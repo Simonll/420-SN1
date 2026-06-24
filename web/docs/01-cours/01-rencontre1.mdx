@@ -1,5 +1,5 @@
 ---
-title: 1 - 🏠 Intro
+title: 1 - Intro
 description: Plan de cours, Introduction, On commence!, Expressions, Opérateurs, Types, Variables, GitHub, Env. virtuel, Aperçu
 hide_table_of_contents: true
 ---
@@ -14,7 +14,7 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
 
 # Intro - aperçu - premier code
 
-## 🧮 Expressions, opérateurs, types, variables
+## Expressions, opérateurs, types, variables
 
 <Tabs queryString="onglet">
 
@@ -58,47 +58,54 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
 
         :::info Introduction
 
-        💡 La programmation, c’est l’art de donner des instructions précises à une machine pour qu’elle accomplisse une
+        La programmation, c’est l’art de donner des instructions précises à une machine pour qu’elle accomplisse une
         tâche. Contrairement à un humain, qui peut comprendre le contexte ou improviser, un ordinateur est totalement
         logique. Il exécute les instructions exactement comme elles sont écrites, sans les interpréter, et toujours dans
         l’ordre prévu.
 
-        💬 Il existe de nombreux langages de programmation, chacun avec ses forces et ses usages. Certains sont conçus
+        Il existe de nombreux langages de programmation, chacun avec ses forces et ses usages. Certains sont conçus
         pour la performance (comme **C** ou **C++**), d’autres pour la simplicité et la lisibilité. C’est le cas de
         **Python**, un langage très apprécié des débutants. Sa syntaxe claire permet de se concentrer sur les concepts
         sans être ralenti par des règles complexes.
 
-        🤖 Python est aussi largement utilisé dans des domaines comme l’**intelligence artificielle**, l’**analyse de
+        Python est aussi largement utilisé dans des domaines comme l’**intelligence artificielle**, l’**analyse de
         données** et la **modélisation scientifique**, grâce à un vaste écosystème de bibliothèques.
 
-        🚫 Mais attention : il n’existe pas un langage unique pour tout faire. Par exemple :
-        - ⚙️ **C/C++** : idéals pour les logiciels qui doivent être rapides et proches du matériel
-        - 🌐 **JavaScript** : incontournable pour le développement web
-        - 📱 **Kotlin** et **Swift** : spécialisés dans les applications mobiles
-        - 📊 **R** et **Python** : très utilisés pour les statistiques, l’analyse de données et la recherche
+        Mais attention : il n’existe pas un langage unique pour tout faire. Par exemple :
+        - **C/C++** : idéals pour les logiciels qui doivent être rapides et proches du matériel
+        - **JavaScript** : incontournable pour le développement web
+        - **Kotlin** et **Swift** : spécialisés dans les applications mobiles
+        - **R** et **Python** : très utilisés pour les statistiques, l’analyse de données et la recherche
         scientifique
+
+
+        <p align="center">
+            <img src={require('/img/cours/narvalphoto.jpeg').default} width="25%"/>
+        </p>
+
+
 
         :::
 
         :::tip Pourquoi apprendre à programmer en sciences?
 
-        🔬 En sciences, savoir programmer est souvent **un atout majeur**, voire **une nécessité**. Que ce soit en
+        En sciences, savoir programmer est souvent **un atout majeur**, voire **une nécessité**. Que ce soit en
         biologie, en physique ou en chimie, la programmation permet de :
-        - 🔄 Modéliser des phénomènes complexes ;
-        - 📈 Analyser des données expérimentales ;
-        - 🧪 Simuler des processus naturels.
+        - Modéliser des phénomènes complexes ;
+        - Analyser des données expérimentales ;
+        - Simuler des processus naturels.
 
-        📚 Quelques exemples :
-        - 🧬 **Biologie** : analyser des génomes ou modéliser l’évolution d’une population ;
-        - 📐 **Mathématiques** : résoudre numériquement des équations différentielles ou visualiser des fonctions en 3D ;
-        - ⚗️ **Chimie** : étudier des réactions chimiques ou manipuler des structures moléculaires ;
-        - 🌍 **Géologie** : analyser des relevés sismiques ou modéliser l’érosion d’un terrain au fil du temps ;
-        - 🪐 **Physique** : simuler la trajectoire d’un objet ou l’interaction entre particules.
+        Quelques exemples :
+        - **Biologie** : analyser des génomes ou modéliser l’évolution d’une population ;
+        - **Mathématiques** : résoudre numériquement des équations différentielles ou visualiser des fonctions en 3D ;
+        - **Chimie** : étudier des réactions chimiques ou manipuler des structures moléculaires ;
+        - **Géologie** : analyser des relevés sismiques ou modéliser l’érosion d’un terrain au fil du temps ;
+        - **Physique** : simuler la trajectoire d’un objet ou l’interaction entre particules.
 
-        🧠 Mais ce n’est pas tout : programmer renforce aussi des compétences générales comme la **pensée logique**, la
+        Mais ce n’est pas tout : programmer renforce aussi des compétences générales comme la **pensée logique**, la
         **résolution de problèmes** et la **rigueur** — des qualités essentielles pour tout scientifique.
 
-        🚀 Enfin, la maîtrise de Python (ou d’un autre langage) ouvre la porte à des domaines en forte croissance, comme
+        Enfin, la maîtrise de Python (ou d’un autre langage) ouvre la porte à des domaines en forte croissance, comme
         la **science des données** ou l’**intelligence artificielle**, très présents dans la recherche et l’industrie.
 
         > ✅ En résumé : apprendre à programmer, ce n’est pas juste utile — c’est souvent indispensable pour comprendre,
@@ -108,13 +115,13 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
 
         :::info Fonctionnement de Python et outils de développement
 
-        ⚙️ Python est un **langage interprété**, ce qui signifie que le code n’est pas compilé en un fichier exécutable,
+        Python est un **langage interprété**, ce qui signifie que le code n’est pas compilé en un fichier exécutable,
         mais **lu et exécuté ligne par ligne** par un interpréteur Python installé sur votre ordinateur.
 
-        💻 Peu importe le système d’exploitation (Windows, macOS ou Linux), tant que l’interpréteur Python est présent,
+        Peu importe le système d’exploitation (Windows, macOS ou Linux), tant que l’interpréteur Python est présent,
         il peut comprendre et exécuter les instructions écrites dans un fichier `.py`.
 
-        🧱 La machine ne fait **aucune déduction** : elle suit les instructions exactement comme elles sont écrites, dans
+        La machine ne fait **aucune déduction** : elle suit les instructions exactement comme elles sont écrites, dans
         l’ordre, sans se poser de questions.
 
         <p align="center">
@@ -123,7 +130,7 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
 
         ---
 
-        ### 👨‍💻 Exemple pour mieux comprendre le fonctionnement
+        ### Exemple pour mieux comprendre le fonctionnement
 
         On peut écrire du code Python avec un simple Bloc-notes ou TextEdit, puis l’exécuter via un terminal.
 
@@ -150,35 +157,35 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
             La somme de 30 et 50 est : 80
             >
             ```
-        👉 Par convention, les fichiers de code Python ont l’extension `.py` plutôt que `.txt` (ex : `fichier.py`), mais ce sont des fichiers texte comme les autres, que l’on peut ouvrir avec n’importe quel éditeur de texte.
+        Par convention, les fichiers de code Python ont l’extension `.py` plutôt que `.txt` (ex : `fichier.py`), mais ce sont des fichiers texte comme les autres, que l’on peut ouvrir avec n’importe quel éditeur de texte.
 
         ---
 
-        ### 🛠️ Environnements de développement (IDE)
+        ### Environnements de développement (IDE)
 
         📝 En théorie, on pourrait écrire du code Python avec un simple Bloc-notes ou TextEdit, puis l’exécuter via un
         terminal. Mais dans la pratique, cela devient vite fastidieux et source d’erreurs.
 
-        💡 C’est pourquoi les programmeurs utilisent des outils appelés **environnements de développement** ou **IDE
+        C’est pourquoi les programmeurs utilisent des outils appelés **environnements de développement** ou **IDE
         (Integrated Development Environments)**, qui facilitent grandement le travail.
 
-        🔧 Un bon IDE ou éditeur de code propose :
-        - 🎨 La **coloration syntaxique** pour une meilleure lisibilité ;
-        - ✍️ L’**autocomplétion** pour écrire plus vite ;
-        - 🚨 La **détection d’erreurs** avant même d’exécuter le programme ;
-        - 🐞 Des outils de **débogage** pour corriger plus facilement les problèmes.
+        Un bon IDE ou éditeur de code propose :
+        - La **coloration syntaxique** pour une meilleure lisibilité ;
+        - L’**autocomplétion** pour écrire plus vite ;
+        - La **détection d’erreurs** avant même d’exécuter le programme ;
+        - Des outils de **débogage** pour corriger plus facilement les problèmes.
 
         ---
 
-        ### 🧰 Exemples d’outils populaires
+        ### Exemples d’outils populaires
 
         Voici trois outils très utilisés pour programmer en Python :
 
-        - 🐍 **PyCharm** : conçu spécifiquement pour Python, avec une interface conviviale et des fonctionnalités
+        - **PyCharm** : conçu spécifiquement pour Python, avec une interface conviviale et des fonctionnalités
         intégrées comme la gestion automatique des environnements virtuels. Idéal pour les débutants.
-        - 💻 **VS Code** : léger, rapide, hautement personnalisable grâce à des extensions. Parfait si vous aimez ajuster
+        - **VS Code** : léger, rapide, hautement personnalisable grâce à des extensions. Parfait si vous aimez ajuster
         votre environnement.
-        - ☁️ **[Google Colab](https://colab.research.google.com)** : un environnement Python entièrement dans le navigateur, sans rien installer. Très populaire en science des données et en apprentissage automatique, il permet d'écrire et d'exécuter du code Python directement dans le nuage, dans des [notebooks interactifs](/recettes/notebook-jupyter).
+        - **[Google Colab](https://colab.research.google.com)** : un environnement Python entièrement dans le navigateur, sans rien installer. Très populaire en science des données et en apprentissage automatique, il permet d'écrire et d'exécuter du code Python directement dans le nuage, dans des [notebooks interactifs](/recettes/notebook-jupyter).
 
         > ✅ En résumé : bien que Python soit simple à apprendre, utiliser un bon environnement de développement rend
         l’apprentissage plus efficace, plus agréable… et moins frustrant !
@@ -203,13 +210,13 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
 
     <TabItem value="code" label="On commence!">
 
-        :::info 🎉 Vous allez coder dès maintenant!
+        :::info Vous allez coder dès maintenant!
         Suivez pas à pas les instructions ci-dessous pour écrire et exécuter votre **premier code Python**.
         :::
 
         ---
 
-        ::::note 🖥️ Écrire et exécuter ses premières commandes Python
+        ::::note Écrire et exécuter ses premières commandes Python
 
         Dans la **Console Python**
         <img src={require('/img/icons/console.png').default} alt="Terminal" width="20"
@@ -256,7 +263,7 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
         C'est le **mode interactif** de Python, idéal pour tester des idées rapidement.
 
         :::tip
-        Vous pouvez utiliser les touches ⬆️ et ⬇️ pour rappeler les dernières commandes que vous avez tapées, ce qui est très pratique pour éviter de retaper la même chose plusieurs fois.
+        Vous pouvez utiliser les touches et pour rappeler les dernières commandes que vous avez tapées, ce qui est très pratique pour éviter de retaper la même chose plusieurs fois.
         :::
 
         ::::
@@ -266,7 +273,7 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
     <TabItem value="expressions" label="Expressions">
 
         :::note Idée importante
-        👉 **Une expression produit toujours une valeur.**
+        **Une expression produit toujours une valeur.**
         :::
 
         <Row>
@@ -291,7 +298,7 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
                 - `2` et `π` sont des constantes
                 - `r` est une variable (le rayon)
 
-                👉 Pour obtenir une valeur :
+                Pour obtenir une valeur :
                 1. On remplace la variable (`r = 2`)
                 2. On calcule :
 
@@ -304,7 +311,7 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
 
                 En **programmation**, c’est le même principe :
 
-                👉 Une **expression** est quelque chose que l’ordinateur **évalue** pour produire une valeur.
+                Une **expression** est quelque chose que l’ordinateur **évalue** pour produire une valeur.
 
                 La différence importante :
                 une expression peut contenir **autre chose que des nombres**.
@@ -323,7 +330,7 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
                 - `5 + 3` → vaut `8`
                 - `"5" + "3"` → vaut `"53"`
 
-                👉 Même structure, **résultat différent** selon le type de données.
+                Même structure, **résultat différent** selon le type de données.
                 :::
             </Column>
         </Row>
@@ -667,7 +674,7 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
 
         ::::info Qu'est-ce que Git et GitHub?
 
-        🗂️ Vous connaissez probablement
+        Vous connaissez probablement
         **OneDrive** : un service permettant de sauvegarder vos fichiers dans le nuage et d'y accéder depuis n'importe quel appareil.
         **GitHub** joue un rôle similaire, mais il est conçu spécifiquement pour le **code source** et s'appuie sur **Git** pour offrir des fonctionnalités bien plus puissantes.
 
@@ -683,7 +690,7 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
 
         ::::info Le dépôt de code
 
-        📁 Un **dépôt de code** (ou *repository*, souvent abrégé *repo*) est un espace de stockage GitHub qui contient
+        Un **dépôt de code** (ou *repository*, souvent abrégé *repo*) est un espace de stockage GitHub qui contient
         tous les fichiers d'un projet ainsi que l'**historique complet de toutes les modifications** qui y ont été
         apportées depuis sa création.
 
@@ -704,10 +711,10 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
 
         Imaginez que vous travaillez sur un fichier Python et que vous ajoutez une nouvelle fonction. \
         Une fois votre travail terminé, vous créez un *commit* pour sauvegarder ces changements. Ce commit contient :
-        - 📝 La liste de tous les fichiers modifiés
-        - 💬 Un **message** décrivant ce qui a été fait (ex : `"Ajout de la fonction calcul_moyenne"`)
-        - 🕓 La date et l'heure de la sauvegarde
-        - 👤 L'identité de l'auteur
+        - La liste de tous les fichiers modifiés
+        - Un **message** décrivant ce qui a été fait (ex : `"Ajout de la fonction calcul_moyenne"`)
+        - La date et l'heure de la sauvegarde
+        - L'identité de l'auteur
 
         :::tip Bonne pratique
         Un bon *commit* regroupe des modifications qui vont ensemble logiquement. \
@@ -728,7 +735,7 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
 
         ---
 
-        ###  🔽 `clone` - Copier le dépôt sur votre ordinateur
+        ###  `clone` - Copier le dépôt sur votre ordinateur
         *Cloner* un dépôt, c'est comme télécharger un projet sur votre ordinateur.
         PyCharm crée automatiquement un dossier contenant tous les fichiers du projet **ainsi que l'historique complet** de toutes les modifications qui y ont été apportées.
 
@@ -737,12 +744,12 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
         - sur les postes au cégep : **à chaque fois** que vous vous connectez (car tout est effacé quand vous vous déconnectez)
 
         ```
-        ☁ Dépôt GitHub (nuage)  ─── clone 🔽 ───▶  💻 Copie locale (votre ordinateur)
+        ☁ Dépôt GitHub (nuage)  ─── clone ───▶  Copie locale (votre ordinateur)
         ```
 
         ---
 
-        ### 📸 `commit` - Sauvegarder vos modifications localement
+        ### `commit` - Sauvegarder vos modifications localement
         *Commiter*, c'est prendre un **instantané** de vos modifications à un moment précis, comme une photo de l'état de votre projet.
         Chaque commit est accompagné d'un **message** que vous rédigez vous-même pour décrire ce qui a été fait — c'est ce message qui rendra votre historique lisible et utile plus tard.
         Attention : un commit ne fait que se sauvegarder localement sur votre ordinateur, **il n'envoie rien vers GitHub**. C'est le rôle du *push*.
@@ -753,23 +760,23 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
 
         ---
 
-        ### 🔼 `push` - Envoyer vos modifications vers GitHub
+        ### `push` - Envoyer vos modifications vers GitHub
         *Pousser* vos commits, c'est mettre GitHub à jour avec votre travail local.
         Tant que vous n'avez pas fait de *push*, vos commits n'existent que sur votre ordinateur : GitHub ne les connaît pas encore.
         C'est donc une étape **indispensable** pour ne pas perdre votre travail et pour le rendre accessible depuis n'importe quel autre ordinateur.
         ```
-        💻 Copie locale (votre ordinateur)  ─── push 🔼 ───▶  ☁ Dépôt GitHub (nuage)
+        💻 Copie locale (votre ordinateur)  ─── push ───▶  ☁ Dépôt GitHub (nuage)
         ```
 
         ---
 
-        ### 🔄 `pull` - Récupérer les dernières modifications depuis GitHub
+        ### `pull` - Récupérer les dernières modifications depuis GitHub
         *Tirer* les modifications, c'est mettre votre copie locale à jour avec ce qui se trouve sur GitHub.
         C'est particulièrement utile si vous avez travaillé depuis un autre ordinateur depuis votre dernière session.
         **Bonne habitude :** toujours commencer une séance de travail par un *pull*, pour être certain.e de travailler sur la version la plus récente de votre code.
 
         ```
-        ☁ Dépôt GitHub (nuage)  ─── pull 🔄 ───▶  💻 Mise à jour de la copie locale (votre ordinateur)
+        ☁ Dépôt GitHub (nuage)  ─── pull ───▶ Mise à jour de la copie locale (votre ordinateur)
         ```
 
         ---
@@ -781,27 +788,27 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
         :::tip Résumé visuel
         Un résumé visuel du flux de travail typique
         ```
-        ☁ GitHub (nuage)
+        ☁  GitHub (nuage)
         │
-        │  🔽 clone (1 seule fois, au début) (ou à chaque connexion à un poste au cégep)
+        │       clone (1 seule fois, au début) (ou à chaque connexion à un poste au cégep)
         ▼
-        💻 Copie locale (votre ordi)
+            Copie locale (votre ordi)
         │
-        │  ✏️ Vous modifiez des fichiers
+        │       Vous modifiez des fichiers
         ▼
-        💻 Modifications en attente
+            Modifications en attente
         │
-        │  📸 commit (on regroupe et décrit les changements)
+        │       commit (on regroupe et décrit les changements)
         ▼
-        💻 Modifications sauvegardées localement
+            Modifications sauvegardées localement
         │
-        │  🔼 push (on envoie vers le nuage)
+        │       push (on envoie vers le nuage)
         ▼
-        ☁️ GitHub (nuage)
+            GitHub (nuage)
         │
-        │  🔄 pull (si modifié depuis un autre ordi)
+        │       pull (si modifié depuis un autre ordi)
         ▼
-        💻 Copie locale mise à jour
+            Copie locale mise à jour
         ```
         :::
 
@@ -826,12 +833,12 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
             <Column size={4}>
                 | Dépôt | Contenu |
                 | :--- | :--- |
-                | 📂 **General** | Le code de vos exercices |
-                | 📂 **TP1** | Le code de votre TP1 |
-                | 📂 **TP2** | Le code de votre TP2 |
+                | **General** | Le code de vos exercices |
+                | **TP1** | Le code de votre TP1 |
+                | **TP2** | Le code de votre TP2 |
             </Column>
             <Column size={8}>
-                #### 🏫 GitHub Classroom, c'est quoi?
+                #### GitHub Classroom, c'est quoi?
                 GitHub Classroom est un outil utilisé par les enseignants pour **créer et distribuer automatiquement** des dépôts
                 aux personnes étudiantes. Cela signifie que :
                 - Chaque étudiant.e possède ses propres dépôts de code.
@@ -839,10 +846,10 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
                 - Vous n'avez pas à créer les dépôts vous-même, il suffit d'accepter un lien d'invitation.
             </Column>
         </Row>
-        :::tip 🛠️ Créer vos propres dépôts
+        :::tip Créer vos propres dépôts
         Vous pouvez aussi, pour vos autres projets, créer vos propres dépôts GitHub manuellement et les gérer à votre guise.\
         C'est très simple, et vous pouvez vous référer à [cette recette](/recettes/creer-repertoire-github) pour vous aider.\
-        🚀 Vous pouvez ainsi créer autant de dépôts que vous le souhaitez pour vos projets personnels et les gérer indépendamment de ceux du cours.
+        Vous pouvez ainsi créer autant de dépôts que vous le souhaitez pour vos projets personnels et les gérer indépendamment de ceux du cours.
         :::
         ::::
 
@@ -919,14 +926,14 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
 
         :::info Environnement virtuel
 
-        🐍 Python de base permet déjà de faire beaucoup de choses : faire des calculs, afficher du texte, manipuler des listes, etc.
+        Python de base permet déjà de faire beaucoup de choses : faire des calculs, afficher du texte, manipuler des listes, etc.
         Mais pour des tâches plus spécialisées (générer des graphiques, analyser des données, faire du traitement d'images), des personnes ont développé des **extensions** que l'on peut ajouter à Python.
         Ces extensions s'appellent des **bibliothèques** (ou *librairies*). Vous en utiliserez plusieurs dans ce cours, comme **Matplotlib** pour les graphiques, **NumPy** pour manipuler des données numériques ou **Pandas** pour l'analyse de données. Le concept de bibliothèque sera vu en détail à la [rencontre 02](/cours/rencontre2?onglet=biblio).
 
-        ⚠️ Le problème? Ces bibliothèques évoluent dans le temps. De nouvelles versions sont régulièrement publiées, avec de nouvelles fonctionnalités, et ces versions ne sont pas toujours compatibles entre elles.
+        Le problème? Ces bibliothèques évoluent dans le temps. De nouvelles versions sont régulièrement publiées, avec de nouvelles fonctionnalités, et ces versions ne sont pas toujours compatibles entre elles.
         Imaginez que vous travaillez sur deux projets différents : **le projet A a besoin de la version 1.0 d'une bibliothèque, et le projet B a besoin de la version 2.0 de cette même bibliothèque**. Si vous installez les deux sur votre ordinateur sans précaution, elles risquent de se nuire mutuellement.
 
-        💡 La solution? L'**environnement virtuel**, une sorte de **bulle isolée** propre à chaque projet, qui contient sa propre version de Python et ses propres bibliothèques, sans interférer avec les autres projets ni avec l'installation globale de Python sur votre ordinateur.
+        La solution? L'**environnement virtuel**, une sorte de **bulle isolée** propre à chaque projet, qui contient sa propre version de Python et ses propres bibliothèques, sans interférer avec les autres projets ni avec l'installation globale de Python sur votre ordinateur.
 
         Concrètement, un environnement virtuel est un **dossier** (nommé `.venv` par convention) créé à la racine de chaque projet. \
         Il contient tout ce dont le projet a besoin pour fonctionner.
@@ -964,7 +971,7 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
 
         ---
 
-        :::note 📦 Et les bibliothèques installées, alors?
+        :::note Et les bibliothèques installées, alors?
 
         Même si le dossier `.venv` n'est pas envoyé sur GitHub, il existe une façon de partager la liste des bibliothèques nécessaires à un projet.
 
@@ -993,15 +1000,14 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
 
         :::
 
-        <Feedback feedbackId="Rencontre #1 - 🐍 Env. Virtuel" />
+        <Feedback feedbackId="Rencontre #1 - Env. Virtuel" />
 
     </TabItem>
 
     <TabItem value="apercu" label="Aperçu">
 
         Le code ci-dessous illustre différents exemples de notions abordées dans le cours.
-        L’objectif est de vous offrir un aperçu très général de ces concepts afin que vous puissiez comprendre la direction dans laquelle nous allons progresser ensemble.
-        Des explications de haut niveau d'abstraction sur les différentes instructions seront données par votre enseignant.
+        Ce code sert uniquement de démonstration globale pour le premier cours. Vous apprendrez à maîtriser chacune de ces lignes au fil des semaines!
 
         :::note Déboggeur
         Les instructions seront exécutées en **mode débogage** : un mode spécial permettant de mieux comprendre le déroulement du programme. \
@@ -1139,8 +1145,8 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
         <RappelFonctionnementClasseInverse/>
         <Tabs>
 
-            <TabItem value="1" label="🏠 Activités à faire à la maison">
-                ## 🧰 Exercices d'environnement de travail
+            <TabItem value="1" label=" Activités à faire à la maison">
+                ## Exercices d'environnement de travail
 
                 Complétez les exercices de cette section avant de poursuivre avec les autres exercices plus bas.
 
@@ -1167,18 +1173,7 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
                 | Groupe | Date/Heure | Enseignant | Liens pour créer les dépôts de code |
                 | :--- | :--- | :--- | :--- |
                 | 1010 | Lundi 8h00 | Nom de l'enseignant | [Lien 1](https://google.com) [Lien 2](https://google.com) [Lien 3](https://google.com) |
-                | 1020 | Lundi 8h00 | Nom de l'enseignant | [Lien 1](https://google.com) [Lien 2](https://google.com) [Lien 3](https://google.com) |
-                | 1030 | Lundi 8h00 | Nom de l'enseignant | [Lien 1](https://google.com) [Lien 2](https://google.com) [Lien 3](https://google.com) |
-                | 1040 | Lundi 8h00 | Nom de l'enseignant | [Lien 1](https://google.com) [Lien 2](https://google.com) [Lien 3](https://google.com) |
-                | 1050 | Lundi 8h00 | Nom de l'enseignant | [Lien 1](https://google.com) [Lien 2](https://google.com) [Lien 3](https://google.com) |
-                | 1060 | Lundi 8h00 | Nom de l'enseignant | [Lien 1](https://google.com) [Lien 2](https://google.com) [Lien 3](https://google.com) |
-                | 1070 | Lundi 8h00 | Nom de l'enseignant | [Lien 1](https://google.com) [Lien 2](https://google.com) [Lien 3](https://google.com) |
-                | 1080 | Lundi 8h00 | Nom de l'enseignant | [Lien 1](https://google.com) [Lien 2](https://google.com) [Lien 3](https://google.com) |
-                | 1090 | Lundi 8h00 | Nom de l'enseignant | [Lien 1](https://google.com) [Lien 2](https://google.com) [Lien 3](https://google.com) |
-                | 1100 | Lundi 8h00 | Nom de l'enseignant | [Lien 1](https://google.com) [Lien 2](https://google.com) [Lien 3](https://google.com) |
-                | 1110 | Lundi 8h00 | Nom de l'enseignant | [Lien 1](https://google.com) [Lien 2](https://google.com) [Lien 3](https://google.com) |
-                | 1120 | Lundi 8h00 | Nom de l'enseignant | [Lien 1](https://google.com) [Lien 2](https://google.com) [Lien 3](https://google.com) |
-
+                
                 :::
                 ---
 
@@ -1189,15 +1184,15 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
                 :::
 
             </TabItem>
-            <TabItem value="2" label=" 🏫 Activités à faire en classe">
+            <TabItem value="2" label=" Activités à faire en classe">
 
-                ## ✏️ Exercices de compréhension
+                ## Exercices de compréhension
 
                 Pour les exercices de cette section, vous pouvez écrire vos réponses sur papier ou vous pouvez [créer un fichier *markdown*](/recettes/creer-markdown).
 
                 ::::info Exercice - EXPRESSIONS
 
-                📁 Créez un fichier `r01_expressions.md` pour votre réponse.
+                Créez un fichier `r01_expressions.md` pour votre réponse.
 
                 Sans exécuter le code, déterminez le résultat de chacune des expressions ci-dessous.<br />
                 Par la suite, tapez (ou copiez) et exécutez le code dans la console, et comparez le résultat avec vos réponses.
@@ -1265,7 +1260,7 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
 
                 ::::info Exercice - AFFICHAGE #1
 
-                📁 Créez un fichier `r01_affichage_1.md` pour votre réponse.
+                Créez un fichier `r01_affichage_1.md` pour votre réponse.
 
                 Sans exécuter le code, qu'affichera le programme ci-dessous?<br/>
                 En situation d'examen, ce type de question serait à faire sans l'ordinateur.
@@ -1294,7 +1289,7 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
 
                 ::::info Exercice - AFFICHAGE #2
 
-                📁 Créez un fichier `r01_affichage_2.md` pour votre réponse.
+                Créez un fichier `r01_affichage_2.md` pour votre réponse.
 
                 Sans exécuter le code, qu'affichera le programme ci-dessous?
                 ```python showLineNumbers
@@ -1323,4 +1318,3 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
 
     </TabItem>
 </Tabs>
-
