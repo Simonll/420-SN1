@@ -1,0 +1,104 @@
+import Row from "../../src/components/Row";
+import Column from "../../src/components/Column";
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import RappelFonctionnementClasseInverse from '@site/docs/_components/RappelFonctionnementClasseInverse.mdx';
+import Feedback from "../../src/components/Feedback";
+import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
+
+# Plan de cours : Programmation en sciences
+
+<RappelFonctionnementClasseInverse />
+
+---
+
+## 1. Évaluations et pondération
+
+<Row>
+  <Column size="6">
+    ### Travaux pratiques
+    * **TP1 — Fondements (Individuel) :** `15 %`  
+      *Lancé en S3, remis en S6*
+    * **TP2 — Partie 1 : Fichiers & NumPy (Équipe) :** `10 %`  
+      *Lancé en S9, remis en S12*
+    * **TP2 — Partie 2 : Pandas & Matplotlib (Équipe) :** `15 %`  
+      *Remis en S14*
+  </Column>
+  <Column size="6">
+    ### Examens & Engagement
+    * **Activités préparatoires (En continu) :** `10 %`  
+      *Quiz de lecture et mini-défis*
+    * **Examen Intra (Double volet) :** `20 %`  
+      *Semaine 8 (Papier + Machine)*
+    * **Examen Final (Double volet) :** `30 %`  
+      *Semaine 15 (Papier + Machine)*
+  </Column>
+</Row>
+
+---
+
+## 2. Calendrier détaillé de la session
+
+Utilisez les onglets ci-dessous pour explorer le contenu par bloc de compétences.
+
+<Tabs defaultValue="bloc1" values={[
+  {label: 'Bloc 1 : Fondements (S1-S6)', value: 'bloc1'},
+  {label: 'Bloc 2 : Intra & Révision (S7-S8)', value: 'bloc2'},
+  {label: 'Bloc 3 : Traitement de données (S9-S12)', value: 'bloc3'},
+  {label: 'Bloc 4 : Analyse & Final (S13-S15)', value: 'bloc4'},
+]}>
+
+  <TabItem value="bloc1">
+    ### Semaines 1 à 3 : Les bases algorithmiques
+    * **S1 — Introduction & Fondements :** Configuration de l'IDE, variables, expressions et opérateurs.
+    * **S2 — Structures conditionnelles :** Logique booléenne et blocs `if`, `elif`, `else`.
+    * **S3 — Structures répétitives :** Boucles `while` et `for`. 
+      * *Évaluation :* **🚀 Lancement du TP1 (15 %)**
+
+    ### Semaines 4 à 6 : Modularité et Débogage
+    * **S4 — Fonctions :** Définition, paramètres, valeurs de retour et portée des variables.
+    * **S5 — Modules & Listes :** Utilisation des bibliothèques standard et listes de données simples.
+    * **S6 — Débogueur & Traçage :** Atelier pratique de correction de bogues en classe.
+      * *Évaluation :* **📥 Remise du TP1** (Avant le cours)
+  </TabItem>
+
+  <TabItem value="bloc2">
+    ### Semaine 7 : Évaluation formative #1
+    * Simulation complète d'examen en temps limité (volet papier et volet machine).
+    * Correction interactive et retour sur les notions les plus difficiles du Bloc 1.
+
+    ### Semaine 8 : Examen Intra (20 %)
+    * **Volet #1 (Papier) :** Sans documentation. Focus sur la lecture de code, le traçage et l'algorithmique de base.
+    * **Volet #2 (Machine) :** Avec documentation. Codage d'un script complet.
+  </TabItem>
+
+  <TabItem value="bloc3">
+    ### Semaines 9 et 10 : Fichiers et NumPy
+    * **S9 — Persistance des données :** Lecture/écriture de fichiers textes, `.csv` et `.json`.
+      * *Évaluation :* **🚀 Lancement du TP2** (Projet d'analyse de session)
+    * **S10 — Calcul vectorisé :** Introduction à la bibliothèque **NumPy**, tableaux multidimensionnels.
+
+    ### Semaines 11 et 12 : Pandas et Graphiques
+    * **S11 — Structures complexes :** Introduction à **Pandas** (*Series* et *DataFrames*), nettoyage de données.
+    * **S12 — Visualisation :** Création de graphiques avec **Matplotlib**.
+      * *Évaluation :* **📥 Remise du TP2 — Partie 1 (10 %)**
+  </TabItem>
+
+  <TabItem value="bloc4">
+    ### Semaine 13 : Évaluation formative #2
+    * Simulation de l'examen final axée sur la manipulation de fichiers et l'analyse de données (Pandas/Matplotlib).
+    * *Rétroaction :* Retour rapide de l'enseignant sur la Partie 1 du TP2 pour guider l'étude.
+
+    ### Semaine 14 : Intégration et Robustesse
+    * Gestion des exceptions (`try/except`), validation des scripts et atelier de consolidation.
+    * *Évaluation :* **📥 Remise finale du TP2 — Partie 2 (15 %)**
+
+    ### Semaine 15 : Examen Final (30 %)
+    * **Volet #1 (Papier) :** Sans documentation. Analyse d'algorithmes et architecture.
+    * **Volet #2 (Machine) :** Avec documentation. Résolution d'un cas complet d'analyse de données scientifiques.
+  </TabItem>
+</Tabs>
+
+---
+
+<Feedback />
