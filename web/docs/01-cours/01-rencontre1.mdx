@@ -11,6 +11,7 @@ import TabItem from '@theme/TabItem';
 import RappelFonctionnementClasseInverse from '@site/docs/_components/RappelFonctionnementClasseInverse.mdx';
 import Feedback from "../../src/components/Feedback";
 import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
+import Link from '@docusaurus/Link';
 
 # Intro - aperçu - premier code
 
@@ -58,29 +59,29 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
 
         :::info Introduction
 
-        La programmation, c’est l’art de donner des instructions précises à une machine pour qu’elle accomplisse une
-        tâche. Contrairement à un humain, qui peut comprendre le contexte ou improviser, un ordinateur est totalement
-        logique. Il exécute les instructions exactement comme elles sont écrites, sans les interpréter, et toujours dans
-        l’ordre prévu.
+        La programmation, c’est l’art de donner des instructions précises à une machine pour qu’elle accomplisse une tâche. Contrairement à un humain, qui peut comprendre le contexte ou improviser, un ordinateur est totalement logique. Il exécute les instructions exactement comme elles sont écrites, sans les interpréter, et toujours dans l’ordre prévu.
 
-        Il existe de nombreux langages de programmation, chacun avec ses forces et ses usages. Certains sont conçus
-        pour la performance (comme **C** ou **C++**), d’autres pour la simplicité et la lisibilité. C’est le cas de
-        **Python**, un langage très apprécié des débutants. Sa syntaxe claire permet de se concentrer sur les concepts
-        sans être ralenti par des règles complexes.
+        Dans un monde de plus en plus numérique, une frontière invisible se dessine entre les simples utilisateurs de technologies et ceux qui en comprennent les rouages. Apprendre à programmer permet de franchir cette frontière : cela augmente notre littératie informatique et nous aide à décoder le langage des machines. Pour de futurs scientifiques ainsi que pour les futurs professionnels de la santé (médecine, pharmacie, recherche clinique, biotechnologies), c'est une compétence de plus en plus incontournable. Qu’il s’agisse d’analyser de grands ensembles de données génétiques, de modéliser des phénomènes biologiques, de traiter de l'imagerie médicale ou d'interagir avec des outils de bio-informatique, comprendre le code vous permet de cesser d'être de simples spectateurs pour devenir des acteurs du changement.
 
-        Python est aussi largement utilisé dans des domaines comme l’**intelligence artificielle**, l’**analyse de
-        données** et la **modélisation scientifique**, grâce à un vaste écosystème de bibliothèques.
+        Il existe de nombreux langages de programmation, chacun avec ses forces et ses usages. Certains sont conçus pour la performance (comme C ou C++), d’autres pour la simplicité et la lisibilité. C’est le cas de Python, un langage très apprécié des débutants. Sa syntaxe claire permet de se concentrer sur les concepts sans être ralenti par des règles complexes.
 
-        Mais attention : il n’existe pas un langage unique pour tout faire. Par exemple :
-        - **C/C++** : idéals pour les logiciels qui doivent être rapides et proches du matériel
-        - **JavaScript** : incontournable pour le développement web
-        - **Kotlin** et **Swift** : spécialisés dans les applications mobiles
-        - **R** et **Python** : très utilisés pour les statistiques, l’analyse de données et la recherche
-        scientifique
+        Python est aussi largement utilisé dans des domaines comme l’intelligence artificielle, l’analyse de données et la modélisation scientifique et médicale, grâce à un vaste écosystème de bibliothèques.
+
+        Mais attention : il nexiste pas un langage unique pour tout faire. Par exemple :
+
+        <Link to="https://gcc.gnu.org/" target="_blank">C/C++</Link> : idéals pour les logiciels qui doivent être rapides et proches du matériel (comme les logiciels de dispositifs médicaux ou d'imagerie lourde).
+
+        <Link to="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank">JavaScript</Link> : incontournable pour le développement web.
+
+        <Link to="https://kotlinlang.org/" target="_blank">Kotlin</Link> et <Link to="https://swift.org/" target="_blank">Swift</Link> : spécialisés dans les applications mobiles (comme les applications de suivi de santé).
+
+        <Link to="https://www.r-project.org/" target="_blank">R</Link> et <Link to="https://www.python.org/" target="_blank">Python</Link> : très utilisés pour les statistiques, l’épidémiologie, l’analyse de données et la recherche scientifique.
 
 
         <p align="center">
             <img src={require('/img/cours/narvalphoto.jpeg').default} width="25%"/>
+            <br/>
+            <Link to="https://www.calculquebec.ca/nouvelle/narval-un-nouveau-superordinateur-dedie-a-la-recherche-scientifique/" target="_blank">Narval</Link>
         </p>
 
 
@@ -89,24 +90,29 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
 
         :::tip Pourquoi apprendre à programmer en sciences?
 
-        En sciences, savoir programmer est souvent **un atout majeur**, voire **une nécessité**. Que ce soit en
-        biologie, en physique ou en chimie, la programmation permet de :
-        - Modéliser des phénomènes complexes ;
-        - Analyser des données expérimentales ;
-        - Simuler des processus naturels.
+        En sciences, savoir programmer est souvent un atout majeur, voire une nécessité. Que ce soit en biologie, en physique ou en chimie, la programmation permet de :
 
-        Quelques exemples :
-        - **Biologie** : analyser des génomes ou modéliser l’évolution d’une population ;
-        - **Mathématiques** : résoudre numériquement des équations différentielles ou visualiser des fonctions en 3D ;
-        - **Chimie** : étudier des réactions chimiques ou manipuler des structures moléculaires ;
-        - **Géologie** : analyser des relevés sismiques ou modéliser l’érosion d’un terrain au fil du temps ;
-        - **Physique** : simuler la trajectoire d’un objet ou l’interaction entre particules.
+        * Modéliser des phénomènes complexes ;
 
-        Mais ce n’est pas tout : programmer renforce aussi des compétences générales comme la **pensée logique**, la
-        **résolution de problèmes** et la **rigueur** — des qualités essentielles pour tout scientifique.
+        * Analyser des données expérimentales ;
 
-        Enfin, la maîtrise de Python (ou d’un autre langage) ouvre la porte à des domaines en forte croissance, comme
-        la **science des données** ou l’**intelligence artificielle**, très présents dans la recherche et l’industrie.
+        * Simuler des processus naturels.
+
+        Quelques exemples concrets :
+
+        * Biologie et Santé : analyser des séquences génomiques, modéliser l’évolution d’une population ou traiter des données d'imagerie médicale ;
+
+        * Mathématiques : résoudre numériquement des équations différentielles ou visualiser des fonctions en 3D ;
+
+        * Chimie : étudier la cinétique de réactions chimiques ou manipuler des structures moléculaires ;
+
+        * Géologie : analyser des relevés sismiques ou modéliser l’érosion d’un terrain au fil du temps ;
+
+        * Physique : simuler la trajectoire d’un objet ou l’interaction entre des particules fondamentales.
+
+        Plus qu'un simple outil technique, la programmation modifie profondément votre manière de penser. Elle façonne ce qu'on appelle la pensée informatique : une démarche intellectuelle qui force à décomposer un problème complexe en sous-éléments gérables, à identifier des structures répétitives et à formuler des solutions avec une clarté et une rigueur absolues. Cette nouvelle gymnastique d'esprit transforme durablement la façon dont un scientifique structure son raisonnement face à l'inconnu, renforçant des compétences transversales cruciales comme l'esprit critique et la résolution de problèmes.
+
+        Enfin, la maîtrise de Python (ou d’un autre langage) ouvre la porte à des domaines en forte croissance, comme la science des données ou l’intelligence artificielle, des outils aujourd'hui omniprésents dans la recherche scientifique, médicale et industrielle.
 
         > ✅ En résumé : apprendre à programmer, ce n’est pas juste utile — c’est souvent indispensable pour comprendre,
         modéliser et explorer le monde scientifique.
@@ -163,17 +169,22 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
 
         ### Environnements de développement (IDE)
 
-        📝 En théorie, on pourrait écrire du code Python avec un simple Bloc-notes ou TextEdit, puis l’exécuter via un
+        En théorie, on pourrait écrire du code Python avec un simple Bloc-notes ou TextEdit, puis l’exécuter via un
         terminal. Mais dans la pratique, cela devient vite fastidieux et source d’erreurs.
 
-        C’est pourquoi les programmeurs utilisent des outils appelés **environnements de développement** ou **IDE
-        (Integrated Development Environments)**, qui facilitent grandement le travail.
+        C’est pourquoi, dans ce cours, nous allons utiliser Visual Studio Code (VS Code). Techniquement, c'est un éditeur de code source ultra-léger et moderne. En lui ajoutant des extensions spécifiques (comme l'extension Python), il se transforme en un puissant environnement de développement ou IDE (Integrated Development Environment) qui facilite grandement le travail.
 
         Un bon IDE ou éditeur de code propose :
-        - La **coloration syntaxique** pour une meilleure lisibilité ;
-        - L’**autocomplétion** pour écrire plus vite ;
-        - La **détection d’erreurs** avant même d’exécuter le programme ;
-        - Des outils de **débogage** pour corriger plus facilement les problèmes.
+        Cet outil propose des fonctionnalités indispensables pour coder efficacement :
+
+        - La coloration syntaxique : Il colore les mots-clés, les variables et les fonctions de Python pour rendre le code immédiatement lisible et structuré ;
+
+        - L’autocomplétion intelligente (IntelliSense) : Il propose des suggestions pendant que vous écrivez, ce qui permet de coder plus vite et d'éviter les fautes de frappe dans les noms de fonctions ;
+
+        - La détection d’erreurs en temps réel (Linting) : Il souligne les erreurs de syntaxe en rouge directement dans votre fichier, avant même que vous n'ayez exécuté le programme ;
+
+
+        - Un débogueur intégré : Un outil puissant qui permet d'exécuter un script ligne par ligne  pour observer comment les variables évoluent en mémoire et comprendre l'origine d'un problème.
 
         ---
 
@@ -190,19 +201,19 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
         > ✅ En résumé : bien que Python soit simple à apprendre, utiliser un bon environnement de développement rend
         l’apprentissage plus efficace, plus agréable… et moins frustrant !
 
-        Pour ce cours, nous utiliserons **PyCharm**.
+        Pour ce cours, nous utiliserons **VS Code** et **Google Colab**.
 
         :::
 
-        :::warning Installation de Python et de PyCharm
+        :::warning Installation de Python et de VS Code
 
-        Si jamais vous voulez installer Python et PyCharm sur votre ordinateur personnel, voici comment faire.
+        Si jamais vous voulez installer Python et VS Code sur votre ordinateur personnel, voici comment faire.
 
-        Pour installer PyCharm avec la même configuration qu’au cégep, suivez [ce guide pas à
-        pas](/recettes/installer-pyCharm) (prévoir environ 20 minutes).
+        Pour installer VS Code avec la même configuration qu’au cégep, suivez [ce guide pas à
+        pas](/recettes/installer-vscode) (prévoir environ 20 minutes).
 
         Une fois l’installation faite, [ce second guide](/recettes/creer-projet) vous montre comment créer votre tout
-        premier projet Python dans PyCharm.
+        premier projet Python dans VS Code.
 
         :::
         <Feedback feedbackId="Rencontre #1 - Introduction" />
@@ -220,7 +231,7 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
 
         Dans la **Console Python**
         <img src={require('/img/icons/console.png').default} alt="Terminal" width="20"
-             style={{verticalAlign: 'middle'}}/> de PyCharm (en bas à gauche), vous pouvez écrire et exécuter directement des commandes Python grâce
+             style={{verticalAlign: 'middle'}}/> de VS Code (en bas à gauche), vous pouvez écrire et exécuter directement des commandes Python grâce
         au mode interactif.
 
         Vous verrez quelque chose comme ça :
@@ -246,24 +257,28 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
         >>> |
         ```
 
-        - L'interpréteur Python a compris l'ordre d'imprimer parce qu'on lui a dit `print`.
-        Ici imprimer veut dire afficher dans notre console.
-        - Le truc à imprimer est fourni entre les parenthèses, c'est un paramètre.
-        Ici on veut imprimer un bout de texte.
-        - L'interpréteur comprend que c'est du texte à afficher et pas d'autres instructions parce que c'est entre
-        guillemets (`""`).
+        Décortiquons cette première ligne de code :
 
-        Tapez maintenant une simple expression mathématique, comme :
+        Le mot-clé print : C'est une fonction native de Python. En programmation, « imprimer » ne signifie pas utiliser une imprimante papier, mais plutôt afficher un résultat textuel dans la console (ou l'espace de sortie sous votre cellule).
+
+        Les parenthèses () : Elles agissent comme un contenant. L'information textuelle ou numérique fournie à l'intérieur des parenthèses est appelée un argument (ou un paramètre).
+
+        Les guillemets "" : Ils entourent le texte pour indiquer à l'interpréteur qu'il s'agit de texte brut (une chaîne de caractères) et non d'une commande Python ou d'une formule mathématique à calculer.
+
+        L'ordinateur comme super calculatrice
+        Essayez maintenant de taper une simple expression mathématique directement dans votre environnement, sans utiliser print :
+
         ```python
         6 / 2 * (1 + 2)
         ```
-        Trop puissant!! Il nous affiche la réponse!
 
-        On peut donc continuer à taper des commandes et voir les résultats immédiatement.<br />
-        C'est le **mode interactif** de Python, idéal pour tester des idées rapidement.
+        Python évalue l'expression en respectant scrupuleusement l'ordre des priorités mathématiques standards (gauche à droite pour la division et la multiplication) et affiche instantanément la réponse : 9.0.
+
+        Cette capacité à saisir une instruction et à obtenir une réponse immédiate s'appelle le mode interactif (souvent appelé REPL en informatique). C'est un bac à sable exceptionnel, idéal pour tester des formules scientifiques, explorer des idées ou valider un comportement logique rapidement avant de l'intégrer dans un script plus long.
+
 
         :::tip
-        Vous pouvez utiliser les touches et pour rappeler les dernières commandes que vous avez tapées, ce qui est très pratique pour éviter de retaper la même chose plusieurs fois.
+        Vous pouvez utiliser les touches Flèche haut ($\uparrow$) et Flèche bas ($\downarrow$) de votre clavier pour faire défiler et rappeler les dernières commandes que vous avez tapées. C'est une astuce très pratique pour éviter de retaper plusieurs fois la même chose.
         :::
 
         ::::
@@ -283,59 +298,58 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
 
                 Elle peut contenir :
                 - des **nombres**
-                - des **constantes** (ex : `π`)
-                - des **variables** (ex : `r`)
-                - des **opérations** (`+`, `-`, `*`, `/`, etc.)
+                - des **constantes** (ex. : $\pi$)
+                - des **variables** (ex. : $r$)
+                - des **opérations** ($+$, $-$, $\times$, $/$, etc.)
 
                 ---
 
-                Exemple :
+                **Exemple :**
 
-                `2πr`
+                $2\pi r$
 
                 Cette expression représente la circonférence d’un cercle.
 
-                - `2` et `π` sont des constantes
-                - `r` est une variable (le rayon)
+                - $2$ et $\pi$ sont des constantes
+                - $r$ est une variable (le rayon)
 
                 Pour obtenir une valeur :
-                1. On remplace la variable (`r = 2`)
+                1. On remplace la variable ($r = 2$)
                 2. On calcule :
 
-                `2 * 3.1416 * 2 = 12.5664`
+                $2 \times 3{,}1416 \times 2 = 12{,}5664$
                 :::
-
             </Column>
+            
             <Column>
                 :::info-nt
-
                 En **programmation**, c’est le même principe :
 
                 Une **expression** est quelque chose que l’ordinateur **évalue** pour produire une valeur.
 
                 La différence importante :
-                une expression peut contenir **autre chose que des nombres**.
+                Une expression peut contenir **autre chose que des nombres**.
 
                 Par exemple :
-                - du **texte**
-                - (plus tard) des **fonctions**
-                - (plus tard) des **valeurs booléennes**
+                - du **texte** (chaînes de caractères)
+                - *(plus tard)* des **fonctions**
+                - *(plus tard)* des **valeurs booléennes**
 
                 ---
 
                 Voici quelques exemples d'expressions en Python :
 
-                - `5` → vaut `5` *(type : int)*
-                - `"5"` → vaut `"5"` *(type : str)*
+                - `5` → vaut `5` *(type : `int`)*
+                - `"5"` → vaut `"5"` *(type : `str`)*
                 - `5 + 3` → vaut `8`
                 - `"5" + "3"` → vaut `"53"`
 
-                Même structure, **résultat différent** selon le type de données.
+                **Opérateurs identiques**, mais résultat différent selon le type de données (c'est la surcharge de l'opérateur `+`).
                 :::
             </Column>
         </Row>
         <Feedback feedbackId="Rencontre #1 - Expressions" />
-    </TabItem>
+    </TabItem>  
 
     <TabItem value="operateurs" label="Opérateurs">
 
