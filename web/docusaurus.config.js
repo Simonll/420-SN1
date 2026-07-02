@@ -116,10 +116,10 @@ const config = {
             navbar: {
                 // title: siteConfig.nom,
                 title: "SN1 (Programmation)",
-                logo: {
-                    alt: "Logo CEM",
-                    src: "img/logo.svg",
-                },
+                // logo: {
+                //     alt: "Logo CEM",
+                //     src: "img/logo.svg",
+                // },
                 items: [
                     {
                         type: "doc",
@@ -131,7 +131,7 @@ const config = {
                         type: "docSidebar",
                         position: "left",
                         sidebarId: "tp",
-                        label: "Travaux Pratiques",
+                        label: "Travaux pratiques",
                     },
                     {
                         type: "docSidebar",
@@ -144,17 +144,7 @@ const config = {
                         position: "left",
                         sidebarId: "aidememoire",
                         label: "Aide-mémoire",
-                    },
-                    {
-                        label: "4A3 (Projet scientifique)",
-                        href: `https://info.cegepmontpetit.ca/360-4A3/`,
-                        position: "right",
-                    },
-                    {
-                        label: "4A4 (Réseaux de neurones)",
-                        href: `https://info.cegepmontpetit.ca/420-4A4/`,
-                        position: "right",
-                    },
+                    }
                 ],
             },
             footer: {

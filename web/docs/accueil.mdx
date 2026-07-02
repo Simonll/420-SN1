@@ -6,41 +6,36 @@ hide_table_of_contents: true
 
 import useBaseUrl from '@docusaurus/useBaseUrl';
 
-# 👩🏻‍💻👨🏿‍💻🧑🏽‍💻 Programmation 👨🏻‍💻👩🏽‍💻 en sciences 👨🏾‍💻🧑🏼‍💻👩🏿‍💻
+# Programmation en sciences
 
 <Row>
 
 <Column>
 
-:::info Bienvenue au cours de Programmation en sciences!
+:::info Bienvenue au cours de Programmation en sciences !
 Dans ce cours, vous allez apprendre à programmer (en Python).
 :::
 
 :::danger IA - Intelligence artificielle
-- Tous les exercices devraient être faits sans IA afin d'arriver à une maîtrise des concepts de base de la programmation.
-- Vous pouvez utiliser l'IA pour vous aider à mieux comprendre ou pour chercher des solutions lorsque vous n'arrivez pas à trouver par vous-mêmes.
-- Tous les examens (parties papier et machine) seront réalisés sans IA pour valider les connaissances et savoir-faire fondamentaux.
+- Tous les exercices doivent être faits par vous-mêmes, sans recourir à l'IA pour générer le code, afin d'arriver à une véritable maîtrise des concepts de base.
+- L'IA peut toutefois vous servir de tuteur : utilisez-la pour mieux comprendre un concept ou pour déboguer lorsque vous êtes bloqué(e).
+- **Notez bien :** tous les examens (théoriques et pratiques) se feront strictement sans IA afin de valider vos connaissances et vos savoir-faire fondamentaux.
 :::
 
 </Column>
 
 <Column>
 
-:::warning Avant chaque séance :
-- Vous avez du travail préparatoire pour découvrir la matière du prochain cours par vous-même, avant la rencontre.
-- Il s'agira de lecture et d'exercices préparatoires à faire.
-- Cela représente environ 3 heures de travail.
+:::warning Avant chaque séance (Travail préparatoire)
+- Vous devez découvrir la matière de la prochaine séance par vous-même à l'aide de lectures et d'exercices préparatoires.
+- Prévoyez environ 3 heures de travail autonome par semaine.
 :::
 
-:::tip Pendant chaque séance :
-
-- Parfois un retour sur ce qui a été vu ou mal compris
-- Parfois une démo
-
-Ensuite, vous allez :
-- Compléter et valider les exercices avec le professeur
-- Poser des questions sur les exercices et travaux
-
+:::tip Pendant chaque séance (En classe)
+- Retour sur les notions vues ou mal comprises.
+- Courtes démonstrations de concepts.
+- Complétion et validation de vos exercices avec votre enseignant.
+- Période de questions sur les travaux en cours.
 :::
 
 </Column>
@@ -51,50 +46,17 @@ Ensuite, vous allez :
     {
         id: "grid",
         label: "Cours",
-        icon: "📋",
         component: <MainDocsGrid />,
         // Les titres et les sous-titres sont définis dans les attributs "title" et "description" de chaque document des cours.
     },
     {
         id: "calendar-prof0",
-        label: "Joris", // Modifier pour le nom de l'enseignant
-        icon: "📅",
-        component: <MainDocsCalendar professorName="Joris" />, // Doit matcher le nom du professeur qui est dans l'attribut "calendrier" des cours qui sont dans sidebar.js
-    },
-    {
-        id: "calendar-prof1",
-        label: "Kevin", // Modifier pour le nom de l'enseignant
-        icon: "📅",
-        component: <MainDocsCalendar professorName="Kevin" />, // Doit matcher le nom du professeur qui est dans l'attribut "calendrier" des cours qui sont dans sidebar.js
-    },
-    {
-        id: "calendar-prof2",
-        label: "Mathieu",  // Modifier pour le nom de l'enseignant
-        icon: "📅",
-        component: <MainDocsCalendar professorName="Mathieu" />, // Doit matcher le nom du professeur qui est dans l'attribut "calendrier" des cours qui sont dans sidebar.js
-    },
-    //* Ajouter d'autres enseignants ici. Voir sidebar.js pour configurer les calendriers.
-    {
-        id: "calendrier-cegep",
-        label: "Calendrier cégep",
-        icon: <div class="navbar__logo"><img src="/420-SN1/img/logo.svg"/></div>,
-        component:
-        <div>
-            <iframe
-                src={useBaseUrl('/pdf/Calendrier-2026-2027.pdf')}
-                style={{
-                    width: '100%',
-                    aspectRatio: '1 / 1.294',   // hauteur d’une page PDF letter US
-                    border: 'none',
-                }}
-                title="Calendrier du cégep"
-            />
-        </div>
+        label: "Simon", // Modifier pour le nom de l'enseignant
+        component: <MainDocsCalendar professorName="Simon" />, // Doit matcher le nom du professeur qui est dans l'attribut "calendrier" des cours qui sont dans sidebar.js
     },
     {
         id: "dispos-labos",
         label: "Dispos labos",
-        icon: "🖥️",
         component:
         <div>
             <iframe
