@@ -1,6 +1,6 @@
 # 420-SN1 - Programmation en sciences 🐍
 
-Site de documentation du cours **420-SN1 Programmation en sciences** au Cégep Édouard-Montpetit.
+Site de documentation du cours **420-SN1 Programmation en sciences**.
 
 Ce site web est construit avec [Docusaurus 3](https://docusaurus.io/), un générateur de sites de documentation statique moderne.
 

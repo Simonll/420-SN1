@@ -3,10 +3,6 @@
     "message": "SN1 (Prog)",
     "description": "The title in the navbar"
   },
-  "logo.alt": {
-    "message": "Logo CEM",
-    "description": "The alt text of navbar logo"
-  },
   "item.label.Cours": {
     "message": "Cours",
     "description": "Navbar item with label Cours"
@@ -22,13 +18,5 @@
   "item.label.Aide-mémoire": {
     "message": "Aide-mémoire",
     "description": "Navbar item with label Aide-mémoire"
-  },
-  "item.label.4A3 (Projet scientifique)": {
-    "message": "4A3 (Projet scientifique)",
-    "description": "Navbar item with label 4A3 (Projet scientifique)"
-  },
-  "item.label.4A4 (Réseaux de neurones)": {
-    "message": "4A4 (Réseaux de neurones)",
-    "description": "Navbar item with label 4A4 (Réseaux de neurones)"
   }
 }
