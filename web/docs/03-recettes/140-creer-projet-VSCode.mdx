@@ -1,0 +1,82 @@
+# Créer un projet dans VS Code
+
+Un **projet VS Code** est un dossier contenant tous les fichiers liés à un programme Python.
+   Il contient habituellement :
+   - des fichiers `.py` (code Python)
+   - un environnement virtuel (`venv`) pour gérer les dépendances
+- d'autres fichiers comme des « notebooks » Jupyter, des images, ou des fichiers Markdown
+
+---
+
+## Deux façons de démarrer un projet
+### Démarrer à partir d'un repertoire GitHub existant
+   (si un projet est déjà ouvert, cliquer sur **New Window** pour ouvrir le nouveau projet dans un nouvel onglet).
+
+1. Créer un dépôt GitHub (si ce n'est pas déjà fait) et le cloner sur votre ordinateur. [répertoire GitHub](/recettes/creer-repertoire-github)
+2. Ouvrir **VS Code**.
+3. Sur l’écran d’accueil, cliquer sur [Open Folder](../../static/img/recettes/vscode-open-folder.png) et sélectionner le dossier cloné.
+
+### Démarrer à partir d'un nouveau projet vide
+   (si un projet est déjà ouvert, cliquer sur **New Window** pour ouvrir le nouveau projet dans un nouvel onglet).
+
+1. Ouvrir **VS Code**.
+2. Sur l’écran d’accueil, cliquer sur [open folder](../../static/img/recettes/vscode-open-folder.png) et sélectionner un dossier vide ou créer un nouveau dossier (sur votre bureau par exemple).
+
+
+---
+
+## Comprendre la structure du projet
+
+Une fois le projet créé, VS Code affiche :
+
+- un dossier principal (nom du projet)
+- un dossier `venv/` contenant l’environnement virtuel
+- un dossier `data` contenant des fichiers de données (optionnel)
+- un dossier `notebooks` contenant les notebooks Jupyter (optionnel)
+- un dossier `src` contenant le code source (optionnel)
+- un fichier `main.py` (optionnel)
+
+---
+
+## Ajouter un premier fichier
+
+1. Dans la colonne de gauche, cliquer-droit sur le dossier du projet, puis sur src (ou sur le dossier principal si vous n'avez pas de dossier src) et choisir **New File**.
+2. Donner un nom au fichier (ex : `test.py`) et appuyer sur ⏎.
+4. Un nouveau fichier `test.py` est créé.
+
+---
+
+## Astuces
+
+- Toujours créer un projet avant d’écrire du code, pour bien organiser vos fichiers.
+- Éviter les accents, espaces ou caractères spéciaux dans les noms de dossiers.
+- Le projet peut contenir aussi des notebooks Jupyter, des fichiers Markdown, etc.
+
+---
+
+## Créer un environnement virtuel
+
+Un **environnement virtuel** est une "bulle" isolée pour votre projet. Il contient sa propre installation de Python et ses propres bibliothèques (comme Matplotlib, Pandas, etc.), ce qui évite les conflits entre les différents projets sur votre machine.
+
+Dans VS Code, le moyen le plus simple de créer un environnement est d'utiliser la palette de commandes.
+
+### Étapes pour créer l'environnement
+
+1.  **Ouvrez le dossier de votre projet** dans VS Code (en suivant l'une des méthodes décrites ci-dessus).
+
+2.  **Ouvrez la Palette de Commandes** en utilisant le raccourci `Ctrl+Shift+P` (ou `Cmd+Shift+P` sur Mac).
+
+3.  Tapez **`Python: Create Environment...`** et sélectionnez cette commande dans la liste.
+
+4.  Choisissez **`Venv`** comme outil pour créer l'environnement. VS Code utilisera le module `venv` intégré à Python.
+
+5.  **Sélectionnez un interpréteur Python**. Une liste des versions de Python installées sur votre machine apparaîtra. Choisissez la version recommandée pour le cours (par exemple, Python 3.10 ou supérieur).
+
+Une fois ces étapes terminées, VS Code va :
+-   Créer un dossier `.venv` à la racine de votre projet.
+-   Configurer automatiquement les paramètres de votre projet (`.vscode/settings.json`) pour utiliser cet environnement.
+
+### Comment savoir si l'environnement est actif ?
+
+-   **Dans la barre d'état :** En bas à droite de la fenêtre de VS Code, vous devriez voir la version de Python suivie de `('.venv': venv)`. Cela indique que l'environnement de votre projet est sélectionné.
+-   **Dans le terminal :** Si vous ouvrez un nouveau terminal (`Terminal > New Terminal`), le nom de l'environnement, `(.venv)`, apparaîtra au début de l'invite de commande. Cela signifie que toute commande `pip install` que vous exécuterez sera installée uniquement dans la "bulle" de votre projet.
