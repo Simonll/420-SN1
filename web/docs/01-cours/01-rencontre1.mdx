@@ -136,61 +136,62 @@ import Link from '@docusaurus/Link';
 
         ---
 
-        ### Exemple pour mieux comprendre le fonctionnement
+        :::note Exemple pour mieux comprendre le fonctionnement
+
+        > La manipulation suivante est présentée à titre d'exemple. Elle ne fonctionnera que si Python est déjà installé sur votre ordinateur.
 
         On peut écrire du code Python avec un simple Bloc-notes ou TextEdit, puis l’exécuter via un terminal.
 
-        - Créez un nouveau document texte sur votre bureau, nommez-le `fichier.txt` et ouvrez-le :
-            1. Clic droit sur le bureau > Nouveau > Document texte
-            2. Nommez le fichier `fichier.txt`
-            3. Ouvrez le fichier avec *Bloc-notes* (double-cliquez dessus)
-        - Copiez-collez les 4 instructions ci-dessous à l'intérieur du fichier, puis sauvegardez-le :
-            ```python
-            nombre1 = 30
-            nombre2 = 50
-            resultat = nombre1 + nombre2
-            print(f"La somme de {nombre1} et {nombre2} est : {resultat}")
-            ```
-            - Pour copier : utilisez le bouton de copie rapide <img src={require('/img/icons/copier.png').default} width="24" style={{ verticalAlign: 'middle' }}/> qui apparait en haut à droite du bloc de code lorsque vous le survolez avec votre souris
-            - Pour coller : utilisez la combinaison de touches **`CTRL + V`**
-            - Pour sauvegarder : utilisez la combinaison de touches **`CTRL + S`**
-        - Lancez un terminal sur le bureau et exécutez la commande : `python fichier.txt` :
-            1. Clic droit sur le bureau > Ouvrir dans le Terminal
-            2. Tapez la commande `python fichier.txt` et appuyez sur `Entrée`
-        - Vous devriez voir s’afficher dans le Terminal quelque chose comme ça :
-            ```
-            > python fichier.txt
-            La somme de 30 et 50 est : 80
-            >
-            ```
+        1.  **Créez un nouveau document texte** sur votre bureau, nommez-le `fichier.txt` et ouvrez-le.
+        2.  **Copiez-collez** les 4 instructions ci-dessous à l'intérieur du fichier, puis sauvegardez-le :
+
+        ```python
+        nombre1 = 30
+        nombre2 = 50
+        resultat = nombre1 + nombre2
+        print(f"La somme de {nombre1} et {nombre2} est : {resultat}")
+        ```
+
+        3.  **Lancez un terminal** sur le bureau et exécutez la commande : `python fichier.txt`.
+
+        Vous devriez voir s’afficher dans le Terminal quelque chose comme ça :
+
+        ```
+        > python fichier.txt
+        La somme de 30 et 50 est : 80
+        >
+        ```
+
         Par convention, les fichiers de code Python ont l’extension `.py` plutôt que `.txt` (ex : `fichier.py`), mais ce sont des fichiers texte comme les autres, que l’on peut ouvrir avec n’importe quel éditeur de texte.
+
+        :::
 
         ---
 
         ### Environnements de développement (IDE)
 
-        En théorie, on pourrait écrire du code Python avec un simple Bloc-notes, mais c'est fastidieux. On utilise plutôt un **Environnement de Développement Intégré (IDE)**.
+        En théorie, on pourrait écrire du code Python avec un simple Bloc-notes, mais c'est fastidieux. On utilise plutôt un **Environnement de Développement Intégré (IDE)** qui simplifie grandement le processus.
 
         Un bon IDE offre :
         - **Coloration syntaxique** pour la lisibilité.
         - **Autocomplétion** pour coder plus vite.
         - **Détection d'erreurs** en temps réel.
         - Un **débogueur** pour trouver et corriger les bugs.
-
+        
         ---
-
-        ### Notre outil pour commencer : Google Colab
-
-        Pour nous concentrer sur la programmation sans se soucier de l'installation, nous utiliserons **[Google Colab](https://colab.research.google.com)** au début du cours.
-
+        
+        ### Notre outil pour commencer : Google Colab <img src="https://colab.research.google.com/img/colab_favicon.ico" width="20" style={{verticalAlign: 'middle'}}/>
+        
+        Pour nous concentrer sur la programmation sans se soucier de l'installation, nous utiliserons **[Google Colab](https://colab.research.google.com)** au début du cours, car **Python n'est pas nécessairement installé par défaut sur votre ordinateur personnel**.
+        
         **Qu'est-ce que Google Colab ?**
         C'est un environnement Python qui fonctionne dans votre navigateur :
         - **Rien à installer** : tout est prêt dans le cloud.
         - **Accessible partout** : il suffit d'un compte Google.
         - **Format interactif** : on utilise des [« notebooks »](/recettes/notebook-jupyter) qui mélangent code, texte et graphiques, parfait pour l'apprentissage.
-
-        Plus tard dans la session, nous installerons un IDE local comme **[VS Code](https://code.visualstudio.com/)**, un outil très utilisé par les professionnels.
-
+        
+        Plus tard dans la session, nous installerons un IDE local comme **[VS Code](https://code.visualstudio.com/)** <img src="https://code.visualstudio.com/favicon.ico" width="20" style={{verticalAlign: 'middle'}}/>, un outil très utilisé par les professionnels.
+        
         > ✅ **En résumé :** On commence avec **Google Colab** pour sa simplicité, puis on passera à **VS Code**.
 
         :::
