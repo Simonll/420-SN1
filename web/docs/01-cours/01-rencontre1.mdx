@@ -8,6 +8,7 @@ import Row from "../../src/components/Row";
 import Column from "../../src/components/Column";
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
+import Admonition from '@theme/Admonition';
 import RappelFonctionnementClasseInverse from '@site/docs/_components/RappelFonctionnementClasseInverse.mdx';
 import Feedback from "../../src/components/Feedback";
 import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
@@ -52,7 +53,6 @@ import Link from '@docusaurus/Link';
         - Vous pouvez expliquer, dessiner, reformuler, mais n'écrivez pas le code pour un.e ami.e.
         - Si vous avez un doute, demandez à votre prof.
         :::
-        {/* <Feedback feedbackId="Rencontre #1 - Plan de cours" /> */}
     </TabItem>
 
     <TabItem value="intro" label="Intro">
@@ -122,10 +122,7 @@ import Link from '@docusaurus/Link';
         :::info Fonctionnement de Python et outils de développement
 
         Python est un **langage interprété**, ce qui signifie que le code n’est pas compilé en un fichier exécutable,
-        mais **lu et exécuté ligne par ligne** par un interpréteur Python installé sur votre ordinateur.
-
-        Peu importe le système d’exploitation (Windows, macOS ou Linux), tant que l’interpréteur Python est présent,
-        il peut comprendre et exécuter les instructions écrites dans un fichier `.py`.
+        mais **lu et exécuté ligne par ligne** par un interpréteur Python.
 
         La machine ne fait **aucune déduction** : elle suit les instructions exactement comme elles sont écrites, dans
         l’ordre, sans se poser de questions.
@@ -136,135 +133,97 @@ import Link from '@docusaurus/Link';
 
         ---
 
-        :::note Exemple pour mieux comprendre le fonctionnement
+        ### Outils de développement
 
-        > La manipulation suivante est présentée à titre d'exemple. Elle ne fonctionnera que si Python est déjà installé sur votre ordinateur.
+        Pour écrire et exécuter du code Python, on utilise des outils qui facilitent le travail.
 
-        On peut écrire du code Python avec un simple Bloc-notes ou TextEdit, puis l’exécuter via un terminal.
-
-        1.  **Créez un nouveau document texte** sur votre bureau, nommez-le `fichier.txt` et ouvrez-le.
-        2.  **Copiez-collez** les 4 instructions ci-dessous à l'intérieur du fichier, puis sauvegardez-le :
-
-        ```python
-        nombre1 = 30
-        nombre2 = 50
-        resultat = nombre1 + nombre2
-        print(f"La somme de {nombre1} et {nombre2} est : {resultat}")
-        ```
-
-        3.  **Lancez un terminal** sur le bureau et exécutez la commande : `python fichier.txt`.
-
-        Vous devriez voir s’afficher dans le Terminal quelque chose comme ça :
-
-        ```
-        > python fichier.txt
-        La somme de 30 et 50 est : 80
-        >
-        ```
-
-        Par convention, les fichiers de code Python ont l’extension `.py` plutôt que `.txt` (ex : `fichier.py`), mais ce sont des fichiers texte comme les autres, que l’on peut ouvrir avec n’importe quel éditeur de texte.
-
-        :::
-
-        ---
-
-        ### Environnements de développement (IDE)
-
-        En théorie, on pourrait écrire du code Python avec un simple Bloc-notes, mais c'est fastidieux. On utilise plutôt un **Environnement de Développement Intégré (IDE)** qui simplifie grandement le processus.
-
-        Un bon IDE offre :
-        - **Coloration syntaxique** pour la lisibilité.
-        - **Autocomplétion** pour coder plus vite.
-        - **Détection d'erreurs** en temps réel.
-        - Un **débogueur** pour trouver et corriger les bugs.
+        #### Pour commencer : Google Colab <img src="https://colab.research.google.com/img/colab_favicon.ico" width="20" style={{verticalAlign: 'middle'}}/>
         
-        ---
+        Au début du cours, nous utiliserons **Google Colab**. C'est un environnement Python qui fonctionne directement dans votre navigateur.
         
-        ### Notre outil pour commencer : Google Colab <img src="https://colab.research.google.com/img/colab_favicon.ico" width="20" style={{verticalAlign: 'middle'}}/>
-        
-        Pour nous concentrer sur la programmation sans se soucier de l'installation, nous utiliserons **[Google Colab](https://colab.research.google.com)** au début du cours, car **Python n'est pas nécessairement installé par défaut sur votre ordinateur personnel**.
-        
-        **Qu'est-ce que Google Colab ?**
-        C'est un environnement Python qui fonctionne dans votre navigateur :
-        - **Rien à installer** : tout est prêt dans le cloud.
+        **Avantages :**
+        - **Rien à installer** : tout est déjà configuré dans le cloud.
         - **Accessible partout** : il suffit d'un compte Google.
-        - **Format interactif** : on utilise des [« notebooks »](/recettes/notebook-jupyter) qui mélangent code, texte et graphiques, parfait pour l'apprentissage.
+        - **Format interactif** : on travaille avec des « notebooks » qui permettent de mélanger du code, du texte et des graphiques, ce qui est idéal pour apprendre et expérimenter.
         
-        Plus tard dans la session, nous installerons un IDE local comme **[VS Code](https://code.visualstudio.com/)** <img src="https://code.visualstudio.com/favicon.ico" width="20" style={{verticalAlign: 'middle'}}/>, un outil très utilisé par les professionnels.
+        #### Pour la suite : VS Code <img src="https://code.visualstudio.com/favicon.ico" width="20" style={{verticalAlign: 'middle'}}/>
+
+        Plus tard dans la session, nous installerons **VS Code**, un éditeur de code très populaire chez les professionnels. Il offre des fonctionnalités avancées comme :
+        - La **coloration syntaxique** pour une meilleure lisibilité.
+        - L'**autocomplétion** pour coder plus vite.
+        - La **détection d'erreurs** en temps réel.
+        - Un **débogueur** puissant pour trouver et corriger les bugs.
         
-        > ✅ **En résumé :** On commence avec **Google Colab** pour sa simplicité, puis on passera à **VS Code**.
+        > ✅ **En résumé :** On commence avec **Google Colab** pour sa simplicité, puis on passera à **VS Code** pour une expérience de développement plus complète.
 
         :::
-        {/* <Feedback feedbackId="Rencontre #1 - Introduction" /> */}
     </TabItem>
 
     <TabItem value="code" label="On commence!">
 
         :::info Vous allez coder dès maintenant!
-        Suivez pas à pas les instructions ci-dessous pour écrire et exécuter votre **premier code Python**.
+        Suivez pas à pas les instructions ci-dessous pour écrire et exécuter votre **premier code Python** dans Google Colab.
         :::
 
         ---
 
         ::::note Écrire et exécuter ses premières commandes Python
 
-        Dans la **Console Python**
-        <img src={require('/img/icons/console.png').default} alt="Terminal" width="20"
-             style={{verticalAlign: 'middle'}}/> de VS Code (en bas à gauche), vous pouvez écrire et exécuter directement des commandes Python grâce
-        au mode interactif.
+        Google Colab utilise des **cellules de code** interactives. C'est comme un cahier de notes où chaque bloc de code peut être exécuté indépendamment.
 
-        Vous verrez quelque chose comme ça :
+        **1. Ouvrez le notebook d'introduction dans Colab :**
 
-        ```
-        Python Console
-        >>> |
-        ```
+        <a href="https://colab.research.google.com/github/Simonll/420-SN1/blob/develop/code/notebooks/01-rencontre1.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+        
+        > Si vous n'avez pas de notebook pour cet exercice, vous pouvez simplement ouvrir Google Colab et créer un nouveau notebook (`Fichier > Nouveau notebook`).
 
-        Le `>>>` est l'invite de commande, il attend que vous tapiez quelque chose.
-        On peut maintenant donner des instructions à l'ordinateur.
+        **2. Exécutez votre première cellule de code :**
 
-        Tapez cette commande (vous pouvez aussi la copier-coller) puis appuyez sur `Entrée` :
+        Dans le notebook, vous verrez une cellule de code. Cliquez sur l'icône de lecture (▶️) à gauche de la cellule ou sélectionnez la cellule et appuyez sur `Maj + Entrée` pour l'exécuter.
+
         ```python
         print("Bonjour le monde!")
         ```
 
-        Vous devriez voir s'afficher :
-        ```python
-        Python Console>>> print("Bonjour le monde!")
+        Le résultat s'affichera juste en dessous de la cellule :
+        ```
         Bonjour le monde!
-
-        >>> |
         ```
 
         Décortiquons cette première ligne de code :
 
-        Le mot-clé print : C'est une fonction native de Python. En programmation, « imprimer » ne signifie pas utiliser une imprimante papier, mais plutôt afficher un résultat textuel dans la console (ou l'espace de sortie sous votre cellule).
+        - **`print`** : C'est une fonction native de Python. En programmation, « imprimer » signifie afficher un résultat textuel.
+        - **`()`** : Les parenthèses contiennent ce que la fonction doit utiliser (l'argument).
+        - **`""`** : Les guillemets indiquent que `"Bonjour le monde!"` est du texte brut (une chaîne de caractères) et non une commande.
 
-        Les parenthèses () : Elles agissent comme un contenant. L'information textuelle ou numérique fournie à l'intérieur des parenthèses est appelée un argument (ou un paramètre).
+        **3. Utilisez Colab comme une super calculatrice :**
 
-        Les guillemets "" : Ils entourent le texte pour indiquer à l'interpréteur qu'il s'agit de texte brut (une chaîne de caractères) et non d'une commande Python ou d'une formule mathématique à calculer.
-
-        L'ordinateur comme super calculatrice
-        Essayez maintenant de taper une simple expression mathématique directement dans votre environnement, sans utiliser print :
+        Tapez une expression mathématique dans une nouvelle cellule et exécutez-la. Python l'évaluera et affichera le résultat.
 
         ```python
         6 / 2 * (1 + 2)
         ```
 
-        Python évalue l'expression en respectant scrupuleusement l'ordre des priorités mathématiques standards (gauche à droite pour la division et la multiplication) et affiche instantanément la réponse : 9.0.
+        Résultat :
+        ```
+        9.0
+        ```
 
-        Cette capacité à saisir une instruction et à obtenir une réponse immédiate s'appelle le mode interactif (souvent appelé REPL en informatique). C'est un bac à sable exceptionnel, idéal pour tester des formules scientifiques, explorer des idées ou valider un comportement logique rapidement avant de l'intégrer dans un script plus long.
-
+        Cette capacité à saisir une instruction et à obtenir une réponse immédiate s'appelle le mode interactif. C'est un bac à sable exceptionnel, idéal pour tester des formules, explorer des idées ou valider un comportement logique rapidement.
 
         :::tip
-        Vous pouvez utiliser les touches Flèche haut ($\uparrow$) et Flèche bas ($\downarrow$) de votre clavier pour faire défiler et rappeler les dernières commandes que vous avez tapées. C'est une astuce très pratique pour éviter de retaper plusieurs fois la même chose.
+        Dans Colab, vous pouvez utiliser les touches Flèche haut ($\uparrow$) et Flèche bas ($\downarrow$) dans une cellule pour naviguer dans l'historique des commandes que vous avez tapées dans cette cellule.
         :::
 
         ::::
-        {/* <Feedback feedbackId="Rencontre #1 - On commence!" /> */}
     </TabItem>
 
     <TabItem value="expressions" label="Expressions">
+
+        <Admonition type="tip" title="Testez dans Colab !">
+            <p>Ouvrez le notebook d'introduction pour tester les exemples de cette section dans des cellules de code.</p>
+            <a href="https://colab.research.google.com/github/Simonll/420-SN1/blob/develop/code/notebooks/01-rencontre1.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+        </Admonition>
 
         :::note Idée importante
         **Une expression produit toujours une valeur.**
@@ -327,10 +286,14 @@ import Link from '@docusaurus/Link';
                 :::
             </Column>
         </Row>
-        {/* <Feedback feedbackId="Rencontre #1 - Expressions" /> */}
     </TabItem>
 
     <TabItem value="operateurs" label="Opérateurs">
+
+        <Admonition type="tip" title="Testez dans Colab !">
+            <p>Ouvrez le notebook d'introduction pour tester les exemples de cette section dans des cellules de code.</p>
+            <a href="https://colab.research.google.com/github/Simonll/420-SN1/blob/develop/code/notebooks/01-rencontre1.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+        </Admonition>
 
         :::info Opérateurs
 
@@ -438,10 +401,14 @@ import Link from '@docusaurus/Link';
         |------------|------------------------------------|---------|
         | <C>=</C> | Affectation simple | <C>x = <N>5</N></C> |
 
-        {/* <Feedback feedbackId="Rencontre #1 - Opérateurs" /> */}
     </TabItem>
 
     <TabItem value="types" label="Types">
+
+        <Admonition type="tip" title="Testez dans Colab !">
+            <p>Ouvrez le notebook d'introduction pour tester les exemples de cette section dans des cellules de code.</p>
+            <a href="https://colab.research.google.com/github/Simonll/420-SN1/blob/develop/code/notebooks/01-rencontre1.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+        </Admonition>
 
         :::info Types
         En programmation, les valeurs que l'on manipule ont un **type**, et le type d'une valeur détermine comment on peut l'utiliser et quelles opérations sont possibles avec cette valeur.
@@ -534,10 +501,14 @@ import Link from '@docusaurus/Link';
         Il existe aussi des structures de données plus complexes pour stocker des données, comme les `list`, les `set`, les `tuple` ou les `dict`, que nous verrons plus tard.
         :::
 
-        {/* <Feedback feedbackId="Rencontre #1 - Types" /> */}
     </TabItem>
 
     <TabItem value="variables" label="Variables">
+
+        <Admonition type="tip" title="Testez dans Colab !">
+            <p>Ouvrez le notebook d'introduction pour tester les exemples de cette section dans des cellules de code.</p>
+            <a href="https://colab.research.google.com/github/Simonll/420-SN1/blob/develop/code/notebooks/01-rencontre1.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+        </Admonition>
 
         :::info Variables
         Les variables servent à stocker des informations manipulées par une application.\
@@ -660,7 +631,6 @@ import Link from '@docusaurus/Link';
         Votre enseignant vous fournira une feuille pour la réaliser.
         :::
         ::::
-        {/* <Feedback feedbackId="Rencontre #1 - Variables" /> */}
     </TabItem>
 
     <TabItem value="github" label="GitHub">
@@ -912,7 +882,6 @@ import Link from '@docusaurus/Link';
 
         Le `README.md` est écrit en **Markdown**, un format de texte simple qui permet de structurer du contenu (titres, listes, gras, liens, blocs de code…) de façon lisible aussi bien en texte brut que rendu par GitHub. La [recette sur les fichiers Markdown](/recettes/creer-markdown) vous explique comment en créer un dans PyCharm.
         ::::
-        {/* <Feedback feedbackId="Rencontre #1 - GitHub" /> */}
     </TabItem>
 
     <TabItem value="venv" label="Env. virtuel">
@@ -992,8 +961,6 @@ import Link from '@docusaurus/Link';
         - si nécessaire, un fichier comme `requirements.txt` peut indiquer quelles bibliothèques doivent être réinstallées.
 
         :::
-
-        {/* <Feedback feedbackId="Rencontre #1 - Env. Virtuel" /> */}
 
     </TabItem>
 
@@ -1130,7 +1097,6 @@ import Link from '@docusaurus/Link';
         print("\nPandas - Exemple 2")
         print(donnees_ex2)
         ```
-        {/* <Feedback feedbackId="Rencontre #1 - Aperçu" /> */}
     </TabItem>
 
     <TabItem value="Activités" label="Activités">
