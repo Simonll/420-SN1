@@ -1,5 +1,5 @@
 ---
-title: 2 - 📚 Scripts et fonctions
+title: 2 - Scripts et fonctions
 description: Script, Débogueur, Trace, Fonctions, f-strings, Modules, Bibliothèques, Liste (list), Précision des flottants
 hide_table_of_contents: true
 ---
@@ -17,7 +17,7 @@ import AideMemoireListe from '@site/docs/_components/AideMemoireListe.mdx';
 import Feedback from "../../src/components/Feedback";
 import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
 
-# 📚 Scripts et fonctions
+# Scripts et fonctions
 
 <Tabs queryString="onglet">
 
@@ -82,7 +82,7 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
 
         ---
 
-        :::tip 🚀 Pourquoi écrire des scripts?
+        :::tip Pourquoi écrire des scripts?
 
         Écrire son code dans des fichiers `.py` permet :
 
@@ -93,7 +93,7 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
 
         ---
 
-        :::note 💾 Sauvegarde automatique
+        :::note Sauvegarde automatique
 
         PyCharm **sauvegarde automatiquement** vos fichiers à chaque modification. \
         Inutile d'appuyer sur *`Ctrl + S`* ou de chercher une option *Enregistrer*. Vos changements sont toujours préservés sur votre poste.
@@ -104,7 +104,7 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
 
         ---
 
-        :::warning ▶️ Vérifiez toujours quel fichier sera exécuté
+        :::danger Vérifiez toujours quel fichier sera exécuté
 
         Les boutons d'exécution lancent **le fichier indiqué à leur gauche**, et non nécessairement celui que vous êtes en train de modifier! \
         Assurez-vous que ce sélecteur affiche toujours la valeur **"Current File"**.
@@ -296,14 +296,14 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
 
     <TabItem value="fonctions" label="Fonctions">
 
-        :::info 📌 Fonctions
+        :::info Fonctions
 
         Une **fonction** est un ensemble d’instructions réutilisables regroupées sous un nom.<br />
-        👉 Le nom doit être **significatif** : par exemple, on devine que `print()` sert à afficher quelque chose.
+        Le nom doit être **significatif** : par exemple, on devine que `print()` sert à afficher quelque chose.
 
         ---
 
-        ### ⚡ Comprendre une fonction
+        ### Comprendre une fonction
         Quand on utilise une fonction, il n’est pas nécessaire de connaître tout son code interne.<br />
         Il faut surtout comprendre :
         - Quels **paramètres** attend-elle ? (les infos entre `()`)
@@ -312,14 +312,14 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
 
         ---
 
-        ### 🎯 Les paramètres
+        ### Les paramètres
         Pour appeler une fonction :
         `nom_de_fonction(param1, param2, ...)`<br />
-        ➡️ Le nombre et l’ordre des paramètres sont importants.
+        Le nombre et l’ordre des paramètres sont importants.
 
         ---
 
-        ### 💾 Conserver une valeur de retour
+        ### Conserver une valeur de retour
         On peut stocker le résultat d’une fonction dans une variable, par exemple :
         ```python showLineNumbers
         mon_age_arrondi = round(17.8)
@@ -329,7 +329,7 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
 
         ---
 
-        ::::note 📌 Quelques fonctions utiles
+        ::::note Quelques fonctions utiles
 
         Vous trouverez dans la section [Fonctions utiles](/aidememoire/fonctions) de l'aide-mémoire une liste non-exhaustive de fonctions utiles.
 
@@ -461,7 +461,7 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
         World
         ```
 
-        :::tip saut de ligne à l'aide du caractère `\n`
+        :::tip Saut de ligne à l'aide du caractère `\n`
         Il est également possible de faire un saut de ligne à l'aide du caractère spécial `\n` (un backslash suivi de la lettre n).<br /><br />
         Si vous exécutez ce code :
         ```python showLineNumbers
@@ -475,7 +475,7 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
         ```
         :::
 
-        :::tip afficher un guillemet `"` à l'aide du caractère `\`
+        :::tip Afficher un guillemet `"` à l'aide du caractère `\`
         Comme une chaîne de caractères est délimitée par des guillemets (`"`), écrire un guillemet **à l'intérieur** de cette chaîne poserait problème : Python croirait que la chaîne se termine là.<br /><br />
         Pour insérer un guillemet dans la chaîne, on le fait précéder d'un backslash `\`. On dit qu'on *échappe* le caractère.
         ```python showLineNumbers
@@ -490,7 +490,7 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
         - `\'` pour afficher une apostrophe dans une chaîne délimitée par des apostrophes
         - `\\` pour afficher un backslash
 
-        💡 Une autre astuce consiste à délimiter la chaîne avec des apostrophes (`'`) si elle contient des guillemets (ou l'inverse) :
+        Une autre astuce consiste à délimiter la chaîne avec des apostrophes (`'`) si elle contient des guillemets (ou l'inverse) :
         ```python showLineNumbers
         print('Elle a dit : "Bonjour!"')
         ```
@@ -504,7 +504,7 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
 
     <TabItem value="fstring" label="f-strings">
 
-        ::::info ✨ Les f-strings, c'est quoi?
+        ::::info Les f-strings, c'est quoi?
 
         Une *f-string* (ou *formatted string*), c'est similaire à une **phrase à trous** : on écrit le texte normalement, et partout où on veut insérer une valeur, on laisse un trou avec des accolades `{}`. Python remplit ensuite chaque trou avec la valeur correspondante.<br />
 
@@ -519,7 +519,7 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
         Le résultat de 3.14159265 x 2 est : 6.2831853.
         ```
 
-        :::tip 🤔 Pourquoi utiliser une f-string?
+        :::tip Pourquoi utiliser une f-string?
         On pourrait obtenir un résultat semblable avec la concaténation (`+`) ou en séparant les éléments par des virgules dans `print()`.
         Mais la f-string est souvent **plus lisible** et évite d'avoir à **convertir les nombres en `str`** soi-même : on insère directement les variables et les expressions entre accolades, et Python s'occupe du reste.
         :::
@@ -527,7 +527,7 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
 
         ---
 
-        ::::info 🔢 Formatage des nombres
+        ::::info Formatage des nombres
         Les f-strings permettent un contrôle très précis de la présentation des nombres entiers et flottants. \
         Il suffit d’ajouter, à l’intérieur des accolades `{}`, après l’expression, un `:` suivi d’options pour contrôler le format.
 
@@ -556,7 +556,7 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
         Le résultat de 3.14159265 x 2 est : 6.28.
         ```
 
-        :::note 📌 Le format change l'affichage, pas la valeur
+        :::note Le format change l'affichage, pas la valeur
         Ces options modifient seulement **la façon dont le nombre est affiché**. \
         La variable, elle, garde sa valeur et son type d'origine (un `float` reste un `float`).
         :::
@@ -564,7 +564,7 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
 
         ---
 
-        :::info 🔤 Formatage des chaînes de caractères
+        :::info Formatage des chaînes de caractères
         Il est possible de forcer une chaîne de caractères à occuper un certain nombre de positions et de contrôler son alignement.
         Ceci est particulièrement utile lorsque l’alignement vertical entre plusieurs lignes affichées dans la console doit être respecté (par exemple, lors de l’affichage d’un tableau en console).
 
@@ -595,7 +595,7 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
         Renoir     Dessendre
         ```
 
-        👉 C'est cette technique d'alignement qui vous permettra d'afficher des **données bien lisibles** dans la console, en alignant proprement les valeurs les unes sous les autres.
+        C'est cette technique d'alignement qui vous permettra d'afficher des **données bien lisibles** dans la console, en alignant proprement les valeurs les unes sous les autres.
         :::
 
 
@@ -610,8 +610,8 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
         Cependant, elles ne sont pas toutes chargées automatiquement au démarrage.
         **Pourquoi?** Pour garder Python plus léger et éviter de charger inutilement des outils dont on n’a pas besoin.
 
-        👉 Ces fonctions sont regroupées dans des fichiers Python (`.py`) appelés **modules**.\
-        👉 Un **module**, c’est donc un fichier qui contient des fonctions organisées autour d’un thème.
+        Ces fonctions sont regroupées dans des fichiers Python (`.py`) appelés **modules**.\
+        Un **module**, c’est donc un fichier qui contient des fonctions organisées autour d’un thème.
 
         Pour utiliser les fonctions d’un module, il existe deux approches principales :
 
@@ -668,7 +668,7 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
             </Column>
         </Row>
 
-        👉 En général, on écrit les `import` et les `from` au **début du fichier Python**.\
+        En général, on écrit les `import` et les `from` au **début du fichier Python**.\
         **Pourquoi?** Quand quelqu’un ouvre le fichier, il peut voir immédiatement quels modules le programme utilise.
 
         ::::
@@ -703,7 +703,7 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
 
         ---
 
-        :::info 📚 Modules utiles en Python
+        :::info Modules utiles en Python
         Vous trouverez la documentation officielle des modules de base sur le site officiel de Python. \
         **Il n'est pas nécessaire de la consulter** pour l'instant : elle est très technique et peut être difficile à apprivoiser lorsqu'on débute la programmation.
 
@@ -718,7 +718,7 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
 
         ---
 
-        :::tip 🤖 Vulgariser des modules et des fonctions avec l’IA
+        :::tip Vulgariser des modules et des fonctions avec l’IA
 
         **Si bien utilisés**, des outils d’intelligence artificielle comme Copilot (basé sur la technologie de ChatGPT et
         accessible gratuitement en ligne) peuvent vous aider à mieux comprendre le fonctionnement de modules et de
@@ -727,7 +727,7 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
         Cela peut être particulièrement utile lorsque la documentation officielle vous semble complexe ou si vous avez
         des doutes sur l’utilisation d’une fonction.
 
-        Accédez à Copilot 🧠 à l’aide de ce [lien](https://copilot.microsoft.com/) et essayez le prompt suivant :
+        Accédez à Copilot à l’aide de ce [lien](https://copilot.microsoft.com/) et essayez le prompt suivant :
         ```
         Agis comme un formateur expert en Python.
         Je suis étudiant en science de la nature débutant l'apprentissage de la programmation.
@@ -744,7 +744,7 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
 
         ---
 
-        :::info Bibliothèques 📚
+        :::info Bibliothèques
 
         Parfois, plusieurs modules sont regroupés ensemble pour former un tout réutilisable et
         partageable facilement.<br />
@@ -1124,7 +1124,7 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
 
         ---
 
-        ::::info 🔬 Pourquoi ça arrive?
+        ::::info Pourquoi ça arrive?
 
         Les ordinateurs stockent les données en **binaire** (des 0 et des 1). Or, certaines fractions décimales simples, comme `0.1`, **ne peuvent pas être représentées exactement en binaire**, tout comme `1/3` ne peut pas être écrit exactement en décimal (`0.333333...`).
 
@@ -1155,7 +1155,7 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
 
         ---
 
-        :::danger 💥 Impacts concrets
+        :::danger Impacts concrets
 
         Ce problème peut causer des bugs subtils et difficiles à détecter.
 
@@ -1170,7 +1170,7 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
         print(a == b)   # Affiche False  ← les deux valeurs semblent identiques, pourtant!
         ```
 
-        👉 *L'opérateur `==` vérifie si deux valeurs sont exactement identiques et retourne `True` (vrai) ou `False` (faux). Il sera étudié à la [rencontre 4](/cours/rencontre4).*
+        *L'opérateur `==` vérifie si deux valeurs sont exactement identiques et retourne `True` (vrai) ou `False` (faux). Il sera étudié à la [rencontre 4](/cours/rencontre4).*
 
 
         **Accumulation d'erreurs dans un calcul répété :**
@@ -1193,13 +1193,13 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
 
         ---
 
-        ::::info 🛠️ Comment y remédier
+        ::::info Comment y remédier
 
         Il existe plusieurs stratégies selon le contexte.
 
         ---
 
-        ### ✅ Stratégie 1 : Arrondir l'affichage avec les f-strings
+        ### Stratégie 1 : Arrondir l'affichage avec les f-strings
 
         Si le problème est uniquement visuel, on peut simplement contrôler le nombre de décimales affichées :
 
@@ -1212,7 +1212,7 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
 
         ---
 
-        ### ✅ Stratégie 2 : Arrondir avec `round()`
+        ### Stratégie 2 : Arrondir avec `round()`
 
         La fonction `round()` permet de limiter la précision d'un nombre flottant :
 
@@ -1228,7 +1228,7 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
 
         ---
 
-        ### ✅ Stratégie 3 : Comparer avec une tolérance
+        ### Stratégie 3 : Comparer avec une tolérance
 
         Pour vérifier si deux flottants sont "pratiquement égaux", on compare leur différence à un seuil très petit :
 
@@ -1242,12 +1242,12 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
         print(difference < tolerance) # Affiche True  ← la différence est négligeable
         ```
 
-        👉 *L'opérateur `<` vérifie si la valeur de gauche est plus petite que celle de droite. Il sera étudié à la [rencontre 4](/cours/rencontre4).*
+        *L'opérateur `<` vérifie si la valeur de gauche est plus petite que celle de droite. Il sera étudié à la [rencontre 4](/cours/rencontre4).*
 
 
         ---
 
-        ### ✅ Stratégie 4 : Utiliser le module `decimal`
+        ### Stratégie 4 : Utiliser le module `decimal`
 
         Quand la précision absolue est critique, Python offre le module `decimal` qui effectue les calculs en base 10, comme le ferait un humain :
 
@@ -1266,14 +1266,14 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
 
         :::warning
         Alors, pourquoi ne pas utiliser `decimal` systématiquement?\
-        👉 Parce que c'est beaucoup plus lent et plus complexe à manipuler que les flottants classiques.
+        Parce que c'est beaucoup plus lent et plus complexe à manipuler que les flottants classiques.
         :::
 
         ::::
 
         ---
 
-        :::tip 💡 À retenir pour ce cours
+        :::tip À retenir pour ce cours
 
         Dans ce cours d'introduction, les deux réflexes essentiels sont :
 
@@ -1295,7 +1295,7 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
         <Tabs>
             <TabItem value="1" label="🏠 Activités à faire à la maison">
 
-                ## 🧠 Auto-validation des connaissances
+                ## Auto-validation des connaissances
 
                 [**Ce formulaire**](https://forms.gle/YYzQgMACNvrF6mLSA) sert à vérifier votre compréhension des éléments les plus importants de la rencontre R02. Ne faites ce questionnaire **que lorsque vous vous sentez en très bonne maîtrise de la matière**. En classe, dès votre arrivée, vous aurez un **questionnaire très similaire**, évalué **sommativement**, à compléter sans accès à **aucune documentation**.
 
@@ -1306,7 +1306,7 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
 
                 ---
 
-                ## ✏️ Exercices de compréhension
+                ## Exercices de compréhension
 
                 ::::info Exercice - Trace simple
 
@@ -1346,7 +1346,7 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
 
                 ---
 
-                # 🎯 Solutionnaire
+                # Solutionnaire
 
                 :::warning
                 Consultez le solutionnaire **uniquement après avoir complété l'exercice par vous-même**. \
@@ -1360,14 +1360,14 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
 	        <TabItem value="2" label=" 🏫 Activités à faire en classe">
 
 
-                ## 🔨 Exercices de création
+                ## Exercices de création
 
                 Pour chacun des exercices de cette section, vous devez créer des fichiers `.py` avec les noms indiqués.
 
                 <DocumentationAutorisee />
 
                 ::::info Exercice - *Free style*
-                📁 Créez un fichier `r02_free_style.py` pour votre réponse.
+                Créez un fichier `r02_free_style.py` pour votre réponse.
 
                 Dans un fichier, écrivez une dizaine de lignes de commandes Python.<br />
                 Vous pouvez inclure :
@@ -1376,7 +1376,7 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
                 - des affichages avec `print()`
 
                 Exécutez votre code en mode débogage pour vous familiariser avec le débogueur.<br />
-                👉 Ce sera l'outil le plus utile de votre vie pour programmer!
+                Ce sera l'outil le plus utile de votre vie pour programmer!
 
                 :::note Notions visées
                 Variables, calculs et affectation, exécution en mode débogage (débogueur)
@@ -1387,7 +1387,7 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
                 ---
 
                 ::::info Exercice - QUESTION DE GRAVITÉ
-                📁 Créez un fichier `r02_question_de_gravite.py` pour votre réponse.
+                Créez un fichier `r02_question_de_gravite.py` pour votre réponse.
 
                 La gravité sur Mars est d’environ 3,71 m/s². \
                 Écrivez un programme pour convertir une masse (en kilogrammes) en son poids correspondant sur Mars, en newtons (N).
@@ -1400,9 +1400,9 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
                 Le programme doit afficher le bon poids peu importe le contenu de la variable.
 
 
-                💡 Formule : $\text{poids}=\text{masse}\times\text{gravité}$
+                Formule : $\text{poids}=\text{masse}\times\text{gravité}$
 
-                ✅ Sortie attendue
+                Sortie attendue
                 ```
                 Masse sur Terre (kg) : 50
                 Le poids sur Mars est de 185.5 N.
@@ -1417,11 +1417,11 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
                 ---
 
                 ::::info Exercice - MOYENNE PRESSION SYSTOLIQUE
-                📁 Créez un fichier `r02_pression_systolique.py` pour votre réponse.
+                Créez un fichier `r02_pression_systolique.py` pour votre réponse.
 
                 Créez un programme calculant la moyenne de la pression systolique d'un patient.
 
-                #### 🛠️ **INSTRUCTIONS**
+                #### **INSTRUCTIONS**
 
                 1. **Déclarez une liste** `mesures` contenant les 3 valeurs de pression systolique (matin, midi, soir) :
                     ```python
@@ -1433,12 +1433,12 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
 
                 Validez le bon fonctionnement de votre programme en modifiant les valeurs dans la liste.
 
-                :::tip 💡 Pourquoi une liste?
+                :::tip Pourquoi une liste?
                 Les trois mesures sont des données **du même type** (des pressions) collectées de façon répétée. Une liste les regroupe naturellement. De plus, utiliser `sum()` et `len()` rend votre calcul **généralisant** : il fonctionnerait sans modification avec 4, 5 ou 10 mesures dans la liste.
                 :::
                 <br/>
 
-                ✅ Sortie attendue
+                Sortie attendue
                 ```
                 Pression systolique
 
@@ -1458,7 +1458,7 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
                 ---
 
                 ::::info Exercice - GÉNÉRER UN NOMBRE ALÉATOIRE
-                📁 Créez un fichier `r02_nombre_aleatoire.py` pour votre réponse.
+                Créez un fichier `r02_nombre_aleatoire.py` pour votre réponse.
 
                 Vous devez générer un nombre entier aléatoire compris entre 2 variables :
 
@@ -1467,7 +1467,7 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
                 valeur_max = 100
                 ```
 
-                ✅ Sortie attendue
+                Sortie attendue
                 ```
                 Nombre le plus bas : 50
                 Nombre le plus haut : 100
@@ -1480,7 +1480,7 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
                 - **Approche plus simple** : Vous pouvez demander à ChatGPT ou un autre outil d'IA quelle fonction utiliser pour générer un nombre compris entre deux bornes
                 inclusives, et de vous expliquer son fonctionnement.
 
-                🧠 Exemple de prompt :
+                Exemple de prompt :
 
                 ```
                 Quelle est la fonction du module random en Python qui permet de générer
@@ -1497,11 +1497,11 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
                 ---
 
                 ::::info Exercice - REMPLIR UNE LISTE ALÉATOIREMENT
-                📁 Créez un fichier `r02_liste_aleatoire.py` pour votre réponse.
+                Créez un fichier `r02_liste_aleatoire.py` pour votre réponse.
 
                 Créez un programme qui part d’une **liste vide** et lui ajoute 5 nombres entiers aléatoires compris entre 0 et 100.
 
-                #### 🛠️**INSTRUCTIONS**
+                #### **INSTRUCTIONS**
 
                 1. Déclarez une liste vide :
                     ```python
@@ -1512,11 +1512,11 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
 
                 Le module `random` sera nécessaire. Si vous ne savez pas quelle fonction utiliser, référez-vous à l’exercice précédent ou consultez la documentation.
 
-                :::tip 💡 Pour les curieux
+                :::tip Pour les curieux
                 Vous remarquerez que les 5 appels à `.append()` sont presque identiques. C’est précisément ce genre de répétition qu’une boucle `for` élimine : en quelques lignes, elle exécuterait automatiquement l’ajout autant de fois que souhaité que ce soit 5 ou 500 nombres. Vous verrez ça bientôt!
                 :::
 
-                ✅ Sortie attendue
+                Sortie attendue
                 ```
                 Liste de nombres aléatoires : [42, 7, 91, 55, 23]
                 ```
@@ -1532,7 +1532,7 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
                 ---
 
                 ::::info Exercice - CALCUL DE LA DISTANCE ENTRE 2 POINTS
-                📁 Créez un fichier `r02_distance_2_points.py` pour votre réponse.
+                Créez un fichier `r02_distance_2_points.py` pour votre réponse.
 
                 Créez un programme **calculant et affichant** la distance entre les 2 points, arrondie à 2 décimales.<br />
                 La formule de la distance entre 2 points $A(x_1, y_1)$ et $B(x_2, y_2)$ est :
@@ -1551,11 +1551,11 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
                 Accédez aux coordonnées via les index : `points[1][0]` pour $x_2$. \
                 Pour réaliser la racine carrée de la formule, vous aurez besoin d'une fonction du module `math`.
 
-                :::tip 💡 Pourquoi une liste de listes?
+                :::tip Pourquoi une liste de listes?
                 Chaque point est lui-même une liste `[x, y]`, et `points` regroupe tous les points du problème. Cette structure, appelée **liste de listes** (ou liste imbriquée), reflète naturellement la réalité : un ensemble de points, chacun défini par ses coordonnées. `points[0]` est le point A, `points[1]` est le point B.
                 :::
 
-                ✅ Sortie attendue
+                Sortie attendue
                 ```
                 Point A
                 X1 : 50
@@ -1577,7 +1577,7 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
                 ---
 
                 ::::info Exercice – CONSTRUIRE UN NOMBRE DÉCIMAL
-                📁 Créez un fichier `r02_nombre_decimal.py` pour votre réponse.
+                Créez un fichier `r02_nombre_decimal.py` pour votre réponse.
 
                 En utilisant les 2 variables suivantes :
                 ```python
@@ -1592,7 +1592,7 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
 
                 Indice : les puissances de 10 peuvent vous aider.
 
-                ✅ Sortie attendue
+                Sortie attendue
                 ```
                 chiffre : 5
                 position décimale : 3
@@ -1609,13 +1609,13 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
                 ---
 
                 ::::info Exercice - CALCUL DE LA NOTE FINALE DU COURS
-                📁 Créez un fichier `r02_note_finale.py` pour votre réponse.
+                Créez un fichier `r02_note_finale.py` pour votre réponse.
 
 
                 Créez un programme qui calcule la note finale obtenue par un étudiant dans ce cours. \
                 La règle de la double sanction n'est pas à appliquer dans cet exercice, car les notions nécessaires n'ont pas encore été vues.
 
-                #### 🛠️ **INSTRUCTIONS**
+                #### **INSTRUCTIONS**
                 1. **Déclarez une variable** pour le nom de l'étudiant et **quatre listes parallèles** :
                     ```python
                     nom_etudiant = "Nicola Tesla"
@@ -1627,13 +1627,13 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
                 2. **Appliquez les pondérations** pour calculer la note finale en accédant aux éléments par leur index.
                 3. **Affichez un résumé clair** des notes de chaque évaluation et de la note finale, arrondies à 2 décimales.
 
-                :::tip 💡 Pourquoi des listes?
+                :::tip Pourquoi des listes?
                 Ces quatre listes sont **parallèles** : à l'index `0`, on trouve tout ce qui concerne le TP1 (`evaluations[0]`, `notes[0]`, `sur[0]`, `ponderations[0]`). Regrouper les données de cette façon évite de multiplier les variables et prépare le terrain pour les boucles `for` que vous verrez bientôt.
                 :::
 
                 Vous pouvez créer d'autres variables si vous le jugez nécessaire.
 
-                ✅ Sortie attendue
+                Sortie attendue
                 ```
                 Étudiant : Nicola Tesla
 
@@ -1656,7 +1656,7 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
                 ---
 
                 ::::info Exercice - DÉCOMPOSER UN MONTANT EN BILLETS
-                📁 Créez un fichier `r02_montant_billets.py` pour votre réponse.
+                Créez un fichier `r02_montant_billets.py` pour votre réponse.
 
                 Écrivez un programme permettant de décomposer un montant en billets de 100, 50, 20, 10 et 5\$.<br />
                 Le programme doit privilégier les billets de plus grandes valeurs.
@@ -1687,7 +1687,7 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
                     - `376 // 100` $\longrightarrow$ `3`
                     - `95 // 100` $\longrightarrow$ `0`
 
-                :::tip 💡 Pourquoi une liste?
+                :::tip Pourquoi une liste?
                 Les valeurs de coupures forment une série naturellement ordonnée. Les stocker dans une liste rend l'intention du code plus claire. Vous verrez lors d'un prochain cours qu'une boucle `for` permettrait de traiter automatiquement toutes les coupures, peu importe leur nombre, en quelques lignes seulement.
                 :::
 
@@ -1699,12 +1699,12 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
 
                 ---
 
-                ## ✏️ Exercices sur papier
+                ## Exercices sur papier
 
                 <DocumentationInterdite />
 
                 ::::info Exercice - Vitesse d'impact
-                📁 Créez un fichier `r02_vitesse_impact.py` pour votre réponse.
+                Créez un fichier `r02_vitesse_impact.py` pour votre réponse.
 
                 Écrivez (**sur papier**) un programme qui calcule la vitesse d’impact ($v$) d’un objet en chute libre à partir d’une hauteur ($h$) donnée en mètres.
 
@@ -1740,7 +1740,7 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
 
                 <IntroSolutionsExercices />
 
-                🔨 Solution des **exercices de création** :
+                Solution des **exercices de création** :
                 - Question de gravité *(solutionnaire à venir)*
                 - Moyenne pression systolique *(solutionnaire à venir)*
                 - Générer un nombre aléatoire *(solutionnaire à venir)*
@@ -1750,7 +1750,7 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
                 - Calcul de la note finale du cours *(solutionnaire à venir)*
                 - Décomposer un montant en billets *(solutionnaire à venir)*
 
-                ✏️ Solution des **exercices de compréhension** :
+                Solution des **exercices de compréhension** :
                 - Vitesse d'impact *(solutionnaire à venir)*
             </TabItem>
         </Tabs>
@@ -1767,7 +1767,7 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
 
         ---
 
-        ::::info Générer des graphiques 📊
+        ::::info Générer des graphiques
 
         Nous allons utiliser **Matplotlib**, une bibliothèque Python très flexible pour la visualisation de données.<br />
         Elle permet de créer des graphiques simples ou complexes et de personnaliser pratiquement tous les éléments :
