@@ -7,6 +7,7 @@ hide_table_of_contents: true
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import Column from "../../src/components/Column";
+import Admonition from '@theme/Admonition';
 import Row from "../../src/components/Row";
 
 import RappelFonctionnementClasseInverse from '@site/docs/_components/RappelFonctionnementClasseInverse.mdx';
@@ -22,6 +23,12 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
 <Tabs queryString="onglet">
 
     <TabItem value="script" label="Script" default>
+
+        <Admonition type="tip" title="Faire les exercices dans Colab">
+            <p>Si vous préférez, vous pouvez aussi faire les exercices de cette section dans un notebook Google Colab. Cliquez sur le badge ci-dessous pour ouvrir le notebook préparé pour vous.</p>
+            <a href="https://colab.research.google.com/github/Simonll/420-SN1/blob/develop/code/notebooks/exercices_semaine_2.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+        </Admonition>
+
 
         :::warning Retour sur le mode interactif
 
@@ -899,6 +906,26 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
         ```
         :::
 
+        :::tip Alternative avec `+=`
+        On peut aussi utiliser l'opérateur `+=` pour ajouter un ou plusieurs éléments à la fin d'une liste. C'est une alternative à `append()` qui modifie aussi la liste en place.
+
+        ```python showLineNumbers
+        ma_liste = [1, 2, 3]
+        ma_liste += [4]      # Ajoute l'élément 4
+        print(ma_liste)      # Affiche [1, 2, 3, 4]
+
+        ma_liste += [5, 6]   # Ajoute les éléments 5 et 6
+        print(ma_liste)      # Affiche [1, 2, 3, 4, 5, 6]
+        ```
+
+        Attention, il faut bien fournir une **liste** (avec des `[]`) à droite de l'opérateur. Si on oublie les crochets pour une chaîne de caractères, Python ajoutera chaque caractère individuellement :
+        ```python showLineNumbers
+        ma_liste = ["Mario"]
+        ma_liste += "Link" # Oups! On a oublié les crochets
+        print(ma_liste)    # Affiche ['M', 'a', 'r', 'i', 'o', 'L', 'i', 'n', 'k']
+        ```
+        :::
+
         ---
 
         :::tip Qu'est-ce qu'une méthode?
@@ -1304,7 +1331,7 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
 
         <RappelFonctionnementClasseInverse/>
         <Tabs>
-            <TabItem value="1" label="🏠 Activités à faire à la maison">
+            <TabItem value="1" label="Activités à faire à la maison">
 
                 ## Auto-validation des connaissances
 
@@ -1368,7 +1395,7 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
                 - Trace simple — [solutionnaire.pdf](/pdf/r02_trace_simple_solutionnaire.pdf)
 
             </TabItem>
-	        <TabItem value="2" label=" 🏫 Activités à faire en classe">
+	        <TabItem value="2" label="Activités à faire en classe">
 
 
                 ## Exercices de création
@@ -1376,6 +1403,11 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
                 Pour chacun des exercices de cette section, vous devez créer des fichiers `.py` avec les noms indiqués.
 
                 <DocumentationAutorisee />
+
+                <Admonition type="tip" title="Faire les exercices dans Colab">
+                    <p>Si vous préférez, vous pouvez aussi faire les exercices de cette section dans un notebook Google Colab. Cliquez sur le badge ci-dessous pour ouvrir le notebook préparé pour vous.</p>
+                    <a href="https://colab.research.google.com/github/Simonll/420-SN1/blob/develop/code/notebooks/exercices_semaine_2.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+                </Admonition>
 
                 ::::info Exercice - *Free style*
                 Créez un fichier `r02_free_style.py` pour votre réponse.
@@ -1648,12 +1680,10 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
                 ```
                 Étudiant : Nicola Tesla
 
-                TP1        (15%) :  8 / 10
+                TP1        (20%) :  8 / 10
                 TP2        (25%) :  9 / 10
                 Examen 1   (20%) : 90 / 100
-                Examen 2   (30%) : 95 / 100
-                Contrôles  (10%) :  9 / 10
-
+                Examen 2   (35%) : 95 / 100
                 Note obtenue pour ce cours : 90.0 / 100
                 Attention, l'application de la double sanction n'a pas été réalisée!
                 ```
