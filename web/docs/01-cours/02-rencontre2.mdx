@@ -325,6 +325,10 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
         mon_age_arrondi = round(17.8)
         ```
 
+        :::note La distinction `print()` vs `return`
+        La distinction entre `print()` (afficher) et `return` (renvoyer une valeur) est cruciale. Consultez cette page de l'aide-mémoire pour une explication détaillée.
+        :::
+
         :::
 
         ---
@@ -360,14 +364,21 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
         ---
 
         ### La fonction `len()`
-        La fonction len() permet de calculer la longueur d'une chaîne de caractères (le nombre de caractères qu'elle contient).<br />
-        Elle prend une chaîne de caractères en paramètre et retourne un entier représentant le nombre de caractères.
+        La fonction `len()` permet de calculer la longueur d'une séquence, comme une **chaîne de caractères** (nombre de caractères) ou une **liste** (nombre d'éléments).<br />
+        Elle prend la séquence en paramètre et retourne un entier.
 
         ```python showLineNumbers
+        # Avec une chaîne de caractères
         prenom = "Alice"
         longueur_prenom = len(prenom)
         print(f"La longueur du prénom {prenom} est : {longueur_prenom}")  # La longueur du prénom Alice est : 5
+
+        # Avec une liste
+        notes = [85, 92, 78]
+        nombre_de_notes = len(notes)
+        print(f"Il y a {nombre_de_notes} notes.") # Il y a 3 notes.
         ```
+        Le concept de liste sera abordé plus en détail dans l'onglet **Liste (list)**.
 
         ---
 
@@ -1513,7 +1524,7 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
                 Le module `random` sera nécessaire. Si vous ne savez pas quelle fonction utiliser, référez-vous à l’exercice précédent ou consultez la documentation.
 
                 :::tip Pour les curieux
-                Vous remarquerez que les 5 appels à `.append()` sont presque identiques. C’est précisément ce genre de répétition qu’une boucle `for` élimine : en quelques lignes, elle exécuterait automatiquement l’ajout autant de fois que souhaité que ce soit 5 ou 500 nombres. Vous verrez ça bientôt!
+                Vous remarquez que les 5 appels à `.append()` sont presque identiques. Pour l'instant, nous répétons l'appel manuellement, mais lors d'une prochaine rencontre, nous verrons comment une boucle `for` peut automatiser cette tâche en quelques lignes seulement !
                 :::
 
                 Sortie attendue
