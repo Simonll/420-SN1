@@ -1,6 +1,6 @@
 ---
 title: 1 - Intro
-description: Plan de cours, Introduction, On commence!, Expressions, Opérateurs, Types, Variables, GitHub, Env. virtuel, Aperçu
+description: Plan de cours, Introduction, On commence!, Expressions, Opérateurs, Types, Variables, VS Code, GitHub, Env. virtuel, Aperçu
 hide_table_of_contents: true
 ---
 
@@ -148,13 +148,13 @@ import Link from '@docusaurus/Link';
         
         #### Pour la suite : VS Code <img src="https://code.visualstudio.com/favicon.ico" width="20" style={{verticalAlign: 'middle'}}/>
 
-        Plus tard dans la session, nous installerons **VS Code**, un éditeur de code très populaire chez les professionnels. Il offre des fonctionnalités avancées comme :
+        Après une première exploration avec Google Colab, nous installerons et utiliserons **VS Code** pour le reste de la session. C'est un éditeur de code très populaire qui offre des fonctionnalités avancées comme :
         - La **coloration syntaxique** pour une meilleure lisibilité.
         - L'**autocomplétion** pour coder plus vite.
         - La **détection d'erreurs** en temps réel.
         - Un **débogueur** puissant pour trouver et corriger les bugs.
         
-        > ✅ **En résumé :** On commence avec **Google Colab** pour sa simplicité, puis on passera à **VS Code** pour une expérience de développement plus complète.
+        > ✅ **En résumé :** On commence avec **Google Colab** pour une première prise en main, et nous utiliserons principalement **VS Code** pour une expérience de développement complète.
 
         :::
     </TabItem>
@@ -175,7 +175,7 @@ import Link from '@docusaurus/Link';
 
         <a href="https://colab.research.google.com/github/Simonll/420-SN1/blob/develop/code/notebooks/01-rencontre1.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
         
-        > Si vous n'avez pas de notebook pour cet exercice, vous pouvez simplement ouvrir Google Colab et créer un nouveau notebook (`Fichier > Nouveau notebook`).
+        > Si vous n'avez pas de notebook pour cet exercice, vous pouvez simplement ouvrir Google Colab et créer un nouveau notebook (`Fichier > Nouveau notebook`) et copier-coller le code ci-dessous dans la première cellule.
 
         **2. Exécutez votre première cellule de code :**
 
@@ -631,6 +631,19 @@ import Link from '@docusaurus/Link';
         Votre enseignant vous fournira une feuille pour la réaliser.
         :::
         ::::
+    
+    </TabItem>
+
+    <TabItem value="VSCode" label="VS Code">
+        ::::info Installation de VS Code
+        
+        Il est maintenant temps d'installer l'environnement de développement que nous utiliserons pour le reste de la session : **VS Code**.
+        
+        Suivez attentivement les deux recettes ci-dessous pour installer le logiciel et créer votre premier projet :
+        1. [Installer VS Code](/recettes/installer-VSCode)
+        2. [Créer un projet dans VS Code](/recettes/creer-projet-VSCode)
+        
+        ::::
     </TabItem>
 
     <TabItem value="github" label="GitHub">
@@ -641,9 +654,9 @@ import Link from '@docusaurus/Link';
         **OneDrive** : un service permettant de sauvegarder vos fichiers dans le nuage et d'y accéder depuis n'importe quel appareil.
         **GitHub** joue un rôle similaire, mais il est conçu spécifiquement pour le **code source** et s'appuie sur **Git** pour offrir des fonctionnalités bien plus puissantes.
 
-        🔧 **Git** est un outil qui roule sur votre ordinateur et qui enregistre l'**historique de vos modifications**. C'est ce qu'on appelle un système de **contrôle de version**.
+        **Git** est un outil qui roule sur votre ordinateur et qui enregistre l'**historique de vos modifications**. C'est ce qu'on appelle un système de **contrôle de version**.
 
-        ☁️ **GitHub**, lui, est la plateforme en ligne qui héberge vos projets Git et permet de les **partager**, de les **synchroniser** et de **collaborer** avec d'autres développeurs.
+        **GitHub**, lui, est la plateforme en ligne qui héberge vos projets Git et permet de les **partager**, de les **synchroniser** et de **collaborer** avec d'autres développeurs.
 
         > *En résumé : **Git** gère l'historique de votre code en local, **GitHub** le met dans le nuage - comme OneDrive, mais en beaucoup plus puissant.*
 
@@ -669,7 +682,7 @@ import Link from '@docusaurus/Link';
 
         ::::info L'ensemble de modifications (*commit*)
 
-        📸 Un **ensemble de modifications** (ou *commit*) représente un **regroupement logique de changements**
+        Un **ensemble de modifications** (ou *commit*) représente un **regroupement logique de changements**
         sauvegardés dans le dépôt à un instant précis.
 
         Imaginez que vous travaillez sur un fichier Python et que vous ajoutez une nouvelle fonction. \
@@ -707,7 +720,7 @@ import Link from '@docusaurus/Link';
         - sur les postes au cégep : **à chaque fois** que vous vous connectez (car tout est effacé quand vous vous déconnectez)
 
         ```
-        ☁ Dépôt GitHub (nuage)  ─── clone ───▶  Copie locale (votre ordinateur)
+        Dépôt GitHub (nuage)  ─── clone ───▶  Copie locale (votre ordinateur)
         ```
 
         ---
@@ -718,7 +731,7 @@ import Link from '@docusaurus/Link';
         Attention : un commit ne fait que se sauvegarder localement sur votre ordinateur, **il n'envoie rien vers GitHub**. C'est le rôle du *push*.
 
         ```
-        ✏️ Fichiers modifiés  ─── commit 📸 ───▶   💻 Historique local (votre ordinateur)
+        Fichiers modifiés  ─── commit 📸 ───▶   💻 Historique local (votre ordinateur)
         ```
 
         ---
@@ -728,7 +741,7 @@ import Link from '@docusaurus/Link';
         Tant que vous n'avez pas fait de *push*, vos commits n'existent que sur votre ordinateur : GitHub ne les connaît pas encore.
         C'est donc une étape **indispensable** pour ne pas perdre votre travail et pour le rendre accessible depuis n'importe quel autre ordinateur.
         ```
-        💻 Copie locale (votre ordinateur)  ─── push ───▶  ☁ Dépôt GitHub (nuage)
+        Copie locale (votre ordinateur)  ─── push ───▶  ☁ Dépôt GitHub (nuage)
         ```
 
         ---
@@ -739,7 +752,7 @@ import Link from '@docusaurus/Link';
         **Bonne habitude :** toujours commencer une séance de travail par un *pull*, pour être certain.e de travailler sur la version la plus récente de votre code.
 
         ```
-        ☁ Dépôt GitHub (nuage)  ─── pull ───▶ Mise à jour de la copie locale (votre ordinateur)
+        Dépôt GitHub (nuage)  ─── pull ───▶ Mise à jour de la copie locale (votre ordinateur)
         ```
 
         ---
@@ -1135,13 +1148,12 @@ import Link from '@docusaurus/Link';
                 
                 :::
                 ---
-
-                :::info Devoir #3 - Installer PyCharm (facultatif)
-                L'achat d'un ordinateur n'est pas requis pour ce cours. \
-                Si vous comptez travaillez exclusivement sur les ordinateurs du Cégep, vous pouvez sauter cette étape. \
-                Sinon, vous pouvez suivre [cette recette](/recettes/installer-pyCharm) pour installer PyCharm sur votre ordinateur personnel.
+                :::info Installation sur votre ordinateur personnel (fortement recommandé)
+                Pour travailler sur vos projets en classe et à la maison avec les vrais outils de programmation, vous devez installer les logiciels suivants sur votre ordinateur personnel :
+                1. [Python](https://www.python.org/downloads/) (version 3.11 ou plus récente)
+                2. [VS Code](https://code.visualstudio.com/download) (version 1.80 ou plus récente)
+                3. [Git](https://git-scm.com/downloads) (version 2.42 ou plus récente)
                 :::
-
             </TabItem>
             <TabItem value="2" label=" Activités à faire en classe">
 
