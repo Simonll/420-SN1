@@ -636,13 +636,12 @@ import Link from '@docusaurus/Link';
 
     <TabItem value="VSCode" label="VS Code">
         ::::info Installation de VS Code
-        
+
         Il est maintenant temps d'installer l'environnement de développement que nous utiliserons pour le reste de la session : **VS Code**.
-        
+
         Suivez attentivement les deux recettes ci-dessous pour installer le logiciel et créer votre premier projet :
         1. [Installer VS Code](/recettes/installer-VSCode)
         2. [Créer un projet dans VS Code](/recettes/creer-projet-VSCode)
-        
         ::::
     </TabItem>
 
@@ -714,7 +713,7 @@ import Link from '@docusaurus/Link';
         ###  `clone` - Copier le dépôt sur votre ordinateur
         *Cloner* un dépôt, c'est comme télécharger un projet sur votre ordinateur.
         Votre IDE va créer un dossier contenant tous les fichiers du projet ainsi que l'historique complet de toutes les modifications qui y ont été apportées.
-
+        
         Pour un *repo* donné, cette opération est effectuée :
         - sur votre ordinateur personnel : **une seule fois**
 
@@ -787,10 +786,10 @@ import Link from '@docusaurus/Link';
         ```
         :::
 
-        :::tip `commit`-`push` : une combinaison courante
+        :::tip `commit` et `push` : une combinaison courante
         En pratique, on fait souvent un *commit* suivi d'un *push* pour sauvegarder notre travail localement et le rendre accessible sur GitHub.\
-        VS Code propose une option pour faire les deux en une seule étape, ce qui peut être très pratique pour gagner du temps.
-
+        VS Code (et la plupart des IDEs) propose une option pour faire les deux en une seule étape, ce qui peut être très pratique pour gagner du temps.
+        
         Chaque fois que vous avez terminé un exercice, ou bien créé une nouvelle fonctionnalité dans votre code, ou corrigé un bug, faites un `commit`-`push` (un *commit* suivi d'un *push*) pour ne pas perdre votre travail.
 
         :::
@@ -868,7 +867,7 @@ import Link from '@docusaurus/Link';
 
         :::tip Exemple de fichier
         Un `.gitignore` typique pour un projet Python pourrait contenir :
-        ```
+        ```text
         # Exclusion des fichiers propres à votre environnement/configuration de travail local
         .idea/
         .vscode/
@@ -879,7 +878,7 @@ import Link from '@docusaurus/Link';
         *.pyc
         *.pyo
         ```
-        Cela exclut automatiquement le dossier de configuration de PyCharm, les fichiers de cache Python.
+        Cela exclut automatiquement les dossiers de configuration des IDEs et les fichiers de cache Python.
         :::
 
         ::::
@@ -916,15 +915,16 @@ import Link from '@docusaurus/Link';
 
         ---
 
-        :::info Le dossier `.venv` dans PyCharm
-        Lorsque vous créez un nouveau projet dans PyCharm, celui-ci utilise automatiquement `venv` (l'outil officiel intégré à Python) pour créer un environnement virtuel et indique qu'il créera un dossier `.venv` dans votre projet. C'est aussi à cette étape que vous pouvez choisir la **version de Python** à utiliser pour le projet :
+        :::info Le dossier `.venv` dans votre IDE
+        La plupart des IDEs modernes facilitent la gestion des environnements virtuels.
+        
+        - **VS Code** : Lorsque vous ouvrez un dossier contenant un projet Python, VS Code détecte votre interpréteur. Si vous n'avez pas d'environnement virtuel, il vous proposera d'en créer un. Il l'activera ensuite automatiquement dans le terminal intégré.
+        - **PyCharm** : Crée et active automatiquement un environnement virtuel pour chaque nouveau projet.
 
         <p align="left">
             <img src={require('/img/cours/r01-venv.png').default} alt="Création d'un environnement virtuel dans PyCharm" width="60%" />
         </p>
-
-        PyCharm active automatiquement l'environnement virtuel quand vous travaillez dans un projet, vous n'avez pas à vous en occuper. Il existe d'autres outils pour gérer des environnements virtuels (comme `conda`), mais `venv` est celui que vous utiliserez dans ce cours.
-
+        
         Le dossier `.venv` contient :
         - **`Scripts/` (Windows) ou `bin/` (Mac/Linux)** : une copie locale de Python et `pip` (l'outil qui installe les bibliothèques) réservée à ce projet uniquement
         - **`Lib/site-packages/`** : les bibliothèques installées pour ce projet (ex : Matplotlib, Pandas) ; elles sont isolées des autres projets et de l'installation globale de Python
@@ -933,7 +933,7 @@ import Link from '@docusaurus/Link';
         :::
 
         ---
-
+        
         :::warning Ne jamais commiter `.venv` sur GitHub!
 
 
@@ -942,7 +942,7 @@ import Link from '@docusaurus/Link';
 
         C'est pourquoi le fichier `.gitignore` devrait exclure automatiquement ce dossier. Assurez-vous de ne jamais le retirer de votre `.gitignore`!
         :::
-
+        
         ---
 
         :::note Et les bibliothèques installées, alors?
@@ -1113,7 +1113,14 @@ import Link from '@docusaurus/Link';
 
     <TabItem value="Activités" label="Activités">
 
-        <RappelFonctionnementClasseInverse/>
+        :::info Organisation du cours
+        Pour maximiser votre apprentissage, ce cours est structuré pour vous permettre de découvrir les concepts à votre rythme à la maison, et de profiter du temps en classe pour mettre en pratique, poser des questions et solidifier vos connaissances avec l'aide de l'enseignant.
+
+        **À la maison :** Vous êtes invité à explorer la matière et faire les exercices préparatoires avant chaque rencontre.
+        
+        **En classe :** Le temps en présentiel est une ressource précieuse. Nous l'utilisons pour nous attaquer aux défis plus complexes, valider votre compréhension et obtenir une rétroaction immédiate.
+        :::
+
         <Tabs>
 
             <TabItem value="1" label=" Activités à faire à la maison">
@@ -1242,10 +1249,10 @@ import Link from '@docusaurus/Link';
                 nombre3 = nombre2 - nombre1 - 10
                 print(nombre1, nombre2, nombre3)
                 ```
-                Validez ensuite votre réponse en exécutant le code dans la console de PyCharm.
+                Validez ensuite votre réponse en exécutant le code dans la console de votre IDE.
 
                 Puis, faites la trace d’exécution de ce programme sur papier. \
-                Validez votre trace à l’aide du débogueur, dans PyCharm, en plaçant un point d'arrêt sur la 1<sup>ère</sup> ligne.
+                Validez votre trace à l’aide du débogueur de votre IDE, en plaçant un point d'arrêt sur la 1<sup>ère</sup> ligne.
 
                 Avancez pas à pas en prenant le temps d'observer l'évolution des variables.
 
@@ -1273,7 +1280,7 @@ import Link from '@docusaurus/Link';
                 Validez votre réponse.
 
                 Puis, faites la trace d’exécution de ce programme sur papier. \
-                Validez votre trace à l’aide du débogueur, dans PyCharm, en plaçant un point d'arrêt sur la 1<sup>ère</sup> ligne. \
+                Validez votre trace à l’aide du débogueur de votre IDE, en plaçant un point d'arrêt sur la 1<sup>ère</sup> ligne. \
                 Avancez pas à pas en prenant le temps d'observer l'évolution des variables.
 
                 Que s'est-il passé avec le contenu des variables `x` et `y`?
