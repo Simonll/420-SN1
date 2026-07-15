@@ -1,0 +1,92 @@
+---
+title: "⌨️ Utiliser le terminal dans VS Code"
+description: "Guide pour utiliser le terminal intégré dans VS Code pour exécuter des commandes et des scripts Python."
+---
+
+import Admonition from '@theme/Admonition';
+
+Le terminal intégré dans VS Code est un outil puissant qui vous permet d'exécuter des commandes directement dans votre éditeur. Il est très utile pour naviguer dans votre système de fichiers, exécuter des scripts, et gérer votre dépôt Git.
+
+---
+
+## Ouvrir le terminal
+
+Pour ouvrir le terminal dans VS Code, vous pouvez :
+-   Utiliser le menu : **Terminal > Nouveau Terminal** (ou *New Terminal*).
+-   Utiliser le raccourci clavier : <kbd>Ctrl</kbd> + <kbd>\`</kbd> (le guillemet simple inversé, souvent sur la même touche que `~`).
+
+Un panneau s'ouvrira en bas de l'éditeur, affichant une invite de commande (le *prompt*).
+
+<Admonition type="info" title="Quel terminal est utilisé ?">
+VS Code détecte automatiquement les terminaux installés sur votre système.
+- Sur **Windows**, il peut s'agir de **PowerShell** ou de **Git Bash** (si Git est installé).
+- Sur **macOS** et **Linux**, il s'agit généralement de **bash** ou **zsh**.
+
+Vous pouvez changer de terminal par défaut ou en ouvrir un nouveau d'un type différent en cliquant sur la flèche vers le bas à côté du `+` dans le panneau du terminal.
+</Admonition>
+
+---
+
+## Commandes de base pour naviguer
+
+Voici quelques commandes essentielles pour vous déplacer dans les dossiers de votre projet.
+
+| Commande | Description | Exemple |
+|---|---|---|
+| `ls` | **Lister** le contenu du dossier actuel. | `ls` |
+| `cd <dossier>` | **Changer de dossier** (*Change Directory*). | `cd R01` |
+| `cd ..` | Revenir au dossier parent. | `cd ..` |
+| `pwd` | **Afficher le chemin** du dossier actuel (*Print Working Directory*). | `pwd` |
+
+<Admonition type="tip" title="Astuce pour Windows">
+Si vous utilisez l'invite de commandes par défaut de Windows (CMD ou PowerShell), la commande pour lister les fichiers est `dir` au lieu de `ls`.
+</Admonition>
+
+---
+
+## Exécuter un script Python
+
+Pour exécuter un fichier Python, utilisez la commande `python` suivie du nom du fichier.
+
+1.  Assurez-vous d'être dans le bon dossier (utilisez `ls` et `cd` si besoin).
+2.  Tapez la commande :
+
+```bash
+python mon_script.py
+```
+
+Le script s'exécutera et son résultat (par exemple, ce qui est affiché avec `print()`) apparaîtra directement dans le terminal.
+
+---
+
+## Utiliser le mode interactif (REPL)
+
+Le REPL (*Read-Eval-Print Loop*) est une console Python interactive, parfaite pour tester rapidement des bouts de code.
+
+1.  Pour démarrer le REPL, tapez simplement `python` dans le terminal et appuyez sur `Entrée`.
+2.  L'invite de commande changera pour `>>>`.
+3.  Vous pouvez maintenant taper du code Python directement.
+
+```python
+>>> 3 + 5
+8
+>>> nom = "Alice"
+>>> print(f"Bonjour, {nom}!")
+Bonjour, Alice!
+```
+
+Pour quitter le REPL et revenir au terminal normal, tapez `exit()` et appuyez sur `Entrée`.
+
+---
+
+## Environnement virtuel et terminal
+
+L'un des plus grands avantages du terminal intégré de VS Code est sa gestion des **environnements virtuels**.
+
+Lorsque vous ouvrez un projet qui contient un dossier `.venv`, VS Code l'active automatiquement dans le terminal. Vous le remarquerez car le nom de l'environnement apparaît au début de l'invite de commande :
+
+```bash
+(.venv) C:\Users\VotreNom\Projets\MonProjet>
+```
+
+Cela signifie que toutes les commandes `python` ou `pip` que vous exécuterez utiliseront l'interpréteur et les bibliothèques de **cet environnement isolé**, et non ceux installés globalement sur votre machine. C'est une bonne pratique essentielle pour éviter les conflits entre projets.
