@@ -713,11 +713,10 @@ import Link from '@docusaurus/Link';
 
         ###  `clone` - Copier le dépôt sur votre ordinateur
         *Cloner* un dépôt, c'est comme télécharger un projet sur votre ordinateur.
-        PyCharm crée automatiquement un dossier contenant tous les fichiers du projet **ainsi que l'historique complet** de toutes les modifications qui y ont été apportées.
+        Votre IDE va créer un dossier contenant tous les fichiers du projet ainsi que l'historique complet de toutes les modifications qui y ont été apportées.
 
         Pour un *repo* donné, cette opération est effectuée :
         - sur votre ordinateur personnel : **une seule fois**
-        - sur les postes au cégep : **à chaque fois** que vous vous connectez (car tout est effacé quand vous vous déconnectez)
 
         ```
         Dépôt GitHub (nuage)  ─── clone ───▶  Copie locale (votre ordinateur)
@@ -757,8 +756,8 @@ import Link from '@docusaurus/Link';
 
         ---
 
-        :::tip Guide pour PyCharm
-        Un guide détaillant comment faire ces opérations directement à partir de PyCharm est disponible dans cette **[recette](/recettes/enclasse_pycharm)**
+        :::tip Guide pour VS Code
+        VS Code intègre des outils Git très puissants. Vous pouvez cloner, commiter, pousser et tirer des modifications directement depuis l'interface, sans avoir besoin d'un autre logiciel.
         :::
 
         :::tip Résumé visuel
@@ -790,7 +789,7 @@ import Link from '@docusaurus/Link';
 
         :::tip `commit`-`push` : une combinaison courante
         En pratique, on fait souvent un *commit* suivi d'un *push* pour sauvegarder notre travail localement et le rendre accessible sur GitHub.\
-        PyCharm propose une option pour faire les deux en une seule étape, ce qui peut être très pratique pour gagner du temps.
+        VS Code propose une option pour faire les deux en une seule étape, ce qui peut être très pratique pour gagner du temps.
 
         Chaque fois que vous avez terminé un exercice, ou bien créé une nouvelle fonctionnalité dans votre code, ou corrigé un bug, faites un `commit`-`push` (un *commit* suivi d'un *push*) pour ne pas perdre votre travail.
 
@@ -850,8 +849,8 @@ import Link from '@docusaurus/Link';
         ├── ...
         ```
         où `R01`, `R02`, etc. sont des dossiers pour chaque rencontre, et à l'intérieur de chaque dossier, les fichiers de code pour chaque exercice.
-
-        Pour créer une dossier, il suffit de faire un clic droit dans l'explorateur de fichiers de PyCharm, puis de choisir `New` → `Directory`.
+        
+        La plupart des IDEs permettent de créer un nouveau dossier en faisant un clic droit sur le dossier parent dans l'explorateur de fichiers.
         :::
 
         ---
@@ -861,14 +860,14 @@ import Link from '@docusaurus/Link';
         Par principe, certains éléments ne doivent jamais figurer dans un dépôt Git :
 
         - **Les fichiers volumineux** : ils ralentissent les opérations de clonage et de mise à jour.
-        - **Les fichiers de configuration d'IDE** : par exemple, le dossier `.idea` de **PyCharm**, qui est propre à votre environnement de travail local et n'a aucune utilité pour les autres.
+        - **Les fichiers de configuration d'IDE** : par exemple, le dossier `.vscode` de **VS Code**, qui est propre à votre environnement de travail local et n'a aucune utilité pour les autres.
         - **Les fichiers générés** : tout ce qui peut être produit automatiquement par l'exécution de votre programme (images, fichiers texte, etc.).
 
         **Le fichier `.gitignore`** est un fichier **optionnel** placé à la racine de votre dépôt de code et sert à indiquer à Git d'ignorer de tous les commits certains fichiers ou dossiers en fonction de modèles (*patterns*) définis à l'intérieur.
         Les fichiers listés dans `.gitignore` ne seront jamais inclus dans vos commits, même par accident.
 
         :::tip Exemple de fichier
-        Un `.gitignore` typique pour un projet PyCharm pourrait contenir :
+        Un `.gitignore` typique pour un projet Python pourrait contenir :
         ```
         # Exclusion des fichiers propres à votre environnement/configuration de travail local
         .idea/
@@ -893,7 +892,7 @@ import Link from '@docusaurus/Link';
 
         On y trouve typiquement une description du projet, des instructions pour l'utiliser, et toute autre information utile pour quelqu'un qui le découvre pour la première fois.
 
-        Le `README.md` est écrit en **Markdown**, un format de texte simple qui permet de structurer du contenu (titres, listes, gras, liens, blocs de code…) de façon lisible aussi bien en texte brut que rendu par GitHub. La [recette sur les fichiers Markdown](/recettes/creer-markdown) vous explique comment en créer un dans PyCharm.
+        Le `README.md` est écrit en **Markdown**, un format de texte simple qui permet de structurer du contenu (titres, listes, gras, liens, blocs de code…) de façon lisible aussi bien en texte brut que rendu par GitHub. La recette sur les fichiers Markdown vous explique comment en créer un.
         ::::
     </TabItem>
 
