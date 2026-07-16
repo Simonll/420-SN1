@@ -34,7 +34,7 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
 
         Le mode interactif (dans la console) est pratique pour tester des idées, mais :
 
-        - Tout disparaît dès qu'on ferme la console (ou PyCharm).
+        - Tout disparaît dès qu'on ferme la console (ou l'IDE).
         - On ne peut pas conserver votre code.
         - On doit tout retaper à chaque fois.
 
@@ -43,7 +43,7 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
 
         ---
 
-        :::info Bonjour le monde en python, dans un fichier texte
+        :::info Bonjour le monde en Python, dans un fichier texte
 
         On va vite vouloir donner plein d'ordres à l'ordinateur en lui parlant en Python.
 
@@ -66,14 +66,14 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
         x = 6
         y = 7
         resultat = x * y
-        x = 0
+        x = 0 
         y = resultat
         ```
 
         On va ensuite *exécuter* notre script (il ne s'agit pas de le tuer).<br />
         On demande à python de suivre nos ordres, d'*exécuter* nos instructions, une par une.
 
-        En suivant [cette recette](/recettes/creer-python), créez, dans un projet PyCharm, un script Python, copiez-y le code ci-haut, et exécutez-le.
+        En suivant [cette recette](/recettes/creer-python), créez, dans un projet dans VS Code, un script Python, copiez-y le code ci-haut, et exécutez-le.
 
         Que voyez-vous?
         - L'interpréteur a affiché trois lignes. Pourquoi?
@@ -102,8 +102,7 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
 
         :::note Sauvegarde automatique
 
-        PyCharm **sauvegarde automatiquement** vos fichiers à chaque modification. \
-        Inutile d'appuyer sur *`Ctrl + S`* ou de chercher une option *Enregistrer*. Vos changements sont toujours préservés sur votre poste.
+        Dans VS Code, vous pouvez vérifier que l'option **Auto Save** est activée dans le menu **File > Auto Save**. Sinon, prenez l'habitude d'appuyer sur *`Ctrl + S`* pour sauvegarder vos fichiers avant de les exécuter.
 
         > ⚠️ Attention toutefois : cette sauvegarde est **locale**. Pour envoyer vos modifications vers **GitHub**, un `commit-push` reste nécessaire.
 
@@ -111,19 +110,11 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
 
         ---
 
-        :::danger Vérifiez toujours quel fichier sera exécuté
+        :::danger Quel fichier est exécuté?
 
-        Les boutons d'exécution lancent **le fichier indiqué à leur gauche**, et non nécessairement celui que vous êtes en train de modifier! \
-        Assurez-vous que ce sélecteur affiche toujours la valeur **"Current File"**.
+        Le bouton d'exécution (▶️) en haut à droite de l'éditeur lance par défaut **le fichier actuellement ouvert dans l'éditeur**. C'est le comportement le plus simple pour commencer.
 
-        <img
-          src={require('/img/cours/r02-current-file.png').default}
-          alt="Sélecteur Current File dans PyCharm"
-          style={{ maxWidth: '100%', height: 'auto' }}
-        />
-
-        Parfois, PyCharm modifie cette valeur pour indiquer le nom d'un fichier script en particulier. \
-        PyCharm exécutera alors ce fichier-là plutôt que celui ouvert, ce qui peut mener à des résultats inattendus.
+        Plus tard, vous pourrez configurer des profils de lancement plus complexes pour des projets plus gros avec le fichier `launch.json`, mais pour l'instant, le bouton ▶️ est votre meilleur ami.
 
         :::
 
@@ -147,14 +138,13 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
 
         ::::info Bonjour le monde dans un environnement de développement
 
-        On va être honnête, vos scripts ne vont pas souvent faire ce que vous voulez. Par contre, ils
-        vont faire exactement ce que vous avez écrit. On va donc avoir besoin d'une méthode efficace pour comprendre ce qui se passe dans notre code.
+        On va être honnête, vos scripts ne vont pas souvent faire ce que vous voulez. Par contre, ils vont faire exactement ce que vous avez écrit. On va donc avoir besoin d'une méthode efficace pour comprendre ce qui se passe dans notre code.
 
-        Dans un environnement de développement (ou *IDE, Integrated Developpement Environment*) comme PyCharm, on va pouvoir :
+        Dans un environnement de développement (ou *IDE, Integrated Developpement Environment*) comme VS Code, on va pouvoir :
         - arrêter le temps!
         - et voir à l'intérieur de l'ordinateur!
 
-        Lisez la section [Déboguer](/recettes/deboguer-point-arret) pour apprendre à utiliser le débogueur dans PyCharm.
+        Lisez la section Déboguer pour apprendre à utiliser le débogueur.
 
         Ensuite, mettez un point d'arrêt à la ligne de la première instruction (les commentaires ne sont pas des instructions) dans le script Python créé à la section [Script](/cours/rencontre2?onglet=script), donc à la ligne `print("bonjour...` :
         ```python showLineNumbers
@@ -171,13 +161,13 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
         y = resultat
         ```
 
-        Roulez votre script, mais cette fois, en mode débogage (en cliquant sur l'icône du bug 🪲).
+        Lancez le débogage en allant dans la vue « Exécuter et déboguer » (icône 🐞 sur la gauche) et en cliquant sur le bouton vert, ou en appuyant sur `F5`.
         - L'exécution va s'arrêter sur le point d'arrêt.
         - La ligne de code où se trouve le point d'arrêt sera mise en surbrillance et n'aura pas encore été exécutée.
-        - Si vous cliquez sur le bouton **Step Over** <img src={require('/img/icons/stepover.png').default} alt="Step Over" width="24" style={{ verticalAlign: 'middle' }} />, l'instruction sera exécutée et vous pourrez voir le résultat dans la console.
-        - Si vous continuer à cliquer sur <img src={require('/img/icons/stepover.png').default} alt="Step Over" width="24" style={{ verticalAlign: 'middle' }} />, vous pourrez exécuter le script ligne par ligne et observer son comportement.
-        - Si vous avez plus d'un point d'arrêt, vous pouvez cliquer sur le bouton **Resume** <img src={require('/img/icons/resume.png').default} alt="Resume" width="24" style={{ verticalAlign: 'middle' }} /> qui permet de continuer l'exécution jusqu'au prochain point d'arrêt.
-        - Vous pouvez également arrêter l'exécution à tout moment en cliquant sur le bouton **Stop** <img src={require('/img/icons/stop.png').default} alt="Stop" width="24" style={{ verticalAlign: 'middle' }} />.
+        - Si vous cliquez sur le bouton **Step Over**, l'instruction sera exécutée et vous pourrez voir le résultat dans la console.
+        - Si vous continuez à cliquer sur **Step Over**, vous pourrez exécuter le script ligne par ligne et observer son comportement.
+        - Si vous avez plus d'un point d'arrêt, vous pouvez cliquer sur le bouton **Continue** qui permet de continuer l'exécution jusqu'au prochain point d'arrêt.
+        - Vous pouvez également arrêter l'exécution à tout moment en cliquant sur le bouton **Stop**.
 
         Avancez une ligne à la fois et, lorsque vous arrivez à la ligne `x = 6`, observez les variables qui sont créées et affichées dans la fenêtre de débogage, ainsi que leurs modification. En particulier, notez le changement du contenu des variables `x` et `y` lorsqu'elles sont modifiées.
 
@@ -192,11 +182,11 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
         :::info Raccourcis clavier
         Vous pouvez exécuter les actions de débogage plus rapidement en utilisant des **raccourcis clavier**.
 
-        | Action | Icône | Windows | macOS |
-        |-------|--------|------------------|--------|
-        | **Step Over** | <img src={require('/img/icons/stepover.png').default} alt="Step Over" width="24" style={{ verticalAlign: 'middle' }} /> | `F8` | `F8` |
-        | **Resume** | <img src={require('/img/icons/resume.png').default} alt="Resume" width="24" style={{ verticalAlign: 'middle' }} /> | `F9` | `⌥` Option + `⌘` Command + `R` |
-        | **Stop** | <img src={require('/img/icons/stop.png').default} alt="Stop" width="24" style={{ verticalAlign: 'middle' }} /> | `Ctrl` + `F2` | `⌘` Command + `F2` |
+        | Action | Windows / Linux | macOS |
+        |:---|:---|:---|
+        | **Continuer** | `F5` | `F5` |
+        | **Passer par dessus** | `F10` | `F10` |
+        | **Arrêter** | `F5` + `Shift` + `F5` | `⇧F5` |
 
         :::
 
@@ -204,22 +194,13 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
 
         :::danger Débogueur inutilisable en présence d'erreurs de syntaxe
 
-        Lorsqu’une erreur de syntaxe apparaît en rouge dans PyCharm, Python est incapable d’exécuter votre script, que ce soit en mode normal ou en mode débogage. Le programme ne comprend tout simplement pas ce qu’il doit faire. Pour le débogueur, il faut garder en tête que :
+        Lorsqu’une erreur de syntaxe est soulignée en rouge dans VS Code, Python est incapable d’exécuter votre script, que ce soit en mode normal ou en mode débogage. Le programme ne comprend tout simplement pas ce qu’il doit faire. Pour le débogueur, il faut garder en tête que :
 
             - Le débogueur ne fonctionne **que sur un programme valide**, c'est-à-dire sans erreur de syntaxe, même si le code contient des erreurs de logique.
             - Une erreur de syntaxe empêche le code d’être transformé en instructions compréhensibles pour l'ordinateur.
             - Tant que la syntaxe n’est pas corrigée, le débogueur reste inutilisable.
 
-        Par exemple, si vous tentez d'exécuter le programme suivant, avec ou sans le débogueur :
-
-        <p align="left">
-            <img src={require('/img/cours/R02_Exemple_Code_Synthaxe_Invalide.png').default} alt="Exemple code invalide" style={{ verticalAlign: 'middle' }} width="60%" />
-        </p>
-
-        Vous obtiendrez un message indiquant une erreur de syntaxe à la ligne 4 :
-        <p align="left">
-            <img src={require('/img/cours/R02_Exemple_SyntaxError_Console.png').default} alt="Exemple console syntaxe erreur" style={{ verticalAlign: 'middle' }} width="50%" />
-        </p>
+        Votre IDE souligne les erreurs de syntaxe en rouge et les liste dans le panneau « Problèmes » en bas de l'éditeur. Tant que ces erreurs ne sont pas corrigées, le débogage ne pourra pas démarrer.
 
         Les erreurs de syntaxe à corriger dans cet exemple sont :
         - **Ligne 4** : Le symbole d'assignation `=` est manquant
@@ -229,8 +210,6 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
         Il faut aussi garder en tête que Python fait réellement de son mieux pour identifier l’emplacement exact d’une erreur. Selon la nature du problème, ce n’est pas toujours simple pour lui : l’erreur peut se trouver avant ou après la ligne indiquée. Il arrive donc que le numéro de ligne signalé ne corresponde pas parfaitement à la source du problème.
         :::
 
-
-        {/* <Feedback feedbackId="Rencontre #2 - Débogueur" /> */}
     </TabItem>
 
     <TabItem value="trace" label="Trace">
@@ -331,12 +310,12 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
         ```python showLineNumbers
         mon_age_arrondi = round(17.8)
         ```
+        :::
 
         :::note La distinction `print()` vs `return`
-        La distinction entre `print()` (afficher) et `return` (renvoyer une valeur) est cruciale. Consultez cette page de l'aide-mémoire pour une explication détaillée.
+        La distinction entre `print()` (afficher) et `return` (renvoyer une valeur) est cruciale. Consultez cette [page](/aidememoire/return-print) de l'aide-mémoire pour une explication détaillée.
         :::
 
-        :::
 
         ---
 
@@ -770,8 +749,8 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
 
         ⚡ **Points clés :**
         - Chaque module d’une bibliothèque peut contenir des fonctions, classes ou constantes spécifiques.
-        - Pour utiliser une bibliothèque externe, il faut d'abord [l'installer](/recettes/ajouter-librairie) avec la ligne de commande `pip install nom_de_la_bibliothèque`.
-        - Une fois installée, on peut **importer ses modules** comme pour un module Python classique :
+        - Pour utiliser une bibliothèque externe, il faut d'abord l'installer dans l'environnement virtuel de votre projet. Cela se fait généralement avec la commande `pip install nom_de_la_bibliothèque` dans le terminal.
+        - Une fois installée, on peut **importer ses modules** comme pour un module Python classique.
 
         ```python showLineNumbers
         import numpy # Importer la bibliothèque "numpy"
@@ -1679,11 +1658,10 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
                 Sortie attendue
                 ```
                 Étudiant : Nicola Tesla
-
-                TP1        (20%) :  8 / 10
+                TP1        (15%) :  8 / 10
                 TP2        (25%) :  9 / 10
                 Examen 1   (20%) : 90 / 100
-                Examen 2   (35%) : 95 / 100
+                Examen 2   (30%) : 95 / 100
                 Note obtenue pour ce cours : 90.0 / 100
                 Attention, l'application de la double sanction n'a pas été réalisée!
                 ```
@@ -1822,9 +1800,9 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
         Voici un exemple simple, testez-le dans un script Python!<br />
         Ne vous inquiétez pas si vous ne comprenez le code pour l'instant, on verra plus en détail comment faire des graphiques dans un prochain cours.
 
-        :::warning Installer Matplotlib
-        Pour utiliser une bibliothèque Python comme Matplotlib, il faut d’abord l’installer dans votre environnement de travail. \
-        Avant d’exécuter l’exemple ci-dessous, assurez-vous d’avoir suivi les étapes nécessaires pour [installer la bibliothèque](/recettes/ajouter-librairie) Matplotlib.
+        :::tip Installer Matplotlib
+        Pour utiliser une bibliothèque Python comme Matplotlib, il faut d’abord l’installer dans votre environnement de travail. Dans le terminal de VS Code (où votre environnement virtuel est activé), exécutez la commande :
+        `pip install matplotlib`
         :::
 
         ```python showLineNumbers

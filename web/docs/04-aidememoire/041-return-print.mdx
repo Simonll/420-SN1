@@ -2,20 +2,20 @@
 hide_table_of_contents: true
 ---
 
-# 🖨 `print()` vs `return` ⏎
+# `print()` vs `return` ⏎
 
 Beaucoup mélangent les deux, parce qu’on **voit** immédiatement `print()` à l’écran, alors que `return` est plus invisible.
 
 <Row>
 <Column>
-      ## 🖨 `print()`
-            - 👉 est une **fonction**
+      ## `print()`
+            - est une **fonction**
             - **affiche** quelque chose à l’écran
             - produit un **effet visuel**
 </Column>
 <Column>
-      ## ⏎ `return`
-            - 👉 est un **mot-clé**
+      ## `return`
+            - est un **mot-clé**
             - **renvoie une valeur** à l’endroit où la fonction a été appelée
             - produit une **valeur utilisable**
 </Column>
@@ -42,7 +42,7 @@ Beaucoup mélangent les deux, parce qu’on **voit** immédiatement `print()` à
     None
     ```
 
-    👉 `dire_bonjour()` vaut `None`.
+    `dire_bonjour()` vaut `None`.
 
     - La fonction a affiché `"Bonjour!"`
     - Mais elle n’a rien retourné
@@ -70,7 +70,7 @@ Beaucoup mélangent les deux, parce qu’on **voit** immédiatement `print()` à
     Bonjour!
     ```
 
-    👉 `dire_bonjour()` vaut `"Bonjour!"`.
+    `dire_bonjour()` vaut `"Bonjour!"`.
 
     - La fonction retourne une valeur
     - La variable `x` reçoit cette valeur
@@ -80,7 +80,7 @@ Beaucoup mélangent les deux, parce qu’on **voit** immédiatement `print()` à
   </Column>
 </Row>
 
-## 🎯 Pourquoi on se casse la tête à utiliser `return` ?
+## Pourquoi on se casse la tête à utiliser `return` ?
 
 Parce qu’une fonction n’est pas faite pour afficher.
 Elle est faite pour **calculer**.
@@ -92,7 +92,7 @@ Regardez la différence :
 <Row>
 <Column>
   :::note-nt
-  ### ❌ Version limitée (avec `print()`)
+  ### Version limitée (avec `print()`)
 
   ```python
   def carre(n):
@@ -101,14 +101,14 @@ Regardez la différence :
   x = carre(4) + 10
   ```
 
-  👉 Impossible! \
+  Impossible! \
   `carre(4)` vaut `None`, donc on ne peut pas faire `+ 10`.
   :::
 </Column>
 
 <Column>
   :::info-nt
-  ### ✅ Version flexible (avec `return`)
+  ### Version flexible (avec `return`)
 
   ```python
   def carre(n):
@@ -118,12 +118,12 @@ Regardez la différence :
   print(x)
   ```
 
-  👉 Maintenant, ça fonctionne.
+  Maintenant, ça fonctionne.
   :::
 </Column>
 </Row>
 
-## 💡 Idée importante
+## Idée importante
 
 Une fonction qui retourne une valeur est :
 
@@ -140,15 +140,15 @@ b = carre(5) * 3    # faire un autre calcul avec la valeur retournée
 print(carre(10))    # afficher directement la valeur retournée
 ```
 
-👉 Une seule fonction, plusieurs usages.
+Une seule fonction, plusieurs usages.
 
-## ⚠️ Erreur fréquente
+## Erreur fréquente
 
 <Row>
 <Column>
 
   :::danger-nt
-  ### ❌ Mauvaise façon
+  ### Mauvaise façon
 
   ```python
   def carre(n):
@@ -172,7 +172,7 @@ print(carre(10))    # afficher directement la valeur retournée
 <Column>
 
   :::tip-nt
-  ### ✅ Bonne façon
+  ### Bonne façon
 
   ```python
   def carre(n):
@@ -190,7 +190,7 @@ print(carre(10))    # afficher directement la valeur retournée
 </Column>
 </Row>
 
-## 🧠 Résumé mental
+## Résumé mental
 
 - `print()` ➜ pour **voir**
 - `return` ➜ pour **transmettre**
