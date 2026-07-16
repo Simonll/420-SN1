@@ -1,6 +1,6 @@
 ---
 title: 2 - Scripts et fonctions
-description: Script, Débogueur, Trace, Fonctions, f-strings, Modules, Bibliothèques, Liste (list), Précision des flottants
+description: Scripts, Débogueur, Traces, Fonctions, f-strings, Modules, Bibliothèques, Liste (list), Précision des flottants
 hide_table_of_contents: true
 ---
 
@@ -22,7 +22,7 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
 
 <Tabs queryString="onglet">
 
-    <TabItem value="script" label="Script" default>
+    <TabItem value="scripts" label="Scripts" default>
 
         <Admonition type="tip" title="Faire les exercices dans Colab">
             <p>Si vous préférez, vous pouvez aussi faire les exercices de cette section dans un notebook Google Colab. Cliquez sur le badge ci-dessous pour ouvrir le notebook préparé pour vous.</p>
@@ -123,6 +123,11 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
 
     <TabItem value="debug" label="Débogueur">
 
+        <Admonition type="tip" title="Faire les exercices dans Colab">
+            <p>Si vous préférez, vous pouvez aussi faire les exercices de cette section dans un notebook Google Colab. Cliquez sur le badge ci-dessous pour ouvrir le notebook préparé pour vous.</p>
+            <a href="https://colab.research.google.com/github/Simonll/420-SN1/blob/develop/code/notebooks/exercices_semaine_2.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+        </Admonition>
+
         :::tip Pourquoi utiliser le débogueur
         Le débogueur est un outil puissant qui permet de suivre l'exécution de votre code pas à pas.
         Il vous permet de voir la valeur des variables, d'arrêter l'exécution à des points spécifiques (points d'arrêt),
@@ -212,7 +217,11 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
 
     </TabItem>
 
-    <TabItem value="trace" label="Trace">
+    <TabItem value="traces" label="Traces">
+         <Admonition type="tip" title="Faire les exercices dans Colab">
+            <p>Si vous préférez, vous pouvez aussi faire les exercices de cette section dans un notebook Google Colab. Cliquez sur le badge ci-dessous pour ouvrir le notebook préparé pour vous.</p>
+            <a href="https://colab.research.google.com/github/Simonll/420-SN1/blob/develop/code/notebooks/exercices_semaine_2.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+        </Admonition>
 
         :::tip Pourquoi faire une trace
         La trace est un outil qui permet de suivre l'exécution d'un programme en affichant les valeurs des variables et les
@@ -281,7 +290,10 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
     </TabItem>
 
     <TabItem value="fonctions" label="Fonctions">
-
+        <Admonition type="tip" title="Faire les exercices dans Colab">
+            <p>Si vous préférez, vous pouvez aussi faire les exercices de cette section dans un notebook Google Colab. Cliquez sur le badge ci-dessous pour ouvrir le notebook préparé pour vous.</p>
+            <a href="https://colab.research.google.com/github/Simonll/420-SN1/blob/develop/code/notebooks/exercices_semaine_2.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+        </Admonition>
         :::info Fonctions
 
         Une **fonction** est un ensemble d’instructions réutilisables regroupées sous un nom.<br />
@@ -312,12 +324,10 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
         ```
         :::
 
-        :::note La distinction `print()` vs `return`
+        :::warning La distinction `print()` vs `return`
         La distinction entre `print()` (afficher) et `return` (renvoyer une valeur) est cruciale. Consultez cette [page](/aidememoire/return-print) de l'aide-mémoire pour une explication détaillée.
         :::
 
-
-        ---
 
         ::::note Quelques fonctions utiles
 
@@ -493,6 +503,14 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
         ```
         :::
 
+        :::info Le typage des fonctions
+        En Python, les fonctions sont **dynamiquement typées**, ce qui signifie que le type des paramètres et de la valeur de retour n'est pas explicitement déclaré. Cependant, il est possible d'utiliser des **annotations de type** pour indiquer les types attendus des paramètres et de la valeur de retour. Ces annotations sont facultatives et servent principalement à la documentation et à l'analyse statique du code. Elles n'affectent pas l'exécution du programme. Vous pouvez consulter l'aide-mémoire sur les [fonctions](/aidememoire/fonctions-creation) pour plus d'informations sur ce sujet.
+
+        ```python
+        def addition(a: int, b: int) -> int:
+            return a + b
+        ```
+
         ::::
 
 
@@ -500,6 +518,10 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
     </TabItem>
 
     <TabItem value="fstring" label="f-strings">
+        <Admonition type="tip" title="Faire les exercices dans Colab">
+            <p>Si vous préférez, vous pouvez aussi faire les exercices de cette section dans un notebook Google Colab. Cliquez sur le badge ci-dessous pour ouvrir le notebook préparé pour vous.</p>
+            <a href="https://colab.research.google.com/github/Simonll/420-SN1/blob/develop/code/notebooks/exercices_semaine_2.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+        </Admonition>
 
         ::::info Les f-strings, c'est quoi?
 
@@ -600,6 +622,10 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
     </TabItem>
 
     <TabItem value="modules" label="Modules et bibliothèques">
+        <Admonition type="tip" title="Faire les exercices dans Colab">
+            <p>Si vous préférez, vous pouvez aussi faire les exercices de cette section dans un notebook Google Colab. Cliquez sur le badge ci-dessous pour ouvrir le notebook préparé pour vous.</p>
+            <a href="https://colab.research.google.com/github/Simonll/420-SN1/blob/develop/code/notebooks/exercices_semaine_2.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+        </Admonition>
 
         ::::info Les modules en Python
 
@@ -747,7 +773,7 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
         partageable facilement.<br />
         Nous appelons ce regroupement une **bibliothèque**.
 
-        ⚡ **Points clés :**
+        **Points clés :**
         - Chaque module d’une bibliothèque peut contenir des fonctions, classes ou constantes spécifiques.
         - Pour utiliser une bibliothèque externe, il faut d'abord l'installer dans l'environnement virtuel de votre projet. Cela se fait généralement avec la commande `pip install nom_de_la_bibliothèque` dans le terminal.
         - Une fois installée, on peut **importer ses modules** comme pour un module Python classique.
@@ -784,6 +810,10 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
     </TabItem>
 
     <TabItem value="liste" label="Liste (list)" default>
+        <Admonition type="tip" title="Faire les exercices dans Colab">
+            <p>Si vous préférez, vous pouvez aussi faire les exercices de cette section dans un notebook Google Colab. Cliquez sur le badge ci-dessous pour ouvrir le notebook préparé pour vous.</p>
+            <a href="https://colab.research.google.com/github/Simonll/420-SN1/blob/develop/code/notebooks/exercices_semaine_2.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+        </Admonition>
 
         :::info Introduction aux listes
         Jusqu'ici nous avons vu les 4 types de données de base en Python :
@@ -1119,6 +1149,10 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
     </TabItem>
 
     <TabItem value="precision-flottants" label="Précision des flottants">
+        <Admonition type="tip" title="Faire les exercices dans Colab">
+            <p>Si vous préférez, vous pouvez aussi faire les exercices de cette section dans un notebook Google Colab. Cliquez sur le badge ci-dessous pour ouvrir le notebook préparé pour vous.</p>
+            <a href="https://colab.research.google.com/github/Simonll/420-SN1/blob/develop/code/notebooks/exercices_semaine_2.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+        </Admonition>
 
         :::warning ⚠️ Les nombres flottants ne sont pas toujours exacts
 

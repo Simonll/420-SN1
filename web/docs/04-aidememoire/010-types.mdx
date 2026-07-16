@@ -70,6 +70,28 @@ Choisir la bonne structure dépend de ce dont tu as besoin : ordre, modifiabilit
 
 **Note :** les **dict** conservent l'ordre d'insertion des clés.
 
+### Utiliser le typage pour imposer des contraintes
+
+Par exemple, il est possible de préciser qu'une list doit contenir uniquement des entiers, ou qu'un dict doit avoir des clés de type str et des valeurs de type int.
+
+```python
+from typing import List, Set, Tuple, Dict, Any
+
+liste_a : List[int] = [1, 2, 3]  # Liste d'entiers
+ensemble_b : Set[str] = {"a", "b", "c"}  # Ensemble
+tuple_c : Tuple[int, str] = (1, "a")  # Tuple avec un entier et une chaîne
+dictionnaire_d : Dict[str, int] = {"a": 1, "b": 2}  # Dictionnaire avec clés str et valeurs int
+```
+
+Il est également possible d'utiliser `Any` pour indiquer que n'importe quel type est accepté.
+
+```pythonpython
+from typing import List, Any
+liste_e : List[Any] = [1, "a", 3.14, True]  # Liste pouvant contenir n'importe quel type
+```
+
+
+
 
 </TabItem>
 

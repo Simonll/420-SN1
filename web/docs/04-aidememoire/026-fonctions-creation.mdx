@@ -4,7 +4,7 @@ hide_table_of_contents: true
 
 import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
 
-# ⚙️ Création de fonctions
+# Création de fonctions
 
 Une fonction regroupe un bloc de code réutilisable sous un nom. \
 Elle reçoit des données en entrée via ses **paramètres**, effectue un traitement, et peut renvoyer un résultat avec `return`.
@@ -29,7 +29,7 @@ def double(x):
 
 ---
 
-## 🔹 Paramètres
+## Paramètres
 
 Une fonction peut avoir 0, 1 ou plusieurs paramètres.
 
@@ -54,7 +54,7 @@ puissance(3, 2)   # base=3, exposant=2 → retourne 9
 
 ---
 
-## 🔹 Valeur par défaut
+## Valeur par défaut
 
 Un paramètre peut avoir une valeur par défaut, utilisée si aucune valeur n'est fournie lors de l'appel.
 
@@ -66,11 +66,11 @@ puissance(5)     # exposant prend la valeur par défaut → 25
 puissance(5, 3)  # exposant prend la valeur fournie → 125
 ```
 
-💡 Les paramètres **sans** valeur par défaut doivent toujours être placés **avant** ceux qui en ont une.
+Les paramètres **sans** valeur par défaut doivent toujours être placés **avant** ceux qui en ont une.
 
 ---
 
-## 🔹 Valeur de retour
+## Valeur de retour
 
 | Situation | Comportement |
 |---|---|
@@ -113,7 +113,7 @@ print(saluer("Kirby"))   # Affiche la salutation, puis None
 
 ---
 
-## 🔹 Portée des variables
+## Portée des variables
 
 | Portée | Définition | Accessible |
 |---|---|---|
@@ -131,11 +131,11 @@ ma_fonction()
 print(x)           # affiche 10
 ```
 
-💡 Les paramètres d'une fonction ont aussi une portée locale.
+Les paramètres d'une fonction ont aussi une portée locale.
 
 ---
 
-## 🔹 Commentaires et docstring
+## Commentaires et docstring
 
 ```python
 def energie_cinetique(masse, vitesse):
@@ -156,3 +156,47 @@ def energie_cinetique(masse, vitesse):
 |---|---|
 | <C><S># commentaire</S></C> | Commentaire sur une ligne ou en fin de ligne |
 | <C><S>"""..."""</S></C> | Docstring : documenter une fonction (obligatoire bonne pratique) |
+
+---
+
+## Typage des fonctions (Annotations de type)
+
+Le typage des fonctions (ou *type hinting*) permet de spécifier le type de données attendu pour les paramètres et la valeur de retour. C'est une pratique moderne qui rend le code plus lisible, plus robuste et plus facile à déboguer.
+
+### 1. Clarifier le retour d'une fonction
+
+Le typage permet de répondre de façon visuelle et explicite à la question de la différence entre `return` et `print`. Si une fonction ne fait qu'afficher un résultat sans rien calculer, on peut le déclarer officiellement avec `-> None`.
+
+L'étudiant voit immédiatement que cette fonction ne lui redonnera aucune donnée utilisable pour la suite de son script :
+
+```python
+def afficher_vitesse(vitesse: float) -> None:
+    print(f"La vitesse mesurée est de {vitesse} m/s.")
+```
+
+### 2. Améliorer l'autocomplétion dans VS Code
+
+C'est ici que l'outil devient le meilleur ami de l'étudiant. En ajoutant des types, VS Code devient soudainement beaucoup plus intelligent.
+
+Lorsqu'un étudiant appellera sa fonction plus tard dans son code, l'IntelliSense (la petite boîte d'aide de VS Code) lui rappellera exactement ce qu'il doit fournir. S'il a tapé `def calculer_masse(volume: float, densite: float) -> float:`, VS Code va le prévenir (avec un soulignement subtil) s'il essaie d'y insérer du texte par erreur. C'est un filet de sécurité énorme.
+
+### 3. Renforcer la rigueur scientifique
+
+En sciences, la nature d'une donnée est tout aussi importante que sa valeur. Savoir si on manipule un nombre entier (un nombre de cellules, une quantité de patients) ou un nombre à virgule flottante (une concentration, une distance) est fondamental. Le typage force l'étudiant à réfléchir à la nature de sa variable avant même d'écrire son équation.
+
+### 4. Un indice, pas une contrainte stricte
+
+Il y a cependant un "piège" conceptuel important à clarifier : Python reste un langage à **typage dynamique**.
+
+Il faut bien expliquer aux étudiants que ces annotations sont des **indices** (*hints*) pour eux-mêmes et pour VS Code, mais que Python n'arrêtera pas l'exécution de lui-même si on "triche".
+
+```python
+# L'équation de l'énergie cinétique
+def energie_cinetique(masse: float, vitesse: float) -> float:
+    return 0.5 * masse * (vitesse ** 2)
+
+# Python autorisera ceci sans erreur fatale (bien que VS Code puisse souligner l'anomalie)
+energie_cinetique(10, True)
+```
+
+C'est pourquoi on les appelle des **annotations** et non des contraintes strictes comme en C++ ou en Java.
