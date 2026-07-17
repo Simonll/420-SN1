@@ -16,7 +16,7 @@ import DocumentationInterdite from '@site/docs/_components/DocumentationInterdit
 import IntroSolutionsExercices from '@site/docs/_components/IntroSolutionsExercices.mdx';
 import Feedback from "../../src/components/Feedback";
 
-# ⚙️ Création de fonctions
+# Création de fonctions
    
 <Tabs queryString="onglet">
 
@@ -100,14 +100,14 @@ import Feedback from "../../src/components/Feedback";
         La fonction calcule `2 * 5` et retourne `10`.
 
         Cependant, ici, la valeur retournée par la fonction est perdue.\
-        👉 La fonction fonctionne… mais le résultat disparaît si on ne le stocke pas.\
+        La fonction fonctionne… mais le résultat disparaît si on ne le stocke pas.\
         Il pourrait être plus utile de stocker cette valeur dans une variable :
 
         ```python showLineNumbers=4
         resultat = double(5)  # Appel de la fonction et stockage de la valeur retournée dans la variable 'resultat'
         ```
 
-        👉 Une fonction ne montre rien à l’écran : elle retourne une valeur que l'on peut ensuite utiliser.
+        Une fonction ne montre rien à l’écran : elle retourne une valeur que l'on peut ensuite utiliser.
 
         ::::
 
@@ -170,7 +170,7 @@ import Feedback from "../../src/components/Feedback";
          - `carre` est une fonction avec un seul paramètre `x` qui retourne le carré de `x`.
          - `puissance` est une fonction avec deux paramètres, `base` et `exposant`, qui retourne la base élevée à la puissance de l'exposant.
 
-        👉 Les paramètres sont séparés par des virgules.
+        Les paramètres sont séparés par des virgules.
 
         Lorsqu'on appelle une fonction, il faut lui passer le même nombre de valeurs que de paramètres définis :
 
@@ -257,7 +257,7 @@ import Feedback from "../../src/components/Feedback";
         print(f"Moyenne de Bob  : {round(moyenne_bob, 2)}")
         ```
 
-        👉 On passe la liste entière en un seul paramètre. À l'intérieur de la fonction, `notes[0]`, `notes[1]` et `notes[2]` donnent accès à chacune des valeurs. Appeler la fonction avec des listes différentes produit des résultats différents sans réécrire la logique.
+        On passe la liste entière en un seul paramètre. À l'intérieur de la fonction, `notes[0]`, `notes[1]` et `notes[2]` donnent accès à chacune des valeurs. Appeler la fonction avec des listes différentes produit des résultats différents sans réécrire la logique.
 
         :::
 
@@ -269,7 +269,7 @@ import Feedback from "../../src/components/Feedback";
 
         :::info `return`
 
-        Les valeurs retournées servent d'*output* à la fonction.
+        Les valeurs retournées servent de sortie à la fonction ou *output*.
 
         Une fonction peut retourner plusieurs valeurs, séparées par des virgules :
 
@@ -309,7 +309,7 @@ import Feedback from "../../src/components/Feedback";
 
         ---
 
-        ::::warning Fonction avec pas de return
+        ::::warning Fonction sans return
 
         Une fonction peut ne pas avoir d'instruction `return`. \
         Dans ce cas, elle retourne automatiquement la valeur `None`.
@@ -366,7 +366,7 @@ import Feedback from "../../src/components/Feedback";
         print(message)  # Affiche le message stocké dans la variable 'message'
         ```
 
-        👉 Si jamais vous êtes confus.e entre `print()` et `return`, lisez [cette section](/aidememoire/return-print).
+        Si jamais vous êtes confus.e entre `print()` et `return`, lisez [cette section](/aidememoire/return-print).
 
         ::::
 
@@ -440,7 +440,7 @@ import Feedback from "../../src/components/Feedback";
         print(f"Valeur globale de x : {x}")  # Affiche 10
         ```
 
-        👉 Dans cet exemple, la variable `x` à l’intérieur de la fonction est indépendante de celle à l’extérieur. \
+        Dans cet exemple, la variable `x` à l’intérieur de la fonction est indépendante de celle à l’extérieur. \
         Elles ont le même nom, mais **ce sont 2 variables différentes**.\
         Lorsque vous faites la [trace](/recettes/produire-une-trace), **vous devez prévoir 2 colonnes**!
 
@@ -521,7 +521,7 @@ import Feedback from "../../src/components/Feedback";
             poids = m * g
             return poids
         ```
-        👉 Cette fonction est pure : elle fait un calcul et retourne une valeur, sans rien afficher à l'écran.
+        Cette fonction est pure : elle fait un calcul et retourne une valeur, sans rien afficher à l'écran.
         ::::
 
         ---
@@ -550,7 +550,7 @@ import Feedback from "../../src/components/Feedback";
         print(f"Sur l'astre Lune, le poids est de {p_lune:.2f} N.")
         ```
 
-        👉 **Observation** : Le calcul est maintenant isolé dans une fonction (si on veut changer la précision, on ne le fait qu'à un seul endroit). Cependant, on remarque que les instructions `print()` sont encore très répétitives. On va donc extraire une deuxième fonction pour gérer l'affichage, et qui appellera la fonction de calcul pour obtenir le poids.
+        **Observation** : Le calcul est maintenant isolé dans une fonction (si on veut changer la précision, on ne le fait qu'à un seul endroit). Cependant, on remarque que les instructions `print()` sont encore très répétitives. On va donc extraire une deuxième fonction pour gérer l'affichage, et qui appellera la fonction de calcul pour obtenir le poids.
         :::
 
         ---
@@ -621,14 +621,14 @@ import Feedback from "../../src/components/Feedback";
         afficher_poids_astre("Lune", masse_spationaute, 1.62)
         ```
 
-        👉 Si demain on veut changer la phrase affichée ou modifier le format d’affichage, on n’aura qu’à modifier **un seul endroit** dans le code au lieu de trois.
+        Si demain on veut changer la phrase affichée ou modifier le format d’affichage, on n’aura qu’à modifier **un seul endroit** dans le code au lieu de trois.
         :::
 
         ---
 
         :::tip-nt
 
-        ### 📋 Variante avec des listes parallèles
+        ### Variante avec des listes parallèles
 
         Les données utilisées pour appeler nos fonctions peuvent être organisées dans des **listes parallèles** (comme on l'a vu à la rencontre précédente). Voici comment réécrire le script principal en regroupant les noms des astres et leurs gravités dans des listes :
 
@@ -654,9 +654,9 @@ import Feedback from "../../src/components/Feedback";
         afficher_poids_astre(noms_astres[2], masse_spationaute, gravites[2])
         ```
 
-        👉 À l'index `0` on trouve tout ce qui concerne la Terre (`noms_astres[0]` et `gravites[0]`), à l'index `1` Mars, et ainsi de suite. Les données restent parfaitement synchronisées.
+        À l'index `0` on trouve tout ce qui concerne la Terre (`noms_astres[0]` et `gravites[0]`), à l'index `1` Mars, et ainsi de suite. Les données restent parfaitement synchronisées.
 
-        💡 Avec les **boucles** que vous verrez bientôt, il sera possible de parcourir ces listes automatiquement peu importe le nombre d'astres dans la liste!
+        Avec les **boucles** que vous verrez bientôt, il sera possible de parcourir ces listes automatiquement peu importe le nombre d'astres dans la liste!
 
         :::
 
@@ -756,18 +756,23 @@ import Feedback from "../../src/components/Feedback";
 
         :::note Pile d'appels
 
-        Lorsque l’on démarre un programme Python, **une pile d'appels** est automatiquement créée. \
-        Cette structure de données, généralement invisible sauf en cas d’erreur ou via des outils de débogage,
-        permet à Python de suivre l’ordre d’exécution des fonctions et de conserver l’état des variables locales.
-        
-        🔁 Fonctionnement de la pile
+        Lorsque Python exécute un programme, il doit garder la trace de « qui a appelé qui ». Pour cela, il utilise un mécanisme interne appelé la pile d'appels.
 
-        - Lorsqu’une instruction **appelle une fonction**, celle-ci est **empilée au sommet de la pile d'appels**.
-        - Python exécute **une seule fonction à la fois**, toujours celle qui se trouve **en haut de la pile**.
-        - Une fois l’exécution terminée, **la fonction est retirée de la pile**.
-        - **La fonction suivante au sommet** devient alors **la nouvelle fonction active**, que Python exécute immédiatement.
+        C'est une sorte de "GPS" qui permet à Python de toujours savoir où il en est rendu et où il doit retourner une fois qu'une tâche est terminée. Bien qu'elle soit invisible en temps normal, c'est exactement cette pile qui s'affiche à l'écran sous le nom de Traceback lorsque votre programme plante !
+
+
+        Le fonctionnement (Principe LIFO)
+        La pile fonctionne comme une vraie pile de dossiers sur un bureau : elle suit le principe LIFO (Last In, First Out – Dernier arrivé, premier sorti).
+
+        Voici comment Python procède :
+
+        L'empilement : Quand une instruction appelle une fonction, Python met le programme actuel sur pause et dépose la nouvelle fonction au sommet de la pile.
+
+        Priorité au sommet : Python ne peut faire qu'une seule chose à la fois. Il travaille toujours sur la fonction qui se trouve tout en haut de la pile.
+
+        Le retour : Dès que la fonction au sommet a terminé son travail, elle est retirée de la pile. Python reprend alors le travail sur la fonction qui se trouve juste en dessous, exactement là où il l'avait laissée.
         
-        📚 Principe LIFO
+        Principe LIFO
 
         La pile d'appels suit le principe LIFO (*Last In, First Out*) :
         - La dernière fonction ajoutée est la première à être exécutée, et la première à être retirée.
@@ -784,8 +789,15 @@ import Feedback from "../../src/components/Feedback";
         fonction_a()
         ```
 
-        Dans cet exemple, lorsque `fonction_a()` est appelée, elle appelle `fonction_b()`, qui est ajoutée à la pile d'appels.\
-        Une fois que `fonction_b()` a terminé son exécution, le contrôle revient à `fonction_a()`.
+        Dans cet exemple :
+
+        1. fonction_a() est appelée en premier. Elle va au sommet de la pile.
+
+        2. À mi-chemin, elle appelle fonction_b(). Python met la fonction A sur pause et empile la fonction B par-dessus.
+
+        3. La fonction B s'exécute complètement, puis est retirée de la pile.
+
+        4. Python retrouve la fonction A au sommet et termine son exécution.
 
         :::
 
@@ -849,7 +861,7 @@ import Feedback from "../../src/components/Feedback";
 
     <TabItem value="trace" label="Trace">
 
-        ## 🕵️‍♂️ Trace d’exécution avec des fonctions
+        ## Trace d’exécution avec des fonctions
 
         Voici un exemple de trace d'exécution contenant des appels de fonctions
 
@@ -861,7 +873,7 @@ import Feedback from "../../src/components/Feedback";
         <RappelFonctionnementClasseInverse/>
         <Tabs>
             <TabItem value="1" label="🏠 Activités à faire à la maison">
-                ## 🧠 Auto-validation des connaissances
+                ## Auto-validation des connaissances
 
                 [**Ce formulaire**](https://forms.gle/TJnBPSw6BYJDMa9k6) sert à vérifier votre compréhension des éléments les plus importants de la rencontre R03. Ne faites ce questionnaire **que lorsque vous vous sentez en très bonne maîtrise de la matière**. En classe, dès votre arrivée, vous aurez un **questionnaire très similaire**, évalué **sommativement**, à compléter sans accès à **aucune documentation**.
 
@@ -872,14 +884,14 @@ import Feedback from "../../src/components/Feedback";
 
                 ---
 
-                ## ✏️ Exercices de compréhension
+                ## Exercices de compréhension
 
                 Pour le premier exercice de cette section, vous pouvez écrire vos réponses sur papier ou vous pouvez [créer un fichier *markdown*](/recettes/creer-markdown). \
                 Pour les autres exercices, vous pouvez imprimer ce [tableau de trace d'exécution](/pdf/Traces_recto_verso.pdf) pour réaliser les traces.
 
 
                 ::::info Exercice - Portée des variables
-                📁 Créez un fichier `r03_portee_variables.md` pour votre réponse.
+                Créez un fichier `r03_portee_variables.md` pour votre réponse.
 
                 :::warning-nt
                 Il n’y a **aucune trace à rédiger** pour ce numéro.
@@ -914,7 +926,7 @@ import Feedback from "../../src/components/Feedback";
                 ::::info Exercice - Trace avec fonction
 
                 :::note-nt ️
-                🖨 Pour réaliser cet exercice, imprimez le [tableau de trace d'exécution](/pdf/Traces_recto_verso.pdf).
+                Pour réaliser cet exercice, imprimez le [tableau de trace d'exécution](/pdf/Traces_recto_verso.pdf).
                 :::
                 :::warning-nt
                 En situation d'**examen**, vous devrez compléter une trace d'exécution sur **papier** sans utiliser d'ordinateur.
@@ -949,7 +961,7 @@ import Feedback from "../../src/components/Feedback";
                 ::::info Exercice - Trace avec fonctions avec paramètres
 
                 :::note-nt ️
-                🖨 Pour réaliser cet exercice, imprimez le [tableau de trace d'exécution](/pdf/Traces_recto_verso.pdf).
+                Pour réaliser cet exercice, imprimez le [tableau de trace d'exécution](/pdf/Traces_recto_verso.pdf).
                 :::
 
                 En suivant **la recette** de trace **[avec fonctions](/recettes/produire-une-trace?recette-activite=Avec+fonction)**, tracez son exécution.
@@ -978,7 +990,7 @@ import Feedback from "../../src/components/Feedback";
 
                 ---
 
-                # 🎯 Solutionnaires
+                # Solutionnaires
 
                 :::warning
                 Consultez le solutionnaire **uniquement après avoir complété l'exercice par vous-même**. \
@@ -1002,7 +1014,7 @@ import Feedback from "../../src/components/Feedback";
 
                 ::::info Exercice - Conversion Celsius → Fahrenheit
 
-                📁 Créez un fichier `r03_celsius_fahrenheit.py` pour votre réponse.
+                Créez un fichier `r03_celsius_fahrenheit.py` pour votre réponse.
 
                 Écrivez une fonction `celsius_vers_fahrenheit(celsius)` qui reçoit une température en **°C** et retourne sa valeur
                 en **°F** grâce à la formule
@@ -1027,7 +1039,7 @@ import Feedback from "../../src/components/Feedback";
 
                 ::::info Exercice - Aire d’un rectangle
 
-                📁 Créez un fichier `r03_aire_rectangle.py` pour votre réponse.
+                Créez un fichier `r03_aire_rectangle.py` pour votre réponse.
 
                 Écrivez une fonction `aire_rectangle(longueur, largeur)` qui calcule et **retourne** l’aire d’un rectangle.<br />
                 Puis, appelez la fonction pour afficher l’aire d’un rectangle de 5 m $\times$ 3 m. Par exemple :
@@ -1044,14 +1056,14 @@ import Feedback from "../../src/components/Feedback";
                 ---
 
                 ::::info Exercice - Réutilisation de fonctions
-                📁 Créez un fichier `r03_reutilisation_fonctions.py` pour votre réponse.
+                Créez un fichier `r03_reutilisation_fonctions.py` pour votre réponse.
 
                 1) Écrivez une fonction `aire_rectangle(longueur, largeur)` qui calcule et **retourne** l’aire d’un rectangle.
 
                 2) Écrivez une deuxième fonction `volume_prisme(longueur, largeur, hauteur)` qui calcule et **retourne** le
                 volume d’un prisme rectangulaire.
 
-                👉 Cette deuxième fonction doit **réutiliser** (appeler) votre fonction `aire_rectangle` pour calculer la base du prisme avant de la
+                Cette deuxième fonction doit **réutiliser** (appeler) votre fonction `aire_rectangle` pour calculer la base du prisme avant de la
                 multiplier par la hauteur.
 
                 3) Testez vos fonctions en affichant :
@@ -1070,7 +1082,7 @@ import Feedback from "../../src/components/Feedback";
 
                 ::::info Exercice - ÉNERGIE CINÉTIQUE
 
-                📁 Créez un fichier `r03_energie_cinetique.py` pour votre réponse. Le nom du fichier de module est au choix.
+                Créez un fichier `r03_energie_cinetique.py` pour votre réponse. Le nom du fichier de module est au choix.
 
                 Pour cet exercice, vous devez créer un **module** (un fichier `.py`) et un **script** (un autre fichier `.py`).<br />
                 Référez-vous à la [recette sur les modules](/recettes/creer-module) pour savoir comment faire.
@@ -1099,7 +1111,7 @@ import Feedback from "../../src/components/Feedback";
                 ---
 
                 ::::info Exercice - FORCE GRAVITATIONNELLE
-                📁 Créez un fichier `r03_force_gravitationnelle.py` pour votre réponse.
+                Créez un fichier `r03_force_gravitationnelle.py` pour votre réponse.
 
                 Dans le même module créé à l'exercice précédent, ajoutez une fonction permettant de calculer le poids en utilisant la loi de la gravitation universelle de Newton dont la formule est :
 
@@ -1127,7 +1139,7 @@ import Feedback from "../../src/components/Feedback";
 
                 ::::info Exercice - Bonjour
 
-                📁 Créez un fichier `r03_bonjour.py` pour votre réponse.
+                Créez un fichier `r03_bonjour.py` pour votre réponse.
 
                 1) Écrivez une fonction `dire_bonjour(prenom)` qui reçoit un prénom en paramètre et affiche un message de salutation personnalisé. \
                 Par exemple, appeler `dire_bonjour("Chatmouraï")` doit afficher :
@@ -1140,7 +1152,7 @@ import Feedback from "../../src/components/Feedback";
                 prenoms = ["Chatmouraï", "Astro", "Peluche"]
                 ```
 
-                ✅ Sortie attendue
+                Sortie attendue
                 ```
                 Bonjour, Chatmouraï!
                 Bonjour, Astro!
@@ -1156,7 +1168,7 @@ import Feedback from "../../src/components/Feedback";
                 ---
 
                 ::::info Exercice - Refactorisation du code - Umbrella Corporation
-                📁 Créez un fichier `r03_umbrella_corporation.py` pour votre réponse.
+                Créez un fichier `r03_umbrella_corporation.py` pour votre réponse.
 
                 Le code ci-dessous affiche un rapport concernant des expérimentations réalisées par une entreprise pharmaceutique de confiance. \
                 **Beaucoup d'instructions** servant à afficher des données **sont très similaires** et sont utilisées dans le **même ordre**. \
@@ -1205,7 +1217,7 @@ import Feedback from "../../src/components/Feedback";
                 2. **Définissez une fonction** nommée `afficher_echantillon(...)` qui reçoit un élément de chacune des cinq listes en paramètre et affiche le bloc d'informations d'un échantillon.
                 3. **Appelez la fonction** trois fois en lui passant les éléments correspondants par leur index (`noms[0]`, `temperatures[0]`, etc.).
 
-                :::tip 💡 Pourquoi des listes parallèles?
+                :::tip Pourquoi des listes parallèles?
                 À l'index `0`, on retrouve tout ce qui concerne le Virus-T (`noms[0]`, `temperatures[0]`, etc.). Cette structure rend les données **plus faciles à maintenir** : ajouter un quatrième échantillon ne demande qu'un ajout dans chaque liste. Avec les boucles `for` que vous verrez bientôt, un seul appel de fonction suffirait pour traiter tous les échantillons!
                 :::
 
@@ -1220,7 +1232,7 @@ import Feedback from "../../src/components/Feedback";
                 ---
 
                 ::::info Exercice - Refactorisation du code - Calcul de densité
-                📁 Créez un fichier `r03_calcul_densite.py` pour votre réponse.
+                Créez un fichier `r03_calcul_densite.py` pour votre réponse.
 
                 Le code ci-dessous calcule la densité en kg/m<sup>3</sup> de 3 échantillons à partir de leur masse en g et de leur volume en cm<sup>3</sup>. \
                 Le problème : les données sont stockées dans des variables individuelles et le calcul est répété trois fois. \
@@ -1262,7 +1274,7 @@ import Feedback from "../../src/components/Feedback";
                 3. **Appelez votre fonction** trois fois en accédant aux éléments des listes par leur index et stockez les résultats dans des variables.
                 4. **Affichez les résultats** de façon identique à la version originale.
 
-                :::tip 💡 Pourquoi des listes parallèles?
+                :::tip Pourquoi des listes parallèles?
                 Les masses et les volumes sont des données **du même type** collectées pour chaque échantillon. Les regrouper en listes parallèles réduit le nombre de variables de 6 à 2, et rend le code plus lisible : `masses_g[1]` et `volumes_cm3[1]` désignent clairement les données du deuxième échantillon. Avec les boucles `for` que vous verrez bientôt, un seul appel de fonction suffirait pour calculer les 3 densités!
                 :::
 
@@ -1282,7 +1294,7 @@ import Feedback from "../../src/components/Feedback";
                 ---
 
                 ::::info Exercice - Une question de nanosecondes
-                📁 Créez un fichier `r03_nanosecondes.md` pour votre réponse.
+                Créez un fichier `r03_nanosecondes.md` pour votre réponse.
 
                 Dans la documentation du module `time` ([doc](https://docs.python.org/fr/3.13/library/time.html)), on trouve la fonction `time.monotonic_ns()`.
                 Cette fonction permet  d'obtenir le temps en nanosecondes depuis le lancement de l'application. À chaque appel de la fonction, le temps retourné est toujours de plus en plus grand. Testez le code ci-dessous :
@@ -1321,7 +1333,7 @@ import Feedback from "../../src/components/Feedback";
                 ```
 
                 **Question** \
-                ✏️ Selon vous, en observant les instructions 15 à 19, que représente le nombre contenu dans la variable <i>mystere</i>?
+                Selon vous, en observant les instructions 15 à 19, que représente le nombre contenu dans la variable <i>mystere</i>?
 
                 **Instructions pour vous aider dans votre réflexion**
                 1) Exécutez le programme tel quel et notez la valeur affichée.
@@ -1337,12 +1349,12 @@ import Feedback from "../../src/components/Feedback";
 
                 ---
 
-                ## ✏️ Exercices sur papier
+                ## Exercices sur papier
 
                 <DocumentationInterdite />
 
                 ::::info Exercice - Force centripète
-                📁 Créez un fichier `r03_force_centripete.py` pour votre réponse.
+                Créez un fichier `r03_force_centripete.py` pour votre réponse.
 
                 Écrivez un programme qui calcule la force nécessaire ($F_c$) pour maintenir un objet en mouvement circulaire (comme une voiture dans un virage).
 
@@ -1384,7 +1396,7 @@ import Feedback from "../../src/components/Feedback";
                 - Refactorisation du code - Calcul de densité *(solutionnaire à venir)*
                 - Une question de nanosecondes *(solutionnaire à venir)*
 
-                ✏️ Solution des **exercices de compréhension** :
+                Solution des **exercices de compréhension** :
                 - Force centripète *(solutionnaire à venir)*
 
             </TabItem>

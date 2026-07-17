@@ -29,9 +29,9 @@ def double(x):
 
 ---
 
-## Paramètres
+## Les paramètres
 
-Une fonction peut avoir 0, 1 ou plusieurs paramètres.
+Le paramètre est la variable déclarée dans la définition même de la fonction. C'est l'espace réservé (la « boîte vide ») qui attend de recevoir une donnée. Une fonction peut avoir 0, 1 ou plusieurs paramètres. 
 
 ```python
 def nombre_pi():
@@ -50,6 +50,24 @@ def puissance(base, exposant):
 ```python
 puissance(2, 3)   # base=2, exposant=3 → retourne 8
 puissance(3, 2)   # base=3, exposant=2 → retourne 9
+```
+
+---
+## L'arguement
+
+L'argument est la valeur fournie à un paramètre lors de l'appel de la fonction. C'est la donnée réelle qui remplit la « boîte vide » du paramètre.
+
+```python
+# 'masse' et 'volume' sont les PARAMÈTRES (les boîtes vides)
+def calculer_concentration(masse: float, volume: float) -> float:
+    return masse / volume
+
+# 10.5 et 2.0 sont les ARGUMENTS (les valeurs concrètes)
+resultat = calculer_concentration(masse=10.5, volume=2.0)
+
+# Ici, le contenu de la variable 'poids_echantillon' devient l'ARGUMENT
+poids_echantillon = 50.0
+calculer_concentration(masse=poids_echantillon, volume=5.0)
 ```
 
 ---
@@ -109,6 +127,24 @@ saluer("Kirby")
 
 # ❌ Mauvaise utilisation
 print(saluer("Kirby"))   # Affiche la salutation, puis None
+```
+
+---
+### Une fonction peut retourner une autre fonction
+
+```python
+def creer_courbe_calibration(pente, ordonnee):
+    """
+    Cette fonction principale est une usine. 
+    Elle fabrique et retourne une nouvelle fonction sur mesure.
+    """
+    
+# 1. On définit la sous-fonction à l'intérieur
+def appliquer_calibration(valeur_brute: float) -> float:
+    return (pente * valeur_brute) + ordonnee
+
+# 2. On retourne la fonction ELLE-MÊME (attention : pas de parenthèses !)
+return appliquer_calibration
 ```
 
 ---
@@ -193,6 +229,13 @@ Il faut bien expliquer aux étudiants que ces annotations sont des **indices** (
 ```python
 # L'équation de l'énergie cinétique
 def energie_cinetique(masse: float, vitesse: float) -> float:
+    """
+    Calcule l'énergie cinétique d'un objet.
+    équation : E = 1/2 * m * v^2
+    argument masse : masse en kg
+    argument vitesse : vitesse en m/s
+    retourne : énergie cinétique en Joules
+    """
     return 0.5 * masse * (vitesse ** 2)
 
 # Python autorisera ceci sans erreur fatale (bien que VS Code puisse souligner l'anomalie)
