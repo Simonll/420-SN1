@@ -13,12 +13,12 @@ const darkCodeTheme = themes.vsDark;
 const config = {
     title: siteConfig.nom,
     tagline: siteConfig.description,
-    url: "https://info.cegepmontpetit.ca/",
+    url: "https://simonll.github.io/420-SN1",
     baseUrl: `/${siteConfig.nomUrl}/`,
     onBrokenLinks: "throw",
     favicon: "img/favicon.ico",
 
-    organizationName: "departement-info-cem",
+    organizationName: "simonll", // Usually your GitHub org/user name.
     projectName: siteConfig.nomUrl,
     deploymentBranch: "gh-pages",
     trailingSlash: false,
@@ -61,7 +61,7 @@ const config = {
                 docs: {
                     sidebarPath: require.resolve("./sidebars.js"),
                     routeBasePath: "/",
-                    // editUrl: `https://github.com/departement-info-cem/${siteConfig.nomUrl}/tree/main/web`,
+                    // editUrl: `https://github.com/simonll/${siteConfig.nomUrl}/tree/main/web`,
                     remarkPlugins: [remarkMath],
                     rehypePlugins: [rehypeKatex],
                     admonitions: {
@@ -155,7 +155,7 @@ const config = {
                         items: [
                             {
                                 label: "GitHub",
-                                href: `https://github.com/departement-info-cem/${siteConfig.nomUrl}`,
+                                href: `https://github.com/simonll/${siteConfig.nomUrl}`,
                             },
                         ],
                     },
@@ -178,8 +178,8 @@ const config = {
                     name: "keywords",
                     content: `${siteConfig.nom}, ${siteConfig.description},
                         SN1, cem, 420, 420-SN1, programmation en sciences, cours programmation cégep, 
-                        sciences de la nature, programmation, python, cégep, cegep,
-                        cégep Édouard-Montpetit, cegep Edouard Montpetit, programmation scientifique, 
+                        sciences de la nature, programmation, python, cégep,
+                        cégep Édouard-Montpetit, programmation scientifique, 
                         étudiants sciences de la nature, initiation à la programmation, python, algorithmes, 
                         informatique, cours informatique, sciences de la nature, apprendre la programmation`,
                 },
@@ -196,12 +196,8 @@ const config = {
                     content: "website",
                 },
                 {
-                    property: "og:image",
-                    content: "https://info.cegepmontpetit.ca/420-SN1/img/logo.svg"
-                },
-                {
                     property: "og:url",
-                    content: "https://info.cegepmontpetit.ca/420-SN1/"
+                    content: "https://simonll.github.io/420-SN1/"
                 }
             ],
         }),
