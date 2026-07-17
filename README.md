@@ -4,11 +4,11 @@ Site de documentation du cours **420-SN1 Programmation en sciences**.
 
 Ce site web est construit avec [Docusaurus 3](https://docusaurus.io/), un générateur de sites de documentation statique moderne.
 
-## 🌐 Site en ligne
+## Site en ligne
 
-Le site est déployé à l'adresse : **https://info.cegepmontpetit.ca/420-SN1/**
+Le site est déployé à l'adresse : **https://simonll.github.io/420-SN1/**
 
-## 📚 Contenu
+## Contenu
 
 Le site contient :
 
@@ -17,7 +17,7 @@ Le site contient :
 - **Recettes** : Guides pratiques (installation, configuration, etc.)
 - **Aide-mémoire** : Référence rapide des concepts Python
 
-## 🚀 Installation et développement local
+## Installation et développement local
 
 ### Prérequis
 
@@ -37,14 +37,14 @@ npm start
 
 Cette commande démarre un serveur de développement local et ouvre le site dans votre navigateur à l'adresse `http://localhost:3000/420-SN1/`. La plupart des modifications se reflètent en temps réel sans avoir à redémarrer le serveur.
 
-## 🔌Créer une version hors-ligne du site
+## une version hors-ligne du site
 
 #### Modifier temporairement le fichier config.js
 Modifier la valeur de `nomUrl` dans le fichier `config.js` par la valeur "".
 ```javascript
 const config = {
     nom: "420-SN1 - Programmation en sciences",
-    description: "Site du cours 420-SN1 Programmation en sciences au cégep Édouard-Montpetit.",
+    description: "Site du cours 420-SN1 Programmation en sciences.",
     nomUrl: ""
 };
 
@@ -65,7 +65,7 @@ L’étudiant.e devra double-cliquer sur ce fichier pour lancer le site Web. \
 Ce lanceur va démarrer un serveur Web localement sur le port 3000. \
 Il ne reste plus qu’à compresser (zipper) le contenu du répertoire.
 
-## 📁 Structure du projet
+## Structure du projet
 
 ```
 420-SN1/
@@ -86,7 +86,7 @@ Il ne reste plus qu’à compresser (zipper) le contenu du répertoire.
 └── package.json              # Dépendances et scripts npm
 ```
 
-## 🛠️ Technologies utilisées
+## Technologies utilisées
 
 - **Docusaurus 3** : Framework de documentation
 - **React** : Bibliothèque JavaScript pour l'interface
@@ -95,7 +95,7 @@ Il ne reste plus qu’à compresser (zipper) le contenu du répertoire.
 - **Prism** : Coloration syntaxique du code
 - **Mermaid** : Diagrammes et graphiques
 
-## ✏️ Contribuer
+## Contribuer
 
 Pour contribuer au site :
 
@@ -106,22 +106,21 @@ Pour contribuer au site :
 5. Créez un commit avec un message descriptif en français
 6. Poussez vos modifications et créez une pull request
 
-## 📝 Licence
+## Licence
 
 Voir le fichier [LICENSE](LICENSE) pour plus de détails.
 
-## 👥 Auteurs
+## Auteurs
 
-Département d'informatique - Cégep Édouard-Montpetit
+## Auteurs et contributeurs
 
-## 🔗 Liens utiles
+* **Création originale :** Département d'informatique - Cégep Édouard-Montpetit
+* **Adaptation :** Simon Laurin-Lemay
+
+## Liens utiles
 
 - [Guide Markdown étendu pour Docusaurus](https://docusaurus.io/fr/docs/markdown-features)
 - [Documentation Docusaurus](https://docusaurus.io/)
 - [Markdown Guide](https://www.markdownguide.org/)
 - [KaTeX Documentation](https://katex.org/)
-
-## Avancé
-
-Des composantes supplémentaires ont été développées par Pierre-Olivier Brillant. Vous pouvez vous référer à la section [Wiki](https://github.com/departement-info-cem/depinfo-gabarit/wiki) de ce repository, ou vous adresser directement à lui pour en savoir plus.
 
