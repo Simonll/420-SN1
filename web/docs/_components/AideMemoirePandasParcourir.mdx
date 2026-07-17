@@ -1,9 +1,0 @@
-import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
-
-| Opération | Syntaxe | Description |
-|---|---|---|
-| Importer Pandas | <C><K>import</K> pandas <K>as</K> pd</C> | Convention universelle |
-| Parcourir ligne par ligne | <C><K>for</K> index, row <K>in</K> df.<F>iterrows</F>():</C> | `index` = numéro de ligne, `row` = Series |
-| Accéder à une valeur | <C>row[<S>"Console"</S>]</C> | Valeur de la colonne "Console" pour la ligne courante |
-| Parcourir une colonne | <C><K>for</K> val <K>in</K> df[<S>"Console"</S>]:</C> | Itère sur les valeurs d'une Series |
-| Convertir en liste | <C>df[<S>"Console"</S>].<F>tolist</F>()</C> | Retourne une liste Python ordinaire |
