@@ -13,7 +13,7 @@ const darkCodeTheme = themes.vsDark;
 const config = {
     title: siteConfig.nom,
     tagline: siteConfig.description,
-    url: "https://simonll.github.io/420-SN1",
+    url: "https://simonll.github.io",
     baseUrl: `/${siteConfig.nomUrl}/`,
     onBrokenLinks: "throw",
     favicon: "img/favicon.ico",
