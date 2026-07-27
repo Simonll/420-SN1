@@ -1,5 +1,5 @@
 ---
-title: 5 - 🔄 Boucles
+title: 5 - Boucles
 description: while, Affectation, range / for, Structures combinées, break / continue / pass, DRY, Boucles imbriquées, input()
 hide_table_of_contents: true
 ---
@@ -15,32 +15,29 @@ import IntroSolutionsExercices from '@site/docs/_components/IntroSolutionsExerci
 import Feedback from "../../src/components/Feedback";
 import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
 
-# 🔄 Boucles
+# Boucles
 
 <Tabs queryString="onglet">
 
     <TabItem value="while" label="while" default>
 
         :::info Introduction aux boucles
+        Les boucles apportent une puissance considérable à vos programmes. Elles permettent de répéter des actions, de parcourir des listes et de traiter des données massivement sans avoir à copier-coller du code. Avec les variables et les conditions, c'est l'un des piliers de la programmation.
 
-        La boucle apporte à la programmation une puissance considérable.<br />
-        Elle permet de répéter des actions, de parcourir des listes, de traiter des données
-        de manière efficace.<br />
-        Elle est un des piliers de la programmation avec les conditions et les fonctions.
-
-        En gros, sa structure est la suivante :
+        Voici la logique fondamentale d'une boucle :
         ```pseudo showLineNumbers
-        Tant que (une certaine condition est vraie) :
-            # instructions à répéter
-            # instructions à répéter
-            # instructions à répéter
+        Tant que (cette condition est vraie) :
+            # Exécuter cette instruction
+            # Et celle-ci
+        # Suite du programme (exécuté quand la condition devient fausse)
 
         ```
-        Si on exécutait ce pseudo-code, on répéterait l'exécution des lignes 2 à 4 tant que la condition de la ligne 1 est vraie.<br />
+        Si on exécutait ce pseudo-code, on répéterait l'exécution des lignes 2 à 4 tant que la condition de la ligne 1 est vraie.\
         Dès que la condition devient fausse, on sort de la boucle et on continue l'exécution du programme à la ligne 5.
 
-        En Python, on utilise le mot-clé `while` pour créer une boucle de ce type.<br />
-        Voici un exemple simple :
+        En Python, on traduit le "Tant que" par le mot-clé `while`.
+        Voici un exemple classique :
+        
         ```python showLineNumbers
         compteur = 0
         while compteur < 5:
@@ -48,59 +45,71 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
             compteur = compteur + 1  # Incrémente le compteur de 1
         print("Fin de la boucle")
         ```
-        Dans cet exemple, la boucle `while` continue tant que la variable `compteur` est inférieure à 5, c'est-à-dire tant que l'expression `compteur < 5` est évaluée à `True`.<br />
-        À chaque ***itération*** (tour de la boucle), elle affiche la valeur du compteur (ligne 3) et l'incrémente de 1 (ligne 4).<br />
-        Quand `compteur` atteint 5, la condition (`compteur < 5`) devient fausse (`False`) et la boucle se termine.
+        
+        **Que se passe-t-il ici ?**
 
-        Exécutez ce code en mode débogage pour bien comprendre son fonctionnement.<br />
-        Mettez un point d'arrêt sur la ligne 1 et avancez une ligne à la fois pour suivre l'évolution de la variable `compteur`.
+        1. Python évalue la condition : est-ce que `0 < 5` ? Oui (`True`).
+        2. Il entre dans la boucle, affiche "0", et ajoute 1 à `compteur`.
+        3. Il remonte à la ligne 2 pour vérifier à nouveau. Est-ce que `1 < 5` ? Oui.
+        4. À chaque tour (qu'on appelle une **itération**), `compteur` augmente.
+        5. Quand `compteur` atteint 5, la condition `5 < 5` devient fausse (`False`). Python saute alors par-dessus la boucle et passe à la ligne 5.
+
+        **Le meilleur moyen de comprendre :** Exécutez ce code en mode débogage ! Mettez un point d'arrêt sur la ligne 1 et avancez une ligne à la fois pour voir la variable `compteur` grandir à chaque tour.
 
         :::
 
         ---
 
         :::warning Attention aux boucles infinies
-        Il est crucial de s'assurer que la condition de la boucle deviendra fausse à un moment donné.<br />
-        Sinon, la boucle continuera indéfiniment, ce qui peut faire planter votre programme.<br />
-        Dans l'exemple ci-dessus, si on oublie d'incrémenter `compteur`, la condition `compteur < 5` restera toujours vraie et la boucle ne s'arrêtera jamais.
+        Il est crucial de s'assurer que la condition de la boucle deviendra **fausse** à un moment donné.\
+        
+        Si vous oubliez la ligne `compteur = compteur + 1` dans l'exemple précédent, `compteur` restera éternellement à 0. La condition `0 < 5` sera toujours vraie, ce qui créera une **boucle infinie** et fera planter ou figer votre programme.
         :::
 
         ---
 
         :::tip affectation raccourcie
-        Pour incrémenter une variable, on peut utiliser l'opérateur d'affectation raccourcie `+=`.<br />
-        Par exemple, au lieu d'écrire `compteur = compteur + 1`, on peut écrire `compteur += 1`.<br />
-        Cela fonctionne de la même manière pour les autres opérations mathématiques avec les opérateurs `-=`, `*=`, `/=`, etc.
+        Pour incrémenter une variable, les programmeurs utilisent un raccourci très pratique : l'opérateur `+=`.
+        Au lieu d'écrire le nom de la variable deux fois (`compteur = compteur + 1`), on écrit simplement `compteur += 1`.
 
-        Voici le même exemple avec l'opérateur `+=` :
+        Cela fonctionne de la même manière pour toutes les opérations mathématiques : `-=`, `*=`, `/=`.
+
+        Voici le même code, écrit de façon plus moderne :
+
         ```python showLineNumbers
         compteur = 0
         while compteur < 5:
             print("Compteur =", compteur)
-            compteur += 1  # Incrémente le compteur de 1
+            compteur += 1  # Fait exactement la même chose !
         print("Fin de la boucle")
         ```
         :::
 
         ---
 
-        :::info Autre exemple
-        Voici un autre exemple qui utilise une boucle `while` pour calculer la somme des nombres de 1 à 10 :
+        :::info Un exemple pratique : L'accumulateur
+        Voici un autre usage classique de la boucle `while` : additionner une série de nombres (ici, de 1 à 10). Ce principe de programmation s'appelle l'**accumulateur**.
+
         ```python showLineNumbers
         somme = 0
         nombre = 1
-        while nombre <= 10:
-            somme += nombre  # Ajoute le nombre courant à la somme
-            nombre += 1      # Passe au nombre suivant
-        print("La somme des nombres de 1 à 10 est :", somme)
-        ```
-        Dans cet exemple, la boucle continue tant que `nombre` est inférieur ou égal à 10 (`nombre <= 10`).<br />
-        À chaque itération, elle ajoute la valeur de `nombre` à `somme` et incrémente `nombre` de 1.<br />
-        Quand `nombre` devient 11, la condition `nombre <= 10` devient fausse et la boucle se termine.<br />
-        Le programme affiche alors la somme totale des nombres de 1 à 10.
 
-        Exécutez-le en mode débogage pour suivre l'évolution des variables `somme` et `nombre` à chaque itération!
+        while nombre <= 10:
+            somme += nombre  # Ajoute le nombre actuel au total
+            nombre += 1      # Passe au prochain nombre
+            
+        print("La somme des nombres de 1 à 10 est :", somme)
+
+        ```
+
+        Dans cet exemple, nous avons deux variables qui travaillent en équipe :
+
+        * `nombre` agit comme notre **compteur** (1, 2, 3... jusqu'à 11).
+        * `somme` agit comme notre **accumulateur** (il accumule les valeurs à chaque tour : 1, puis 3, puis 6...).
+
+        Encore une fois, exécutez-le en mode débogage pour voir les variables `somme` et `nombre` évoluer en tandem à chaque itération !
         :::
+
 
 
         {/* <Feedback feedbackId="Rencontre #5 - while" /> */}
@@ -108,17 +117,17 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
 
     <TabItem value="affectation" label="Affectation">
 
-        :::info Opérateurs d'affectation
+        :::info Les opérateurs d'affectation
 
-        Nous avons déjà vu l'opérateur d'affectation `=` qui permet d'affecter une valeur à une variable.<br />
-        Par exemple :
+        Nous avons déjà utilisé l'opérateur `=` classique pour affecter une valeur de départ à une variable :
         ```python
         x = 5
-        y = 10
+
         ```
 
-        Python propose également des opérateurs d'affectation composés qui permettent de faire des
-        opérations mathématiques et de réaffecter le résultat à la même variable en une seule instruction.
+        Mais en programmation, il est très fréquent de devoir modifier une variable en utilisant sa propre valeur (par exemple : ajouter 1 à un compteur, ou doubler un score).
+
+        Plutôt que d'écrire le nom de la variable deux fois (ex. : `x = x + 1`), Python propose des **opérateurs d'affectation raccourcis**. Ils effectuent l'opération mathématique et sauvegardent le résultat dans la même variable, en une seule étape.
 
         Voici les opérateurs d'affectation composés les plus courants :
 
@@ -132,18 +141,18 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
         | <C>//=</C> | Division entière et affectation | <C>a //= b</C> | <C>a = a // b</C> |
         | <C>**=</C> | Exponentiation et affectation | <C>a **= b</C> | <C>a = a ** b</C> |
 
-        Ces opérateurs sont très utiles pour simplifier le code et rendre les opérations plus concises.
-
         :::
 
         ---
 
-        :::tip Exemple d'utilisation
+        :::tip En pratique
+        Ces raccourcis rendent votre code beaucoup plus lisible, surtout quand vos variables ont des noms descriptifs et longs !
         ```python
         compteur = 0
         compteur += 1  # équivalent à compteur = compteur + 1
         compteur *= 2  # équivalent à compteur = compteur * 2
-        print(compteur)  # Affiche 2
+        compteur += 8  # 2 + 8 -> compteur vaut maintenant 10
+        print(compteur)  # Affiche 10
         ```
         :::
 
@@ -154,11 +163,11 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
     <TabItem value="for" label="range / for">
 
         :::tip La fonction `range()`
-        `range()` génère une séquence de nombres. Il existe 3 façons de l'appeler selon le nombre de paramètres :
+        La fonction `range()` génère une séquence de nombres. Il existe 3 façons de l'appeler selon le nombre de paramètres fournis :
 
-        - `range(stop)` : part de `0`, avance de `1` en `1`, s'arrête avant `stop`
-        - `range(start, stop)` : part de `start`, avance de `1` en `1`, s'arrête avant `stop`
-        - `range(start, stop, step)` : part de `start`, avance de `step` en `step`, s'arrête avant `stop`
+        - `range(stop)` : part de `0` (par défaut), avance de `1` (par défaut) et s'arrête **juste avant** `stop`.
+        - `range(start, stop)` : part de `start`, avance de `1` et s'arrête avant `stop`.
+        - `range(start, stop, step)` : part de `start`, avance par bonds de `step` et s'arrête avant `stop`.
 
         | Appel             | Produit les nombres    |
         |-------------------|------------------------|
@@ -167,13 +176,13 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
         | <C><B>range</B>(<N>0</N>, <N>11</N>, <N>2</N>)</C> | <C><N>0</N>, <N>2</N>, <N>4</N>, <N>6</N>, <N>8</N>, <N>10</N></C> |
         | <C><B>range</B>(<N>5</N>, <N>0</N>, -<N>1</N>)</C> | <C><N>5</N>, <N>4</N>, <N>3</N>, <N>2</N>, <N>1</N></C> |
 
-        ⚠️ `range()` n'est pas exactement une liste en Python, mais elle se comporte de la même façon lorsqu'on la parcourt.
+        *Note : `range()` n'est pas techniquement une liste en Python, mais elle se comporte exactement comme telle lorsqu'on la parcourt.*
         :::
 
         ---
 
         ::::info Boucle `for` avec `range()`
-        La boucle `for` parcourt une séquence de valeurs **une par une**, et exécute les instructions du bloc à chaque itération (à chaque tour de boucle).
+        La boucle `for` parcourt une séquence de valeurs **une par une**, et exécute son bloc d'instructions à chaque itération (à chaque tour).
 
         Sa structure est la suivante :
         ```python showLineNumbers
@@ -181,65 +190,65 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
             # instructions répétées à chaque itération
         ```
 
-        À chaque itération de boucle, `i` prend automatiquement la valeur suivante dans la séquence produite par `range()`.
+        À chaque tour de boucle, la variable `i` prend automatiquement la valeur suivante dans la séquence produite par `range()`.
 
         :::tip À noter
-        La boucle `for` est un cas particulier de `while`. Elle est simplement plus pratique quand on sait d'avance combien de tours on veut faire.
+        La boucle `for` est en réalité un cas particulier de la boucle `while`. Elle est simplement beaucoup plus pratique lorsqu'on sait d'avance combien de tours on veut effectuer.
         :::
 
-        Voici quatre exemples, lisez d'abord le commentaire, puis le code :
+        Voici quatre exemples pour bien comprendre la mécanique. Lisez le commentaire, puis le code :
+
         ```python showLineNumbers
-        # Exemple 1 : i vaut 0, puis 1, puis 2, puis 3, puis 4 → 5 tours
+        # Exemple 1 : i vaut 0, puis 1, 2, 3, 4 (5 tours au total)
         for i in range(5):
             print(i)
-        ```
-        ```python showLineNumbers
-        # Exemple 2 : i commence à 1 et s'arrête avant 6 → affiche 1 à 5
+
+        # Exemple 2 : i commence à 1 et s'arrête juste avant 6
         for i in range(1, 6):
             print(i)
-        ```
-        ```python showLineNumbers
-        # Exemple 3 : i avance de 2 en 2 → affiche seulement les pairs
+
+        # Exemple 3 : i avance de 2 en 2 (affiche seulement les nombres pairs)
         for i in range(0, 11, 2):
             print(i)
-        ```
-        ```python showLineNumbers
-        # Exemple 4 : step négatif → i descend de 5 jusqu'à 1
+
+        # Exemple 4 : step négatif → i entame un compte à rebours de 5 jusqu'à 1
         for i in range(5, 0, -1):
             print(i)
+
         ```
 
-        👉 Exécutez ces exemples en mode débogage, un à la fois.<br />
-        Mettez un point d'arrêt sur le `for` et avancez ligne par ligne pour voir `i` changer de valeur à chaque itération.
+        **Le meilleur test :** Exécutez ces exemples en mode débogage, un à la fois. Placez un point d'arrêt sur le `for` et avancez ligne par ligne pour voir la variable `i` changer de valeur sous vos yeux !
         ::::
 
         ---
 
         :::info Parcourir une liste avec `for`, `range()` et `len()`
-        Puisque `range()` produit une séquence d'index (`0`, `1`, `2`…), on peut l'utiliser pour accéder à chaque élément d'une liste tour par itération.
+        Puisque `range()` produit une séquence d'index (`0`, `1`, `2`…), c'est l'outil idéal pour générer les **index** permettant de lire une liste.
 
-        `len(liste)` retourne le nombre d'éléments d'une liste. Donc `range(len(liste))` génère exactement les bons index pour parcourir toute la liste :
+        Rappel : `len(liste)` retourne le nombre d'éléments d'une liste. Par conséquent, `range(len(liste))` générera exactement les bons index pour parcourir cette liste du début à la fin.
 
         ```python showLineNumbers
         consoles = ["PS5", "Xbox Series X", "Nintendo Switch 2"]
         nb_elements = len(consoles)       # nb_elements vaut 3
         for i in range(nb_elements):      # i prendra les valeurs 0, 1, 2
-            print(consoles[i])            # accède à l'élément à la position i
+            print(consoles[i])            # accède à l'élément à la position i de la liste consoles
 
-        # On aurait pu écrire directement :
+        # En pratique, les programmeurs l'écrivent souvent sur une seule ligne :
         # for i in range(len(consoles)):
         ```
 
-        Au 1er tour : `i` vaut `0` → `consoles[0]` → `"PS5"` \
-        Au 2e tour &nbsp;: `i` vaut `1` → `consoles[1]` → `"Xbox Series X"` \
-        Au 3e tour &nbsp;: `i` vaut `2` → `consoles[2]` → `"Nintendo Switch 2"`
+        **Ce qui se passe en coulisses :**
 
-        👉 Exécutez ce code en mode débogage et observez `i` et `consoles[i]` évoluer ensemble à chaque itération.
+        * **1er tour :** `i` vaut `0` → `consoles[0]` → `"PS5"`
+        * **2e tour :** `i` vaut `1` → `consoles[1]` → `"Xbox Series X"`
+        * **3e tour :** `i` vaut `2` → `consoles[2]` → `"Nintendo Switch 2"`
+
+        Exécutez ce code en mode débogage et observez `i` et `consoles[i]` évoluer ensemble à chaque itération.
         :::
 
         ---
 
-        :::tip Quand on n'a pas besoin de `i` : utiliser `_`
+        :::tip Quand on n'utilise pas `i` : la convention `_`
         Parfois, on veut simplement **répéter une action** un certain nombre de fois, sans jamais utiliser la valeur de `i` à l'intérieur de la boucle.
 
         Par exemple, afficher 5 fois le même message :
@@ -248,39 +257,40 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
             print("Bienvenue!")  # i n'est pas utilisé
         ```
 
-        Dans ce cas, nommer la variable `i` est trompeur : ça laisse croire qu'on va s'en servir, alors qu'on ne l'utilise pas. \
-        La convention en Python est d'utiliser `_` (un tiret bas) pour signaler explicitement que la variable est intentionnellement ignorée :
+        Dans ce cas, nommer la variable `i` peut être trompeur, car cela laisse croire à un autre programmeur qu'elle servira à un calcul.
+        En Python, la convention est d'utiliser le tiret bas (`_`) pour signaler explicitement que la variable de boucle est intentionnellement ignorée :
 
-        ```python showLineNumbers
+        ```python showLineNumbers {1}
         for _ in range(5):
-            print("Bienvenue!")  # on répète 5 fois, la valeur du tour ne nous intéresse pas
+            print("Bienvenue !")  # On répète 5 fois, le numéro du tour ne nous intéresse pas
+
         ```
 
-        Le résultat est identique, mais `_` communique clairement l'intention : *"je n'ai pas besoin de savoir à quel tour je suis, je veux juste répéter."*
+        Le résultat est identique, mais le `_` communique clairement votre intention : *"Je n'ai pas besoin de savoir à quel tour je suis, je veux juste répéter."*
 
-        👉 Règle simple : si on utilise la variable de boucle dans le bloc (`consoles[i]`, `i * 2`, etc.), on la nomme `i`. Si on ne l'utilise jamais, on utilise `_`.
         :::
 
         ---
 
-        :::warning `for` ou `while`? Savoir choisir
+        :::warning Le grand duel : `for` ou `while`? Savoir choisir
         La règle est simple : **`for` quand on connaît le nombre de tours d'avance, `while` quand on ne le connaît pas**.
 
-        On utilise un **`for`** quand le nombre d'itérations est **connu ou calculable avant** d'entrer dans la boucle :
+        Utilisez un **`for`** lorsque le nombre d'itérations est **connu ou calculable avant** même d'entrer dans la boucle :
 
-        - *Afficher les 12 mois de l'année* → on sait qu'il y en a exactement 12.
-        - *Parcourir une liste de 30 étudiants* → `len(liste)` nous donne le compte d'avance.
-        - *Calculer la table de multiplication de 7 (de 1 à 10)* → exactement 10 tours.
-        - *Répéter une action 5 fois* → le nombre est fixé d'avance.
+        * *Afficher les 12 mois de l'année* → On sait qu'il y en a exactement 12.
+        * *Parcourir une liste de 30 étudiants* → `len(liste)` nous donne le compte exact d'avance.
+        * *Calculer la table de multiplication de 7 (de 1 à 10)* → Exactement 10 tours.
+        * *Répéter une action 5 fois* → Le nombre est fixé d'avance.
 
-        On **n'a pas le choix** d'utiliser un **`while`** quand le nombre d'itérations **dépend de quelque chose qui survient pendant l'exécution**, donc impossible à connaître d'avance :
+        Utilisez un **`while`** lorsque le nombre d'itérations **dépend d'un événement qui survient pendant l'exécution** (il est donc impossible à prédire) :
 
-        - *Redemander un mot de passe tant qu'il est incorrect* → l'utilisateur pourrait le réussir au 1er essai... ou au 50e. Impossible à prévoir.
-        - *Générer des nombres aléatoires jusqu'à tomber sur un 6* → ça pourrait arriver tout de suite ou prendre des dizaines de tours.
-        - *Continuer une partie tant que le joueur n'a pas perdu* → on ne sait pas combien de tours durera la partie.
-        - *Lire des données tant qu'il en reste à lire* → le nombre dépend du contenu du fichier.
+        * *Redemander un mot de passe tant qu'il est incorrect* → L'utilisateur peut réussir au 1er essai... ou au 50e.
+        * *Générer des nombres aléatoires jusqu'à obtenir un 6* → Cela peut prendre 1 tour comme 100 tours.
+        * *Faire durer une partie de jeu vidéo tant que le joueur a des points de vie* → La durée de la partie est inconnue.
 
-        👉 Le test mental : **« Est-ce que je peux écrire le nombre de tours sur un papier AVANT de lancer la boucle? »** Si oui → `for`. Si non → `while`.
+        **Le test mental ultime :** *« Est-ce que je pourrais écrire le nombre total de tours sur un bout de papier AVANT que l'ordinateur ne lance la boucle ? »*
+        Si oui → `for`.
+        Si non → `while`.
         :::
 
 
@@ -289,42 +299,47 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
 
     <TabItem value="forif" label="Structures combinées">
 
-        :::info Structures combinées
+        :::info Combiner les structures
 
-        Il est possible de combiner les différentes structures de contrôle pour créer des programmes plus complexes et puissants.<br />
-        Par exemple, on peut imbriquer des boucles à l'intérieur d'autres boucles, ou utiliser des conditions à l'intérieur de boucles.
+        En programmation, la véritable puissance apparaît lorsqu'on assemble nos outils. Il est très courant d'imbriquer des boucles à l'intérieur d'autres boucles, ou de placer des conditions (`if/else`) à l'intérieur d'une boucle.
 
-        Voici un exemple simple qui combine une boucle `for` avec une condition `if` pour afficher les nombres pairs de 0 à 10 :
+        Voici un exemple classique qui combine une boucle `for` avec une condition `if` pour trouver et afficher uniquement les nombres pairs entre 0 et 10 :
+
         ```python showLineNumbers
         for i in range(11):
             if i % 2 == 0:
                 print(i)
-        ```
-        Dans cet exemple, la boucle `for` itère sur les nombres de 0 à 10, et la condition `if` vérifie si le nombre est pair (c'est-à-dire si le reste de la division par 2 est égal à 0).<br />
-        Si la condition est vraie, le nombre est affiché.
 
-        Exécutez ce code en mode débogage pour bien comprendre son fonctionnement.<br />
-        Mettez un point d'arrêt sur la ligne 1 et avancez une ligne à la fois pour suivre l'évolution de la variable `i` et l'évaluation de la condition.
+        ```
+        **Comment ça fonctionne :**
+        La boucle `for` fait défiler les nombres de 0 à 10. À chaque tour, la condition `if` agit comme un filtre. Elle vérifie si le nombre actuel est pair (c'est-à-dire si le reste de sa division par 2 est égal à 0, grâce à l'opérateur modulo `%`). Si le test est vrai, le nombre est affiché ; sinon, Python passe directement au prochain tour de boucle.
+
+        **À tester :** Exécutez ce code en mode débogage. Mettez un point d'arrêt sur la ligne 1 et avancez ligne par ligne. Vous verrez l'ordinateur "sauter" par-dessus le `print` lorsque la variable `i` contient un nombre impair !
 
         :::
 
         ---
 
-        :::info Exemple avec une liste
-        On peut combiner `for` et `if` pour traiter les éléments d'une liste selon une condition. \
-        Voici un exemple qui parcourt une liste de températures et affiche un message différent selon que la température indique une fièvre ou non :
+        :::info Exemple pratique avec une liste
+        Filtrer ou catégoriser des données est l'une des tâches les plus fréquentes en informatique. On combine presque toujours un `for` et un `if` pour analyser les éléments d'une liste un par un.
+
+        Voici un programme qui parcourt une liste de températures corporelles et pose un diagnostic pour chacune d'elles :
+
         ```python showLineNumbers
         temperatures = [36.5, 38.2, 37.1, 39.8, 36.9]
+
         for i in range(len(temperatures)):
             if temperatures[i] > 37.5:
-                print(f"{temperatures[i]}°C : fièvre!")
+                print(f"{temperatures[i]}°C : fièvre !")
             else:
                 print(f"{temperatures[i]}°C : normale")
-        ```
-        À chaque itération, `i` prend la valeur de l'index courant et `temperatures[i]` accède à la température correspondante dans la liste. \
-        La condition `if` détermine ensuite quel message afficher pour cette température.
 
-        Exécutez ce code en mode débogage pour suivre l'évolution de `i` et de `temperatures[i]` à chaque itération.
+        ```
+
+        **La mécanique interne :**
+        À chaque itération, la variable `i` (notre index) avance d'une position (0, 1, 2, 3, 4). L'expression `temperatures[i]` extrait la valeur contenue dans cette case, puis la structure `if/else` décide immédiatement de l'aiguillage à prendre (fièvre ou normale).
+
+        **L'habitude à prendre :** Exécutez ce code en mode débogage. C'est la meilleure façon de voir concrètement comment la variable `i` (la position) et `temperatures[i]` (la donnée réelle) travaillent en équipe à chaque nouveau tour de boucle.
         :::
 
 
@@ -333,64 +348,84 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
 
     <TabItem value="break" label="break / continue / pass">
 
-        :::info Instructions `break`, `continue` et `pass`
+        :::info Contrôler le flux `break`, `continue` et `pass`
 
-        Parfois, on peut vouloir interrompre une boucle avant qu'elle ne se termine naturellement, ou sauter certaines itérations.<br />
-        Python fournit trois instructions spéciales pour gérer ces situations : `break`, `continue` et `pass`.
+        Normalement, une boucle s'exécute jusqu'à ce que sa condition devienne fausse ou qu'elle ait parcouru tous ses éléments. Mais parfois, on veut **prendre le contrôle** : arrêter la boucle prématurément ou sauter une étape spécifique.
+
+        Python propose trois instructions pour gérer ces situations.
 
         :::
 
         ---
 
-        :::info `break`
-        Cette instruction permet de sortir immédiatement d'une boucle, qu'elle soit `for` ou `while`.<br />
-        Lorsqu'un `break` est rencontré, l'exécution du programme continue à la ligne suivant la boucle.
+        :::info Le frein d'urgence : `break`
+        L'instruction `break` permet de **sortir immédiatement** d'une boucle (`for` ou `while`), même si elle n'avait pas terminé son travail. Dès que Python lit `break`, il abandonne la boucle et passe à la suite du programme.
+
+        *Cas d'usage typique :* On cherche un élément précis dans une base de données. Dès qu'on le trouve, on fait un `break` pour arrêter de chercher et ne pas gaspiller de puissance de calcul.
+
         ```python showLineNumbers
         for i in range(10):
             if i == 5:
-                break  # Sort de la boucle lorsque i vaut 5
+                break  # Interrompt définitivement la boucle
             print(i)
+
         print("Fin de la boucle")
+        # Affiche : 0, 1, 2, 3, 4, puis "Fin de la boucle"
         ```
-        Dans cet exemple, la boucle s'arrête dès que `i` atteint 5.
 
         :::
 
         ---
 
-        :::info `continue`
-        Cette instruction permet de sauter le reste du code dans la boucle pour l'itération en cours et de passer directement à l'itération suivante.
+        :::info Le saut d'obstacle : `continue`
+        L'instruction `continue` ne détruit pas la boucle, mais elle **annule le tour en cours**. Dès que Python lit `continue`, il ignore toutes les instructions qui suivent et remonte immédiatement au début de la boucle pour entamer le tour suivant.
+
+        *Cas d'usage typique :* On parcourt une liste de fichiers et on utilise `continue` pour sauter ceux qui sont corrompus ou invalides.
+
         ```python showLineNumbers
         for i in range(10):
             if i % 2 == 0:
-                continue  # Saute les nombres pairs
+                continue  # Saute par-dessus le print() si le nombre est pair
             print(i)
+
+        # N'affichera que les nombres impairs : 1, 3, 5, 7, 9
+
         ```
-        Ici, seuls les nombres impairs sont affichés, car les nombres pairs sont ignorés grâce à `continue`.
 
         :::
 
         ---
 
-        :::info `pass`
-        Cette instruction est un "no-op" (no operation), c'est-à-dire qu'elle ne fait rien.<br />
-        Elle est souvent utilisée comme un espace réservé dans des blocs de code où une instruction est requise syntaxiquement mais où aucune action n'est nécessaire.
+        :::info Le bouche-trou (espace réservé) : `pass`
+        L'instruction `pass` est un peu spéciale : elle ne fait **absolument rien**. C'est un espace réservé (un *placeholder*).
+
+        *Pourquoi l'utiliser ?* En Python, l'indentation est stricte. Si vous écrivez un `if`, un `else` ou un `for` sans rien mettre à l'intérieur, Python plantera avec une erreur de syntaxe. `pass` permet de dire à l'ordinateur : *"Je n'ai rien à te faire exécuter ici pour le moment, passe ton chemin sans planter"*.
+
         ```python showLineNumbers
         for i in range(5):
             if i < 3:
-                pass  # Ne fait rien pour i < 3
+                pass  # Code à écrire plus tard, on évite une erreur de syntaxe en attendant
             else:
                 print(i)
+
+        # Affiche seulement : 3, 4
+
         ```
-        Dans cet exemple, rien ne se passe pour les valeurs de `i` inférieures à 3, mais pour les autres valeurs, elles sont affichées.
+
+        En résumé :
+
+        * `continue` agit : il force la boucle à sauter le reste du tour actuel pour passer au suivant.
+
+        * `pass` est passif : il ne fait absolument rien et sert uniquement de bouche-trou pour que le code soit syntaxiquement correct.
 
         :::
 
         ---
 
-        :::tip Pour bien comprendre
-        Exécutez ces exemples en mode débogage pour bien comprendre comment chaque instruction affecte le flux d'exécution de la boucle.<br />
-        Mettez des points d'arrêt aux endroits stratégiques et avancez ligne par ligne pour observer le comportement du programme.
+        :::tip Visualisez le changement de trajectoire !
+        Ces trois instructions modifient la trajectoire naturelle de votre code. Le meilleur moyen de comprendre la différence entre un `break` et un `continue` est d'exécuter ces exemples en **mode débogage**.
+
+        Placez un point d'arrêt sur le `for` et avancez pas à pas : vous verrez littéralement Python "fuir" la boucle au `break`, ou "rebondir" en haut de la boucle au `continue`.
         :::
 
 
@@ -400,14 +435,16 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
     <TabItem value="DRY" label="DRY">
 
         :::info Éviter la répétition : les boucles et les listes
-        En programmation, on suit souvent le principe **DRY** (*Don't Repeat Yourself*).<br />
-        Si vous remarquez que vous copiez-collez un bloc d'instructions en changeant seulement quelques valeurs, c'est le signe qu'il faut utiliser une **boucle**!
+        En programmation, il existe une règle d'or appelée **DRY** (*Don't Repeat Yourself* - Ne vous répétez pas). 
+
+        Si vous remarquez que vous êtes en train de copier-coller un bloc de code en ne changeant que quelques petites valeurs à l'intérieur, c'est le signal d'alarme : **vous avez besoin d'une boucle !**
         :::
 
         ---
 
-        :::danger ⚠️ Le code redondant
-        Voici un programme qui affiche les informations de trois étudiants. Le bloc d'instructions est répété trois fois, seules les valeurs changent :
+        :::danger Le code redondant
+        Voici un programme qui affiche le bulletin de trois étudiants. Remarquez comment le bloc d'instructions est répété trois fois. Seules les valeurs changent :
+
         ```python showLineNumbers
         print("Étudiant #1")
         print("Nom : Félix")
@@ -423,48 +460,59 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
         print("Nom : Léa")
         print("Note : 58")
         print()
+
         ```
-        Ce code fonctionne, mais il est difficile à maintenir : ajouter un 4e étudiant oblige à copier-coller un nouveau bloc. Et si le format d'affichage change, il faut modifier trois endroits!
+
+        Ce code fonctionne, mais c'est un cauchemar à maintenir. Si vous voulez ajouter un 4e étudiant, vous devez copier-coller un nouveau bloc. Pire encore : si vous décidez de changer le mot "Nom :" pour "Prénom :", vous devrez faire la modification à trois endroits différents !
         :::
 
         ---
 
-        :::note Étape 1 : Identifier ce qui change
-        En observant les trois blocs, on remarque que seules trois choses varient d'un bloc à l'autre :
-        - Le **numéro** de l'étudiant (`#1`, `#2`, `#3`)
-        - Le **nom** (`Félix`, `Dayron`, `Léa`)
-        - La **note** (`72`, `91`, `58`)
+        :::note Étape 1 : Extraire ce qui change
+        Pour corriger cela, observez les trois blocs et isolez **uniquement ce qui varie** :
 
-        Le numéro correspond simplement à la position dans la liste (index `0`, `1`, `2`), donc on peut le calculer automatiquement avec `i + 1`.<br />
-        On regroupe les noms et les notes dans des **listes parallèles** :
+        1. Le **numéro** de l'étudiant (`1`, `2`, `3`)
+        2. Le **nom** (`Félix`, `Dayron`, `Léa`)
+        3. La **note** (`72`, `91`, `58`)
+
+        Le numéro correspond en fait à la position de l'étudiant (l'index `0`, `1`, `2`), auquel on ajoute simplement `1` pour l'affichage humain.
+        Quant aux noms et aux notes, on va les extraire du code pour les ranger dans des **listes parallèles** :
+
         ```python showLineNumbers
         noms  = ["Félix", "Dayron", "Léa"]
         notes = [72, 91, 58]
+
         ```
+
         :::
 
         ---
 
-        :::tip ✅ Étape 2 : Remplacer la répétition par une boucle
-        Maintenant qu'on a les données dans des listes, une seule boucle suffit pour traiter tous les étudiants :
+        :::tip ✅ Étape 2 : La magie de la boucle
+        Maintenant que nos données sont proprement rangées dans des listes, on écrit le bloc d'affichage **une seule fois** et on laisse la boucle faire le travail répétitif :
+
         ```python showLineNumbers
         noms  = ["Félix", "Dayron", "Léa"]
         notes = [72, 91, 58]
 
         nb_elements = len(noms)
         for i in range(nb_elements):
-            print(f"Étudiant #{i + 1}")
-            print(f"Nom : {noms[i]}")
-            print(f"Note : {notes[i]}")
+            print(f"Étudiant #{i + 1}")    # On ajoute 1 à l'index pour afficher 1, 2, 3...
+            print(f"Nom : {noms[i]}")      # On pige dans la liste des noms
+            print(f"Note : {notes[i]}")    # On pige dans la liste des notes
             print()
+
         ```
-        Le résultat affiché est **identique** à la version redondante, mais le code est bien plus court et plus facile à maintenir.
+
+        Le résultat à l'écran est **strictement identique** à la version redondante, mais le code est devenu intelligent !
         :::
 
         ---
 
-        :::info L'avantage clé : la flexibilité
-        Pour ajouter un 4e étudiant, on n'ajoute qu'**un élément dans chaque liste** et la boucle s'adapte automatiquement grâce à `len()` :
+        :::info L'avantage absolu : La flexibilité
+        Regardez ce qui se passe si l'on veut ajouter un 4e étudiant (Tristan).
+        On ajoute simplement **ses données dans les listes**, et c'est tout. La fonction `len()` détectera automatiquement qu'il y a maintenant 4 éléments, et la boucle s'ajustera toute seule :
+
         ```python showLineNumbers
         noms  = ["Félix", "Dayron", "Léa", "Tristan"]
         notes = [72, 91, 58, 83]
@@ -475,8 +523,10 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
             print(f"Nom : {noms[i]}")
             print(f"Note : {notes[i]}")
             print()
+
         ```
-        👉 Le corps de la boucle n'a pas changé d'une seule ligne. C'est la puissance de combiner les listes et les boucles!
+
+        Le corps de la boucle (les lignes 6 à 9) n'a pas changé d'un seul caractère. C'est la véritable puissance de combiner les listes et les boucles : on sépare les **données** de la **logique d'affichage** !
         :::
 
 
@@ -485,86 +535,113 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
 
     <TabItem value="forfor" label="Boucles imbriquées">
 
-        :::info Boucles imbriquées
+        :::info Une boucle dans une boucle : l'imbrication
+        Il est tout à fait possible de placer une boucle à l'intérieur d'une autre boucle. On appelle cela des **boucles imbriquées**.\
+        C'est la technique incontournable pour traiter des grilles en 2D, comme des pixels sur un écran, un échiquier, ou un tableau Excel (lignes et colonnes).
 
-        Il est possible de placer une boucle à l'intérieur d'une autre boucle.<br />
-        On parle alors de boucles imbriquées.
+
 
         Voici un exemple simple avec deux boucles `for` imbriquées pour afficher une table de multiplication :
-        ```python showLineNumbers
-        for i in range(1, 6):           # Boucle extérieure pour les lignes
-            for j in range(1, 6):       # Boucle intérieure pour les colonnes
-                print(i * j, end='\t')  # Affiche le produit avec une tabulation
-            print()                     # Nouvelle ligne après chaque ligne de la table
-        ```
-        Dans cet exemple, la boucle extérieure itère sur les valeurs de `i` de 1 à 5, et pour chaque valeur de `i`, la boucle intérieure itère sur les valeurs de `j` de 1 à 5.<br />
-        Le produit `i * j` est affiché dans une grille formatée.
 
-        Exécutez ce code en mode débogage pour bien comprendre son fonctionnement.<br />
-        Mettez un point d'arrêt sur la ligne 1 et avancez une ligne à la fois pour suivre l'évolution des variables `i` et `j`.
+
+        ```python showLineNumbers
+        for i in range(1, 6):           # Boucle extérieure (gère les lignes)
+            for j in range(1, 6):       # Boucle intérieure (gère les colonnes)
+                print(i * j, end='\t')  # Affiche le produit avec une tabulation ('\t')
+            print()                     # Change de ligne quand la ligne actuelle est finie
+
+        ```
+
+        **L'analogie de l'horloge :**
+        Pensez aux aiguilles d'une montre. La boucle intérieure (`j`, les minutes) doit faire un tour complet (de 1 à 5) pour que la boucle extérieure (`i`, les heures) avance d'un seul cran.
+
+        Exécutez ce code en débogage (point d'arrêt ligne 1) pour bien voir `j` tourner à toute vitesse pendant que `i` avance d'un pas lent.
 
         :::
 
         ---
 
-        :::tip Exemple avec une boucle `while`
-        Voici un exemple similaire utilisant des boucles `while` imbriquées pour afficher un triangle d'étoiles :
+        :::tip Une grille dynamique avec `while`
+        Dans l'exemple précédent, la grille était carrée. Mais la limite de la boucle intérieure peut très bien **dépendre** de l'état de la boucle extérieure !
+
+        Voici un exemple générant un triangle d'étoiles :
+
         ```python showLineNumbers
         lignes = 5
         i = 1
-        while i <= lignes:           # Boucle extérieure pour les lignes
+
+        while i <= lignes:           # Boucle extérieure (les lignes)
             j = 1
-            while j <= i:            # Boucle intérieure pour les étoiles dans chaque ligne
-                print('*', end=' ')  # Afficher une étoile sans générer un saut de ligne
+            while j <= i:            # La limite de j grandit à chaque nouvelle ligne i !
+                print('*', end=' ')  # Affiche une étoile sans sauter de ligne
                 j += 1
-            print()                  # Nouvelle ligne après chaque ligne d'étoiles
+            print()                  # Saute à la ligne suivante
             i += 1
+
         ```
-        Dans cet exemple, la boucle extérieure contrôle le nombre de lignes, tandis que la boucle intérieure contrôle le nombre d'étoiles affichées dans chaque ligne.
 
-        Exécutez ce code en mode débogage pour bien comprendre son fonctionnement.<br />
-        Mettez un point d'arrêt sur la ligne 2 et avancez une ligne à la fois pour suivre l'évolution des variables `i` et `j`.
-
+        Remarquez la condition de la ligne 6 : `while j <= i`. À la ligne 1, la boucle interne affiche 1 étoile et s'arrête. À la ligne 5, elle doit en afficher 5 avant de s'arrêter.
         :::
 
         ---
 
-        :::note Exemple
-        Voici une fonction qui prend comme paramètres une largeur et une hauteur, et qui affiche un rectangle de `#` de ces dimensions :
+        :::note Construire ses lignes d'un coup (Exercice)
+        Voici une fonction qui affiche un rectangle de `#` selon des dimensions données en paramètres :
+
         ```python showLineNumbers
         def afficher_rectangle(largeur, hauteur):
-            for i in range(hauteur):          # Boucle pour chaque ligne
-                for j in range(largeur):      # Boucle pour chaque colonne
-                    print('#', end='')        # Affiche un '#' sans saut de ligne
-                print()                       # Nouvelle ligne après chaque ligne de '#'
+            for i in range(hauteur):          # Répète pour chaque ligne
+                for j in range(largeur):      # Répète pour chaque colonne
+                    print('#', end='')        # Affiche un '#' collé au précédent
+                print()                       # Saute à la ligne
+                
         afficher_rectangle(5, 3)
-        ```
-        Exécutez ce code en mode débogage pour bien comprendre son fonctionnement.<br />
-        Il devrait afficher :
-        ```
-        #####
-        #####
-        #####
-        ```
 
-        Voici  maintenant une version qui utilise la concaténation de chaînes de caractères (str) pour construire chaque ligne avant de l'afficher :
+        ```
+        *(Affichera un bloc de 3 lignes par 5 colonnes)*
+
+        Toutefois, appeler la fonction `print()` pour chaque petit caractère individuellement demande beaucoup d'efforts à l'ordinateur. Une meilleure approche consiste à **construire la ligne complète en mémoire** à l'aide de la concaténation, puis à l'afficher en une seule fois :
+
         ```python showLineNumbers
         def afficher_rectangle(largeur, hauteur):
-            for i in range(hauteur):          # Boucle pour chaque ligne
-                ligne = ''                    # Initialise une chaîne vide pour la ligne
-                for j in range(largeur):      # Boucle pour chaque colonne
-                    ligne += '#'              # Concatène un '#' à la chaîne de la ligne
-                print(ligne)                  # Affiche la ligne complète
+            for _ in range(hauteur):          # Le numéro du tour n'est pas utilisé (_)
+                ligne = ''                    # Initialise une boîte vide (chaîne) pour la ligne
+                for j in range(largeur):
+                    ligne += '#'              # Ajoute les '#' un par un dans la boîte
+                print(ligne)                  # Affiche la boîte complète d'un seul coup
+                
         afficher_rectangle(5, 3)
+
         ```
 
-        Vous remarquerez que le résultat est le même, mais la méthode est différente.<br />
-        Entre autres, cela évite d'utiliser `print()` à chaque itération de la boucle intérieure, ce qui peut être plus efficace pour de grandes dimensions.
-
-        Exécutez ce code en mode débogage pour bien voir la `str` `ligne` s'allonger à chaque itération de la boucle intérieure.
-
+        **Testez-le en débogage :** Observez la variable `ligne` s'allonger petit à petit (`#`, puis `##`, puis `###`) à chaque tour de la boucle intérieure.
         :::
 
+        ---
+
+        :::tip Le "super-pouvoir" Pythonique : multiplier du texte !
+        Dans de nombreux langages de programmation, la boucle imbriquée que nous venons de voir est la seule façon de construire cette ligne.
+
+        Mais Python possède une astuce incroyablement performante : **la multiplication de chaînes de caractères**. Vous pouvez éviter complètement la boucle intérieure en multipliant simplement votre caractère :
+
+        ```python showLineNumbers
+        def afficher_rectangle_pro(largeur, hauteur):
+            for _ in range(hauteur):
+                # Crée une ligne de X caractères instantanément !
+                print('#' * largeur)  
+
+        ```
+        C'est la méthode la plus rapide et la plus élégante en Python pour répéter un motif.\
+        Mais vous pouriez aussi utiliser la fonction `join` : 
+
+        ```python showLineNumbers
+        def afficher_rectangle_pro(largeur, hauteur):
+            for _ in range(hauteur):
+            # Crée une ligne de X caractères instantanément !
+            print("".join(["#" for _ in range(largeur)]))  
+
+        ```
+        :::
 
         {/* <Feedback feedbackId="Rencontre #5 - Boucles imbriquées" /> */}
     </TabItem>
@@ -574,33 +651,40 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
         ::::info-nt
 
         ### La fonction `input()`
-        La fonction `input()` permet de demander à l'utilisateur de saisir une entrée.<br />
-        Elle peut être utilisée avec ou sans paramètre.<br />
-        - Sans paramètre, elle attend une saisie de l'utilisateur.
-        - Avec un paramètre, elle affiche un message pour guider l'utilisateur.
+        La fonction `input()` rend vos programmes interactifs en permettant de poser une question à l'utilisateur et de récupérer ce qu'il tape au clavier.
 
-        Par exemple (essayez ce code dans un script Python) :
+        Elle s'utilise généralement en lui passant une chaîne de caractères qui servira de guide (le message d'invite) :
+
         ```python showLineNumbers
-        # Exemple sans paramètre
-        saisie_utilisateur = input()  # attend une saisie de l’utilisateur
-        print(saisie_utilisateur)
-
-        # Exemple avec un paramètre
+        # Affiche la question, et sauvegarde la réponse dans la variable 'prenom'
         prenom = input("Veuillez saisir votre prénom : ")
-        print(prenom)
+        print(f"Bonjour, {prenom} !")
+
+        # On peut aussi l'utiliser sans paramètre, mais l'utilisateur ne saura pas quoi faire !
+        saisie_mystere = input() 
+
         ```
 
-        :::warning La fonction input met le programme sur pause!
-         Lorsque la fonction `input(...)` est exécutée, le programme se met en pause. \
-         Le programme attend que l’utilisateur.rice écrive quelque chose dans la console et qu’il ou elle appuie sur la touche ENTRÉE. \
-         C’est donc **normal** que l’instruction suivante ne soit pas exécutée tant que vous n’avez pas saisi quelque chose dans la console!
+        :::warning `input` met le programme sur PAUSE !
+        Lorsque la fonction `input(...)` est exécutée, le programme se met en pause. \
+        Dès que Python lit l'instruction `input()`, le programme **se fige**. Il attend patiemment que l'utilisateur tape quelque chose dans la console et appuie sur la touche **ENTRÉE**.\
+
+        C'est donc tout à fait normal que l'instruction suivante ne s'exécute pas tant que la touche Entrée n'a pas été pressée !
+        
         :::
+
+        ### Le grand piège : `input()` retourne TOUJOURS du texte !
+
         La fonction `input(...)` retourne **TOUJOURS** une chaîne de caractères (`str`), même si l’utilisateur saisit un nombre. \
         Pour utiliser la valeur dans un calcul, il faut la convertir avec `int()` ou `float()`.
 
-        Voici deux exemples concrets :
+        Peu importe ce que l'utilisateur tape (même s'il entre le chiffre `42`), la fonction `input()` considère toujours que c'est du texte (`str`). Si vous tentez de faire un calcul mathématique avec cette donnée sans la convertir, le résultat sera inattendu ou le programme plantera.
 
-        :::tip Demander un nombre entier ou décimal
+        Pour utiliser la valeur dans un calcul, il faut la **convertir** en nombre à l'aide des fonctions `int()` (pour un entier) ou `float()` (pour un décimal).
+
+        :::tip Astuce : La conversion sur une seule ligne
+        Au lieu de faire la conversion sur deux lignes distinctes, les programmeurs enveloppent souvent le `input()` directement à l'intérieur de `int()` ou `float()` :
+
         ```python showLineNumbers
         # Demander un nombre entier (int)
         age = int(input("Entrez votre âge : "))
@@ -609,10 +693,10 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
         # Demander un nombre décimal (float)
         taille = float(input("Entrez votre taille en mètres : "))
         print(f"Votre taille en centimètres est {taille * 100} cm.")
+
         ```
 
-        `int()` convertit la chaîne en nombre entier et `float()` en nombre décimal.<br />
-        Sans cette conversion, Python traiterait la saisie comme du texte et l’addition ou la multiplication ne fonctionnerait pas comme prévu.
+        Sans ces fonctions de conversion, l'ordinateur traiterait l'âge comme le mot "18", et l'addition `age + 10` provoquerait une erreur !
         :::
 
         ::::
@@ -623,7 +707,7 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
 
     <TabItem value="trace" label="Trace">
 
-        ## 🕵️‍♂️ Trace d’exécution avec des structures répétitives
+        ## Trace d’exécution avec des structures répétitives
 
         Voici un exemple de trace d'exécution contenant des structures répétitives
 
@@ -635,24 +719,24 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
 
         <RappelFonctionnementClasseInverse/>
         <Tabs>
-            <TabItem value="1" label="🏠 Activités à faire à la maison">
-                ## 🧠 Auto-validation des connaissances
+            <TabItem value="1" label="Activités à faire à la maison">
+                ## Auto-validation des connaissances
 
-                [**Ce formulaire**](https://forms.gle/skckXd6AvWRKyiBDA) sert à vérifier votre compréhension des éléments les plus importants de la rencontre R05. Ne faites ce questionnaire **que lorsque vous vous sentez en très bonne maîtrise de la matière**. En classe, dès votre arrivée, vous aurez un **questionnaire très similaire**, évalué **sommativement**, à compléter sans accès à **aucune documentation**.
+                {/*[**Ce formulaire**](https://forms.gle/skckXd6AvWRKyiBDA) sert à vérifier votre compréhension des éléments les plus importants de la rencontre R05. Ne faites ce questionnaire **que lorsque vous vous sentez en très bonne maîtrise de la matière**. En classe, dès votre arrivée, vous aurez un **questionnaire très similaire**, évalué **sommativement**, à compléter sans accès à **aucune documentation**.
 
-                ::::warning
+                 ::::warning
                 Ne pas remplir le formulaire diminue fortement vos chances de réussir l’évaluation sommative en début de rencontre. \
                 Assurez-vous de bien comprendre toutes les notions derrière chaque question.
-                ::::
+                :::: */}
 
                 ---
 
-                ## ✏️ Exercices de compréhension
+                ## Exercices de compréhension
 
                 ::::info Exercice - Révision : Trace avec fonction
 
                 :::note-nt ️
-                🖨 Pour réaliser cet exercice, imprimez le [tableau de trace d'exécution](/pdf/Traces_recto_verso.pdf).
+                Pour réaliser cet exercice, imprimez le [tableau de trace d'exécution](/pdf/Traces_recto_verso.pdf).
                 :::
                 :::warning-nt
                 En situation d'**examen**, vous devrez compléter une trace d'exécution sur **papier** sans utiliser d'ordinateur.
@@ -685,7 +769,7 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
                 ::::info Exercice - Trace `while`
 
                 :::note-nt ️
-                🖨 Pour réaliser cet exercice, imprimez le [tableau de trace d'exécution](/pdf/Traces_recto_verso.pdf).
+                Pour réaliser cet exercice, imprimez le [tableau de trace d'exécution](/pdf/Traces_recto_verso.pdf).
                 :::
 
                 En suivant **la recette** de trace **[avec boucle](/recettes/produire-une-trace?recette-activite=Avec+boucle)**, tracez son exécution.
@@ -710,7 +794,7 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
                 ::::info Exercice - Trace `while`, `if`, `break`
 
                 :::note-nt ️
-                🖨 Pour réaliser cet exercice, imprimez le [tableau de trace d'exécution](/pdf/Traces_recto_verso.pdf).
+                Pour réaliser cet exercice, imprimez le [tableau de trace d'exécution](/pdf/Traces_recto_verso.pdf).
                 :::
 
                 En suivant **les recettes** de trace **[avec boucle](/recettes/produire-une-trace?recette-activite=Avec+boucle)** et **[avec condition](/recettes/produire-une-trace?recette-activite=condition)**, tracez son exécution.
@@ -738,7 +822,7 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
                 ::::info Exercice - Trace `range` imbriqué, `if`, `continue`
 
                 :::note-nt ️
-                🖨 Pour réaliser cet exercice, imprimez le [tableau de trace d'exécution](/pdf/Traces_recto_verso.pdf).
+                Pour réaliser cet exercice, imprimez le [tableau de trace d'exécution](/pdf/Traces_recto_verso.pdf).
                 :::
 
                 En suivant **les recettes** de trace **[avec boucle](/recettes/produire-une-trace?recette-activite=Avec+boucle)** et **[avec condition](/recettes/produire-une-trace?recette-activite=condition)**, tracez son exécution.
@@ -760,7 +844,7 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
 
                 ---
 
-                # 🎯 Solutionnaires
+                # Solutionnaires
 
                 :::warning
                 Consultez le solutionnaire **uniquement après avoir complété l'exercice par vous-même**. \
@@ -775,19 +859,28 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
 
             </TabItem>
 
-	        <TabItem value="2" label=" 🏫 Activités à faire en classe">
+	        <TabItem value="2" label="Activités à faire en classe">
 
-                ## ✏️ Exercices de compréhension
+                ## Exercices de compréhension
 
                 <DocumentationAutorisee />
 
-                ::::info Exercice - Débogue et compte
+                
+                ::::info Exercice - Déboguer et compter
+                Créez un fichier `r05_evalue_expression.md` pour votre réponse.
 
-                📁 Créez un fichier `r05_debogue_compte.md` pour votre réponse.
+                En exécutant le code ci-dessous en **mode débogage**, déterminez :
+                1. Combien de fois la ligne 4 est-elle réellement exécutée ?
+                2. Quelles sont les valeurs successives que prend la variable `resultat` ? \
+                Lorsque l'exécution est **arrêtée sur la ligne 5** (mettez-y un point d'arrêt !) évaluer les expressions suivantes :
 
-                En exécutant ce code en mode débogage, déterminez :
-                1) combien de fois la ligne 4 est exécutée,
-                2) les valeurs successives de `resultat`.
+                3. `compteur * 2`
+                4. `compteur > 3`
+                5. `compteur % 2 == 0`
+                6. `compteur + 100`
+
+                
+
                 ```python showLineNumbers
                 def factorielle(n):
                     resultat = 1
@@ -797,49 +890,24 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
 
                 r = factorielle(9)
                 print(r)
+
                 ```
 
+                7. Une fois la boucle complètement terminée, que représentent concrètement les valeurs affichées aux lignes 6 et 7 ?
+
+                :::tip Les variables accumulatrices
+                `total` et `compteur` sont des **variables accumulatrices**. Elles ne reçoivent pas une valeur fixe dès le départ, mais s'enrichissent à chaque passage dans la boucle. On les reconnaît à leur initialisation à `0` juste avant la boucle, et à l'utilisation de l'opérateur `+=` pour accumuler les valeurs au fil des itérations.
+                :::
+
                 :::note Notions visées
-                Boucle `for` avec `range()`, débogueur (compter les itérations, observer une variable), `return`
+                Boucle `for` avec `range()`, débogueur (compter les itérations, observer une variable), `return`.
                 :::
 
                 ::::
 
                 ---
 
-                ::::info Exercice - Evalue une expression
-                📁 Créez un fichier `r05_evalue_expression.md` pour votre réponse.
-
-                Exécutez ce code en mode débogage et, en suivant [cette recette](/recettes/deboguer-point-arret#évaluer-une-expression), utilisez la fonctionnalité "Evaluate Expression" pour calculer les expressions suivantes lorsque l'exécution est **arrêtée à la ligne 5** (mettez un point d'arrêt!) :
-                1) `compteur * 2`
-                2) `compteur > 3`
-                3) `compteur % 2 == 0`
-                4) `compteur + 100`
-                ```python showLineNumbers
-                total = 0
-                compteur = 0
-                for i in range(1, 6): # i → va valoir 1, 2, 3, 4 puis 5
-                    total += i
-                    compteur += 1
-                print(total)
-                print(compteur)
-                ```
-                5) Une fois la boucle terminée, que représente concrètement la valeur affichée aux lignes 6 et 7?
-
-                :::note
-                `total` et `compteur` sont des **variables accumulatrices** : elles ne reçoivent pas une valeur fixe dès le départ, mais s'enrichissent à chaque passage dans la boucle. On les reconnaît à leur initialisation à `0` avant la boucle et à l'opérateur `+=` qui accumule les valeurs au fil des itérations.
-                :::
-
-                :::note Notions visées
-                Débogueur (« Evaluate Expression », point d'arrêt), boucle `for`, opérateurs arithmétiques et logiques, modulo
-                :::
-
-                ::::
-
-                ---
-
-
-                ## 🔨 Exercices de création
+                ## Exercices de création
 
                 Pour chacun des exercices de cette section, vous devez créer des fichiers `.py` avec les noms indiqués.
 
@@ -847,113 +915,103 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
 
                 ::::info Exercice - Afficher 5 chiffres aléatoires
 
-                📁 Créez un fichier `r05_aleatoire.py` pour votre réponse.
+                Créez un fichier `r05_aleatoire.py` pour votre réponse.
 
-                Afficher 5 chiffres aléatoires les uns en dessous des autres.
-                - Les chiffres doivent être compris dans l'ensemble **1**, **2**, **3**, **4**, **5**.
-                - Un même chiffre peut être affiché plusieurs fois.
+                Écrivez un programme qui affiche 5 chiffres aléatoires, les uns en dessous des autres.
+                - Les chiffres doivent être choisis parmi cet ensemble : **1, 2, 3, 4, 5**.
+                - Un même chiffre a le droit d'apparaître plusieurs fois.
 
                 :::note Notions visées
-                Boucle (`for`), module `random`
+                Boucle (`for`), module `random`.
                 :::
-
                 ::::
 
                 ---
 
-                ::::info Exercice - Générateur jusqu'à la cible 🎯
+                Créez un fichier `r05_cible.py` pour votre réponse.
 
-                📁 Créez un fichier `r05_cible.py` pour votre réponse.
+                Écrivez un programme qui génère des nombres entiers aléatoires entre 1 et 10 **à l'infini**, et qui s'arrête **immédiatement dès qu'il génère un multiple de 7**.
 
-                Écrivez un programme qui génère des nombres entiers aléatoires entre 1 et 10 **à l'infini**, et qui s'arrête **dès qu'il génère un multiple de 7**.
-
-                À chaque tour, le programme affiche le nombre généré. \
+                À chaque tour, le programme doit afficher le nombre généré. 
                 Quand la condition d'arrêt est atteinte, il affiche un message de fin indiquant combien de nombres ont été générés au total.
 
-                ✅ Exemple de sortie *(les valeurs changent à chaque exécution)*
-                ```
+                ✅ **Exemple de sortie** *(les valeurs changeront à chaque exécution)* :
+                ```text
                 3
                 9
                 2
                 7
                 Arrêt après 4 nombres générés.
+
                 ```
 
                 :::tip
-                La boucle `while` est idéale ici : on ne sait pas à l'avance combien de tours seront nécessaires. \
-                Pour compter les tours, utilisez une **variable accumulatrice**.
+                La boucle `while` est idéale ici : on ne sait pas à l'avance combien de tours seront nécessaires !
+                Pour compter les tours, utilisez une **variable accumulatrice** (initialisée à 0 avant la boucle).
                 :::
 
-                #### 🎯 Pour aller plus loin
-                Modifiez le programme pour qu'il s'arrête plutôt dès que le même nombre est généré **deux fois de suite**. \
-                *(Indice : il faut mémoriser le nombre du tour précédent.)*
+                #### Pour aller plus loin
+
+                Modifiez votre programme pour qu'il s'arrête plutôt dès que le **même nombre est généré deux fois de suite**.
+                *(Indice : il faudra créer une variable pour mémoriser le nombre tiré au tour précédent !)*
 
                 :::note Notions visées
-                Boucle `while` avec condition d'arrêt non triviale, module `random`, variable accumulatrice (compteur de tours), opérateur modulo (`%`)
+                Boucle `while` avec condition d'arrêt dynamique, module `random`, variable accumulatrice (compteur), opérateur modulo (`%`).
                 :::
-
                 ::::
 
                 ---
 
-                ::::info Exercice - Jeu de devinette numérique
+                ::::info Exercice - Le juste prix (Devinette numérique)
+                Créez un fichier `r05_devine.py` pour votre réponse.
 
-                📁 Créez un fichier `r05_devine.py` pour votre réponse.
+                Écrivez un programme qui choisit secrètement un nombre entier aléatoire entre 0 et 100. L'utilisateur doit tenter de deviner ce nombre.
 
-                Écrivez un programme qui choisit un nombre entier aléatoire entre 0 et 100. \
-                L'utilisateur doit deviner ce nombre.
+                Tant que la réponse de l'utilisateur est incorrecte, le programme l'aide en lui indiquant si le nombre secret est plus haut ou plus bas. Lorsqu'il trouve le bon nombre, le programme le félicite et s'arrête.
 
-                Tant que la réponse est incorrecte, le programme indique si le nombre à deviner est plus haut ou plus bas. \
-                Lorsqu'il trouve le bon nombre, le programme le félicite.
+                *Exemples de messages à afficher :* 
+                → *"Plus haut !"*
+                → *"Plus bas !"*
+                → *"Bravo humain, vous avez trouvé le nombre !"*
 
-                <i>Exemple de messages</i> : \
-                → <i>"Plus haut!"</i>  \
-                → <i>"Plus bas!"</i> \
-                → <i>"Bravo humain, vous avez trouvé le nombre!"</i>
-
-                :::tip
-                Pour ce numéro, vous devez utiliser la fonction `input()` et `int()`. \
-                Il est possible d'utiliser ces fonctions à l'intérieur d'une boucle!
+                :::tip N'oubliez pas la conversion !
+                Vous devrez utiliser la fonction `input()` **à l'intérieur** de votre boucle pour demander une nouvelle réponse à chaque tour. 
+                Rappelez-vous qu'`input()` retourne toujours du texte (`str`). Vous devrez donc convertir cette réponse en entier avec `int()` pour pouvoir la comparer mathématiquement au nombre secret.
                 :::
 
-                :::warning La fonction input met le programme sur pause!
-                Lorsque la fonction `input(...)` est exécutée, le programme se met en pause. \
-                Le programme attend que l'utilisateur.rice écrive quelque chose dans la console et qu'il ou elle appuie sur la touche ENTRÉE. \
-                C'est donc **normal** que l'instruction suivante ne soit pas exécutée tant que vous n'avez pas saisi quelque chose dans la console!
+                :::warning La fonction `input` met le programme sur pause !
+                Dès que la fonction `input(...)` est lue, le programme se fige. Il attend que l'utilisateur tape sa réponse et appuie sur la touche ENTRÉE. C'est donc **tout à fait normal** que la boucle s'arrête et attende à chaque tour !
                 :::
 
                 :::note Notions visées
-                Boucle `while`, module `random`, `input()`, `int()`, structures conditionnelles, condition d'arrêt
+                Boucle `while`, module `random`, `input()`, `int()`, structures conditionnelles (`if/elif/else`), condition d'arrêt.
                 :::
-
                 ::::
 
                 ---
 
-                ::::info Exercice - Remplir et analyser une liste 🎲
+                ::::info Exercice - Remplir et analyser une liste
+                Créez un fichier `r05_liste_aleatoire_boucle.py` pour votre réponse.
 
-                📁 Créez un fichier `r05_liste_aleatoire_boucle.py` pour votre réponse.
+                À la **Rencontre #2**, vous aviez dû remplir une liste en copiant-collant **cinq fois** la commande `.append()`. Un petit mot dans le cours disait : *« une boucle ferait ça automatiquement… vous verrez ça bientôt ! »*.
 
-                À la **Rencontre #2**, vous aviez rempli une liste avec **cinq `.append()` copiés-collés**, et un petit mot disait : \
-                *« une boucle ferait ça automatiquement… vous verrez ça bientôt! »*.
-
-                Bientôt, c'est maintenant. 🚀
+                Ce moment est arrivé.
 
                 ##### PARTIE 1 - Construire la liste avec une boucle
                 1. Partez d'une **liste vide**.
                 2. À l'aide d'**une boucle**, ajoutez **10** nombres entiers aléatoires (entre 1 et 100 inclusivement) à la liste.
-                3. Affichez la liste obtenue.
+                3. Affichez la liste complète générée.
 
                 ##### PARTIE 2 - Parcourir la liste par index
-                4. Parcourez la liste avec **une boucle** pour afficher chaque nombre sur sa propre ligne, précédé de « → ».
-                5. Dans la même logique de parcours, **comptez** combien de nombres sont **supérieurs à 50** à l'aide d'une variable accumulatrice `compteur`.
+                4. Parcourez maintenant cette liste avec **une boucle `for`** pour afficher chaque nombre sur sa propre ligne, précédé d'une flèche « → ».
+                5. Profitez de ce parcours pour **compter** combien de nombres sont **supérieurs à 50**, à l'aide d'une variable accumulatrice `compteur`.
 
-                :::tip
-                Utilisez une **variable accumulatrice** initialisée à `0` avant la boucle. À l'intérieur, une structure conditionnelle (`if`) vous permettra de décider à quel moment l'incrémenter.
+                :::tip L'accumulateur conditionnel
+                Utilisez une **variable accumulatrice** (initialisée à `0` avant la boucle). À l'intérieur de la boucle, une structure conditionnelle (`if`) vous permettra de décider à quel moment l'incrémenter.
                 :::
 
-                ✅ Exemple de sortie *(les valeurs changent à chaque exécution)*
-                ```
+                ✅ **Exemple de sortie** *(les valeurs changeront à chaque exécution)* :
+                ```text
                 Liste générée : [42, 7, 91, 55, 23, 88, 3, 67, 50, 12]
 
                 → 42
@@ -963,180 +1021,172 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
                 → 12
 
                 Nombres supérieurs à 50 : 4
+
                 ```
 
-                #### 🎯 Pour aller plus loin
-                Modifiez le programme pour générer **non pas 10, mais 10 000** nombres, sans rien changer d'autre que ce nombre.
+                ::::
+
+
+                ---
+
+                ::::info Exercice - Umbrella Corporation, version boucle
+                Créez un fichier `r05_umbrella_boucle.py` pour votre réponse.
+
+                À la **Rencontre #3**, vous aviez amélioré un rapport de l'Umbrella Corporation en créant une fonction `afficher_echantillon(...)` que vous appeliez **3 fois manuellement** sur des **listes parallèles**. 
+                La promesse était : *« avec une boucle, un seul appel suffira pour traiter tous les échantillons »*. Tenons cette promesse !
+
+                #### INSTRUCTIONS
+                1. **Recopiez intégralement** le code de cet ancien exercice (`r03_umbrella_corporation.py`) dans votre nouveau script `r05_umbrella_boucle.py`.
+                2. **Ne modifiez absolument pas** la fonction `afficher_echantillon(...)`. Vous devez l'utiliser telle quelle.
+                3. Remplacez vos **3 appels manuels** par une **seule boucle `for`** qui appellera la fonction en lui passant les valeurs de l'échantillon correspondant à l'index `i`.
+
+                Lorsqu'on exécute votre nouvelle version, le résultat à l'écran doit être **exactement le même** qu'à la rencontre 3, mais le code sera beaucoup plus intelligent.
+
+                #### Pour aller plus loin
+                Ajoutez les données d'un **4e échantillon** dans vos listes de départ. Votre boucle devrait l'afficher automatiquement **sans aucune autre modification** au code ! C'est ça, la véritable puissance de la combinaison listes et boucles.
 
                 :::note Notions visées
-                Construction d'une liste avec `.append()` **dans une boucle**, parcours par index, accumulateur de comptage, `for` + `if`, module `random`, généralisation
+                Boucle `for`, parcours de **listes parallèles** par index, réutilisation et appel d'une fonction dans une boucle, généralisation via `len()`.
                 :::
-
                 ::::
 
                 ---
 
-                ::::info Exercice - Umbrella Corporation, version boucle ☣️
+                ::::info Exercice - Créer ses propres statistiques
+                Créez un fichier `r05_statistiques.py` pour votre réponse.
 
-                📁 Créez un fichier `r05_umbrella_boucle.py` pour votre réponse.
-
-                À la **Rencontre #3**, vous aviez amélioré le rapport de l'Umbrella Corporation en créant une fonction `afficher_echantillon(...)` que vous appeliez **3 fois manuellement** sur des **listes parallèles**.
-                La promesse était : *« avec une boucle, un seul appel suffirait pour traiter tous les échantillons »*. Tenons-la! 🧟
-                <br/>
-
-                #### 🛠️ INSTRUCTIONS
-
-                1. **Recopier intégralement** le code fait pour l'exercice (`r03_umbrella_corporation.py`) dans le nouveau script `r05_umbrella_boucle.py`.
-                2. **Ne modifiez pas** la fonction `afficher_echantillon(...)` (vous devez l'utiliser sans la modifier).
-                3. Remplacez les **3 appels manuels** à la fonction par une **seule boucle** appelant la fonction avec les valeurs de l'échantillon correspondant à l'index `i`.
-
-                Lorsqu'on exécute votre version, on doit observer **exactement le même résultat** que la version R3, mais avec un appel de fonction au lieu de trois.
-
-                #### 🎯 Pour aller plus loin
-                Ajoutez un **4ᵉ échantillon** dans les listes. Votre boucle doit l'afficher **sans aucune autre modification** au code. C'est ça, la puissance de combiner listes et boucles!
-
-                :::note Notions visées
-                Boucle `for`, parcours de **listes parallèles** par index, réutilisation et appel d'une fonction dans une boucle, généralisation via `len()`
-                :::
-
-                ::::
-
-                ---
-
-                ::::info Exercice - CALCULER DES STATISTIQUES
-                📁 Créez un fichier `r05_statistiques.py` pour votre réponse.
-
-                La corporation remarque des variations de la température dans l'une des salles d'entreposage. \
-                Différentes mesures de la température ont été prises durant la journée :
+                La corporation Umbrella remarque des variations de température dans l'une de ses salles d'entreposage. Différentes mesures ont été prises durant la journée :
 
                 ```python showLineNumbers
                 temperatures = [23.5, 25.4, 27.6, 21.9, 26.7, 24.6]
+
                 ```
 
-                :::warning Contrainte
-                Vous **n'avez pas** le droit d'utiliser des fonctions prédéfinies comme `min()`, `max()`, `sum()`, `len()`, `sort()`, `sorted()`, ... **(ಥ⌣ಥ)**. \
-                Votre code doit fonctionner peu importe le nombre de mesures dans la liste.
+                :::warning Contrainte majeure
+                Vous **n'avez pas** le droit d'utiliser les fonctions prédéfinies de Python telles que `min()`, `max()`, `sum()`, `len()`, `sort()` ou `sorted()`.
+                Votre algorithme doit fonctionner correctement peu importe le nombre de mesures contenues dans la liste.
                 :::
 
                 ---
 
                 ##### PARTIE 1 : Compteur, somme et moyenne
 
-                À l'aide d'une boucle, calculez et affichez :
-                - le nombre de mesures prises
-                - la somme des températures
-                - la température moyenne
+                À l'aide d'une boucle, parcourez la liste pour calculer et afficher :
+                - Le nombre total de mesures prises
+                - La somme de toutes les températures
+                - La température moyenne
 
-                ✅ Résultat attendu :
-                ```
+                ✅ **Résultat attendu :**
+                ```text
                 Températures : [23.5, 25.4, 27.6, 21.9, 26.7, 24.6]
-                 nb. mesures : 6
-                       somme : 149.7
-                     moyenne : 24.95
+                nb. mesures : 6
+                    somme : 149.7
+                    moyenne : 24.95
                 ```
 
                 :::tip Astuces
-                - **Compteur** : utilisez une variable accumulatrice, comme vu précédemment, pour compter le nombre de températures.
-                - **Somme** : utilisez une variable accumulatrice, comme vu précédemment, pour faire la somme des températures.
-                - **Moyenne** : calculez-la **après** la boucle à partir des deux variables précédentes.
+                * **Compteur** : Utilisez une variable accumulatrice pour compter le nombre d'éléments.
+                * **Somme** : Utilisez une deuxième variable accumulatrice pour additionner les températures au fil de la boucle.
+                * **Moyenne** : Calculez-la **une fois la boucle terminée**, en divisant votre somme par votre compteur.
                 :::
 
                 ---
 
                 ##### PARTIE 2 : Minimum et maximum
 
-                Ajoutez une deuxième boucle pour calculer et afficher la température la plus basse et la plus élevée.
+                Ajoutez une deuxième boucle pour trouver et afficher la température la plus basse et la plus élevée.
 
-                ✅ Résultat attendu (en plus de la Partie 1) :
-                ```
-                         min : 21.9
-                         max : 27.6
+                ✅ **Résultat attendu (en plus de la Partie 1) :**
+                ```text
+                        min : 21.9
+                        max : 27.6
                 ```
 
-                :::tip Astuces
-                - Initialisez `min_temp` et `max_temp` avec le **premier élément** de la liste avant de démarrer la boucle.
-                - À chaque itération, comparez la température courante avec `min_temp` et `max_temp`, et mettez-les à jour si nécessaire.
-                - Après la dernière itération, `min_temp` et `max_temp` contiennent les valeurs recherchées.
+                :::tip Astuces de pro pour le min/max
+
+                * **L'initialisation :** Initialisez vos variables `min_temp` et `max_temp` avec la valeur du **premier élément** de la liste (l'index `0`) *avant* de démarrer la boucle. Ne les initialisez surtout pas à `0` !
+                * **La comparaison :** À chaque tour de boucle, utilisez un `if` pour vérifier si la température actuelle "bat le record" (est-elle plus petite que `min_temp` ? Est-elle plus grande que `max_temp` ?). Si oui, mettez à jour vos variables.
+                * Une fois la boucle terminée, vos variables contiendront les valeurs extrêmes recherchées.
                 :::
 
-                #### 🎯 Pour aller plus loin
-                Fusionnez vos deux boucles en **une seule** qui calcule les 5 statistiques en même temps.
+                #### Pour aller plus loin
+
+                Pourquoi parcourir la liste deux fois ? Fusionnez vos deux boucles en **une seule boucle maîtresse** qui calcule les 5 statistiques en un seul et unique parcours de la liste !
 
                 :::note Notions visées
-                Boucle (`for`/`while`), parcours d'une liste, variables accumulatrices (compteur, somme), calcul de min/max sans fonction prédéfinie, structures conditionnelles, généralisation
+                Boucle (`for`/`while`), parcours d'une liste, variables accumulatrices (compteur, somme), algorithmes de recherche de min/max sans fonction prédéfinie, structures conditionnelles, généralisation.
                 :::
-
                 ::::
 
                 ---
 
-                ::::info Exercice - Énumérer des décimales 🔬
+                ::::info Exercice - Énumérer des décimales (Précision de l'ordinateur)
+                Créez un fichier `r05_decimales.py` pour votre réponse.
 
-                📁 Créez un fichier `r05_decimales.py` pour votre réponse.
+                À la **Rencontre #2**, vous avez découvert que les nombres à virgule flottante ne sont **pas toujours exacts** en informatique (`0.1 + 0.2` donne `0.30000000000000004`). On va maintenant utiliser une **boucle imbriquée** pour observer ce phénomène à plus grande échelle.
 
-                À la **Rencontre #2**, vous avez découvert que les nombres flottants ne sont **pas toujours exacts** (`0.1 + 0.2` donne `0.30000000000000004`). \
-                On va maintenant utiliser une **boucle imbriquée** pour observer ce phénomène à plus grande échelle.
-
-                Bob veut énumérer les décimales `0.1` à `0.9`, puis `0.01` à `0.09`, puis `0.001` à `0.009`. \
-                Il les calcule en multipliant un chiffre `i` (de 1 à 9) par une puissance de 10 négative :
+                Bob veut énumérer les décimales de `0.1` à `0.9`, puis de `0.01` à `0.09`, puis de `0.001` à `0.009`. Il les calcule en multipliant un chiffre `i` (allant de 1 à 9) par une puissance négative de 10 :
 
                 ```python showLineNumbers
                 for puissance in range(1, 4):       # puissance vaut 1, puis 2, puis 3
                     for i in range(1, 10):          # i vaut 1, 2, ..., 9
                         nombre = i * 10 ** -puissance
                         print(nombre, end="  ")
-                    print()                         # saut de ligne après chaque groupe
+                    print()                         # Saut de ligne après chaque groupe de 9
+
                 ```
 
                 ##### PARTIE 1 - Observer
-                Exécutez ce code et observez la sortie. \
-                Repérez les nombres qui **ne s'affichent pas exactement** comme prévu (par exemple `0.30000000000000004` au lieu de `0.3`).
+
+                Exécutez ce code et observez la sortie. Repérez visuellement les nombres qui **ne s'affichent pas exactement** comme prévu (par exemple, `0.30000000000000004` au lieu de `0.3`).
 
                 ##### PARTIE 2 - Comparer avec `round()`
-                Modifiez la boucle pour afficher, à côté de chaque nombre, sa version arrondie avec `round(nombre, puissance)`. \
-                Pour chaque valeur, affichez aussi si les deux sont identiques ou non grâce à une condition.
 
-                ✅ Exemple de sortie *(extrait)*
-                ```
+                Modifiez la boucle intérieure pour afficher, à côté de chaque nombre, sa version proprement arrondie avec `round(nombre, puissance)`.
+                Pour chaque valeur, utilisez une condition (`if`) pour afficher si les deux valeurs sont "identiques" ou si elles sont "DIFFÉRENTES".
+
+                ✅ **Exemple de sortie attendue** *(extrait)* :
+
+                ```text
                 0.1 → round: 0.1 → identique
                 0.2 → round: 0.2 → identique
                 0.30000000000000004 → round: 0.3 → DIFFÉRENT
                 0.4 → round: 0.4 → identique
+
                 ```
 
-                #### 🎯 Pour aller plus loin
-                1. Augmentez la portée pour aller jusqu'à `0.000000001` en changeant **une seule valeur** dans votre code.
-                2. Bob a essayé une **autre méthode** pour générer les mêmes décimales : \
-                   au lieu de multiplier, il construit une chaîne de caractères puis la convertit en `float`.
-                   <br/><br/>
-                   Remplacez la **ligne 3** (`nombre = i * 10 ** -puissance`) par :
+                #### Pour aller plus loin
 
+                1. Augmentez la portée du programme pour générer des décimales jusqu'à `0.000000001` en changeant **une seule valeur** dans votre code.
+                2. Bob a essayé une **autre méthode** pour générer les mêmes décimales : au lieu d'utiliser une multiplication, il construit le texte de la décimale, puis le convertit en nombre réel (`float`).
+                Remplacez la ligne de calcul (`nombre = i * 10 ** -puissance`) par celle-ci :
                 ```python
                 nombre = float("0." + "0" * (puissance - 1) + str(i))
+
                 ```
 
-                Reprenez votre comparaison de la Partie 2 avec cette méthode. Que remarquez-vous? Y a-t-il encore des nombres marqués « DIFFÉRENT »?
 
-                💡 Cela illustre une idée importante : la précision dépend de **la façon dont on calcule** une valeur, pas seulement de la valeur elle-même.
+                Exécutez à nouveau votre programme de la Partie 2 avec cette nouvelle méthode. Que remarquez-vous ? Y a-t-il encore des nombres marqués « DIFFÉRENT » ?
+
+                > **La morale de l'histoire :** Cette expérience illustre une notion fondamentale en programmation : le niveau de précision dépend souvent de **la façon dont on calcule** la valeur, et pas seulement de la valeur elle-même !
 
                 :::note Notions visées
-                Boucles imbriquées (`for`), `range()`, opérateur de puissance (`**`), précision des flottants, `round()`, structure conditionnelle, `end` dans `print()`, conversion `str` → `float`
+                Boucles imbriquées (`for`), `range()`, opérateur de puissance (`**`), précision des flottants, `round()`, structure conditionnelle, paramètre `end` dans `print()`, conversion `str` → `float`.
                 :::
-
                 ::::
+
 
                 ---
 
-                ::::info Exercice - Générer un nombre - DRY : boucle simple
-                📁 Créez un fichier `r05_generer_nombre.py` pour votre réponse.
+                ::::info Exercice - Refactorisation : Le générateur de nombres
+                Créez un fichier `r05_generer_nombre.py` pour votre réponse.
 
-                Le code de la fonction ci-dessous permet de générer un nombre de 3 chiffres (sans zéro) :
+                Le code ci-dessous permet de générer un nombre de 3 chiffres (sans aucun zéro à l'intérieur), mais il souffre d'un sérieux problème de répétition :
 
                 ```python showLineNumbers
                 import random
 
                 def generer_nombre():
-
                     nombre = 0
 
                     position = 0
@@ -1155,22 +1205,24 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
 
                 resultat = generer_nombre()
                 print(f"Nombre généré : {resultat}")
+
                 ```
 
-                - Modifier le code afin de retirer la répétition de code (à l'aide d'une boucle).
-                - Ajouter un paramètre optionnel à la fonction pour indiquer la longueur du nombre à générer (par défaut 3).
+                #### VOTRE MISSION
+
+                * **Modifiez** le code de cette fonction en utilisant une boucle pour éliminer complètement la répétition (application du fameux principe **DRY** - *Don't Repeat Yourself*).
+                * **Ajoutez un paramètre optionnel** à la fonction pour permettre de choisir la longueur du nombre à générer. La valeur par défaut de ce paramètre doit rester `3`.
 
                 :::note Notions visées
-                Boucles (`for`/`while`), refactorisation (DRY), définition de fonction, paramètre avec valeur par défaut, module `random`, opérateurs arithmétiques (puissances de 10)
+                Boucles (`for`/`while`), refactorisation (DRY), définition de fonction, paramètre avec valeur par défaut, module `random`, opérateurs arithmétiques (puissances de 10).
                 :::
-
                 ::::
 
                 ---
 
-                ::::info Exercice - Affichage d'étoiles - DRY : boucle imbriquée
+                ::::info Exercice - Refactorisation : Affichage d'étoiles
 
-                📁 Créez un fichier `r05_etoile_1.py` pour votre réponse.
+                Créez un fichier `r05_etoile_1.py` pour votre réponse.
 
                 Nous allons transformer un code répétitif affichant des lignes d’étoiles sur plusieurs lignes \
                 en une version plus propre et flexible grâce à l’utilisation de boucles.
@@ -1200,26 +1252,26 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
                 print()
                 ```
 
-                #### 🪜 ÉTAPES À SUIVRE
+                #### ÉTAPES À SUIVRE
 
-                1. 📌 **COMPRENDRE LE MOTIF** \
+                1. **COMPRENDRE LE MOTIF** \
                 Exécutez le code dans PyCharm et observez le motif affiché. \
                 Chaque ligne contient un nombre croissant d’étoiles, allant de 1 à 4.
 
 
-                2. 🔍 **IDENTIFIER LA RÉPÉTITION** \
+                2. **IDENTIFIER LA RÉPÉTITION** \
                 Tentez d'observer la répétition et tentez de voir comment on peut généraliser le tout. \
                 Pour chaque ligne, vous remarquez qu'on fait toujours les mêmes 2 actions :
                     - Afficher un nombre variable d'étoiles selon la ligne
                     - Puis réaliser un saut de ligne.
 
-                3. 🔁 **PLANIFIER LA RÉSOLUTION À L'AIDE DE BOUCLES** \
+                3. **PLANIFIER LA RÉSOLUTION À L'AIDE DE BOUCLES** \
                 Vous aurez besoin d'une boucle pour répéter ces 2 ensembles d'actions pour chacune des lignes. \
                 Petit problème : le nombre d'instructions pour afficher des étoiles est variable selon la ligne... que faire? \
                 Vous allez avoir besoin d'une boucle pour représenter la création des étoiles! \
                 Vous aurez donc une boucle de création de lignes, et à l'intérieur une boucle de création d'étoiles.
 
-                4. 👨🏻‍💻 **CODER** \
+                4. **CODER** \
                 Vous avez assez philosophié, maintenant codez! \
                 Lorsque vous avez fini, votre code sera générique et flexible! \
                 Vous seriez capable d'afficher 20 lignes au lieu de 4 avec un p'tit changement mineur!
@@ -1232,58 +1284,76 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
 
                 ---
 
-                ## ✏️ Exercices sur papier
+                ::::info Exercice - Refactorisation : L'escalier d'étoiles
+                Créez un fichier `r05_etoile_1.py` pour votre réponse.
 
-                <DocumentationInterdite />
+                Nous allons transformer ce script très répétitif (qui affiche un escalier d'étoiles) en une version élégante et flexible grâce à l’utilisation des **boucles imbriquées**.
 
-                ::::info Exercice - Cote de passage
-                📁 Créez un fichier `r05_cote_passage.py` pour votre réponse.
+                ```python showLineNumbers
+                # Ligne 1
+                print('*', end='')
+                print()
 
-                Une liste de notes est déjà déclarée dans votre programme :
-                ```python
-                notes = [72, 45, 88, 55, 91, 60, 38]
+                # Ligne 2
+                print('*', end='')  # Affiche une étoile sans sauter de ligne
+                print('*', end='')
+                print()             # Saute à la ligne
+
+                # Ligne 3
+                print('*', end='')
+                print('*', end='')
+                print('*', end='')
+                print()
+
+                # Ligne 4
+                print('*', end='')
+                print('*', end='')
+                print('*', end='')
+                print('*', end='')
+                print()
+
                 ```
 
-                Écrivez le reste du programme qui parcourt cette liste et affiche, pour chaque note, si l'étudiant a **réussi** (≥ 60) ou **échoué**. À la fin, affichez le nombre total de réussites.
+                #### ÉTAPES À SUIVRE
 
-                **Exemple de sortie attendu :**
-                ```
-                72 → Réussi
-                45 → Échoué
-                88 → Réussi
-                55 → Échoué
-                91 → Réussi
-                60 → Réussi
-                38 → Échoué
-                Nombre de réussites : 4
-                ```
+                1. **COMPRENDRE LE MOTIF**
+                Exécutez le code dans votre éditeur et observez le motif affiché. Chaque ligne contient un nombre croissant d’étoiles, allant de 1 à 4.
+                2. **IDENTIFIER LA RÉPÉTITION**
+                Observez la structure pour tenter de la généraliser. Pour chaque ligne, vous remarquerez que l'on fait toujours les deux mêmes actions :
+
+                * Afficher un nombre variable d'étoiles (selon la ligne actuelle).
+                * Effectuer un saut de ligne.
+
+                3. **PLANIFIER LES BOUCLES IMBRIQUÉES**
+                Vous aurez besoin d'une boucle principale pour gérer les **lignes** (boucle extérieure). Puisque le nombre de `print('*')` successifs dépend de la ligne actuelle, vous aurez besoin d'une sous-boucle pour générer ces **étoiles** (boucle intérieure) *avant* de faire votre saut de ligne. Rappelez-vous l'analogie de l'horloge !
+                4. **CODER !**
+                Assez philosophié, à vos claviers ! Une fois terminé, votre code sera totalement générique et flexible. Pour afficher un escalier de 20 marches plutôt que 4, vous n'aurez qu'un seul chiffre à changer !
 
                 :::note Notions visées
-                Boucle `for` sur une liste, `if`/`else`, variable accumulatrice, f-string
+                Boucles imbriquées (`for`), paramètre `end` de la fonction print, identification de répétitions, généralisation d'un motif.
                 :::
-
                 ::::
 
                 ---
 
                 <IntroSolutionsExercices />
 
-                ✏️ Solution des **exercices de compréhension** :
-                - Débogue et compte *(solutionnaire à venir)*
-                - Evalue une expression *(solutionnaire à venir)*
+                Solution des **exercices de compréhension** :
+                - Déboguer et compter *(solutionnaire à venir)*
+                - Évaluer une expression en direct *(solutionnaire à venir)*
 
-                🔨 Solution des **exercices de création** :
+                Solution des **exercices de création** :
                 - Afficher 5 chiffres aléatoires *(solutionnaire à venir)*
-                - Générateur jusqu'à la cible *(solutionnaire à venir)*
-                - Jeu de devinette numérique *(solutionnaire à venir)*
+                - Générer jusqu'à la cible *(solutionnaire à venir)*
+                - Le juste prix (Devinette numérique) *(solutionnaire à venir)*
                 - Remplir et analyser une liste *(solutionnaire à venir)*
                 - Umbrella Corporation, version boucle *(solutionnaire à venir)*
-                - Calculer des statistiques *(solutionnaire à venir)*
-                - Énumérer des décimales *(solutionnaire à venir)*
-                - Générer un nombre - DRY : boucle simple *(solutionnaire à venir)*
-                - Affichage d'étoiles - DRY : boucle imbriquée *(solutionnaire à venir)*
+                - Créer ses propres statistiques (Sans filet !) *(solutionnaire à venir)*
+                - Énumérer des décimales (Précision de l'ordinateur) *(solutionnaire à venir)*
+                - Refactorisation : Le générateur de nombres *(solutionnaire à venir)*
+                - Refactorisation : L'escalier d'étoiles *(solutionnaire à venir)*
 
-                ✏️ Solution des **exercices sur papier** :
+                Solution des **exercices sur papier** :
                 - Cote de passage *(solutionnaire à venir)*
             </TabItem>
         </Tabs>
