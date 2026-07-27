@@ -1,5 +1,5 @@
 ---
-title: 4 - 🔍 Expressions booléennes
+title: 4 - Expressions booléennes
 description: Expressions booléennes, if, elif, else, Comparaison, Imbrication, DRY, Forme compacte, raise/try/catch
 hide_table_of_contents: true
 ---
@@ -16,7 +16,7 @@ import Feedback from "../../src/components/Feedback";
 import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
 import AideMemoireExpressionsBoolennes from '@site/docs/_components/AideMemoireExpressionsBoolennes.mdx';
 
-# 🔍 Expressions booléennes
+# Expressions booléennes
 
 <Tabs className="tabs-centered" queryString="onglet">
 
@@ -130,7 +130,7 @@ Voici comment Python évalue l’instruction #5, étape par étape :
 
         :::info On veut pas le sawouère, on veut le wouère
         C'est bien beau, ça, les expressions booléennes, mais à quoi ça sert?<br />
-        👉 Elles servent principalement à contrôler le flux d'exécution du programme, \
+        Elles servent principalement à contrôler le flux d'exécution du programme, \
         c'est-à-dire à décider quelles parties du code doivent être exécutées en fonction de certaines conditions.
         :::
 
@@ -460,7 +460,7 @@ Voici comment Python évalue l’instruction #5, étape par étape :
         Bien
         Passable
         ```
-        👉 Avec des `if` indépendants, Python évalue **chaque condition séparément**, de haut en bas, **sans jamais s'arrêter**. Comme les 3 conditions sont `True` pour `score = 95`, les **3 blocs sont exécutés**. Ce n'est presque certainement pas ce qu'on voulait! Il aurait été préférable que Python arrête d’évaluer les autres conditions dès qu’il trouve une condition donnant `True`.
+        Avec des `if` indépendants, Python évalue **chaque condition séparément**, de haut en bas, **sans jamais s'arrêter**. Comme les 3 conditions sont `True` pour `score = 95`, les **3 blocs sont exécutés**. Ce n'est presque certainement pas ce qu'on voulait! Il aurait été préférable que Python arrête d’évaluer les autres conditions dès qu’il trouve une condition donnant `True`.
 
         :::
 
@@ -485,12 +485,12 @@ Voici comment Python évalue l’instruction #5, étape par étape :
         Excellent
         ```
 
-        👉 Avec `if/elif/else`, dès qu'une condition est `True`, Python exécute le bloc correspondant et **saute immédiatement le reste** : les autres conditions ne sont **jamais évaluées**. Un seul bloc s'exécute, peu importe le nombre de `elif`. Python a donc exécuté uniquement le bloc associé à `score >= 90`.
+        Avec `if/elif/else`, dès qu'une condition est `True`, Python exécute le bloc correspondant et **saute immédiatement le reste** : les autres conditions ne sont **jamais évaluées**. Un seul bloc s'exécute, peu importe le nombre de `elif`. Python a donc exécuté uniquement le bloc associé à `score >= 90`.
         :::
 
         ---
 
-        :::note 🧠 Comment choisir entre les 2 approches
+        :::note Comment choisir entre les 2 approches
 
         | Situation | Utiliser |
         |-----------|----------|
@@ -504,11 +504,11 @@ Voici comment Python évalue l’instruction #5, étape par étape :
         pression_atm = 1.8
 
         if ph < 6 :
-            print("⚠️ Solution acide : portez des gants de protection.")       # ✅ Exécuté
+            print("Solution acide : portez des gants de protection.")       # ✅ Exécuté
         if temperature_celsius > 60 :
-            print("🌡️ Température élevée : risque de brûlure.")                # ✅ Exécuté
+            print("Température élevée : risque de brûlure.")                # ✅ Exécuté
         if pression_atm > 1.5 :
-            print("💨 Pression élevée : vérifiez l'étanchéité du système.")    # ✅ Exécuté
+            print("Pression élevée : vérifiez l'étanchéité du système.")    # ✅ Exécuté
         ```
         Ici, les 3 avertissements sont **complémentaires** et ont du sens ensemble. Plusieurs `if` indépendants sont donc le bon choix.
 
@@ -564,13 +564,13 @@ Voici comment Python évalue l’instruction #5, étape par étape :
         if ph < 7 :
             print("Solution acide.")
             if temperature_celsius > 60 :               # Condition imbriquée dans le if
-                print("⚠️ Acide ET chaude : danger!")
+                print("Acide ET chaude : danger!")
             else :
                 print("Acide mais à température normale.")
         else :
             print("Solution neutre ou basique.")
             if temperature_celsius > 60 :               # Condition imbriquée dans le else
-                print("⚠️ Solution chaude : manipuler avec précaution.")
+                print("Solution chaude : manipuler avec précaution.")
             else :
                 print("Conditions stables.")
         ```
@@ -578,10 +578,10 @@ Voici comment Python évalue l’instruction #5, étape par étape :
         Résultat affiché avec `ph = 4.2` et `temperature_celsius = 75` :
         ```
         Solution acide.
-        ⚠️ Acide ET chaude : danger!
+        Acide ET chaude : danger!
         ```
 
-        👉 Python entre d'abord dans le bloc `if ph < 7`, puis évalue la condition sur la température **seulement à l'intérieur de ce bloc**.
+        Python entre d'abord dans le bloc `if ph < 7`, puis évalue la condition sur la température **seulement à l'intérieur de ce bloc**.
         :::
 
         :::note L'indentation, encore plus importante avec l'imbrication!
@@ -605,7 +605,7 @@ Voici comment Python évalue l’instruction #5, étape par étape :
         :::
 
         :::tip Exemple concret — classification d'une étoile 🌟
-        En astronomie, on peut classer une étoile selon sa **luminosité** et sa **température de surface** :
+        En astronomie, on peut classer les étoiles selon leur **luminosité** et leur **température de surface** :
 
         ```python showLineNumbers
         luminosite = 500        # En unités solaires
@@ -636,10 +636,10 @@ Voici comment Python évalue l’instruction #5, étape par étape :
         Résultat affiché avec `luminosite = 500` et `temperature_K = 8000` :
         ```
         Étoile très lumineuse.
-        ⭐ Classification : étoile blanche géante.
+        Classification : étoile blanche géante.
         ```
 
-        👉 Le premier `if/elif/else` traite la luminosité, puis, à l'intérieur de **chacun** de ses blocs, un second `if/elif/else` affine la classification selon la température.
+        Le premier `if/elif/else` traite la luminosité, puis, à l'intérieur de **chacun** de ses blocs, un second `if/elif/else` affine la classification selon la température.
         :::
 
         :::warning Attention à la profondeur d'imbrication!
@@ -663,7 +663,7 @@ Voici comment Python évalue l’instruction #5, étape par étape :
         ```
         :::
 
-        :::note 🧠 Quand utiliser l'imbrication?
+        :::note Quand utiliser l'imbrication?
 
         | Situation | Approche recommandée |
         |-----------|----------------------|
@@ -671,7 +671,7 @@ Voici comment Python évalue l’instruction #5, étape par étape :
         | Les conditions sont **indépendantes** les unes des autres | Plusieurs <C><K>if</K></C> séparés |
         | Les conditions peuvent être combinées simplement | <C><K>and</K></C> / <C><K>or</K></C> dans un seul <C><K>if</K></C> |
 
-        👉 L'imbrication est le bon choix quand la **logique est hiérarchique** : on vérifie d'abord une catégorie générale, puis on affine à l'intérieur de cette catégorie.
+        L'imbrication est le bon choix quand la **logique est hiérarchique** : on vérifie d'abord une catégorie générale, puis on affine à l'intérieur de cette catégorie.
         :::
 
 
@@ -690,7 +690,7 @@ Voici comment Python évalue l’instruction #5, étape par étape :
 
         ---
 
-        :::danger ⚠️ Avant le bloc — exemple avec une instruction redondante au début
+        :::danger Avant le bloc — exemple avec une instruction redondante au début
         Repérez l'instruction répétée inutilement dans les deux blocs :
         ```python showLineNumbers
         # Version redondante
@@ -745,7 +745,7 @@ Voici comment Python évalue l’instruction #5, étape par étape :
 
         ---
 
-        :::tip ✅ La bonne approche : sortir l'instruction commune après le bloc
+        :::tip La bonne approche : sortir l'instruction commune après le bloc
         ```python showLineNumbers
         # Version sans redondance
         masse_g = 5.2
@@ -763,7 +763,7 @@ Voici comment Python évalue l’instruction #5, étape par étape :
 
         ---
 
-        :::note 🧠 Récapitulatif — où placer les instructions communes?
+        :::note Récapitulatif — où placer les instructions communes?
 
         | Position de la redondance | Solution |
         |---------------------------|----------|
@@ -771,7 +771,7 @@ Voici comment Python évalue l’instruction #5, étape par étape :
         | À la **fin** de chaque bloc | Placer l'instruction **après** le bloc `if/else` |
         | Au **début et à la fin** | Placer une instruction **avant** et une **après** |
 
-        👉 La règle est simple : si une instruction s'exécute **dans tous les cas**, elle ne devrait **jamais** se retrouver à l'intérieur d'un `if` ou d'un `else`.
+        La règle est simple : si une instruction s'exécute **dans tous les cas**, elle ne devrait **jamais** se retrouver à l'intérieur d'un `if` ou d'un `else`.
         :::
 
         ---
@@ -812,7 +812,7 @@ Voici comment Python évalue l’instruction #5, étape par étape :
         :::warning Attention — ne pas confondre redondance et répétition intentionnelle!
         Parfois, deux instructions se ressemblent mais **ne sont pas identiques** : elles ne peuvent donc pas être sorties du bloc.
         ```python showLineNumbers
-        # ✅ Ce n'est PAS de la redondance, car les messages sont différents!
+        # Ce n'est PAS de la redondance, car les messages sont différents!
         ph = 4.2
 
         if ph < 7 :
@@ -875,8 +875,8 @@ Voici comment Python évalue l’instruction #5, étape par étape :
     <TabItem value="exceptions-validation" label="Validation raise/try/except">
 
         :::info Pourquoi valider les paramètres?
-        Quand on écrit une fonction, il faut s'assurer que les **entrées** (paramètres) ont du sens.\
-        Sinon, on risque d'obtenir des résultats absurdes ou des erreurs difficiles à comprendre.
+        Si les paramètres d'une fonction sont invalides, le programme risque de produire un résultat absurde (ex: une concentration négative) ou de planter violemment. \
+        Valider permet de **contrôler** l'erreur avec un message explicite.
 
         Comparez ces deux versions :
 
@@ -906,15 +906,14 @@ Voici comment Python évalue l’instruction #5, étape par étape :
         a = 1 + 2
         ```
 
-        👉 La version 2 donne des **messages d'erreur explicites**, évite les résultats absurdes et rend le code **plus robuste et réutilisable**.
+        La version 2 donne des **messages d'erreur explicites**, évite les résultats absurdes et rend le code **plus robuste et réutilisable**.
 
         :::
 
         ---
 
-        :::note `raise` — mettre une barrière dans une fonction
-        `raise` permet de **provoquer volontairement une erreur** si une condition n'est pas respectée.\
-        C'est la façon de signaler au programmeur qui appelle la fonction qu'il l'utilise avec de mauvaises valeurs.
+        :::info `raise` : Mettre une barrière dans la fonction
+        L'instruction `raise` permet de provoquer volontairement une erreur. C'est la façon de dire au programmeur : *"Tu as mal utilisé ma fonction"*. Dès qu'un `raise` est déclenché, la fonction s'arrête immédiatement et retourne l'erreur à l'appelant.
 
         ```python showLineNumbers
         def concentration(masse_g, volume_L):
@@ -925,14 +924,12 @@ Voici comment Python évalue l’instruction #5, étape par étape :
             return masse_g / volume_L
         ```
 
-        Dès qu'une condition invalide est détectée, Python **interrompt immédiatement** la fonction et remonte l'erreur à l'appelant.\
-        Les lignes suivantes à l'intérieur de la fonction ne sont jamais exécutées (comme c'est le cas avec l'instruction `return`).
         :::
 
         ---
 
-        :::tip `try/except` — mettre un filet de sécurité à l'appel
-        `try/except` permet de **rattraper** une erreur qui se produit, plutôt que de laisser le programme planter.
+        :::info `try/except` : Le filet de sécurité
+        Alors que `raise` crée l'erreur et la retourne, `try/except` sert à **attraper** l'erreur lors de l'appel de la fonction pour empêcher ;e le programme de planter.
 
         Exécutez ce code sans `try/except`, observez l'erreur, puis ajoutez le filet et relancez :
 
@@ -942,6 +939,7 @@ Voici comment Python évalue l’instruction #5, étape par étape :
         print(concentration(-10, 20))  # ❌ Le programme s'arrête ici avec une erreur brute
         print(concentration(4, 5))     # Jamais atteint
         ```
+        Note : La variable `e` contient le message d'erreur défini par le raise. Vous pouvez l'afficher, le journaliser ou l'ignorer.
 
         ```python showLineNumbers
         # Avec filet : le programme gère l'erreur proprement
@@ -950,26 +948,18 @@ Voici comment Python évalue l’instruction #5, étape par étape :
             print(concentration(-10, 20))  # ❌ Lève ValueError → on saute au except
             print(concentration(4, 5))     # ⏭️ Jamais atteint (on est déjà dans le except)
         except ValueError as e:
-            print(f"Une erreur est survenue : {e}")
+            print(f"Erreur interceptée : {e}")
         ```
-
-        La variable `e` contient le message d'erreur personnalisé passé à `raise`.
-        On peut choisir de faire ce qu'on veut du message :
-            - l'afficher à la console
-            - le journaliser dans un fichier
-            - exécuter un bout de code en particulier en fonction du message
         :::
 
         ---
+        :::note La dynamique `raise` et `try/except`
+        | Mécanisme | Son rôle | Son emplacement |
+        |-----------|----------|-----------------|
+        | <C><K>raise</K></C> | **Signaler le problème** | **À l'intérieur** de la fonction. |
+        | <C><K>try/except</K></C> | **Gérer le problème** | **À l'appel** de la fonction. |
 
-        :::note Différence fondamentale entre `raise` et `try/except`
-
-        | Mécanisme | Rôle | Où l'écrire |
-        |-----------|------|-------------|
-        | <C><K>raise</K></C> | **Signaler** un problème (mettre une barrière) | **Dans** la fonction, là où les paramètres sont vérifiés |
-        | <C><K>try</K>/<K>except</K></C> | **Attraper** un problème (mettre un filet) | **À l'appel** de la fonction, pour gérer proprement les erreurs et éviter l'arrêt du programme |
-
-        👉 On utilise `raise` pour protéger la fonction, et `try/except` pour que l'appelant décide quoi faire en cas d'erreur.
+        *La bonne pratique :* Séparer les responsabilités. La fonction signale le problème (`raise`), mais c'est au programme principal de décider comment réagir à cette erreur (`try/except`).
         :::
 
         ---
@@ -995,7 +985,7 @@ Voici comment Python évalue l’instruction #5, étape par étape :
         math.factorial(2.5)# ❌ TypeError: 'float' object cannot be interpreted as an integer
         ```
 
-        👉 Le module `math` lève une `ValueError` dès qu'on sort du **domaine mathématique valide** (valeur impossible à calculer).
+        Le module `math` lève une `ValueError` dès qu'on sort du **domaine mathématique valide** (valeur impossible à calculer).
 
         ---
 
@@ -1010,7 +1000,7 @@ Voici comment Python évalue l’instruction #5, étape par étape :
         float("abc")      # ❌ ValueError: could not convert string to float: 'abc'
         ```
 
-        👉 `int()` et `float()` lèvent une `ValueError` si la chaîne de caractères **ne représente pas un nombre valide**.\
+        `int()` et `float()` lèvent une `ValueError` si la chaîne de caractères **ne représente pas un nombre valide**.\
         C'est une erreur très fréquente quand on lit une saisie utilisateur ou des données provenant d'un fichier.
 
         ---
@@ -1038,11 +1028,36 @@ Voici comment Python évalue l’instruction #5, étape par étape :
         a = 1 + 2                      # Cette instruction est finalement exécutée!
         ```
 
-        👉 Un seul bloc `try/except` attrape à la fois les erreurs de conversion **et** les erreurs de domaine, car les deux lèvent une `ValueError`.
+        Un seul bloc `try/except` attrape à la fois les erreurs de conversion **et** les erreurs de domaine, car les deux lèvent une `ValueError`.
         L'appel de la fonction `calculer_racine()` ne causera **jamais l'arrêt du programme** car les erreurs sont bien attrapées.
         La fonction va soit retourner :
             - soit une valeur valide
             - soit la valeur None
+
+        --- 
+
+        :::info Il est possible d'attrapper toutes les erreurs qui ont été levé par `raise`
+    
+        ```python showLineNumbers
+        import math
+
+        def calcul_complexe(texte):
+            try:
+                nombre = float(texte)         # Peut lever une ValueError (si texte) ou TypeError
+                resultat = math.sqrt(nombre)  # Peut lever une ValueError (si négatif)
+                division = 100 / resultat     # Peut lever une ZeroDivisionError
+                return division
+            
+            except Exception as e:
+                # Attrape n'importe laquelle des erreurs ci-haut !
+                print(f"Une erreur inattendue a été bloquée : {e}")
+                return None
+
+                print(calcul_complexe("abc")) # ✅ Bloqué proprement
+
+        print(calcul_complexe("-4"))  # ✅ Bloqué proprement
+        print(calcul_complexe("0"))   # ✅ Bloqué proprement
+        ```
 
         ---
 
@@ -1056,10 +1071,32 @@ Voici comment Python évalue l’instruction #5, étape par étape :
 
         ---
 
-        :::tip 🤔 Le réflexe à adopter
+        :::tip Le réflexe à adopter
         Quand vous intégrez une nouvelle fonction dans votre code, posez-vous toujours la question :\
         **"Qu'est-ce qui pourrait mal se passer ici, et est-ce que ma fonction le gère?"**
-        :::
+        
+        Ainsi, on peut tester la fonction. Il est alors possible d'interroger la variable `e` qui contient l'erreur levée:
+        ```python showLineNumbers
+        import math
+
+        def calcul_complexe(texte):
+            try:
+                nombre = float(texte)         # Peut lever une ValueError (si texte) ou TypeError
+                resultat = math.sqrt(nombre)  # Peut lever une ValueError (si négatif)
+                division = 100 / resultat     # Peut lever une ZeroDivisionError
+                return division
+            
+            except Exception as e:
+                # Attrape n'importe laquelle des erreurs ci-haut !
+                print(f"Le message : {e.__str__}")
+                print(f"Le nom de l'erreur: {e.__name__}")
+                return None
+
+                print(calcul_complexe("abc")) # ✅ Bloqué proprement
+
+        print(calcul_complexe("-4"))  # ✅ Bloqué proprement
+        print(calcul_complexe("0"))   # ✅ Bloqué proprement
+        ```
 
         ---
 
@@ -1091,7 +1128,7 @@ Voici comment Python évalue l’instruction #5, étape par étape :
         Par exemple : `isinstance(5, int)` → `True`, `isinstance("5", int)` → `False`.\
         On peut tester plusieurs types à la fois : `isinstance(5, (int, float))` → `True`.
 
-        👉 Remarquez l'**ordre des vérifications** : on valide d'abord les **types**, puis les **valeurs**. C'est important, car une valeur du mauvais type (comme une masse de type `str`) ne pourrait même pas être comparée à `0` sans provoquer une erreur.
+        Remarquez l'**ordre des vérifications** : on valide d'abord les **types**, puis les **valeurs**. C'est important, car une valeur du mauvais type (comme une masse de type `str`) ne pourrait même pas être comparée à `0` sans provoquer une erreur.
         :::
 
         ---
@@ -1130,7 +1167,7 @@ Voici comment Python évalue l’instruction #5, étape par étape :
 
     <TabItem value="trace" label="Trace">
 
-        ## 🕵️‍♂️ Trace d’exécution avec des structures conditionelles
+        ## Trace d’exécution avec des structures conditionelles
 
         Voici un exemple de trace d'exécution contenant des structures conditionnelles
 
@@ -1142,18 +1179,18 @@ Voici comment Python évalue l’instruction #5, étape par étape :
 
         <RappelFonctionnementClasseInverse/>
         <Tabs>
-            <TabItem value="1" label="🏠 Activités à faire à la maison">
-                ## 🧠 Auto-validation des connaissances
+            <TabItem value="1" label=" Activités à faire à la maison">
+                ## Auto-validation des connaissances
 
                 [**Ce formulaire**](https://forms.gle/j4v5T4bW3Ay4q67R6) sert à vérifier votre compréhension des éléments les plus importants de la rencontre R04. Ne faites ce questionnaire **que lorsque vous vous sentez en très bonne maîtrise de la matière**. En classe, dès votre arrivée, vous aurez un **questionnaire très similaire**, évalué **sommativement**, à compléter sans accès à **aucune documentation**.
 
-                ::::warning
+{/*                 ::::warning
                 Ne pas remplir le formulaire diminue fortement vos chances de réussir l’évaluation sommative en début de rencontre. \
-                Assurez-vous de bien comprendre toutes les notions derrière chaque question.
+                Assurez-vous de bien comprendre toutes les notions derrière chaque question. */}
                 ::::
 
                 ---
-                ## ✏️ Exercices de compréhension
+                ## Exercices de compréhension
 
                 Pour faire les traces des exercices suivants, regardez d'abord cette recette de [trace avec condition](/cours/rencontre4?onglet=trace)
 
@@ -1260,7 +1297,7 @@ Voici comment Python évalue l’instruction #5, étape par étape :
 
                 ---
 
-                # 🎯 Solutionnaires
+                # Solutionnaires
 
                 :::warning
                 Consultez le solutionnaire **uniquement après avoir complété l'exercice par vous-même**. \
@@ -1275,27 +1312,27 @@ Voici comment Python évalue l’instruction #5, étape par étape :
             </TabItem>
 
 
-	        <TabItem value="2" label=" 🏫 Activités à faire en classe">
+	        <TabItem value="2" label="Activités à faire en classe">
 
-                ## 🔨 Exercices de création
+                ## Exercices de création
 
                 Pour chacun des exercices de cette section, vous devez créer des fichiers `.py` avec les noms indiqués.
 
                 <DocumentationAutorisee />
 
                 ::::info Exercice - Le niveau de pH
-                📁 Créez un fichier `r04_niveau_ph.py` pour votre réponse.
+                Créez un fichier `r04_niveau_ph.py` pour votre réponse.
 
                 Définissez une fonction décrivant le niveau d'acidité d'une solution à partir de son [pH](https://fr.wikipedia.org/wiki/Potentiel_hydrog%C3%A8ne). \
                 La fonction doit recevoir en entrée le pH et renvoyer en sortie soit : "acide", "neutre" ou "basique". \
                 Validez le bon fonctionnement en testant les différents cas possibles à l'aide d'appels :
                 ```python showLineNumbers
-                print(f"Une solution avec un Ph de 5 est : {nom_de_votre_fonction(5)}")
-                print(f"Une solution avec un Ph de 7 est : {nom_de_votre_fonction(7)}")
-                print(f"Une solution avec un Ph de 10 est : {nom_de_votre_fonction(10)}")
+                print(f"Une solution avec un pH de 5 est : {nom_de_votre_fonction(5)}")
+                print(f"Une solution avec un pH de 7 est : {nom_de_votre_fonction(7)}")
+                print(f"Une solution avec un pH de 10 est : {nom_de_votre_fonction(10)}")
                 ```
 
-                <i>**Remarque** : si vous obtenez comme résultat "Une solution avec un Ph de 5 est : None" c'est que votre fonction [ne retourne pas une valeur!](/cours/rencontre3?onglet=retour)</i>
+                <i>**Remarque** : si vous obtenez comme résultat "Une solution avec un pH de 5 est : None" c'est que votre fonction [ne retourne pas une valeur!](/cours/rencontre3?onglet=retour)</i>
 
                 :::note Notions visées
                 Définition de fonction, paramètre, structures conditionnelles (`if`/`elif`/`else`), `return`, f-strings
@@ -1306,7 +1343,7 @@ Voici comment Python évalue l’instruction #5, étape par étape :
                 ---
 
                 ::::info Exercice - Analyse d'échantillons chimiques 🧪
-                📁 Créez un fichier `r04_analyse_echantillons.py` pour votre réponse.
+                Créez un fichier `r04_analyse_echantillons.py` pour votre réponse.
 
                 Reprenez votre fonction `niveau_ph` de l'exercice précédent et utilisez-la pour analyser une série d'échantillons stockés dans des **listes parallèles**. \
                 Vous **ne devez pas modifier** le code de la fonction **niveau_ph**, vous devez la réutiliser telle quelle.
@@ -1326,7 +1363,7 @@ Voici comment Python évalue l’instruction #5, étape par étape :
                 Lait            (pH 6.7)  → acide
                 Soude caustique (pH 13.5) → basique
                 ```
-                👉 Pour obtenir les colonnes bien alignées, consultez la section **Alignement** de l'[aide-mémoire sur les f-strings](/aidememoire/f-string) \
+                Pour obtenir les colonnes bien alignées, consultez la section **Alignement** de l'[aide-mémoire sur les f-strings](/aidememoire/f-string) \
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;en particulier la syntaxe `:<N` pour aligner un texte à gauche sur `N` caractères.
 
 
@@ -1338,8 +1375,8 @@ Voici comment Python évalue l’instruction #5, étape par étape :
 
                 ---
 
-                ::::info Exercice - REFACTORISATION : LES BULLETINS SCOLAIRES 📋
-                📁 Créez un fichier `r04_refactorisation_bulletins.py` pour votre réponse.
+                ::::info Exercice - REFACTORISATION : LES BULLETINS SCOLAIRES
+                Créez un fichier `r04_refactorisation_bulletins.py` pour votre réponse.
 
                 Le code ci-dessous affiche un mini-bulletin pour un.e étudiant.e. \
                 Il fonctionne correctement, mais il est **truffé de répétitions inutiles** dans les blocs `if/elif/else`.
@@ -1380,7 +1417,7 @@ Voici comment Python évalue l’instruction #5, étape par étape :
                     print("=========================")
                 ```
 
-                #### 🛠️ **INSTRUCTIONS**
+                #### **INSTRUCTIONS**
 
                 1. **Identifiez** toutes les instructions redondantes dans le code ci-dessus : \
                    *Comptez combien de fois chaque `print` apparaît. Lesquels se retrouvent dans les **4 blocs**? Lesquels varient d'un bloc à l'autre?*
@@ -1417,13 +1454,13 @@ Voici comment Python évalue l’instruction #5, étape par étape :
                 ---
 
                 ::::info Exercice - Classification sismique 🌍
-                📁 Créez un fichier `r04_classification_sismique.py` pour votre réponse.
+                Créez un fichier `r04_classification_sismique.py` pour votre réponse.
 
                 Lors d'un tremblement de terre, deux mesures sont enregistrées : la **magnitude** (énergie libérée, échelle de Richter) et la **profondeur du foyer** en kilomètres. Ces deux valeurs, analysées ensemble, permettent d'estimer l'impact en surface.
 
                 On veut écrire un programme qui affiche une **fiche sismique complète** à partir de ces deux mesures.
 
-                #### 📋 Données de référence
+                #### Données de référence
 
                 <div style={{ display: 'flex', justifyContent: 'center', gap: '2rem' }}>
 
@@ -1471,14 +1508,14 @@ Voici comment Python évalue l’instruction #5, étape par étape :
 
                 </div>
 
-                #### 🛠️ **INSTRUCTIONS**
+                #### **INSTRUCTIONS**
 
                 1. **Créez une fonction** `classifier_magnitude(magnitude)` qui retourne la catégorie correspondante (`"Micro"`, `"Mineur"`, `"Modéré"`, `"Fort"` ou `"Majeur"`).
 
                 2. **Créez une fonction** `classifier_profondeur(profondeur_km)` qui retourne le type de foyer (`"Superficiel"`, `"Intermédiaire"` ou `"Profond"`).
 
                 3. **Créez une fonction** `impact_probable(magnitude, profondeur_km)` qui retourne la description de l'impact en combinant les deux paramètres. \
-                👉 *Deux approches sont possibles pour cette fonction :*
+                *Deux approches sont possibles pour cette fonction :*
                     - *Conditions **imbriquées** : on évalue d'abord la magnitude, puis on affine selon la profondeur à l'intérieur de chaque bloc (`if` dans un `if`).*
                     - *Conditions **combinées** avec `and` : on teste les deux critères sur une même ligne.*
 
@@ -1539,7 +1576,7 @@ Voici comment Python évalue l’instruction #5, étape par étape :
                 ---
 
                 ::::info Exercice - TARIFICATION ÉLECTRIQUE PAR PALIERS ⚡
-                📁 Créez un fichier `r04_tarification_electrique.py` pour votre réponse.
+                Créez un fichier `r04_tarification_electrique.py` pour votre réponse.
 
                 **Hydro-Québec** facture l'électricité résidentielle selon un système de **paliers** : \
                 les premiers kilowattheures consommés coûtent moins cher, et la consommation supplémentaire est facturée à un tarif plus élevé.
@@ -1561,10 +1598,10 @@ Voici comment Python évalue l’instruction #5, étape par étape :
                 - Les **25 kWh restants** (65 − 40) : 25 × 0,10 = **2,50 $**
                 - **Total : 4,90 $**
 
-                👉 La clé : quand `kwh > 40`, la facture se calcule en **deux parties**. On paie les 40 premiers kWh au tarif bas, puis le surplus au tarif élevé.
+                La clé : quand `kwh > 40`, la facture se calcule en **deux parties**. On paie les 40 premiers kWh au tarif bas, puis le surplus au tarif élevé.
                 :::
 
-                #### 🛠️ **INSTRUCTIONS**
+                #### **INSTRUCTIONS**
 
                 1. **Créez une fonction** `calculer_facture(kwh, tarif_nuit=False)` qui calcule et **retourne** le montant à payer. \
                    *Le paramètre `tarif_nuit=False` est optionnel : par défaut, on utilise le tarif D. \
@@ -1597,8 +1634,8 @@ Voici comment Python évalue l’instruction #5, étape par étape :
 
                 ---
 
-                ::::info Exercice - TOURNOI DE QUIDDITCH 🧹
-                📁 Créez un fichier `r04_quidditch.py` pour votre réponse.
+                ::::info Exercice - TOURNOI DE QUIDDITCH
+                Créez un fichier `r04_quidditch.py` pour votre réponse.
 
                 La saison de Quidditch de Poudlard est terminée! \
                 Les résultats des quatre maisons ont été compilés et sont déjà classés du premier au dernier. \
@@ -1631,7 +1668,7 @@ Voici comment Python évalue l’instruction #5, étape par étape :
                 - Le programme doit fonctionner peu importe les valeurs dans les listes. Elles auront toujours 4 éléments.
                 - La première et la dernière maison du classement ont un message spécial.
 
-                👉 Pour obtenir les colonnes bien alignées, consultez la section **Alignement** de l'[aide-mémoire sur les f-strings](/aidememoire/f-string) \
+                Pour obtenir les colonnes bien alignées, consultez la section **Alignement** de l'[aide-mémoire sur les f-strings](/aidememoire/f-string) \
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;en particulier la syntaxe `:<N` pour aligner un texte à gauche sur `N` caractères.
 
                 :::note Notions visées
@@ -1643,7 +1680,7 @@ Voici comment Python évalue l’instruction #5, étape par étape :
                 ---
 
                 ::::info Exercice - Validation de paramètres
-                📁 Créez un fichier `r04_validation_parametres.py` pour votre réponse.
+                Créez un fichier `r04_validation_parametres.py` pour votre réponse.
 
                 Écrivez une fonction `densite(masse, volume)` qui calcule et retourne la densité en g/mL selon la formule :
 
@@ -1669,12 +1706,12 @@ Voici comment Python évalue l’instruction #5, étape par étape :
 
                 ---
 
-                ## ✏️ Exercices sur papier
+                ## Exercices sur papier
 
                 <DocumentationInterdite />
 
                 ::::info Exercice - Indice de masse corporelle (IMC)
-                📁 Créez un fichier `r04_imc.py` pour votre réponse.
+                Créez un fichier `r04_imc.py` pour votre réponse.
 
                 Écrivez un programme qui calcule et interprète l'indice de masse corporelle (IMC) d'une personne selon la formule :
 
@@ -1720,7 +1757,7 @@ Voici comment Python évalue l’instruction #5, étape par étape :
 
                 <IntroSolutionsExercices />
 
-                🔨 Solution des **exercices de création** :
+                Solution des **exercices de création** :
                 - Le niveau de pH *(solutionnaire à venir)*
                 - Analyse d'échantillons chimiques *(solutionnaire à venir)*
                 - Refactorisation : les bulletins scolaires *(solutionnaire à venir)*
@@ -1729,7 +1766,7 @@ Voici comment Python évalue l’instruction #5, étape par étape :
                 - Tournoi de Quidditch *(solutionnaire à venir)*
                 - Validation de paramètres *(solutionnaire à venir)*
 
-                ✏️ Solution des **exercices sur papier** :
+                Solution des **exercices sur papier** :
                 - Indice de masse corporelle (IMC) *(solutionnaire à venir)*
 
             </TabItem>
@@ -1782,7 +1819,7 @@ Voici comment Python évalue l’instruction #5, étape par étape :
         - Permet de gérer facilement des cas spécifiques.
         - Peut être plus performant que de nombreuses instructions `if`/`elif` dans certains cas.
 
-        👉 Il est important de noter que tout `match/case` peut être réécrit avec des `if`/`elif`/`else`, mais l'inverse n'est pas toujours vrai.
+        Il est important de noter que tout `match/case` peut être réécrit avec des `if`/`elif`/`else`, mais l'inverse n'est pas toujours vrai.
         :::
 
 
