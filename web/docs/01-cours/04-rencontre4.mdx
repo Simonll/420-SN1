@@ -353,10 +353,12 @@ Voici comment Python évalue l’instruction #5, étape par étape :
 
         ```python showLineNumbers
         def calculer_paie_brute(nb_heures, taux_horaire, temps_double_apres_40_heures=False):
-            salaire = nb_heures * taux_horaire
-            if temps_double_apres_40_heures and nb_heures >= 40:
+            if temps_double_apres_40_heures and nb_heures > 40:
+                heures_regulieres = 40
                 nb_heures_temps_supp = nb_heures - 40
-                salaire = salaire + nb_heures_temps_supp * taux_horaire * 2
+                salaire = (heures_regulieres * taux_horaire) + (nb_heures_temps_supp * taux_horaire * 2)
+            else:
+                salaire = nb_heures * taux_horaire
             return salaire
 
         nb_heures = 45
@@ -368,7 +370,7 @@ Voici comment Python évalue l’instruction #5, étape par étape :
 
         ```
         Calcul de la paie brute pour 45 heures à un taux horaire de 20$/h.
-          Avec le temps > 40 payé au taux doublé   : 1100$
+          Avec le temps > 40 payé au taux doublé   : 1000.0$
           Avec le temps > 40 payé au taux régulier : 900$
         ```
 
@@ -381,15 +383,26 @@ Voici comment Python évalue l’instruction #5, étape par étape :
         ```python showLineNumbers
         def stabilite_noyau(masse_atomique, nb_protons):
             """
-            Classifie la stabilité d'un noyau selon le ratio neutrons/protons.
+            Classifie la stabilité d'un noyau selon un ratio neutrons/protons simplifié.
 
             Paramètres :
             masse_atomique (int) : Nombre de masse de l'élément (protons + neutrons).
             nb_protons (int)     : Nombre de protons dans le noyau.
 
             Retourne :
-            str : "stable", "légèrement instable" ou "très instable".
+            str: "stable", "légèrement instable" ou "très instable".
+
+            Lève:
+            ValueError: Si le nombre de protons est nul ou si la masse est inférieure au nombre de protons.
+            TypeError: Si les paramètres ne sont pas des entiers.
             """
+            if not isinstance(masse_atomique, int) or not isinstance(nb_protons, int):
+                raise TypeError("La masse atomique et le nombre de protons doivent être des entiers.")
+            if nb_protons <= 0:
+                raise ValueError("Le nombre de protons doit être strictement positif.")
+            if masse_atomique < nb_protons:
+                raise ValueError("La masse atomique ne peut être inférieure au nombre de protons.")
+
             nb_neutrons = masse_atomique - nb_protons
             ratio = nb_neutrons / nb_protons
             if ratio <= 1.1 :
@@ -451,7 +464,7 @@ Voici comment Python évalue l’instruction #5, étape par étape :
         if score >= 50 :
             print("Passable")   # ✅ Exécuté (95 >= 50 est True)
         else :
-            print("Échec")      # ⏭️ Bloc ignoré (car la condition score >= 50 a donné True)
+            print("Échec")      # ⏭️ Bloc ignoré. Cet `else` est lié UNIQUEMENT au `if score >= 50` précédent.
         ```
 
         Résultat affiché :
@@ -823,6 +836,17 @@ Voici comment Python évalue l’instruction #5, étape par étape :
         Ici, les deux `print` contiennent du texte différent. Ils doivent rester dans leurs blocs respectifs.
         :::
 
+        :::tip Pour aller plus loin (avancé)
+        Même si les instructions ne sont pas identiques, on peut souvent appliquer le principe DRY en extrayant la partie qui varie dans une variable. Ici, on pourrait utiliser la forme compacte pour rendre le code encore plus concis :
+
+        ```python
+        ph = 4.2
+        type_solution = "acide" if ph < 7 else "basique ou neutre"
+        print(f"Le pH de {ph} indique une solution {type_solution}.")
+        ```
+        On a maintenant un seul `print`, ce qui est encore plus facile à maintenir!
+        :::
+
 
         {/* <Feedback feedbackId="Rencontre #4 - DRY" /> */}
     </TabItem>
@@ -1088,8 +1112,8 @@ Voici comment Python évalue l’instruction #5, étape par étape :
             
             except Exception as e:
                 # Attrape n'importe laquelle des erreurs ci-haut !
-                print(f"Le message : {e.__str__}")
-                print(f"Le nom de l'erreur: {e.__name__}")
+                print(f"Le message : {e}")
+                print(f"Le nom de l'erreur: {type(e).__name__}")
                 return None
 
                 print(calcul_complexe("abc")) # ✅ Bloqué proprement
