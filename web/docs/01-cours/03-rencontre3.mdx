@@ -208,20 +208,31 @@ import Feedback from "../../src/components/Feedback";
         Cette organisation permet à l’utilisateur de la fonction de **fournir les valeurs pour les paramètres essentiels en priorité**, tout en ayant la liberté de **spécifier uniquement les options supplémentaires** s’il le souhaite.
 
         ```python showLineNumbers
-        def prix_total(prix, quantite=1, taxe=1.15):
-            return prix * quantite * taxe
+        def force_pesanteur(masse, g=9.81, facteur_securite=1.0):
+            """
+            Calcule la force gravitationnelle subie par une masse.
+
+            Paramètres:
+            masse (float): La masse de l'objet en kilogrammes (kg).
+            g (float, optionnel): L'accélération gravitationnelle en m/s². Vaut 9.81 par défaut.
+            facteur_securite (float, optionnel): Un multiplicateur pour ajouter une marge de sécurité. Vaut 1.0 par défaut.
+
+            Retourne:
+            float: La force gravitationnelle calculée en Newtons (N).
+            """
+            return masse * g * facteur_securite
 
         # Exemples d'appels
-        total1 = prix_total(10)                 # 10 * 1 * 1.15 = 11.5
-        total2 = prix_total(10, 3)              # 10 * 3 * 1.15 = 34.5
-        total3 = prix_total(10, 3, 1.2)         # 10 * 3 * 1.2 = 36
-        total4 = prix_total(10, taxe=1.2)       # 10 * 1 * 1.2 = 12
+        f1 = force_pesanteur(70)                       # 70 * 9.81 * 1.0 = 686.7 N (Terre)
+        f2 = force_pesanteur(70, 1.62)                 # 70 * 1.62 * 1.0 = 113.4 N (Lune)
+        f3 = force_pesanteur(70, 9.81, 1.5)            # 70 * 9.81 * 1.5 = 1030.05 N (Terre avec marge)
+        f4 = force_pesanteur(70, facteur_securite=1.5)   # 70 * 9.81 * 1.5 = 1030.05 N (Terre avec marge)
         ```
 
         La dernière ligne de cet exemple est particulièrement intéressante à analyser :
-        - on fournit un prix (`10`) ;
-        - on ne fournit aucune valeur pour la quantité, la valeur par défaut sera utilisée (`1`) ;
-        - malgré l'absence de valeur pour la quantité, on peut fournir une valeur pour la taxe, en utilisant le nom du paramètre (`taxe=1.2`).
+        - on fournit la masse obligatoire (`70`) ;
+        - on ne fournit aucune valeur pour l'accélération gravitationnelle, la valeur par défaut sur Terre sera utilisée (`g=9.81`) ;
+        - malgré l'absence de valeur spécifiée pour $g$, on peut fournir directement un facteur de sécurité en utilisant le nom du paramètre (`facteur_securite=1.5`).
 
         :::
 
