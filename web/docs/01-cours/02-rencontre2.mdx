@@ -1675,10 +1675,10 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
                 1. **Déclarez une variable** pour le nom de l'étudiant et **quatre listes parallèles** :
                     ```python
                     nom_etudiant = "Nicola Tesla"
-                    evaluations  = ["TP1",  "TP2",  "Examen 1", "Examen 2", "Contrôles"]
-                    notes        = [8,      9,      90,         95,         9          ]
-                    sur          = [10,     10,     100,        100,        10         ]
-                    ponderations = [0.15,   0.25,   0.20,       0.30,       0.10       ]
+                    evaluations  = ["TP1",  "TP2",  "Examen 1", "Examen 2"]
+                    notes        = [16,      21,      90,         95]
+                    sur          = [20,     25,     100,        100]
+                    ponderations = [0.20,   0.25,   0.20,       0.35]
                     ```
                 2. **Appliquez les pondérations** pour calculer la note finale en accédant aux éléments par leur index.
                 3. **Affichez un résumé clair** des notes de chaque évaluation et de la note finale, arrondies à 2 décimales.
@@ -1692,11 +1692,11 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
                 Sortie attendue
                 ```
                 Étudiant : Nicola Tesla
-                TP1        (15%) :  8 / 10
-                TP2        (25%) :  9 / 10
+                TP1        (20%) :  16 / 20
+                TP2        (25%) :  21 / 25
                 Examen 1   (20%) : 90 / 100
-                Examen 2   (30%) : 95 / 100
-                Note obtenue pour ce cours : 90.0 / 100
+                Examen 2   (35%) : 95 / 100
+                Note obtenue pour ce cours : 88.25 / 100
                 Attention, l'application de la double sanction n'a pas été réalisée!
                 ```
 
