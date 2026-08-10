@@ -1,0 +1,52 @@
+import Admonition from '@theme/Admonition';
+import Link from '@docusaurus/Link';
+import Column from '../../src/components/Column';
+import Row from '../../src/components/Row';
+import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
+import RappelFonctionnementClasseInverse from '@site/docs/_components/RappelFonctionnementClasseInverse.mdx';
+import DocumentationAutorisee from '@site/docs/_components/DocumentationAutorisee.mdx';
+import DocumentationInterdite from '@site/docs/_components/DocumentationInterdite.mdx';
+import IntroSolutionsExercices from '@site/docs/_components/IntroSolutionsExercices.mdx';
+import AideMemoireListe from '@site/docs/_components/AideMemoireListe.mdx';
+
+:::info Les opérateurs d'affectation
+
+        Nous avons déjà utilisé l'opérateur `=` classique pour affecter une valeur de départ à une variable :
+        ```python
+        x = 5
+
+        ```
+
+        Mais en programmation, il est très fréquent de devoir modifier une variable en utilisant sa propre valeur (par exemple : ajouter 1 à un compteur, ou doubler un score).
+
+        Plutôt que d'écrire le nom de la variable deux fois (ex. : `x = x + 1`), Python propose des **opérateurs d'affectation raccourcis**. Ils effectuent l'opération mathématique et sauvegardent le résultat dans la même variable, en une seule étape.
+
+        Voici les opérateurs d'affectation composés les plus courants :
+
+        | Opérateur | Description                          | Exemple               | Équivalent à          |
+        |-----------|--------------------------------------|-----------------------|-----------------------|
+        | <C>+=</C> | Addition et affectation | <C>a += b</C> | <C>a = a + b</C> |
+        | <C>-=</C> | Soustraction et affectation | <C>a -= b</C> | <C>a = a - b</C> |
+        | <C>*=</C> | Multiplication et affectation | <C>a *= b</C> | <C>a = a * b</C> |
+        | <C>/=</C> | Division et affectation | <C>a /= b</C> | <C>a = a / b</C> |
+        | <C>%=</C> | Modulo et affectation | <C>a %= b</C> | <C>a = a % b</C> |
+        | <C>//=</C> | Division entière et affectation | <C>a //= b</C> | <C>a = a // b</C> |
+        | <C>**=</C> | Exponentiation et affectation | <C>a **= b</C> | <C>a = a ** b</C> |
+
+        :::
+
+        ---
+
+        :::tip En pratique
+        Ces raccourcis rendent votre code beaucoup plus lisible, surtout quand vos variables ont des noms descriptifs et longs !
+        ```python
+        compteur = 0
+        compteur += 1  # équivalent à compteur = compteur + 1
+        compteur *= 2  # équivalent à compteur = compteur * 2
+        compteur += 8  # 2 + 8 -> compteur vaut maintenant 10
+        print(compteur)  # Affiche 10
+        ```
+        :::
+
+
+        {/* <Feedback feedbackId="Rencontre #5 - Affectation" /> */}

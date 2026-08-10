@@ -1,0 +1,79 @@
+import Admonition from '@theme/Admonition';
+import Link from '@docusaurus/Link';
+import Column from '../../src/components/Column';
+import Row from '../../src/components/Row';
+import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
+import RappelFonctionnementClasseInverse from '@site/docs/_components/RappelFonctionnementClasseInverse.mdx';
+import DocumentationAutorisee from '@site/docs/_components/DocumentationAutorisee.mdx';
+import DocumentationInterdite from '@site/docs/_components/DocumentationInterdite.mdx';
+import IntroSolutionsExercices from '@site/docs/_components/IntroSolutionsExercices.mdx';
+import AideMemoireListe from '@site/docs/_components/AideMemoireListe.mdx';
+
+:::info Un elfe?
+        Non!<br />
+        `elif` est la contraction de "else if", qui signifie "sinon si".<br />
+        Elle permet de vérifier une autre condition si la première condition dans l'instruction `if` est `False`.
+
+        Par exemple :
+        ```python showLineNumbers
+        age = 16
+        if age >= 18 :
+            print("Vous êtes majeur.")
+        elif age >= 13 :
+            print("Vous êtes adolescent.")
+        ```
+        :::
+
+        ---
+
+        :::note Multiple elif
+        On peut avoir plusieurs clauses `elif` pour vérifier plusieurs conditions différentes.<br />
+        Par exemple :
+        ```python showLineNumbers
+        age = 10
+        if age >= 18 :
+            print("Vous êtes majeur.")
+        elif age >= 13 :
+            print("Vous êtes adolescent.")
+        elif age >= 3 :
+            print("Vous êtes un enfant.")
+        ```
+        :::
+
+        ---
+
+        :::tip Ordre des conditions
+        L'ordre des conditions est important.<br />
+        Les conditions sont évaluées de haut en bas, et la première condition qui est `True` déclenche l'exécution du bloc de code correspondant.<br />
+        Par exemple, dans le code suivant, la condition `age >= 13` sera toujours `True` pour tous les adultes, et la condition `age >= 18` ne sera jamais atteinte :
+        ```python showLineNumbers
+        age = 21
+        if age >= 13 :
+            print("Vous êtes adolescent.")
+        elif age >= 18 :
+            print("Vous êtes majeur.")
+        ```
+        Pour éviter cela, il faut toujours commencer par la condition la plus restrictive (la plus élevée) et descendre vers les conditions moins restrictives :
+        ```python showLineNumbers
+        age = 21
+        if age >= 18 :
+            print("Vous êtes majeur.")
+        elif age >= 13 :
+            print("Vous êtes adolescent.")
+        ```
+        :::
+
+        ---
+
+        :::warning Pas de `elif` sans `if`
+        Une clause `elif` doit toujours être précédée d'une instruction `if`.<br />
+        Par exemple, le code suivant est incorrect et provoquera une erreur de syntaxe :
+        ```python showLineNumbers
+        age = 16
+        elif age >= 13 :  # Erreur : 'elif' sans 'if'
+            print("Vous êtes adolescent.")
+        ```
+        :::
+
+
+        {/* <Feedback feedbackId="Rencontre #4 - elif" /> */}

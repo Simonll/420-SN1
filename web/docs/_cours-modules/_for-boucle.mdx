@@ -1,0 +1,49 @@
+import Admonition from '@theme/Admonition';
+import Link from '@docusaurus/Link';
+import Column from '../../src/components/Column';
+import Row from '../../src/components/Row';
+import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
+import RappelFonctionnementClasseInverse from '@site/docs/_components/RappelFonctionnementClasseInverse.mdx';
+import DocumentationAutorisee from '@site/docs/_components/DocumentationAutorisee.mdx';
+import DocumentationInterdite from '@site/docs/_components/DocumentationInterdite.mdx';
+import IntroSolutionsExercices from '@site/docs/_components/IntroSolutionsExercices.mdx';
+import AideMemoireListe from '@site/docs/_components/AideMemoireListe.mdx';
+
+:::info La boucle `for`
+        Contrairement à la boucle `while` qui répète une action tant qu'une condition est vraie, la boucle **`for`** est conçue pour répéter des instructions un **nombre connu de fois** ou pour parcourir une séquence d'éléments.
+        :::
+
+        ---\
+
+        :::note La fonction `range()`
+        La fonction native `range()` génère une séquence de nombres entiers. Elle est très souvent utilisée avec la boucle `for`.
+
+        ```python showLineNumbers
+        # Affiche les nombres de 0 à 4 (5 itérations au total)
+        for i in range(5):
+            print("Itération :", i)
+        ```
+
+        - **`range(fin)`** : De `0` à `fin - 1`.
+        - **`range(debut, fin)`** : De `debut` à `fin - 1`.
+        - **`range(debut, fin, pas)`** : De `debut` à `fin - 1` avec un saut de `pas`.
+
+        ```python showLineNumbers
+        # Affiche les nombres pairs de 2 à 10 inclusivement
+        for n in range(2, 11, 2):
+            print(n)  # Affiche 2, 4, 6, 8, 10
+        ```
+        :::
+
+        ---\
+
+        :::tip Application aux sciences
+        Calcul de la position d'un objet en chute libre à chaque seconde pendant 5 secondes ($y(t) = \frac{1}{2} g t^2$) :
+
+        ```python showLineNumbers
+        g = 9.81
+        for t in range(6):  # t va de 0 à 5 secondes
+            position = 0.5 * g * (t ** 2)
+            print(f"À t = {t} s, la position est {position:.2f} m")
+        ```
+        :::

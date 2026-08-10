@@ -1,0 +1,137 @@
+import Admonition from '@theme/Admonition';
+import Link from '@docusaurus/Link';
+import Column from '../../src/components/Column';
+import Row from '../../src/components/Row';
+import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
+import RappelFonctionnementClasseInverse from '@site/docs/_components/RappelFonctionnementClasseInverse.mdx';
+import DocumentationAutorisee from '@site/docs/_components/DocumentationAutorisee.mdx';
+import DocumentationInterdite from '@site/docs/_components/DocumentationInterdite.mdx';
+import IntroSolutionsExercices from '@site/docs/_components/IntroSolutionsExercices.mdx';
+import AideMemoireListe from '@site/docs/_components/AideMemoireListe.mdx';
+
+:::info Paramètres
+
+        Les paramètres servent d'*input* à une fonction.
+
+        Les fonctions peuvent prendre un nombre variable de paramètres, y compris aucun paramètre du tout. \
+        Voici 3 fonctions avec différents nombres de paramètres :
+
+        ```python showLineNumbers
+        def nombre_pi():
+            return 3.14159
+
+        def carre(x):
+            return x * x
+
+        def puissance(base, exposant):
+            return base ** exposant
+        ```
+
+         - `nombre_pi` est une fonction sans paramètre qui retourne la valeur de π.
+         - `carre` est une fonction avec un seul paramètre `x` qui retourne le carré de `x`.
+         - `puissance` est une fonction avec deux paramètres, `base` et `exposant`, qui retourne la base élevée à la puissance de l'exposant.
+
+        Les paramètres sont séparés par des virgules.
+
+        Lorsqu'on appelle une fonction, il faut lui passer le même nombre de valeurs que de paramètres définis :
+
+        ```python
+        pi = nombre_pi()       # Appel de la fonction sans paramètre
+        carre_de_5 = carre(5)  # Appel de la fonction avec un paramètre (x=5)
+        ```
+
+        Lorsque la fonction a plusieurs paramètres, l'ordre des valeurs transmises doit correspondre à l'ordre des paramètres définis dans la fonction :
+
+        ```python
+        resultat1 = puissance(2, 3)  # Appel de la fonction avec base=2 et exposant=3 (retourne 8)
+        resultat2 = puissance(3, 2)  # Appel de la fonction avec base=3 et exposant=2 (retourne 9)
+        ```
+        
+        :::
+
+        ---
+
+        :::tip Paramètre avec valeur par défaut
+        Il est possible de définir une valeur par défaut pour un paramètre.\
+        Si aucune valeur n'est fournie pour un paramètre lors de l'appel de la fonction, la valeur par défaut sera utilisée.
+
+        ```python showLineNumbers
+        def puissance(base, exposant=2):
+            return base ** exposant
+
+        resultat1 = puissance(5)     # retourne 25, car exposant prend la valeur par défaut 2
+        resultat2 = puissance(5, 3)  # retourne 125, car exposant prend la valeur 3 fournie lors de l'appel
+        ```
+
+        Comme dans cet exemple, une fonction peut posséder à la fois des paramètres avec des valeurs par défaut et des paramètres sans valeurs par défaut.
+
+        Lorsqu’on définit une fonction, il est courant de **placer d’abord les paramètres obligatoires** (ceux qui n’ont pas de valeur par défaut), **suivis des paramètres facultatifs** (ceux qui ont une valeur par défaut).\
+        Cette organisation permet à l’utilisateur de la fonction de **fournir les valeurs pour les paramètres essentiels en priorité**, tout en ayant la liberté de **spécifier uniquement les options supplémentaires** s’il le souhaite.
+
+        ```python showLineNumbers
+        def force_pesanteur(masse, g=9.81, facteur_securite=1.0):
+            """
+            Calcule la force gravitationnelle subie par une masse.
+
+            Paramètres:
+            masse (float): La masse de l'objet en kilogrammes (kg).
+            g (float, optionnel): L'accélération gravitationnelle en m/s². Vaut 9.81 par défaut.
+            facteur_securite (float, optionnel): Un multiplicateur pour ajouter une marge de sécurité. Vaut 1.0 par défaut.
+
+            Retourne:
+            float: La force gravitationnelle calculée en Newtons (N).
+            """
+            return masse * g * facteur_securite
+
+        # Exemples d'appels
+        f1 = force_pesanteur(70)                       # 70 * 9.81 * 1.0 = 686.7 N (Terre)
+        f2 = force_pesanteur(70, 1.62)                 # 70 * 1.62 * 1.0 = 113.4 N (Lune)
+        f3 = force_pesanteur(70, 9.81, 1.5)            # 70 * 9.81 * 1.5 = 1030.05 N (Terre avec marge)
+        f4 = force_pesanteur(70, facteur_securite=1.5)   # 70 * 9.81 * 1.5 = 1030.05 N (Terre avec marge)
+        ```
+
+        La dernière ligne de cet exemple est particulièrement intéressante à analyser :
+        - on fournit la masse obligatoire (`70`) ;
+        - on ne fournit aucune valeur pour l'accélération gravitationnelle, la valeur par défaut sur Terre sera utilisée (`g=9.81`) ;
+        - malgré l'absence de valeur spécifiée pour $g$, on peut fournir directement un facteur de sécurité en utilisant le nom du paramètre (`facteur_securite=1.5`).
+
+        :::
+
+        ---
+
+        :::note Une liste comme paramètre
+
+        Un paramètre peut être de n'importe quel type y compris une **liste**. \
+        À l'intérieur de la fonction, on accède aux éléments de la liste via leur index, comme on l'a vu à la rencontre précédente.
+
+        Voici une fonction qui reçoit une liste de 3 notes et retourne leur moyenne :
+
+        ```python showLineNumbers
+        def calculer_moyenne(notes):
+            """
+            Calcule la moyenne de 3 notes.
+
+            Paramètre :
+            notes (list) : Une liste contenant 3 notes numériques.
+
+            Retourne :
+            float : La moyenne des 3 notes.
+            """
+            return (notes[0] + notes[1] + notes[2]) / 3
+
+        notes_alice = [14, 17, 12]
+        notes_bob   = [9,  11, 15]
+
+        moyenne_alice = calculer_moyenne(notes_alice)
+        moyenne_bob   = calculer_moyenne(notes_bob)
+
+        print(f"Moyenne d'Alice : {round(moyenne_alice, 2)}")
+        print(f"Moyenne de Bob  : {round(moyenne_bob, 2)}")
+        ```
+
+        On passe la liste entière en un seul paramètre. À l'intérieur de la fonction, `notes[0]`, `notes[1]` et `notes[2]` donnent accès à chacune des valeurs. Appeler la fonction avec des listes différentes produit des résultats différents sans réécrire la logique.
+
+        :::
+
+
+        {/* <Feedback feedbackId="Rencontre #3 - Paramètres" /> */}

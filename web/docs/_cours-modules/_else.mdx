@@ -1,0 +1,196 @@
+import Admonition from '@theme/Admonition';
+import Link from '@docusaurus/Link';
+import Column from '../../src/components/Column';
+import Row from '../../src/components/Row';
+import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
+import RappelFonctionnementClasseInverse from '@site/docs/_components/RappelFonctionnementClasseInverse.mdx';
+import DocumentationAutorisee from '@site/docs/_components/DocumentationAutorisee.mdx';
+import DocumentationInterdite from '@site/docs/_components/DocumentationInterdite.mdx';
+import IntroSolutionsExercices from '@site/docs/_components/IntroSolutionsExercices.mdx';
+import AideMemoireListe from '@site/docs/_components/AideMemoireListe.mdx';
+
+:::info Le sinon
+        `else` signifie "sinon".<br />
+        Elle permet de définir un bloc de code qui sera exécuté si toutes les conditions précédentes (`if` et `elif`) sont `False`.
+
+        Par exemple :
+        ```python showLineNumbers
+        age = 10
+        if age >= 18 :
+            print("Vous êtes majeur.")
+        elif age >= 13 :
+            print("Vous êtes adolescent.")
+        else :
+            print("Vous êtes un enfant.")
+        ```
+        Dans cet exemple, si `age` est inférieur à 13, le message "Vous êtes un enfant." sera affiché.
+        :::
+
+        ---
+
+        :::tip Utilisation avec if et elif
+        La clause `else` est souvent utilisée à la fin d'une série d'instructions `if` et `elif` pour capturer tous les cas non couverts par les conditions précédentes.<br />
+        Par exemple :
+        ```python showLineNumbers
+        score = 85
+        if score >= 90 :
+            print("Excellent")
+        elif score >= 75 :
+            print("Bien")
+        elif score >= 50 :
+            print("Passable")
+        else :
+            print("Échec")
+        ```
+        :::
+
+        ---
+
+        :::warning Pas de condition avec else
+        Contrairement à `if` et `elif`, la clause `else` ne prend pas de condition.<br />
+        Elle est simplement exécutée si toutes les conditions précédentes sont `False`. Par exemple, le code suivant est incorrect et provoquera une erreur de syntaxe :
+        ```python showLineNumbers
+        score = 85
+        if score >= 90 :
+            print("Excellent")
+        elif score >= 75 :
+            print("Bien")
+        elif score >= 50 :
+            print("Passable")
+        else score < 50 :  # Erreur : 'else' ne doit pas avoir de condition
+            print("Échec")
+        ```
+        :::
+
+        ---
+
+        :::tip else sans elif
+        Il est possible d'utiliser `else` directement après un `if`, sans avoir besoin de `elif`.<br />
+        Par exemple :
+        ```python showLineNumbers
+        age = 20
+        if age >= 18 :
+            print("Vous êtes majeur.")
+        else :
+            print("Vous êtes mineur.")
+        ```
+        :::
+
+        ---
+
+        :::info Intégration avec les fonctions et les listes
+
+        Les structures conditionnelles (`if/elif/else`, `match/case`) peuvent être utilisées à l'intérieur de fonctions.
+
+        **Exemple 1 — `if/else` simple :**
+        ```python showLineNumbers
+        def est_pair(n):
+            if n % 2 == 0:
+                return True  # Faire modulo 2 sur un nombre pair donne toujours 0!
+            else:
+                return False
+        
+        a = 33
+        b = 52
+        print(f"{a} est un nombre pair : {est_pair(a)}")
+        print(f"{b} est un nombre pair : {est_pair(b)}")
+        ```
+
+        ```
+        33 est un nombre pair : False
+        52 est un nombre pair : True
+        ```
+        **Exemple 2 — `if/else` avec paramètre optionnel et calcul par palier :**
+
+        La fonction suivante calcule la paie brute d'un employé. Elle accepte un troisième paramètre optionnel pour activer le calcul des heures supplémentaires au taux double.
+
+        ```python showLineNumbers
+        def calculer_paie_brute(nb_heures, taux_horaire, temps_double_apres_40_heures=False):
+            if temps_double_apres_40_heures and nb_heures > 40:
+                heures_regulieres = 40
+                nb_heures_temps_supp = nb_heures - 40
+                salaire = (heures_regulieres * taux_horaire) + (nb_heures_temps_supp * taux_horaire * 2)
+            else:
+                salaire = nb_heures * taux_horaire
+            return salaire
+
+        nb_heures = 45
+        taux_horaire = 20
+        print(f"Calcul de la paie brute pour {nb_heures} heures à un taux horaire de {taux_horaire}$/h.")
+        print(f"  Avec le temps > 40 payé au taux doublé   : {calculer_paie_brute(nb_heures, taux_horaire, True)}$")
+        print(f"  Avec le temps > 40 payé au taux régulier : {calculer_paie_brute(nb_heures, taux_horaire)}$")
+        ```
+
+        ```
+        Calcul de la paie brute pour 45 heures à un taux horaire de 20$/h.
+          Avec le temps > 40 payé au taux doublé   : 1000.0$
+          Avec le temps > 40 payé au taux régulier : 900$
+        ```
+
+        **Exemple 3 — `if/elif/else` avec trois listes parallèles :**
+
+        On peut stocker plusieurs valeurs dans des **listes parallèles** et appeler notre fonction sur chaque élément.
+        Voici une liste d'éléments du tableau périodique avec leur masse atomique (en u.m.a.) et leur nombre de protons.
+        On veut **classifier la stabilité** de chaque noyau en fonction du rapport entre sa masse atomique et son nombre de protons — un indicateur simplifié du ratio neutrons/protons :
+
+        ```python showLineNumbers
+        def stabilite_noyau(masse_atomique, nb_protons):
+            """
+            Classifie la stabilité d'un noyau selon un ratio neutrons/protons simplifié.
+
+            Paramètres :
+            masse_atomique (int) : Nombre de masse de l'élément (protons + neutrons).
+            nb_protons (int)     : Nombre de protons dans le noyau.
+
+            Retourne :
+            str: "stable", "légèrement instable" ou "très instable".
+
+            Lève:
+            ValueError: Si le nombre de protons est nul ou si la masse est inférieure au nombre de protons.
+            TypeError: Si les paramètres ne sont pas des entiers.
+            """
+            if not isinstance(masse_atomique, int) or not isinstance(nb_protons, int):
+                raise TypeError("La masse atomique et le nombre de protons doivent être des entiers.")
+            if nb_protons <= 0:
+                raise ValueError("Le nombre de protons doit être strictement positif.")
+            if masse_atomique < nb_protons:
+                raise ValueError("La masse atomique ne peut être inférieure au nombre de protons.")
+
+            nb_neutrons = masse_atomique - nb_protons
+            ratio = nb_neutrons / nb_protons
+            if ratio <= 1.1 :
+                return "stable"
+            elif ratio <= 1.5 :
+                return "légèrement instable"
+            else :
+                return "très instable"
+
+        masses_atomiques = [1,4,7,12,14,16]
+        symboles = ["H","He","Li","C","N","O"]
+        nb_protons = [1,2,3,6,7,8]
+
+        print(f"{symboles[0]} (masse {masses_atomiques[0]}) - stabilité : {stabilite_noyau(masses_atomiques[0], nb_protons[0])}")
+        print(f"{symboles[1]} (masse {masses_atomiques[1]}) - stabilité : {stabilite_noyau(masses_atomiques[1], nb_protons[1])}")
+        print(f"{symboles[2]} (masse {masses_atomiques[2]}) - stabilité : {stabilite_noyau(masses_atomiques[2], nb_protons[2])}")
+        print(f"{symboles[3]} (masse {masses_atomiques[3]}) - stabilité : {stabilite_noyau(masses_atomiques[3], nb_protons[3])}")
+        print(f"{symboles[4]} (masse {masses_atomiques[4]}) - stabilité : {stabilite_noyau(masses_atomiques[4], nb_protons[4])}")
+        print(f"{symboles[5]} (masse {masses_atomiques[5]}) - stabilité : {stabilite_noyau(masses_atomiques[5], nb_protons[5])}")
+        ```
+
+        ```
+        H (masse 1) - stabilité : stable
+        He (masse 4) - stabilité : stable
+        Li (masse 7) - stabilité : légèrement instable
+        C (masse 12) - stabilité : stable
+        N (masse 14) - stabilité : stable
+        O (masse 16) - stabilité : stable
+        ```
+
+        👉 On remarque qu'on répète 6 fois la même instruction `print` en changeant seulement l'index. \
+        C'est exactement le genre de répétition qu'une **boucle `for`** éliminera en quelques lignes, vous verrez ça bientôt!
+
+        :::
+
+
+
+        {/* <Feedback feedbackId="Rencontre #4 - else" /> */}

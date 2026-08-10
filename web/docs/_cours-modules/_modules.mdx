@@ -1,6 +1,14 @@
 import Admonition from '@theme/Admonition';
+import Link from '@docusaurus/Link';
 import Column from '../../src/components/Column';
 import Row from '../../src/components/Row';
+import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
+import RappelFonctionnementClasseInverse from '@site/docs/_components/RappelFonctionnementClasseInverse.mdx';
+import DocumentationAutorisee from '@site/docs/_components/DocumentationAutorisee.mdx';
+import DocumentationInterdite from '@site/docs/_components/DocumentationInterdite.mdx';
+import IntroSolutionsExercices from '@site/docs/_components/IntroSolutionsExercices.mdx';
+import AideMemoireListe from '@site/docs/_components/AideMemoireListe.mdx';
+
 
 
 <Admonition type="tip" title="Faire les exercices dans Colab">
@@ -28,7 +36,6 @@ import Row from '../../src/components/Row';
 
                 ```python showLineNumbers
                 # Importer le module "math"
-                import math
 
                 print(math.sqrt(16)) # Résultat : 4.0
                 print(math.cos(5))   # Résultat : 0.28366218546322625
@@ -88,7 +95,6 @@ import Row from '../../src/components/Row';
             <Column size={6}>
                 ```python showLineNumbers
                 # Donner un alias à un module
-                import random as rd
 
                 print(rd.randint(1, 10))
                 ```
@@ -160,7 +166,6 @@ import Row from '../../src/components/Row';
         - Une fois installée, on peut **importer ses modules** comme pour un module Python classique.
 
         ```python showLineNumbers
-        import numpy # Importer la bibliothèque "numpy"
         print(numpy.array([1, 2, 3]))
         ```
 
@@ -181,7 +186,6 @@ import Row from '../../src/components/Row';
 
         Il suffit d'utiliser le mot-clé `as` lors de l'importation :
         ```python showLineNumbers
-        import numpy as np          # Importer la bibliothèque "numpy" avec l'alias "np"
         print(np.array([1, 2, 3]))  # Utiliser l'alias "np" (au lieu d'écrire numpy) pour accéder à la fonction "array()"
         ```
         :::

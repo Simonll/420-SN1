@@ -1,0 +1,66 @@
+import TabItem from '@theme/TabItem';
+import Tabs from '@theme/Tabs';
+import Admonition from '@theme/Admonition';
+import Link from '@docusaurus/Link';
+import Column from '../../src/components/Column';
+import Row from '../../src/components/Row';
+import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
+import RappelFonctionnementClasseInverse from '@site/docs/_components/RappelFonctionnementClasseInverse.mdx';
+import DocumentationAutorisee from '@site/docs/_components/DocumentationAutorisee.mdx';
+import DocumentationInterdite from '@site/docs/_components/DocumentationInterdite.mdx';
+import IntroSolutionsExercices from '@site/docs/_components/IntroSolutionsExercices.mdx';
+import AideMemoireListe from '@site/docs/_components/AideMemoireListe.mdx';
+
+:::info Définition d'une liste
+        Une **liste** est une structure de données séquentielle capable de stocker plusieurs valeurs ordonnées dans une seule variable.
+
+        ```python showLineNumbers
+        # Une liste de nombres de concentrations mesurées en laboratoire
+        concentrations = [100.0, 85.5, 72.8, 61.2, 50.0]
+        ```
+
+        - On utilise les crochets `[]` pour définir une liste.
+        - Les éléments sont séparés par des virgules.
+        :::
+
+        ---\
+
+        :::note Accès aux éléments par index
+        En Python, le premier élément d'une liste est à l'index **`0`**.
+
+        ```python showLineNumbers
+        mesures = [12.5, 14.2, 15.0]
+        print(mesures[0])  # Affiche 12.5 (premier élément)
+        print(mesures[1])  # Affiche 14.2 (deuxième élément)
+        print(len(mesures)) # len() retourne le nombre d'éléments (ici 3)
+        ```
+        :::
+
+        ---\
+
+        :::tip Parcours d'une liste avec `for`
+        Il existe deux façons de parcourir une liste avec une boucle `for` :
+
+        <Tabs>
+        <TabItem value="direct" label="1. Parcours direct par élément" default>
+
+        ```python showLineNumbers
+        temperatures = [21.5, 22.0, 20.8, 23.1]
+
+        for temp in temperatures:
+            print(f"Mesure enregistrée : {temp} °C")
+        ```
+
+        </TabItem>
+        <TabItem value="index" label="2. Parcours par index (avec range)">
+
+        ```python showLineNumbers
+        temperatures = [21.5, 22.0, 20.8, 23.1]
+
+        for i in range(len(temperatures)):
+            print(f"Heure {i} : {temperatures[i]} °C")
+        ```
+
+        </TabItem>
+        </Tabs>
+        :::

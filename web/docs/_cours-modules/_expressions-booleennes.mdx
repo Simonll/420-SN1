@@ -1,0 +1,114 @@
+import AideMemoireExpressionsBoolennes from '@site/docs/_components/AideMemoireExpressionsBoolennes.mdx';
+import Admonition from '@theme/Admonition';
+import Link from '@docusaurus/Link';
+import Column from '../../src/components/Column';
+import Row from '../../src/components/Row';
+import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
+import RappelFonctionnementClasseInverse from '@site/docs/_components/RappelFonctionnementClasseInverse.mdx';
+import DocumentationAutorisee from '@site/docs/_components/DocumentationAutorisee.mdx';
+import DocumentationInterdite from '@site/docs/_components/DocumentationInterdite.mdx';
+import IntroSolutionsExercices from '@site/docs/_components/IntroSolutionsExercices.mdx';
+import AideMemoireListe from '@site/docs/_components/AideMemoireListe.mdx';
+
+:::info Qu'est-ce qu'une expression booléenne?
+
+        Une expression booléenne est une expression qui évalue à une valeur de vérité ([`bool`](/aidememoire/types/)), c'est-à-dire soit `True` (vrai) soit `False` (faux).<br />
+        Elles sont utilisées pour prendre des décisions dans le code, comme dans les instructions conditionnelles (`if`, `elif`, `else`) et les boucles (`while`, `for`).
+
+        :::
+
+        ---
+
+        :::note Opérateurs de comparaison
+
+        Les opérateurs de comparaison sont utilisés pour comparer deux valeurs.<br />
+        Voici les principaux opérateurs de comparaison en Python :
+
+        <AideMemoireExpressionsBoolennes />
+
+        :::
+
+        ---
+
+        :::tip Exemples d'utilisation
+        ```python showLineNumbers
+        a = 5
+        b = 10
+        print(a < b)   # Affiche True
+        print(a == b)  # Affiche False
+        print(a + 5 >= b - max(1, min(4, a, 6), 5))   # Affiche True, explications ci-dessous!
+        ```
+
+Les 2 opérandes d’un opérateur de comparaison peuvent être le résultat de l'évaluation d’expressions. \
+Python évalue l’expression selon la [priorité des opérateurs](/aidememoire/operateurs?onglet=priorite), en remplaçant chaque sous-expression par sa valeur résultante.
+
+Voici comment Python évalue l’instruction #5, étape par étape :
+
+        ```python 
+        print(a + 5 >= b - max(1, min(4, a, 6), 5))  # Instruction originale
+        print(5 + 5 >= b - max(1, min(4, 5, 6), 5))  # Remplace 'a' par sa valeur
+        print(10 >= b - max(1, min(4, 5, 6), 5))     # Calcule la somme de '5 + 5'
+        print(10 >= 10 - max(1, min(4, 5, 6), 5))    # Remplace 'b' par sa valeur
+        print(10 >= 10 - max(1, 4, 5))               # La fonction min(...) doit être résolue avant la fonction max(...)
+        print(10 >= 10 - 5)                          # La fonction max(...) est résolue
+        print(10 >= 5)                               # L'opération >=
+        print(True)                                  # Affiche "True" dans la console
+        ```
+        :::
+
+        ---
+
+        :::note Opérateurs logiques
+
+        Les opérateurs logiques sont utilisés pour combiner plusieurs expressions booléennes. \
+        Ils sont inclus dans le tableau des expressions booléennes ci-dessus (`and`, `or`, `not`).
+
+        :::
+
+        ---
+
+        :::info Priorité des opérateurs
+        La priorité des opérateurs détermine l'ordre dans lequel les opérations sont effectuées dans une expression.<br />
+        En Python, la priorité des opérateurs est la suivante (de la plus haute à la plus basse) :
+        1. Parenthèses `()`
+        2. Opérateurs de comparaison (`==`, `!=`, `<`, `<=`, `>`, `>=`)
+        3. Opérateur `not`
+        4. Opérateur `and`
+        5. Opérateur `or`
+
+        Un ordre plus exhaustif des priorités des opérateurs est disponible [ici dans l'aide-mémoire](/aidememoire/operateurs?onglet=priorite).
+        :::
+
+        ---
+
+        :::tip Exemple de priorité
+        ```python showLineNumbers
+        a = 5
+        b = 10
+        c = 15
+        print(a < b and b < c)  # Évalué comme (a < b) and (b < c), affiche True
+        print(a < b or b > c)   # Évalué comme (a < b) or (b > c), affiche True
+        print(not a < b)        # Évalué comme not (a < b), affiche False
+
+        # On peut utiliser des parenthèses pour modifier l'ordre d'évaluation :
+        print(a < b or b > c and a == 5)  # Évalué comme a < b or (b > c and a == 5), affiche True
+        print((a < b or b > c) and a == 5) # Évalué comme (a < b or b > c) and a == 5, affiche True
+        ```
+        :::
+
+        ---
+
+        :::info Stockage dans des variables
+        On peut stocker le résultat d'une expression booléenne dans une variable pour une utilisation ultérieure.
+        ```python showLineNumbers
+        a = 5
+        b = 10
+        est_plus_petit = a < b  # est_plus_petit sera True
+        est_egal = a == b       # est_egal sera False
+        print(est_plus_petit)    # Affiche True
+        print(est_egal)          # Affiche False
+        ```
+        :::
+
+
+        {/* <Feedback feedbackId="Rencontre #4 - Expressions booléennes" /> */}

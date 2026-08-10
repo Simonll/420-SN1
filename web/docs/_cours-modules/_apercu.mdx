@@ -1,3 +1,14 @@
+import Admonition from '@theme/Admonition';
+import Link from '@docusaurus/Link';
+import Column from '../../src/components/Column';
+import Row from '../../src/components/Row';
+import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
+import RappelFonctionnementClasseInverse from '@site/docs/_components/RappelFonctionnementClasseInverse.mdx';
+import DocumentationAutorisee from '@site/docs/_components/DocumentationAutorisee.mdx';
+import DocumentationInterdite from '@site/docs/_components/DocumentationInterdite.mdx';
+import IntroSolutionsExercices from '@site/docs/_components/IntroSolutionsExercices.mdx';
+import AideMemoireListe from '@site/docs/_components/AideMemoireListe.mdx';
+
 Le code ci-dessous illustre différents exemples de notions abordées dans le cours.
 Ce code sert uniquement de démonstration globale pour le premier cours. Vous apprendrez à maîtriser chacune de ces lignes au fil des semaines!
 
@@ -16,11 +27,6 @@ pip install matplotlib pandas numpy
 :::
 
     ```python showLineNumbers
-import math
-import random
-import matplotlib.pyplot as plt
-import pandas as pd
-import numpy as np
 
 print("Démo #1 - utilisation de fonctions standard (R02)")
 max(10, 50, 30)

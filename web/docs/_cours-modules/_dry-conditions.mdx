@@ -1,0 +1,167 @@
+import Admonition from '@theme/Admonition';
+import Link from '@docusaurus/Link';
+import Column from '../../src/components/Column';
+import Row from '../../src/components/Row';
+import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
+import RappelFonctionnementClasseInverse from '@site/docs/_components/RappelFonctionnementClasseInverse.mdx';
+import DocumentationAutorisee from '@site/docs/_components/DocumentationAutorisee.mdx';
+import DocumentationInterdite from '@site/docs/_components/DocumentationInterdite.mdx';
+import IntroSolutionsExercices from '@site/docs/_components/IntroSolutionsExercices.mdx';
+import AideMemoireListe from '@site/docs/_components/AideMemoireListe.mdx';
+
+:::info Éviter la répétition : les structures conditionnelles
+        En programmation, on suit souvent le principe **DRY** (*Don't Repeat Yourself*). \
+        Si vous remarquez que vous écrivez **la même instruction plusieurs fois** dans des blocs différents, c'est le signe qu'elle n'est pas vraiment conditionnelle! <br/>
+
+        Si une instruction se retrouve à la fois dans le `if` **et** dans le `else`, elle s'exécuterait dans **tous les cas** de toute façon. \
+        Elle devrait donc être placée **en dehors** du bloc conditionnel — soit **avant**, soit **après**, selon sa position dans les blocs de code.
+        :::
+
+        ---
+
+        :::danger Avant le bloc — exemple avec une instruction redondante au début
+        Repérez l'instruction répétée inutilement dans les deux blocs :
+        ```python showLineNumbers
+        # Version redondante
+        temperature = 37.8
+
+        if temperature > 37.5 :
+            print("Initialisation du protocole de mesure...")  # ❌ Répété au début des 2 blocs!
+            print("⚠️ Fièvre détectée : consulter un médecin.")
+        else :
+            print("Initialisation du protocole de mesure...")  # ❌ Répété au début des 2 blocs!
+            print("✅ Température normale.")
+        ```
+        Peu importe la valeur de `temperature`, l'initialisation du protocole est **toujours** affichée.\
+        La répéter dans les deux blocs est inutile et rend le code plus difficile à maintenir.
+        :::
+
+        ---
+
+        :::tip ✅ La bonne approche : sortir l'instruction commune avant le bloc
+        ```python showLineNumbers
+        # Version sans redondance
+        temperature = 37.8
+
+        print("Initialisation du protocole de mesure...")  # ✅ Exécuté dans tous les cas avant les 2 blocs
+
+        if temperature > 37.5 :
+            print("⚠️ Fièvre détectée : consulter un médecin.")
+        else :
+            print("✅ Température normale.")
+        ```
+        Le code est plus court, plus lisible, et plus facile à modifier : si le message d'initialisation change, on n'a qu'**un seul endroit** à modifier.
+        :::
+
+        ---
+
+        :::danger ⚠️ Après le bloc — exemple avec une instruction redondante à la fin
+        Même problème, mais cette fois l'instruction répétée se trouve à la **fin** de chaque bloc :
+        ```python showLineNumbers
+        # Version redondante
+        masse_g = 5.2
+        volume_mL = 10.0
+
+        if masse_g > 0 and volume_mL > 0 :
+            densite = masse_g / volume_mL
+            print(f"Densité calculée : {densite} g/mL")
+            print("--- Fin de l'analyse ---")  # ❌ Répété à la fin des 2 blocs!
+        else :
+            print("⚠️ Paramètres invalides, calcul impossible.")
+            print("--- Fin de l'analyse ---")  # ❌ Répété à la fin des 2 blocs!
+        ```
+        :::
+
+        ---
+
+        :::tip La bonne approche : sortir l'instruction commune après le bloc
+        ```python showLineNumbers
+        # Version sans redondance
+        masse_g = 5.2
+        volume_mL = 10.0
+
+        if masse_g > 0 and volume_mL > 0 :
+            densite = masse_g / volume_mL
+            print(f"Densité calculée : {densite} g/mL")
+        else :
+            print("⚠️ Paramètres invalides, calcul impossible.")
+
+        print("--- Fin de l'analyse ---")  # ✅ Exécuté dans tous les cas après les 2 blocs
+        ```
+        :::
+
+        ---
+
+        :::note Récapitulatif — où placer les instructions communes?
+
+        | Position de la redondance | Solution |
+        |---------------------------|----------|
+        | Au **début** de chaque bloc | Placer l'instruction **avant** le bloc `if` |
+        | À la **fin** de chaque bloc | Placer l'instruction **après** le bloc `if/else` |
+        | Au **début et à la fin** | Placer une instruction **avant** et une **après** |
+
+        La règle est simple : si une instruction s'exécute **dans tous les cas**, elle ne devrait **jamais** se retrouver à l'intérieur d'un `if` ou d'un `else`.
+        :::
+
+        ---
+
+        :::tip Exemple complet — redondance au début ET à la fin
+        ```python showLineNumbers
+        # Version redondante
+        pression_atm = 2.3
+
+        if pression_atm > 2.0 :
+            print("=== Rapport de pression ===")     # ❌ Début redondant
+            print("⚠️ Pression critique détectée!")
+            print("=== Fin du rapport ===")          # ❌ Fin redondante
+        else :
+            print("=== Rapport de pression ===")     # ❌ Début redondant
+            print("✅ Pression dans les normes.")
+            print("=== Fin du rapport ===")          # ❌ Fin redondante
+        ```
+
+        ```python showLineNumbers
+        # Version sans redondance
+        pression_atm = 2.3
+
+        print("=== Rapport de pression ===")            # ✅ Redondance déplacée avant les blocs
+
+        if pression_atm > 2.0 :
+            print("⚠️ Pression critique détectée!")
+        else :
+            print("✅ Pression dans les normes.")
+
+        print("=== Fin du rapport ===")                 # ✅ Redondance déplacée après les blocs
+        ```
+        Le résultat affiché est **identique**, mais la version propre est bien plus facile à lire et à maintenir!
+        :::
+
+        ---
+
+        :::warning Attention — ne pas confondre redondance et répétition intentionnelle!
+        Parfois, deux instructions se ressemblent mais **ne sont pas identiques** : elles ne peuvent donc pas être sorties du bloc.
+        ```python showLineNumbers
+        # Ce n'est PAS de la redondance, car les messages sont différents!
+        ph = 4.2
+
+        if ph < 7 :
+            print(f"Le pH de {ph} indique une solution acide.")
+        else :
+            print(f"Le pH de {ph} indique une solution basique ou neutre.")
+        ```
+        Ici, les deux `print` contiennent du texte différent. Ils doivent rester dans leurs blocs respectifs.
+        :::
+
+        :::tip Pour aller plus loin (avancé)
+        Même si les instructions ne sont pas identiques, on peut souvent appliquer le principe DRY en extrayant la partie qui varie dans une variable. Ici, on pourrait utiliser la forme compacte pour rendre le code encore plus concis :
+
+        ```python
+        ph = 4.2
+        type_solution = "acide" if ph < 7 else "basique ou neutre"
+        print(f"Le pH de {ph} indique une solution {type_solution}.")
+        ```
+        On a maintenant un seul `print`, ce qui est encore plus facile à maintenir!
+        :::
+
+
+        {/* <Feedback feedbackId="Rencontre #4 - DRY" /> */}

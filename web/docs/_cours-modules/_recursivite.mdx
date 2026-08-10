@@ -1,0 +1,44 @@
+import Admonition from '@theme/Admonition';
+import Link from '@docusaurus/Link';
+import Column from '../../src/components/Column';
+import Row from '../../src/components/Row';
+import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
+import RappelFonctionnementClasseInverse from '@site/docs/_components/RappelFonctionnementClasseInverse.mdx';
+import DocumentationAutorisee from '@site/docs/_components/DocumentationAutorisee.mdx';
+import DocumentationInterdite from '@site/docs/_components/DocumentationInterdite.mdx';
+import IntroSolutionsExercices from '@site/docs/_components/IntroSolutionsExercices.mdx';
+import AideMemoireListe from '@site/docs/_components/AideMemoireListe.mdx';
+
+:::warning
+        La récursivité est une notion plus avancée qui dépasse le cadre de ce cours.<br/>
+        Elle n'est pas obligatoire pour réussir le cours, mais il s'agit d'un concept intéressant à explorer si vous êtes curieu.x.se.<br />
+        Vous pouvez choisir de ne pas lire cette section si vous n'êtes pas assez à l'aise ou si vous êtes déjà assez mêlé.e comme ça!<br />
+        :::
+
+        :::info Récursivité
+
+        La récursivité est une technique de programmation où une fonction s'appelle elle-même pour résoudre un problème.<br />
+        Cela peut être utile pour résoudre des problèmes qui peuvent être décomposés en sous-problèmes similaires.
+
+        Voici un exemple simple de fonction récursive qui calcule la factorielle d'un nombre :<br />
+        (note : le code contient un `if` que l'on n'a pas encore vu, mais c'est pour illustrer la récursivité)
+
+        ```python showLineNumbers
+        def factorielle(n):
+            if n == 0 or n == 1:  # Cas de base
+                return 1
+            else:
+                return n * factorielle(n - 1)  # Appel récursif
+
+        print(factorielle(5))  # Affiche 120
+        ```
+
+        Dans cet exemple, la fonction `factorielle` s'appelle elle-même avec un paramètre réduit jusqu'à atteindre le cas de base (0 ou 1), où elle retourne 1.<br />
+        La pile d'appels se remplit à chaque appel récursif, puis se vide lorsque les appels sont résolus.
+
+        Si vous êtes curieu.x.se vous pouvez exécuter ce code en mode débogage et observer la pile d'appels pour voir comment elle évolue avec chaque appel récursif.
+
+        :::
+
+
+        {/* <Feedback feedbackId="Rencontre #3 - Récursivité" /> */}

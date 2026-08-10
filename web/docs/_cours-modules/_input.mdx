@@ -1,0 +1,66 @@
+import Admonition from '@theme/Admonition';
+import Link from '@docusaurus/Link';
+import Column from '../../src/components/Column';
+import Row from '../../src/components/Row';
+import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
+import RappelFonctionnementClasseInverse from '@site/docs/_components/RappelFonctionnementClasseInverse.mdx';
+import DocumentationAutorisee from '@site/docs/_components/DocumentationAutorisee.mdx';
+import DocumentationInterdite from '@site/docs/_components/DocumentationInterdite.mdx';
+import IntroSolutionsExercices from '@site/docs/_components/IntroSolutionsExercices.mdx';
+import AideMemoireListe from '@site/docs/_components/AideMemoireListe.mdx';
+
+::::info-nt
+
+        ### La fonction `input()`
+        La fonction `input()` rend vos programmes interactifs en permettant de poser une question à l'utilisateur et de récupérer ce qu'il tape au clavier.
+
+        Elle s'utilise généralement en lui passant une chaîne de caractères qui servira de guide (le message d'invite) :
+
+        ```python showLineNumbers
+        # Affiche la question, et sauvegarde la réponse dans la variable 'prenom'
+        prenom = input("Veuillez saisir votre prénom : ")
+        print(f"Bonjour, {prenom} !")
+
+        # On peut aussi l'utiliser sans paramètre, mais l'utilisateur ne saura pas quoi faire !
+        saisie_mystere = input() 
+
+        ```
+
+        :::warning `input` met le programme sur PAUSE !
+        Lorsque la fonction `input(...)` est exécutée, le programme se met en pause. \
+        Dès que Python lit l'instruction `input()`, le programme **se fige**. Il attend patiemment que l'utilisateur tape quelque chose dans la console et appuie sur la touche **ENTRÉE**.\
+
+        C'est donc tout à fait normal que l'instruction suivante ne s'exécute pas tant que la touche Entrée n'a pas été pressée !
+        
+        :::
+
+        ### Le grand piège : `input()` retourne TOUJOURS du texte !
+
+        La fonction `input(...)` retourne **TOUJOURS** une chaîne de caractères (`str`), même si l’utilisateur saisit un nombre. \
+        Pour utiliser la valeur dans un calcul, il faut la convertir avec `int()` ou `float()`.
+
+        Peu importe ce que l'utilisateur tape (même s'il entre le chiffre `42`), la fonction `input()` considère toujours que c'est du texte (`str`). Si vous tentez de faire un calcul mathématique avec cette donnée sans la convertir, le résultat sera inattendu ou le programme plantera.
+
+        Pour utiliser la valeur dans un calcul, il faut la **convertir** en nombre à l'aide des fonctions `int()` (pour un entier) ou `float()` (pour un décimal).
+
+        :::tip Astuce : La conversion sur une seule ligne
+        Au lieu de faire la conversion sur deux lignes distinctes, les programmeurs enveloppent souvent le `input()` directement à l'intérieur de `int()` ou `float()` :
+
+        ```python showLineNumbers
+        # Demander un nombre entier (int)
+        age = int(input("Entrez votre âge : "))
+        print(f"Dans 10 ans, vous aurez {age + 10} ans.")
+
+        # Demander un nombre décimal (float)
+        taille = float(input("Entrez votre taille en mètres : "))
+        print(f"Votre taille en centimètres est {taille * 100} cm.")
+
+        ```
+
+        Sans ces fonctions de conversion, l'ordinateur traiterait l'âge comme le mot "18", et l'addition `age + 10` provoquerait une erreur !
+        :::
+
+        ::::
+
+
+        {/* <Feedback feedbackId="Rencontre #5 - input()" /> */}

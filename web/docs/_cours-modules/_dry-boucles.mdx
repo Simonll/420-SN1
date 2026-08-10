@@ -1,0 +1,108 @@
+import Admonition from '@theme/Admonition';
+import Link from '@docusaurus/Link';
+import Column from '../../src/components/Column';
+import Row from '../../src/components/Row';
+import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
+import RappelFonctionnementClasseInverse from '@site/docs/_components/RappelFonctionnementClasseInverse.mdx';
+import DocumentationAutorisee from '@site/docs/_components/DocumentationAutorisee.mdx';
+import DocumentationInterdite from '@site/docs/_components/DocumentationInterdite.mdx';
+import IntroSolutionsExercices from '@site/docs/_components/IntroSolutionsExercices.mdx';
+import AideMemoireListe from '@site/docs/_components/AideMemoireListe.mdx';
+
+:::info Éviter la répétition : les boucles et les listes
+        En programmation, il existe une règle d'or appelée **DRY** (*Don't Repeat Yourself* - Ne vous répétez pas). 
+
+        Si vous remarquez que vous êtes en train de copier-coller un bloc de code en ne changeant que quelques petites valeurs à l'intérieur, c'est le signal d'alarme : **vous avez besoin d'une boucle !**
+        :::
+
+        ---
+
+        :::danger Le code redondant
+        Voici un programme qui affiche le bulletin de trois étudiants. Remarquez comment le bloc d'instructions est répété trois fois. Seules les valeurs changent :
+
+        ```python showLineNumbers
+        print("Étudiant #1")
+        print("Nom : Félix")
+        print("Note : 72")
+        print()
+
+        print("Étudiant #2")
+        print("Nom : Dayron")
+        print("Note : 91")
+        print()
+
+        print("Étudiant #3")
+        print("Nom : Léa")
+        print("Note : 58")
+        print()
+
+        ```
+
+        Ce code fonctionne, mais c'est un cauchemar à maintenir. Si vous voulez ajouter un 4e étudiant, vous devez copier-coller un nouveau bloc. Pire encore : si vous décidez de changer le mot "Nom :" pour "Prénom :", vous devrez faire la modification à trois endroits différents !
+        :::
+
+        ---
+
+        :::note Étape 1 : Extraire ce qui change
+        Pour corriger cela, observez les trois blocs et isolez **uniquement ce qui varie** :
+
+        1. Le **numéro** de l'étudiant (`1`, `2`, `3`)
+        2. Le **nom** (`Félix`, `Dayron`, `Léa`)
+        3. La **note** (`72`, `91`, `58`)
+
+        Le numéro correspond en fait à la position de l'étudiant (l'index `0`, `1`, `2`), auquel on ajoute simplement `1` pour l'affichage humain.
+        Quant aux noms et aux notes, on va les extraire du code pour les ranger dans des **listes parallèles** :
+
+        ```python showLineNumbers
+        noms  = ["Félix", "Dayron", "Léa"]
+        notes = [72, 91, 58]
+
+        ```
+
+        :::
+
+        ---
+
+        :::tip ✅ Étape 2 : La magie de la boucle
+        Maintenant que nos données sont proprement rangées dans des listes, on écrit le bloc d'affichage **une seule fois** et on laisse la boucle faire le travail répétitif :
+
+        ```python showLineNumbers
+        noms  = ["Félix", "Dayron", "Léa"]
+        notes = [72, 91, 58]
+
+        nb_elements = len(noms)
+        for i in range(nb_elements):
+            print(f"Étudiant #{i + 1}")    # On ajoute 1 à l'index pour afficher 1, 2, 3...
+            print(f"Nom : {noms[i]}")      # On pige dans la liste des noms
+            print(f"Note : {notes[i]}")    # On pige dans la liste des notes
+            print()
+
+        ```
+
+        Le résultat à l'écran est **strictement identique** à la version redondante, mais le code est devenu intelligent !
+        :::
+
+        ---
+
+        :::info L'avantage absolu : La flexibilité
+        Regardez ce qui se passe si l'on veut ajouter un 4e étudiant (Tristan).
+        On ajoute simplement **ses données dans les listes**, et c'est tout. La fonction `len()` détectera automatiquement qu'il y a maintenant 4 éléments, et la boucle s'ajustera toute seule :
+
+        ```python showLineNumbers
+        noms  = ["Félix", "Dayron", "Léa", "Tristan"]
+        notes = [72, 91, 58, 83]
+
+        nb_elements = len(noms)
+        for i in range(nb_elements):
+            print(f"Étudiant #{i + 1}")
+            print(f"Nom : {noms[i]}")
+            print(f"Note : {notes[i]}")
+            print()
+
+        ```
+
+        Le corps de la boucle (les lignes 6 à 9) n'a pas changé d'un seul caractère. C'est la véritable puissance de combiner les listes et les boucles : on sépare les **données** de la **logique d'affichage** !
+        :::
+
+
+        {/* <Feedback feedbackId="Rencontre #5 - DRY" /> */}

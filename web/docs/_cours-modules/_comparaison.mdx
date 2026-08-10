@@ -1,0 +1,121 @@
+import Admonition from '@theme/Admonition';
+import Link from '@docusaurus/Link';
+import Column from '../../src/components/Column';
+import Row from '../../src/components/Row';
+import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
+import RappelFonctionnementClasseInverse from '@site/docs/_components/RappelFonctionnementClasseInverse.mdx';
+import DocumentationAutorisee from '@site/docs/_components/DocumentationAutorisee.mdx';
+import DocumentationInterdite from '@site/docs/_components/DocumentationInterdite.mdx';
+import IntroSolutionsExercices from '@site/docs/_components/IntroSolutionsExercices.mdx';
+import AideMemoireListe from '@site/docs/_components/AideMemoireListe.mdx';
+
+:::danger ⚠️ `if if if` vs `if elif else` — ce n'est pas la même chose!
+
+        C'est l'une des erreurs les plus fréquentes chez les débutants : \
+        utiliser plusieurs `if` indépendants là où un `if/elif/else` serait nécessaire. \
+        La différence est fondamentale et peut avoir des impacts sur les performances.
+
+        Prenons cet exemple avec `score = 95` :
+
+        ```python showLineNumbers
+        # Version avec des if if if
+        score = 95
+        if score >= 90 :
+            print("Excellent")  # ✅ Exécuté (95 >= 90 est True)
+        if score >= 75 :
+            print("Bien")       # ✅ Exécuté (95 >= 75 est True)
+        if score >= 50 :
+            print("Passable")   # ✅ Exécuté (95 >= 50 est True)
+        else :
+            print("Échec")      # ⏭️ Bloc ignoré. Cet `else` est lié UNIQUEMENT au `if score >= 50` précédent.
+        ```
+
+        Résultat affiché :
+        ```
+        Excellent
+        Bien
+        Passable
+        ```
+        Avec des `if` indépendants, Python évalue **chaque condition séparément**, de haut en bas, **sans jamais s'arrêter**. Comme les 3 conditions sont `True` pour `score = 95`, les **3 blocs sont exécutés**. Ce n'est presque certainement pas ce qu'on voulait! Il aurait été préférable que Python arrête d’évaluer les autres conditions dès qu’il trouve une condition donnant `True`.
+
+        :::
+
+        ---
+
+        :::tip ✅ La bonne approche : `if elif else`
+        ```python showLineNumbers
+        # Version avec if elif else
+        score = 95
+        if score >= 90 :
+            print("Excellent")  # ✅ Exécuté (95 >= 90 est True) → Python arrête ici
+        elif score >= 75 :
+            print("Bien")       # ⏭️ Bloc ignoré (car une condition d'un bloc précédent a donné True)
+        elif score >= 50 :
+            print("Passable")   # ⏭️ Bloc ignoré (car une condition d'un bloc précédent a donné True)
+        else :
+            print("Échec")      # ⏭️ Bloc ignoré (car une condition d'un bloc précédent a donné True)
+        ```
+
+        Résultat affiché :
+        ```
+        Excellent
+        ```
+
+        Avec `if/elif/else`, dès qu'une condition est `True`, Python exécute le bloc correspondant et **saute immédiatement le reste** : les autres conditions ne sont **jamais évaluées**. Un seul bloc s'exécute, peu importe le nombre de `elif`. Python a donc exécuté uniquement le bloc associé à `score >= 90`.
+        :::
+
+        ---
+
+        :::note Comment choisir entre les 2 approches
+
+        | Situation | Utiliser |
+        |-----------|----------|
+        | Les cas sont **mutuellement exclusifs** (un seul doit s'exécuter) | <C><K>if</K> &#47; <K>elif</K> &#47; <K>else</K></C> |
+        | Les vérifications sont **indépendantes** les unes des autres | Plusieurs <C><K>if</K></C> séparés |
+
+        **Exemple où plusieurs `if` séparés sont appropriés** :
+        ```python showLineNumbers
+        ph = 3.5
+        temperature_celsius = 85
+        pression_atm = 1.8
+
+        if ph < 6 :
+            print("Solution acide : portez des gants de protection.")       # ✅ Exécuté
+        if temperature_celsius > 60 :
+            print("Température élevée : risque de brûlure.")                # ✅ Exécuté
+        if pression_atm > 1.5 :
+            print("Pression élevée : vérifiez l'étanchéité du système.")    # ✅ Exécuté
+        ```
+        Ici, les 3 avertissements sont **complémentaires** et ont du sens ensemble. Plusieurs `if` indépendants sont donc le bon choix.
+
+        :::
+
+        ---
+
+        :::info Récapitulatif if, elif, else
+
+        Pour récapituler, la structure d'une instruction conditionnelle en Python est la suivante :
+        1. `if` : Obligatoire pour commencer une instruction conditionnelle.
+        2. `elif` : Les blocs `elif` sont optionnels.
+            - Il peut y en avoir 0, 1, 2 ou plus.
+            - Chaque `elif` vérifie une condition, seulement si toutes les conditions précédentes sont `False`.
+        3. `else` : Le bloc `else` est optionnel.
+            - Il ne peut y avoir qu’un seul `else`.
+            - Il est exécuté si toutes les conditions précédentes sont `False`.
+            - Le bloc `else` ne prend pas de condition.
+
+        :::
+
+        ---
+
+        :::tip Autres points importants à retenir
+
+        - **Indentation** : le code à exécuter conditionnellement doit être indenté sous l'instruction correspondante.
+        - **Ordre des conditions** :
+            - les conditions sont évaluées de haut en bas;
+            - la première condition `True` déclenche l'exécution du bloc de code correspondant;
+            - dans une structure `if/elif/else`, les autres conditions sont ignorées dès qu’une condition est `True`.
+        :::
+
+
+        {/* <Feedback feedbackId="Rencontre #4 - Comparaison" /> */}

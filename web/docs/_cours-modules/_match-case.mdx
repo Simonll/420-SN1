@@ -1,0 +1,59 @@
+import Admonition from '@theme/Admonition';
+import Link from '@docusaurus/Link';
+import Column from '../../src/components/Column';
+import Row from '../../src/components/Row';
+import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
+import RappelFonctionnementClasseInverse from '@site/docs/_components/RappelFonctionnementClasseInverse.mdx';
+import DocumentationAutorisee from '@site/docs/_components/DocumentationAutorisee.mdx';
+import DocumentationInterdite from '@site/docs/_components/DocumentationInterdite.mdx';
+import IntroSolutionsExercices from '@site/docs/_components/IntroSolutionsExercices.mdx';
+import AideMemoireListe from '@site/docs/_components/AideMemoireListe.mdx';
+
+:::warning match/case — pour ta culture générale!
+        La structure `match/case` produit des résultats très similaires à un `if/elif/else` enchaîné.
+        Elle n'est **pas exigée** dans ce cours : tu ne seras **jamais évalué** dessus.\
+        Si tu la trouves intuitive, libre à toi de l'utiliser. Un bon vieux `if/elif/else` fera toujours l'affaire!
+        :::
+
+        :::info match/case
+        Le `match/case` est une structure de contrôle qui permet de faire des correspondances de motifs (*pattern matching*).<br />
+        - Il permet de comparer une variable à plusieurs valeurs possibles.<br />
+        - Il offre ainsi une alternative aux longues chaînes d'instructions `if`/`elif`/`else` pour des cas spécifiques.
+
+        Sa syntaxe est la suivante :
+        ```python showLineNumbers
+        match variable:
+            case valeur1:
+                # code à exécuter si variable == valeur1
+            case valeur2:
+                # code à exécuter si variable == valeur2
+            case _:
+                # code à exécuter si aucune des valeurs précédentes ne correspond
+        ```
+        - Le `_` dans le dernier `case` agit comme un `else`, capturant tous les autres cas non spécifiés.
+        - Utile pour des comparaisons simples, mais peut être moins flexible que `if`/`elif`/`else` pour des conditions complexes.
+        - Exemple :
+        ```python showLineNumbers
+        jour = "lundi"
+        match jour:
+            case "lundi":
+                print("Début de la semaine")
+            case "mercredi":
+                print("Milieu de la semaine")
+            case "vendredi":
+                print("Fin de la semaine")
+            case _:
+                print("Jour ordinaire")
+        ```
+        :::
+
+        :::tip Avantages du match/case
+        - Plus lisible pour des comparaisons multiples sur une même variable.
+        - Permet de gérer facilement des cas spécifiques.
+        - Peut être plus performant que de nombreuses instructions `if`/`elif` dans certains cas.
+
+        Il est important de noter que tout `match/case` peut être réécrit avec des `if`/`elif`/`else`, mais l'inverse n'est pas toujours vrai.
+        :::
+
+
+        {/* <Feedback feedbackId="Rencontre #4 - match/case" /> */}

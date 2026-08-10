@@ -1,0 +1,103 @@
+import Admonition from '@theme/Admonition';
+import Link from '@docusaurus/Link';
+import Column from '../../src/components/Column';
+import Row from '../../src/components/Row';
+import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
+import RappelFonctionnementClasseInverse from '@site/docs/_components/RappelFonctionnementClasseInverse.mdx';
+import DocumentationAutorisee from '@site/docs/_components/DocumentationAutorisee.mdx';
+import DocumentationInterdite from '@site/docs/_components/DocumentationInterdite.mdx';
+import IntroSolutionsExercices from '@site/docs/_components/IntroSolutionsExercices.mdx';
+import AideMemoireListe from '@site/docs/_components/AideMemoireListe.mdx';
+
+:::info Introduction aux boucles
+        Les boucles apportent une puissance considérable à vos programmes. Elles permettent de répéter des actions, de parcourir des listes et de traiter des données massivement sans avoir à copier-coller du code. Avec les variables et les conditions, c'est l'un des piliers de la programmation.
+
+        Voici la logique fondamentale d'une boucle :
+        ```pseudo showLineNumbers
+        Tant que (cette condition est vraie) :
+            # Exécuter cette instruction
+            # Et celle-ci
+        # Suite du programme (exécuté quand la condition devient fausse)
+
+        ```
+        Si on exécutait ce pseudo-code, on répéterait l'exécution des lignes 2 à 4 tant que la condition de la ligne 1 est vraie.\
+        Dès que la condition devient fausse, on sort de la boucle et on continue l'exécution du programme à la ligne 5.
+
+        En Python, on traduit le "Tant que" par le mot-clé `while`.
+        Voici un exemple classique :
+        
+        ```python showLineNumbers
+        compteur = 0
+        while compteur < 5:
+            print("Compteur =", compteur)
+            compteur = compteur + 1  # Incrémente le compteur de 1
+        print("Fin de la boucle")
+        ```
+        
+        **Que se passe-t-il ici ?**
+
+        1. Python évalue la condition : est-ce que `0 < 5` ? Oui (`True`).
+        2. Il entre dans la boucle, affiche "0", et ajoute 1 à `compteur`.
+        3. Il remonte à la ligne 2 pour vérifier à nouveau. Est-ce que `1 < 5` ? Oui.
+        4. À chaque tour (qu'on appelle une **itération**), `compteur` augmente.
+        5. Quand `compteur` atteint 5, la condition `5 < 5` devient fausse (`False`). Python saute alors par-dessus la boucle et passe à la ligne 5.
+
+        **Le meilleur moyen de comprendre :** Exécutez ce code en mode débogage ! Mettez un point d'arrêt sur la ligne 1 et avancez une ligne à la fois pour voir la variable `compteur` grandir à chaque tour.
+
+        :::
+
+        ---
+
+        :::warning Attention aux boucles infinies
+        Il est crucial de s'assurer que la condition de la boucle deviendra **fausse** à un moment donné.\
+        
+        Si vous oubliez la ligne `compteur = compteur + 1` dans l'exemple précédent, `compteur` restera éternellement à 0. La condition `0 < 5` sera toujours vraie, ce qui créera une **boucle infinie** et fera planter ou figer votre programme.
+        :::
+
+        ---
+
+        :::tip affectation raccourcie
+        Pour incrémenter une variable, les programmeurs utilisent un raccourci très pratique : l'opérateur `+=`.
+        Au lieu d'écrire le nom de la variable deux fois (`compteur = compteur + 1`), on écrit simplement `compteur += 1`.
+
+        Cela fonctionne de la même manière pour toutes les opérations mathématiques : `-=`, `*=`, `/=`.
+
+        Voici le même code, écrit de façon plus moderne :
+
+        ```python showLineNumbers
+        compteur = 0
+        while compteur < 5:
+            print("Compteur =", compteur)
+            compteur += 1  # Fait exactement la même chose !
+        print("Fin de la boucle")
+        ```
+        :::
+
+        ---
+
+        :::info Un exemple pratique : L'accumulateur
+        Voici un autre usage classique de la boucle `while` : additionner une série de nombres (ici, de 1 à 10). Ce principe de programmation s'appelle l'**accumulateur**.
+
+        ```python showLineNumbers
+        somme = 0
+        nombre = 1
+
+        while nombre <= 10:
+            somme += nombre  # Ajoute le nombre actuel au total
+            nombre += 1      # Passe au prochain nombre
+            
+        print("La somme des nombres de 1 à 10 est :", somme)
+
+        ```
+
+        Dans cet exemple, nous avons deux variables qui travaillent en équipe :
+
+        * `nombre` agit comme notre **compteur** (1, 2, 3... jusqu'à 11).
+        * `somme` agit comme notre **accumulateur** (il accumule les valeurs à chaque tour : 1, puis 3, puis 6...).
+
+        Encore une fois, exécutez-le en mode débogage pour voir les variables `somme` et `nombre` évoluer en tandem à chaque itération !
+        :::
+
+
+
+        {/* <Feedback feedbackId="Rencontre #5 - while" /> */}

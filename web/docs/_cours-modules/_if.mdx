@@ -1,0 +1,63 @@
+import Admonition from '@theme/Admonition';
+import Link from '@docusaurus/Link';
+import Column from '../../src/components/Column';
+import Row from '../../src/components/Row';
+import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
+import RappelFonctionnementClasseInverse from '@site/docs/_components/RappelFonctionnementClasseInverse.mdx';
+import DocumentationAutorisee from '@site/docs/_components/DocumentationAutorisee.mdx';
+import DocumentationInterdite from '@site/docs/_components/DocumentationInterdite.mdx';
+import IntroSolutionsExercices from '@site/docs/_components/IntroSolutionsExercices.mdx';
+import AideMemoireListe from '@site/docs/_components/AideMemoireListe.mdx';
+
+:::info On veut pas le sawouère, on veut le wouère
+        C'est bien beau, ça, les expressions booléennes, mais à quoi ça sert?<br />
+        Elles servent principalement à contrôler le flux d'exécution du programme, \
+        c'est-à-dire à décider quelles parties du code doivent être exécutées en fonction de certaines conditions.
+        :::
+
+        ---
+
+        :::tip Structure de base d'une instruction conditionnelle
+        Voici un exemple simple d'instruction conditionnelle en Python :
+        ```python showLineNumbers
+        age = 18
+        if age >= 18 :
+            print("Vous êtes majeur.")
+        ```
+        Dans cet exemple, l'instruction `if` vérifie si la variable `age` est supérieure ou égale à 18.<br />
+        Si c'est le cas (si la condition est `True`), le code indenté sous l'instruction `if` est exécuté, affichant "Vous êtes majeur.".<br />
+        Si la condition est `False`, le code indenté n'est pas exécuté.
+        :::
+
+        ---
+
+        :::warning Indentation
+        En Python, l'indentation (les espaces ou tabulations avant une ligne de code) est cruciale pour définir les blocs de code.<br />
+        Le code qui doit être exécuté conditionnellement doit être indenté sous l'instruction `if`.<br />
+        Par exemple :
+        ```python showLineNumbers
+        if condition :
+            # Code indenté, exécuté si la condition est True
+            faire_quelque_chose_conditionnel()
+            faire_autre_chose_conditionnel()
+        # Code non indenté, exécuté indépendamment de la condition
+        faire_autre_chose_en_tout_temps()
+        ```
+        Exemple d'erreur courante due à une mauvaise indentation :
+        ```python showLineNumbers
+        if condition :
+        faire_quelque_chose()  # Erreur : cette ligne doit être indentée
+        ```
+        Exemple concret :
+        ```python showLineNumbers
+        age = 20
+        if age >= 18 :
+            print("Vous êtes majeur.")
+            print("Vous avez le droit de vote!")
+            print("Un grand pouvoir implique de grandes responsabilités.")
+        print("Bienvenue!")  # Toujours exécuté, indépendamment de l'âge
+        ```
+        :::
+
+
+        {/* <Feedback feedbackId="Rencontre #4 - if" /> */}

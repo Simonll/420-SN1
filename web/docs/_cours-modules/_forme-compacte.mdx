@@ -1,0 +1,52 @@
+import Admonition from '@theme/Admonition';
+import Link from '@docusaurus/Link';
+import Column from '../../src/components/Column';
+import Row from '../../src/components/Row';
+import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
+import RappelFonctionnementClasseInverse from '@site/docs/_components/RappelFonctionnementClasseInverse.mdx';
+import DocumentationAutorisee from '@site/docs/_components/DocumentationAutorisee.mdx';
+import DocumentationInterdite from '@site/docs/_components/DocumentationInterdite.mdx';
+import IntroSolutionsExercices from '@site/docs/_components/IntroSolutionsExercices.mdx';
+import AideMemoireListe from '@site/docs/_components/AideMemoireListe.mdx';
+
+:::info Forme compacte
+
+        Pour les instructions conditionnelles simples, on peut utiliser une forme compacte en une seule ligne.<br />
+        Par exemple :
+        ```python showLineNumbers
+        age = 20
+        print("Vous êtes majeur.") if age >= 18 else print("Vous êtes mineur.")
+        ```
+
+        On peut aussi utiliser cette forme compacte pour stocker le résultat dans une variable :
+        ```python showLineNumbers
+        age = 20
+        statut = "majeur" if age >= 18 else "mineur"
+        print(statut)  # Affiche "majeur"
+        ```
+        :::
+
+        ---
+
+        :::tip Limites de la forme compacte
+
+        La forme compacte est utile pour des conditions simples et des actions courtes.<br />
+        Cependant, pour des conditions plus complexes ou des blocs de code plus longs, <br />
+        il est préférable d'utiliser la forme standard avec indentation pour une meilleure lisibilité.
+        :::
+
+        ---
+
+        :::warning Avec des elif
+        On peut aussi utiliser des `elif` dans une forme compacte, mais cela peut rapidement devenir difficile à lire.<br />
+        Par exemple :
+        ```python showLineNumbers
+        score = 85
+        resultat = "Excellent" if score >= 90 else "Bien" if score >= 75 else "Passable" if score >= 50 else "Échec"
+        print(resultat)  # Affiche "Bien"
+        ```
+        Si on a besoin de `elif`, il est préférable d'utiliser la forme standard pour une meilleure lisibilité.
+        :::
+
+
+        {/* <Feedback feedbackId="Rencontre #4 - Forme compacte" /> */}

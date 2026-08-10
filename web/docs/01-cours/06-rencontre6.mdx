@@ -7,153 +7,29 @@ hide_table_of_contents: true
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import Admonition from '@theme/Admonition';
-import Row from "../../src/components/Row";
-import Column from "../../src/components/Column";
-import Feedback from "../../src/components/Feedback";
+import Link from '@docusaurus/Link';
+import Column from '../../src/components/Column';
+import Row from '../../src/components/Row';
+import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
+import RappelFonctionnementClasseInverse from '@site/docs/_components/RappelFonctionnementClasseInverse.mdx';
+import DocumentationAutorisee from '@site/docs/_components/DocumentationAutorisee.mdx';
+import DocumentationInterdite from '@site/docs/_components/DocumentationInterdite.mdx';
+import IntroSolutionsExercices from '@site/docs/_components/IntroSolutionsExercices.mdx';
+import AideMemoireListe from '@site/docs/_components/AideMemoireListe.mdx';
+import Mod_ForBoucle from '../_cours-modules/_for-boucle.mdx';
+import Mod_LesListes from '../_cours-modules/_les-listes.mdx';
+import Mod_StatistiquesTp1 from '../_cours-modules/_statistiques-tp1.mdx';
 
 # Boucle `for`, fonction `range()` et Listes
 
 <Tabs queryString="onglet">
-
     <TabItem value="for" label="La boucle for" default>
-
-        :::info La boucle `for`
-        Contrairement à la boucle `while` qui répète une action tant qu'une condition est vraie, la boucle **`for`** est conçue pour répéter des instructions un **nombre connu de fois** ou pour parcourir une séquence d'éléments.
-        :::
-
-        ---\
-
-        :::note La fonction `range()`
-        La fonction native `range()` génère une séquence de nombres entiers. Elle est très souvent utilisée avec la boucle `for`.
-
-        ```python showLineNumbers
-        # Affiche les nombres de 0 à 4 (5 itérations au total)
-        for i in range(5):
-            print("Itération :", i)
-        ```
-
-        - **`range(fin)`** : De `0` à `fin - 1`.
-        - **`range(debut, fin)`** : De `debut` à `fin - 1`.
-        - **`range(debut, fin, pas)`** : De `debut` à `fin - 1` avec un saut de `pas`.
-
-        ```python showLineNumbers
-        # Affiche les nombres pairs de 2 à 10 inclusivement
-        for n in range(2, 11, 2):
-            print(n)  # Affiche 2, 4, 6, 8, 10
-        ```
-        :::
-
-        ---\
-
-        :::tip Application aux sciences
-        Calcul de la position d'un objet en chute libre à chaque seconde pendant 5 secondes ($y(t) = \frac{1}{2} g t^2$) :
-
-        ```python showLineNumbers
-        g = 9.81
-        for t in range(6):  # t va de 0 à 5 secondes
-            position = 0.5 * g * (t ** 2)
-            print(f"À t = {t} s, la position est {position:.2f} m")
-        ```
-        :::
-
+        <Mod_ForBoucle />
     </TabItem>
-
     <TabItem value="listes" label="Les Listes">
-
-        :::info Définition d'une liste
-        Une **liste** est une structure de données séquentielle capable de stocker plusieurs valeurs ordonnées dans une seule variable.
-
-        ```python showLineNumbers
-        # Une liste de nombres de concentrations mesurées en laboratoire
-        concentrations = [100.0, 85.5, 72.8, 61.2, 50.0]
-        ```
-
-        - On utilise les crochets `[]` pour définir une liste.
-        - Les éléments sont séparés par des virgules.
-        :::
-
-        ---\
-
-        :::note Accès aux éléments par index
-        En Python, le premier élément d'une liste est à l'index **`0`**.
-
-        ```python showLineNumbers
-        mesures = [12.5, 14.2, 15.0]
-        print(mesures[0])  # Affiche 12.5 (premier élément)
-        print(mesures[1])  # Affiche 14.2 (deuxième élément)
-        print(len(mesures)) # len() retourne le nombre d'éléments (ici 3)
-        ```
-        :::
-
-        ---\
-
-        :::tip Parcours d'une liste avec `for`
-        Il existe deux façons de parcourir une liste avec une boucle `for` :
-
-        <Tabs>
-        <TabItem value="direct" label="1. Parcours direct par élément" default>
-
-        ```python showLineNumbers
-        temperatures = [21.5, 22.0, 20.8, 23.1]
-
-        for temp in temperatures:
-            print(f"Mesure enregistrée : {temp} °C")
-        ```
-
-        </TabItem>
-        <TabItem value="index" label="2. Parcours par index (avec range)">
-
-        ```python showLineNumbers
-        temperatures = [21.5, 22.0, 20.8, 23.1]
-
-        for i in range(len(temperatures)):
-            print(f"Heure {i} : {temperatures[i]} °C")
-        ```
-
-        </TabItem>
-        </Tabs>
-        :::
-
+        <Mod_LesListes />
     </TabItem>
-
     <TabItem value="statistiques" label="Statistiques & TP1">
-
-        :::info Analyse de données scientifiques
-        L'un des usages les plus fréquents des listes et des boucles en sciences est de calculer des métriques statistiques sur un ensemble de mesures.
-        :::
-
-        ---\
-
-        :::note Calcul du maximum, du minimum et de la moyenne
-        ```python showLineNumbers
-        donnees = [45.2, 88.0, 92.5, 60.1, 78.4]
-
-        # 1. Calcul du maximum
-        max_val = donnees[0]
-        for val in donnees:
-            if val > max_val:
-                max_val = val
-
-        # 2. Calcul de la moyenne
-        somme = 0
-        for val in donnees:
-            somme += val
-        moyenne = somme / len(donnees)
-
-        print(f"Valeur maximale : {max_val}")
-        print(f"Moyenne : {moyenne:.2f}")
-        ```
-        :::
-
-        ---\
-
-        :::tip Application directe au TP1 (Partie 3b)
-        Pour la **Partie 3b du TP1**, vous utiliserez exactement cette logique pour :
-        - Stocker l'évolution heure par heure de la concentration dans une liste (`simulation.append(...)`).
-        - Parcourir cette liste pour identifier la concentration maximale $C_{max}$.
-        - Compter combien d'heures la concentration reste dans la fenêtre thérapeutique optimale.
-        :::
-
+        <Mod_StatistiquesTp1 />
     </TabItem>
-
 </Tabs>

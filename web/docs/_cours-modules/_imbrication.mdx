@@ -1,0 +1,140 @@
+import Admonition from '@theme/Admonition';
+import Link from '@docusaurus/Link';
+import Column from '../../src/components/Column';
+import Row from '../../src/components/Row';
+import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
+import RappelFonctionnementClasseInverse from '@site/docs/_components/RappelFonctionnementClasseInverse.mdx';
+import DocumentationAutorisee from '@site/docs/_components/DocumentationAutorisee.mdx';
+import DocumentationInterdite from '@site/docs/_components/DocumentationInterdite.mdx';
+import IntroSolutionsExercices from '@site/docs/_components/IntroSolutionsExercices.mdx';
+import AideMemoireListe from '@site/docs/_components/AideMemoireListe.mdx';
+
+:::info Des conditions dans des conditions!
+        Il est tout à fait possible d'écrire une structure conditionnelle **à l'intérieur** d'une autre.\
+        On appelle cela des structures **imbriquées** (*nested* en anglais).
+
+        C'est utile quand une décision dépend d'une autre, comme dans la vraie vie!
+        :::
+
+        :::tip Exemple de base — classer un échantillon
+        Imaginons qu'on veuille classer un échantillon selon son pH **ET** sa température :
+
+        ```python showLineNumbers
+        ph = 4.2
+        temperature_celsius = 75
+
+        if ph < 7 :
+            print("Solution acide.")
+            if temperature_celsius > 60 :               # Condition imbriquée dans le if
+                print("Acide ET chaude : danger!")
+            else :
+                print("Acide mais à température normale.")
+        else :
+            print("Solution neutre ou basique.")
+            if temperature_celsius > 60 :               # Condition imbriquée dans le else
+                print("Solution chaude : manipuler avec précaution.")
+            else :
+                print("Conditions stables.")
+        ```
+
+        Résultat affiché avec `ph = 4.2` et `temperature_celsius = 75` :
+        ```
+        Solution acide.
+        Acide ET chaude : danger!
+        ```
+
+        Python entre d'abord dans le bloc `if ph < 7`, puis évalue la condition sur la température **seulement à l'intérieur de ce bloc**.
+        :::
+
+        :::note L'indentation, encore plus importante avec l'imbrication!
+        Chaque niveau d'imbrication ajoute **un niveau d'indentation supplémentaire**.\
+        C'est ce qui permet à Python de savoir à quel bloc appartient chaque instruction.
+
+        ```python showLineNumbers
+        if condition_1 :
+            # Bloc de la condition 1 (indenté 1 fois)
+            if condition_2 :
+                # Bloc de la condition 2 (indenté 2 fois)
+                faire_quelque_chose()
+            else :
+                # Bloc else de la condition 2 (indenté 2 fois)
+                faire_autre_chose()
+        else :
+            # Bloc else de la condition 1 (indenté 1 fois)
+            faire_encore_autre_chose()
+        ```
+
+        :::
+
+        :::tip Exemple concret — classification d'une étoile 🌟
+        En astronomie, on peut classer les étoiles selon leur **luminosité** et leur **température de surface** :
+
+        ```python showLineNumbers
+        luminosite = 500        # En unités solaires
+        temperature_K = 8000    # En kelvins
+
+        if luminosite >= 100 :
+            print("Étoile très lumineuse.")
+            if temperature_K >= 10000 :
+                print("⭐ Classification : étoile bleue géante.")
+            elif temperature_K >= 6000 :
+                print("⭐ Classification : étoile blanche géante.")
+            else :
+                print("⭐ Classification : supergéante froide.")
+        elif luminosite >= 1 :
+            print("Étoile de luminosité moyenne.")
+            if temperature_K >= 6000 :
+                print("⭐ Classification : étoile de la séquence principale (type solaire ou plus chaud).")
+            else :
+                print("⭐ Classification : étoile naine froide.")
+        else :
+            print("Étoile peu lumineuse.")
+            if temperature_K >= 4000 :
+                print("⭐ Classification : naine blanche.")
+            else :
+                print("⭐ Classification : naine brune.")
+        ```
+
+        Résultat affiché avec `luminosite = 500` et `temperature_K = 8000` :
+        ```
+        Étoile très lumineuse.
+        Classification : étoile blanche géante.
+        ```
+
+        Le premier `if/elif/else` traite la luminosité, puis, à l'intérieur de **chacun** de ses blocs, un second `if/elif/else` affine la classification selon la température.
+        :::
+
+        :::warning Attention à la profondeur d'imbrication!
+        Plus on imbrique de niveaux, plus le code devient difficile à lire et à déboguer.\
+        En général, une bonne règle de base est de ne pas dépasser **2 à 3 niveaux**.\
+        Si vous vous retrouvez avec plus de 3 niveaux, c'est souvent le signe que le code pourrait être réorganisé, par exemple en utilisant des fonctions.
+
+        ```python showLineNumbers
+        # ❌ Difficile à lire — trop de niveaux d'imbrication
+        if condition_1 :
+            if condition_2 :
+                if condition_3 :
+                    if condition_4 :
+                        faire_quelque_chose()  # On s'y perd!
+        ```
+
+        ```python showLineNumbers
+        # ✅ Plus lisible — on peut souvent combiner les conditions avec and
+        if condition_1 and condition_2 and condition_3 and condition_4 :
+            faire_quelque_chose()
+        ```
+        :::
+
+        :::note Quand utiliser l'imbrication?
+
+        | Situation | Approche recommandée |
+        |-----------|----------------------|
+        | La 2e condition ne s'évalue **que si** la 1re est vraie | **Imbrication** |
+        | Les conditions sont **indépendantes** les unes des autres | Plusieurs <C><K>if</K></C> séparés |
+        | Les conditions peuvent être combinées simplement | <C><K>and</K></C> / <C><K>or</K></C> dans un seul <C><K>if</K></C> |
+
+        L'imbrication est le bon choix quand la **logique est hiérarchique** : on vérifie d'abord une catégorie générale, puis on affine à l'intérieur de cette catégorie.
+        :::
+
+
+        {/* <Feedback feedbackId="Rencontre #4 - Imbrication" /> */}

@@ -1,0 +1,46 @@
+import Admonition from '@theme/Admonition';
+import Link from '@docusaurus/Link';
+import Column from '../../src/components/Column';
+import Row from '../../src/components/Row';
+import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
+import RappelFonctionnementClasseInverse from '@site/docs/_components/RappelFonctionnementClasseInverse.mdx';
+import DocumentationAutorisee from '@site/docs/_components/DocumentationAutorisee.mdx';
+import DocumentationInterdite from '@site/docs/_components/DocumentationInterdite.mdx';
+import IntroSolutionsExercices from '@site/docs/_components/IntroSolutionsExercices.mdx';
+import AideMemoireListe from '@site/docs/_components/AideMemoireListe.mdx';
+
+:::info Analyse de données scientifiques
+        L'un des usages les plus fréquents des listes et des boucles en sciences est de calculer des métriques statistiques sur un ensemble de mesures.
+        :::
+
+        ---\
+
+        :::note Calcul du maximum, du minimum et de la moyenne
+        ```python showLineNumbers
+        donnees = [45.2, 88.0, 92.5, 60.1, 78.4]
+
+        # 1. Calcul du maximum
+        max_val = donnees[0]
+        for val in donnees:
+            if val > max_val:
+                max_val = val
+
+        # 2. Calcul de la moyenne
+        somme = 0
+        for val in donnees:
+            somme += val
+        moyenne = somme / len(donnees)
+
+        print(f"Valeur maximale : {max_val}")
+        print(f"Moyenne : {moyenne:.2f}")
+        ```
+        :::
+
+        ---\
+
+        :::tip Application directe au TP1 (Partie 3b)
+        Pour la **Partie 3b du TP1**, vous utiliserez exactement cette logique pour :
+        - Stocker l'évolution heure par heure de la concentration dans une liste (`simulation.append(...)`).
+        - Parcourir cette liste pour identifier la concentration maximale $C_{max}$.
+        - Compter combien d'heures la concentration reste dans la fenêtre thérapeutique optimale.
+        :::

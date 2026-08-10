@@ -6,538 +6,54 @@ hide_table_of_contents: true
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
-
+import Admonition from '@theme/Admonition';
+import Link from '@docusaurus/Link';
+import Column from '../../src/components/Column';
+import Row from '../../src/components/Row';
+import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
 import RappelFonctionnementClasseInverse from '@site/docs/_components/RappelFonctionnementClasseInverse.mdx';
-import TraceBoucle from '@site/docs/_components/TraceBoucle.mdx';
 import DocumentationAutorisee from '@site/docs/_components/DocumentationAutorisee.mdx';
 import DocumentationInterdite from '@site/docs/_components/DocumentationInterdite.mdx';
 import IntroSolutionsExercices from '@site/docs/_components/IntroSolutionsExercices.mdx';
-import Feedback from "../../src/components/Feedback";
-import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
+import AideMemoireListe from '@site/docs/_components/AideMemoireListe.mdx';
+import Mod_While from '../_cours-modules/_while.mdx';
+import Mod_AffectationBoucle from '../_cours-modules/_affectation-boucle.mdx';
+import Mod_ForProchain from '../_cours-modules/_for-prochain.mdx';
+import Mod_BreakContinue from '../_cours-modules/_break-continue.mdx';
+import Mod_DryBoucles from '../_cours-modules/_dry-boucles.mdx';
+import Mod_BouclesImbriquees from '../_cours-modules/_boucles-imbriquees.mdx';
+import Mod_Input from '../_cours-modules/_input.mdx';
+import Mod_TraceBoucles from '../_cours-modules/_trace-boucles.mdx';
 
 # Boucles
 
 <Tabs queryString="onglet">
-
     <TabItem value="while" label="while" default>
-
-        :::info Introduction aux boucles
-        Les boucles apportent une puissance considérable à vos programmes. Elles permettent de répéter des actions, de parcourir des listes et de traiter des données massivement sans avoir à copier-coller du code. Avec les variables et les conditions, c'est l'un des piliers de la programmation.
-
-        Voici la logique fondamentale d'une boucle :
-        ```pseudo showLineNumbers
-        Tant que (cette condition est vraie) :
-            # Exécuter cette instruction
-            # Et celle-ci
-        # Suite du programme (exécuté quand la condition devient fausse)
-
-        ```
-        Si on exécutait ce pseudo-code, on répéterait l'exécution des lignes 2 à 4 tant que la condition de la ligne 1 est vraie.\
-        Dès que la condition devient fausse, on sort de la boucle et on continue l'exécution du programme à la ligne 5.
-
-        En Python, on traduit le "Tant que" par le mot-clé `while`.
-        Voici un exemple classique :
-        
-        ```python showLineNumbers
-        compteur = 0
-        while compteur < 5:
-            print("Compteur =", compteur)
-            compteur = compteur + 1  # Incrémente le compteur de 1
-        print("Fin de la boucle")
-        ```
-        
-        **Que se passe-t-il ici ?**
-
-        1. Python évalue la condition : est-ce que `0 < 5` ? Oui (`True`).
-        2. Il entre dans la boucle, affiche "0", et ajoute 1 à `compteur`.
-        3. Il remonte à la ligne 2 pour vérifier à nouveau. Est-ce que `1 < 5` ? Oui.
-        4. À chaque tour (qu'on appelle une **itération**), `compteur` augmente.
-        5. Quand `compteur` atteint 5, la condition `5 < 5` devient fausse (`False`). Python saute alors par-dessus la boucle et passe à la ligne 5.
-
-        **Le meilleur moyen de comprendre :** Exécutez ce code en mode débogage ! Mettez un point d'arrêt sur la ligne 1 et avancez une ligne à la fois pour voir la variable `compteur` grandir à chaque tour.
-
-        :::
-
-        ---
-
-        :::warning Attention aux boucles infinies
-        Il est crucial de s'assurer que la condition de la boucle deviendra **fausse** à un moment donné.\
-        
-        Si vous oubliez la ligne `compteur = compteur + 1` dans l'exemple précédent, `compteur` restera éternellement à 0. La condition `0 < 5` sera toujours vraie, ce qui créera une **boucle infinie** et fera planter ou figer votre programme.
-        :::
-
-        ---
-
-        :::tip affectation raccourcie
-        Pour incrémenter une variable, les programmeurs utilisent un raccourci très pratique : l'opérateur `+=`.
-        Au lieu d'écrire le nom de la variable deux fois (`compteur = compteur + 1`), on écrit simplement `compteur += 1`.
-
-        Cela fonctionne de la même manière pour toutes les opérations mathématiques : `-=`, `*=`, `/=`.
-
-        Voici le même code, écrit de façon plus moderne :
-
-        ```python showLineNumbers
-        compteur = 0
-        while compteur < 5:
-            print("Compteur =", compteur)
-            compteur += 1  # Fait exactement la même chose !
-        print("Fin de la boucle")
-        ```
-        :::
-
-        ---
-
-        :::info Un exemple pratique : L'accumulateur
-        Voici un autre usage classique de la boucle `while` : additionner une série de nombres (ici, de 1 à 10). Ce principe de programmation s'appelle l'**accumulateur**.
-
-        ```python showLineNumbers
-        somme = 0
-        nombre = 1
-
-        while nombre <= 10:
-            somme += nombre  # Ajoute le nombre actuel au total
-            nombre += 1      # Passe au prochain nombre
-            
-        print("La somme des nombres de 1 à 10 est :", somme)
-
-        ```
-
-        Dans cet exemple, nous avons deux variables qui travaillent en équipe :
-
-        * `nombre` agit comme notre **compteur** (1, 2, 3... jusqu'à 11).
-        * `somme` agit comme notre **accumulateur** (il accumule les valeurs à chaque tour : 1, puis 3, puis 6...).
-
-        Encore une fois, exécutez-le en mode débogage pour voir les variables `somme` et `nombre` évoluer en tandem à chaque itération !
-        :::
-
-
-
-        {/* <Feedback feedbackId="Rencontre #5 - while" /> */}
+        <Mod_While />
     </TabItem>
-
     <TabItem value="affectation" label="Affectation">
-
-        :::info Les opérateurs d'affectation
-
-        Nous avons déjà utilisé l'opérateur `=` classique pour affecter une valeur de départ à une variable :
-        ```python
-        x = 5
-
-        ```
-
-        Mais en programmation, il est très fréquent de devoir modifier une variable en utilisant sa propre valeur (par exemple : ajouter 1 à un compteur, ou doubler un score).
-
-        Plutôt que d'écrire le nom de la variable deux fois (ex. : `x = x + 1`), Python propose des **opérateurs d'affectation raccourcis**. Ils effectuent l'opération mathématique et sauvegardent le résultat dans la même variable, en une seule étape.
-
-        Voici les opérateurs d'affectation composés les plus courants :
-
-        | Opérateur | Description                          | Exemple               | Équivalent à          |
-        |-----------|--------------------------------------|-----------------------|-----------------------|
-        | <C>+=</C> | Addition et affectation | <C>a += b</C> | <C>a = a + b</C> |
-        | <C>-=</C> | Soustraction et affectation | <C>a -= b</C> | <C>a = a - b</C> |
-        | <C>*=</C> | Multiplication et affectation | <C>a *= b</C> | <C>a = a * b</C> |
-        | <C>/=</C> | Division et affectation | <C>a /= b</C> | <C>a = a / b</C> |
-        | <C>%=</C> | Modulo et affectation | <C>a %= b</C> | <C>a = a % b</C> |
-        | <C>//=</C> | Division entière et affectation | <C>a //= b</C> | <C>a = a // b</C> |
-        | <C>**=</C> | Exponentiation et affectation | <C>a **= b</C> | <C>a = a ** b</C> |
-
-        :::
-
-        ---
-
-        :::tip En pratique
-        Ces raccourcis rendent votre code beaucoup plus lisible, surtout quand vos variables ont des noms descriptifs et longs !
-        ```python
-        compteur = 0
-        compteur += 1  # équivalent à compteur = compteur + 1
-        compteur *= 2  # équivalent à compteur = compteur * 2
-        compteur += 8  # 2 + 8 -> compteur vaut maintenant 10
-        print(compteur)  # Affiche 10
-        ```
-        :::
-
-
-        {/* <Feedback feedbackId="Rencontre #5 - Affectation" /> */}
+        <Mod_AffectationBoucle />
     </TabItem>
-
     <TabItem value="for" label="for & listes (Prochain cours)">
-
-        :::info Suite du chapitre sur les boucles : Rencontre 6
-        Les notions sur la **boucle `for`**, la fonction **`range()`** ainsi que la manipulation des **Listes** sont abordées à la **[Rencontre 6](/cours/rencontre6)**.
-        :::
-
+        <Mod_ForProchain />
     </TabItem>
-
     <TabItem value="break" label="break / continue / pass">
-
-        :::info Contrôler le flux `break`, `continue` et `pass`
-
-        Normalement, une boucle s'exécute jusqu'à ce que sa condition devienne fausse ou qu'elle ait parcouru tous ses éléments. Mais parfois, on veut **prendre le contrôle** : arrêter la boucle prématurément ou sauter une étape spécifique.
-
-        Python propose trois instructions pour gérer ces situations.
-
-        :::
-
-        ---
-
-        :::info Le frein d'urgence : `break`
-        L'instruction `break` permet de **sortir immédiatement** d'une boucle (`for` ou `while`), même si elle n'avait pas terminé son travail. Dès que Python lit `break`, il abandonne la boucle et passe à la suite du programme.
-
-        *Cas d'usage typique :* On cherche un élément précis dans une base de données. Dès qu'on le trouve, on fait un `break` pour arrêter de chercher et ne pas gaspiller de puissance de calcul.
-
-        ```python showLineNumbers
-        for i in range(10):
-            if i == 5:
-                break  # Interrompt définitivement la boucle
-            print(i)
-
-        print("Fin de la boucle")
-        # Affiche : 0, 1, 2, 3, 4, puis "Fin de la boucle"
-        ```
-
-        :::
-
-        ---
-
-        :::info Le saut d'obstacle : `continue`
-        L'instruction `continue` ne détruit pas la boucle, mais elle **annule le tour en cours**. Dès que Python lit `continue`, il ignore toutes les instructions qui suivent et remonte immédiatement au début de la boucle pour entamer le tour suivant.
-
-        *Cas d'usage typique :* On parcourt une liste de fichiers et on utilise `continue` pour sauter ceux qui sont corrompus ou invalides.
-
-        ```python showLineNumbers
-        for i in range(10):
-            if i % 2 == 0:
-                continue  # Saute par-dessus le print() si le nombre est pair
-            print(i)
-
-        # N'affichera que les nombres impairs : 1, 3, 5, 7, 9
-
-        ```
-
-        :::
-
-        ---
-
-        :::info Le bouche-trou (espace réservé) : `pass`
-        L'instruction `pass` est un peu spéciale : elle ne fait **absolument rien**. C'est un espace réservé (un *placeholder*).
-
-        *Pourquoi l'utiliser ?* En Python, l'indentation est stricte. Si vous écrivez un `if`, un `else` ou un `for` sans rien mettre à l'intérieur, Python plantera avec une erreur de syntaxe. `pass` permet de dire à l'ordinateur : *"Je n'ai rien à te faire exécuter ici pour le moment, passe ton chemin sans planter"*.
-
-        ```python showLineNumbers
-        for i in range(5):
-            if i < 3:
-                pass  # Code à écrire plus tard, on évite une erreur de syntaxe en attendant
-            else:
-                print(i)
-
-        # Affiche seulement : 3, 4
-
-        ```
-
-        En résumé :
-
-        * `continue` agit : il force la boucle à sauter le reste du tour actuel pour passer au suivant.
-
-        * `pass` est passif : il ne fait absolument rien et sert uniquement de bouche-trou pour que le code soit syntaxiquement correct.
-
-        :::
-
-        ---
-
-        :::tip Visualisez le changement de trajectoire !
-        Ces trois instructions modifient la trajectoire naturelle de votre code. Le meilleur moyen de comprendre la différence entre un `break` et un `continue` est d'exécuter ces exemples en **mode débogage**.
-
-        Placez un point d'arrêt sur le `for` et avancez pas à pas : vous verrez littéralement Python "fuir" la boucle au `break`, ou "rebondir" en haut de la boucle au `continue`.
-        :::
-
-
-        {/* <Feedback feedbackId="Rencontre #5 - break / continue / pass" /> */}
+        <Mod_BreakContinue />
     </TabItem>
-
     <TabItem value="DRY" label="DRY">
-
-        :::info Éviter la répétition : les boucles et les listes
-        En programmation, il existe une règle d'or appelée **DRY** (*Don't Repeat Yourself* - Ne vous répétez pas). 
-
-        Si vous remarquez que vous êtes en train de copier-coller un bloc de code en ne changeant que quelques petites valeurs à l'intérieur, c'est le signal d'alarme : **vous avez besoin d'une boucle !**
-        :::
-
-        ---
-
-        :::danger Le code redondant
-        Voici un programme qui affiche le bulletin de trois étudiants. Remarquez comment le bloc d'instructions est répété trois fois. Seules les valeurs changent :
-
-        ```python showLineNumbers
-        print("Étudiant #1")
-        print("Nom : Félix")
-        print("Note : 72")
-        print()
-
-        print("Étudiant #2")
-        print("Nom : Dayron")
-        print("Note : 91")
-        print()
-
-        print("Étudiant #3")
-        print("Nom : Léa")
-        print("Note : 58")
-        print()
-
-        ```
-
-        Ce code fonctionne, mais c'est un cauchemar à maintenir. Si vous voulez ajouter un 4e étudiant, vous devez copier-coller un nouveau bloc. Pire encore : si vous décidez de changer le mot "Nom :" pour "Prénom :", vous devrez faire la modification à trois endroits différents !
-        :::
-
-        ---
-
-        :::note Étape 1 : Extraire ce qui change
-        Pour corriger cela, observez les trois blocs et isolez **uniquement ce qui varie** :
-
-        1. Le **numéro** de l'étudiant (`1`, `2`, `3`)
-        2. Le **nom** (`Félix`, `Dayron`, `Léa`)
-        3. La **note** (`72`, `91`, `58`)
-
-        Le numéro correspond en fait à la position de l'étudiant (l'index `0`, `1`, `2`), auquel on ajoute simplement `1` pour l'affichage humain.
-        Quant aux noms et aux notes, on va les extraire du code pour les ranger dans des **listes parallèles** :
-
-        ```python showLineNumbers
-        noms  = ["Félix", "Dayron", "Léa"]
-        notes = [72, 91, 58]
-
-        ```
-
-        :::
-
-        ---
-
-        :::tip ✅ Étape 2 : La magie de la boucle
-        Maintenant que nos données sont proprement rangées dans des listes, on écrit le bloc d'affichage **une seule fois** et on laisse la boucle faire le travail répétitif :
-
-        ```python showLineNumbers
-        noms  = ["Félix", "Dayron", "Léa"]
-        notes = [72, 91, 58]
-
-        nb_elements = len(noms)
-        for i in range(nb_elements):
-            print(f"Étudiant #{i + 1}")    # On ajoute 1 à l'index pour afficher 1, 2, 3...
-            print(f"Nom : {noms[i]}")      # On pige dans la liste des noms
-            print(f"Note : {notes[i]}")    # On pige dans la liste des notes
-            print()
-
-        ```
-
-        Le résultat à l'écran est **strictement identique** à la version redondante, mais le code est devenu intelligent !
-        :::
-
-        ---
-
-        :::info L'avantage absolu : La flexibilité
-        Regardez ce qui se passe si l'on veut ajouter un 4e étudiant (Tristan).
-        On ajoute simplement **ses données dans les listes**, et c'est tout. La fonction `len()` détectera automatiquement qu'il y a maintenant 4 éléments, et la boucle s'ajustera toute seule :
-
-        ```python showLineNumbers
-        noms  = ["Félix", "Dayron", "Léa", "Tristan"]
-        notes = [72, 91, 58, 83]
-
-        nb_elements = len(noms)
-        for i in range(nb_elements):
-            print(f"Étudiant #{i + 1}")
-            print(f"Nom : {noms[i]}")
-            print(f"Note : {notes[i]}")
-            print()
-
-        ```
-
-        Le corps de la boucle (les lignes 6 à 9) n'a pas changé d'un seul caractère. C'est la véritable puissance de combiner les listes et les boucles : on sépare les **données** de la **logique d'affichage** !
-        :::
-
-
-        {/* <Feedback feedbackId="Rencontre #5 - DRY" /> */}
+        <Mod_DryBoucles />
     </TabItem>
-
     <TabItem value="forfor" label="Boucles imbriquées">
-
-        :::info Une boucle dans une boucle : l'imbrication
-        Il est tout à fait possible de placer une boucle à l'intérieur d'une autre boucle. On appelle cela des **boucles imbriquées**.\
-        C'est la technique incontournable pour traiter des grilles en 2D, comme des pixels sur un écran, un échiquier, ou un tableau Excel (lignes et colonnes).
-
-
-
-        Voici un exemple simple avec deux boucles `for` imbriquées pour afficher une table de multiplication :
-
-
-        ```python showLineNumbers
-        for i in range(1, 6):           # Boucle extérieure (gère les lignes)
-            for j in range(1, 6):       # Boucle intérieure (gère les colonnes)
-                print(i * j, end='\t')  # Affiche le produit avec une tabulation ('\t')
-            print()                     # Change de ligne quand la ligne actuelle est finie
-
-        ```
-
-        **L'analogie de l'horloge :**
-        Pensez aux aiguilles d'une montre. La boucle intérieure (`j`, les minutes) doit faire un tour complet (de 1 à 5) pour que la boucle extérieure (`i`, les heures) avance d'un seul cran.
-
-        Exécutez ce code en débogage (point d'arrêt ligne 1) pour bien voir `j` tourner à toute vitesse pendant que `i` avance d'un pas lent.
-
-        :::
-
-        ---
-
-        :::tip Une grille dynamique avec `while`
-        Dans l'exemple précédent, la grille était carrée. Mais la limite de la boucle intérieure peut très bien **dépendre** de l'état de la boucle extérieure !
-
-        Voici un exemple générant un triangle d'étoiles :
-
-        ```python showLineNumbers
-        lignes = 5
-        i = 1
-
-        while i <= lignes:           # Boucle extérieure (les lignes)
-            j = 1
-            while j <= i:            # La limite de j grandit à chaque nouvelle ligne i !
-                print('*', end=' ')  # Affiche une étoile sans sauter de ligne
-                j += 1
-            print()                  # Saute à la ligne suivante
-            i += 1
-
-        ```
-
-        Remarquez la condition de la ligne 6 : `while j <= i`. À la ligne 1, la boucle interne affiche 1 étoile et s'arrête. À la ligne 5, elle doit en afficher 5 avant de s'arrêter.
-        :::
-
-        ---
-
-        :::note Construire ses lignes d'un coup (Exercice)
-        Voici une fonction qui affiche un rectangle de `#` selon des dimensions données en paramètres :
-
-        ```python showLineNumbers
-        def afficher_rectangle(largeur, hauteur):
-            for i in range(hauteur):          # Répète pour chaque ligne
-                for j in range(largeur):      # Répète pour chaque colonne
-                    print('#', end='')        # Affiche un '#' collé au précédent
-                print()                       # Saute à la ligne
-                
-        afficher_rectangle(5, 3)
-
-        ```
-        *(Affichera un bloc de 3 lignes par 5 colonnes)*
-
-        Toutefois, appeler la fonction `print()` pour chaque petit caractère individuellement demande beaucoup d'efforts à l'ordinateur. Une meilleure approche consiste à **construire la ligne complète en mémoire** à l'aide de la concaténation, puis à l'afficher en une seule fois :
-
-        ```python showLineNumbers
-        def afficher_rectangle(largeur, hauteur):
-            for _ in range(hauteur):          # Le numéro du tour n'est pas utilisé (_)
-                ligne = ''                    # Initialise une boîte vide (chaîne) pour la ligne
-                for j in range(largeur):
-                    ligne += '#'              # Ajoute les '#' un par un dans la boîte
-                print(ligne)                  # Affiche la boîte complète d'un seul coup
-                
-        afficher_rectangle(5, 3)
-
-        ```
-
-        **Testez-le en débogage :** Observez la variable `ligne` s'allonger petit à petit (`#`, puis `##`, puis `###`) à chaque tour de la boucle intérieure.
-        :::
-
-        ---
-
-        :::tip Le "super-pouvoir" Pythonique : multiplier du texte !
-        Dans de nombreux langages de programmation, la boucle imbriquée que nous venons de voir est la seule façon de construire cette ligne.
-
-        Mais Python possède une astuce incroyablement performante : **la multiplication de chaînes de caractères**. Vous pouvez éviter complètement la boucle intérieure en multipliant simplement votre caractère :
-
-        ```python showLineNumbers
-        def afficher_rectangle_pro(largeur, hauteur):
-            for _ in range(hauteur):
-                # Crée une ligne de X caractères instantanément !
-                print('#' * largeur)  
-
-        ```
-        C'est la méthode la plus rapide et la plus élégante en Python pour répéter un motif.\
-        Mais vous pouriez aussi utiliser la fonction `join` : 
-
-        ```python showLineNumbers
-        def afficher_rectangle_pro(largeur, hauteur):
-            for _ in range(hauteur):
-            # Crée une ligne de X caractères instantanément !
-            print("".join(["#" for _ in range(largeur)]))  
-
-        ```
-        :::
-
-        {/* <Feedback feedbackId="Rencontre #5 - Boucles imbriquées" /> */}
+        <Mod_BouclesImbriquees />
     </TabItem>
-
     <TabItem value="input" label="input()">
-
-        ::::info-nt
-
-        ### La fonction `input()`
-        La fonction `input()` rend vos programmes interactifs en permettant de poser une question à l'utilisateur et de récupérer ce qu'il tape au clavier.
-
-        Elle s'utilise généralement en lui passant une chaîne de caractères qui servira de guide (le message d'invite) :
-
-        ```python showLineNumbers
-        # Affiche la question, et sauvegarde la réponse dans la variable 'prenom'
-        prenom = input("Veuillez saisir votre prénom : ")
-        print(f"Bonjour, {prenom} !")
-
-        # On peut aussi l'utiliser sans paramètre, mais l'utilisateur ne saura pas quoi faire !
-        saisie_mystere = input() 
-
-        ```
-
-        :::warning `input` met le programme sur PAUSE !
-        Lorsque la fonction `input(...)` est exécutée, le programme se met en pause. \
-        Dès que Python lit l'instruction `input()`, le programme **se fige**. Il attend patiemment que l'utilisateur tape quelque chose dans la console et appuie sur la touche **ENTRÉE**.\
-
-        C'est donc tout à fait normal que l'instruction suivante ne s'exécute pas tant que la touche Entrée n'a pas été pressée !
-        
-        :::
-
-        ### Le grand piège : `input()` retourne TOUJOURS du texte !
-
-        La fonction `input(...)` retourne **TOUJOURS** une chaîne de caractères (`str`), même si l’utilisateur saisit un nombre. \
-        Pour utiliser la valeur dans un calcul, il faut la convertir avec `int()` ou `float()`.
-
-        Peu importe ce que l'utilisateur tape (même s'il entre le chiffre `42`), la fonction `input()` considère toujours que c'est du texte (`str`). Si vous tentez de faire un calcul mathématique avec cette donnée sans la convertir, le résultat sera inattendu ou le programme plantera.
-
-        Pour utiliser la valeur dans un calcul, il faut la **convertir** en nombre à l'aide des fonctions `int()` (pour un entier) ou `float()` (pour un décimal).
-
-        :::tip Astuce : La conversion sur une seule ligne
-        Au lieu de faire la conversion sur deux lignes distinctes, les programmeurs enveloppent souvent le `input()` directement à l'intérieur de `int()` ou `float()` :
-
-        ```python showLineNumbers
-        # Demander un nombre entier (int)
-        age = int(input("Entrez votre âge : "))
-        print(f"Dans 10 ans, vous aurez {age + 10} ans.")
-
-        # Demander un nombre décimal (float)
-        taille = float(input("Entrez votre taille en mètres : "))
-        print(f"Votre taille en centimètres est {taille * 100} cm.")
-
-        ```
-
-        Sans ces fonctions de conversion, l'ordinateur traiterait l'âge comme le mot "18", et l'addition `age + 10` provoquerait une erreur !
-        :::
-
-        ::::
-
-
-        {/* <Feedback feedbackId="Rencontre #5 - input()" /> */}
+        <Mod_Input />
     </TabItem>
-
     <TabItem value="trace" label="Trace">
-
-        ## Trace d’exécution avec des structures répétitives
-
-        Voici un exemple de trace d'exécution contenant des structures répétitives
-
-        <TraceBoucle />
-
+        <Mod_TraceBoucles />
     </TabItem>
-
     <TabItem value="Activités" label="Activités">
+
 
         <RappelFonctionnementClasseInverse/>
         <Tabs>
@@ -1179,6 +695,6 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
                 - Cote de passage *(solutionnaire à venir)*
             </TabItem>
         </Tabs>
+    
     </TabItem>
-
 </Tabs>

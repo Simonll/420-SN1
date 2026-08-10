@@ -1,0 +1,120 @@
+import Admonition from '@theme/Admonition';
+import Link from '@docusaurus/Link';
+import Column from '../../src/components/Column';
+import Row from '../../src/components/Row';
+import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
+import RappelFonctionnementClasseInverse from '@site/docs/_components/RappelFonctionnementClasseInverse.mdx';
+import DocumentationAutorisee from '@site/docs/_components/DocumentationAutorisee.mdx';
+import DocumentationInterdite from '@site/docs/_components/DocumentationInterdite.mdx';
+import IntroSolutionsExercices from '@site/docs/_components/IntroSolutionsExercices.mdx';
+import AideMemoireListe from '@site/docs/_components/AideMemoireListe.mdx';
+
+:::info Une boucle dans une boucle : l'imbrication
+        Il est tout à fait possible de placer une boucle à l'intérieur d'une autre boucle. On appelle cela des **boucles imbriquées**.\
+        C'est la technique incontournable pour traiter des grilles en 2D, comme des pixels sur un écran, un échiquier, ou un tableau Excel (lignes et colonnes).
+
+
+
+        Voici un exemple simple avec deux boucles `for` imbriquées pour afficher une table de multiplication :
+
+
+        ```python showLineNumbers
+        for i in range(1, 6):           # Boucle extérieure (gère les lignes)
+            for j in range(1, 6):       # Boucle intérieure (gère les colonnes)
+                print(i * j, end='\t')  # Affiche le produit avec une tabulation ('\t')
+            print()                     # Change de ligne quand la ligne actuelle est finie
+
+        ```
+
+        **L'analogie de l'horloge :**
+        Pensez aux aiguilles d'une montre. La boucle intérieure (`j`, les minutes) doit faire un tour complet (de 1 à 5) pour que la boucle extérieure (`i`, les heures) avance d'un seul cran.
+
+        Exécutez ce code en débogage (point d'arrêt ligne 1) pour bien voir `j` tourner à toute vitesse pendant que `i` avance d'un pas lent.
+
+        :::
+
+        ---
+
+        :::tip Une grille dynamique avec `while`
+        Dans l'exemple précédent, la grille était carrée. Mais la limite de la boucle intérieure peut très bien **dépendre** de l'état de la boucle extérieure !
+
+        Voici un exemple générant un triangle d'étoiles :
+
+        ```python showLineNumbers
+        lignes = 5
+        i = 1
+
+        while i <= lignes:           # Boucle extérieure (les lignes)
+            j = 1
+            while j <= i:            # La limite de j grandit à chaque nouvelle ligne i !
+                print('*', end=' ')  # Affiche une étoile sans sauter de ligne
+                j += 1
+            print()                  # Saute à la ligne suivante
+            i += 1
+
+        ```
+
+        Remarquez la condition de la ligne 6 : `while j <= i`. À la ligne 1, la boucle interne affiche 1 étoile et s'arrête. À la ligne 5, elle doit en afficher 5 avant de s'arrêter.
+        :::
+
+        ---
+
+        :::note Construire ses lignes d'un coup (Exercice)
+        Voici une fonction qui affiche un rectangle de `#` selon des dimensions données en paramètres :
+
+        ```python showLineNumbers
+        def afficher_rectangle(largeur, hauteur):
+            for i in range(hauteur):          # Répète pour chaque ligne
+                for j in range(largeur):      # Répète pour chaque colonne
+                    print('#', end='')        # Affiche un '#' collé au précédent
+                print()                       # Saute à la ligne
+                
+        afficher_rectangle(5, 3)
+
+        ```
+        *(Affichera un bloc de 3 lignes par 5 colonnes)*
+
+        Toutefois, appeler la fonction `print()` pour chaque petit caractère individuellement demande beaucoup d'efforts à l'ordinateur. Une meilleure approche consiste à **construire la ligne complète en mémoire** à l'aide de la concaténation, puis à l'afficher en une seule fois :
+
+        ```python showLineNumbers
+        def afficher_rectangle(largeur, hauteur):
+            for _ in range(hauteur):          # Le numéro du tour n'est pas utilisé (_)
+                ligne = ''                    # Initialise une boîte vide (chaîne) pour la ligne
+                for j in range(largeur):
+                    ligne += '#'              # Ajoute les '#' un par un dans la boîte
+                print(ligne)                  # Affiche la boîte complète d'un seul coup
+                
+        afficher_rectangle(5, 3)
+
+        ```
+
+        **Testez-le en débogage :** Observez la variable `ligne` s'allonger petit à petit (`#`, puis `##`, puis `###`) à chaque tour de la boucle intérieure.
+        :::
+
+        ---
+
+        :::tip Le "super-pouvoir" Pythonique : multiplier du texte !
+        Dans de nombreux langages de programmation, la boucle imbriquée que nous venons de voir est la seule façon de construire cette ligne.
+
+        Mais Python possède une astuce incroyablement performante : **la multiplication de chaînes de caractères**. Vous pouvez éviter complètement la boucle intérieure en multipliant simplement votre caractère :
+
+        ```python showLineNumbers
+        def afficher_rectangle_pro(largeur, hauteur):
+            for _ in range(hauteur):
+                # Crée une ligne de X caractères instantanément !
+                print('#' * largeur)  
+
+        ```
+        C'est la méthode la plus rapide et la plus élégante en Python pour répéter un motif.\
+        Mais vous pouriez aussi utiliser la fonction `join` : 
+
+        ```python showLineNumbers
+        def afficher_rectangle_pro(largeur, hauteur):
+            for _ in range(hauteur):
+            # Crée une ligne de X caractères instantanément !
+            print("".join(["#" for _ in range(largeur)]))  
+
+        ```
+        :::
+
+        {/* <Feedback feedbackId="Rencontre #5 - Boucles imbriquées" /> */}

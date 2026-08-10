@@ -1,0 +1,221 @@
+import Admonition from '@theme/Admonition';
+import Link from '@docusaurus/Link';
+import Column from '../../src/components/Column';
+import Row from '../../src/components/Row';
+import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
+import RappelFonctionnementClasseInverse from '@site/docs/_components/RappelFonctionnementClasseInverse.mdx';
+import DocumentationAutorisee from '@site/docs/_components/DocumentationAutorisee.mdx';
+import DocumentationInterdite from '@site/docs/_components/DocumentationInterdite.mdx';
+import IntroSolutionsExercices from '@site/docs/_components/IntroSolutionsExercices.mdx';
+import AideMemoireListe from '@site/docs/_components/AideMemoireListe.mdx';
+
+:::info Éviter la répétition : créez des fonctions!
+
+        En programmation, on suit souvent le principe **DRY** (*Don't Repeat Yourself*).
+        Si vous remarquez que vous copiez-collez du code en changeant seulement quelques valeurs, il est temps de créer une fonction!
+
+        Prenons un exemple en physique spatiale où l'on calcule et affiche le poids d'un spationaute dont la masse est de 75 kg sur différents astres (rappel : le poids est une force en newtons (N) calculée par la formule $P = m \times g$).
+
+        ```python showLineNumbers
+        masse_spationaute = 75
+
+        # Calcul et affichage pour la Terre
+        poids_terre = masse_spationaute * 9.81
+        print(f"Sur l'astre Terre, le poids est de {poids_terre:.2f} N.")
+
+        # Calcul et affichage pour Mars
+        poids_mars = masse_spationaute * 3.71
+        print(f"Sur l'astre Mars, le poids est de {poids_mars:.2f} N.")
+
+        # Calcul et affichage pour la Lune
+        poids_lune = masse_spationaute * 1.62
+        print(f"Sur l'astre Lune, le poids est de {poids_lune:.2f} N.")
+        ```
+
+        Ici, les lignes de calcul et d'affichage sont répétées trois fois. C'est l'occasion idéale pour extraire le tout dans des fonctions.
+        :::
+
+        ---
+
+        :::warning-nt
+        Dans cet exemple, on va créer 2 fonctions : une pour faire le calcul du poids, et une pour faire l'affichage, qui appellera la première fonction pour faire le calcul.
+
+        Commençons par la fonction de calcul.
+        :::
+
+        ---
+
+        ## Fonction 1 : calcul du poids
+
+        :::note-nt
+
+        ### Étape 1 : Identifier les éléments qui changent
+
+        Regardez attentivement les blocs de code répétés et identifiez ce qui varie d'un bloc à l'autre. Ces variables deviendront les **paramètres** de notre fonction.
+
+        Dans notre exemple, voici ce qui change :
+        - La valeur de la gravité (`9.81`, `3.71`, `1.62`)
+        - La masse pourrait aussi changer si on veut être plus flexible (`75`).
+
+        Ce qui reste identique, c'est l'opération mathématique (la multiplication) et la phrase affichée dans le `print()`.
+        :::
+
+        ---
+
+        ::::note-nt
+
+        ### Étape 2 : Extraire la fonction de calcul (avec retour)
+
+        Commençons par isoler le calcul mathématique.
+        On veut créer une fonction qui reçoit les variables nécessaires, effectue le calcul, et nous redonne le résultat.
+
+        - **Paramètres** : la masse (`m`) et la gravité (`g`).
+        - **Variable locale** : le résultat du calcul (`poids`). Elle n'existera que pour le temps de ce calcul.
+        - **Valeur de retour** : le `poids` calculé (le résultat de la multiplication).
+
+        ```python showLineNumbers
+        def calculer_poids(m, g):
+            poids = m * g
+            return poids
+        ```
+        Cette fonction est pure : elle fait un calcul et retourne une valeur, sans rien afficher à l'écran.
+        ::::
+
+        ---
+
+        :::info-nt
+
+        ### Résultat intermédiaire : intégration du calcul
+
+        Nous avons maintenant isolé la logique mathématique. Le script principal appelle maintenant notre fonction `calculer_poids` au lieu de réécrire la formule à chaque fois.
+
+        ```python showLineNumbers
+        def calculer_poids(m, g):
+            poids = m * g
+            return poids
+
+        masse_spationaute = 75
+
+        # On utilise maintenant la fonction pour obtenir les valeurs
+        p_terre = calculer_poids(masse_spationaute, 9.81)
+        print(f"Sur l'astre Terre, le poids est de {p_terre:.2f} N.")
+
+        p_mars = calculer_poids(masse_spationaute, 3.71)
+        print(f"Sur l'astre Mars, le poids est de {p_mars:.2f} N.")
+
+        p_lune = calculer_poids(masse_spationaute, 1.62)
+        print(f"Sur l'astre Lune, le poids est de {p_lune:.2f} N.")
+        ```
+
+        **Observation** : Le calcul est maintenant isolé dans une fonction (si on veut changer la précision, on ne le fait qu'à un seul endroit). Cependant, on remarque que les instructions `print()` sont encore très répétitives. On va donc extraire une deuxième fonction pour gérer l'affichage, et qui appellera la fonction de calcul pour obtenir le poids.
+        :::
+
+        ---
+
+        ## Fonction 2 : affichage du poids
+
+        :::note-nt
+
+        ### Étape 1 : Identifier ce que la fonction doit afficher
+
+        Regardez les lignes d'affichage et identifiez ce qui varie d'une ligne à l'autre.
+
+        Dans notre exemple, la phrase affichée contient :
+        - le nom de l'astre (`"Terre"`, `"Mars"`, `"Lune"`)
+        - le poids calculé à partir de la masse et de la gravité
+
+        La structure de la phrase reste toujours la même.
+
+        :::
+
+        ---
+
+        :::note-nt
+
+        ### Étape 2 : Extraire la fonction d'affichage (sans retour)
+
+        Nous allons créer une deuxième fonction qui gère le texte affiché, et qui appellera notre première fonction pour obtenir le poids.
+
+        - **Paramètres** : le nom de l'astre (`nom_astre`), la masse (`m`) et la gravité (`g`).
+        - **Variable locale** : le poids calculé par l'appel de fonction (`poids_calcule`).
+        - **Valeur de retour** : aucune (elle ne fera que des `print()`).
+
+        ```python showLineNumbers
+        def afficher_poids_astre(nom_astre, m, g):
+            # Appel à l'autre fonction pour faire le calcul
+            poids_calcule = calculer_poids(m, g)
+
+            # Affichage du résultat
+            print(f"Sur l'astre {nom_astre}, le poids est de {poids_calcule:.2f} N.")
+        ```
+        :::
+
+        ---
+
+        :::info-nt
+
+        ### Résultat final : intégration de l'affichage
+
+        Une fois nos deux fonctions créées, notre script principal devient beaucoup plus court et plus lisible!
+
+        ```python showLineNumbers
+        # --- Définition des fonctions ---
+
+        def calculer_poids(m, g):
+            poids = m * g
+            return poids
+
+        def afficher_poids_astre(nom_astre, m, g):
+            poids_calcule = calculer_poids(m, g)
+            print(f"Sur l'astre {nom_astre}, le poids est de {poids_calcule:.2f} N.")
+
+        # --- Script principal ---
+
+        masse_spationaute = 75
+
+        afficher_poids_astre("Terre", masse_spationaute, 9.81)
+        afficher_poids_astre("Mars", masse_spationaute, 3.71)
+        afficher_poids_astre("Lune", masse_spationaute, 1.62)
+        ```
+
+        Si demain on veut changer la phrase affichée ou modifier le format d’affichage, on n’aura qu’à modifier **un seul endroit** dans le code au lieu de trois.
+        :::
+
+        ---
+
+        :::tip-nt
+
+        ### Variante avec des listes parallèles
+
+        Les données utilisées pour appeler nos fonctions peuvent être organisées dans des **listes parallèles** (comme on l'a vu à la rencontre précédente). Voici comment réécrire le script principal en regroupant les noms des astres et leurs gravités dans des listes :
+
+        ```python showLineNumbers
+        # --- Définition des fonctions (inchangées) ---
+
+        def calculer_poids(m, g):
+            poids = m * g
+            return poids
+
+        def afficher_poids_astre(nom_astre, m, g):
+            poids_calcule = calculer_poids(m, g)
+            print(f"Sur l'astre {nom_astre}, le poids est de {poids_calcule:.2f} N.")
+
+        # --- Script principal avec des listes parallèles ---
+
+        masse_spationaute = 75
+        noms_astres = ["Terre", "Mars", "Lune"]
+        gravites    = [9.81, 3.71, 1.62]
+
+        afficher_poids_astre(noms_astres[0], masse_spationaute, gravites[0])
+        afficher_poids_astre(noms_astres[1], masse_spationaute, gravites[1])
+        afficher_poids_astre(noms_astres[2], masse_spationaute, gravites[2])
+        ```
+
+        À l'index `0` on trouve tout ce qui concerne la Terre (`noms_astres[0]` et `gravites[0]`), à l'index `1` Mars, et ainsi de suite. Les données restent parfaitement synchronisées.
+
+        Avec les **boucles** que vous verrez bientôt, il sera possible de parcourir ces listes automatiquement peu importe le nombre d'astres dans la liste!
+
+        :::
+
+
+        {/* <Feedback feedbackId="Rencontre #3 - DRY" /> */}
