@@ -22,13 +22,15 @@ import AideMemoireListe from '@site/docs/_components/AideMemoireListe.mdx';
         :::info Le frein d'urgence : `break`
         L'instruction `break` permet de **sortir immédiatement** d'une boucle (`for` ou `while`), même si elle n'avait pas terminé son travail. Dès que Python lit `break`, il abandonne la boucle et passe à la suite du programme.
 
-        *Cas d'usage typique :* On cherche un élément précis dans une base de données. Dès qu'on le trouve, on fait un `break` pour arrêter de chercher et ne pas gaspiller de puissance de calcul.
+        *Cas d'usage typique :* On cherche un élément précis (par exemple, dans une boucle avec un compteur). Dès qu'on le trouve, on fait un `break` pour arrêter de chercher et ne pas gaspiller de puissance de calcul.
 
         ```python showLineNumbers
-        for i in range(10):
-            if i == 5:
+        compteur = 0
+        while compteur < 10:
+            if compteur == 5:
                 break  # Interrompt définitivement la boucle
-            print(i)
+            print(compteur)
+            compteur += 1
 
         print("Fin de la boucle")
         # Affiche : 0, 1, 2, 3, 4, puis "Fin de la boucle"
@@ -41,16 +43,17 @@ import AideMemoireListe from '@site/docs/_components/AideMemoireListe.mdx';
         :::info Le saut d'obstacle : `continue`
         L'instruction `continue` ne détruit pas la boucle, mais elle **annule le tour en cours**. Dès que Python lit `continue`, il ignore toutes les instructions qui suivent et remonte immédiatement au début de la boucle pour entamer le tour suivant.
 
-        *Cas d'usage typique :* On parcourt une liste de fichiers et on utilise `continue` pour sauter ceux qui sont corrompus ou invalides.
+        *Cas d'usage typique :* On parcourt une série de valeurs ou de fichiers et on utilise `continue` pour sauter ceux qui ne respectent pas un critère.
 
         ```python showLineNumbers
-        for i in range(10):
-            if i % 2 == 0:
-                continue  # Saute par-dessus le print() si le nombre est pair
-            print(i)
+        compteur = 0
+        while compteur < 10:
+            compteur += 1
+            if compteur % 2 == 0:
+                continue  # Saute le print() si le nombre est pair
+            print(compteur)
 
         # N'affichera que les nombres impairs : 1, 3, 5, 7, 9
-
         ```
 
         :::
@@ -60,17 +63,18 @@ import AideMemoireListe from '@site/docs/_components/AideMemoireListe.mdx';
         :::info Le bouche-trou (espace réservé) : `pass`
         L'instruction `pass` est un peu spéciale : elle ne fait **absolument rien**. C'est un espace réservé (un *placeholder*).
 
-        *Pourquoi l'utiliser ?* En Python, l'indentation est stricte. Si vous écrivez un `if`, un `else` ou un `for` sans rien mettre à l'intérieur, Python plantera avec une erreur de syntaxe. `pass` permet de dire à l'ordinateur : *"Je n'ai rien à te faire exécuter ici pour le moment, passe ton chemin sans planter"*.
+        *Pourquoi l'utiliser ?* En Python, l'indentation est stricte. Si vous écrivez un `if`, un `else` ou un `while` sans rien mettre à l'intérieur, Python plantera avec une erreur de syntaxe. `pass` permet de dire à l'ordinateur : *"Je n'ai rien à te faire exécuter ici pour le moment, passe ton chemin sans planter"*.
 
         ```python showLineNumbers
-        for i in range(5):
-            if i < 3:
+        compteur = 0
+        while compteur < 5:
+            if compteur < 3:
                 pass  # Code à écrire plus tard, on évite une erreur de syntaxe en attendant
             else:
-                print(i)
+                print(compteur)
+            compteur += 1
 
         # Affiche seulement : 3, 4
-
         ```
 
         En résumé :
@@ -86,7 +90,7 @@ import AideMemoireListe from '@site/docs/_components/AideMemoireListe.mdx';
         :::tip Visualisez le changement de trajectoire !
         Ces trois instructions modifient la trajectoire naturelle de votre code. Le meilleur moyen de comprendre la différence entre un `break` et un `continue` est d'exécuter ces exemples en **mode débogage**.
 
-        Placez un point d'arrêt sur le `for` et avancez pas à pas : vous verrez littéralement Python "fuir" la boucle au `break`, ou "rebondir" en haut de la boucle au `continue`.
+        Placez un point d'arrêt sur la boucle et avancez pas à pas : vous verrez littéralement Python "fuir" la boucle au `break`, ou "rebondir" en haut de la boucle au `continue`.
         :::
 
 
