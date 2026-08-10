@@ -116,10 +116,10 @@ const config = {
             navbar: {
                 // title: siteConfig.nom,
                 title: "SN1 (Programmation)",
-                // logo: {
-                //     alt: "Logo CEM",
-                //     src: "img/logo.svg",
-                // },
+                logo: {
+                     alt: "420-SN1",
+                     src: "img/new_logo.png",
+                },
                 items: [
                     {
                         type: "doc",
@@ -179,7 +179,7 @@ const config = {
                     content: `${siteConfig.nom}, ${siteConfig.description},
                         SN1, cem, 420, 420-SN1, programmation en sciences, cours programmation cégep, 
                         sciences de la nature, programmation, python, cégep,
-                        cégep Édouard-Montpetit, programmation scientifique, 
+                        programmation scientifique, 
                         étudiants sciences de la nature, initiation à la programmation, python, algorithmes, 
                         informatique, cours informatique, sciences de la nature, apprendre la programmation`,
                 },
