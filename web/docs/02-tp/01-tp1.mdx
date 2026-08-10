@@ -3,402 +3,136 @@ hide_table_of_contents: true
 ---
 
 import useBaseUrl from '@docusaurus/useBaseUrl';
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 
-# TP1 🥕 Calcul de racines
+# TP1 Simulateur de Cinétique et Suivi de Données
 
-:::warning Explications
-Une vidéo expliquant en détail le TP et fournissant quelques conseils est disponible en bas de page.
+:::info Calendrier et dates clés
+- **Période de réalisation** : Rencontres 2 à 7 inclusivement (temps de travail guidé prévu en classe lors de chaque rencontre)
+- **Date de remise** : **Rencontre 7 avant minuit**
+- **Préparation aux examens** : La réalisation progressive du TP1 prépare directement aux examens des rencontres suivantes.
 :::
 
 <Row>
     <Column>
-        :::info 🧠 Contexte
-        Un ordinateur, c’est très rapide, mais pas très intelligent. On va en profiter pour lui faire calculer la racine
-        carrée… de façon très bête.
+        :::info Contexte du projet
+        Que ce soit en **pharmacologie/santé** (suivi de la concentration d'un médicament dans le sang) ou en **chimie/physique** (décomposition d'un réactif ou baisse de température), les scientifiques doivent modéliser l'évolution d'une quantité au fil du temps.
 
-        Vous devez implémenter deux méthodes de calcul « brutales » d’une racine carrée :
-        1. une méthode **par dichotomie** (réduction d'un intervalle)
-        2. une méthode **chiffre par chiffre** (par essais successifs)
-
-        Puis vous devrez :
-        1. comparer ces méthodes à la fonction standard `math.sqrt()` en termes de performance
-        2. étendre le calcul à une racine n-ième
+        Dans ce travail pratique, vous allez concevoir un **simulateur de cinétique numérique** capable de :
+        1. Calculer la concentration d'une substance à un instant donné.
+        2. Analyser si la concentration respecte des seuils de sécurité ou des fenêtres d'efficacité (`if / elif / else`).
+        3. Générer un suivi temporel heure par heure (`for / while`) et identifier des métriques clés ($C_{max}$, temps d'efficacité).
         :::
     </Column>
     <Column>
-        :::tip 🎯 Objectifs pédagogiques
-        À la fin de ce travail, vous serez capable de :
+        :::tip Objectifs pédagogiques (Rencontres 1 à 5)
+        À la fin de ce travail, vous saurez :
 
-        - Utiliser des variables, types de base, opérateurs et fonctions
-        - Utiliser des structures conditionnelles et expressions logiques
-        - Utiliser des structures répétitives
-        - Décomposer un algorithme en fonctions réutilisables
-        - Évaluer la performance d’un algorithme avec des mesures de temps
-        - Appliquer la logique pour résoudre un problème numérique complexe sans bibliothèque
-        - Valider le fonctionnement de vos algorithmes à l'aide de jeux d'essais
+        - **R1 - R2** : Manipuler des types de données (`float`, `int`, `str`), variables et opérations mathématiques.
+        - **R3** : Créer et documenter des fonctions réutilisables (`def`, `return`, docstrings).
+        - **R4** : Utiliser des structures conditionnelles pour valider des seuils (`if / elif / else`).
+        - **R5** : Implémenter des boucles (`for`, `while`) et manipuler des listes de données.
+        - **R1 - R6** : Structurer un projet Python propre et versionné avec **Git/GitHub**.
         :::
     </Column>
 </Row>
 
-:::note Créer le projet
-Pour faire ce TP, vous devez créer un nouveau projet PyCharm et utiliser un répertoire GitHub dès le début.
-
-- Si votre enseignant utilise GitHub Classroom, utilisez le répertoire créé par votre enseignant.
-- Si votre enseignant n'utilise pas GitHub Classroom, créez votre propre répertoire et partagez-lui l'accès en lecture.
+:::danger Plagiat et utilisation d'outils
+Si votre travail est suspecté de plagiat (code copié, généré par IA sans compréhension, ou utilisant des notions non vues en classe) :
+* **Preuve formelle** : Note de 0 automatique.
+* **Vérification en bureau** : Vous devrez expliquer votre code ligne par ligne à votre enseignant(e). L'incapacité d'expliquer votre propre code équivaut à un plagiat.
 :::
 
-:::danger Plagiat
-# ❗🤖 👀 🚫
-Si votre travail est suspecté de plagiat (code copié d'un.e autre étudiant.e, code généré par IA, notions non
-abordées en classe, etc.), deux choses peuvent se produire :
-        * Le plagiat est prouvé par nos outils : note de 0, automatiquement.
-        * Le plagiat est plutôt évident, mais une validation est requise : vous serez convoqué(e) au bureau de votre
-enseignant(e). Vous devrez répondre à certaines questions pour prouver que vous comprenez et maîtrisez le code
-qui a été utilisé. Si vous ne réussissez pas à répondre à certaines questions, vous aurez la note
-de 0 (si vous ne comprenez pas votre propre code, c'est que vous avez plagié, d'une manière ou d'une autre).
-:::
+---
 
-:::warning <Highlight color="tip"><span style={{color: 'white'}}>1 point</span></Highlight> Répertoire Git 🐈‍⬛ et documentation des fonctions
-- Au moins 5 commits de tailles comparables (il n'y a pas un commit avec tout dedans et les autres vides)
-- Les commits décrivent l'avancement du projet dans un français sans faute [(voir instructions)](https://github.com/simonll/420-SN1)
-- Chaque fonction doit être documentée à l'aide d'un  *[docstring](/cours/rencontre3?onglet=comments)*  dans un français sans faute : description de la fonction, paramètres, valeur retournée, exceptions possibles, etc.
-- Votre projet doit contenir exactement ces 3 scripts Python et rien d'autre (l'ordre des scripts n'a pas d'importance) :
-```
+## Échéancier de réalisation suggéré
+
+| Étape | Rencontres | Notions mobilisées | Objectif de l'étape |
+| :--- | :--- | :--- | :--- |
+| **Partie 0** | **R2** | VS Code, Git/GitHub, `.py` | Initialisation du projet `tp1/` et du dépôt Git. |
+| **Partie 1** | **R3** | Fonctions (`def`, `return`, docstrings) | Fonctions mathématiques de cinétique et de conversion dans `cinetique.py`. |
+| **Partie 2** | **R4** | Conditionnelles (`if/elif/else`) | Classification des niveaux et validation des données. |
+| **Partie 3a** | **R5** | Boucle `while`, Accumulateurs | Simulation de décomposition heure par heure. |
+| **Partie 3b** | **R6** | Boucle `for`, `range()`, Listes | Analyse statistique de la simulation (`Cmax`, durée optimale) dans `analyse.py`. |
+| **Remise** | **R7** | Finalisation & Git | Atelier final en classe, validation et **remise avant minuit le jour de R7**. |
+
+---
+
+## Structure du projet requise
+
+Votre dépôt GitHub doit contenir exactement l'arborescence suivante :
+
+```text
 tp1/
-├── racine.py         # doit contenir vos 2 fonctions pour les 2 méthodes différentes du calcul de la racine carrée
-├── performance.py    # doit contenir vos tests de performance des fonctions du module "racine.py"
-└── autocorrection.py # ce fichier vous est fourni et sert à l'autocorrection de votre travail
+├── cinetique.py       # Contient vos fonctions de calcul et de simulation
+├── analyse.py        # Contient les fonctions d'analyse statistique de la simulation
+└── main.py           # Script principal qui exécute la démonstration complète
 ```
-Téléchargez le fichier <a href={useBaseUrl('/ressources/tp1/autocorrection.py')} download="autocorrection.py">`autocorrection.py`</a> et placez-le dans votre projet.
+
+:::warning 🐈‍⬛ Exigences Git et Documentation (2 points)
+- **Au moins 5 commits** significatifs répartis au fil des semaines (et non un seul commit final).
+- Messages de commit clairs et en français.
+- Chaque fonction doit comporter un **docstring** complet (description, paramètres, type et valeur de retour).
 :::
 
-::::note <Highlight color="tip"><span style={{color: 'white'}}>6 points</span></Highlight> 🔧 Calculer la racine carrée « à la main »
-Dans le script `racine.py`, vous devez créer 2 fonctions, soit une pour chacune des 2 méthodes du calcul de la racine carrée d'un nombre.
+---
 
-<Row>
-    <Column>
-        :::info ➤ Méthode 1 : Dichotomie (avec arrêt basé sur l’arrondi)
+## 🔧 Détail des consignes
 
-        On cherche la racine dans un intervalle $[\text{bas}, \text{haut}]$
-        qui se réduit de moitié à chaque étape.
+<Tabs>
+<TabItem value="partie1" label="Partie 1 : Fonctions de calcul (R1-R3)" default>
 
-        On commence par déterminer l'intervalle initial :
+Dans le fichier `cinetique.py`, implémentez les fonctions suivantes :
 
-        $$
-        \text{Si}
-        \begin{cases}
-            n \ge 1 : & \text{intervalle initial} = [0, n],\\[1em]
-            0 < n < 1 : & \text{intervalle initial} = [n, 1],\\[1em]
-            n = 0 : & \text{racine} = 0,\\[1em]
-            n < 0 : &
-            \begin{aligned}
-                & \text{non défini dans } \mathbb{R} : \\[-0.5em]
-                & \text{on lève une exception}.
-            \end{aligned}
-        \end{cases}
-        $$
+1. **`calculer_concentration(c0, k, temps)`** :
+   Calcul de la concentration restante selon la formule de décomposition de premier ordre :
+   $$C(t) = C_0 \cdot e^{-k \cdot t}$$
+   *(Utilisez `math.exp()` du module `math`).*
 
-        Par la suite, on va réduire l'intervalle de moitié de la manière suivante :
+2. **`calculer_demi_vie(k)`** :
+   Calcule le temps de demi-vie ($t_{1/2}$) nécessaire pour que la concentration soit divisée par 2 :
+   $$t_{1/2} = \frac{\ln(2)}{k}$$
 
-        1. On calcule le milieu :
-        $$
-        \text{milieu} = \frac{\text{bas} + \text{haut}}{2}
-        $$
+</TabItem>
 
-        2. Puis :
+<TabItem value="partie2" label="Partie 2 : Analyse des seuils (R4)">
 
-        $$
-        \text{Si}
-            \begin{cases}
-                \text{milieu}^2 < n : & \text{on déplace } \text{bas} = \text{milieu},\\
-                \text{milieu}^2 \ge n : & \text{on déplace } \text{haut} = \text{milieu}.
-            \end{cases}
-        $$
+Dans le fichier `cinetique.py`, ajoutez la fonction d'évaluation des seuils :
 
-        On répète l'opération de réduction de l'intervalle jusqu'à ce que le critère d’arrêt soit atteint (voir ci-dessous).
+3. **`evaluer_niveau(concentration, seuil_min, seuil_max)`** :
+   Retourne un message sous forme de chaîne de caractères (`str`) selon le niveau :
+   - `"INSUFFISANT"` si $C < \text{seuil\_min}$
+   - `"OPTIMAL"` si $\text{seuil\_min} \le C \le \text{seuil\_max}$
+   - `"TOXIQUE / CRITIQUE"` si $C > \text{seuil\_max}$
 
-        ---
-        ### 🔎 Critère d’arrêt
+</TabItem>
 
-        On arrête lorsque **les deux bornes donnent le même résultat, une fois arrondi à la précision demandée**.
+<TabItem value="partie3" label="Partie 3 : Simulation et statistiques (R5-R6)">
 
-        Par exemple, si on veut $k$ décimales, on arrête lorsque :
+Dans le fichier `analyse.py` :
 
-        $$
-        \text{round}(\text{bas}, k) = \text{round}(\text{haut}, k)
-        $$
+4. **`simuler_evolution(c0, k, duree_heures)`** :
+   Génère et retourne une **liste** contenant la concentration calculée pour chaque heure de $t = 0$ jusqu'à $t = \text{duree\_heures}$.
 
-        et ce résultat arrondi est la racine approximée.
+5. **`analyser_resultats(liste_concentrations, seuil_min, seuil_max)`** :
+   Analyse la liste des concentrations et retourne un dictionnaire ou un rapport contenant :
+   - La concentration maximale ($C_{max}$).
+   - Le nombre d'heures pendant lesquelles la concentration est restée dans la zone `"OPTIMAL"`.
 
-        ---
-        ### Exemple (racine de $8$, avec $5$ décimales)
+Dans `main.py` :
+- Exécutez une simulation complète avec des valeurs d'exemple et affichez un rapport lisible dans la console.
 
-        On poursuit les itérations jusqu'à ce que :
+</TabItem>
+</Tabs>
 
-        $$
-        \text{round}(\text{bas}, 5) = \text{round}(\text{haut}, 5)
-        $$
+---
 
-        Supposons qu’on obtienne :
-        - `bas = 2.8284225463867188`
-        - `haut= 2.82843017578125`
+## Grille d'évaluation (10 points)
 
-        Alors :
-        - `round(2.828422..., 5) = 2.82842`
-        - `round(2.828430..., 5) = 2.82843`
-
-        → On continue.
-
-        Plus tard :
-        - `bas = 2.8284263610839844`
-        - `haut= 2.82843017578125`
-
-        Alors :
-        - `round(2.8284263..., 5) = 2.82843`
-        - `round(2.8284301..., 5) = 2.82843`
-
-        → On peut donc arrêter.
-
-        Résultat retourné : $2.82843$.
-
-        :::
-    </Column>
-    <Column>
-        :::info ➤ Méthode 2 : Chiffre par chiffre
-
-        On construit le résultat décimale par décimale, en partant de la gauche vers la droite.
-
-        Supposons que nous cherchons la racine carrée de $8$.
-
-        ---
-
-        ### 🌕 Partie entière
-        On commence par déterminer la **partie entière** (à gauche de la virgule) de la racine carrée.
-
-        On fait des essais successifs pour trouver le plus grand entier dont le carré est inférieur ou égal à $8$ :
-
-        - $0^2 = 0$
-        - $1^2 = 1$
-        - $2^2 = 4$
-        - $3^2 = 9$
-
-        Puisque $3^2 > 8$, on retient **$2$**.
-
-        👉 À cette étape, on sait que la racine est dans l’intervalle :
-        $$
-        2 \quad \le \quad \sqrt{8} \quad < \quad 3
-        $$
-
-        Donc, la racine de $8$ ressemble à $2$ point quelque chose (ex : $2.0..., 2.1..., ..., 2.9...$).
-
-        ---
-
-        ### 🔢 Décimales
-
-        On va maintenant ajouter les décimales **une à la fois**.
-
-        #### Première décimale
-
-        On teste les valeurs possibles :
-
-        - $2.0^2 = 4$
-        - $2.1^2 = 4.41$
-        - $2.2^2 = 4.84$
-        - $2.3^2 = 5.29$
-        - $2.4^2 = 5.76$
-        - $2.5^2 = 6.25$
-        - $2.6^2 = 6.76$
-        - $2.7^2 = 7.29$
-        - $2.8^2 = 7.84$
-        - $2.9^2 = 8.41$
-
-        Puisque $2.9^2 > 8$, on retient **$2.8$**.
-
-        👉 On a maintenant :
-        $$
-        2.8 \quad \le \quad \sqrt{8} \quad < \quad 2.9
-        $$
-
-        ---
-
-        #### Deuxième décimale
-
-        Même principe :
-
-        - $2.80^2 = 7.84$
-        - $2.81^2 = 7.8961$
-        - $2.82^2 = 7.9524$
-        - $2.83^2 = 8.0089$
-
-        Puisque $2.83^2 > 8$, on retient **$2.82$**.
-
-        👉 On a maintenant :
-        $$
-        2.82 \quad \le \quad \sqrt{8} \quad < \quad 2.83
-        $$
-
-        ---
-
-        On répète ce processus pour chaque décimale jusqu’à atteindre la précision souhaitée.
-
-        ---
-
-        ### ⚙️ Traduction en algorithme
-
-        À chaque position décimale :
-
-        1. On fixe les chiffres déjà trouvés
-        2. On teste les chiffres de **0 à 9**
-        3. On garde le plus grand chiffre tel que :
-        $$
-        (\text{approximation})^2 \le n
-        $$
-
-        👉 Cela correspond directement à :
-        - une boucle sur les **positions**
-        - une boucle imbriquée sur les **chiffres de 0 à 9**
-
-        ---
-
-        ### ≅ Arrondi ou pas ?
-
-        Avec cette méthode, **on n’arrondit pas la réponse**.
-
-        On retourne simplement la **borne inférieure**, c’est-à-dire le plus grand nombre construit tel que :
-        $$
-        (\text{approximation})^2 \le n
-        $$
-
-        👉 On obtient donc une **troncature** à la précision demandée.
-
-        Par exemple, si la vraie valeur est :
-        $$
-        \sqrt{8} \approx 2.828427...
-        $$
-
-        Avec une précision de 5 décimales, on retourne :
-        $$
-        2.82842
-        $$
-
-        (et non $2.82843$).
-        :::
-    </Column>
-</Row>
-
-**LES PARAMÈTRES** \
-Ces deux fonctions doivent recevoir les deux paramètres suivants :
-1. **Le nombre** dont on souhaite calculer la racine
-    - Vous devez valider que ce nombre est supérieur ou égal à zéro.
-2. **La précision souhaitée** (ex. : 4 pour obtenir un maximum de 4 décimales) :
-    - Ce paramètre doit être **facultatif** (en configurant une valeur par défaut).
-    - Vous devez valider que la précision est comprise **entre 4 et 10 décimales**.
-
-**VALEUR RETOURNÉE** \
-Concernant les valeurs retournées par ces 2 fonctions :
-- Elles doivent retourner simplement le résultat en **format numérique**, comme le fait `math.sqrt()`.
-- Les fonctions ne doivent pas appeler la fonction `print`.
-- Certaines racines n'ont pas de décimales ou en possèdent peu :
-    - *Exemple* : La racine carrée de `9` est `3.0`, peu importe la valeur de votre précision souhaitée.
-    - **Ne rajoutez pas de zéros inutiles** à votre réponse.
-
-
-
-:::danger GARDER LE MODULE `RACINE` PROPRE
-Votre module `racine` doit contenir uniquement ces 2 fonctions et aucune instruction dans ce module ne doit être laissée à l'extérieur de ces 2 fonctions.
-:::
-
-:::tip ✅ Autocorrection
-
-Vous devez exécuter fréquemment le script `autocorrection.py`. Il détecte automatiquement votre progression, ce que vous avez fait ou non, et exécute des tests en conséquence.
-Votre enseignant va se servir de ce script pour valider le bon fonctionnement de vos 2 fonctions.
-
-⚠️ Pour que le script fonctionne correctement, il faut absolument que le mot `dichotomie` soit présent dans la docstring de la fonction correspondant à la méthode par dichotomie.
-
-Le script nécessite au préalable l'installation du package `requests` ([voir la procédure d'installation d'un package](/recettes/ajouter-librairie)).
-Cette bibliothèque permet de télécharger des fichiers en ligne par programmation ; elle est utilisée ici pour vérifier si une nouvelle version du script est disponible et pour la télécharger automatiquement.
-
-
-
-**Limitations du script** \
-Le script possède certaines limites et ne vérifie pas les points suivants :
-
-- La **cohérence de vos docstrings** ainsi que la **qualité du français**.
-- La présence de **code inutile ou redondant** à l'intérieur de vos fonctions.
-- Le respect de la consigne exigeant au moins **cinq commits** dans votre dépôt GitHub.
-- Le bon fonctionnement du script `performance.py`.
-
-:::
-
-::::
-:::note <Highlight color="tip"><span style={{color: 'white'}}>2 points</span></Highlight> 📈 Comparaison des performances
-Dans le script `performance.py`, vous allez comparer vos 2 fonctions du module `racine` avec la fonction `math.sqrt()` pour comparer leurs performances.
-
-**Pour chacune des 3 méthodes** (fonction 1, fonction 2, `math.sqrt()`) vous devez :
-- À l'aide d'une boucle, appeler la fonction 100 000 fois avec un nombre flottant aléatoire
-    - Utilisez un nombre flottant aléatoire différent à chaque appel
-    - Les nombres flottants générés doivent être compris entre 10 et 10 000
-- Calculer le temps total nécessaire pour réaliser les 100 000 appels (en ms)
-- Afficher :
-    - Le **temps de calcul total** pour les 100 000 appels (en **millisecondes**)
-    - Le **temps moyen** par appel de la fonction
-
-Exemple d'affichage attendu (les valeurs sont fictives) :
-```
-Résultats des performances :
-Méthode 1 (dichotomie)          : Temps total = 50 ms, Temps moyen = 0.0005 ms
-Méthode 2 (chiffre par chiffre) : Temps total = 150 ms, Temps moyen = 0.0015 ms
-Méthode 3 (math.sqrt)           : Temps total = 10 ms, Temps moyen = 0.0001 ms
-```
-Votre format d'affichage devrait être identique. \
-Le script doit s'éxécuter en moins de 60 secondes.
-:::
-
-:::tip <Highlight color="tip"><span style={{color: 'white'}}>1 point</span></Highlight> 🌱 Généraliser à une racine n-ième
-Vous devez **transformer** vos deux fonctions du module `racine` afin qu'elles puissent calculer la racine n-ième d'un nombre.
-
-**Ajout d'un nouveau paramètre**
-- Ajoutez un paramètre `base` à vos deux fonctions (ex. : 2 pour racine carrée, 3 pour racine cubique, etc.).
-- Ce paramètre doit être **optionnel** et avoir la valeur **2** par défaut.
-- L'**ordre des paramètres** doit être exactement le suivant (sans quoi l'autocorrection ne fonctionnera pas) :
-    - le nombre
-    - la base
-    - la précision
-
-**Règles de validation et logique**
-
-- **Nombres négatifs**
-    - Le calcul de la racine d'un nombre négatif doit être possible **uniquement si la base est impaire** (ex. : la racine cubique de -27 est -3).
-    - Dans tous les autres cas, une exception doit être levée.
-- **Validation de la base**
-    - La valeur du paramètre `base` ne doit pas être inférieure à 2.
-    - Vous devez valider la valeur passée en paramètre.
-
-
-**Vérification du bon fonctionnement**
-- Le script `autocorrection.py` ajustera les tests en **conséquence** dès qu'il **détectera** le paramètre supplémentaire dans vos fonctions.
-:::
-
-:::danger Fonctionnement global <Highlight color="danger"><span style={{color: 'white'}}>2 points négatifs</span></Highlight>
-Le projet fonctionne sans plantage et correctement, et le code est clair et facile à lire.
-Ce pointage fonctionne en négatif.
-Si le projet fonctionne correctement en tout temps, vous conservez votre note.
-Dans le cas contraire, vous perdez des points avec un maximum de 2.
-
-- Plantage (un script qui plante lorsqu'on l'exécute) <Highlight color="danger"><span style={{color: 'white'}}>-1 point</span></Highlight>
-- Code illisible (ex : noms de variables incompréhensibles, difficulté à comprendre le code) <Highlight color="danger"><span style={{color: 'white'}}>-1 point</span></Highlight>
-- Information affichée incohérente <Highlight color="danger"><span style={{color: 'white'}}>-1 point</span></Highlight>
-- Autre cas...
-:::
-
-## Explications détaillées
-<iframe
-    style={{
-        width: "100%",
-        aspectRatio: "16 / 9",
-        border: "0",
-    }}
-    src="https://www.youtube.com/embed/pZQTVRX8b8k?si=WtkI8IgswdlGL16x"
-    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-    allowFullScreen
-></iframe>
+| Critère | Barème |
+| :--- | :--- |
+| **Git & Structure** (5 commits minimum, arborescence propre, docstrings) | **2 pts** |
+| **Partie 1** (Calculs mathématiques, `math.exp`, précision des retours) | **2.5 pts** |
+| **Partie 2** (Logique conditionnelle `if/elif/else`, cas limites) | **2.5 pts** |
+| **Partie 3** (Boucle temporelle, gestion de liste, calcul des statistiques) | **3 pts** |

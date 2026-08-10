@@ -1,6 +1,6 @@
 ---
 title: 2 - Scripts et fonctions
-description: Scripts, Débogueur, Traces, Fonctions, f-strings, Modules, Bibliothèques, Liste (list), Précision des flottants
+description: Scripts, Débogueur, Traces, Fonctions, f-strings, Modules, Bibliothèques, Précision des flottants
 hide_table_of_contents: true
 ---
 
@@ -30,25 +30,23 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
         </Admonition>
 
 
-        :::warning Retour sur le mode interactif
+        :::tip Transition vers les scripts Python
 
-        Le mode interactif (dans la console) est pratique pour tester des idées, mais :
+        Tester du code de façon isolée (dans des cellules ou des tests rapides) est pratique pour expérimenter, mais pour de vrais programmes :
 
-        - Tout disparaît dès qu'on ferme la console (ou l'IDE).
-        - On ne peut pas conserver votre code.
-        - On doit tout retaper à chaque fois.
+        - On souhaite conserver notre code de façon durable.
+        - On veut pouvoir l'exécuter, le modifier et le partager facilement.
 
-        C'est pourquoi, à partir de maintenant, nous allons créer des [**scripts Python**](/recettes/creer-python), c'est-à-dire des fichiers `.py` dans lesquels nous allons écrire et conserver tout notre code.
+        C'est pourquoi, à partir de maintenant, nous allons créer des [**scripts Python**](/recettes/creer-python), c'est-à-dire des fichiers `.py` dans lesquels nous allons écrire, structurer et conserver tout notre code dans VS Code.
         :::
 
         ---
 
         :::info Bonjour le monde en Python, dans un fichier texte
 
-        On va vite vouloir donner plein d'ordres à l'ordinateur en lui parlant en Python.
+        On va vite vouloir donner une série d'ordres à l'ordinateur en Python.
 
-        Ça devient pénible de les écrire les uns après les autres en mode interactif.<br />
-        Alors, on va écrire les ordres les uns après les autres dans un fichier.
+        Plutôt que d'exécuter les instructions une par une de manière isolée, nous allons les regrouper dans un fichier.
 
         On va appeler ça un *script Python*.<br />
         Concrètement, c'est juste un fichier texte avec des instructions en Python.<br />
@@ -809,38 +807,15 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
         {/* <Feedback feedbackId="Rencontre #2 - Modules" /> */}
     </TabItem>
 
-    <TabItem value="liste" label="Liste (list)" default>
-        <Admonition type="tip" title="Faire les exercices dans Colab">
-            <p>Si vous préférez, vous pouvez aussi faire les exercices de cette section dans un notebook Google Colab. Cliquez sur le badge ci-dessous pour ouvrir le notebook préparé pour vous.</p>
-            <a href="https://colab.research.google.com/github/Simonll/420-SN1/blob/develop/code/notebooks/exercices_semaine_2.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
-        </Admonition>
+    <TabItem value="liste" label="Listes (Prochainement R6)">
 
-        :::info Introduction aux listes
-        Jusqu'ici nous avons vu les 4 types de données de base en Python :
-        - les entiers (`int`) : 5, -3, 42, 0, ...
-        - les nombres à virgule (`float`) : 3.14, -0.001, 2.0, ...
-        - les chaînes de caractères (`str`) : "Bonjour", 'a', "123", ...
-        - les booléens (`bool`) : True, False
-
-        Python propose aussi des types de données plus complexes, comme les **listes**. Une liste permet de stocker plusieurs valeurs dans une seule variable, dans un ordre précis.
-
-        Les listes sont définies par des crochets `[]`, avec les éléments séparés par des virgules :
-        ```python showLineNumbers
-        heros = ["Mario", "Link", "Kirby", "Sonic"]
-        annees_creation = [1981, 1986, 1992, 1991]
-        ```
-
-        Les éléments d'une liste peuvent être de n'importe quel type (`str`, `int`, `float`, `bool`).
-
-        Une liste peut même contenir des éléments de types différents :
-        ```python showLineNumbers
-        melange = ["Alice", 42, 3.14, True]
-        ```
+        :::info Les listes en Python
+        La notion de **Listes (`list`)** et leur manipulation complète sont désormais abordées à la **[Rencontre 6](/cours/rencontre6)** en combinaison avec les boucles `for`.
         :::
 
-        ---
+    </TabItem>
 
-        ::::info Accéder aux éléments d'une liste
+    <TabItem value="precision-flottants" label="Précision des flottants">
         Chaque élément d'une liste est associé à un **index** (sa position), qui commence à **0**.
 
         ```
