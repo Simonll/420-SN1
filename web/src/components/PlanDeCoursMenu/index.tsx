@@ -9,10 +9,10 @@ interface PdfChoice {
 
 // Les 4 documents PDF présents dans web/static/pdf
 const CHOICES: PdfChoice[] = [
-  { label: "Plan de cours A26", file: "PC_2026A_420-SN1-RE_Departement-Informatique.pdf" },
+  /* { label: "Plan de cours A26", file: "PC_2026A_420-SN1-RE_Departement-Informatique.pdf" },
   { label: "Annexe - Département informatique", file: "PC_2026A_ANNEXE_Département-Informatique.pdf" },
   { label: "Annexe - Kevin et Mathieu", file: "PC_2026A_ANNEXE_Kevin_Mathieu.pdf" },
-  { label: "Annexe - Joris", file: "PC_2026A_ANNEXE_Joris.pdf" },
+  { label: "Annexe - Joris", file: "PC_2026A_ANNEXE_Joris.pdf" },*/
 ];
 
 export default function PlanDeCoursMenu() {
