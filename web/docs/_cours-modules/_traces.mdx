@@ -1,0 +1,74 @@
+import Admonition from '@theme/Admonition';
+import Column from '../../src/components/Column';
+import Row from '../../src/components/Row';
+
+
+<Admonition type="tip" title="Faire les exercices dans Colab">
+            <p>Si vous préférez, vous pouvez aussi faire les exercices de cette section dans un notebook Google Colab. Cliquez sur le badge ci-dessous pour ouvrir le notebook préparé pour vous.</p>
+            <a href="https://colab.research.google.com/github/Simonll/420-SN1/blob/develop/code/notebooks/exercices_semaine_2.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+        </Admonition>
+
+        :::tip Pourquoi faire une trace
+        La trace est un outil qui permet de suivre l'exécution d'un programme en affichant les valeurs des variables et les
+        instructions exécutées à chaque étape. C'est un excellent moyen de comprendre comment votre code fonctionne et de
+        détecter les erreurs.
+        :::
+
+        ---
+
+        ::::info Création d'une trace
+
+        Lisez la section [Trace d'exécution](/recettes/produire-une-trace) pour apprendre à rédiger une trace.
+
+        Ensuite, avec un crayon et du papier, générez la trace (en tableau) pour le script Python créé à la section [Script](/cours/rencontre2?onglet=script), montré ci-bas.
+
+        Une fois votre trace faite, vous allez exécuter le code pour valider qu'elle est correcte, en suivant ces étapes :
+        - Placez un point d'arrêt sur la première ligne qui s'exécute.
+        - Lancez l'exécution en mode débogage.
+        - Sautez de ligne en ligne pour voir si la trace est correcte (valeurs des variables, instructions exécutées).
+
+        :::warning ATTENTION
+        Il faut d'abord faire la trace à la main, sans regarder le débogueur, pour que ce soit un véritable exercice de compréhension du code. C'est seulement après avoir fait votre propre trace que vous devez utiliser le débogueur pour vérifier votre travail. À l'examen, vous n'aurez pas accès au débogueur, donc il est important de s'entraîner à faire des traces à la main
+        :::
+
+        <Row>
+            <Column>
+
+                ```python showLineNumbers
+                # ceci est un commentaire, cette ligne est pour les humains
+                # l'ordinateur va l'ignorer car elle commence par un "#"
+                print("bonjour bonjour cher maitre humain")
+                6 / 2 * (1 + 2)
+                print("Ca va aujourd' hui?")
+                print( 4 / 5 * (9 + 6) )
+                x = 6
+                y = 7
+                resultat = x * y
+                x = 0
+                y = resultat
+                ```
+            </Column>
+            <Column>
+
+                <details>
+                    <summary>Vous devriez normalement obtenir cette trace :</summary>
+                    | # ligne | x | y | resultat | affichage |
+                    |---------|---|---|----------|-----------|
+                    | 3 | | | | bonjour bonjour cher maitre humain |
+                    | 4 | | | | |
+                    | 5 | | | | Ca va aujourd' hui? |
+                    | 6 | | | | 12 |
+                    | 7 | 6 | | | |
+                    | 8 | 6 | 7 | | |
+                    | 9 | 6 | 7 | 42 |
+                    | 10 | 0 | 7 | 42 |
+                    | 11 | 0 | 42 | 42 |
+                </details>
+
+            </Column>
+        </Row>
+
+        ::::
+
+
+        {/* <Feedback feedbackId="Rencontre #2 - Trace" /> */}

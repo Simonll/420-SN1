@@ -1,0 +1,105 @@
+import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
+import Admonition from '@theme/Admonition';
+
+
+<Admonition type="tip" title="Faire les exercices dans Colab">
+            <p>Si vous préférez, vous pouvez aussi faire les exercices de cette section dans un notebook Google Colab. Cliquez sur le badge ci-dessous pour ouvrir le notebook préparé pour vous.</p>
+            <a href="https://colab.research.google.com/github/Simonll/420-SN1/blob/develop/code/notebooks/exercices_semaine_2.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+        </Admonition>
+
+        ::::info Les f-strings, c'est quoi?
+
+        Une *f-string* (ou *formatted string*), c'est similaire à une **phrase à trous** : on écrit le texte normalement, et partout où on veut insérer une valeur, on laisse un trou avec des accolades `{}`. Python remplit ensuite chaque trou avec la valeur correspondante.<br />
+
+        Pour créer une f-string, on place un `f` juste avant les guillemets. Par exemple, dans `f"Le résultat de {nombre1} x {nombre2} est : {nombre1 * nombre2}"`, les trois trous `{nombre1}`, `{nombre2}` et `{nombre1 * nombre2}` sont remplis par leurs valeurs.
+        ```python
+        nombre1 = 3.14159265
+        nombre2 = 2
+        print(f"Le résultat de {nombre1} x {nombre2} est : {nombre1 * nombre2}.")
+        ```
+        Cette exemple affiche le résultat :
+        ```
+        Le résultat de 3.14159265 x 2 est : 6.2831853.
+        ```
+
+        :::tip Pourquoi utiliser une f-string?
+        On pourrait obtenir un résultat semblable avec la concaténation (`+`) ou en séparant les éléments par des virgules dans `print()`.
+        Mais la f-string est souvent **plus lisible** et évite d'avoir à **convertir les nombres en `str`** soi-même : on insère directement les variables et les expressions entre accolades, et Python s'occupe du reste.
+        :::
+        ::::
+
+        ---
+
+        ::::info Formatage des nombres
+        Les f-strings permettent un contrôle très précis de la présentation des nombres entiers et flottants. \
+        Il suffit d’ajouter, à l’intérieur des accolades `{}`, après l’expression, un `:` suivi d’options pour contrôler le format.
+
+        Voici différentes options permettant de contrôler le format :
+
+        | Syntaxe | Effet | Exemple |
+        |-|-|-|
+        | <C><S>:.2f</S></C> | Arrondi à 2 décimales, complété par des 0 | <C><N>3.14159265</N></C> → <C><N>3.14</N></C> / <C><N>3.5</N></C> → <C><N>3.50</N></C> |
+        | <C><S>:.0f</S></C> | Arrondi sans décimale | <C><N>3.99</N></C> → <C><N>4</N></C> |
+        | <C><S>:,</S></C> | Spécifier le séparateur de milliers | <C><N>1000000</N></C> → <C><N>1,000,000</N></C> |
+        | <C><S>:05d</S></C> | Entier sur 5 chiffres, complété par des 0 | <C><N>42</N></C> → <C><N>00042</N></C> |
+        | <C><S>:+.2f</S></C> | Affiche le signe + ou - et conserve 2 décimales | <C><N>3.5</N></C> → <C><N>+3.50</N></C> / <C>-<N>2</N></C> → <C>-<N>2.00</N></C> |
+
+        Par exemple, le code ci-dessous :
+
+        ```python
+        # le résultat est arrondi à 2 décimales :
+        nombre1 = 3.14159265
+        nombre2 = 2
+        print(f"Le résultat de {nombre1} x {nombre2} est : {nombre1 * nombre2:.2f}.")
+        ```
+
+        affiche le résultat de la multiplication arrondi à deux décimales :
+
+        ```
+        Le résultat de 3.14159265 x 2 est : 6.28.
+        ```
+
+        :::note Le format change l'affichage, pas la valeur
+        Ces options modifient seulement **la façon dont le nombre est affiché**. \
+        La variable, elle, garde sa valeur et son type d'origine (un `float` reste un `float`).
+        :::
+        ::::
+
+        ---
+
+        :::info Formatage des chaînes de caractères
+        Il est possible de forcer une chaîne de caractères à occuper un certain nombre de positions et de contrôler son alignement.
+        Ceci est particulièrement utile lorsque l’alignement vertical entre plusieurs lignes affichées dans la console doit être respecté (par exemple, lors de l’affichage d’un tableau en console).
+
+        Voici différentes options permettant de contrôler l'alignement :
+
+        | Syntaxe | Effet | Exemple |
+        | - | - | - |
+        | <C><S>:\<10</S></C> | Aligné à gauche sur 10 caractères | <C><S>Mots</S></C> →  <C><S>Mots{'\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0'}</S></C> |
+        | <C><S>:\>10</S></C> | Aligné à droite sur 10 caractères | <C><S>Mots</S></C> →  <C><S>{'\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0'}Mots</S></C> |
+        | <C><S>:^10</S></C> | Centré sur 10 caractères | <C><S>Mots</S></C> →  <C><S>{'\u00A0\u00A0\u00A0'}Mots{'\u00A0\u00A0\u00A0'}</S></C> |
+
+        Par exemple, le code ci-dessous :
+
+        ```python
+        prenom1 = "John"
+        prenom2 = "Dessendre"
+        nom1 = "Doe"
+        nom2 = "Renoir"
+
+        print(f"{'Nom':<10} {'Prénom':<10}") #Affiche la str "Nom" et "Prénom" sur 10 caractères chacun
+        print(f"{nom1:<10} {prenom1:<10}")   #Affiche le contenu des variables nom1 et prenom1 sur 10 caractères chacun
+        print(f"{nom2:<10} {prenom2:<10}")   #Affiche le contenu des variables nom2 et prenom2 sur 10 caractères chacun
+        ```
+        affiche les noms et les prénoms sur 10 caractères chacun, alignés à gauche, séparé d'un espace :
+        ```
+        Nom        Prénom
+        Doe        John
+        Renoir     Dessendre
+        ```
+
+        C'est cette technique d'alignement qui vous permettra d'afficher des **données bien lisibles** dans la console, en alignant proprement les valeurs les unes sous les autres.
+        :::
+
+
+        {/* <Feedback feedbackId="Rencontre #2 - f-strings" /> */}

@@ -1,0 +1,96 @@
+import Admonition from '@theme/Admonition';
+
+
+<Admonition type="tip" title="Faire les exercices dans Colab">
+            <p>Si vous préférez, vous pouvez aussi faire les exercices de cette section dans un notebook Google Colab. Cliquez sur le badge ci-dessous pour ouvrir le notebook préparé pour vous.</p>
+            <a href="https://colab.research.google.com/github/Simonll/420-SN1/blob/develop/code/notebooks/exercices_semaine_2.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+        </Admonition>
+
+
+        :::tip Transition vers les scripts Python
+
+        Tester du code de façon isolée (dans des cellules ou des tests rapides) est pratique pour expérimenter, mais pour de vrais programmes :
+
+        - On souhaite conserver notre code de façon durable.
+        - On veut pouvoir l'exécuter, le modifier et le partager facilement.
+
+        C'est pourquoi, à partir de maintenant, nous allons créer des [**scripts Python**](/recettes/creer-python), c'est-à-dire des fichiers `.py` dans lesquels nous allons écrire, structurer et conserver tout notre code dans VS Code.
+        :::
+
+        ---
+
+        :::info Bonjour le monde en Python, dans un fichier texte
+
+        On va vite vouloir donner une série d'ordres à l'ordinateur en Python.
+
+        Plutôt que d'exécuter les instructions une par une de manière isolée, nous allons les regrouper dans un fichier.
+
+        On va appeler ça un *script Python*.<br />
+        Concrètement, c'est juste un fichier texte avec des instructions en Python.<br />
+        On va faire terminer son nom par `.py` pour éviter de le mélanger avec les fichiers `.pdf`, `.jpg`, etc.
+
+        On va taper dans la zone du fichier les instructions, une par ligne.<br />
+        Par exemple :
+        ```python showLineNumbers
+        # ceci est un commentaire, cette ligne est pour les humains
+        # l'ordinateur va l'ignorer car elle commence par un "#"
+        print("bonjour bonjour cher maitre humain")
+        6 / 2 * (1 + 2)
+        print("Ca va aujourd' hui?")
+        print( 4 / 5 * (9 + 6) )
+        x = 6
+        y = 7
+        resultat = x * y
+        x = 0 
+        y = resultat
+        ```
+
+        On va ensuite *exécuter* notre script (il ne s'agit pas de le tuer).<br />
+        On demande à python de suivre nos ordres, d'*exécuter* nos instructions, une par une.
+
+        En suivant [cette recette](/recettes/creer-python), créez, dans un projet dans VS Code, un script Python, copiez-y le code ci-haut, et exécutez-le.
+
+        Que voyez-vous?
+        - L'interpréteur a affiché trois lignes. Pourquoi?
+        - Il a exécuté les instructions ligne par ligne, de haut en bas.
+        - Il n'exécute rien pour les 2 premières lignes, car elles sont des *commentaires*.
+        - Il a exécuté la ligne 3, qui est une instruction `print()`, et il a affiché le texte entre guillemets.
+        - Il a ensuite exécuté la ligne 4, qui est un calcul, mais comme on ne lui a pas demandé d'afficher le résultat, il ne l'affiche pas.
+        - Il a ensuite exécuté la ligne 5, qui est encore une instruction `print()`, et il a affiché le texte entre guillemets.
+        - Il a ensuite exécuté la ligne 6, qui est encore une instruction `print()`, et il a affiché le résultat du calcul entre parenthèses.
+        - Il a ensuite exécuté les lignes 7 à 11, qui sont des affectations de variables. Comme on ne lui a pas demandé d'afficher quoi que ce soit, il n'affiche rien.
+
+        :::
+
+        ---
+
+        :::tip Pourquoi écrire des scripts?
+
+        Écrire son code dans des fichiers `.py` permet :
+
+        - ✅ De conserver vos programmes.
+        - ✅ De pouvoir les exécuter autant de fois que vous voulez.
+        - ✅ De pouvoir les améliorer petit à petit.
+        :::
+
+        ---
+
+        :::note Sauvegarde automatique
+
+        Dans VS Code, vous pouvez vérifier que l'option **Auto Save** est activée dans le menu **File > Auto Save**. Sinon, prenez l'habitude d'appuyer sur *`Ctrl + S`* pour sauvegarder vos fichiers avant de les exécuter.
+
+        > ⚠️ Attention toutefois : cette sauvegarde est **locale**. Pour envoyer vos modifications vers **GitHub**, un `commit-push` reste nécessaire.
+
+        :::
+
+        ---
+
+        :::danger Quel fichier est exécuté?
+
+        Le bouton d'exécution (▶️) en haut à droite de l'éditeur lance par défaut **le fichier actuellement ouvert dans l'éditeur**. C'est le comportement le plus simple pour commencer.
+
+        Plus tard, vous pourrez configurer des profils de lancement plus complexes pour des projets plus gros avec le fichier `launch.json`, mais pour l'instant, le bouton ▶️ est votre meilleur ami.
+
+        :::
+
+        {/* <Feedback feedbackId="Rencontre #2 - Script" /> */}
