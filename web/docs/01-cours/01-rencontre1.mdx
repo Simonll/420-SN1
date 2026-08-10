@@ -4,1292 +4,235 @@ description: Plan de cours, Introduction, On commence!, Expressions, Opérateurs
 hide_table_of_contents: true
 ---
 
-import Row from "../../src/components/Row";
-import Column from "../../src/components/Column";
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import Admonition from '@theme/Admonition';
-import RappelFonctionnementClasseInverse from '@site/docs/_components/RappelFonctionnementClasseInverse.mdx';
-import Feedback from "../../src/components/Feedback";
-import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
 import Link from '@docusaurus/Link';
+import PlanDeCoursModule from '../_cours-modules/_plan-de-cours.mdx';
+import Mod_intro from '../_cours-modules/_intro.mdx';
+import Mod_code from '../_cours-modules/_code.mdx';
+import Mod_expressions from '../_cours-modules/_expressions.mdx';
+import Mod_operateurs from '../_cours-modules/_operateurs.mdx';
+import Mod_types from '../_cours-modules/_types.mdx';
+import Mod_variables from '../_cours-modules/_variables.mdx';
+import Mod_VSCode from '../_cours-modules/_VSCode.mdx';
+import Mod_github from '../_cours-modules/_github.mdx';
+import Mod_venv from '../_cours-modules/_venv.mdx';
+import Mod_apercu from '../_cours-modules/_apercu.mdx';
 
 # Intro - aperçu - premier code
 
 ## Expressions, opérateurs, types, variables
 
 <Tabs queryString="onglet">
-
     <TabItem value="admin" label="Plan de cours" default>
-
-    :::info Le plan de cours
-    Prenons un moment pour survoler le plan de cours. Nous y verrons :
-    - La progression des apprentissages sur les 15 semaines.
-    - Le calendrier des évaluations et leurs pondérations.
-    - Les règles importantes concernant le plagiat.
-    :::
-
-    :::warning N'oubliez pas vos écouteurs !
-    Certains concepts du cours vous seront présentés sous forme de capsules vidéo, ce qui vous permet de les visionner et de les réécouter à votre propre rythme. 
-    Pensez à glisser une paire d'écouteurs dans votre sac pour pouvoir les écouter en classe sans déranger vos collègues.
-    :::
-
-    :::danger Tolérance zéro pour le plagiat
-    Si un travail remis est suspecté de plagiat (code copié sur un ou une collègue, généré par une IA, ou utilisant des notions non vues en classe), voici ce qui se produira :
-
-    - **Preuve formelle :** Si nos outils détectent un plagiat de façon catégorique, c'est la note de 0 automatiquement.
-    - **Validation requise :** Si le doute est fort mais nécessite une vérification, vous serez convoqué(e) au bureau de votre enseignant(e). Vous devrez expliquer et démontrer que vous maîtrisez parfaitement le code remis. L'incapacité à expliquer le fonctionnement de votre propre code entraînera la note de 0 (ne pas comprendre ce qu'on a remis équivaut à avoir triché).
-    :::
-
-    :::tip Entraide vs Plagiat : Comment tracer la ligne ?
-    En programmation, la limite entre « s'entraider » et « copier » peut parfois sembler floue. Voici nos règles d'or pour collaborer sainement :
-
-    - **Ne partagez jamais vos fichiers ou blocs de code.** Même avec de bonnes intentions, la personne aidée finira souvent par copier-coller sans réfléchir.
-    - **Expliquez la logique, pas la syntaxe.** Vous avez tout à fait le droit de faire des dessins, d'expliquer un algorithme ou de reformuler un problème, mais vous ne devez jamais écrire (ou dicter) le code à la place de quelqu'un d'autre.
-    - **En cas de doute, levez la main !** Votre enseignant(e) est la meilleure personne pour vous décoincer.
-    :::
+        <PlanDeCoursModule />
     </TabItem>
-
     <TabItem value="intro" label="Intro">
-
-        :::info Introduction
-
-        La programmation, c’est l’art de donner des instructions précises à une machine pour qu’elle accomplisse une tâche. Contrairement à un humain, qui peut comprendre le contexte ou improviser, un ordinateur est totalement logique. Il exécute les instructions exactement comme elles sont écrites, sans les interpréter, et toujours dans l’ordre prévu.
-
-        Dans un monde de plus en plus numérique, une frontière invisible se dessine entre les simples utilisateurs de technologies et ceux qui en comprennent les rouages. Apprendre à programmer permet de franchir cette frontière : cela augmente notre littératie informatique et nous aide à décoder le langage des machines. Pour de futurs scientifiques ainsi que pour les futurs professionnels de la santé (médecine, pharmacie, recherche clinique, biotechnologies), c'est une compétence de plus en plus incontournable. Qu’il s’agisse d’analyser de grands ensembles de données génétiques, de modéliser des phénomènes biologiques, de traiter de l'imagerie médicale ou d'interagir avec des outils de bio-informatique, comprendre le code vous permet de cesser d'être de simples spectateurs pour devenir des acteurs du changement.
-
-        Il existe de nombreux langages de programmation, chacun avec ses forces et ses usages. Certains sont conçus pour la performance (comme C ou C++), d’autres pour la simplicité et la lisibilité. C’est le cas de Python, un langage très apprécié des débutants. Sa syntaxe claire permet de se concentrer sur les concepts sans être ralenti par des règles complexes.
-
-        Python est aussi largement utilisé dans des domaines comme l’intelligence artificielle, l’analyse de données et la modélisation scientifique et médicale, grâce à un vaste écosystème de bibliothèques.
-
-        Mais attention : il nexiste pas un langage unique pour tout faire. Par exemple :
-
-        <Link to="https://gcc.gnu.org/" target="_blank">C/C++</Link> : idéals pour les logiciels qui doivent être rapides et proches du matériel (comme les logiciels de dispositifs médicaux ou d'imagerie lourde).
-
-        <Link to="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank">JavaScript</Link> : incontournable pour le développement web.
-
-        <Link to="https://kotlinlang.org/" target="_blank">Kotlin</Link> et <Link to="https://swift.org/" target="_blank">Swift</Link> : spécialisés dans les applications mobiles (comme les applications de suivi de santé).
-
-        <Link to="https://www.r-project.org/" target="_blank">R</Link> et <Link to="https://www.python.org/" target="_blank">Python</Link> : très utilisés pour les statistiques, l’épidémiologie, l’analyse de données et la recherche scientifique.
-
-
-        <p align="center">
-            <img src={require('/img/cours/narvalphoto.jpeg').default} width="25%"/>
-            <br/>
-            <Link to="https://www.calculquebec.ca/nouvelle/narval-un-nouveau-superordinateur-dedie-a-la-recherche-scientifique/" target="_blank">Narval</Link>
-        </p>
-
-
-
-        :::
-
-        :::tip Pourquoi apprendre à programmer en sciences?
-
-        En sciences, savoir programmer est souvent un atout majeur, voire une nécessité. Que ce soit en biologie, en physique ou en chimie, la programmation permet de :
-
-        * Modéliser des phénomènes complexes ;
-
-        * Analyser des données expérimentales ;
-
-        * Simuler des processus naturels.
-
-        Quelques exemples concrets :
-
-        * Biologie et Santé : analyser des séquences génomiques, modéliser l’évolution d’une population ou traiter des données d'imagerie médicale ;
-
-        * Mathématiques : résoudre numériquement des équations différentielles ou visualiser des fonctions en 3D ;
-
-        * Chimie : étudier la cinétique de réactions chimiques ou manipuler des structures moléculaires ;
-
-        * Géologie : analyser des relevés sismiques ou modéliser l’érosion d’un terrain au fil du temps ;
-
-        * Physique : simuler la trajectoire d’un objet ou l’interaction entre des particules fondamentales.
-
-        Plus qu'un simple outil technique, la programmation modifie profondément votre manière de penser. Elle façonne ce qu'on appelle la pensée informatique : une démarche intellectuelle qui force à décomposer un problème complexe en sous-éléments gérables, à identifier des structures répétitives et à formuler des solutions avec une clarté et une rigueur absolues. Cette nouvelle gymnastique d'esprit transforme durablement la façon dont un scientifique structure son raisonnement face à l'inconnu, renforçant des compétences transversales cruciales comme l'esprit critique et la résolution de problèmes.
-
-        Enfin, la maîtrise de Python (ou d’un autre langage) ouvre la porte à des domaines en forte croissance, comme la science des données ou l’intelligence artificielle, des outils aujourd'hui omniprésents dans la recherche scientifique, médicale et industrielle.
-
-        > ✅ En résumé : apprendre à programmer, ce n’est pas juste utile — c’est souvent indispensable pour comprendre,
-        modéliser et explorer le monde scientifique.
-
-        :::
-
-        :::info Fonctionnement de Python et outils de développement
-
-        Python est un **langage interprété**, ce qui signifie que le code n’est pas compilé en un fichier exécutable,
-        mais **lu et exécuté ligne par ligne** par un interpréteur Python.
-
-        La machine ne fait **aucune déduction** : elle suit les instructions exactement comme elles sont écrites, dans
-        l’ordre, sans se poser de questions.
-
-        <p align="center">
-            <img src={require('/img/cours/resizecom-Python-interpreteur.png').default} width="25%"/>
-        </p>
-
-        ---
-
-        ### Outils de développement
-
-        Pour écrire et exécuter du code Python, on utilise des outils qui facilitent le travail.
-
-        #### Pour commencer : Google Colab <img src="https://colab.research.google.com/img/colab_favicon.ico" width="20" style={{verticalAlign: 'middle'}}/>
-        
-        Au début du cours, nous utiliserons **Google Colab**. C'est un environnement Python qui fonctionne directement dans votre navigateur.
-
-        **Avantages :**
-        - **Rien à installer** : tout est déjà configuré dans le cloud.
-        - **Accessible partout** : il suffit d'un compte Google.
-        - **Format interactif** : on travaille avec des « notebooks » qui permettent de mélanger du code, du texte et des graphiques, ce qui est idéal pour apprendre et expérimenter.
-
-        #### Pour la suite : VS Code <img src="https://code.visualstudio.com/favicon.ico" width="20" style={{verticalAlign: 'middle'}}/>
-
-        Après une première exploration avec Google Colab, nous installerons et utiliserons **VS Code** pour le reste de la session. C'est un éditeur de code très populaire qui offre des fonctionnalités avancées comme :
-        - La **coloration syntaxique** pour une meilleure lisibilité.
-        - L'**autocomplétion** pour coder plus vite.
-        - La **détection d'erreurs** en temps réel.
-        - Un **débogueur** puissant pour trouver et corriger les bugs.
-
-        > ✅ **En résumé :** On commence avec **Google Colab** pour une première prise en main, et nous utiliserons principalement **VS Code** pour une expérience de développement complète.
-
-        :::
+        <Mod_intro />
     </TabItem>
-
     <TabItem value="code" label="On commence!">
-
-        :::info Vous allez coder dès maintenant!
-        Suivez pas à pas les instructions ci-dessous pour écrire et exécuter votre **premier code Python** dans Google Colab.
-        :::
-
-        ---
-
-        ::::note Écrire et exécuter ses premières commandes Python
-
-        Google Colab utilise des **cellules de code** interactives. C'est comme un cahier de notes où chaque bloc de code peut être exécuté indépendamment.
-
-        **1. Ouvrez le notebook d'introduction dans Colab :**
-
-        <a href="https://colab.research.google.com/github/Simonll/420-SN1/blob/develop/code/notebooks/01-rencontre1.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
-        
-        > Si vous n'avez pas de notebook pour cet exercice, vous pouvez simplement ouvrir Google Colab et créer un nouveau notebook (`Fichier > Nouveau notebook`) et copier-coller le code ci-dessous dans la première cellule.
-
-        **2. Exécutez votre première cellule de code :**
-
-        Dans le notebook, vous verrez une cellule de code. Cliquez sur l'icône de lecture (▶️) à gauche de la cellule ou sélectionnez la cellule et appuyez sur `Maj + Entrée` pour l'exécuter.
-
-        ```python
-        print("Bonjour le monde!")
-        ```
-
-        Le résultat s'affichera juste en dessous de la cellule :
-        ```
-        Bonjour le monde!
-        ```
-
-        Décortiquons cette première ligne de code :
-
-        - **`print`** : C'est une fonction native de Python. En programmation, « imprimer » signifie afficher un résultat textuel.
-        - **`()`** : Les parenthèses contiennent ce que la fonction doit utiliser (l'argument).
-        - **`""`** : Les guillemets indiquent que `"Bonjour le monde!"` est du texte brut (une chaîne de caractères) et non une commande.
-
-        **3. Utilisez Colab comme une super calculatrice :**
-
-        Tapez une expression mathématique dans une nouvelle cellule et exécutez-la. Python l'évaluera et affichera le résultat.
-
-        ```python
-        6 / 2 * (1 + 2)
-        ```
-
-        Résultat :
-        ```
-        9.0
-        ```
-
-        Cette capacité à saisir une instruction et à obtenir une réponse immédiate s'appelle le mode interactif. C'est un bac à sable exceptionnel, idéal pour tester des formules, explorer des idées ou valider un comportement logique rapidement.
-
-        :::tip
-        Dans Colab, vous pouvez utiliser les touches Flèche haut ($\uparrow$) et Flèche bas ($\downarrow$) dans une cellule pour naviguer dans l'historique des commandes que vous avez tapées dans cette cellule.
-        :::
-
-        ::::
+        <Mod_code />
     </TabItem>
-
     <TabItem value="expressions" label="Expressions">
-
-        <Admonition type="tip" title="Testez dans Colab !">
-            <p>Ouvrez le notebook d'introduction pour tester les exemples de cette section dans des cellules de code.</p>
-            <a href="https://colab.research.google.com/github/Simonll/420-SN1/blob/develop/code/notebooks/01-rencontre1.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
-        </Admonition>
-
-        :::note Idée importante
-        **Une expression produit toujours une valeur.**
-        :::
-
-        <Row>
-            <Column>
-                :::tip-nt
-                En **mathématiques**, une expression est quelque chose qu’on peut **calculer**.
-
-                Elle peut contenir :
-                - des **nombres**
-                - des **constantes** (ex. : $\pi$)
-                - des **variables** (ex. : $r$)
-                - des **opérations** ($+$, $-$, $\times$, $/$, etc.)
-
-                ---
-
-                **Exemple :**
-
-                $2\pi r$
-
-                Cette expression représente la circonférence d’un cercle.
-
-                - $2$ et $\pi$ sont des constantes
-                - $r$ est une variable (le rayon)
-
-                Pour obtenir une valeur :
-                1. On remplace la variable ($r = 2$)
-                2. On calcule :
-
-                $2 \times 3{,}1416 \times 2 = 12{,}5664$
-                :::
-            </Column>
-            
-            <Column>
-                :::info-nt
-                En **programmation**, c’est le même principe :
-
-                Une **expression** est quelque chose que l’ordinateur **évalue** pour produire une valeur.
-
-                La différence importante :
-                Une expression peut contenir **autre chose que des nombres**.
-
-                Par exemple :
-                - du **texte** (chaînes de caractères)
-                - *(plus tard)* des **fonctions**
-                - *(plus tard)* des **valeurs booléennes**
-
-                ---
-
-                Voici quelques exemples d'expressions en Python :
-
-                - `5` → vaut `5` *(type : `int`)*
-                - `"5"` → vaut `"5"` *(type : `str`)*
-                - `5 + 3` → vaut `8`
-                - `"5" + "3"` → vaut `"53"`
-
-                **Opérateurs identiques**, mais résultat différent selon le type de données (c'est la surcharge de l'opérateur `+`).
-                :::
-            </Column>
-        </Row>
+        <Mod_expressions />
     </TabItem>
-
     <TabItem value="operateurs" label="Opérateurs">
-
-        <Admonition type="tip" title="Testez dans Colab !">
-            <p>Ouvrez le notebook d'introduction pour tester les exemples de cette section dans des cellules de code.</p>
-            <a href="https://colab.research.google.com/github/Simonll/420-SN1/blob/develop/code/notebooks/01-rencontre1.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
-        </Admonition>
-
-        :::info Opérateurs
-
-        Les expressions en Python peuvent contenir des opérateurs arithmétiques.<br/>
-        Il existe plusieurs opérateurs qui permettent de construire des expressions à partir d'autres expressions.<br/>
-        Plusieurs sont répertoriés dans l'[aide-mémoire](../aidememoire/operateurs), mais nous commencerons avec ceux-ci
-        :
-        :::
-
-        ## Opérateurs arithmétiques
-
-        | Opérateur | Description | Exemple | Valeur résultante |
-        |------------|------------------|---------------|--------------|
-        | <C>+</C> | Addition | <C><N>10</N> + <N>3</N></C> | <C><N>13</N></C> |
-        | <C>-</C> | Soustraction | <C><N>10</N> - <N>3</N></C> | <C><N>7</N></C> |
-        | <C>*</C> | Multiplication | <C><N>10</N> * <N>3</N></C> | <C><N>30</N></C> |
-        | <C>/</C> | Division (float) | <C><N>11</N> / <N>3</N></C> | <C><N>3.6666...</N></C> |
-        | <C>//</C> | Division entière <br/> (les décimales sont ignorées) | <C><N>11</N> // <N>3</N></C> | <C><N>3</N></C> |
-        | <C>%</C> | Modulo <br/> (le reste d'une division, <br/> explications plus bas) | <C><N>11</N> % <N>3</N></C> | <C><N>2</N></C> |
-        | <C>**</C> | Puissance | <C><N>10</N> ** <N>3</N></C> | <C><N>1000</N></C> |
-
-        <Row>
-            <Column>
-                :::info-nt
-                ## Opérateur modulo : `%`
-                Le modulo est une opération mathématique qui consiste à trouver le reste d'une division entière.
-                Imaginons qu'on souhaite connaitre le résultat de 17 modulo 5 :
-                1. On se demande : "Combien de fois $5$ entre-t-il entièrement dans $17$ ?"
-                2. La réponse est 3 fois ($3 \times 5 = 15$).
-                3. On calcule ensuite la différence : $17 - 15 = 2$.
-                4. Le chiffre $2$ est le reste.
-
-                En mathématiques et en programmation, on dira que 17 modulo 5 est égal à 2.
-
-                L'opérateur modulo est très utile par exemple pour vérifier si un nombre est pair ou impair, et dans de nombreux autres contextes.
-                Par exemple :
-                - `0 % 2` retourne `0` (pair, il n'y a pas de reste)
-                - `1 % 2` retourne `1` (impair, il y a un reste de 1)
-                - `2 % 2` retourne `0` (pair)
-                - `3 % 2` retourne `1` (impair)
-                - `4 % 2` retourne `0` (pair)
-                - `5 % 2` retourne `1` (impair)
-                - ...
-
-                :::
-            </Column>
-            <Column>
-                :::info-nt
-                ## Opérateurs de division : `/` et `//`
-                Dans la console, tapez les expressions `11 / 3` et `11 // 3` pour voir la différence entre les deux.
-                - L'opérateur de division `/` se comporte comme la division classique que l'on connait bien et retourne `3.6666...`. Le résultat est toujours un nombre avec décimale (`float`), par exemple `4 / 2` va retourner `2.0` et non `2`.
-
-                - L’opérateur de division `//` conserve uniquement la partie entière de la division. Il n’y a aucun arrondi : la partie décimale est simplement ignorée. Par exemple, `11 // 3` retourne l’entier (`int`) `3`.
-                :::
-
-                :::tip-nt
-                Pour résumer :
-                - `11 / 3` retourne `3.6666...`
-                - `11 // 3` retourne `3`
-                - `11 % 3` retourne `2`
-                :::
-
-            </Column>
-        </Row>
-
-        <Row>
-            <Column>
-        :::warning-nt
-        ## Priorité des opérateurs
-        Les opérateurs n'ont pas tous la même priorité, c'est-à-dire que certains sont évalués avant d'autres.
-        Par exemple, dans l'expression `10 + 3 * 2`, la multiplication est effectuée avant l'addition, donc le résultat est `16`.<br />
-
-        On dit que la multiplication a une priorité plus élevée que l'addition.
-        Pour voir la liste complète des priorités, consultez l'[aide-mémoire sur les opérateurs](../aidememoire/operateurs?onglet=priorite) (onglet **Priorité des opérateurs**).
-
-        Les parenthèses `()` sont des opérateurs qui permettent de regrouper des expressions pour forcer l'ordre d'évaluation.
-        Par exemple, si on veut que l'addition soit effectuée en premier, on peut écrire `(10 + 3) * 2`, ce qui donne `26` comme résultat.
-
-        Par exemple, dans la console, tapez les expressions `10 + 3 * 2` et `(10 + 3) * 2` pour voir la différence entre les deux.
-        :::
-            </Column>
-            <Column>
-
-            :::tip-nt
-                ## Opérandes et types de résultats
-                Les opérandes (telles que `10` et `3` dans l'expression `10 + 3`) peuvent être des valeurs (comme `10` et `3`), mais pourraient aussi être des variables, un élément d'un tableau, une expression, etc.
-
-                La valeur résultante de l'utilisation d'un opérateur arithmétique peut être de type `int` (nombre entier) ou `float` (nombre décimal), selon l'opérateur ET selon les opérandes. Les types sont expliqués plus en détail dans l'[**onglet Type**](/cours/rencontre1?onglet=types) de cette semaine.
-
-                Par exemple, l'opérateur `+` peut faire la somme de deux nombres, mais utilisé avec des chaînes de caractères (`str`), il va faire la *concaténation* (collage) de ces chaînes :
-                - `10 + 3` retourne `13` (`int`)
-                - `"10" + "3"` retourne `"103"` (`str`)
-
-                :::
-            </Column>
-        </Row>
-
-        :::info-nt
-        Un autre opérateur très utile est l'opérateur d'affectation `=`, qui permet de stocker une valeur dans une variable.\
-        Il sera étudié dans l'onglet [**Variables**](/cours/rencontre1?onglet=variables).
-        :::
-
-        ## Opérateurs d'affectation
-        | Opérateur | Description | Exemple |
-        |------------|------------------------------------|---------|
-        | <C>=</C> | Affectation simple | <C>x = <N>5</N></C> |
-
+        <Mod_operateurs />
     </TabItem>
-
     <TabItem value="types" label="Types">
-
-        <Admonition type="tip" title="Testez dans Colab !">
-            <p>Ouvrez le notebook d'introduction pour tester les exemples de cette section dans des cellules de code.</p>
-            <a href="https://colab.research.google.com/github/Simonll/420-SN1/blob/develop/code/notebooks/01-rencontre1.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
-        </Admonition>
-
-        :::info Types
-        En programmation, les valeurs que l'on manipule ont un **type**, et le type d'une valeur détermine comment on peut l'utiliser et quelles opérations sont possibles avec cette valeur.
-        :::
-
-        Voici les [types de données](../aidememoire/types) de base pour débuter en Python :
-
-        | Type | Description | Exemple |
-        |-----------|------------------------|--------------------|
-        | <C><B>int</B></C> | Nombre entier | <C><N>42</N></C> |
-        | <C><B>float</B></C> | Nombre décimal | <C><N>3.14</N></C> |
-        | <C><B>str</B></C> | Chaîne de caractères | <C><S>"Alice"</S></C> |
-        | <C><B>bool</B></C> | Booléen (vrai ou faux) | <C><K>True</K></C> |
-
-        ::::info-nt
-
-        - Un nombre entier (`int`) s'écrit simplement avec des chiffres, comme `42` ou `-99`.
-        - Un nombre décimal (`float`) s'écrit avec une partie entière et une partie décimale séparées par un point, comme `3.14` ou `-0.001`.
-        - Une chaîne de caractères (`str`) s'écrit entre guillemets, comme `"Alice"` ou `'Bonjour!'`.
-        On peut utiliser des guillemets simples (`''`) ou doubles (`""`), mais il faut être cohérent.
-            :::warning-nt
-            L'expression `"123"` est une chaîne de caractères, pas un nombre entier!\
-            Si vous voulez un nombre entier, il faut écrire `123` sans guillemets.
-            :::
-        - Un booléen (`bool`) est une valeur qui peut être soit `True` (vrai) soit `False` (faux). Ce sont les deux seules valeurs possibles pour un booléen.
-            :::warning-nt
-            L'expression `True` est un booléen, pas une chaîne de caractères!\
-            Si vous voulez une chaîne de caractères, il faut écrire `"True"` ou `'True'` entre guillemets.
-            :::
-
-        ::::
-
-        ---
-
-        :::info `type()`
-
-        Python possède une fonction permettant de connaître le type d'une expression, la fonction **`type()`**.
-
-        Dans la console, tapez ces lignes une par une pour voir le type de chaque expression :
-
-        ```python
-        type(42)        # Retourne <class 'int'>, ce qui signifie que 42 est de type entier
-        type('42')      # ...
-        type(6 * 7)
-        type(3.14)
-        type("Alice")
-        type(True)
-        type('False')
-        ```
-
-        :::
-
-        ---
-
-        :::info Changement de type
-
-        On peut changer le type d'une expression en utilisant des fonctions de conversion.\
-        Par exemple, pour convertir un entier en chaîne de caractères, on utilise la fonction **`str()`**.\
-        Pour convertir une chaîne de caractères en entier, on utilise la fonction **`int()`**.
-
-        Voici quelques exemples, essayez-les dans la console :
-        ```python
-        type(str(42))        # Convertit l'entier 42 en chaîne de caractères
-        type(int("42"))      # Convertit la chaîne de caractères "42" en entier
-        type(float(3))       # Convertit l'entier 3 en nombre décimal
-        type(float("3.14"))  # Convertit la chaîne de caractères "3.14" en nombre décimal
-        ```
-
-        :::
-
-        ---
-
-        :::info Polymorphisme des opérateurs
-
-        Certains opérateurs se comportent différemment selon le type de leurs opérandes.<br />
-        Par exemple, l'opérateur `+` peut faire la somme de deux nombres ou concaténer deux chaînes de caractères.
-
-        Voici quelques exemples, essayez-les dans la console :
-        ```python
-        5 + 3                # Addition de deux entiers
-        "coucou " + "Alice"  # Concaténation de deux chaînes de caractères
-        "coucou " + str(81)  # Concaténation d'une chaîne de caractères et d'un entier converti en chaîne
-        ```
-
-        :::
-
-        ---
-
-        :::tip Types composés
-        Il existe aussi des structures de données plus complexes pour stocker des données, comme les `list`, les `set`, les `tuple` ou les `dict`, que nous verrons plus tard.
-        :::
-
+        <Mod_types />
     </TabItem>
-
     <TabItem value="variables" label="Variables">
-
-        <Admonition type="tip" title="Testez dans Colab !">
-            <p>Ouvrez le notebook d'introduction pour tester les exemples de cette section dans des cellules de code.</p>
-            <a href="https://colab.research.google.com/github/Simonll/420-SN1/blob/develop/code/notebooks/01-rencontre1.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
-        </Admonition>
-
-        :::info Variables
-        Les variables servent à stocker des informations manipulées par une application.\
-        Elles vont être stockées temporairement dans la mémoire vive de l'ordinateur (la *RAM*).
-        :::
-
-        ---
-
-        ::::info Syntaxe pour créer une variable
-
-        Il faut écrire le nom qu'on souhaite donner à notre variable, suivi de l'opérateur d'affectation `=`, suivi
-        d'une expression :
-
-        ```python
-        nom_de_ma_variable = expression
-        ```
-        - `nom_de_ma_variable` est le nom de la variable, qui doit être unique.
-        - `=` est l'opérateur d'affectation, qui permet de stocker la valeur de l'expression dans la variable.
-        - `expression` est une expression qui peut être : une valeur, une opération mathématique, ou même une chaîne de caractères.
-
-        L'expression est d'abord évaluée, puis la valeur résultante est stockée dans la variable.
-
-        - `=` n'est pas un symbole d'égalité, comme en mathématiques, mais un symbole d'**affectation**.
-        - On calcule d'abord l'`expression`, ce qui nous donne une valeur et un type.
-        - Puis on affecte cette valeur et ce type à `nom_de_ma_variable`.
-
-        :::tip
-        L'opérateur d'affectation `=` a une priorité plus basse que les opérateurs arithmétiques, et donc l'expression à droite est évaluée avant, puis la valeur résultante est affectée à la variable.
-        :::
-
-        Exemples :
-
-        ```python
-        x = 5 * 6           # (5 * 6) est évalué, puis le résultat (30) est affecté à x
-        y = 2 * x           # (2 * x) est évalué, puis le résultat (60) est affecté à y
-        ```
-
-        ::::
-
-        ---
-
-        :::info Voir le contenu d'une variable
-        Pour voir ce qui est stocké dans une variable, il suffit de taper son nom dans la console et d'appuyer sur `Entrée`.\
-        Par exemple, si vous avez créé une variable `x`, tapez simplement `x` dans la console et appuyez sur `Entrée`.\
-        Vous verrez la valeur de `x` s'afficher :
-        ```python
-        >>> x = 42
-        >>> x
-        42
-        ```
-        :::
-
-        ---
-
-        ::::info Noms des variables
-
-        Les variables sont comme des boîtes dans lesquelles on peut mettre des valeurs.<br />
-        On peut les nommer comme on veut, tant que le nom est unique et respecte certaines règles.
-
-        Chaque variable possède un nom *unique* permettant de l'identifier.
-
-        En **mathématiques**, nous sommes habitués d'utiliser des noms de variables comme $x$ ou $y$.\
-        En **programmation**, on essaie d'utiliser des noms plus significatifs de l'information que l'on va stocker dans la variable.
-        Par exemple, si on stocke la température d'une journée, on pourrait nommer la variable `temperature_journee`.
-
-        ## Règles pour nommer une variable
-        - Les noms de variables peuvent **contenir uniquement** des lettres, des chiffres (0-9) et des underscores `_`.
-        - Les noms de variables **ne peuvent pas commencer** par un chiffre.
-        - Les noms de variables ne peuvent pas contenir d'espaces, de caractères spéciaux (comme `!`, `@`, `#`, etc.)
-        - Les noms de variables ne doivent pas être des mots réservés du langage Python (comme `if`, `else`, `while`, `for`, etc.).
-        - Il est fortement recommandé de **ne pas utiliser d'accents** dans les noms de variables, même si Python les accepte.
-        - Par convention :
-            - Les noms de variables doivent être :
-                - En **minuscules** : si le contenu de la variable peut évoluer en cours d'exécution du programme.
-                - En **majuscules** : si le contenu de la variable ne devrait jamais être modifié (ex : la valeur de PI est immuable).
-            - Si le nom est composé de plusieurs mots, on utilise un underscore `_` pour les séparer (par exemple, `temperature_journee`).
-
-        Voici quelques exemples de noms de variables :
-
-        ```python
-        rayon_cercle = 20                         # valeur de type int
-        PI = 3.1416                               # valeur de type float (avec un point, pas une virgule!)
-        nom_element_chimique = "Hydrogène"        # valeur de type str (les guillemets sont importants!)
-        est_halogene = True                       # valeur de type bool
-        circonference_circle = rayon_cercle * PI  # valeur de type float contenant le résultat d'une expression
-
-        # Afficher le contenu des variables à l'aide de la fonction "print()"
-        print("*** VALEURS DES VARIABLES : ***")
-        print("rayon_cercle :", rayon_cercle)
-        print("PI :", PI)
-        print("nom_element_chimique :", nom_element_chimique)
-        print("est_halogene :", est_halogene)
-        print("circonference_circle :", circonference_circle)
-        ```
-
-        ::::
-
-        ---
-
-        ::::info Les variables peuvent... varier!
-
-        Le contenu d'une variable peut être modifié au fur et à mesure de l'exécution des instructions à l'aide de
-        l'opérateur d'assignation `=`.
-        Dans l'exemple ci-dessous, la variable "resultat" est modifiée 3 fois.
-
-        ```python showLineNumbers
-        nombre1 = 10
-        nombre2 = 20
-        nombre3 = 30
-        resultat = nombre1 + nombre2
-        resultat = resultat + nombre3
-        resultat = resultat / 3
-        print("resultat :", resultat)
-        ```
-
-        Est-ce que vous pourriez prédire le résultat et deviner à quel calcul il correspond?
-
-        :::note Trace d'exécution
-        Réalisons une trace d’exécution simplifiée de ce programme ensemble! 💪 \
-        Votre enseignant vous fournira une feuille pour la réaliser.
-        :::
-        ::::
-    
+        <Mod_variables />
     </TabItem>
-
     <TabItem value="VSCode" label="VS Code">
-        ::::info Installation de VS Code
-
-        Il est maintenant temps d'installer l'environnement de développement que nous utiliserons pour le reste de la session : **VS Code**.
-
-        Suivez attentivement les deux recettes ci-dessous pour installer le logiciel et créer votre premier projet :
-        1. [Installer VS Code](/recettes/installer-VSCode)
-        2. [Créer un projet dans VS Code](/recettes/creer-projet-VSCode)
-        ::::
+        <Mod_VSCode />
     </TabItem>
-
     <TabItem value="github" label="GitHub">
-
-        ::::info Qu'est-ce que Git et GitHub?
-
-        Vous connaissez probablement
-        **OneDrive** : un service permettant de sauvegarder vos fichiers dans le nuage et d'y accéder depuis n'importe quel appareil.
-        **GitHub** joue un rôle similaire, mais il est conçu spécifiquement pour le **code source** et s'appuie sur **Git** pour offrir des fonctionnalités bien plus puissantes.
-
-        **Git** est un outil qui roule sur votre ordinateur et qui enregistre l'**historique de vos modifications**. C'est ce qu'on appelle un système de **contrôle de version**.
-
-        **GitHub**, lui, est la plateforme en ligne qui héberge vos projets Git et permet de les **partager**, de les **synchroniser** et de **collaborer** avec d'autres développeurs.
-
-        > *En résumé : **Git** gère l'historique de votre code en local, **GitHub** le met dans le nuage - comme OneDrive, mais en beaucoup plus puissant.*
-
-        ::::
-
-        ---
-
-        ::::info Le dépôt de code
-
-        Un **dépôt de code** (ou *repository*, souvent abrégé *repo*) est un espace de stockage GitHub qui contient
-        tous les fichiers d'un projet ainsi que l'**historique complet de toutes les modifications** qui y ont été
-        apportées depuis sa création.
-
-        On peut le voir comme un dossier de projet intelligent qui se souvient de tout ce qui s'y est passé :
-        - Quels fichiers ont été modifiés
-        - Qui les a modifiés
-        - Quand les modifications ont été faites
-        - Pourquoi elles ont été faites (grâce aux messages de description)
-
-        ::::
-
-        ---
-
-        ::::info L'ensemble de modifications (*commit*)
-
-        Un **ensemble de modifications** (ou *commit*) représente un **regroupement logique de changements**
-        sauvegardés dans le dépôt à un instant précis.
-
-        Imaginez que vous travaillez sur un fichier Python et que vous ajoutez une nouvelle fonction. \
-        Une fois votre travail terminé, vous créez un *commit* pour sauvegarder ces changements. Ce commit contient :
-        - La liste de tous les fichiers modifiés
-        - Un **message** décrivant ce qui a été fait (ex : `"Ajout de la fonction calcul_moyenne"`)
-        - La date et l'heure de la sauvegarde
-        - L'identité de l'auteur
-
-        :::tip Bonne pratique
-        Un bon *commit* regroupe des modifications qui vont ensemble logiquement. \
-        Son message doit être clair et résumer en quelques mots ce qui a été fait. \
-        Exemples :
-        - ✅ `"Correction du calcul de la superficie"`
-        - ✅ `"Ajout de la validation des entrées utilisateur"`
-        - ❌ `"modifs"` — trop vague, inutile!
-        :::
-
-        ::::
-
-        ---
-
-        ::::info Les opérations principales : clone, commit, push et pull
-
-        Voici les quatre opérations que vous utiliserez le plus souvent pour interagir avec un dépôt GitHub :
-
-        ---
-
-        ###  `clone` - Copier le dépôt sur votre ordinateur
-        *Cloner* un dépôt, c'est comme télécharger un projet sur votre ordinateur.
-        Votre IDE va créer un dossier contenant tous les fichiers du projet ainsi que l'historique complet de toutes les modifications qui y ont été apportées.
-        
-        Pour un *repo* donné, cette opération est effectuée :
-        - sur votre ordinateur personnel : **une seule fois**
-
-        ```
-        Dépôt GitHub (nuage)  ─── clone ───▶  Copie locale (votre ordinateur)
-        ```
-
-        ---
-
-        ### `commit` - Sauvegarder vos modifications localement
-        *Commiter*, c'est prendre un **instantané** de vos modifications à un moment précis, comme une photo de l'état de votre projet.
-        Chaque commit est accompagné d'un **message** que vous rédigez vous-même pour décrire ce qui a été fait — c'est ce message qui rendra votre historique lisible et utile plus tard.
-        Attention : un commit ne fait que se sauvegarder localement sur votre ordinateur, **il n'envoie rien vers GitHub**. C'est le rôle du *push*.
-
-        ```
-        Fichiers modifiés ─── commit ───▶ Historique local (votre ordinateur)
-        ```
-
-        ---
-
-        ### `push` - Envoyer vos modifications vers GitHub
-        *Pousser* vos commits, c'est mettre GitHub à jour avec votre travail local.
-        Tant que vous n'avez pas fait de *push*, vos commits n'existent que sur votre ordinateur : GitHub ne les connaît pas encore.
-        C'est donc une étape **indispensable** pour ne pas perdre votre travail et pour le rendre accessible depuis n'importe quel autre ordinateur.
-        ```
-        Copie locale (votre ordinateur) ─── push ───▶ Dépôt GitHub (nuage)
-        ```
-
-        ---
-
-        ### `pull` - Récupérer les dernières modifications depuis GitHub
-        *Tirer* les modifications, c'est mettre votre copie locale à jour avec ce qui se trouve sur GitHub.
-        C'est particulièrement utile si vous avez travaillé depuis un autre ordinateur depuis votre dernière session.
-        **Bonne habitude :** toujours commencer une séance de travail par un *pull*, pour être certain.e de travailler sur la version la plus récente de votre code.
-
-        ```
-        Dépôt GitHub (nuage) ─── pull ───▶ Mise à jour de la copie locale (votre ordinateur)
-        ```
-
-        ---
-
-        :::tip Guide pour VS Code
-        VS Code intègre des outils Git très puissants. Vous pouvez cloner, commiter, pousser et tirer des modifications directement depuis l'interface, sans avoir besoin d'un autre logiciel.
-        :::
-
-        :::tip Résumé visuel
-        Un résumé visuel du flux de travail typique
-        ```
-        ☁  GitHub (nuage)
-        │
-        │       clone (1 seule fois, au début) (ou à chaque connexion à un poste au cégep)
-        ▼
-            Copie locale (votre ordi)
-        │
-        │       Vous modifiez des fichiers
-        ▼
-            Modifications en attente
-        │
-        │       commit (on regroupe et décrit les changements)
-        ▼
-            Modifications sauvegardées localement
-        │
-        │       push (on envoie vers le nuage)
-        ▼
-            GitHub (nuage)
-        │
-        │       pull (si modifié depuis un autre ordi)
-        ▼
-            Copie locale mise à jour
-        ```
-        :::
-
-        :::tip `commit` et `push` : une combinaison courante
-        En pratique, on fait souvent un *commit* suivi d'un *push* pour sauvegarder notre travail localement et le rendre accessible sur GitHub.\
-        VS Code (et la plupart des IDEs) propose une option pour faire les deux en une seule étape, ce qui peut être très pratique pour gagner du temps.
-        
-        Chaque fois que vous avez terminé un exercice, ou bien créé une nouvelle fonctionnalité dans votre code, ou corrigé un bug, faites un `commit`-`push` (un *commit* suivi d'un *push*) pour ne pas perdre votre travail.
-
-        :::
-
-        ::::
-
-        ---
-
-        ::::info Application dans notre cours
-
-        Dans le cadre de ce cours, vous travaillerez avec **3 dépôts de code GitHub** distincts, créés par votre
-        enseignant via **GitHub Classroom** :
-        <br/>
-        <Row>
-            <Column size={4}>
-                | Dépôt | Contenu |
-                | :--- | :--- |
-                | **General** | Le code de vos exercices |
-                | **TP1** | Le code de votre TP1 |
-                | **TP2** | Le code de votre TP2 |
-            </Column>
-            <Column size={8}>
-                #### GitHub Classroom, c'est quoi?
-                GitHub Classroom est un outil utilisé par les enseignants pour **créer et distribuer automatiquement** des dépôts
-                aux personnes étudiantes. Cela signifie que :
-                - Chaque étudiant.e possède ses propres dépôts de code.
-                - L'enseignant.e a accès à tous les dépôts pour suivre votre progression.
-                - Vous n'avez pas à créer les dépôts vous-même, il suffit d'accepter un lien d'invitation.
-            </Column>
-        </Row>
-        :::tip Créer vos propres dépôts
-        Vous pouvez aussi, pour vos autres projets, créer vos propres dépôts GitHub manuellement et les gérer à votre guise.\
-        C'est très simple, et vous pouvez vous référer à [cette recette](/recettes/creer-repertoire-github) pour vous aider.\
-        Vous pouvez ainsi créer autant de dépôts que vous le souhaitez pour vos projets personnels et les gérer indépendamment de ceux du cours.
-        :::
-        ::::
-
-        ---
-
-        :::info Structurez votre dépôt de code
-        Pour le *repo* pour vos exercices, afin de pouvoir facilement vous retrouver plus tard, vous pourriez organiser votre dépôt de code d'une manière similaire à celle-ci :
-        ```
-        nom_de_votre_repo/
-        ├── R01/
-        │   ├── r01_expressions.md
-        │   ├── r01_affichage_1.md
-        │   └── r01_affichage_2.md
-        ├── R02/
-        │   ├── r02_free_style.py
-        │   └── r02_question_de_gravite.py
-        │   └── r02_pression_systolique.py
-        │   └── ...
-        ├── R03/
-        │   └── ...
-        ├── ...
-        ├── ...
-        ```
-        où `R01`, `R02`, etc. sont des dossiers pour chaque rencontre, et à l'intérieur de chaque dossier, les fichiers de code pour chaque exercice.
-        
-        La plupart des IDEs permettent de créer un nouveau dossier en faisant un clic droit sur le dossier parent dans l'explorateur de fichiers.
-        :::
-
-        ---
-
-        ::::info Le fichier `.gitignore`
-        GitHub est avant tout une plateforme conçue pour héberger des fichiers légers contenant du **code source**. \
-        Par principe, certains éléments ne doivent jamais figurer dans un dépôt Git :
-
-        - **Les fichiers volumineux** : ils ralentissent les opérations de clonage et de mise à jour.
-        - **Les fichiers de configuration d'IDE** : par exemple, le dossier `.vscode` de **VS Code**, qui est propre à votre environnement de travail local et n'a aucune utilité pour les autres.
-        - **Les fichiers générés** : tout ce qui peut être produit automatiquement par l'exécution de votre programme (images, fichiers texte, etc.).
-
-        **Le fichier `.gitignore`** est un fichier **optionnel** placé à la racine de votre dépôt de code et sert à indiquer à Git d'ignorer de tous les commits certains fichiers ou dossiers en fonction de modèles (*patterns*) définis à l'intérieur.
-        Les fichiers listés dans `.gitignore` ne seront jamais inclus dans vos commits, même par accident.
-
-        :::tip Exemple de fichier
-        Un `.gitignore` typique pour un projet Python pourrait contenir :
-        ```text
-        # Exclusion des fichiers propres à votre environnement/configuration de travail local
-        .idea/
-        .vscode/
-        .venv/
-
-        # Fichiers Python compilés
-        __pycache__/
-        *.pyc
-        *.pyo
-        ```
-        Cela exclut automatiquement les dossiers de configuration des IDEs et les fichiers de cache Python.
-        :::
-
-        ::::
-
-        ---
-
-        ::::info Le fichier `README.md`
-        La plupart des dépôts GitHub contiennent un fichier nommé **`README.md`** à leur racine. \
-        GitHub l'affiche automatiquement sur la page d'accueil du dépôt : c'est la **carte de visite** de votre projet.
-
-        On y trouve typiquement une description du projet, des instructions pour l'utiliser, et toute autre information utile pour quelqu'un qui le découvre pour la première fois.
-
-        Le `README.md` est écrit en **Markdown**, un format de texte simple qui permet de structurer du contenu (titres, listes, gras, liens, blocs de code…) de façon lisible aussi bien en texte brut que rendu par GitHub. La recette sur les fichiers Markdown vous explique comment en créer un.
-        ::::
+        <Mod_github />
     </TabItem>
-
     <TabItem value="venv" label="Env. virtuel">
-
-        :::info Environnement virtuel
-
-        Python de base permet déjà de faire beaucoup de choses : faire des calculs, afficher du texte, manipuler des listes, etc.
-        Mais pour des tâches plus spécialisées (générer des graphiques, analyser des données, faire du traitement d'images), des personnes ont développé des **extensions** que l'on peut ajouter à Python.
-        Ces extensions s'appellent des **bibliothèques** (ou *librairies*). Vous en utiliserez plusieurs dans ce cours, comme **Matplotlib** pour les graphiques, **NumPy** pour manipuler des données numériques ou **Pandas** pour l'analyse de données. Le concept de bibliothèque sera vu en détail à la [rencontre 02](/cours/rencontre2?onglet=biblio).
-
-        Le problème? Ces bibliothèques évoluent dans le temps. De nouvelles versions sont régulièrement publiées, avec de nouvelles fonctionnalités, et ces versions ne sont pas toujours compatibles entre elles.
-        Imaginez que vous travaillez sur deux projets différents : **le projet A a besoin de la version 1.0 d'une bibliothèque, et le projet B a besoin de la version 2.0 de cette même bibliothèque**. Si vous installez les deux sur votre ordinateur sans précaution, elles risquent de se nuire mutuellement.
-
-        La solution? L'**environnement virtuel**, une sorte de **bulle isolée** propre à chaque projet, qui contient sa propre version de Python et ses propres bibliothèques, sans interférer avec les autres projets ni avec l'installation globale de Python sur votre ordinateur.
-
-        Concrètement, un environnement virtuel est un **dossier** (nommé `.venv` par convention) créé à la racine de chaque projet. \
-        Il contient tout ce dont le projet a besoin pour fonctionner.
-
-        :::
-
-        ---
-
-        :::info Le dossier `.venv` dans votre IDE
-        La plupart des IDEs modernes facilitent la gestion des environnements virtuels.
-        
-        - **VS Code** : Lorsque vous ouvrez un dossier contenant un projet Python, VS Code détecte votre interpréteur. Si vous n'avez pas d'environnement virtuel, il vous proposera d'en créer un. Il l'activera ensuite automatiquement dans le terminal intégré.
-
-        Vous trouverez la [recette](/recettes/creer-venv-VSCode) pour créer un environnement virtuel dans VS Code.
-
-        - **PyCharm** : Crée et active automatiquement un environnement virtuel pour chaque nouveau projet.
-
-        <p align="left">
-            <img src={require('/img/cours/r01-venv.png').default} alt="Création d'un environnement virtuel dans PyCharm" width="60%" />
-        </p>
-        
-        Le dossier `.venv` contient :
-        - **`Scripts/` (Windows) ou `bin/` (Mac/Linux)** : une copie locale de Python et `pip` (l'outil qui installe les bibliothèques) réservée à ce projet uniquement
-        - **`Lib/site-packages/`** : les bibliothèques installées pour ce projet (ex : Matplotlib, Pandas) ; elles sont isolées des autres projets et de l'installation globale de Python
-        - **`pyvenv.cfg`** : un fichier de configuration qui indique quelle version de Python est utilisée
-
-        :::
-
-        ---
-        
-        :::warning Ne jamais commiter `.venv` sur GitHub!
-
-
-        Le dossier `.venv` peut être très volumineux, car les bibliothèques installées sont souvent volumineuses, et certaines configurations sont entièrement **propres à votre machine**.\
-        Il n'a donc aucune raison d'être partagé sur GitHub : quelqu'un qui clone votre projet n'a qu'à recréer son propre environnement virtuel de son côté.
-
-        C'est pourquoi le fichier `.gitignore` devrait exclure automatiquement ce dossier. Assurez-vous de ne jamais le retirer de votre `.gitignore`!
-        :::
-        
-        ---
-
-        :::note Et les bibliothèques installées, alors?
-
-        Même si le dossier `.venv` n'est pas envoyé sur GitHub, il existe une façon de partager la liste des bibliothèques nécessaires à un projet.
-
-        Dans les projets Python, on utilise souvent un fichier appelé :
-
-        ```text
-        requirements.txt
-        ```
-
-        Ce fichier contient les bibliothèques à installer, parfois avec leur numéro de version :
-
-        ```text
-        matplotlib==3.9.3
-        numpy==2.2.0
-        pandas==2.2.3
-        ```
-
-        Ainsi, une personne qui clone le projet peut recréer son propre environnement virtuel, puis réinstaller les mêmes bibliothèques localement.
-
-        Dans ce cours, vous n’aurez pas à gérer ce fichier.
-        L’important pour l’instant est surtout de comprendre ceci :
-
-        - le dossier `.venv` reste sur votre ordinateur;
-        - GitHub conserve le code du projet;
-        - si nécessaire, un fichier comme `requirements.txt` peut indiquer quelles bibliothèques doivent être réinstallées.
-
-        :::
-
+        <Mod_venv />
     </TabItem>
-
     <TabItem value="apercu" label="Aperçu">
-
-        Le code ci-dessous illustre différents exemples de notions abordées dans le cours.
-        Ce code sert uniquement de démonstration globale pour le premier cours. Vous apprendrez à maîtriser chacune de ces lignes au fil des semaines!
-
-        :::note Déboggeur
-        Les instructions seront exécutées en **mode débogage** : un mode spécial permettant de mieux comprendre le déroulement du programme. \
-        Ce mode d'exécution sera étudié plus en détail lors de la prochaine rencontre.
-        :::
-
-        :::warning Bibliothèques requises
-        Ce script utilise **Matplotlib** pour générer des graphiques, **NumPy** pour manipuler des ensembles données numériques et **Pandas** pour l'analyse de données. \
-        Ces trois bibliothèques ne sont pas incluses par défaut dans Python et doivent être installées avant de lancer le script. \
-        Le concept de bibliothèque sera étudié au prochain cours. Pour les installer, exécutez les commandes suivantes dans le terminal de PyCharm :
-        ```
-        pip install matplotlib pandas numpy
-        ```
-        :::
-
-         ```python showLineNumbers
-        import math
-        import random
-        import matplotlib.pyplot as plt
-        import pandas as pd
-        import numpy as np
-
-        print("Démo #1 - utilisation de fonctions standard (R02)")
-        max(10, 50, 30)
-        valeur = min(10, 20, max(50, 30))
-        print(valeur)
-        nombre1 = 6
-        nombre2 = 7
-        print(f"La somme est : {nombre1 + nombre2}") # f-string
-
-        print("\nDémo #2 - utilisation de fonctions provenant de module (R02)")
-        print(math.cos(20))
-        print(math.pi)
-
-        print(random.randint(5,10))
-        print(random.randint(5,10))
-
-        print("\nDémo #3 - utilisation de listes")
-        notes = [20, 50, 60]
-        moyenne = sum(notes) / len(notes)
-        print(moyenne)
-
-        print("\nDémo #4 - création d'une fonction (R03)")
-        def fonction_lineaire(a, x, b):
-            print("la fonction est utilisée")
-            return a * x + b
-
-        resultat1 = fonction_lineaire(5, 2, 3) # Essayez F7!
-        resultat2 = fonction_lineaire(3, 2, 4)
-        print(resultat1)
-        print(resultat2)
-
-        print("\nDémo #5 - condition (R04)")
-        nom = "Doe"
-        prenom = "John"
-        age = 25
-        if age >= 18:
-            print(f"{prenom} {nom} est majeur.")
-            print("Bois avec modération!")
-        else:
-            print(f"{prenom} {nom} est mineur.")
-            print("zéro alcool pour toi!")
-
-        print("\nDémo #6 - boucle (R05)")
-        compteur = 1
-        while compteur < 11:
-            print(compteur, "moutons")
-            compteur = compteur + 1
-
-        print("\nDémo #7 - boucle sur des listes (R05 et R09)")
-        chats = ["Astro", "Chatmouraï", "Peluche"]
-        nb_chats = len(chats)
-        print(f"J'ai {nb_chats} chats :")
-        for chat in chats:
-            print(f" - {chat}")
-
-        print("\nDémo #8 - graphique (R09)")
-        x = [1, 2, 3, 4, 5]
-        y = [50, 25, 75, 25, 60]
-        plt.figure()
-        plt.plot(x, y, color='g', label="Ma courbe")
-        plt.xlabel("Mes X")
-        plt.ylabel("Mes Y")
-        plt.title("Mon graphique")
-        plt.legend()
-        plt.show()
-        plt.savefig("graphique.png")
-
-        print("\nDémo #9 - fichier (R10)")
-        with open("pokemons.txt", "w", encoding="UTF-8") as f:
-            f.write("Pikachu\n")
-            f.write("Pitchu\n")
-
-        with open("pokemons.txt", "r", encoding="UTF-8") as f:
-            for ligne in f:
-                print(ligne, end="")
-
-        print("\nDémo #10 - NumPy (R10)")
-        notes = np.array([14, 18, 12, 16, 9])
-        print("Notes originales :", notes)
-        print("Notes sur 100    :", notes * 5)
-        print("Moyenne          :", notes.mean())
-        print("Note max         :", notes.max())
-        print("Note min         :", notes.min())
-
-        print("\nDémo #11 - analyse de données (R11)")
-        donnees = {
-            "Symbole": ["H", "He", "Li", "Be", "B", "C", "N", "O"],
-            "Nom": ["Hydrogène", "Hélium", "Lithium", "Béryllium", "Bore", "Carbone", "Azote", "Oxygène"],
-            "Masse_Atomique": [1.008, 4.0026, 6.94, 9.0122, 10.81, 12.011, 14.007, 15.999],
-            "Type": ["Non-métal", "Gaz noble", "Métal alcalin", "Métal alcalino-terreux", "Métalloïde", "Non-métal", "Non-métal", "Non-métal"]
-        }
-
-        dataframe_donnees = pd.DataFrame(donnees) # Force de Pandas : l'analyse de données
-
-        # Exemple #1 : Obtenir des données bien précises (trier/filtrer/etc)
-        donnees_ex1 = dataframe_donnees.copy()
-        donnees_ex1 = donnees_ex1[donnees_ex1["Type"] == "Non-métal"] #Un filtre
-        donnees_ex1 = donnees_ex1[donnees_ex1["Masse_Atomique"] > 9]  #Un autre filtre
-        donnees_ex1 = donnees_ex1.sort_values(by="Nom")
-        print("\nPandas - Exemple 1")
-        print(donnees_ex1)
-
-        # Exemple #2 : Générer des statistiques
-        donnees_ex2 = dataframe_donnees.copy()
-        donnees_ex2 = donnees_ex2.groupby("Type")["Masse_Atomique"].agg(["min", "max", "count"])
-        print("\nPandas - Exemple 2")
-        print(donnees_ex2)
-        ```
+        <Mod_apercu />
     </TabItem>
-
-    <TabItem value="Activités" label="Activités">
-
+    <TabItem value="Activités à faire à la maison" label="Activités à faire à la maison">
         :::info Organisation du cours
         Pour maximiser votre apprentissage, ce cours est structuré pour vous permettre de découvrir les concepts à votre rythme à la maison, et de profiter du temps en classe pour mettre en pratique, poser des questions et solidifier vos connaissances avec l'aide de l'enseignant.
 
         **À la maison :** Vous êtes invité à explorer la matière et faire les exercices préparatoires avant chaque rencontre.
-        
+
         **En classe :** Le temps en présentiel est une ressource précieuse. Nous l'utilisons pour nous attaquer aux défis plus complexes, valider votre compréhension et obtenir une rétroaction immédiate.
         :::
 
-        <Tabs>
+        ## Exercices d'environnement de travail
 
-            <TabItem value="1" label=" Activités à faire à la maison">
-                ## Exercices d'environnement de travail
+        Complétez les exercices de cette section avant de poursuivre avec les autres exercices plus bas.
 
-                Complétez les exercices de cette section avant de poursuivre avec les autres exercices plus bas.
+        :::info Devoir #1 - Créer un Compte GitHub
+        En suivant [cette recette](/recettes/creer-compte-github), créez-vous un compte GitHub si vous n'en avez pas déjà un. \
+        Vous pouvez utiliser votre adresse courriel personnelle ou celle du Cégep, selon votre préférence.
+        :::
 
-                :::info Devoir #1 - Créer un Compte GitHub
-                En suivant [cette recette](/recettes/creer-compte-github), créez-vous un compte GitHub si vous n'en avez pas déjà un. \
-                Vous pouvez utiliser votre adresse courriel personnelle ou celle du Cégep, selon votre préférence.
-                :::
+        ---
 
-                ---
+        :::info Devoir #2 - Création des dépôts de code GitHub
+        Une fois votre compte GitHub créé, vous devez rejoindre **trois dépôts** distincts :
+        1. **General** : Pour vos exercices et exemples vus en classe.
+        2. **TP1** : Pour le code de votre premier travail pratique.
+        3. **TP2** : Pour le code de votre second travail pratique.
 
-                :::info Devoir #2 - Création des dépôts de code GitHub
-                Une fois votre compte GitHub créé, vous devez rejoindre **trois dépôts** distincts :
-                1. **General** : Pour vos exercices et exemples vus en classe.
-                2. **TP1** : Pour le code de votre premier travail pratique.
-                3. **TP2** : Pour le code de votre second travail pratique.
+        **Procédure à suivre** :
 
-                **Procédure à suivre** :
+        1. **Connexion :** Connectez-vous à votre compte sur [github.com](https://www.github.com)
+        2. **Acceptation des travaux :** Pour chaque lien présent dans le tableau ci-dessous :
+            - Ouvrez le lien.
+            - Cliquez sur le bouton vert "**Accept this assignment**"
 
-                1. **Connexion :** Connectez-vous à votre compte sur [github.com](https://www.github.com)
-                2. **Acceptation des travaux :** Pour chaque lien présent dans le tableau ci-dessous :
-                    - Ouvrez le lien.
-                    - Cliquez sur le bouton vert "**Accept this assignment**"
+        | Groupe | Date/Heure | Enseignant | Liens pour créer les dépôts de code |
+        | :--- | :--- | :--- | :--- |
+        | 1010 | Lundi 8h00 | Nom de l'enseignant | [Lien 1](https://google.com) [Lien 2](https://google.com) [Lien 3](https://google.com) |
 
-                | Groupe | Date/Heure | Enseignant | Liens pour créer les dépôts de code |
-                | :--- | :--- | :--- | :--- |
-                | 1010 | Lundi 8h00 | Nom de l'enseignant | [Lien 1](https://google.com) [Lien 2](https://google.com) [Lien 3](https://google.com) |
-                
-                :::
-                ---
-                :::info Installation sur votre ordinateur personnel (fortement recommandé)
-                Pour travailler sur vos projets en classe et à la maison avec les vrais outils de programmation, vous devez installer les logiciels suivants sur votre ordinateur personnel :
-                1. [Python](https://www.python.org/downloads/) (version 3.11 ou plus récente)
-                2. [VS Code](https://code.visualstudio.com/download) (version 1.80 ou plus récente)
-                3. [Git](https://git-scm.com/downloads) (version 2.42 ou plus récente)
-                :::
-            </TabItem>
-            <TabItem value="2" label=" Activités à faire en classe">
+        :::
+        ---
+        :::info Installation sur votre ordinateur personnel (fortement recommandé)
+        Pour travailler sur vos projets en classe et à la maison avec les vrais outils de programmation, vous devez installer les logiciels suivants sur votre ordinateur personnel :
+        1. [Python](https://www.python.org/downloads/) (version 3.11 ou plus récente)
+        2. [VS Code](https://code.visualstudio.com/download) (version 1.80 ou plus récente)
+        3. [Git](https://git-scm.com/downloads) (version 2.42 ou plus récente)
+        :::
 
-                ## Exercices de compréhension
+    </TabItem>
+    <TabItem value="Activités à faire en classe" label="Activités à faire en classe">
+        ## Exercices de compréhension
 
-                Pour les exercices de cette section, vous pouvez écrire vos réponses sur papier ou vous pouvez [créer un fichier *markdown*](/recettes/creer-markdown).
+        Pour les exercices de cette section, vous pouvez écrire vos réponses sur papier ou vous pouvez [créer un fichier *markdown*](/recettes/creer-markdown).
 
-                ::::info Exercice - EXPRESSIONS
+        ::::info Exercice - EXPRESSIONS
 
-                Créez un fichier `r01_expressions.md` pour votre réponse.
+        Créez un fichier `r01_expressions.md` pour votre réponse.
 
-                Sans exécuter le code, déterminez le résultat de chacune des expressions ci-dessous.<br />
-                Par la suite, tapez (ou copiez) et exécutez le code dans la console, et comparez le résultat avec vos réponses.
+        Sans exécuter le code, déterminez le résultat de chacune des expressions ci-dessous.<br />
+        Par la suite, tapez (ou copiez) et exécutez le code dans la console, et comparez le résultat avec vos réponses.
 
-                <Row>
-                    <Column>
-                        ```python
-                        2 / 8 - 1 / 8
-                        ```
-                        ```python
-                        (1 + 3) / 4
-                        ```
-                    </Column>
-                    <Column>
-                        ```python
-                        2 ** 3
-                        ```
-                        ```python
-                        350 // 100
-                        ```
-                    </Column>
-                    <Column>
-                        ```python
-                        "K" + "L"
-                        ```
-                        ```python
-                        "K" + str(45)
-                        ```
-                    </Column>
-                    <Column>
-                        ```python
-                        1 / 3
-                        ```
-                        ```python
-                        float(3)
-                        ```
-                    </Column>
-                </Row>
-
-                La fonction `round()` permet d'arrondir :
-                - Le 1er paramètre est la valeur à arrondir.
-                - Le 2ème paramètre est le nombre de décimales à conserver.
-
-                Poursuivez l'exercice avec les expressions suivantes :
-                <Row>
-                    <Column>
-                        ```python
-                        print(round(1 / 3, 3))
-                        ```
-                    </Column>
-                    <Column>
-                        ```python
-                        print(round(2 / 3 + 1, 2))
-                        ```
-                    </Column>
-                </Row>
-
-                :::note Notions visées
-                Opérateurs arithmétiques (`/`, `//`, `**`), priorité des opérations, division entière vs décimale, concaténation de chaînes, `round()`, conversion de types `str()`, `float()`
-                :::
-
-                ::::
-
-                ---
-
-                ::::info Exercice - AFFICHAGE #1
-
-                Créez un fichier `r01_affichage_1.md` pour votre réponse.
-
-                Sans exécuter le code, qu'affichera le programme ci-dessous?<br/>
-                En situation d'examen, ce type de question serait à faire sans l'ordinateur.
-
-                ```python showLineNumbers
-                nombre1 = 10
-                nombre2 = nombre1 * nombre1
-                nombre1 = 40
-                nombre3 = nombre2 - nombre1 - 10
-                print(nombre1, nombre2, nombre3)
+        <Row>
+            <Column>
+                ```python
+                2 / 8 - 1 / 8
                 ```
-                Validez ensuite votre réponse en exécutant le code dans la console de votre IDE.
-
-                Puis, faites la trace d’exécution de ce programme sur papier. \
-                Validez votre trace à l’aide du débogueur de votre IDE, en plaçant un point d'arrêt sur la 1<sup>ère</sup> ligne.
-
-                Avancez pas à pas en prenant le temps d'observer l'évolution des variables.
-
-                :::note Notions visées
-                Variables, réaffectation, ordre d'exécution, opérateurs arithmétiques, trace d'exécution, débogueur (points d'arrêt)
-                :::
-
-                ::::
-
-                ---
-
-                ::::info Exercice - AFFICHAGE #2
-
-                Créez un fichier `r01_affichage_2.md` pour votre réponse.
-
-                Sans exécuter le code, qu'affichera le programme ci-dessous?
-                ```python showLineNumbers
-                x = 50
-                y = 100
-                temporaire = y
-                y = x
-                x = temporaire
-                print(x, y)
+                ```python
+                (1 + 3) / 4
                 ```
-                Validez votre réponse.
+            </Column>
+            <Column>
+                ```python
+                2 ** 3
+                ```
+                ```python
+                350 // 100
+                ```
+            </Column>
+            <Column>
+                ```python
+                "K" + "L"
+                ```
+                ```python
+                "K" + str(45)
+                ```
+            </Column>
+            <Column>
+                ```python
+                1 / 3
+                ```
+                ```python
+                float(3)
+                ```
+            </Column>
+        </Row>
 
-                Puis, faites la trace d’exécution de ce programme sur papier. \
-                Validez votre trace à l’aide du débogueur de votre IDE, en plaçant un point d'arrêt sur la 1<sup>ère</sup> ligne. \
-                Avancez pas à pas en prenant le temps d'observer l'évolution des variables.
+        La fonction `round()` permet d'arrondir :
+        - Le 1er paramètre est la valeur à arrondir.
+        - Le 2ème paramètre est le nombre de décimales à conserver.
 
-                Que s'est-il passé avec le contenu des variables `x` et `y`?
+        Poursuivez l'exercice avec les expressions suivantes :
+        <Row>
+            <Column>
+                ```python
+                print(round(1 / 3, 3))
+                ```
+            </Column>
+            <Column>
+                ```python
+                print(round(2 / 3 + 1, 2))
+                ```
+            </Column>
+        </Row>
 
-                :::note Notions visées
-                Variables, échange de valeurs avec une variable temporaire, réaffectation, ordre d'exécution, trace d'exécution, débogueur
-                :::
+        :::note Notions visées
+        Opérateurs arithmétiques (`/`, `//`, `**`), priorité des opérations, division entière vs décimale, concaténation de chaînes, `round()`, conversion de types `str()`, `float()`
+        :::
 
-                ::::
-            </TabItem>
-        </Tabs>
+        ::::
+
+        ---
+
+        ::::info Exercice - AFFICHAGE #1
+
+        Créez un fichier `r01_affichage_1.md` pour votre réponse.
+
+        Sans exécuter le code, qu'affichera le programme ci-dessous?<br/>
+        En situation d'examen, ce type de question serait à faire sans l'ordinateur.
+
+        ```python showLineNumbers
+        nombre1 = 10
+        nombre2 = nombre1 * nombre1
+        nombre1 = 40
+        nombre3 = nombre2 - nombre1 - 10
+        print(nombre1, nombre2, nombre3)
+        ```
+        Validez ensuite votre réponse en exécutant le code dans la console de votre IDE.
+
+        Puis, faites la trace d’exécution de ce programme sur papier. \
+        Validez votre trace à l’aide du débogueur de votre IDE, en plaçant un point d'arrêt sur la 1<sup>ère</sup> ligne.
+
+        Avancez pas à pas en prenant le temps d'observer l'évolution des variables.
+
+        :::note Notions visées
+        Variables, réaffectation, ordre d'exécution, opérateurs arithmétiques, trace d'exécution, débogueur (points d'arrêt)
+        :::
+
+        ::::
+
+        ---
+
+        ::::info Exercice - AFFICHAGE #2
+
+        Créez un fichier `r01_affichage_2.md` pour votre réponse.
+
+        Sans exécuter le code, qu'affichera le programme ci-dessous?
+        ```python showLineNumbers
+        x = 50
+        y = 100
+        temporaire = y
+        y = x
+        x = temporaire
+        print(x, y)
+        ```
+        Validez votre réponse.
+
+        Puis, faites la trace d’exécution de ce programme sur papier. \
+        Validez votre trace à l’aide du débogueur de votre IDE, en plaçant un point d'arrêt sur la 1<sup>ère</sup> ligne. \
+        Avancez pas à pas en prenant le temps d'observer l'évolution des variables.
+
+        Que s'est-il passé avec le contenu des variables `x` et `y`?
+
+        :::note Notions visées
+        Variables, échange de valeurs avec une variable temporaire, réaffectation, ordre d'exécution, trace d'exécution, débogueur
+        :::
+
+        ::::
 
     </TabItem>
 </Tabs>

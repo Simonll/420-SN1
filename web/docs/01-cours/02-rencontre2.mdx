@@ -1,6 +1,6 @@
 ---
 title: 2 - Scripts et fonctions
-description: Scripts, Débogueur, Traces, Fonctions, f-strings, Modules, Bibliothèques, Précision des flottants
+description: Scripts, Débogueur, Traces, Fonctions, f-strings, Modules, Bibliothèques, Listes (intro), Précision des flottants
 hide_table_of_contents: true
 ---
 
@@ -806,16 +806,39 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
 
         {/* <Feedback feedbackId="Rencontre #2 - Modules" /> */}
     </TabItem>
+   
+    <TabItem value="liste" label="Liste (intro)" default>
+        <Admonition type="tip" title="Faire les exercices dans Colab">
+            <p>Si vous préférez, vous pouvez aussi faire les exercices de cette section dans un notebook Google Colab. Cliquez sur le badge ci-dessous pour ouvrir le notebook préparé pour vous.</p>
+            <a href="https://colab.research.google.com/github/Simonll/420-SN1/blob/develop/code/notebooks/exercices_semaine_2.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+        </Admonition>
 
-    <TabItem value="liste" label="Listes (Prochainement R6)">
+        :::info Introduction aux listes
+        Jusqu'ici nous avons vu les 4 types de données de base en Python :
+        - les entiers (`int`) : 5, -3, 42, 0, ...
+        - les nombres à virgule (`float`) : 3.14, -0.001, 2.0, ...
+        - les chaînes de caractères (`str`) : "Bonjour", 'a', "123", ...
+        - les booléens (`bool`) : True, False
 
-        :::info Les listes en Python
-        La notion de **Listes (`list`)** et leur manipulation complète sont désormais abordées à la **[Rencontre 6](/cours/rencontre6)** en combinaison avec les boucles `for`.
+        Python propose aussi des types de données plus complexes, comme les **listes**. Une liste permet de stocker plusieurs valeurs dans une seule variable, dans un ordre précis.
+
+        Les listes sont définies par des crochets `[]`, avec les éléments séparés par des virgules :
+        ```python showLineNumbers
+        heros = ["Mario", "Link", "Kirby", "Sonic"]
+        annees_creation = [1981, 1986, 1992, 1991]
+        ```
+
+        Les éléments d'une liste peuvent être de n'importe quel type (`str`, `int`, `float`, `bool`).
+
+        Une liste peut même contenir des éléments de types différents :
+        ```python showLineNumbers
+        melange = ["Alice", 42, 3.14, True]
+        ```
         :::
 
-    </TabItem>
+        ---
 
-    <TabItem value="precision-flottants" label="Précision des flottants">
+        ::::info Accéder aux éléments d'une liste
         Chaque élément d'une liste est associé à un **index** (sa position), qui commence à **0**.
 
         ```
@@ -1167,7 +1190,6 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
         0.1 (décimal) = 0.0001100110011001100110011001100110011001100110011001101... (binaire)
         ```
 
-
         :::
 
         C'est infiniment proche de `0.1`, mais pas exactement égal. Et quand on additionne plusieurs de ces approximations, l'erreur s'accumule et peut devenir visible.
@@ -1323,7 +1345,7 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
 
                 ## Auto-validation des connaissances
 
-                [**Ce formulaire**](https://forms.gle/YYzQgMACNvrF6mLSA) sert à vérifier votre compréhension des éléments les plus importants de la rencontre R02. Ne faites ce questionnaire **que lorsque vous vous sentez en très bonne maîtrise de la matière**. En classe, dès votre arrivée, vous aurez un **questionnaire très similaire**, évalué **sommativement**, à compléter sans accès à **aucune documentation**.
+                [**Ce formulaire**](https://example.com) sert à vérifier votre compréhension des éléments les plus importants de la rencontre R02. Ne faites ce questionnaire **que lorsque vous vous sentez en très bonne maîtrise de la matière**. En classe, dès votre arrivée, vous aurez un **questionnaire très similaire**, évalué **sommativement**, à compléter sans accès à **aucune documentation**. /**https://forms.gle/YYzQgMACNvrF6mLSA**/
 
                 ::::warning
                 Ne pas remplir le formulaire diminue fortement vos chances de réussir l’évaluation sommative en début de rencontre. \
@@ -1337,7 +1359,7 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
                 ::::info Exercice - Trace simple
 
                 :::note-nt ️
-                🖨 Pour réaliser cet exercice, imprimez le [tableau de trace d'exécution](/pdf/Traces_recto_verso.pdf).
+                Pour réaliser cet exercice, imprimez le [tableau de trace d'exécution](/pdf/Traces_recto_verso.pdf).
                 :::
 
                 :::warning-nt

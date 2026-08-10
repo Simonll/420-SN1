@@ -1,0 +1,79 @@
+:::info Environnement virtuel
+
+Python de base permet déjà de faire beaucoup de choses : faire des calculs, afficher du texte, manipuler des listes, etc.
+Mais pour des tâches plus spécialisées (générer des graphiques, analyser des données, faire du traitement d'images), des personnes ont développé des **extensions** que l'on peut ajouter à Python.
+Ces extensions s'appellent des **bibliothèques** (ou *librairies*). Vous en utiliserez plusieurs dans ce cours, comme **Matplotlib** pour les graphiques, **NumPy** pour manipuler des données numériques ou **Pandas** pour l'analyse de données. Le concept de bibliothèque sera vu en détail à la [rencontre 02](/cours/rencontre2?onglet=biblio).
+
+Le problème? Ces bibliothèques évoluent dans le temps. De nouvelles versions sont régulièrement publiées, avec de nouvelles fonctionnalités, et ces versions ne sont pas toujours compatibles entre elles.
+Imaginez que vous travaillez sur deux projets différents : **le projet A a besoin de la version 1.0 d'une bibliothèque, et le projet B a besoin de la version 2.0 de cette même bibliothèque**. Si vous installez les deux sur votre ordinateur sans précaution, elles risquent de se nuire mutuellement.
+
+La solution? L'**environnement virtuel**, une sorte de **bulle isolée** propre à chaque projet, qui contient sa propre version de Python et ses propres bibliothèques, sans interférer avec les autres projets ni avec l'installation globale de Python sur votre ordinateur.
+
+Concrètement, un environnement virtuel est un **dossier** (nommé `.venv` par convention) créé à la racine de chaque projet. \
+Il contient tout ce dont le projet a besoin pour fonctionner.
+
+:::
+
+---
+
+:::info Le dossier `.venv` dans votre IDE
+La plupart des IDEs modernes facilitent la gestion des environnements virtuels.
+
+- **VS Code** : Lorsque vous ouvrez un dossier contenant un projet Python, VS Code détecte votre interpréteur. Si vous n'avez pas d'environnement virtuel, il vous proposera d'en créer un. Il l'activera ensuite automatiquement dans le terminal intégré.
+
+Vous trouverez la [recette](/recettes/creer-venv-VSCode) pour créer un environnement virtuel dans VS Code.
+
+- **PyCharm** : Crée et active automatiquement un environnement virtuel pour chaque nouveau projet.
+
+<p align="left">
+    <img src={require('/img/cours/r01-venv.png').default} alt="Création d'un environnement virtuel dans PyCharm" width="60%" />
+</p>
+
+Le dossier `.venv` contient :
+- **`Scripts/` (Windows) ou `bin/` (Mac/Linux)** : une copie locale de Python et `pip` (l'outil qui installe les bibliothèques) réservée à ce projet uniquement
+- **`Lib/site-packages/`** : les bibliothèques installées pour ce projet (ex : Matplotlib, Pandas) ; elles sont isolées des autres projets et de l'installation globale de Python
+- **`pyvenv.cfg`** : un fichier de configuration qui indique quelle version de Python est utilisée
+
+:::
+
+---
+
+:::warning Ne jamais commiter `.venv` sur GitHub!
+
+
+Le dossier `.venv` peut être très volumineux, car les bibliothèques installées sont souvent volumineuses, et certaines configurations sont entièrement **propres à votre machine**.\
+Il n'a donc aucune raison d'être partagé sur GitHub : quelqu'un qui clone votre projet n'a qu'à recréer son propre environnement virtuel de son côté.
+
+C'est pourquoi le fichier `.gitignore` devrait exclure automatiquement ce dossier. Assurez-vous de ne jamais le retirer de votre `.gitignore`!
+:::
+
+---
+
+:::note Et les bibliothèques installées, alors?
+
+Même si le dossier `.venv` n'est pas envoyé sur GitHub, il existe une façon de partager la liste des bibliothèques nécessaires à un projet.
+
+Dans les projets Python, on utilise souvent un fichier appelé :
+
+```text
+requirements.txt
+```
+
+Ce fichier contient les bibliothèques à installer, parfois avec leur numéro de version :
+
+```text
+matplotlib==3.9.3
+numpy==2.2.0
+pandas==2.2.3
+```
+
+Ainsi, une personne qui clone le projet peut recréer son propre environnement virtuel, puis réinstaller les mêmes bibliothèques localement.
+
+Dans ce cours, vous n’aurez pas à gérer ce fichier.
+L’important pour l’instant est surtout de comprendre ceci :
+
+- le dossier `.venv` reste sur votre ordinateur;
+- GitHub conserve le code du projet;
+- si nécessaire, un fichier comme `requirements.txt` peut indiquer quelles bibliothèques doivent être réinstallées.
+
+:::

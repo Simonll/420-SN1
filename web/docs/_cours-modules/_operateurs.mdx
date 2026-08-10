@@ -1,0 +1,114 @@
+import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
+
+import Admonition from '@theme/Admonition';
+
+<Admonition type="tip" title="Testez dans Colab !">
+    <p>Ouvrez le notebook d'introduction pour tester les exemples de cette section dans des cellules de code.</p>
+    <a href="https://colab.research.google.com/github/Simonll/420-SN1/blob/develop/code/notebooks/01-rencontre1.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+</Admonition>
+
+:::info Opérateurs
+
+Les expressions en Python peuvent contenir des opérateurs arithmétiques.<br/>
+Il existe plusieurs opérateurs qui permettent de construire des expressions à partir d'autres expressions.<br/>
+Plusieurs sont répertoriés dans l'[aide-mémoire](../aidememoire/operateurs), mais nous commencerons avec ceux-ci
+:
+:::
+
+## Opérateurs arithmétiques
+
+| Opérateur | Description | Exemple | Valeur résultante |
+|------------|------------------|---------------|--------------|
+| <C>+</C> | Addition | <C><N>10</N> + <N>3</N></C> | <C><N>13</N></C> |
+| <C>-</C> | Soustraction | <C><N>10</N> - <N>3</N></C> | <C><N>7</N></C> |
+| <C>*</C> | Multiplication | <C><N>10</N> * <N>3</N></C> | <C><N>30</N></C> |
+| <C>/</C> | Division (float) | <C><N>11</N> / <N>3</N></C> | <C><N>3.6666...</N></C> |
+| <C>//</C> | Division entière <br/> (les décimales sont ignorées) | <C><N>11</N> // <N>3</N></C> | <C><N>3</N></C> |
+| <C>%</C> | Modulo <br/> (le reste d'une division, <br/> explications plus bas) | <C><N>11</N> % <N>3</N></C> | <C><N>2</N></C> |
+| <C>**</C> | Puissance | <C><N>10</N> ** <N>3</N></C> | <C><N>1000</N></C> |
+
+<Row>
+    <Column>
+        :::info-nt
+        ## Opérateur modulo : `%`
+        Le modulo est une opération mathématique qui consiste à trouver le reste d'une division entière.
+        Imaginons qu'on souhaite connaitre le résultat de 17 modulo 5 :
+        1. On se demande : "Combien de fois $5$ entre-t-il entièrement dans $17$ ?"
+        2. La réponse est 3 fois ($3 \times 5 = 15$).
+        3. On calcule ensuite la différence : $17 - 15 = 2$.
+        4. Le chiffre $2$ est le reste.
+
+        En mathématiques et en programmation, on dira que 17 modulo 5 est égal à 2.
+
+        L'opérateur modulo est très utile par exemple pour vérifier si un nombre est pair ou impair, et dans de nombreux autres contextes.
+        Par exemple :
+        - `0 % 2` retourne `0` (pair, il n'y a pas de reste)
+        - `1 % 2` retourne `1` (impair, il y a un reste de 1)
+        - `2 % 2` retourne `0` (pair)
+        - `3 % 2` retourne `1` (impair)
+        - `4 % 2` retourne `0` (pair)
+        - `5 % 2` retourne `1` (impair)
+        - ...
+
+        :::
+    </Column>
+    <Column>
+        :::info-nt
+        ## Opérateurs de division : `/` et `//`
+        Dans la console, tapez les expressions `11 / 3` et `11 // 3` pour voir la différence entre les deux.
+        - L'opérateur de division `/` se comporte comme la division classique que l'on connait bien et retourne `3.6666...`. Le résultat est toujours un nombre avec décimale (`float`), par exemple `4 / 2` va retourner `2.0` et non `2`.
+
+        - L’opérateur de division `//` conserve uniquement la partie entière de la division. Il n’y a aucun arrondi : la partie décimale est simplement ignorée. Par exemple, `11 // 3` retourne l’entier (`int`) `3`.
+        :::
+
+        :::tip-nt
+        Pour résumer :
+        - `11 / 3` retourne `3.6666...`
+        - `11 // 3` retourne `3`
+        - `11 % 3` retourne `2`
+        :::
+
+    </Column>
+</Row>
+
+<Row>
+    <Column>
+:::warning-nt
+## Priorité des opérateurs
+Les opérateurs n'ont pas tous la même priorité, c'est-à-dire que certains sont évalués avant d'autres.
+Par exemple, dans l'expression `10 + 3 * 2`, la multiplication est effectuée avant l'addition, donc le résultat est `16`.<br />
+
+On dit que la multiplication a une priorité plus élevée que l'addition.
+Pour voir la liste complète des priorités, consultez l'[aide-mémoire sur les opérateurs](../aidememoire/operateurs?onglet=priorite) (onglet **Priorité des opérateurs**).
+
+Les parenthèses `()` sont des opérateurs qui permettent de regrouper des expressions pour forcer l'ordre d'évaluation.
+Par exemple, si on veut que l'addition soit effectuée en premier, on peut écrire `(10 + 3) * 2`, ce qui donne `26` comme résultat.
+
+Par exemple, dans la console, tapez les expressions `10 + 3 * 2` et `(10 + 3) * 2` pour voir la différence entre les deux.
+:::
+    </Column>
+    <Column>
+
+    :::tip-nt
+        ## Opérandes et types de résultats
+        Les opérandes (telles que `10` et `3` dans l'expression `10 + 3`) peuvent être des valeurs (comme `10` et `3`), mais pourraient aussi être des variables, un élément d'un tableau, une expression, etc.
+
+        La valeur résultante de l'utilisation d'un opérateur arithmétique peut être de type `int` (nombre entier) ou `float` (nombre décimal), selon l'opérateur ET selon les opérandes. Les types sont expliqués plus en détail dans l'[**onglet Type**](/cours/rencontre1?onglet=types) de cette semaine.
+
+        Par exemple, l'opérateur `+` peut faire la somme de deux nombres, mais utilisé avec des chaînes de caractères (`str`), il va faire la *concaténation* (collage) de ces chaînes :
+        - `10 + 3` retourne `13` (`int`)
+        - `"10" + "3"` retourne `"103"` (`str`)
+
+        :::
+    </Column>
+</Row>
+
+:::info-nt
+Un autre opérateur très utile est l'opérateur d'affectation `=`, qui permet de stocker une valeur dans une variable.\
+Il sera étudié dans l'onglet [**Variables**](/cours/rencontre1?onglet=variables).
+:::
+
+## Opérateurs d'affectation
+| Opérateur | Description | Exemple |
+|------------|------------------------------------|---------|
+| <C>=</C> | Affectation simple | <C>x = <N>5</N></C> |

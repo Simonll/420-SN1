@@ -1,0 +1,102 @@
+import Link from '@docusaurus/Link';
+
+:::info Introduction
+
+La programmation, c’est l’art de donner des instructions précises à une machine pour qu’elle accomplisse une tâche. Contrairement à un humain, qui peut comprendre le contexte ou improviser, un ordinateur est totalement logique. Il exécute les instructions exactement comme elles sont écrites, sans les interpréter, et toujours dans l’ordre prévu.
+
+Dans un monde de plus en plus numérique, une frontière invisible se dessine entre les simples utilisateurs de technologies et ceux qui en comprennent les rouages. Apprendre à programmer permet de franchir cette frontière : cela augmente notre littératie informatique et nous aide à décoder le langage des machines. Pour de futurs scientifiques ainsi que pour les futurs professionnels de la santé (médecine, pharmacie, recherche clinique, biotechnologies), c'est une compétence de plus en plus incontournable. Qu’il s’agisse d’analyser de grands ensembles de données génétiques, de modéliser des phénomènes biologiques, de traiter de l'imagerie médicale ou d'interagir avec des outils de bio-informatique, comprendre le code vous permet de cesser d'être de simples spectateurs pour devenir des acteurs du changement.
+
+Il existe de nombreux langages de programmation, chacun avec ses forces et ses usages. Certains sont conçus pour la performance (comme C ou C++), d’autres pour la simplicité et la lisibilité. C’est le cas de Python, un langage très apprécié des débutants. Sa syntaxe claire permet de se concentrer sur les concepts sans être ralenti par des règles complexes.
+
+Python est aussi largement utilisé dans des domaines comme l’intelligence artificielle, l’analyse de données et la modélisation scientifique et médicale, grâce à un vaste écosystème de bibliothèques.
+
+Mais attention : il nexiste pas un langage unique pour tout faire. Par exemple :
+
+<Link to="https://gcc.gnu.org/" target="_blank">C/C++</Link> : idéals pour les logiciels qui doivent être rapides et proches du matériel (comme les logiciels de dispositifs médicaux ou d'imagerie lourde).
+
+<Link to="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank">JavaScript</Link> : incontournable pour le développement web.
+
+<Link to="https://kotlinlang.org/" target="_blank">Kotlin</Link> et <Link to="https://swift.org/" target="_blank">Swift</Link> : spécialisés dans les applications mobiles (comme les applications de suivi de santé).
+
+<Link to="https://www.r-project.org/" target="_blank">R</Link> et <Link to="https://www.python.org/" target="_blank">Python</Link> : très utilisés pour les statistiques, l’épidémiologie, l’analyse de données et la recherche scientifique.
+
+
+<p align="center">
+    <img src={require('/img/cours/narvalphoto.jpeg').default} width="25%"/>
+    <br/>
+    <Link to="https://www.calculquebec.ca/nouvelle/narval-un-nouveau-superordinateur-dedie-a-la-recherche-scientifique/" target="_blank">Narval</Link>
+</p>
+
+
+
+:::
+
+:::tip Pourquoi apprendre à programmer en sciences?
+
+En sciences, savoir programmer est souvent un atout majeur, voire une nécessité. Que ce soit en biologie, en physique ou en chimie, la programmation permet de :
+
+* Modéliser des phénomènes complexes ;
+
+* Analyser des données expérimentales ;
+
+* Simuler des processus naturels.
+
+Quelques exemples concrets :
+
+* Biologie et Santé : analyser des séquences génomiques, modéliser l’évolution d’une population ou traiter des données d'imagerie médicale ;
+
+* Mathématiques : résoudre numériquement des équations différentielles ou visualiser des fonctions en 3D ;
+
+* Chimie : étudier la cinétique de réactions chimiques ou manipuler des structures moléculaires ;
+
+* Géologie : analyser des relevés sismiques ou modéliser l’érosion d’un terrain au fil du temps ;
+
+* Physique : simuler la trajectoire d’un objet ou l’interaction entre des particules fondamentales.
+
+Plus qu'un simple outil technique, la programmation modifie profondément votre manière de penser. Elle façonne ce qu'on appelle la pensée informatique : une démarche intellectuelle qui force à décomposer un problème complexe en sous-éléments gérables, à identifier des structures répétitives et à formuler des solutions avec une clarté et une rigueur absolues. Cette nouvelle gymnastique d'esprit transforme durablement la façon dont un scientifique structure son raisonnement face à l'inconnu, renforçant des compétences transversales cruciales comme l'esprit critique et la résolution de problèmes.
+
+Enfin, la maîtrise de Python (ou d’un autre langage) ouvre la porte à des domaines en forte croissance, comme la science des données ou l’intelligence artificielle, des outils aujourd'hui omniprésents dans la recherche scientifique, médicale et industrielle.
+
+> ✅ En résumé : apprendre à programmer, ce n’est pas juste utile — c’est souvent indispensable pour comprendre,
+modéliser et explorer le monde scientifique.
+
+:::
+
+:::info Fonctionnement de Python et outils de développement
+
+Python est un **langage interprété**, ce qui signifie que le code n’est pas compilé en un fichier exécutable,
+mais **lu et exécuté ligne par ligne** par un interpréteur Python.
+
+La machine ne fait **aucune déduction** : elle suit les instructions exactement comme elles sont écrites, dans
+l’ordre, sans se poser de questions.
+
+<p align="center">
+    <img src={require('/img/cours/resizecom-Python-interpreteur.png').default} width="25%"/>
+</p>
+
+---
+
+### Outils de développement
+
+Pour écrire et exécuter du code Python, on utilise des outils qui facilitent le travail.
+
+#### Pour commencer : Google Colab <img src="https://colab.research.google.com/img/colab_favicon.ico" width="20" style={{verticalAlign: 'middle'}}/>
+
+Au début du cours, nous utiliserons **Google Colab**. C'est un environnement Python qui fonctionne directement dans votre navigateur.
+
+**Avantages :**
+- **Rien à installer** : tout est déjà configuré dans le cloud.
+- **Accessible partout** : il suffit d'un compte Google.
+- **Format interactif** : on travaille avec des « notebooks » qui permettent de mélanger du code, du texte et des graphiques, ce qui est idéal pour apprendre et expérimenter.
+
+#### Pour la suite : VS Code <img src="https://code.visualstudio.com/favicon.ico" width="20" style={{verticalAlign: 'middle'}}/>
+
+Après une première exploration avec Google Colab, nous installerons et utiliserons **VS Code** pour le reste de la session. C'est un éditeur de code très populaire qui offre des fonctionnalités avancées comme :
+- La **coloration syntaxique** pour une meilleure lisibilité.
+- L'**autocomplétion** pour coder plus vite.
+- La **détection d'erreurs** en temps réel.
+- Un **débogueur** puissant pour trouver et corriger les bugs.
+
+> ✅ **En résumé :** On commence avec **Google Colab** pour une première prise en main, et nous utiliserons principalement **VS Code** pour une expérience de développement complète.
+
+:::

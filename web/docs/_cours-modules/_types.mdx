@@ -1,0 +1,99 @@
+import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
+
+import Admonition from '@theme/Admonition';
+
+<Admonition type="tip" title="Testez dans Colab !">
+    <p>Ouvrez le notebook d'introduction pour tester les exemples de cette section dans des cellules de code.</p>
+    <a href="https://colab.research.google.com/github/Simonll/420-SN1/blob/develop/code/notebooks/01-rencontre1.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+</Admonition>
+
+:::info Types
+En programmation, les valeurs que l'on manipule ont un **type**, et le type d'une valeur détermine comment on peut l'utiliser et quelles opérations sont possibles avec cette valeur.
+:::
+
+Voici les [types de données](../aidememoire/types) de base pour débuter en Python :
+
+| Type | Description | Exemple |
+|-----------|------------------------|--------------------|
+| <C><B>int</B></C> | Nombre entier | <C><N>42</N></C> |
+| <C><B>float</B></C> | Nombre décimal | <C><N>3.14</N></C> |
+| <C><B>str</B></C> | Chaîne de caractères | <C><S>"Alice"</S></C> |
+| <C><B>bool</B></C> | Booléen (vrai ou faux) | <C><K>True</K></C> |
+
+::::info-nt
+
+- Un nombre entier (`int`) s'écrit simplement avec des chiffres, comme `42` ou `-99`.
+- Un nombre décimal (`float`) s'écrit avec une partie entière et une partie décimale séparées par un point, comme `3.14` ou `-0.001`.
+- Une chaîne de caractères (`str`) s'écrit entre guillemets, comme `"Alice"` ou `'Bonjour!'`.
+On peut utiliser des guillemets simples (`''`) ou doubles (`""`), mais il faut être cohérent.
+    :::warning-nt
+    L'expression `"123"` est une chaîne de caractères, pas un nombre entier!\
+    Si vous voulez un nombre entier, il faut écrire `123` sans guillemets.
+    :::
+- Un booléen (`bool`) est une valeur qui peut être soit `True` (vrai) soit `False` (faux). Ce sont les deux seules valeurs possibles pour un booléen.
+    :::warning-nt
+    L'expression `True` est un booléen, pas une chaîne de caractères!\
+    Si vous voulez une chaîne de caractères, il faut écrire `"True"` ou `'True'` entre guillemets.
+    :::
+
+::::
+
+---
+
+:::info `type()`
+
+Python possède une fonction permettant de connaître le type d'une expression, la fonction **`type()`**.
+
+Dans la console, tapez ces lignes une par une pour voir le type de chaque expression :
+
+```python
+type(42)        # Retourne <class 'int'>, ce qui signifie que 42 est de type entier
+type('42')      # ...
+type(6 * 7)
+type(3.14)
+type("Alice")
+type(True)
+type('False')
+```
+
+:::
+
+---
+
+:::info Changement de type
+
+On peut changer le type d'une expression en utilisant des fonctions de conversion.\
+Par exemple, pour convertir un entier en chaîne de caractères, on utilise la fonction **`str()`**.\
+Pour convertir une chaîne de caractères en entier, on utilise la fonction **`int()`**.
+
+Voici quelques exemples, essayez-les dans la console :
+```python
+type(str(42))        # Convertit l'entier 42 en chaîne de caractères
+type(int("42"))      # Convertit la chaîne de caractères "42" en entier
+type(float(3))       # Convertit l'entier 3 en nombre décimal
+type(float("3.14"))  # Convertit la chaîne de caractères "3.14" en nombre décimal
+```
+
+:::
+
+---
+
+:::info Polymorphisme des opérateurs
+
+Certains opérateurs se comportent différemment selon le type de leurs opérandes.<br />
+Par exemple, l'opérateur `+` peut faire la somme de deux nombres ou concaténer deux chaînes de caractères.
+
+Voici quelques exemples, essayez-les dans la console :
+```python
+5 + 3                # Addition de deux entiers
+"coucou " + "Alice"  # Concaténation de deux chaînes de caractères
+"coucou " + str(81)  # Concaténation d'une chaîne de caractères et d'un entier converti en chaîne
+```
+
+:::
+
+---
+
+:::tip Types composés
+Il existe aussi des structures de données plus complexes pour stocker des données, comme les `list`, les `set`, les `tuple` ou les `dict`, que nous verrons plus tard.
+:::

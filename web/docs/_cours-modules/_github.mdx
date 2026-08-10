@@ -1,0 +1,246 @@
+::::info Qu'est-ce que Git et GitHub?
+
+Vous connaissez probablement
+**OneDrive** : un service permettant de sauvegarder vos fichiers dans le nuage et d'y accéder depuis n'importe quel appareil.
+**GitHub** joue un rôle similaire, mais il est conçu spécifiquement pour le **code source** et s'appuie sur **Git** pour offrir des fonctionnalités bien plus puissantes.
+
+**Git** est un outil qui roule sur votre ordinateur et qui enregistre l'**historique de vos modifications**. C'est ce qu'on appelle un système de **contrôle de version**.
+
+**GitHub**, lui, est la plateforme en ligne qui héberge vos projets Git et permet de les **partager**, de les **synchroniser** et de **collaborer** avec d'autres développeurs.
+
+> *En résumé : **Git** gère l'historique de votre code en local, **GitHub** le met dans le nuage - comme OneDrive, mais en beaucoup plus puissant.*
+
+::::
+
+---
+
+::::info Le dépôt de code
+
+Un **dépôt de code** (ou *repository*, souvent abrégé *repo*) est un espace de stockage GitHub qui contient
+tous les fichiers d'un projet ainsi que l'**historique complet de toutes les modifications** qui y ont été
+apportées depuis sa création.
+
+On peut le voir comme un dossier de projet intelligent qui se souvient de tout ce qui s'y est passé :
+- Quels fichiers ont été modifiés
+- Qui les a modifiés
+- Quand les modifications ont été faites
+- Pourquoi elles ont été faites (grâce aux messages de description)
+
+::::
+
+---
+
+::::info L'ensemble de modifications (*commit*)
+
+Un **ensemble de modifications** (ou *commit*) représente un **regroupement logique de changements**
+sauvegardés dans le dépôt à un instant précis.
+
+Imaginez que vous travaillez sur un fichier Python et que vous ajoutez une nouvelle fonction. \
+Une fois votre travail terminé, vous créez un *commit* pour sauvegarder ces changements. Ce commit contient :
+- La liste de tous les fichiers modifiés
+- Un **message** décrivant ce qui a été fait (ex : `"Ajout de la fonction calcul_moyenne"`)
+- La date et l'heure de la sauvegarde
+- L'identité de l'auteur
+
+:::tip Bonne pratique
+Un bon *commit* regroupe des modifications qui vont ensemble logiquement. \
+Son message doit être clair et résumer en quelques mots ce qui a été fait. \
+Exemples :
+- ✅ `"Correction du calcul de la superficie"`
+- ✅ `"Ajout de la validation des entrées utilisateur"`
+- ❌ `"modifs"` — trop vague, inutile!
+:::
+
+::::
+
+---
+
+::::info Les opérations principales : clone, commit, push et pull
+
+Voici les quatre opérations que vous utiliserez le plus souvent pour interagir avec un dépôt GitHub :
+
+---
+
+###  `clone` - Copier le dépôt sur votre ordinateur
+*Cloner* un dépôt, c'est comme télécharger un projet sur votre ordinateur.
+Votre IDE va créer un dossier contenant tous les fichiers du projet ainsi que l'historique complet de toutes les modifications qui y ont été apportées.
+
+Pour un *repo* donné, cette opération est effectuée :
+- sur votre ordinateur personnel : **une seule fois**
+
+```
+Dépôt GitHub (nuage)  ─── clone ───▶  Copie locale (votre ordinateur)
+```
+
+---
+
+### `commit` - Sauvegarder vos modifications localement
+*Commiter*, c'est prendre un **instantané** de vos modifications à un moment précis, comme une photo de l'état de votre projet.
+Chaque commit est accompagné d'un **message** que vous rédigez vous-même pour décrire ce qui a été fait — c'est ce message qui rendra votre historique lisible et utile plus tard.
+Attention : un commit ne fait que se sauvegarder localement sur votre ordinateur, **il n'envoie rien vers GitHub**. C'est le rôle du *push*.
+
+```
+Fichiers modifiés ─── commit ───▶ Historique local (votre ordinateur)
+```
+
+---
+
+### `push` - Envoyer vos modifications vers GitHub
+*Pousser* vos commits, c'est mettre GitHub à jour avec votre travail local.
+Tant que vous n'avez pas fait de *push*, vos commits n'existent que sur votre ordinateur : GitHub ne les connaît pas encore.
+C'est donc une étape **indispensable** pour ne pas perdre votre travail et pour le rendre accessible depuis n'importe quel autre ordinateur.
+```
+Copie locale (votre ordinateur) ─── push ───▶ Dépôt GitHub (nuage)
+```
+
+---
+
+### `pull` - Récupérer les dernières modifications depuis GitHub
+*Tirer* les modifications, c'est mettre votre copie locale à jour avec ce qui se trouve sur GitHub.
+C'est particulièrement utile si vous avez travaillé depuis un autre ordinateur depuis votre dernière session.
+**Bonne habitude :** toujours commencer une séance de travail par un *pull*, pour être certain.e de travailler sur la version la plus récente de votre code.
+
+```
+Dépôt GitHub (nuage) ─── pull ───▶ Mise à jour de la copie locale (votre ordinateur)
+```
+
+---
+
+:::tip Guide pour VS Code
+VS Code intègre des outils Git très puissants. Vous pouvez cloner, commiter, pousser et tirer des modifications directement depuis l'interface, sans avoir besoin d'un autre logiciel.
+:::
+
+:::tip Résumé visuel
+Un résumé visuel du flux de travail typique
+```
+☁  GitHub (nuage)
+│
+│       clone (1 seule fois, au début) (ou à chaque connexion à un poste au cégep)
+▼
+    Copie locale (votre ordi)
+│
+│       Vous modifiez des fichiers
+▼
+    Modifications en attente
+│
+│       commit (on regroupe et décrit les changements)
+▼
+    Modifications sauvegardées localement
+│
+│       push (on envoie vers le nuage)
+▼
+    GitHub (nuage)
+│
+│       pull (si modifié depuis un autre ordi)
+▼
+    Copie locale mise à jour
+```
+:::
+
+:::tip `commit` et `push` : une combinaison courante
+En pratique, on fait souvent un *commit* suivi d'un *push* pour sauvegarder notre travail localement et le rendre accessible sur GitHub.\
+VS Code (et la plupart des IDEs) propose une option pour faire les deux en une seule étape, ce qui peut être très pratique pour gagner du temps.
+
+Chaque fois que vous avez terminé un exercice, ou bien créé une nouvelle fonctionnalité dans votre code, ou corrigé un bug, faites un `commit`-`push` (un *commit* suivi d'un *push*) pour ne pas perdre votre travail.
+
+:::
+
+::::
+
+---
+
+::::info Application dans notre cours
+
+Dans le cadre de ce cours, vous travaillerez avec **3 dépôts de code GitHub** distincts, créés par votre
+enseignant via **GitHub Classroom** :
+<br/>
+<Row>
+    <Column size={4}>
+        | Dépôt | Contenu |
+        | :--- | :--- |
+        | **General** | Le code de vos exercices |
+        | **TP1** | Le code de votre TP1 |
+        | **TP2** | Le code de votre TP2 |
+    </Column>
+    <Column size={8}>
+        #### GitHub Classroom, c'est quoi?
+        GitHub Classroom est un outil utilisé par les enseignants pour **créer et distribuer automatiquement** des dépôts
+        aux personnes étudiantes. Cela signifie que :
+        - Chaque étudiant.e possède ses propres dépôts de code.
+        - L'enseignant.e a accès à tous les dépôts pour suivre votre progression.
+        - Vous n'avez pas à créer les dépôts vous-même, il suffit d'accepter un lien d'invitation.
+    </Column>
+</Row>
+:::tip Créer vos propres dépôts
+Vous pouvez aussi, pour vos autres projets, créer vos propres dépôts GitHub manuellement et les gérer à votre guise.\
+C'est très simple, et vous pouvez vous référer à [cette recette](/recettes/creer-repertoire-github) pour vous aider.\
+Vous pouvez ainsi créer autant de dépôts que vous le souhaitez pour vos projets personnels et les gérer indépendamment de ceux du cours.
+:::
+::::
+
+---
+
+:::info Structurez votre dépôt de code
+Pour le *repo* pour vos exercices, afin de pouvoir facilement vous retrouver plus tard, vous pourriez organiser votre dépôt de code d'une manière similaire à celle-ci :
+```
+nom_de_votre_repo/
+├── R01/
+│   ├── r01_expressions.md
+│   ├── r01_affichage_1.md
+│   └── r01_affichage_2.md
+├── R02/
+│   ├── r02_free_style.py
+│   └── r02_question_de_gravite.py
+│   └── r02_pression_systolique.py
+│   └── ...
+├── R03/
+│   └── ...
+├── ...
+├── ...
+```
+où `R01`, `R02`, etc. sont des dossiers pour chaque rencontre, et à l'intérieur de chaque dossier, les fichiers de code pour chaque exercice.
+
+La plupart des IDEs permettent de créer un nouveau dossier en faisant un clic droit sur le dossier parent dans l'explorateur de fichiers.
+:::
+
+---
+
+::::info Le fichier `.gitignore`
+GitHub est avant tout une plateforme conçue pour héberger des fichiers légers contenant du **code source**. \
+Par principe, certains éléments ne doivent jamais figurer dans un dépôt Git :
+
+- **Les fichiers volumineux** : ils ralentissent les opérations de clonage et de mise à jour.
+- **Les fichiers de configuration d'IDE** : par exemple, le dossier `.vscode` de **VS Code**, qui est propre à votre environnement de travail local et n'a aucune utilité pour les autres.
+- **Les fichiers générés** : tout ce qui peut être produit automatiquement par l'exécution de votre programme (images, fichiers texte, etc.).
+
+**Le fichier `.gitignore`** est un fichier **optionnel** placé à la racine de votre dépôt de code et sert à indiquer à Git d'ignorer de tous les commits certains fichiers ou dossiers en fonction de modèles (*patterns*) définis à l'intérieur.
+Les fichiers listés dans `.gitignore` ne seront jamais inclus dans vos commits, même par accident.
+
+:::tip Exemple de fichier
+Un `.gitignore` typique pour un projet Python pourrait contenir :
+```text
+# Exclusion des fichiers propres à votre environnement/configuration de travail local
+.idea/
+.vscode/
+.venv/
+
+# Fichiers Python compilés
+__pycache__/
+*.pyc
+*.pyo
+```
+Cela exclut automatiquement les dossiers de configuration des IDEs et les fichiers de cache Python.
+:::
+
+::::
+
+---
+
+::::info Le fichier `README.md`
+La plupart des dépôts GitHub contiennent un fichier nommé **`README.md`** à leur racine. \
+GitHub l'affiche automatiquement sur la page d'accueil du dépôt : c'est la **carte de visite** de votre projet.
+
+On y trouve typiquement une description du projet, des instructions pour l'utiliser, et toute autre information utile pour quelqu'un qui le découvre pour la première fois.
+
+Le `README.md` est écrit en **Markdown**, un format de texte simple qui permet de structurer du contenu (titres, listes, gras, liens, blocs de code…) de façon lisible aussi bien en texte brut que rendu par GitHub. La recette sur les fichiers Markdown vous explique comment en créer un.
+::::

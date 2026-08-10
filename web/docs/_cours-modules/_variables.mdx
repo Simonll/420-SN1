@@ -1,0 +1,128 @@
+import Admonition from '@theme/Admonition';
+
+<Admonition type="tip" title="Testez dans Colab !">
+    <p>Ouvrez le notebook d'introduction pour tester les exemples de cette section dans des cellules de code.</p>
+    <a href="https://colab.research.google.com/github/Simonll/420-SN1/blob/develop/code/notebooks/01-rencontre1.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+</Admonition>
+
+:::info Variables
+Les variables servent à stocker des informations manipulées par une application.\
+Elles vont être stockées temporairement dans la mémoire vive de l'ordinateur (la *RAM*).
+:::
+
+---
+
+::::info Syntaxe pour créer une variable
+
+Il faut écrire le nom qu'on souhaite donner à notre variable, suivi de l'opérateur d'affectation `=`, suivi
+d'une expression :
+
+```python
+nom_de_ma_variable = expression
+```
+- `nom_de_ma_variable` est le nom de la variable, qui doit être unique.
+- `=` est l'opérateur d'affectation, qui permet de stocker la valeur de l'expression dans la variable.
+- `expression` est une expression qui peut être : une valeur, une opération mathématique, ou même une chaîne de caractères.
+
+L'expression est d'abord évaluée, puis la valeur résultante est stockée dans la variable.
+
+- `=` n'est pas un symbole d'égalité, comme en mathématiques, mais un symbole d'**affectation**.
+- On calcule d'abord l'`expression`, ce qui nous donne une valeur et un type.
+- Puis on affecte cette valeur et ce type à `nom_de_ma_variable`.
+
+:::tip
+L'opérateur d'affectation `=` a une priorité plus basse que les opérateurs arithmétiques, et donc l'expression à droite est évaluée avant, puis la valeur résultante est affectée à la variable.
+:::
+
+Exemples :
+
+```python
+x = 5 * 6           # (5 * 6) est évalué, puis le résultat (30) est affecté à x
+y = 2 * x           # (2 * x) est évalué, puis le résultat (60) est affecté à y
+```
+
+::::
+
+---
+
+:::info Voir le contenu d'une variable
+Pour voir ce qui est stocké dans une variable, il suffit de taper son nom dans la console et d'appuyer sur `Entrée`.\
+Par exemple, si vous avez créé une variable `x`, tapez simplement `x` dans la console et appuyez sur `Entrée`.\
+Vous verrez la valeur de `x` s'afficher :
+```python
+>>> x = 42
+>>> x
+42
+```
+:::
+
+---
+
+::::info Noms des variables
+
+Les variables sont comme des boîtes dans lesquelles on peut mettre des valeurs.<br />
+On peut les nommer comme on veut, tant que le nom est unique et respecte certaines règles.
+
+Chaque variable possède un nom *unique* permettant de l'identifier.
+
+En **mathématiques**, nous sommes habitués d'utiliser des noms de variables comme $x$ ou $y$.\
+En **programmation**, on essaie d'utiliser des noms plus significatifs de l'information que l'on va stocker dans la variable.
+Par exemple, si on stocke la température d'une journée, on pourrait nommer la variable `temperature_journee`.
+
+## Règles pour nommer une variable
+- Les noms de variables peuvent **contenir uniquement** des lettres, des chiffres (0-9) et des underscores `_`.
+- Les noms de variables **ne peuvent pas commencer** par un chiffre.
+- Les noms de variables ne peuvent pas contenir d'espaces, de caractères spéciaux (comme `!`, `@`, `#`, etc.)
+- Les noms de variables ne doivent pas être des mots réservés du langage Python (comme `if`, `else`, `while`, `for`, etc.).
+- Il est fortement recommandé de **ne pas utiliser d'accents** dans les noms de variables, même si Python les accepte.
+- Par convention :
+    - Les noms de variables doivent être :
+        - En **minuscules** : si le contenu de la variable peut évoluer en cours d'exécution du programme.
+        - En **majuscules** : si le contenu de la variable ne devrait jamais être modifié (ex : la valeur de PI est immuable).
+    - Si le nom est composé de plusieurs mots, on utilise un underscore `_` pour les séparer (par exemple, `temperature_journee`).
+
+Voici quelques exemples de noms de variables :
+
+```python
+rayon_cercle = 20                         # valeur de type int
+PI = 3.1416                               # valeur de type float (avec un point, pas une virgule!)
+nom_element_chimique = "Hydrogène"        # valeur de type str (les guillemets sont importants!)
+est_halogene = True                       # valeur de type bool
+circonference_circle = rayon_cercle * PI  # valeur de type float contenant le résultat d'une expression
+
+# Afficher le contenu des variables à l'aide de la fonction "print()"
+print("*** VALEURS DES VARIABLES : ***")
+print("rayon_cercle :", rayon_cercle)
+print("PI :", PI)
+print("nom_element_chimique :", nom_element_chimique)
+print("est_halogene :", est_halogene)
+print("circonference_circle :", circonference_circle)
+```
+
+::::
+
+---
+
+::::info Les variables peuvent... varier!
+
+Le contenu d'une variable peut être modifié au fur et à mesure de l'exécution des instructions à l'aide de
+l'opérateur d'assignation `=`.
+Dans l'exemple ci-dessous, la variable "resultat" est modifiée 3 fois.
+
+```python showLineNumbers
+nombre1 = 10
+nombre2 = 20
+nombre3 = 30
+resultat = nombre1 + nombre2
+resultat = resultat + nombre3
+resultat = resultat / 3
+print("resultat :", resultat)
+```
+
+Est-ce que vous pourriez prédire le résultat et deviner à quel calcul il correspond?
+
+:::note Trace d'exécution
+Réalisons une trace d’exécution simplifiée de ce programme ensemble! 💪 \
+Votre enseignant vous fournira une feuille pour la réaliser.
+:::
+::::

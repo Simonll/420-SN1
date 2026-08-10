@@ -1,0 +1,68 @@
+import Admonition from '@theme/Admonition';
+
+<Admonition type="tip" title="Testez dans Colab !">
+    <p>Ouvrez le notebook d'introduction pour tester les exemples de cette section dans des cellules de code.</p>
+    <a href="https://colab.research.google.com/github/Simonll/420-SN1/blob/develop/code/notebooks/01-rencontre1.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+</Admonition>
+
+:::note Idée importante
+**Une expression produit toujours une valeur.**
+:::
+
+<Row>
+    <Column>
+        :::tip-nt
+        En **mathématiques**, une expression est quelque chose qu’on peut **calculer**.
+
+        Elle peut contenir :
+        - des **nombres**
+        - des **constantes** (ex. : $\pi$)
+        - des **variables** (ex. : $r$)
+        - des **opérations** ($+$, $-$, $\times$, $/$, etc.)
+
+        ---
+
+        **Exemple :**
+
+        $2\pi r$
+
+        Cette expression représente la circonférence d’un cercle.
+
+        - $2$ et $\pi$ sont des constantes
+        - $r$ est une variable (le rayon)
+
+        Pour obtenir une valeur :
+        1. On remplace la variable ($r = 2$)
+        2. On calcule :
+
+        $2 \times 3{,}1416 \times 2 = 12{,}5664$
+        :::
+    </Column>
+
+    <Column>
+        :::info-nt
+        En **programmation**, c’est le même principe :
+
+        Une **expression** est quelque chose que l’ordinateur **évalue** pour produire une valeur.
+
+        La différence importante :
+        Une expression peut contenir **autre chose que des nombres**.
+
+        Par exemple :
+        - du **texte** (chaînes de caractères)
+        - *(plus tard)* des **fonctions**
+        - *(plus tard)* des **valeurs booléennes**
+
+        ---
+
+        Voici quelques exemples d'expressions en Python :
+
+        - `5` → vaut `5` *(type : `int`)*
+        - `"5"` → vaut `"5"` *(type : `str`)*
+        - `5 + 3` → vaut `8`
+        - `"5" + "3"` → vaut `"53"`
+
+        **Opérateurs identiques**, mais résultat différent selon le type de données (c'est la surcharge de l'opérateur `+`).
+        :::
+    </Column>
+</Row>

@@ -1,0 +1,131 @@
+Le code ci-dessous illustre différents exemples de notions abordées dans le cours.
+Ce code sert uniquement de démonstration globale pour le premier cours. Vous apprendrez à maîtriser chacune de ces lignes au fil des semaines!
+
+:::note Déboggeur
+Les instructions seront exécutées en **mode débogage** : un mode spécial permettant de mieux comprendre le déroulement du programme. \
+Ce mode d'exécution sera étudié plus en détail lors de la prochaine rencontre.
+:::
+
+:::warning Bibliothèques requises
+Ce script utilise **Matplotlib** pour générer des graphiques, **NumPy** pour manipuler des ensembles données numériques et **Pandas** pour l'analyse de données. \
+Ces trois bibliothèques ne sont pas incluses par défaut dans Python et doivent être installées avant de lancer le script. \
+Le concept de bibliothèque sera étudié au prochain cours. Pour les installer, exécutez les commandes suivantes dans le terminal de PyCharm :
+```
+pip install matplotlib pandas numpy
+```
+:::
+
+    ```python showLineNumbers
+import math
+import random
+import matplotlib.pyplot as plt
+import pandas as pd
+import numpy as np
+
+print("Démo #1 - utilisation de fonctions standard (R02)")
+max(10, 50, 30)
+valeur = min(10, 20, max(50, 30))
+print(valeur)
+nombre1 = 6
+nombre2 = 7
+print(f"La somme est : {nombre1 + nombre2}") # f-string
+
+print("\nDémo #2 - utilisation de fonctions provenant de module (R02)")
+print(math.cos(20))
+print(math.pi)
+
+print(random.randint(5,10))
+print(random.randint(5,10))
+
+print("\nDémo #3 - utilisation de listes")
+notes = [20, 50, 60]
+moyenne = sum(notes) / len(notes)
+print(moyenne)
+
+print("\nDémo #4 - création d'une fonction (R03)")
+def fonction_lineaire(a, x, b):
+    print("la fonction est utilisée")
+    return a * x + b
+
+resultat1 = fonction_lineaire(5, 2, 3) # Essayez F7!
+resultat2 = fonction_lineaire(3, 2, 4)
+print(resultat1)
+print(resultat2)
+
+print("\nDémo #5 - condition (R04)")
+nom = "Doe"
+prenom = "John"
+age = 25
+if age >= 18:
+    print(f"{prenom} {nom} est majeur.")
+    print("Bois avec modération!")
+else:
+    print(f"{prenom} {nom} est mineur.")
+    print("zéro alcool pour toi!")
+
+print("\nDémo #6 - boucle (R05)")
+compteur = 1
+while compteur < 11:
+    print(compteur, "moutons")
+    compteur = compteur + 1
+
+print("\nDémo #7 - boucle sur des listes (R05 et R09)")
+chats = ["Astro", "Chatmouraï", "Peluche"]
+nb_chats = len(chats)
+print(f"J'ai {nb_chats} chats :")
+for chat in chats:
+    print(f" - {chat}")
+
+print("\nDémo #8 - graphique (R09)")
+x = [1, 2, 3, 4, 5]
+y = [50, 25, 75, 25, 60]
+plt.figure()
+plt.plot(x, y, color='g', label="Ma courbe")
+plt.xlabel("Mes X")
+plt.ylabel("Mes Y")
+plt.title("Mon graphique")
+plt.legend()
+plt.show()
+plt.savefig("graphique.png")
+
+print("\nDémo #9 - fichier (R10)")
+with open("pokemons.txt", "w", encoding="UTF-8") as f:
+    f.write("Pikachu\n")
+    f.write("Pitchu\n")
+
+with open("pokemons.txt", "r", encoding="UTF-8") as f:
+    for ligne in f:
+        print(ligne, end="")
+
+print("\nDémo #10 - NumPy (R10)")
+notes = np.array([14, 18, 12, 16, 9])
+print("Notes originales :", notes)
+print("Notes sur 100    :", notes * 5)
+print("Moyenne          :", notes.mean())
+print("Note max         :", notes.max())
+print("Note min         :", notes.min())
+
+print("\nDémo #11 - analyse de données (R11)")
+donnees = {
+    "Symbole": ["H", "He", "Li", "Be", "B", "C", "N", "O"],
+    "Nom": ["Hydrogène", "Hélium", "Lithium", "Béryllium", "Bore", "Carbone", "Azote", "Oxygène"],
+    "Masse_Atomique": [1.008, 4.0026, 6.94, 9.0122, 10.81, 12.011, 14.007, 15.999],
+    "Type": ["Non-métal", "Gaz noble", "Métal alcalin", "Métal alcalino-terreux", "Métalloïde", "Non-métal", "Non-métal", "Non-métal"]
+}
+
+dataframe_donnees = pd.DataFrame(donnees) # Force de Pandas : l'analyse de données
+
+# Exemple #1 : Obtenir des données bien précises (trier/filtrer/etc)
+donnees_ex1 = dataframe_donnees.copy()
+donnees_ex1 = donnees_ex1[donnees_ex1["Type"] == "Non-métal"] #Un filtre
+donnees_ex1 = donnees_ex1[donnees_ex1["Masse_Atomique"] > 9]  #Un autre filtre
+donnees_ex1 = donnees_ex1.sort_values(by="Nom")
+print("\nPandas - Exemple 1")
+print(donnees_ex1)
+
+# Exemple #2 : Générer des statistiques
+donnees_ex2 = dataframe_donnees.copy()
+donnees_ex2 = donnees_ex2.groupby("Type")["Masse_Atomique"].agg(["min", "max", "count"])
+print("\nPandas - Exemple 2")
+print(donnees_ex2)
+```
