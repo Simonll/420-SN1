@@ -1,0 +1,387 @@
+
+        :::info 🤖 Introduction à Scikit-learn
+
+        Scikit-learn est une bibliothèque Python utilisée pour faire de l’**apprentissage automatique** (*machine learning*).\
+        Elle permet de créer des **modèles** capables de détecter des relations dans les données afin de **faire des prédictions**.
+
+        On retrouve principalement trois types d’algorithmes :
+
+        - **Classification** → classer des éléments
+          <i>(ex : ceci est une photo de chat, ceci est une photo de chien)</i>
+        - **Régression** → prédire une valeur numérique
+          <i>(ex : combien de Bixi seront empruntés demain)</i>
+        - **Clustering** → regrouper des données similaires
+          <i>(ex : identifier des groupes de clients avec des comportements semblables)</i>
+
+        ---
+
+        ### 🧠 Concepts clés
+
+        - **Modèle** : algorithme qui apprend à partir des données
+        - **Prétraitement des données** : préparer les données (normaliser, encoder, nettoyer)
+        - **Évaluation des modèles** : mesurer la qualité des prédictions
+        - **Pipeline** : enchaîner plusieurs étapes automatiquement
+
+        ---
+
+        👉 Cette semaine, nous allons nous concentrer sur des modèles simples de **régression**, en lien avec la **visualisation des données**.
+
+        :::
+
+        :::note 🚗 Démonstration : Consommation d’essence et caractéristiques des voitures
+
+        Nous utiliserons le jeu de données classique **Auto MPG** (*Miles per Gallon*) pour explorer la relation entre la **consommation d’essence** (`mpg`) et des variables comme le **poids** (`weight`) ou le **nombre de cylindres** (`cylinders`).
+        - Ce jeu de données (*dataset*) est très vintage (années 70-80), mais reste un excellent exemple pédagogique.
+        - Vous pouvez le télécharger ici : <a href={useBaseUrl('/ressources/csv/mpg_dataset.csv')} download="mpg_dataset.csv">mpg_dataset.csv</a>
+
+        ---
+
+        ### 🧰 Chargement du jeu de données
+
+        ```python
+        import pandas as pd
+
+        # Chargement du jeu de données
+        df = pd.read_csv('mpg_dataset.csv')
+
+        # Aperçu
+        print(df.head())
+        df.info()
+        ```
+        ```
+            mpg  cylinders  displacement  ...  model_year  origin                       name
+        0  18.0          8         307.0  ...          70     usa  chevrolet chevelle malibu
+        1  15.0          8         350.0  ...          70     usa          buick skylark 320
+        2  18.0          8         318.0  ...          70     usa         plymouth satellite
+        3  16.0          8         304.0  ...          70     usa              amc rebel sst
+        4  17.0          8         302.0  ...          70     usa                ford torino
+
+        [5 rows x 9 columns]
+
+        RangeIndex: 398 entries, 0 to 397
+        Data columns (total 9 columns):
+         #   Column        Non-Null Count  Dtype
+        ---  ------        --------------  -----
+         0   mpg           398 non-null    float64
+         1   cylinders     398 non-null    int64
+         2   displacement  398 non-null    float64
+         3   horsepower    392 non-null    float64
+         4   weight        398 non-null    int64
+         5   acceleration  398 non-null    float64
+         6   model_year    398 non-null    int64
+         7   origin        398 non-null    object
+         8   name          398 non-null    object
+        dtypes: float64(4), int64(3), object(2)
+        memory usage: 28.1+ KB
+        ```
+        Ce jeu de données contient 398 entrées (voitures) avec les 9 colonnes suivantes :
+        1. `mpg` : consommation en miles par gallon
+        2. `cylinders` : nombre de cylindres
+        3. `displacement` : cylindrée en pouces cubes
+        4. `horsepower` : puissance en chevaux
+        5. `weight` : poids en livres
+        6. `acceleration` : temps d’accélération de 0 à 60 mph
+        7. `model_year` : année du modèle
+        8. `origin` : pays d’origine (usa, europe, japan)
+        9. `name` : nom du modèle
+
+        Ce qui nous intéresse ici, c’est de voir comment certaines caractéristiques (ex. poids, cylindres) influencent la consommation (`mpg`, première colonne).
+
+        :::
+
+        :::info 🔍 Exploration rapide
+
+            Regroupons les voitures par nombre de cylindres et calculons la moyenne de consommation pour chaque groupe :
+        ```python
+        # Moyenne de la consommation par nombre de cylindres
+        print(df.groupby("cylinders")["mpg"].mean())
+        ```
+        ```
+        cylinders
+        3    20.550000
+        4    29.286765
+        5    27.366667
+        6    19.985714
+        8    14.963107
+        Name: mpg, dtype: float64
+        ```
+        💡 On observe une relation **inverse** : à l'exception des petits 3-cylindres, on dirait que plus il y a de cylindres, plus la mesure de consommation (mpg) diminue. 🤔<br />
+            C'est plutôt logique : plus une voiture a de cylindres, plus elle consomme d’essence (donc moins elle parcourt de miles par gallon).
+            Mais c'est un peu mélangeant, car on est plutôt habitué à penser à l'envers, soit en litres consommés aux 100 km (L/100km), où une consommation plus faible est donc meilleure.
+
+        👉 Nous allons donc créer une nouvelle colonne `l_par_100km` pour convertir `mpg` en litres aux 100 km :
+        ```python
+        # Conversion mpg -> L/100km
+        df["l_par_100km"] = 235.214583 / df["mpg"]
+        ```
+            Refaisons le même calcul avec cette nouvelle colonne :
+        ```python
+        print(df.groupby("cylinders")["l_par_100km"].mean())
+        ```
+        ```
+        cylinders
+        3    11.578018
+        4     8.333277
+        5     9.103094
+        6    12.106109
+        8    16.235661
+        Name: l_par_100km, dtype: float64
+        ```
+
+            Visualisons maintenant la relation entre le poids (`weight`) et la consommation (`l_par_100km`) avec un graphique de dispersion (`scatter plot`) :
+        ```python
+        # Visualisation simple
+        import matplotlib.pyplot as plt
+
+        plt.scatter(df["weight"], df["l_par_100km"], alpha=0.6)
+
+        plt.xlabel("Poids du véhicule (lbs)")
+        plt.ylabel("Consommation d'essence (L/100km)")
+        plt.title("Consommation d'essence en fonction du poids du véhicule")
+
+        plt.show()
+        ```
+        <img src={require('/img/cours/poids_vs_conso_1.png').default} width="50%"/>
+
+        <br /><br />
+
+        💬 On observe une tendance claire : plus le poids du véhicule augmente, plus la consommation en litres aux 100 km augmente également. Cela confirme notre intuition que les voitures plus lourdes consomment plus d’essence.
+
+        :::
+
+        :::note 🧮 Régression linéaire simple (Scikit-learn)
+
+        Nous allons modéliser cette relation avec une régression linéaire (`LinearRegression`).
+
+            Préparons d'abord les données :
+        ```python
+        # Suppression des lignes contenant des valeurs manquantes
+        # (on regarde seulement les colonnes utilisées : l_par_100km et weight)
+        df = df.dropna(subset=["l_par_100km", "weight"])
+
+        # Préparation des variables
+        X = df[["weight"]]            # variables explicatives (celles utilisées pour prédire y)
+        y = df["l_par_100km"]         # variable cible         (celle que l'on veut prédire)
+        ```
+
+        Il est très important de bien comprendre ici la structure de `X` et `y` :
+        - `X` est un *DataFrame* à 2 dimensions (double `[` et double `]`) même si une seule colonne : il doit toujours être en 2D pour Scikit-learn.
+        - `y` est une Series (1D) contenant les valeurs cibles.
+
+        Ici :
+        - `X` est une matrice 2D de dimensions (n_samples, n_features) où `n_samples` est le nombre de voitures et `n_features` est 1 (le poids).
+        - `y` est un vecteur 1D de longueur `n_samples` contenant les valeurs de consommation (l_par_100km).
+
+        Plus précisément, comme on a 398 voitures, `X` aura une forme (398, 1) et `y` aura une forme (398,) :
+        <Row>
+            <Column>
+                ```python
+                print(X)
+                ```
+                ```
+                     weight
+                0      3504
+                1      3693
+                2      3436
+                3      3433
+                4      3449
+                ..      ...
+                393    2790
+                394    2130
+                395    2295
+                396    2625
+                397    2720
+
+                [398 rows x 1 columns]
+                ```
+            </Column>
+            <Column>
+                ```python
+                print(y)
+                ```
+                ```
+
+                0      13.067477
+                1      15.680972
+                2      13.067477
+                3      14.700911
+                4      13.836152
+                         ...
+                393     8.711651
+                394     5.345786
+                395     7.350456
+                396     8.400521
+                397     7.587567
+                Name: l_par_100km, Length: 398, dtype: float64
+
+                ```
+            </Column>
+        </Row>
+
+        Entraînons maintenant le modèle de régression linéaire :
+        ```python
+        from sklearn.linear_model import LinearRegression
+
+        # On crée un modèle linéaire :
+        model = LinearRegression()
+
+        # Le modèle va essayer de trouver la "meilleure droite" qui représente la relation entre X et y.
+        # 👉 On "entraîne" le modèle :
+        model = model.fit(X, y)
+
+        # ⚠️ ici, le score est calculé sur les données d'entraînement :
+        print("Score R² :", model.score(X, y))
+        print("Coefficient :", model.coef_[0])
+        print("Intercept :", model.intercept_)
+        ```
+        ```
+        Score R² : 0.7836118983544517
+        Coefficient : 0.0040789144329788085
+        Intercept : -0.9030520509041988
+        ```
+        - Un score R² de 0.78 indique que le modèle explique environ 78% de la variance observée dans la consommation (`l_par_100km`) en fonction du poids
+            - R² indique que le modèle explique bien la relation observée (très bon).
+            - Un score **R² = 1** : Le modèle explique parfaitement la variance des données (**Parfait**)
+            - Un score **0.7 ≤ R² < 1** : Le modèle explique bien la variance, mais pas parfaitement (**Très bon**)
+            - Un score **0.5 ≤ R² < 0.7** : Le modèle explique une partie significative de la variance (**Acceptable**)
+            - Un score **0.3 ≤ R² < 0.5** : Le modèle a une faible capacité explicative (**Médiocre**)
+            - Un score **0 ≤ R² < 0.3** : Le modèle explique très peu de la variance (**Faible**)
+            - Un score **R² = 0** : Le modèle n'explique rien du tout (**Inutile**)
+            - Un score **R² < 0** : Le modèle est pire qu'une simple moyenne (régression non pertinente) (**Mauvais**)
+
+        - Le coefficient positif (0.00408) confirme que la relation est directe : **plus le poids augmente, plus la consommation (L/100km) augmente** :
+            - Coefficient **positif** : la variable cible augmente quand la variable explicative augmente.
+            - Coefficient **négatif** : la variable cible diminue quand la variable explicative augmente.
+            - Coefficient **proche de zéro** : la variable explicative a peu ou pas d’effet.
+
+        - La relation entre le poids et la consommation peut donc être modélisée par la formule de la droite de régression suivante :
+        $$
+        \text{l\_par\_100km} \quad = \quad 0.00408 \times \text{weight} - 0.903
+        $$
+
+
+        <p align="center">(où 0.00408 est la valeur du coefficient et -0.903 est la valeur intercept)</p>
+
+        :::
+
+        :::info 📈 Visualisation de la régression
+
+        La méthode `model.predict()` permet d'obtenir les valeurs cibles prédites par le modèle (à l'aide de la formule).
+
+
+        ```python
+        # On calcule les valeurs prédites par le modèle pour chaque poids
+        y_pred = model.predict(X)
+
+        plt.scatter(X, y, label="Données réelles", alpha=0.6)
+
+        # On ajoute la droite de régression :
+        plt.plot(X, y_pred, color="red", label="Régression linéaire")
+
+        plt.xlabel("Poids du véhicule (lbs)")
+        plt.ylabel("Consommation d'essence (L/100km)")
+        plt.title("Régression linéaire : Poids vs Consommation")
+        plt.legend()
+
+        plt.show()
+        ```
+        <img src={require('/img/cours/poids_vs_conso_2.png').default} width="50%"/>
+
+        <br /><br />
+
+        💬 On obtient une droite de tendance montrant clairement la relation linéaire entre le poids et la consommation :
+        - Les points bleus représentent les données réelles (poids vs consommation).
+        - La ligne rouge est la droite de régression linéaire ajustée par le modèle.
+
+        :::
+
+        :::note Visualisation des cylindres
+
+        Colorons les points en fonction du nombre de cylindres pour voir si on peut observer une tendance supplémentaire :
+
+        ```python
+        # pour chaque nombre de cylindres :
+        for cyl in [8, 6, 5, 4, 3]:
+            # on crée un dataframe filtré pour ce nombre de cylindres :
+            subset = df[df["cylinders"] == cyl]
+            # puis on trace les points correspondants :
+            plt.scatter(subset["weight"], subset["l_par_100km"], alpha=0.6, label=f"{cyl} cylindres")
+
+        plt.xlabel("Poids du véhicule (lbs)")
+        plt.ylabel("Consommation d'essence (L/100km)")
+        plt.title("Consommation en fonction du poids selon le nombre de cylindres")
+        plt.legend()
+
+        plt.show()
+        ```
+        <img src={require('/img/cours/poids_vs_conso_3.png').default} width="50%"/>
+
+        <br /><br />
+
+        💬 On observe que les voitures avec plus de cylindres (ex. 8 cylindres) ont tendance à être plus lourdes et à consommer plus d’essence, ce qui confirme notre analyse précédente.
+
+        :::
+
+        :::info ⚙️ Régression multiple
+
+        On peut facilement ajouter d’autres variables (ex. nombre de cylindres, puissance) :
+
+        ```python
+        # Suppression des lignes contenant des valeurs manquantes
+        # (seulement pour les colonnes utilisées dans le modèle)
+        df = df.dropna(subset=["l_par_100km", "weight", "cylinders", "horsepower"])
+
+        # Préparation des variables :
+        # X → variables explicatives (plusieurs colonnes → modèle multiple)
+        # y → variable cible (ce qu'on veut prédire)
+        X = df[["weight", "cylinders", "horsepower"]]
+        y = df["l_par_100km"]
+
+        # On crée un modèle linéaire :
+        model = LinearRegression()
+
+        # Le modèle va essayer de trouver la "meilleure combinaison" de ces variables pour prédire y.
+        # 👉 On "entraîne" le modèle :
+        model.fit(X, y)
+
+        # ⚠️ ici, le score est calculé sur les données d'entraînement :
+        print("Score R² :", model.score(X, y))
+        print("Coefficients :", model.coef_)
+        print("Intercept :", model.intercept_)
+        ```
+        ```
+        Coefficients : [0.00229432 0.2757425  0.03284566]
+        Score R² : 0.8176921365228299
+        Intercept : -0.5232093212414135
+        ```
+        - Le score R² a augmenté à 0.82, indiquant que l’ajout de ces deux variables supplémentaires améliore la capacité du modèle à expliquer la variance de la consommation.
+        - La relation reste positive pour le poids et le nombre de cylindres, et la puissance a aussi un effet positif sur la consommation.
+        - La formule de la régression multiple est donc :
+        $$
+        \text{l\_par\_100km} \quad = \quad 0.00229 \times \text{weight} \quad + \quad 0.2757 \times \text{cylinders} \quad + \quad 0.03285 \times \text{horsepower} \quad - \quad 0.5232
+        $$
+
+        <p align="center">(où 0.00229, 0.2757 et 0.03285 sont les valeurs des coefficients des variables explicatives et -0.5232 est la valeur intercept)</p>
+
+        :::
+
+        ---
+
+        :::info 🎁 Exercice facultatif — Régression linéaire simple et visualisation
+        📁 Créez un fichier `regression_lineaire.py` pour votre réponse.
+
+        Utilisez 🤖 Scikit-learn pour créer un modèle de régression linéaire simple qui prédit la consommation `l_par_100km` en fonction de la puissance (`horsepower`).
+
+        Affichez le score R², le coefficient et l'intercept du modèle :
+        ```
+        Score R² : 0.7306976406434581
+        Coefficient : 0.08691820578815233
+        Intercept : 2.168240692150743
+        ```
+        Ensuite, générez ce graphique de dispersion avec la droite de régression linéaire :
+
+
+        <img src={require('/img/cours/exercice_4.png').default} width="50%"/>
+        :::
+
+        {/* <Feedback feedbackId="Rencontre #12 - 🤖 Scikit-learn" /> */}

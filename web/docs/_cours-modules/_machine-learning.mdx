@@ -1,0 +1,212 @@
+
+        :::tip 🧠🧮 Qu'est-ce que l'apprentissage machine?
+        L'apprentissage machine (*Machine Learning*, ML) est une branche de l'intelligence artificielle qui se concentre sur le développement d'algorithmes et de modèles permettant aux ordinateurs d'apprendre à partir de données, sans être explicitement programmés pour chaque tâche spécifique. En utilisant des techniques statistiques, les modèles de ML identifient des patterns dans les données et font des prédictions ou prennent des décisions basées sur ces patterns.
+        :::
+
+        :::info Pipeline typique d'apprentissage machine
+        Voici un diagramme qui présente les étapes clés d'un projet typique d'apprentissage machine, depuis la collecte des données brutes jusqu'à la génération de prédictions à l'aide d'un modèle entraîné :
+
+        <Row>
+            <Column size={4}>
+                ```mermaid
+                flowchart TD
+                A["📥 Données brutes"]
+                B["🧹 Prétraitement"]
+                C["🧩 Extraction de caractéristiques"]
+                D["🧠 Choix du modèle"]
+                E["🎯 Entraînement"]
+                F["✅ Modèle entraîné"]
+                G["📊 Évaluation"]
+                H["🚀 Prédictions"]
+                A --> B --> C --> D --> E --> F --> G --> H
+                ```
+            </Column>
+            <Column size={8}>
+                ### 📥 Données brutes
+                - Données collectées à partir de différentes sources : fichiers CSV, images, texte, etc.
+                - Elles sont souvent incomplètes, hétérogènes ou bruitées.
+
+                ### 🧹 Prétraitement
+                - Nettoyage : valeurs manquantes, doublons, normalisation, encodage.
+                - Améliore la qualité des données et réduit l’erreur.
+
+                ### 🧩 Extraction de caractéristiques
+                - Transformation des données en caractéristiques (*features*).
+                - Sélection d’attributs pertinents ou création de nouvelles variables.
+
+                ### 🧠 Choix du modèle
+                - Choix de l’algorithme : régression, arbres de décision, forêts, réseaux de neurones, etc.
+                - Chaque modèle a ses forces et ses limites.
+
+                ### 🎯 Entraînement
+                - Ajustement des paramètres du modèle pour minimiser l’erreur.
+                - Inclut souvent des itérations (epochs) et une validation.
+                - Peut être exigeant en ressources (temps, mémoire, énergie).
+
+                ### ✅ Modèle entraîné
+                - Paramètres optimisés et structure fixe.
+                - Prêt à être évalué sur des données nouvelles.
+
+                ### 📊 Évaluation
+                - Mesure de la performance sur un ensemble de test indépendant.
+                - Permet de valider la qualité réelle du modèle entraîné.
+
+                ### 🚀 Prédictions
+                - Utilisation du modèle en contexte réel pour générer des prédictions.
+                - Intégration dans une application, un service ou un système automatisé.
+            </Column>
+        </Row>
+        :::
+
+        :::tip 🎯 Entraînement
+
+        L'entraînement est le processus par lequel un modèle d'apprentissage machine apprend à partir des données.
+        Il consiste à ajuster les paramètres internes du modèle afin de minimiser une **fonction de perte** 📉
+        qui mesure l'écart entre les prédictions du modèle 🤖 et les valeurs réelles 🏷️.
+
+        Pour obtenir un modèle **robuste et performant**, l'entraînement nécessite souvent des ressources importantes :
+
+        - **📊 Données** : Plus il y a de données de qualité, meilleur sera l'apprentissage.
+        - **⏱️ Temps de calcul** : L'entraînement peut être long, surtout pour les modèles complexes.
+        - **💻 Puissance de calcul** : Utilisation de GPU/TPU ⚡ pour accélérer les calculs.
+        - **🧠 Mémoire** : Stockage des données et des paramètres du modèle pendant l'entraînement.
+        - **🔋 Énergie** : Consommation énergétique importante liée au matériel informatique intensif.
+        :::
+
+        :::warning 🔥 Surapprentissage (overfitting) et jeux de données
+
+        Le **surapprentissage** se produit lorsqu'un modèle apprend *trop bien* les détails et le **bruit** des données d'entraînement,
+        au point de perdre sa capacité à **généraliser** à de nouvelles données.
+
+        Ce concept peut sembler contre-intuitif 🤔 : comment un modèle peut-il être *trop bon* ?
+
+        Imaginez un étudiant qui **mémorise par cœur** chaque question d’un examen passé 📚🧠,
+        sans comprendre réellement les concepts. Lorsqu’il est confronté à un nouvel examen avec des questions différentes ❓➡️❓, il échoue.
+
+        Le surapprentissage est similaire :
+        le modèle performe **exceptionnellement bien** sur l’entraînement 💯,
+        mais échoue sur des données jamais vues auparavant 🚫.
+
+        Pour éviter ce problème, plusieurs stratégies existent :
+        - **🛡️ Régularisation**
+        - **⏳ Arrêt précoce (*early stopping*)**
+        - **📂 Séparation des données** en ensembles d'entraînement, validation et test
+
+        :::
+
+        :::tip 🎯 Séparation des données
+
+        Pour prévenir le surapprentissage (*overfitting*), un jeu de données est généralement divisé en **trois ensembles distincts**, chacun ayant un rôle bien précis.<br />
+        On pourrait par exemple utiliser la répartition classique **70% - 15% - 15%** :
+
+        ```mermaid
+        flowchart TD
+        A["📂 Jeu de données complet"] --> B["📘 70% Entraînement"]
+        A --> C["📙 15% Validation"]
+        A --> D["📗 15% Test"]
+        ```
+
+        ### Les trois ensembles
+        - **📘 Entraînement (*training set*)**
+          Sert à **apprendre** : le modèle ajuste ses paramètres internes.
+        - **📙 Validation (*validation set*)**
+          Utilisé pour **ajuster les hyperparamètres** et surveiller le surapprentissage durant l’entraînement.
+        - **📗 Test (*test set*)**
+          Utilisé **uniquement à la fin** pour mesurer la performance réelle du modèle sur des données jamais vues.
+
+        ### Exemple pratique
+
+        Pour un jeu de **1000 échantillons** 🧪 :
+
+        - **70%** → 700 pour l’entraînement
+        - **15%** → 150 pour la validation
+        - **15%** → 150 pour le test
+
+        La séparation doit être faite **aléatoirement** 🎲 pour garantir que chaque ensemble reste représentatif.
+        :::
+
+        :::info Exemples d'algorithmes courants
+        Voici quelques algorithmes d'apprentissage machine couramment utilisés, classés par type :
+        | Type | Algorithmes | Description |
+        |------|-------------|-------------|
+        | Régression | Régression linéaire, régression logistique | Prédire une valeur continue ou une probabilité |
+        | Arbres de décision | CART, Random Forest, Gradient Boosting | Modèles basés sur des règles hiérarchiques |
+        | Machines à vecteurs de support | SVM | Trouver l'hyperplan optimal pour la classification |
+        | Réseaux de neurones | Perceptron, CNN, RNN | Modèles en couches pour données complexes |
+        | Clustering | K-means, DBSCAN | Regrouper des données non étiquetées en clusters |
+        :::
+
+        :::note Exemple d'implémentation avec scikit-learn
+        Voici un exemple simple d'utilisation de la bibliothèque `scikit-learn` en Python pour effectuer une **classification supervisée** sur un vrai jeu de données classique : le jeu de données **Iris** (`sklearn.datasets.load_iris`).
+
+        Ce script suit les grandes étapes du pipeline vu plus haut :
+        chargement des données → séparation entraînement/validation/test → entraînement → évaluation → prédictions.
+
+        Vous pouvez le rouler tel quel dans un environnement Python avec `scikit-learn` installé.
+
+        ```python showLineNumbers
+        # 1. Import des bibliothèques nécessaires
+        from sklearn.datasets import load_iris
+        from sklearn.model_selection import train_test_split
+        from sklearn.pipeline import make_pipeline
+        from sklearn.preprocessing import StandardScaler
+        from sklearn.linear_model import LogisticRegression
+        from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
+
+        # 2. Charger le jeu de données Iris
+        iris = load_iris()
+        X = iris.data           # Caractéristiques (features) : mesures des fleurs
+        y = iris.target         # Étiquettes (labels) : espèce d'Iris (0, 1 ou 2)
+
+        print("Noms des features :", iris.feature_names)
+        print("Noms des classes  :", iris.target_names)
+        print("Taille du jeu de données :", X.shape, "échantillons\n")
+
+        # 3. Séparer les données en train / validation / test
+        #    Ici, on commence par séparer en (train+val) et test,
+        #    puis on re-sépare train+val en train et val.
+
+        # 15% des données pour le test final
+        X_temp, X_test, y_temp, y_test = train_test_split(
+            X, y, test_size=0.15, random_state=42, stratify=y
+        )
+
+        # Sur le 85% restant, on garde 70% pour l'entraînement et 15% pour la validation
+        # 15% de 100% = 0.15 → 15% de 85% ≈ 17.6% → on ajuste la proportion
+        X_train, X_val, y_train, y_val = train_test_split(
+            X_temp, y_temp, test_size=0.176, random_state=42, stratify=y_temp
+        )
+
+        print("Taille ensemble d'entraînement :", X_train.shape[0])
+        print("Taille ensemble de validation   :", X_val.shape[0])
+        print("Taille ensemble de test         :", X_test.shape[0], "\n")
+
+        # 4. Définir un modèle + pipeline de prétraitement
+        #    Ici : Standardisation des features + Régression logistique
+        model = make_pipeline(
+            StandardScaler(),
+            LogisticRegression(max_iter=1000, random_state=42)
+        )
+
+        # 5. Entraîner le modèle sur l'ensemble d'entraînement
+        model.fit(X_train, y_train)
+
+        # 6. Évaluer sur l'ensemble de validation
+        y_val_pred = model.predict(X_val)
+        val_accuracy = accuracy_score(y_val, y_val_pred)
+        print("Accuracy sur l'ensemble de validation :", round(val_accuracy, 3))
+
+        # 7. Évaluer sur l'ensemble de test (performance finale)
+        y_test_pred = model.predict(X_test)
+        test_accuracy = accuracy_score(y_test, y_test_pred)
+        print("Accuracy sur l'ensemble de test       :", round(test_accuracy, 3), "\n")
+
+        print("Matrice de confusion (test) :")
+        print(confusion_matrix(y_test, y_test_pred), "\n")
+
+        print("Rapport de classification (test) :")
+        print(classification_report(y_test, y_test_pred, target_names=iris.target_names))
+        :::
+
+
+        {/* <Feedback feedbackId="Rencontre #12 - 🧠🧮 Apprentissage machine" /> */}

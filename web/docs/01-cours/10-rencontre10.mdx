@@ -1,5 +1,5 @@
 ---
-title: 10 - Graphiques, collections
+title: 10 - Collections, Graphiques (Matplotlib)
 description: For (séquence), Compréhension de liste, Ensemble (set), Tuple (tuple), Dictionnaire (dict), Matplotlib
 hide_table_of_contents: true
 ---
@@ -25,7 +25,7 @@ import Mod_Tuple from '../_cours-modules/_tuple.mdx';
 import Mod_Dict from '../_cours-modules/_dict.mdx';
 import Mod_Matplotlib from '../_cours-modules/_matplotlib.mdx';
 
-# Graphiques, collections (set, tuple, dict)
+# Collections (set, tuple, dict), Graphiques (Matplotlib)
 
 <Tabs queryString="onglet">
 
@@ -53,19 +53,21 @@ import Mod_Matplotlib from '../_cours-modules/_matplotlib.mdx';
         <Mod_Matplotlib />
     </TabItem>
 
-    <TabItem value="Activités" label="Activités">
+<TabItem value="Activités" label="Activités">
 
         <RappelFonctionnementClasseInverse/>
         <Tabs>
             <TabItem value="1" label="Activités à faire à la maison">
                 ## Auto-validation des connaissances
 
-                [**Ce formulaire**](https://forms.gle/SU1rJpYeoJ6XB1QA8) sert à vérifier votre compréhension des éléments les plus importants de la rencontre R09. Ne faites ce questionnaire **que lorsque vous vous sentez en très bonne maîtrise de la matière**. En classe, dès votre arrivée, vous aurez un **questionnaire très similaire**, évalué **sommativement**, à compléter sans accès à **aucune documentation**.
+                [**Ce formulaire**](https://forms.gle/PVFuF6aH8kcRrbaYA) sert à vérifier votre compréhension des éléments les plus importants de la rencontre R11. Ne faites ce questionnaire **que lorsque vous vous sentez en très bonne maîtrise de la matière**. En classe, dès votre arrivée, vous aurez un **questionnaire très similaire**, évalué **sommativement**, à compléter sans accès à **aucune documentation**.
 
                 ::::warning
-                Ne pas remplir le formulaire diminue fortement vos chances de réussir l’évaluation sommative en début de rencontre.                 Assurez-vous de bien comprendre toutes les notions derrière chaque question.
+                Ne pas remplir le formulaire diminue fortement vos chances de réussir l’évaluation sommative en début de rencontre. \
+                Assurez-vous de bien comprendre toutes les notions derrière chaque question.
                 ::::
             </TabItem>
+
 	        <TabItem value="2" label="Activités à faire en classe">
 
                 ## Exercices de création
@@ -74,713 +76,556 @@ import Mod_Matplotlib from '../_cours-modules/_matplotlib.mdx';
 
                 <DocumentationAutorisee />
 
-                ::::info Exercice - Affichage des virus - liste simple
-                Créez un fichier `r10_virus_liste_simple.py` pour votre réponse.
+                ::::info Exercice - Analyse : Modèles de véhicules
+                Créez un fichier `r9_modeles_vehicules.py` pour votre réponse.
 
-                Umbrella Corporation souhaite afficher la liste des virus qu'elle possède.                 La présentation souhaitée est détaillée ci-dessous. La liste est contenue dans la variable **virus**.
+                Téléchargez le fichier <a href={useBaseUrl('/ressources/csv/mpg_dataset.csv')} download="mpg_dataset.csv">mpg_dataset.csv</a> et placez-le dans le même dossier que votre script.
 
-                ```python showLineNumbers
-                virus = ["Virus-T", "Virus-C", "Virus-G", "Uroboros"]
+                **Exploration**
+
+                1. Chargez les données dans un *DataFrame*.
+                2. Affichez le résumé technique avec `info()` (types, valeurs manquantes, taille).
+                3. Affichez les types de données de chaque colonne avec `dtypes`.
+                4. Affichez les statistiques descriptives avec `describe()`.
+
+                Résultat attendu pour `dtypes` :
+                ```
+                mpg             float64
+                cylinders         int64
+                displacement    float64
+                horsepower      float64
+                weight            int64
+                acceleration    float64
+                model_year        int64
+                origin           object
+                name             object
+                dtype: object
                 ```
 
-                <br/>
-                ##### CONTRAINTES À RESPECTER
-
-                - Votre code doit fonctionner peu importe le nombre d'éléments dans la liste.
-                - Si la liste est vide, afficher un message sympa à l'utilisateur.
-                - Si la liste n'est pas vide, vous devez utiliser un `for element in liste` pour parcourir les éléments de la liste.
-                - Vous pouvez modifier le contenu de la liste fournie pour tester différents scénarios.
-
-                <br/>
-                ##### RÉSULTAT ATTENDU AVEC LA LISTE DE DÉPART FOURNIE
-
+                Résultat attendu pour `describe()` :
                 ```
-                Liste des 4 virus :
-                    Virus-T
-                    Virus-C
-                    Virus-G
-                    Uroboros
+                              mpg   cylinders  displacement  horsepower       weight  acceleration  model_year
+                count  398.000000  398.000000    398.000000  392.000000   398.000000    398.000000  398.000000
+                mean    23.514573    5.454774    193.425879  104.469388  2970.424623     15.568090   76.010050
+                std      7.815984    1.701004    104.269838   38.491160   846.841774      2.757689    3.697627
+                min      9.000000    3.000000     68.000000   46.000000  1613.000000      8.000000   70.000000
+                25%     17.500000    4.000000    104.250000   75.000000  2223.750000     13.825000   73.000000
+                50%     23.000000    4.000000    148.500000   93.500000  2803.500000     15.500000   76.000000
+                75%     29.000000    8.000000    262.000000  126.000000  3608.000000     17.175000   79.000000
+                max     46.600000    8.000000    455.000000  230.000000  5140.000000     24.800000   82.000000
                 ```
 
-                <br/>
-                ##### RÉSULTAT ATTENDU AVEC UNE LISTE À 2 ÉLÉMENTS
+                **Filtrage et tri**
 
+                4. Filtrez et affichez les modèles japonais ayant une accélération de 19.4 et plus.
+
+                Résultat attendu :
                 ```
-                Liste des 2 virus :
-                    Virus-T
-                    Virus-C
+                Les modèles japonais ayant une accélération de 19.4 et plus :
+                    - toyota corolla 1200
+                    - mazda glc deluxe
+                    - datsun 210 mpg
                 ```
 
-                <br/>
-                ##### RÉSULTAT ATTENDU AVEC UNE LISTE VIDE
+                5. Filtrez et affichez les 5 voitures avec le plus de horsepower.
 
+                Résultat attendu :
                 ```
-                Désolé aucun produit pharmaceutique mortel disponible
+                Les 5 voitures avec le plus de horsepower :
+                    - horsepower : 230.0 - pontiac grand prix
+                    - horsepower : 225.0 - buick electra 225 custom
+                    - horsepower : 225.0 - pontiac catalina
+                    - horsepower : 225.0 - buick estate wagon (sw)
+                    - horsepower : 220.0 - chevrolet impala
                 ```
+
+                **Comptage**
+
+                6. Affichez le nombre de voitures japonaises avec un poids supérieur à 2500.
+
+                Résultat attendu :
+                ```
+                Le nombre de voitures japonaises avec un poids supérieur à 2500 : 17
+                ```
+
+                **Exportation**
+
+                7. Filtrez le *DataFrame* pour ne conserver que les voitures japonaises, puis exportez ce nouveau *DataFrame* dans un fichier nommé `mpg_japonaises.csv` sans l'index. Ouvrez ensuite le fichier dans un éditeur ou un tableur pour vérifier qu'il ne contient bien que des voitures japonaises.
 
                 :::note Notions visées
-                Listes, boucle `for ... in`, fonction `len()`, test de liste vide
+                Pandas, chargement CSV `read_csv()`, `info()`, `dtypes`, `describe()`, filtrage booléen, tri `sort_values()`, comptage, exportation `to_csv()`
                 :::
 
                 ::::
 
                 ---
 
-                ::::info Exercice - Affichage des virus - listes parallèles
-                Créez un fichier `r10_virus_listes_paralleles.py` pour votre réponse.
+                ::::info Exercice - Analyse : Prix Turing
+                Créez un fichier `r9_prix_turing.py` pour votre réponse.
 
-                Recopiez le code de l'exercice précédent, il vous servira de point de départ.
+                Téléchargez le fichier <a href={useBaseUrl('/ressources/csv/Turing.csv')} download="Turing.csv">Turing.csv</a> et placez-le dans le même dossier que votre script. Il contient tous les gagnants du Prix Turing.
 
-                La Umbrella Corporation souhaite améliorer le rapport précédent fait.                 Elle vous fournit sous la forme d'une liste des caractéristiques sur chaque virus.
+                **Exploration**
 
-                ```python showLineNumbers
-                virus = ["Virus-T", "Virus-C", "Virus-G", "Uroboros"]
-                caracteristiques = [
-                    "Transforme les humains en zombies et armes biologiques",
-                    "Provoque des mutations extrêmes et régénère les tissus",
-                    "Cause des mutations incontrôlables avec régénération cellulaire rapide",
-                    "Consomme les organismes incompatibles et renforce les hôtes compatibles"
-                ]
+                1. Chargez les données dans un *DataFrame*.
+                2. Affichez le nombre de lignes et de colonnes du *DataFrame* ainsi que la liste de ses colonnes.
+
+                Résultat attendu :
+                ```
+                Dimensions : (79, 4)
+                Colonnes   : ['year', 'laureate', 'contribution', 'affiliation']
                 ```
 
-                :::warning
-                Comme les deux listes doivent être parcourues en parallèle via un index commun, un `for element in liste` ne fonctionnera pas. Utilisez `for i in range(len())`.
-                :::
+                **Comptage**
 
-                <br/>
-                ##### RÉSULTAT ATTENDU AVEC LES LISTES DE DÉPART FOURNIES
+                3. Affichez le nombre total de lauréats.
 
+                Résultat attendu :
                 ```
-                Liste des 4 virus :
-                    Virus-T - Transforme les humains en zombies et armes biologiques
-                    Virus-C - Provoque des mutations extrêmes et régénère les tissus
-                    Virus-G - Cause des mutations incontrôlables avec régénération cellulaire rapide
-                    Uroboros - Consomme les organismes incompatibles et renforce les hôtes compatibles
+                Nombre total de lauréats : 79
                 ```
 
-                <br/>
-                ##### RÉSULTAT ATTENDU AVEC DES LISTES À 2 ÉLÉMENTS
+                **Filtrage**
 
+                4. Affichez les lauréats dont la contribution contient le mot `'intelligence'`.
+
+                Résultat attendu :
                 ```
-                Liste des 2 virus :
-                    Virus-T - Transforme les humains en zombies et armes biologiques
-                    Virus-C - Provoque des mutations extrêmes et régénère les tissus
+                Lauréats avec 'intelligence' dans la contribution :
+                    - Marvin Minsky
+                    - Allen Newell
+                    - Herbert A. Simon
+                    - Raj Reddy
+                ```
+
+                5. Affichez les lauréats affiliés à MIT **ou** Stanford.
+
+                Résultat attendu :
+                ```
+                Lauréats affiliés à MIT ou Stanford :
+                    - Marvin Minsky (MIT)
+                    - John McCarthy (Stanford University)
+                    - Donald E. Knuth (Stanford University)
+                    - Robert W. Floyd (Stanford University)
+                    - Fernando J. Corbató (MIT)
+                    - Edward A. Feigenbaum (Stanford University)
+                    - Douglas C. Engelbart (Stanford Research Institute (SRI))
+                    - Ronald L. Rivest (MIT)
+                    - Barbara H. Liskov (MIT)
+                    - Shafi Goldwasser (MIT / Weizmann Institute)
+                    - Silvio Micali (MIT)
+                    - Michael Stonebraker (MIT)
+                    - Whitfield Diffie (Stanford / Sun Microsystems)
+                    - Martin E. Hellman (Stanford University)
+                    - Tim Berners-Lee (CERN / W3C / MIT)
+                    - John L. Hennessy (Stanford University)
+                    - Patrick M. Hanrahan (Stanford University / Pixar)
+                    - Jeffrey D. Ullman (Stanford University)
+                ```
+
+                6. Affichez les lauréats ayant reçu le prix entre 1980 et 1990 inclusivement.
+
+                Résultat attendu :
+                ```
+                Lauréats entre 1980 et 1990 :
+                    - 1980 : C.A.R. (Tony) Hoare
+                    - 1981 : Edgar F. Codd
+                    - 1982 : Stephen A. Cook
+                    - 1983 : Kenneth L. Thompson
+                    - 1983 : Dennis M. Ritchie
+                    - 1984 : Niklaus Wirth
+                    - 1985 : Richard M. Karp
+                    - 1986 : John E. Hopcroft
+                    - 1986 : Robert E. Tarjan
+                    - 1987 : John Cocke
+                    - 1988 : Ivan E. Sutherland
+                    - 1989 : William (Velvel) Kahan
+                    - 1990 : Fernando J. Corbató
+                ```
+
+                7. Affichez les 5 lauréats les plus récents.
+
+                Résultat attendu :
+                ```
+                Les 5 lauréats les plus récents :
+                    - 2024 : Richard S. Sutton
+                    - 2024 : Andrew G. Barto
+                    - 2023 : Avi Wigderson
+                    - 2022 : Robert M. Metcalfe
+                    - 2021 : Jack J. Dongarra
+                ```
+
+                **Statistiques**
+
+                8. Créez une nouvelle colonne `decennie` en appliquant la formule `(year // 10) * 10` utilisant la colonne `year` (ex. 1986 → 1980, 2023 → 2020).
+
+                9. Affichez le nombre de lauréats par décennie. *(indice : regroupement + compte)*
+
+                Résultat attendu :
+                ```
+                Lauréats par décennie :
+                    - 1960s : 4 lauréats
+                    - 1970s : 12 lauréats
+                    - 1980s : 12 lauréats
+                    - 1990s : 12 lauréats
+                    - 2000s : 16 lauréats
+                    - 2010s : 16 lauréats
+                    - 2020s : 7 lauréats
                 ```
 
                 :::note Notions visées
-                Listes parallèles, boucle `for i in range(len(...))`, parcours par index
+                Pandas, dimensions (`shape`), liste des colonnes, filtrage par texte `str.contains()`, conditions multiples (`|`), tri, création de nouvelle colonne, regroupement `groupby()` et comptage
                 :::
 
                 ::::
 
                 ---
 
-                ::::info Exercice - Affichage des virus - liste à 2 dimensions
-                Créez un fichier `r10_virus_liste_2d.py` pour votre réponse.
+                ::::info Exercice - groupby et moyenne
+                Créez un fichier `groupby_moyenne.py` pour votre réponse.
 
-                Recopiez le code du premier exercice, il vous servira de point de départ.
+                Téléchargez le fichier <a href={useBaseUrl('/ressources/csv/tips_dataset.csv')} download="tips_dataset.csv">tips_dataset.csv</a> et placez-le dans le même dossier que votre script.
 
-                La Umbrella Corporation souhaite améliorer le rapport précédent fait.                 La corporation souhaite désormais afficher dans le rapport le taux de succès de mutation.                 Elle vous fournit désormais toutes les données sous la forme d'une seule liste!
+                1. Chargez les données dans un *DataFrame*.
+                2. Calculez et affichez la **facture moyenne** (`total_bill`) par jour de la semaine.
 
-                ```python showLineNumbers
-                virus_et_autres_info = [
-                    ["Virus-T", 0.9 ,"Transforme les humains en zombies et armes biologiques"],
-                    ["Virus-C", 0.0001 ,"Provoque des mutations extrêmes et régénère les tissus"],
-                    ["Virus-G", 0.85, "Cause des mutations incontrôlables avec régénération cellulaire rapide"],
-                    ["Uroboros", 0.005, "Consomme les organismes incompatibles et renforce les hôtes compatibles"]
-                ]
+                Résultat attendu :
+                ```
+                day
+                Fri     17.151579
+                Sat     20.441379
+                Sun     21.410000
+                Thur    17.682742
+                Name: total_bill, dtype: float64
                 ```
 
-                :::note
-                Le taux de mutation est stocké comme un nombre décimal (ex. `0.9`). Pour l'afficher en pourcentage, multipliez par 100 (ex. `0.9 * 100 = 90.0%`).
-                :::
+                3. Calculez et affichez le **total des pourboires** (`tip`) par moment de la journée (dîner/lunch).
 
-                <br/>
-                ##### RÉSULTAT ATTENDU AVEC LA LISTE DE DÉPART FOURNIE
-
+                Résultat attendu :
                 ```
-                Liste des 4 virus :
-                    Virus-T - Transforme les humains en zombies et armes biologiques (taux de mutation estimé : 90.0%)
-                    Virus-C - Provoque des mutations extrêmes et régénère les tissus (taux de mutation estimé : 0.01%)
-                    Virus-G - Cause des mutations incontrôlables avec régénération cellulaire rapide (taux de mutation estimé : 85.0%)
-                    Uroboros - Consomme les organismes incompatibles et renforce les hôtes compatibles (taux de mutation estimé : 0.5%)
+                time
+                Dinner    546.07
+                Lunch     185.51
+                Name: tip, dtype: float64
                 ```
 
-                <br/>
-                ##### RÉSULTAT ATTENDU AVEC UNE LISTE DE 2 LISTES
+                4. Calculez et affichez la **taille moyenne du groupe** (`size`) par jour de la semaine.
 
+                Résultat attendu :
                 ```
-                Liste des 2 virus :
-                    Virus-T - Transforme les humains en zombies et armes biologiques (taux de mutation estimé : 90.0%)
-                    Virus-C - Provoque des mutations extrêmes et régénère les tissus (taux de mutation estimé : 0.01%)
+                day
+                Fri     2.105263
+                Sat     2.517241
+                Sun     2.842105
+                Thur    2.451613
+                Name: size, dtype: float64
                 ```
+
+                5. Calculez et affichez le **nombre de repas** par sexe (`sex`).
+
+                Résultat attendu :
+                ```
+                sex
+                Female     87
+                Male      157
+                Name: total_bill, dtype: int64
+                ```
+
+                6. Calculez et affichez la **facture moyenne** par statut fumeur (`smoker`).
+
+                Résultat attendu :
+                ```
+                smoker
+                No     19.188278
+                Yes    20.756344
+                Name: total_bill, dtype: float64
+                ```
+
+                En observant ces résultats, répondez aux questions suivantes :
+                - Quel jour de la semaine génère les factures les plus élevées? Et le plus faibles?
+                - Le dîner ou le lunch génère-t-il plus de pourboires au total? Pourquoi selon vous?
+                - Est-ce que les fumeurs dépensent plus en moyenne que les non-fumeurs?
+                - Quel jour vient-on en plus grand groupe? Est-ce cohérent avec la facture moyenne de ce jour?
+                - Les hommes ou les femmes viennent-ils manger plus souvent au restaurant?
 
                 :::note Notions visées
-                Listes à 2 dimensions (listes imbriquées), accès par index multiple, f-strings, formatage de pourcentage
+                Pandas, regroupement `groupby()`, fonctions d'agrégation (`mean`, `sum`, `count`), interprétation de résultats
                 :::
 
                 ::::
 
                 ---
 
-                ::::info Exercice - Manipulation de listes par compréhension
-                Créez un fichier `r10_comprehension_liste.py` pour votre réponse.
+                ::::info Exercice - Nettoyage et sélection de données
+                Créez un fichier `r9_nettoyage_selection.py` pour votre réponse.
 
-                La compréhension de liste permet de transformer, filtrer et manipuler des données de manière concise et efficace.                 À partir de la liste suivante :
+                Un registraire de cégep dispose d'un tableau d'étudiants en Sciences de la nature contenant des données manquantes et des doublons. Les programmes sont :
+                - **200.BA** : Sciences de la santé
+                - **200.BB** : Sciences pures et appliquées
+                - **200.BC** : Sciences de la nature (Découverte / Enrichi)
 
-                ```python showLineNumbers
-                liste = [1, 2, 3, 4, 5]
-                ```
+                Utilisez le dictionnaire suivant pour créer votre *DataFrame* :
 
-                Vous devez créer **6 nouvelles listes** en utilisant **exclusivement la [compréhension de liste](?onglet=listcomp)**.                 Chaque cas représente une transformation ou une opération **différente**.
+                ```python
+                import pandas as pd
 
-                ##### CAS À COMPLÉTER
-                1. Multiplier chaque élément par 5                    <i>Résultat attendu : [5, 10, 15, 20, 25]</i>
-
-                2. Garder uniquement les nombres supérieurs à 2                    <i>Résultat attendu : [3, 4, 5]</i>
-
-                3. Créer une liste de booléens indiquant si chaque nombre est supérieur à 3                    <i>Résultat attendu : [False, False, False, True, True]</i>
-
-                4. Créer une nouvelle liste contenant les carrés sous forme de texte                    <i>Résultat attendu : ['Le carré de 1 est 1', 'Le carré de 2 est 4', ..., 'Le carré de 5 est 25']</i>
-
-                :::tip Indice
-                Une f-string sera nécessaire dans la section `expression` de la compréhension de liste.
-                :::
-
-                5. Remplacer les nombres impairs par le mot "impair"                    <i>Résultat attendu : ['impair', 2, 'impair', 4, 'impair']</i>
-
-                :::tip Indice
-                Un [if/else compacte](/cours/rencontre4?onglet=compacte) est nécessaire dans la section `expression` de la compréhension de liste.
-                :::
-
-                6. Doubler uniquement les nombres pairs                    <i>Résultat attendu : [4, 8]</i>
-
-                ##### FORMAT ATTENDU
-
-                Pour chaque cas, vous devez écrire votre code comme ceci :
-
-                ```python showLineNumbers
-                casX = [ ... ]  # Remplacez les "..." par votre compréhension de liste
-                print(casX)
-                ```
-
-                :::note Notions visées
-                Compréhension de liste, filtrage (`if`), transformation (`expression`), if/else compact, f-strings
-                :::
-
-                ::::
-
-                ---
-
-                ::::info Exercice - Manipulation d'ensembles
-                Créez un fichier `r10_ensembles.py` pour votre réponse.
-
-                Les ensembles (set) permettent de stocker des éléments uniques et d'effectuer des opérations mathématiques comme l’union, l’intersection ou la différence.                 À partir des ensembles suivants :
-
-                ```python showLineNumbers
-                ensemble1 = {1, 2, 3, 4, 5}
-                ensemble2 = {4, 5, 6, 7, 8}
-                ```
-
-                Vous devez créer **3 nouveaux ensembles** et compléter **1 cas de conversion** en utilisant **exclusivement des opérations sur les `set`** et la fonction `list()`.                 Pas de boucles, ni de compréhension de liste. Chaque cas représente une transformation ou une opération différente.
-
-                <br/>
-                ##### CAS À COMPLÉTER
-                1. <i>Résultat attendu : \{1, 2, 3, 4, 5, 6, 7, 8}</i>
-
-                2. <i>Résultat attendu : \{4, 5}</i>
-
-                3. <i>Résultat attendu : \{1, 2, 3}</i>
-
-                4. La liste suivante contient des doublons. Convertissez-la en ensemble pour les supprimer, puis reconvertissez-la en liste triée.
-                   ```python
-                   mesures = [3, 7, 3, 1, 7, 9, 1, 5]
-                   ```
-                   <i>Résultat attendu : [1, 3, 5, 7, 9]</i>
-
-                :::tip Indice
-                La fonction `sorted()` peut être utile pour trier la liste finale.
-                :::
-
-                <br/>
-                ##### FORMAT ATTENDU
-
-                Pour chaque cas, vous devez écrire votre code comme ceci :
-
-                ```python showLineNumbers
-                casX = ...  # Remplacez les "..." par une opération sur les ensembles
-                print(casX)
-                ```
-
-                :::note Notions visées
-                Ensembles (`set`), union, intersection, différence, conversion `list()` / `sorted()`
-                :::
-
-                ::::
-
-                ---
-
-                ::::info Exercice - Dictionnaires - Dictionnaire imbriqué
-                Créez un fichier `r10_dictionnaires_imbrique.py` pour votre réponse.
-
-                Les données de température d'une journée d'une ville sont stockées sous forme de dictionnaire.
-
-                ```python showLineNumbers
-                info = {
-                    "lieu": "Raccoon City",
-                    "date": "2025-07-12",
-                    "temperatures_C": {
-                        "Matin": 18.2,
-                        "Midi": 22.5,
-                        "Après-midi": 24.1,
-                        "Soir": 20.3
-                    }
+                data = {
+                    'prenom':      ['Léa', 'Mathis', 'Léa', 'Yasmine', 'Tristan', None, 'Émile'],
+                    'programme':   ['200.BA', '200.BB', '200.BA', '200.BC', '200.BA', '200.BB', '200.BC'],
+                    'session':     [3, None, 3, 2, None, 4, 1],
+                    'note_finale': [78, 85, 78, None, 91, 67, None],
+                    'nb_absences': [2, 0, 2, 5, None, 1, 3]
                 }
+                df = pd.DataFrame(data)
                 ```
 
-                Écrivez un programme qui :
-
-                1. Affiche le lieu et la date en en-tête.
-                2. Affiche chaque moment de la journée avec sa température, alignés en colonnes.
-                3. Calcule et affiche la température moyenne.
-
-                Le résultat doit correspondre exactement au format suivant (y compris les espaces, les lignes vides et les indentations) :
+                Le *DataFrame* initial ressemble à ceci :
                 ```
-                Températures à Raccoon City le 2025-07-12
-
-                    Matin       : 18.2 °C
-                    Midi        : 22.5 °C
-                    Après-midi  : 24.1 °C
-                    Soir        : 20.3 °C
-
-                Température moyenne : 21.28 °C
+                    prenom programme  session  note_finale  nb_absences
+                0      Léa    200.BA      3.0         78.0          2.0
+                1   Mathis    200.BB      NaN         85.0          0.0
+                2      Léa    200.BA      3.0         78.0          2.0
+                3  Yasmine    200.BC      2.0          NaN          5.0
+                4  Tristan    200.BA      NaN         91.0          NaN
+                5      NaN    200.BB      4.0         67.0          1.0
+                6    Émile    200.BC      1.0          NaN          3.0
                 ```
 
-                :::tip Indice - Accès au dictionnaire imbriqué
-                Pour accéder aux températures, utilisez `info['temperatures_C']`. C'C'est lui-même un dictionnaire que vous pouvez parcourir avec `.items()`.
-                :::
+                **Nettoyage**
 
-                :::tip Indice - Alignement
-                Consultez l'[aide-mémoire sur les f-strings](/aidememoire/f-string) pour les options de formatage permettant d'aligner du texte sur une largeur fixe.
-                :::
+                1. Affichez les lignes ne contenant **aucune valeur manquante**.
+
+                Résultat attendu :
+                ```
+                  prenom programme  session  note_finale  nb_absences
+                0    Léa    200.BA      3.0         78.0          2.0
+                2    Léa    200.BA      3.0         78.0          2.0
+                ```
+
+                2. Remplacez les valeurs manquantes comme suit, puis affichez le *DataFrame* corrigé :
+                    - `session` : remplacez par la **moyenne** des sessions
+                    - `note_finale` : remplacez par la **médiane** des notes
+                    - `nb_absences` : remplacez par `0`
+
+                Résultat attendu :
+                ```
+                    prenom programme  session  note_finale  nb_absences
+                0      Léa    200.BA      3.0         78.0          2.0
+                1   Mathis    200.BB      2.6         85.0          0.0
+                2      Léa    200.BA      3.0         78.0          2.0
+                3  Yasmine    200.BC      2.0         78.0          5.0
+                4  Tristan    200.BA      2.6         91.0          0.0
+                5      NaN    200.BB      4.0         67.0          1.0
+                6    Émile    200.BC      1.0         78.0          3.0
+                ```
+
+                Continuez avec ce *DataFrame* corrigé pour les étapes suivantes.
+
+                3. Supprimez les lignes dupliquées et affichez le *DataFrame* résultant.
+
+                Résultat attendu :
+                ```
+                    prenom programme  session  note_finale  nb_absences
+                0      Léa    200.BA      3.0         78.0          2.0
+                1   Mathis    200.BB      2.6         85.0          0.0
+                3  Yasmine    200.BC      2.0         78.0          5.0
+                4  Tristan    200.BA      2.6         91.0          0.0
+                5      NaN    200.BB      4.0         67.0          1.0
+                6    Émile    200.BC      1.0         78.0          3.0
+                ```
+
+                **Sélection**
+
+                4. À partir du *DataFrame* corrigé (avant suppression des doublons), affichez le prénom et la note finale des étudiants en **200.BA** (Sciences de la santé).
+
+                Résultat attendu :
+                ```
+                    prenom  note_finale
+                0      Léa         78.0
+                2      Léa         78.0
+                4  Tristan         91.0
+                ```
+
+                5. Affichez les 3 premières lignes et les colonnes `prenom`, `programme` et `session` du *DataFrame* corrigé.
+
+                Résultat attendu :
+                ```
+                   prenom programme  session
+                0     Léa    200.BA      3.0
+                1  Mathis    200.BB      2.6
+                2     Léa    200.BA      3.0
+                ```
 
                 :::note Notions visées
-                Dictionnaires imbriqués, accès par clé, `.items()`, calcul de moyenne, alignement avec f-strings
+                Création d'un *DataFrame* depuis un dictionnaire, valeurs manquantes `dropna()`, `fillna()`, `mean`/`median`, suppression de doublons `drop_duplicates()`, sélection de colonnes et de lignes `loc`, `iloc`, `head()`
                 :::
 
                 ::::
 
                 ---
 
-                ::::info Exercice - Jeu de devinette amélioré
-                Créez un fichier `r10_jeu_devinette_ameliore.py` pour votre réponse.
+                ::::info Exercice - Visualisation : Pourboire par personne
+                Créez un fichier `r9_pourboire_par_personne.py` pour votre réponse.
 
-                Partez du code suivant (version de base du jeu de devinette) et **améliorez-le** afin d'insulter gentiment l'utilisateur s'il saisit un nombre déjà saisi.                 Malgré sa stupidité, vous devez quand même lui indiquer si la bonne réponse est plus haute ou plus basse!
+                Téléchargez le fichier <a href={useBaseUrl('/ressources/csv/tips_dataset.csv')} download="tips_dataset.csv">tips_dataset.csv</a> et placez-le dans le même dossier que votre script.
 
-                ```python showLineNumbers
-                import random
+                **Transformation**
 
-                nombre_secret = random.randint(1, 100)
-                devine = -1
+                1. Chargez les données dans un *DataFrame*.
+                2. Créez une nouvelle colonne `tip_par_person` qui calcule le pourboire par personne (`tip` divisé par `size`).
+                3. Affichez les 5 premières lignes du *DataFrame* modifié.
 
-                while devine != nombre_secret:
-                    devine = int(input("Tente de trouver le nombre que j'ai en tête : "))
-
-                    if devine < nombre_secret:
-                        print("Plus haut!\n")
-                    elif devine > nombre_secret:
-                        print("Plus bas!\n")
-
-                print("Bravo humain, tu as trouvé le nombre!")
+                Résultat attendu :
+                ```
+                   total_bill   tip     sex smoker  day    time  size  tip_par_person
+                0       16.99  1.01  Female     No  Sun  Dinner     2        0.505000
+                1       10.34  1.66    Male     No  Sun  Dinner     3        0.553333
+                2       21.01  3.50    Male     No  Sun  Dinner     3        1.166667
+                3       23.68  3.31    Male     No  Sun  Dinner     2        1.655000
+                4       24.59  3.61  Female     No  Sun  Dinner     4        0.902500
                 ```
 
-                ##### CONTRAINTES À RESPECTER
+                **Visualisation**
 
-                - Stockez tous les essais de l'utilisateur dans un ensemble.
-                - Utilisez l'opérateur `in` pour vérifier si un essai a déjà été saisi.
+                4. Générez un histogramme de `tip_par_person` avec `bins=10` pour visualiser la distribution des pourboires par personne.
+                5. Générez un boxplot de `tip_par_person` regroupé par taille de groupe (`size`) pour voir comment le pourboire par personne varie selon la taille du groupe.
 
-                <br/>
-                ##### EXEMPLE DE RÉSULTAT ATTENDU
+                Résultats attendus :
+                <Row>
+                  <Column size={6}>
+                    <div style={{ textAlign: "left" }}>
+                      <img
+                        src={require('/img/cours/exercice_2a.png').default}
+                        alt="Histogramme du pourboire par personne"
+                        style={{ maxWidth: '100%', height: 'auto' }}
+                      />
+                    </div>
+                  </Column>
+                    <Column size={6}>
+                        <div style={{ textAlign: "right" }}>
+                        <img
+                            src={require('/img/cours/exercice_2b.png').default}
+                            alt="Boxplot tip par person par size"
+                            style={{ maxWidth: '100%', height: 'auto' }}
+                        />
+                        </div>
+                    </Column>
+                </Row>
 
-                <i>**Rappel** : le nombre est choisi aléatoirement par l'ordinateur à chaque partie.</i>
-                <br/>
+                <br />
 
-                ```
-                Tente de trouver le nombre que j'ai en tête : 50
-                Plus haut!
-
-                Tente de trouver le nombre que j'ai en tête : 95
-                Plus bas!
-
-                Tente de trouver le nombre que j'ai en tête : 92
-                Plus bas!
-
-                Tente de trouver le nombre que j'ai en tête : 50
-                Tu ne sembles pas être le pingouin glissant le plus loin...
-                Tu avais déjà essayé cette réponse...
-                Plus haut!
-
-                Tente de trouver le nombre que j'ai en tête : 89
-                Bravo humain, tu as trouvé le nombre!
-                ```
+                Voyez-vous des tendances intéressantes ? Par exemple, est-ce que le pourboire par personne augmente ou diminue avec la taille du groupe?
 
                 :::note Notions visées
-                Boucle `while`, ensembles (accumulation), opérateur `in`, module `random`
+                Pandas, création de colonne calculée, `head()`, visualisation (histogramme avec `bins`, boxplot par groupe)
                 :::
 
                 ::::
 
                 ---
 
-                ::::info Exercice - Graphique - Courbe simple
-                Créez un fichier `r10_graphique_courbe_simple.py` pour votre réponse.
+                ::::info Exercice - Visualisation : Consommation d'essence
+                Créez un fichier `consommation_essence.py` pour votre réponse.
 
-                Vous devez reproduire, **le plus fidèlement possible**, le graphique suivant :
+                Téléchargez le fichier <a href={useBaseUrl('/ressources/csv/mpg_dataset.csv')} download="mpg_dataset.csv">mpg_dataset.csv</a> et placez-le dans le même dossier que votre script.
 
-                <img src={require('/img/cours/Graphique1.png').default} width="50%"/>
-                <br/>
-                <br/>
-                Les données nécessaires au graphique sont fournies sous la forme de 2 listes :
+                **Transformation**
 
-                ```python showLineNumbers
-                temperatures = [5.0, 5.816326530612245, 6.63265306122449, 7.448979591836735,
-                                8.26530612244898, 9.081632653061224, 9.89795918367347, 10.714285714285715,
-                                11.53061224489796, 12.346938775510203, 13.16326530612245, 13.979591836734695,
-                                14.795918367346939, 15.612244897959183, 16.42857142857143, 17.244897959183675,
-                                18.06122448979592, 18.877551020408163, 19.693877551020407, 20.510204081632654,
-                                21.3265306122449, 22.142857142857142, 22.95918367346939, 23.775510204081634,
-                                24.591836734693878, 25.408163265306122, 26.224489795918366, 27.040816326530614,
-                                27.857142857142858, 28.6734693877551, 29.48979591836735, 30.306122448979593,
-                                31.122448979591837, 31.93877551020408, 32.755102040816325, 33.57142857142857,
-                                34.38775510204081, 35.20408163265306, 36.02040816326531, 36.83673469387755,
-                                37.6530612244898, 38.46938775510204, 39.285714285714285, 40.10204081632653,
-                                40.91836734693878, 41.734693877551024, 42.55102040816327, 43.36734693877551,
-                                44.183673469387756, 45.0]
+                1. Chargez les données dans un *DataFrame*.
+                2. Créez une nouvelle colonne `l_par_100km` en convertissant `mpg` en litres aux 100 km à l'aide de la formule :
 
-                photosynthese = [-0.4208586207089154, -0.9002982388093212, 2.90695296113819, -2.3816678390159787,
-                                1.6301613438564548, -0.6395165673646073, 0.4062406047933971, -3.0807857229738986,
-                                0.7630986943366226, -7.109276797690082, 1.0400704458874834, -1.6231609563256293,
-                                3.5158201201035792, 0.7073045481852345, 4.462535684066591, 3.469725363276981,
-                                7.800055142339156, 3.6581720517708147, 12.848632806212834, 17.01723976662892,
-                                21.583172080660294, 32.30270168260925, 34.27508939188592, 43.959441989933595,
-                                52.391688150519585, 61.14262118477141, 81.52320747993383, 80.49707329499296,
-                                90.43305211916575, 99.87264809035379, 99.64218123860432, 103.57940043588764,
-                                101.38268425121551, 92.5592720723287, 83.62418715159393, 84.92142209312819,
-                                70.6148436983045, 59.1725221343123, 49.47349737546689, 44.62045689259768,
-                                31.310564654507512, 24.072064122012684, 16.917980484652784, 13.408756457014197,
-                                7.579626366114782, 8.420568754382284, 5.911835499055119, 3.4010226647009074,
-                                3.2056589365442028, 3.021178647669223]
+                $$
+                \text{l\_par\_100km} \quad = \quad \frac{235.214}{\text{mpg}}
+                $$
 
-                ```
+                **Visualisation**
+
+                3. Générez un histogramme de `l_par_100km` pour visualiser la distribution de la consommation.
+                4. Générez un graphique en barres de la consommation moyenne (`l_par_100km`) par nombre de cylindres (`cylinders`).
+                <Row>
+                  <Column size={6}>
+                    <div style={{ textAlign: "left" }}>
+                      <img
+                        src={require('/img/cours/exercice_3a.png').default}
+                        alt="Histogramme de la consommation en litres aux 100 km"
+                        style={{ maxWidth: '100%', height: 'auto' }}
+                      />
+                    </div>
+                  </Column>
+                    <Column size={6}>
+                        <div style={{ textAlign: "right" }}>
+                        <img
+                            src={require('/img/cours/exercice_3b.png').default}
+                            alt="Consommation moyenne par nombre de cylindres"
+                            style={{ maxWidth: '100%', height: 'auto' }}
+                        />
+                        </div>
+                    </Column>
+                </Row>
+
+                <br />
+
+                Voyez-vous des tendances intéressantes ? Par exemple, est-ce que la consommation varie selon le nombre de cylindres?
 
                 :::note Notions visées
-                Matplotlib, `plt.plot()`, courbe simple, titre et étiquettes d'axes
+                Pandas, création de colonne calculée, visualisation (histogramme, graphique en barres), regroupement `groupby()` pour la moyenne
                 :::
 
                 ::::
 
                 ---
 
-                ::::info Exercice - Graphique - Températures annuelles
-                Créez un fichier `r10_graphique_temperatures_annuelles.py` pour votre réponse.
+                ## Exercices sur papier
 
-                Un chercheur suit la température moyenne enregistrée chaque mois dans une réserve naturelle.                 Les données sont stockées sous forme d’une liste de tuples, où chaque tuple contient :
-
-                - le nom du mois
-                - la température moyenne en °C
-
-                Votre objectif :
-                - Extraire les noms des mois et les températures depuis la liste de tuples ci-dessous.
-                    - Créer par programmation une liste pour les noms des mois et une liste pour les valeurs.
-                    - [**La compréhension de liste**](/cours/rencontre10?onglet=listcomp) peut vous aider à créer ces 2 listes rapidement.
-                - Afficher ces données dans un graphique linéaire pour visualiser l’évolution de la température au fil des mois.
-                    - Ajouter un titre, une grille et des étiquettes d’axes claires en lien avec le graphique.
-                    - Définissez les dimensions du graphique à 12x5 pouces en utilisant `plt.figure(...)`.
-                        - Cette instruction doit être placée avant toutes les autres instructions de traçage de votre graphique.
-
-                ```python showLineNumbers
-                temperatures = [
-                    ("Janvier", 2.5),
-                    ("Février", 3.0),
-                    ("Mars", 6.2),
-                    ("Avril", 10.5),
-                    ("Mai", 15.3),
-                    ("Juin", 19.1),
-                    ("Juillet", 22.4),
-                    ("Août", 21.9),
-                    ("Septembre", 17.0),
-                    ("Octobre", 12.1),
-                    ("Novembre", 6.8),
-                    ("Décembre", 3.4)
-                ]
-                ```
-                <br/>
-                ##### Exemple de graphique attendu
-
-                <img src={require('/img/cours/ExerciceTupleGraphique.png').default} width="100%"/>
-
-                :::note Notions visées
-                Liste de tuples, compréhension de liste pour extraire des données, Matplotlib (graphique linéaire)
+                :::warning-nt
+                Les exercices suivants ne visent pas nécessairement à pratiquer la matière de cette rencontre, \
+                mais plutôt à vous entraîner à l'écriture de code "papier" sur des concepts plus simples, comme il pourrait y avoir à l'examen.
                 :::
-
-                ::::
-
-                ---
-
-                ::::info Exercice - Graphique - Barres et moyennes
-                Créez un fichier `r10_graphique_barres_moyennes.py` pour votre réponse.
-
-                 Vous devez reproduire, **le plus fidèlement possible**, le graphique ci-dessous.                  Il représente la consommation moyenne d’eau (millions de m<sup>3</sup>/an) au Canada.
-
-                <img src={require('/img/cours/Graphique2.png').default} width="70%"/>
-
-                :::tip Indice
-                Vous devez créer une nouvelle liste représentant la moyenne pour chaque secteur.
-                :::
-
-                Les données nécessaires au graphique sont fournies sous la forme des listes ci-dessous :
-
-
-                ```python showLineNumbers
-                secteurs = ["Résidentiel", "Agricole", "Industriel", "Énergie", "Municipal", "Autres"]
-                couleur_barres = ['skyblue', 'limegreen', 'gold', 'salmon', 'orchid', 'gray']
-
-                # Données totales pour l’ensemble du Canada (12 données par liste, une donnée par province/territoire)
-                residentiel = [410, 380, 220, 200, 890, 860, 170, 180, 60, 100, 40, 30, 25]
-                agricole = [780, 640, 850, 600, 720, 670, 230, 210, 150, 180, 20, 15, 10]
-                industriel = [520, 410, 290, 310, 1100, 970, 190, 200, 50, 130, 60, 40, 20]
-                energie = [300, 270, 180, 150, 400, 420, 100, 110, 30, 90, 25, 20, 10]
-                municipal = [260, 250, 130, 120, 680, 700, 90, 100, 25, 70, 15, 10, 8]
-                autres = [90, 80, 60, 50, 130, 120, 40, 40, 10, 25, 5, 5, 3]
-                 ```
-
-                :::note Notions visées
-                Calcul de moyennes sur des listes, Matplotlib `plt.bar()`, couleurs des barres, construction de nouvelles listes
-                :::
-
-                ::::
-
-                ---
-
-                ::::info Exercice - Graphique - Populations par saison
-                Créez un fichier `r10_graphique_populations_saison.py` pour votre réponse.
-
-                Vous devez analyser les populations de différentes espèces animales dans une réserve naturelle.                 Pour chaque espèce, une liste du nombre d’individus observés pour chacune des 4 saisons est fournie :
-
-                ```python showLineNumbers
-                populations = {
-                    "Cerfs": [32, 45, 50, 41],
-                    "Renards": [12, 15, 13, 10],
-                    "Lapins": [85, 102, 98, 76],
-                    "Aigles": [5, 7, 6, 5]
-                }
-                saisons = ["Printemps", "Été", "Automne", "Hiver"]
-                ```
-                <br/>
-                ##### ÉTAPE 1 - VOLET CONSOLE
-
-                Calculez et affichez à la console le résultat ci-dessous.                 Les valeurs doivent être calculées à partir des données de la variable population.
-
-                ```
-                Recensement pour les 4 espèces :
-
-                Cerfs : moyenne par saison = 42.0 individus
-                Renards : moyenne par saison = 12.5 individus
-                Lapins : moyenne par saison = 90.2 individus
-                Aigles : moyenne par saison = 5.8 individus
-                ```
-                **REMARQUES**
-                - Votre code doit fonctionner peu importe le nombre d’animaux dans le dictionnaire `populations`.
-                - Les couleurs des courbes seront automatiquement les bonnes.
-
-                <br/>
-                ##### ÉTAPE 2 - VOLET GRAPHIQUE
-
-                Générez le graphique ci-dessous.
-
-                <img src={require('/img/cours/ExerciceDictionnaireGraphique.png').default} width="75%"/>
-
-                :::note Notions visées
-                Dictionnaires, parcours avec `.items()`, calcul de moyenne, Matplotlib (courbes multiples), code générique
-                :::
-
-                ::::
-
-                ---
-
-                ::::info Exercice - Graphique - Nuage de points et courbe
-                📁 Créez un fichier `r10_graphique_nuage_courbe.py` pour votre réponse.
-
-                 Vous devez reproduire, **le plus fidèlement possible**, le graphique ci-dessous. <br/>\
-                Il représente la croissance de 10 plantes sur 30 jours.                 Chaque point en vert semi-transparent représente une mesure d’une plante, il y a donc 300 points.                 La courbe représente la moyenne de leur croissance.
-
-                <img src={require('/img/cours/Graphique3.png').default} width="70%"/>
-
-                <br/><br/>
-
-                **Étape 1 - Tracer une seule plante**
-
-                Commencez par tracer uniquement les points de `plante1` en vert semi-transparent, sans ligne entre les points.                 Vérifiez que votre graphique ressemble aux mesures de la première plante avant de continuer.
-
-                **Étape 2 - Tracer les 10 plantes**
-
-                Ajoutez les 9 autres plantes de la même façon. La fonction `plot(...)` doit être appelée une fois par plante (10 appels au total).
-
-                **Étape 3 - Calculer et tracer la moyenne**
-
-                Créez une liste `moyennes` contenant la moyenne des 10 plantes pour chacun des 30 jours, puis tracez-la comme une courbe (avec une ligne).
-
-                :::tip Indices
-                - La transparence des points peut être déterminée avec le paramètre `alpha` (ex : `alpha=0.25`).
-                - Pour la courbe des moyennes, créez une nouvelle liste représentant la moyenne de chacun des 30 jours.
-                :::
-
-                <br/>
-                Les données nécessaires au graphique sont fournies sous la forme d’une liste par plante (1 donnée par jour) :
-
-                ```python showLineNumbers
-               jour = list(range(1, 31)) #Génère une liste [1,2,3,...,28,29,30]
-               plante1 = [0.8976591646433567, 0.0, 0.15498324299736432, 0.9841528009536402, 0.15657204065985764, 0.0, 0.33447160605066895, 4.6283876633678975, 5.266817494776518, 3.4487692867267548, 5.870556870585399, 5.59921181812971, 9.151254660249002, 7.310614349370278, 9.851989318343366, 13.824188176315175, 15.464723326276136, 15.702426828326931, 13.512838407325102, 12.809356526359828, 17.47960344645509, 15.123420443868309, 17.40785829723269, 19.197800939941423, 20.154793311136707, 17.915665513991193, 20.104929315636344, 17.305250783347308, 19.13156508363107, 21.033513462238393]
-               plante2 = [0.17528353328795931, 0.2756336458541735, 0.0, 0.0, 0.0, 0.6309221590379746, 3.727550566214523, 1.2508511778721294, 0.7024180814306074, 6.830442869157721, 4.936682177229124, 4.5291192276271754, 4.990690106855183, 9.895431855587745, 11.417271004590937, 10.827200698671112, 12.598193409811389, 12.815001837722994, 16.14637147427025, 14.621077844225155, 17.03212243808826, 17.027520550344995, 16.747459643059045, 19.755682219447348, 20.9180585108655, 23.47304450933025, 17.30950120875156, 17.337504826772005, 19.26714999504858, 21.294379182578343]
-               plante3 = [0.7102632701578836, 0.0, 0.0, 0.0, 2.3343028391462797, 2.3438873675900336, 0.6454097889242174, 1.0996724026369975, 3.286045694345812, 3.9285399427808274, 3.612599736185482, 4.30020407797379, 9.145504683557949, 9.21225840090138, 8.562279898630978, 10.377545561479028, 10.300619634750328, 12.13895510845491, 14.769665211706135, 13.690346592845321, 15.37871243532946, 16.583317142828676, 16.57879523525781, 16.756826717506286, 17.604537555459814, 18.40131885619254, 16.404259701325834, 18.89079355214781, 20.288042085972553, 18.21005148218242]
-               plante4 = [0.0, 0.0, 0.8973792501708838, 0.9830097528856888, 0.0, 0.6461179782755417, 0.23226953686786578, 1.2472478853272517, 6.401366814252393, 2.0415819065854146, 3.891611111275125, 5.262117713514414, 7.876585352377606, 7.183706437052258, 12.426333923266526, 9.649513617333888, 12.73628479093696, 12.478132650678955, 15.249038804916301, 17.805230262139887, 13.063427000000233, 15.159135971994353, 17.14983145120984, 21.307851142556363, 17.03068748570027, 20.253810785360578, 19.569583288170133, 19.743382094110608, 22.00312569974368, 21.748919012129882]
-               plante5 = [0.6694150780194975, 1.4938014956025913, 0.35368890690893984, 0.9833023284099253, 1.2338260363941644, 2.192373222056616, 0.7787428769386353, 1.6909990215262607, 3.4065845701224866, 4.510530462984979, 4.769874841771353, 6.539463845509872, 10.129871941734269, 11.25078568737028, 12.01651914074369, 9.673096507429102, 11.77202031960022, 14.999346444191085, 14.834671920744888, 15.668917765971251, 15.638377444681467, 19.014525684346527, 16.407694562665597, 18.564642981001583, 17.46831271855271, 16.90077670848018, 20.338978550282203, 18.906724587915743, 19.694358440253918, 16.657933007109023]
-               plante6 = [1.3443398103456938, 1.7153571861619716, 0.1333277692479119, 1.6103108806176778, 0.0, 2.6826886678064543, 0.7904991374065058, 4.151998225725303, 1.508265561315599, 3.980472455562051, 5.12564841025743, 6.54192202156568, 9.19733810691179, 10.520195804652623, 9.10149309227341, 13.48939226520939, 13.149708808238799, 13.883893735070835, 15.228942187800202, 17.639327729443565, 18.317677985660385, 15.481336669078772, 18.548569162881705, 19.176333920189357, 17.836996378597085, 21.095745501671274, 20.171253471005997, 19.018100870312136, 17.274245444905446, 21.26052545093896]
-               plante7 = [0.0, 0.8985906272911144, 0.0, 2.0769771214349646, 0.0, 0.1303882294417198, 3.0373598089846636, 4.5034510344243515, 2.6102761908237677, 4.0807103767398845, 5.082159908953121, 6.926619478650151, 6.845441288816597, 10.789809579653474, 9.57315458379442, 9.12607939931834, 14.263096787065773, 11.63195582037034, 14.232154873258024, 15.820119635528503, 19.262088637822018, 15.523011851191633, 17.47956143053687, 17.34668556294283, 19.63177817156293, 16.291851406997555, 20.408500890879306, 18.695461783200003, 20.966068097868853, 20.542745168091884]
-               plante8 = [0.0, 0.0, 0.31593716941831607, 1.797879409074148, 1.3549021087528006, 2.72834888395552, 3.8987228957550815, 1.4887672079330272, 2.5269437973885465, 2.3589672604919345, 5.361937377304439, 6.7009581034667764, 5.728281913775275, 8.740111897509529, 11.79561232423084, 12.380547993337167, 12.103145069789937, 13.47668835211402, 16.290659431434516, 14.372002381487956, 16.470123949718353, 17.309302440725823, 14.597188305730064, 15.981267855499347, 18.953169075105787, 16.98465673667939, 18.473607004645785, 18.227860154572642, 14.21517584840647, 21.26330654419327]
-               plante9 = [0.0, 0.4522723346745793, 1.7586043686210397, 0.0, 1.2458737753703606, 2.015879463453331, 1.417370812307034, 1.8886807926980338, 2.2707244139301315, 2.7734256465247826, 5.501813520535498, 4.751188398387352, 10.846530040610622, 4.8128866460687805, 9.089459498762263, 11.772422596289898, 11.254134423545405, 13.530654216426512, 17.50499431491864, 16.576957278084116, 11.990172734262561, 16.994063860033176, 18.276243579795942, 19.50467136528814, 20.242796584353783, 18.524683668288525, 17.51022351284659, 17.155392328472765, 18.613109151742346, 17.347847505152078]
-               plante10 = [0.0, 1.6617879828120876, 1.1114070518778814, 1.2413536244030396, 1.0957815500862658, 1.5336617782080486, 1.6312859846759336, 4.19868256424098, 3.416719289385172, 4.608614661530128, 3.5593769395445642, 6.521317626985673, 5.077549860821263, 9.603200324467075, 5.755340324739416, 9.639255450256496, 14.271414716495176, 12.778076460254391, 15.402533086111394, 16.708734436876853, 14.17417569230928, 17.100934078054095, 18.80519666846201, 14.897059850615431, 21.046899131076906, 15.375114293061099, 16.463903627318345, 20.611482792264987, 19.857870964605823, 19.38782379439097]
-                 ```
-
-                :::note Notions visées
-                Nuage de points avec Matplotlib, multiples appels à `plot()`, calcul de moyennes par index
-                :::
-
-                ::::
-
-                ---
-
-                ## ✏️ Exercices sur papier
 
                 <DocumentationInterdite />
 
-                ::::info Exercice - Tracer un graphique à la main
+                ::::info Exercice - Écrire du code sans PyCharm
 
-                Dessinez sur papier, approximativement, le graphique qui serait produit par l'exécution du code ci-dessous.
+                Sur papier, sans ordinateur, écrivez un code demandant à l'utilisateur de saisir un nombre. \
+                Tant que le nombre saisi est positif, le programme redemande de saisir un nouveau nombre. \
+                Lorsqu'un nombre saisi est négatif, le programme affiche tous les nombres saisis ainsi que leur somme. \
+                Le programme prend alors fin.
 
-                **N'exécutez pas le code avant d'avoir terminé votre dessin !**
+                #### Exemple d'exécution
 
-                ```python showLineNumbers
-                import matplotlib.pyplot as plt
-
-                transport = ["Bus", "Voiture", "Vélo", "Skateboard", "Trottinette", "Marche"]
-                etudiants = [40, 30, 20, 15, 10, 5]
-
-                plt.bar(transport, etudiants)
-
-                plt.title("Comment les étudiants viennent au cégep")
-                plt.xlabel("Mode de transport")
-                plt.ylabel("Nombre d'étudiants")
-
-                plt.show()
+                ```
+                Saisir un nombre : 20
+                Saisir un nombre : 50
+                Saisir un nombre : 10
+                Saisir un nombre : -5
+                Nombres saisis : [20, 50, 10, -5]
+                Somme : 75
                 ```
 
-                Créez un fichier `r10_graphique_main.py` pour valider votre réponse en exécutant le code.
+                Créez un fichier `sans_pycharm.py` pour valider votre réponse à l'aide de **Pycharm**.
 
                 :::note Notions visées
-                Lecture de code Matplotlib, `plt.bar()`, anticipation du résultat d'un graphique
+                Boucle `while`, saisie utilisateur `input()`, accumulation dans une liste, calcul de somme
                 :::
 
                 ::::
 
                 ---
-
-                ::::info Exercice - Prédire le résultat avec des ensembles
-
-                Écrivez sur papier ce qui sera affiché dans la console par l'exécution du code ci-dessous.
-
-                **N'exécutez pas le code avant d'avoir terminé vos réponses !**
-
-                ```python showLineNumbers
-                virus_a = {"T", "G", "Uroboros"}
-                virus_b = {"G", "C", "Las Plagas"}
-
-                virus_a.add("T")
-                virus_a.add("C")
-
-                print(len(virus_a))
-                print("Uroboros" in virus_b)
-                print(virus_a & virus_b)
-                print(virus_a - virus_b)
-                print(virus_a | virus_b)
-                ```
-
-                Créez un fichier `r10_comprehension_set.py` pour valider votre réponse en exécutant le code.
-
-                :::note Notions visées
-                Ensembles (`set`), unicité des éléments, `add()`, `len()`, opérateur `in`, union, intersection, différence
-                :::
-
-                ::::
-
-                ---
-
-                ::::info Exercice - Prédire le résultat avec un dictionnaire
-
-                Écrivez sur papier ce qui sera affiché dans la console par l'exécution du code ci-dessous.
-
-                **N'exécutez pas le code avant d'avoir terminé vos réponses !**
-
-                ```python showLineNumbers
-                joueur = {
-                    "pseudo": "Sakura99",
-                    "score": 4200,
-                    "niveau": 12,
-                    "inventaire": ["clé", "herbe verte"]
-                }
-
-                joueur["score"] = joueur["score"] + 300
-                joueur["inventaire"].append("ruban encreur")
-                joueur["region"] = "QC"
-
-                print(joueur["pseudo"])
-                print(joueur["score"])
-                print("niveau" in joueur)
-                print("clé" in joueur)
-                print(len(joueur))
-                print(joueur["inventaire"])
-                ```
-
-                Créez un fichier `r10_comprehension_dict.py` pour valider votre réponse en exécutant le code.
-
-                :::note Notions visées
-                Dictionnaires (`dict`), accès par clé, modification d'une valeur, ajout d'une nouvelle clé, liste comme valeur, opérateur `in`, fonction `len()`
-                :::
-
-                ::::
 
                 <IntroSolutionsExercices />
 
-                🔨 Solution des **exercices de création** :
-                - Affichage des virus - liste simple *(solutionnaire à venir)*
-                - Affichage des virus - listes parallèles *(solutionnaire à venir)*
-                - Affichage des virus - liste à 2 dimensions *(solutionnaire à venir)*
-                - Manipulation de listes par compréhension *(solutionnaire à venir)*
-                - Manipulation d'ensembles *(solutionnaire à venir)*
-                - Dictionnaires - Dictionnaire imbriqué *(solutionnaire à venir)*
-                - Jeu de devinette amélioré *(solutionnaire à venir)*
-                - Graphique - Courbe simple *(solutionnaire à venir)*
-                - Graphique - Températures annuelles *(solutionnaire à venir)*
-                - Graphique - Barres et moyennes *(solutionnaire à venir)*
-                - Graphique - Populations par saison *(solutionnaire à Regions)*
-                - Graphique - Nuage de points et courbe *(solutionnaire à venir)*
+                Solution des **exercices de création** :
+                - Analyse : Modèles de véhicules *(solutionnaire à venir)*
+                - Analyse : Prix Turing *(solutionnaire à venir)*
+                - groupby et moyenne *(solutionnaire à venir)*
+                - Nettoyage et sélection de données *(solutionnaire à venir)*
+                - Visualisation : Pourboire par personne *(solutionnaire à venir)*
+                - Visualisation : Consommation d'essence *(solutionnaire à venir)*
 
-                ✏️ Solution des **exercices de compréhension** :
-                - Tracer un graphique à la main *(solutionnaire à venir)*
-                - Prédire le résultat avec des ensembles *(solutionnaire à venir)*
-                - Prédire le résultat avec un dictionnaire *(solutionnaire à venir)*
-           </TabItem>
+                Solution des **exercices sur papier** :
+                - Écrire du code sans PyCharm *(solutionnaire à venir)*
+            </TabItem>
         </Tabs>
-
     </TabItem>
+
 </Tabs>

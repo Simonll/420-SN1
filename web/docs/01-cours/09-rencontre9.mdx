@@ -1,6 +1,6 @@
 ---
-title: 9 - Pandas
-description: Intro, Explorer, Filtrer / Trier, Sélectionner, Parcourir, Nettoyer, Transformer, Statistiques, Exporter, Visualiser
+title: 9 - 🗂 Fichiers, 🐼 Pandas
+description: Fichiers (texte/CSV/JSON), Intro, Explorer, Filtrer / Trier, Sélectionner, Parcourir, Nettoyer, Transformer, Statistiques, Exporter, Visualiser
 hide_table_of_contents: true
 ---
 
@@ -16,6 +16,14 @@ import DocumentationAutorisee from '@site/docs/_components/DocumentationAutorise
 import DocumentationInterdite from '@site/docs/_components/DocumentationInterdite.mdx';
 import IntroSolutionsExercices from '@site/docs/_components/IntroSolutionsExercices.mdx';
 import Feedback from "../../src/components/Feedback";
+
+import AideMemoireFichiersTexte from '@site/docs/_components/AideMemoireFichiersTexte.mdx';
+import AideMemoireFichiersJSON from '@site/docs/_components/AideMemoireFichiersJSON.mdx';
+import Mod_FichierIntro from '../_cours-modules/_fichier-intro.mdx';
+import Mod_FichierTexte from '../_cours-modules/_fichier-texte.mdx';
+import Mod_FichierCsv from '../_cours-modules/_fichier-csv.mdx';
+import Mod_FichierJson from '../_cours-modules/_fichier-json.mdx';
+
 import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
 import AideMemoirePandasExplorer from '@site/docs/_components/AideMemoirePandasExplorer.mdx';
 import AideMemoirePandasFiltrerTrier from '@site/docs/_components/AideMemoirePandasFiltrerTrier.mdx';
@@ -38,9 +46,27 @@ import Mod_PandasStatistiques from '../_cours-modules/_pandas-statistiques.mdx';
 import Mod_PandasExporter from '../_cours-modules/_pandas-exporter.mdx';
 import Mod_PandasVisualiser from '../_cours-modules/_pandas-visualiser.mdx';
 
-# Pandas
+# Fichiers, Pandas
 
 <Tabs queryString="onglet">
+
+
+    <TabItem value="fichier" label="Fichier (intro)">
+        <Mod_FichierIntro />
+    </TabItem>
+
+    <TabItem value="texte" label="Fichier texte">
+        <Mod_FichierTexte />
+    </TabItem>
+
+    <TabItem value="csv" label="Fichier CSV">
+        <Mod_FichierCsv />
+    </TabItem>
+
+    <TabItem value="json" label="Fichier JSON">
+        <Mod_FichierJson />
+    </TabItem>
+
 
     <TabItem value="data" label="Intro" default>
         <Mod_PandasIntro />
@@ -82,12 +108,12 @@ import Mod_PandasVisualiser from '../_cours-modules/_pandas-visualiser.mdx';
         <Mod_PandasVisualiser />
     </TabItem>
 
-    <TabItem value="Activités" label="Activités">
+ <TabItem value="Activités" label="Activités">
 
         <RappelFonctionnementClasseInverse/>
         <Tabs>
-            <TabItem value="1" label="Activités à faire à la maison">
-                ## Auto-validation des connaissances
+            <TabItem value="1" label="🏠 Activités à faire à la maison">
+                ## 🧠 Auto-validation des connaissances
 
                 [**Ce formulaire**](https://forms.gle/PVFuF6aH8kcRrbaYA) sert à vérifier votre compréhension des éléments les plus importants de la rencontre R11. Ne faites ce questionnaire **que lorsque vous vous sentez en très bonne maîtrise de la matière**. En classe, dès votre arrivée, vous aurez un **questionnaire très similaire**, évalué **sommativement**, à compléter sans accès à **aucune documentation**.
 
@@ -97,16 +123,16 @@ import Mod_PandasVisualiser from '../_cours-modules/_pandas-visualiser.mdx';
                 ::::
             </TabItem>
 
-	        <TabItem value="2" label="Activités à faire en classe">
+	        <TabItem value="2" label=" 🏫 Activités à faire en classe">
 
-                ## Exercices de création
+                ## 🔨 Exercices de création
 
                 Pour chacun des exercices de cette section, vous devez créer des fichiers `.py` avec les noms indiqués.
 
                 <DocumentationAutorisee />
 
                 ::::info Exercice - Analyse : Modèles de véhicules
-                Créez un fichier `r9_modeles_vehicules.py` pour votre réponse.
+                📁 Créez un fichier `r11_modeles_vehicules.py` pour votre réponse.
 
                 Téléchargez le fichier <a href={useBaseUrl('/ressources/csv/mpg_dataset.csv')} download="mpg_dataset.csv">mpg_dataset.csv</a> et placez-le dans le même dossier que votre script.
 
@@ -190,7 +216,7 @@ import Mod_PandasVisualiser from '../_cours-modules/_pandas-visualiser.mdx';
                 ---
 
                 ::::info Exercice - Analyse : Prix Turing
-                Créez un fichier `r9_prix_turing.py` pour votre réponse.
+                📁 Créez un fichier `r11_prix_turing.py` pour votre réponse.
 
                 Téléchargez le fichier <a href={useBaseUrl('/ressources/csv/Turing.csv')} download="Turing.csv">Turing.csv</a> et placez-le dans le même dossier que votre script. Il contient tous les gagnants du Prix Turing.
 
@@ -311,7 +337,7 @@ import Mod_PandasVisualiser from '../_cours-modules/_pandas-visualiser.mdx';
                 ---
 
                 ::::info Exercice - groupby et moyenne
-                Créez un fichier `r11_groupby_moyenne.py` pour votre réponse.
+                📁 Créez un fichier `r11_groupby_moyenne.py` pour votre réponse.
 
                 Téléchargez le fichier <a href={useBaseUrl('/ressources/csv/tips_dataset.csv')} download="tips_dataset.csv">tips_dataset.csv</a> et placez-le dans le même dossier que votre script.
 
@@ -386,7 +412,7 @@ import Mod_PandasVisualiser from '../_cours-modules/_pandas-visualiser.mdx';
                 ---
 
                 ::::info Exercice - Nettoyage et sélection de données
-                Créez un fichier `r9_nettoyage_selection.py` pour votre réponse.
+                📁 Créez un fichier `r11_nettoyage_selection.py` pour votre réponse.
 
                 Un registraire de cégep dispose d'un tableau d'étudiants en Sciences de la nature contenant des données manquantes et des doublons. Les programmes sont :
                 - **200.BA** : Sciences de la santé
@@ -494,7 +520,7 @@ import Mod_PandasVisualiser from '../_cours-modules/_pandas-visualiser.mdx';
                 ---
 
                 ::::info Exercice - Visualisation : Pourboire par personne
-                Créez un fichier `r9_pourboire_par_personne.py` pour votre réponse.
+                📁 Créez un fichier `r11_pourboire_par_personne.py` pour votre réponse.
 
                 Téléchargez le fichier <a href={useBaseUrl('/ressources/csv/tips_dataset.csv')} download="tips_dataset.csv">tips_dataset.csv</a> et placez-le dans le même dossier que votre script.
 
@@ -524,7 +550,7 @@ import Mod_PandasVisualiser from '../_cours-modules/_pandas-visualiser.mdx';
                   <Column size={6}>
                     <div style={{ textAlign: "left" }}>
                       <img
-                        src={require('/img/cours/exercice_2a.png').default}
+                        src={require('/img/cours/r11_exercice_2a.png').default}
                         alt="Histogramme du pourboire par personne"
                         style={{ maxWidth: '100%', height: 'auto' }}
                       />
@@ -533,7 +559,7 @@ import Mod_PandasVisualiser from '../_cours-modules/_pandas-visualiser.mdx';
                     <Column size={6}>
                         <div style={{ textAlign: "right" }}>
                         <img
-                            src={require('/img/cours/exercice_2b.png').default}
+                            src={require('/img/cours/r11_exercice_2b.png').default}
                             alt="Boxplot tip par person par size"
                             style={{ maxWidth: '100%', height: 'auto' }}
                         />
@@ -554,7 +580,7 @@ import Mod_PandasVisualiser from '../_cours-modules/_pandas-visualiser.mdx';
                 ---
 
                 ::::info Exercice - Visualisation : Consommation d'essence
-                Créez un fichier `r11_consommation_essence.py` pour votre réponse.
+                📁 Créez un fichier `r11_consommation_essence.py` pour votre réponse.
 
                 Téléchargez le fichier <a href={useBaseUrl('/ressources/csv/mpg_dataset.csv')} download="mpg_dataset.csv">mpg_dataset.csv</a> et placez-le dans le même dossier que votre script.
 
@@ -575,7 +601,7 @@ import Mod_PandasVisualiser from '../_cours-modules/_pandas-visualiser.mdx';
                   <Column size={6}>
                     <div style={{ textAlign: "left" }}>
                       <img
-                        src={require('/img/cours/exercice_3a.png').default}
+                        src={require('/img/cours/r11_exercice_3a.png').default}
                         alt="Histogramme de la consommation en litres aux 100 km"
                         style={{ maxWidth: '100%', height: 'auto' }}
                       />
@@ -584,7 +610,7 @@ import Mod_PandasVisualiser from '../_cours-modules/_pandas-visualiser.mdx';
                     <Column size={6}>
                         <div style={{ textAlign: "right" }}>
                         <img
-                            src={require('/img/cours/exercice_3b.png').default}
+                            src={require('/img/cours/r11_exercice_3b.png').default}
                             alt="Consommation moyenne par nombre de cylindres"
                             style={{ maxWidth: '100%', height: 'auto' }}
                         />
@@ -604,7 +630,7 @@ import Mod_PandasVisualiser from '../_cours-modules/_pandas-visualiser.mdx';
 
                 ---
 
-                ## Exercices sur papier
+                ## ✏️ Exercices sur papier
 
                 :::warning-nt
                 Les exercices suivants ne visent pas nécessairement à pratiquer la matière de cette rencontre, \
@@ -631,7 +657,7 @@ import Mod_PandasVisualiser from '../_cours-modules/_pandas-visualiser.mdx';
                 Somme : 75
                 ```
 
-                Créez un fichier `r11_sans_pycharm.py` pour valider votre réponse à l'aide de **Pycharm**.
+                📁 Créez un fichier `r11_sans_pycharm.py` pour valider votre réponse à l'aide de **Pycharm**.
 
                 :::note Notions visées
                 Boucle `while`, saisie utilisateur `input()`, accumulation dans une liste, calcul de somme
@@ -643,7 +669,7 @@ import Mod_PandasVisualiser from '../_cours-modules/_pandas-visualiser.mdx';
 
                 <IntroSolutionsExercices />
 
-                Solution des **exercices de création** :
+                🔨 Solution des **exercices de création** :
                 - Analyse : Modèles de véhicules *(solutionnaire à venir)*
                 - Analyse : Prix Turing *(solutionnaire à venir)*
                 - groupby et moyenne *(solutionnaire à venir)*
@@ -651,7 +677,7 @@ import Mod_PandasVisualiser from '../_cours-modules/_pandas-visualiser.mdx';
                 - Visualisation : Pourboire par personne *(solutionnaire à venir)*
                 - Visualisation : Consommation d'essence *(solutionnaire à venir)*
 
-                Solution des **exercices sur papier** :
+                ✏️ Solution des **exercices sur papier** :
                 - Écrire du code sans PyCharm *(solutionnaire à venir)*
             </TabItem>
         </Tabs>

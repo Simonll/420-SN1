@@ -1,0 +1,371 @@
+
+        :::info 🧠🕸️ Qu'est-ce que l'apprentissage profond?
+        L'apprentissage profond (*Deep Learning*, DL) est une sous-catégorie de l'apprentissage machine qui utilise des réseaux de neurones artificiels profonds pour modéliser et résoudre des problèmes complexes. Ces réseaux sont composés de plusieurs couches de neurones interconnectés, permettant au modèle d'apprendre des représentations hiérarchiques des données.
+
+        Le DL est particulièrement efficace pour traiter des données non structurées telles que les images, le texte et l'audio, et a conduit à des avancées significatives dans des domaines comme la vision par ordinateur, le traitement du langage naturel et la reconnaissance vocale.
+        :::
+
+        :::tip Applications avancées
+        L'apprentissage profond a permis des avancées significatives dans divers domaines, notamment :
+        | Domaine | Exemples |
+        |---------|----------|
+        | Vision par ordinateur | Reconnaissance faciale, détection d'objets |
+        | Traitement du langage naturel | Traduction automatique, chatbots |
+        | Génération de contenu | Création d'images, musique, texte |
+        | Santé | Diagnostic médical, analyse d'images médicales |
+        :::
+
+        :::info Modèle de base : le neurone artificiel 🤖
+
+        Le neurone artificiel est l'unité de base des réseaux de neurones en apprentissage profond.
+        Il reçoit plusieurs entrées, applique des poids à chacune d'elles, additionne le tout avec un biais, puis applique une **fonction d'activation** pour produire une sortie.
+
+        À la base, il est inspiré du fonctionnement d'un neurone biologique :
+
+        ```mermaid
+        flowchart LR
+
+        subgraph Bio["🧬 Neurone biologique"]
+            A1["Dendrites<br/><sub>Reçoivent des signaux chimiques/électriques</sub>"]
+            A2["Soma (corps cellulaire)<br/><sub>Intègre les signaux</sub>"]
+            A3["Axone<br/><sub>Transmet un signal électrique</sub>"]
+            A4["Synapses<br/><sub>Transmission chimique vers d'autres neurones</sub>"]
+
+            A1 --> A2 --> A3 --> A4
+        end
+
+        subgraph Art["🤖 Neurone artificiel"]
+            B1["Entrées x₁, x₂, …"]
+            B2["Poids w₁, w₂, …"]
+            B3["Somme pondérée<br/>Σ(wᵢ·xᵢ + biais)"]
+            B4["Fonction d'activation<br/>f(Σ)"]
+            B5["Sortie y"]
+
+            B1 --> B3
+            B2 --> B3
+            B3 --> B4 --> B5
+        end
+
+        Bio ---> Art
+        ```
+
+        :::
+
+        :::warning Neurone artificiel vs neurone biologique
+        - Bien que le **neurone artificiel** s’inspire du fonctionnement du **neurone biologique**, il ne s’agit que d’une **approximation mathématique très simplifiée**.
+        - Les neurones biologiques sont des structures extraordinairement complexes :
+        ils communiquent au moyen de **signaux électriques et chimiques**, s’adaptent en permanence, possèdent des milliers de connexions (synapses) et fonctionnent selon des principes **continu** (analogique) plutôt que numérique.
+        - Certains projets ambitieux, comme le **Blue Brain Project**, tentent de modéliser le cerveau humain.
+        Mais en pratique, les neurones artificiels utilisés en apprentissage machine restent des abstractions conçues pour résoudre des tâches spécifiques, sans chercher à reproduire la complexité réelle du cerveau.
+        - En réalité, nous comprenons encore mal le fonctionnement détaillé d’un seul neurone biologique.
+        Alors imaginer modéliser le cerveau humain dans son ensemble — qui compte environ **100 milliards de neurones**, interconnectés par **100 trillions de synapses** — dépasse largement nos capacités actuelles de simulation et de compréhension.
+        - Même avec les avancées spectaculaires en intelligence artificielle, la complexité du cerveau humain demeure **infiniment supérieure** à ce que nos modèles peuvent reproduire.
+        - Pour aller plus loin, vous pouvez lire *[Le cerveau, l’univers dans votre tête](https://www.davidfortin.ca/styled-2/)* du neurochirurgien David Fortin — un excellent ouvrage de vulgarisation.
+        :::
+
+        :::note Perceptron
+        Le quessé?? Le **perceptron** est l'un des modèles de neurones artificiels les plus simples et les plus fondamentaux en apprentissage machine. Il a été introduit par Frank Rosenblatt en 1958. Le perceptron est conçu pour effectuer des tâches de classification binaire, c'est-à-dire qu'il peut distinguer entre deux classes différentes.
+
+        Le perceptron fonctionne en prenant plusieurs entrées pondérées, en les sommant, puis en appliquant une fonction d'activation (généralement une fonction seuil) pour produire une sortie binaire (0 ou 1).
+        ```mermaid
+        flowchart LR
+            A1["Entrées x₁, x₂, …"]
+            A2["Poids w₁, w₂, …"]
+            A3["Somme pondérée<br/>Σ(wᵢ·xᵢ + biais)"]
+            A4["Fonction d'activation<br/>f(Σ)"]
+            A5["Sortie y"]
+            A1 --> A3
+            A2 --> A3
+            A3 --> A4 --> A5
+        ```
+
+        Le code suivant illustre le fonctionnement d'un perceptron simple en Python pour apprendre la fonction logique ET :
+        ```python showLineNumbers
+        # Données d'entraînement (ET logique)
+        X = [(0,0), (0,1), (1,0), (1,1)]
+        y = [0, 0, 0, 1]
+
+        # Poids initiaux
+        w = [0.1, -0.2]
+        b = 0.0
+        lr = 0.1
+
+        # Fonction d'activation (seuil)
+        def activation(z):
+            return 1 if z >= 0.5 else 0
+
+        # Entraînement
+        for epoch in range(20):
+            for (x1, x2), cible in zip(X, y):
+                z = w[0]*x1 + w[1]*x2 + b
+                pred = activation(z)
+                err = cible - pred
+
+                # Mise à jour des poids
+                w[0] += lr * err * x1
+                w[1] += lr * err * x2
+                b    += lr * err
+
+        # Test final
+        for (x1, x2) in X:
+            z = w[0]*x1 + w[1]*x2 + b
+            print((x1, x2), activation(z))
+        ```
+
+        Le perceptron peut être entraîné à l'aide d'un algorithme simple qui ajuste les poids en fonction des erreurs de classification sur un ensemble de données d'entraînement. Cependant, le perceptron a des limitations, notamment son incapacité à résoudre des problèmes non linéaires, ce qui a conduit au développement de réseaux de neurones plus complexes et profonds.
+        :::
+
+        :::info 🔗 Réseaux de neurones
+
+        Un **réseau de neurones artificiels** est une architecture composée de plusieurs couches de neurones interconnectés :
+
+        - une **couche d’entrée** qui reçoit les données (features),
+        - une ou plusieurs **couches cachées** qui transforment progressivement les représentations,
+        - une **couche de sortie** qui produit la prédiction (classe, probabilité, valeur numérique, etc.).
+
+        Chaque neurone applique une combinaison linéaire de ses entrées (poids + biais), puis une **fonction d’activation non linéaire**.
+        En empilant plusieurs couches, le réseau peut apprendre des **représentations hiérarchiques** de plus en plus abstraites.
+
+        Le schéma ci-dessous illustre un réseau simple avec :
+
+        - 3 neurones d’entrée
+        - 2 couches cachées
+        - 1 neurone de sortie
+
+        ```mermaid
+        flowchart LR
+
+            %% Couches
+            subgraph Input["Couche d'entrée"]
+                X1["x1"]
+                X2["x2"]
+                X3["x3"]
+            end
+
+            subgraph Hidden1["Couche cachée 1"]
+                H11["h1_1"]
+                H12["h1_2"]
+                H13["h1_3"]
+            end
+
+            subgraph Hidden2["Couche cachée 2"]
+                H21["h2_1"]
+                H22["h2_2"]
+            end
+
+            subgraph Output["Couche de sortie"]
+                Y["y"]
+            end
+
+            %% Connexions entrée -> couche cachée 1 (fully connected)
+            X1 --> H11
+            X1 --> H12
+            X1 --> H13
+
+            X2 --> H11
+            X2 --> H12
+            X2 --> H13
+
+            X3 --> H11
+            X3 --> H12
+            X3 --> H13
+
+            %% Connexions couche cachée 1 -> couche cachée 2
+            H11 --> H21
+            H11 --> H22
+
+            H12 --> H21
+            H12 --> H22
+
+            H13 --> H21
+            H13 --> H22
+
+            %% Connexions couche cachée 2 -> sortie
+            H21 --> Y
+            H22 --> Y
+        ```
+
+        Dans un vrai modèle de deep learning, il peut y avoir :
+
+        - beaucoup plus de neurones par couche,
+        - de nombreuses couches cachées (réseaux “profonds”),
+        - des types de couches spécialisés (convolutions, récurrences, attention, etc.),
+        mais l’idée de base reste la même : **propager l’information de gauche à droite** en la transformant à chaque couche.
+
+        :::
+
+
+        :::tip 🐾 Exemple : classifier des animaux dans des photos
+
+        Dans un réseau profond entraîné à **reconnaître des animaux dans des images**, les couches n’apprennent pas toutes la même chose :
+
+        - Les **premières couches** repèrent surtout des **motifs très simples** : bords, orientations, contrastes.
+        - Les **couches intermédiaires** apprennent des **textures et motifs locaux** : pelage, motifs de fourrure, contours d’oreilles, etc.
+        - Les **couches plus profondes** combinent ces éléments pour reconnaître des **parties d’objets** : yeux, museau, pattes…
+        - Les **dernières couches** construisent une représentation globale de l’**animal entier** et produisent la **classe prédite** (chat, chien, oiseau, etc.).
+
+        Ce schéma illustre cette montée progressive en abstraction :
+
+        ```mermaid
+        flowchart LR
+
+            I["📷 Image d'entrée<br/><sub>chat, chien, oiseau…</sub>"] --> L1
+            subgraph C1["Couche 1"]
+                L1["Bords & orientations<br/><sub>lignes, contours simples</sub>"]
+            end
+
+            C1 --> L2
+            subgraph C2["Couche 2"]
+                L2["Textures & motifs locaux<br/><sub>pelage, tâches, motifs</sub>"]
+            end
+
+            C2 --> L3
+            subgraph C3["Couche 3"]
+                L3["Parties d'objets<br/><sub>yeux, oreilles, pattes</sub>"]
+            end
+
+            C3 --> L4
+            subgraph C4["Couche 4+"]
+                L4["Représentations d'animaux<br/><sub>forme globale : 'chat', 'chien', 'oiseau'</sub>"]
+            end
+
+            L4 --> Y["🎯 Sortie<br/><sub>classe prédite</sub>"]
+        ```
+
+        Dans un tel modèle de réseau de neurones convolutifs (*Convolutional Neural Network, CNN*), ces “couches” sont des **couches convolutionnelles** apprenant automatiquement ces niveaux de représentation, sans que l’on dise explicitement au modèle “voici un bord” ou “voici une patte” : il les découvre à partir des données et se construit sa propre hiérarchie de caractéristiques.
+
+        :::
+
+        :::info Architectures courantes
+        Voici quelques architectures de réseaux de neurones couramment utilisées en apprentissage profond :
+        | Architecture | Description | Applications |
+        |--------------|-------------|--------------|
+        | Réseaux de neurones convolutifs (CNN) | Utilisent des couches convolutionnelles pour extraire des caractéristiques spatiales | Vision par ordinateur, reconnaissance d'images |
+        | Réseaux de neurones récurrents (RNN) | Conçus pour traiter des séquences de données en utilisant des connexions récurrentes | Traitement du langage naturel, séries temporelles |
+        | Transformeurs | Utilisent des mécanismes d'attention pour capturer les dépendances à long terme dans les données séquentielles | Traduction automatique, modèles de langage |
+        | Autoencodeurs | Réseaux non supervisés utilisés pour la réduction de dimensionnalité et la génération de données | Compression de données, génération d'images |
+        :::
+
+        :::warning Défis de l'apprentissage profond
+        Malgré ses succès, l'apprentissage profond présente plusieurs défis :
+        - **Données massives** : Nécessite de grandes quantités de données étiquetées pour un entraînement efficace.
+        - **Coût computationnel** : Entraînement de modèles profonds demande des ressources matérielles importantes (GPU/TPU).
+        - **Interprétabilité** : Les modèles profonds sont souvent considérés comme des "boîtes noires", rendant difficile la compréhension de leurs décisions.
+        - **Surapprentissage** : Risque accru de surapprentissage en raison de la complexité des modèles.
+        - **Biais** : Les modèles peuvent apprendre et amplifier les biais présents dans les données d'entraînement.
+        :::
+
+        ::::info Exemple d'implémentation avec Keras (réseaux de neurones)
+
+        Voici un exemple d'utilisation de la bibliothèque `Keras` (incluse dans `TensorFlow`) pour entraîner un **réseau de neurones simple** sur le jeu de données `MNIST` (images de chiffres manuscrits 28×28).
+
+        Ce jeu de données est constitué d'environ 60 000 images de chiffres (0 à 9) écrits à la main.<br />
+        Le but est de construire un modèle capable de reconnaître correctement des chiffres écrits à la main.
+
+        L'objectif est de montrer les grandes étapes d'un entraînement en deep learning :
+
+        1. Charger un jeu de données intégré à Keras
+        2. Prétraiter les données (normalisation, mise en forme)
+        3. Créer un modèle (architecture)
+        4. Compiler le modèle (choix de la fonction de perte, de l’optimiseur, des métriques)
+        5. Entraîner le modèle (`fit`)
+        6. Évaluer sur un ensemble de test
+
+        :::warning-nt
+        > 💡 Cet exemple est surtout **illustratif** : pour l’exécuter, il faut avoir installé `tensorflow` (qui contient `keras`), ce qui peut prendre environ 3 minutes à installer via le terminal intégré <img src={require('/img/icons/terminal.png').default}/> :
+
+        ```bash
+        pip install tensorflow
+        ```
+        :::
+
+        ```python showLineNumbers
+        # 1. Importer les bibliothèques nécessaires
+        import tensorflow as tf
+        from tensorflow import keras
+        from tensorflow.keras import layers
+
+        # 2. Charger le jeu de données MNIST
+        #    (images de chiffres manuscrits 28x28 en niveaux de gris)
+        (x_train, y_train), (x_test, y_test) = keras.datasets.mnist.load_data()
+
+        print("Taille x_train :", x_train.shape)
+        print("Taille y_train :", y_train.shape)
+        print("Taille x_test  :", x_test.shape)
+        print("Taille y_test  :", y_test.shape)
+
+        # 3. Prétraitement des données
+        #    - Conversion en float32
+        #    - Normalisation des pixels dans [0, 1]
+        x_train = x_train.astype("float32") / 255.0
+        x_test  = x_test.astype("float32") / 255.0
+
+        #    On réserve une partie de x_train pour la validation
+        x_val = x_train[-10000:]
+        y_val = y_train[-10000:]
+
+        x_train = x_train[:-10000]
+        y_train = y_train[:-10000]
+
+        print("Après split :")
+        print("Entraînement :", x_train.shape, y_train.shape)
+        print("Validation   :", x_val.shape,   y_val.shape)
+        print("Test         :", x_test.shape,  y_test.shape)
+
+        #    Les images 28x28 sont aplaties en vecteurs de taille 784
+        x_train = x_train.reshape((-1, 28 * 28))
+        x_val   = x_val.reshape((-1, 28 * 28))
+        x_test  = x_test.reshape((-1, 28 * 28))
+
+        # 4. Définir le modèle (réseau de neurones fully-connected)
+        model = keras.Sequential(
+            [
+                layers.Input(shape=(784,)),              # 28*28 pixels
+                layers.Dense(128, activation="relu"),    # Couche cachée 1
+                layers.Dense(64, activation="relu"),     # Couche cachée 2
+                layers.Dense(10, activation="softmax"),  # 10 classes (chiffres 0–9)
+            ]
+        )
+
+        # Afficher un résumé du modèle
+        model.summary()
+
+        # 5. Compiler le modèle
+        #    - Optimiseur : Adam
+        #    - Perte : entropie croisée pour labels entiers (sparse_categorical_crossentropy)
+        #    - Métrique : accuracy
+        model.compile(
+            optimizer="adam",
+            loss="sparse_categorical_crossentropy",
+            metrics=["accuracy"],
+        )
+
+        # 6. Entraîner le modèle
+        history = model.fit(
+            x_train,
+            y_train,
+            epochs=5,                # Nombre de passes sur les données d'entraînement
+            batch_size=32,           # Taille des mini-lots
+            validation_data=(x_val, y_val),
+        )
+
+        # 7. Évaluer la performance sur l'ensemble de test
+        test_loss, test_acc = model.evaluate(x_test, y_test, verbose=0)
+        print(f"Loss sur le test : {test_loss:.4f}")
+        print(f"Accuracy sur le test : {test_acc:.4f}")
+
+        # 8. Faire quelques prédictions (optionnel)
+        import numpy as np
+
+        samples = x_test[:5]
+        labels  = y_test[:5]
+
+        pred_probas = model.predict(samples)
+        pred_labels = np.argmax(pred_probas, axis=1)
+
+        print("Labels réels     :", labels)
+        print("Labels prédits   :", pred_labels)
+        ::::
+
+
+        {/* <Feedback feedbackId="Rencontre #12 - 🧠🕸️ Apprentissage profond" /> */}

@@ -1,0 +1,116 @@
+
+        :::tip 🌍 Pourquoi parler d’empreinte écologique de l’IA?
+
+        Derrière chaque requête à un modèle d’IA, il y a :
+
+        - des **centres de données** 🏢 remplis de serveurs et de GPU ;
+        - une **consommation d’électricité** ⚡ (souvent produite à partir de combustibles fossiles) ;
+        - du **refroidissement** 💧 (eau, climatisation) ;
+        - et du **matériel** à fabriquer puis à recycler (métaux, terres rares, déchets électroniques).
+
+        Selon l’Agence internationale de l’énergie (AIE), les centres de données consommaient déjà autour de **1,5 %** de l’électricité mondiale en 2024, et cette part pourrait **doubler** d’ici 2030, en grande partie à cause de l’IA.  [oai_citation:0‡IEA](https://www.iea.org/reports/energy-and-ai/executive-summary?utm_source=chatgpt.com)
+
+        :::
+
+        :::warning 🧩 Où se situe l’impact?
+
+        On peut simplifier l’empreinte écologique de l’IA en trois grandes composantes :
+
+        1. **Entraînement des modèles**
+           - Entraîner un grand modèle (par ex. un grand modèle de langage) peut consommer des **dizaines de GWh** d’électricité.
+           - Certaines estimations pour des modèles de type GPT-3 parlent de **centaines de tonnes de CO₂e** émises pour un seul entraînement.  [oai_citation:1‡The Sustainable Agency](https://thesustainableagency.com/blog/environmental-impact-of-generative-ai/?utm_source=chatgpt.com)
+           - Cela représente l’équivalent de **centaines de vols long-courrier** ou de la **vie entière** d’émissions d’une voiture moyenne.
+
+        2. **Utilisation quotidienne (inférence)**
+           - Une fois le modèle déployé, chaque requête (chat, image, recommandation…) consomme de l’énergie.
+           - Google estimait déjà qu’environ **60 %** de l’énergie liée à l’IA était consommée par l’**inférence** (usage quotidien), contre 40 % pour l’entraînement.  [oai_citation:2‡news.climate.columbia.edu](https://news.climate.columbia.edu/2023/06/09/ais-growing-carbon-footprint/?utm_source=chatgpt.com)
+           - Avec des millions d’utilisateurs, ces “petites” requêtes s’additionnent.
+
+        3. **Eau et refroidissement**
+           - Les centres de données utilisent de grandes quantités d’**eau** pour le refroidissement.
+           - Une étude estimait par exemple qu’un entraînement de GPT-3 avait nécessité de l’ordre de **700 000 L d’eau douce** pour le refroidissement, l’équivalent de la fabrication de centaines de voitures.  [oai_citation:3‡Earth.Org](https://earth.org/environmental-impact-chatgpt/?utm_source=chatgpt.com)
+
+        Pour visualiser le chemin de l’impact :
+
+        ```mermaid
+        flowchart LR
+            U["👩‍💻 Vous<br/><sub>(code, requêtes)</sub>"] --> R["Requêtes vers un modèle d'IA"]
+            R --> DC["🏢 Centre de données<br/><sub>GPU, serveurs</sub>"]
+
+            DC --> P["⚡ Électricité<br/><sub>mix énergétique local</sub>"]
+            P --> CO2["🌫️ Émissions de CO₂e"]
+
+            DC --> Cool["💧 Refroidissement<br/><sub>eau, climatisation</sub>"]
+
+            DC --> HW["🛠️ Matériel informatique"]
+            HW --> Waste["🗑️ Déchets électroniques<br/><sub>extraction, recyclage</sub>"]
+        ```
+
+        :::
+
+        :::info 📊 Ordres de grandeur (approximatifs)
+
+        Ces chiffres évoluent vite, mais donnent une idée des échelles :
+
+        | Aspect | Ordre de grandeur | Source / contexte |
+        |--------|-------------------|--------------------|
+        | Part de l’électricité mondiale utilisée par les centres de données | ~1,5 % en 2024 | AIE (Energy and AI)  [oai_citation:4‡IEA](https://www.iea.org/reports/energy-and-ai/executive-summary?utm_source=chatgpt.com) |
+        | Projection pour 2030 | Jusqu’à ~3 % de l’électricité mondiale | AIE, scénarios 2030  [oai_citation:5‡IEA](https://www.iea.org/reports/energy-and-ai/energy-demand-from-ai?utm_source=chatgpt.com) |
+        | Entraînement d’un très grand modèle | centaines de milliers de kg de CO₂e (≈ centaines de vols long-courrier) | études sur GPT-3 et autres grands modèles  [oai_citation:6‡The Sustainable Agency](https://thesustainableagency.com/blog/environmental-impact-of-generative-ai/?utm_source=chatgpt.com) |
+        | Eau utilisée pour l’entraînement d’un grand modèle | ~700 000 L pour un entraînement (ordre de grandeur) | étude sur GPT-3  [oai_citation:7‡Earth.Org](https://earth.org/environmental-impact-chatgpt/?utm_source=chatgpt.com) |
+
+        > 🧊 À l’échelle d’un **TP en cégep**, votre impact est très faible comparé à celui de grands modèles industriels.
+        > Mais comprendre ces ordres de grandeur permet de réfléchir à une **pratique plus sobre** dès maintenant.
+
+        :::
+
+        :::tip 🌱 Vers une IA plus “verte” (Green AI)
+
+        Des équipes de recherche et d’ingénierie travaillent à réduire l’empreinte écologique de l’IA, ce qu’on appelle parfois **Green AI**.  [oai_citation:8‡ScienceDirect](https://www.sciencedirect.com/science/article/pii/S0925231224008671?utm_source=chatgpt.com)
+        Parmi les stratégies :
+
+        - **Modèles plus petits et efficaces**
+          - Utiliser des modèles plus compacts quand c’est possible (au lieu de toujours choisir “le plus gros modèle”).
+          - Techniques de **compression**, **quantification**, **distillation** pour réduire la taille des modèles.  [oai_citation:9‡esdst.eu](https://esdst.eu/green-ai-reducing-the-carbon-footprint-of-machine-learning/?utm_source=chatgpt.com)
+
+        - **Matériel et infrastructures plus sobres**
+          - Data centers alimentés par des **énergies renouvelables** (solaire, éolien, hydro).
+          - Serveurs et GPU plus efficaces sur le plan énergétique.
+
+        - **Optimisation des entraînements**
+          - Limiter le nombre d’expériences redondantes.
+          - Planifier les entraînements aux moments où l’électricité est plus “propre” (forte part de renouvelable).  [oai_citation:10‡research.google](https://research.google/blog/good-news-about-the-carbon-footprint-of-machine-learning-training/?utm_source=chatgpt.com)
+
+        - **Mesure du carbone**
+          - Utiliser des outils comme **CodeCarbon** ou autres frameworks pour estimer l’empreinte carbone d’un entraînement.
+          - Intégrer cette information dans les choix de modèles et d’architectures.  [oai_citation:11‡InfoQ](https://www.infoq.com/articles/best-practices-energy-efficient-ai-ml-systems/?utm_source=chatgpt.com)
+
+        :::
+
+        :::tip 🧮 Et vous, en SN1, concrètement?
+
+        À votre échelle (TP en Python, petits modèles, jeux de données modestes), l’impact direct est très faible, mais vous pouvez déjà adopter de **bons réflexes** :
+
+        - **Éviter le gaspillage de calcul**
+          - Ne pas lancer 50 fois le même entraînement “pour rien”.
+          - Sauvegarder les modèles entraînés au lieu de tout refaire à chaque exécution.
+
+        - **Commencer simple**
+          - Tester d’abord des **modèles simples** (régression, petits arbres, petits réseaux).
+          - N’augmenter la complexité **que si nécessaire**.
+
+        - **Réutiliser plutôt que tout recréer**
+          - Quand c’est possible, utiliser des **modèles pré-entraînés** légers ou des bibliothèques optimisées (scikit-learn, etc.).
+
+        - **Être curieux·se de la question**
+          - Lorsqu’on vous présente un nouvel outil d’IA, vous pouvez poser la question :
+            > “Et son **empreinte écologique**, on sait quelque chose là-dessus?”
+          - C’est déjà une manière de faire évoluer les pratiques.
+
+        L’objectif n’est pas de vous culpabiliser dès maintenant, mais de vous donner des **repères** :
+        l’IA n’est pas “magique” ni “immatérielle”, elle repose sur des infrastructures bien réelles, avec un **coût énergétique et matériel**. 🌱
+
+        :::
+
+
+        {/* <Feedback feedbackId="Rencontre #12 - 🌳 Empreinte écologique" /> */}
