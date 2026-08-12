@@ -7,34 +7,42 @@ hide_table_of_contents: true
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import useBaseUrl from '@docusaurus/useBaseUrl';
-
-import Row from "../../src/components/Row";
 import Column from "../../src/components/Column";
-
+import Row from "../../src/components/Row";
 import RappelFonctionnementClasseInverse from '@site/docs/_components/RappelFonctionnementClasseInverse.mdx';
 import DocumentationAutorisee from '@site/docs/_components/DocumentationAutorisee.mdx';
 import DocumentationInterdite from '@site/docs/_components/DocumentationInterdite.mdx';
 import IntroSolutionsExercices from '@site/docs/_components/IntroSolutionsExercices.mdx';
 import Feedback from "../../src/components/Feedback";
+import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
 
-import AideMemoireFichiersTexte from '@site/docs/_components/AideMemoireFichiersTexte.mdx';
+import AideMemoireDict from '@site/docs/_components/AideMemoireDict.mdx';
+import AideMemoireExpressionsBoolennes from '@site/docs/_components/AideMemoireExpressionsBoolennes.mdx';
 import AideMemoireFichiersJSON from '@site/docs/_components/AideMemoireFichiersJSON.mdx';
+import AideMemoireFichiersTexte from '@site/docs/_components/AideMemoireFichiersTexte.mdx';
+import AideMemoireListe from '@site/docs/_components/AideMemoireListe.mdx';
+import AideMemoireNumpyBornes from '@site/docs/_components/AideMemoireNumpyBornes.mdx';
+import AideMemoireNumpyConditions from '@site/docs/_components/AideMemoireNumpyConditions.mdx';
+import AideMemoireNumpyManipulation from '@site/docs/_components/AideMemoireNumpyManipulation.mdx';
+import AideMemoireNumpyMatplotlib from '@site/docs/_components/AideMemoireNumpyMatplotlib.mdx';
+import AideMemoireNumpyTableaux from '@site/docs/_components/AideMemoireNumpyTableaux.mdx';
+import AideMemoireNumpyVectorise from '@site/docs/_components/AideMemoireNumpyVectorise.mdx';
+import AideMemoirePandasExplorer from '@site/docs/_components/AideMemoirePandasExplorer.mdx';
+import AideMemoirePandasExporter from '@site/docs/_components/AideMemoirePandasExporter.mdx';
+import AideMemoirePandasFiltrerTrier from '@site/docs/_components/AideMemoirePandasFiltrerTrier.mdx';
+import AideMemoirePandasNettoyer from '@site/docs/_components/AideMemoirePandasNettoyer.mdx';
+import AideMemoirePandasParcourir from '@site/docs/_components/AideMemoirePandasParcourir.mdx';
+import AideMemoirePandasSelectionner from '@site/docs/_components/AideMemoirePandasSelectionner.mdx';
+import AideMemoirePandasStatistiques from '@site/docs/_components/AideMemoirePandasStatistiques.mdx';
+import AideMemoirePandasTransformer from '@site/docs/_components/AideMemoirePandasTransformer.mdx';
+import AideMemoirePandasVisualiser from '@site/docs/_components/AideMemoirePandasVisualiser.mdx';
+import AideMemoireSet from '@site/docs/_components/AideMemoireSet.mdx';
+import AideMemoireTuple from '@site/docs/_components/AideMemoireTuple.mdx';
+
 import Mod_FichierIntro from '../_cours-modules/_fichier-intro.mdx';
 import Mod_FichierTexte from '../_cours-modules/_fichier-texte.mdx';
 import Mod_FichierCsv from '../_cours-modules/_fichier-csv.mdx';
 import Mod_FichierJson from '../_cours-modules/_fichier-json.mdx';
-
-import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
-import AideMemoirePandasExplorer from '@site/docs/_components/AideMemoirePandasExplorer.mdx';
-import AideMemoirePandasFiltrerTrier from '@site/docs/_components/AideMemoirePandasFiltrerTrier.mdx';
-import AideMemoirePandasSelectionner from '@site/docs/_components/AideMemoirePandasSelectionner.mdx';
-import AideMemoirePandasParcourir from '@site/docs/_components/AideMemoirePandasParcourir.mdx';
-import AideMemoirePandasNettoyer from '@site/docs/_components/AideMemoirePandasNettoyer.mdx';
-import AideMemoirePandasTransformer from '@site/docs/_components/AideMemoirePandasTransformer.mdx';
-import AideMemoirePandasStatistiques from '@site/docs/_components/AideMemoirePandasStatistiques.mdx';
-import AideMemoirePandasExporter from '@site/docs/_components/AideMemoirePandasExporter.mdx';
-import AideMemoirePandasVisualiser from '@site/docs/_components/AideMemoirePandasVisualiser.mdx';
-
 import Mod_PandasIntro from '../_cours-modules/_pandas-intro.mdx';
 import Mod_PandasExplorer from '../_cours-modules/_pandas-explorer.mdx';
 import Mod_PandasFiltrerTrier from '../_cours-modules/_pandas-filtrer-trier.mdx';
@@ -46,10 +54,9 @@ import Mod_PandasStatistiques from '../_cours-modules/_pandas-statistiques.mdx';
 import Mod_PandasExporter from '../_cours-modules/_pandas-exporter.mdx';
 import Mod_PandasVisualiser from '../_cours-modules/_pandas-visualiser.mdx';
 
-# Fichiers, Pandas
+# 🗂 Fichiers, 🐼 Pandas
 
 <Tabs queryString="onglet">
-
 
     <TabItem value="fichier" label="Fichier (intro)">
         <Mod_FichierIntro />
@@ -67,12 +74,7 @@ import Mod_PandasVisualiser from '../_cours-modules/_pandas-visualiser.mdx';
         <Mod_FichierJson />
     </TabItem>
 
-
-    <TabItem value="data" label="Intro" default>
-        <Mod_PandasIntro />
-    </TabItem>
-
-    <TabItem value="pandas" label="Explorer">
+    <TabItem value="pandas" label="Explorer" default>
         <Mod_PandasExplorer />
     </TabItem>
 
@@ -108,7 +110,7 @@ import Mod_PandasVisualiser from '../_cours-modules/_pandas-visualiser.mdx';
         <Mod_PandasVisualiser />
     </TabItem>
 
- <TabItem value="Activités" label="Activités">
+<TabItem value="Activités" label="Activités">
 
         <RappelFonctionnementClasseInverse/>
         <Tabs>
@@ -132,7 +134,7 @@ import Mod_PandasVisualiser from '../_cours-modules/_pandas-visualiser.mdx';
                 <DocumentationAutorisee />
 
                 ::::info Exercice - Analyse : Modèles de véhicules
-                📁 Créez un fichier `r11_modeles_vehicules.py` pour votre réponse.
+                📁 Créez un fichier `modeles_vehicules.py` pour votre réponse.
 
                 Téléchargez le fichier <a href={useBaseUrl('/ressources/csv/mpg_dataset.csv')} download="mpg_dataset.csv">mpg_dataset.csv</a> et placez-le dans le même dossier que votre script.
 
@@ -216,7 +218,7 @@ import Mod_PandasVisualiser from '../_cours-modules/_pandas-visualiser.mdx';
                 ---
 
                 ::::info Exercice - Analyse : Prix Turing
-                📁 Créez un fichier `r11_prix_turing.py` pour votre réponse.
+                📁 Créez un fichier `prix_turing.py` pour votre réponse.
 
                 Téléchargez le fichier <a href={useBaseUrl('/ressources/csv/Turing.csv')} download="Turing.csv">Turing.csv</a> et placez-le dans le même dossier que votre script. Il contient tous les gagnants du Prix Turing.
 
@@ -337,7 +339,7 @@ import Mod_PandasVisualiser from '../_cours-modules/_pandas-visualiser.mdx';
                 ---
 
                 ::::info Exercice - groupby et moyenne
-                📁 Créez un fichier `r11_groupby_moyenne.py` pour votre réponse.
+                📁 Créez un fichier `groupby_moyenne.py` pour votre réponse.
 
                 Téléchargez le fichier <a href={useBaseUrl('/ressources/csv/tips_dataset.csv')} download="tips_dataset.csv">tips_dataset.csv</a> et placez-le dans le même dossier que votre script.
 
@@ -412,7 +414,7 @@ import Mod_PandasVisualiser from '../_cours-modules/_pandas-visualiser.mdx';
                 ---
 
                 ::::info Exercice - Nettoyage et sélection de données
-                📁 Créez un fichier `r11_nettoyage_selection.py` pour votre réponse.
+                📁 Créez un fichier `nettoyage_selection.py` pour votre réponse.
 
                 Un registraire de cégep dispose d'un tableau d'étudiants en Sciences de la nature contenant des données manquantes et des doublons. Les programmes sont :
                 - **200.BA** : Sciences de la santé
@@ -520,7 +522,7 @@ import Mod_PandasVisualiser from '../_cours-modules/_pandas-visualiser.mdx';
                 ---
 
                 ::::info Exercice - Visualisation : Pourboire par personne
-                📁 Créez un fichier `r11_pourboire_par_personne.py` pour votre réponse.
+                📁 Créez un fichier `pourboire_par_personne.py` pour votre réponse.
 
                 Téléchargez le fichier <a href={useBaseUrl('/ressources/csv/tips_dataset.csv')} download="tips_dataset.csv">tips_dataset.csv</a> et placez-le dans le même dossier que votre script.
 
@@ -550,7 +552,7 @@ import Mod_PandasVisualiser from '../_cours-modules/_pandas-visualiser.mdx';
                   <Column size={6}>
                     <div style={{ textAlign: "left" }}>
                       <img
-                        src={require('/img/cours/r11_exercice_2a.png').default}
+                        src={require('/img/cours/exercice_2a.png').default}
                         alt="Histogramme du pourboire par personne"
                         style={{ maxWidth: '100%', height: 'auto' }}
                       />
@@ -559,7 +561,7 @@ import Mod_PandasVisualiser from '../_cours-modules/_pandas-visualiser.mdx';
                     <Column size={6}>
                         <div style={{ textAlign: "right" }}>
                         <img
-                            src={require('/img/cours/r11_exercice_2b.png').default}
+                            src={require('/img/cours/exercice_2b.png').default}
                             alt="Boxplot tip par person par size"
                             style={{ maxWidth: '100%', height: 'auto' }}
                         />
@@ -580,7 +582,7 @@ import Mod_PandasVisualiser from '../_cours-modules/_pandas-visualiser.mdx';
                 ---
 
                 ::::info Exercice - Visualisation : Consommation d'essence
-                📁 Créez un fichier `r11_consommation_essence.py` pour votre réponse.
+                📁 Créez un fichier `consommation_essence.py` pour votre réponse.
 
                 Téléchargez le fichier <a href={useBaseUrl('/ressources/csv/mpg_dataset.csv')} download="mpg_dataset.csv">mpg_dataset.csv</a> et placez-le dans le même dossier que votre script.
 
@@ -601,7 +603,7 @@ import Mod_PandasVisualiser from '../_cours-modules/_pandas-visualiser.mdx';
                   <Column size={6}>
                     <div style={{ textAlign: "left" }}>
                       <img
-                        src={require('/img/cours/r11_exercice_3a.png').default}
+                        src={require('/img/cours/exercice_3a.png').default}
                         alt="Histogramme de la consommation en litres aux 100 km"
                         style={{ maxWidth: '100%', height: 'auto' }}
                       />
@@ -610,7 +612,7 @@ import Mod_PandasVisualiser from '../_cours-modules/_pandas-visualiser.mdx';
                     <Column size={6}>
                         <div style={{ textAlign: "right" }}>
                         <img
-                            src={require('/img/cours/r11_exercice_3b.png').default}
+                            src={require('/img/cours/exercice_3b.png').default}
                             alt="Consommation moyenne par nombre de cylindres"
                             style={{ maxWidth: '100%', height: 'auto' }}
                         />
@@ -657,7 +659,7 @@ import Mod_PandasVisualiser from '../_cours-modules/_pandas-visualiser.mdx';
                 Somme : 75
                 ```
 
-                📁 Créez un fichier `r11_sans_pycharm.py` pour valider votre réponse à l'aide de **Pycharm**.
+                📁 Créez un fichier `sans_pycharm.py` pour valider votre réponse à l'aide de **Pycharm**.
 
                 :::note Notions visées
                 Boucle `while`, saisie utilisateur `input()`, accumulation dans une liste, calcul de somme
