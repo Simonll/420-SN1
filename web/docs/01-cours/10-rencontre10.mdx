@@ -1,2161 +1,659 @@
 ---
-title: 10 - 🗂 Fichiers, 🔢 NumPy
-description: Fichier (texte/CSV/JSON), Tableaux NumPy, Calcul vectorisé, Bornes et correction, Filtres et masques, Restructurer / Sauvegarder, NumPy et Matplotlib
+title: 10 - Graphiques, collections
+description: For (séquence), Compréhension de liste, Ensemble (set), Tuple (tuple), Dictionnaire (dict), Matplotlib
 hide_table_of_contents: true
 ---
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
-import useBaseUrl from '@docusaurus/useBaseUrl';
 
+import Column from "../../src/components/Column";
+import Row from "../../src/components/Row";
 import RappelFonctionnementClasseInverse from '@site/docs/_components/RappelFonctionnementClasseInverse.mdx';
 import DocumentationAutorisee from '@site/docs/_components/DocumentationAutorisee.mdx';
 import DocumentationInterdite from '@site/docs/_components/DocumentationInterdite.mdx';
 import IntroSolutionsExercices from '@site/docs/_components/IntroSolutionsExercices.mdx';
+import AideMemoireSet from '@site/docs/_components/AideMemoireSet.mdx';
+import AideMemoireTuple from '@site/docs/_components/AideMemoireTuple.mdx';
+import AideMemoireDict from '@site/docs/_components/AideMemoireDict.mdx';
 import Feedback from "../../src/components/Feedback";
-import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
-import AideMemoireFichiersTexte from '@site/docs/_components/AideMemoireFichiersTexte.mdx';
-import AideMemoireFichiersJSON from '@site/docs/_components/AideMemoireFichiersJSON.mdx';
-import AideMemoireNumpyTableaux from '@site/docs/_components/AideMemoireNumpyTableaux.mdx';
-import AideMemoireNumpyVectorise from '@site/docs/_components/AideMemoireNumpyVectorise.mdx';
-import AideMemoireNumpyBornes from '@site/docs/_components/AideMemoireNumpyBornes.mdx';
-import AideMemoireNumpyConditions from '@site/docs/_components/AideMemoireNumpyConditions.mdx';
-import AideMemoireNumpyManipulation from '@site/docs/_components/AideMemoireNumpyManipulation.mdx';
-import AideMemoireNumpyMatplotlib from '@site/docs/_components/AideMemoireNumpyMatplotlib.mdx';
 
-# 🗂 Fichiers, 🔢 NumPy
+import Mod_ForSequence from '../_cours-modules/_for-sequence.mdx';
+import Mod_ComprehensionListe from '../_cours-modules/_comprehension-liste.mdx';
+import Mod_Set from '../_cours-modules/_set.mdx';
+import Mod_Tuple from '../_cours-modules/_tuple.mdx';
+import Mod_Dict from '../_cours-modules/_dict.mdx';
+import Mod_Matplotlib from '../_cours-modules/_matplotlib.mdx';
 
-<Tabs className="tabs-centered" queryString="onglet">
+# Graphiques, collections (set, tuple, dict)
 
-    <TabItem value="fichier" label="Fichier (intro)">
+<Tabs queryString="onglet">
 
-        :::info Introduction aux fichiers
-
-        Un fichier c'est quoi?
-
-        - un ensemble de données stockées sur un support de stockage (disque dur, SSD, clé USB, carte SD, etc.)
-        - chaque fichier a un nom et une extension (par exemple `monfichier.txt`)
-        - les fichiers peuvent contenir différents types de données : texte, images, vidéos, audio, etc.
-        - pour lire ou écrire dans un fichier, on utilise des programmes ou des scripts
-        - chaque fichier utilise un encodage de caractères (le standard étant l'UTF-8).
-            - c'est un peu comme la « table de traduction » permettant à l'ordinateur de transformer les bits (0 et 1) en lettres et en accents.
-            - sans le bon encodage, le mot `"expérience"` pourrait s'afficher comme `"expÃ©rience"`.
-            - c'est pourquoi il est important de toujours préciser `encoding="utf-8"` dans `open()` (ça s'en vient).
-
-        ### Types de fichiers courants (et exemples courants d'extensions)
-
-        - Fichiers texte (.txt, .csv, .json, .xml, etc.)
-        - Fichiers binaires (.bin, .exe, .dll, etc.)
-        - Fichiers image (.jpg, .png, .gif, etc.)
-        - Fichiers audio (.mp3, .wav, .flac, etc.)
-        - Fichiers vidéo (.mp4, .avi, .mkv, etc.)
-
-        ### Opérations courantes sur les fichiers
-
-        - Ouvrir un fichier : pour lire ou écrire des données
-        - Lire un fichier : pour extraire les données contenues dans le fichier
-        - Écrire dans un fichier : pour ajouter ou modifier des données dans le fichier
-        - Fermer un fichier : pour libérer les ressources utilisées par le fichier
-
-        :::
-
-        ---
-
-        :::info Ouvrir un fichier avec `open()` et `with`
-
-        En Python, on utilise la fonction `open()` pour ouvrir un fichier. \
-        Il est recommandé de l'utiliser avec le mot-clé `with`, qui garantit que le fichier est automatiquement fermé après utilisation, même en cas d'erreur.
-
-        ```python
-        with open("monfichier.txt", "r", encoding="utf-8") as f:  # "r" pour mode lecture
-            contenu = f.read()
-            print(contenu)
-
-        # Le fichier est automatiquement fermé lorsqu'on sort du bloc with.
-        ```
-
-        Les différents **modes d'ouverture** sont détaillés dans l'onglet **Fichier texte**.
-
-        :::
-
-
-        {/* <Feedback feedbackId="Rencontre #10 - Fichier" /> */}
+    <TabItem value="foreach" label="For (séquence)" default>
+        <Mod_ForSequence />
     </TabItem>
 
-    <TabItem value="texte" label="Fichier texte">
-
-        :::info Qu'est-ce qu'un fichier texte?
-
-        Un fichier texte est un type de fichier très courant et simple à manipuler.
-        - Il est simplement constitué d'une suite de caractères lisibles par l'humain.
-        - Il ne contient aucun formatage, juste du texte brut.
-        - Un fichier texte est organisé en lignes, séparées par des caractères spéciaux appelés sauts de ligne (`\n`).
-        - ✅ Les scripts Python (`.py`) que vous écrivez sont aussi des fichiers texte.
-        - ❌ Un fichier `.docx` (Word) ou `.pdf` contient du texte, mais aussi beaucoup d'autres informations de formatage, donc ce ne sont pas des fichiers texte.
-
-        On peut ouvrir ou créer un fichier texte à la main avec un éditeur de texte (Notepad, PyCharm, VSCode, ...) ou avec du code Python.
-
-        :::
-
-        ---
-
-        :::info Les modes d'ouverture
-
-        Lorsqu'on ouvre un fichier avec `open()`, on doit préciser ce qu'on veut faire avec lui en passant un **mode** :
-
-        | Mode | Signification | Effet |
-        |:----:|---------------|-------|
-        | <C><S>"r"</S></C> | *read* — lecture | Lit le contenu du fichier |
-        | <C><S>"w"</S></C> | *write* — écriture | Crée ou écrase le fichier |
-        | <C><S>"a"</S></C> | *append* — ajout | Ajoute à la fin sans effacer |
-
-        :::
-
-        ---
-
-        ## 📖 Mode `"r"` : Lecture
-
-        :::info Lire ligne par ligne : `for ligne in f`
-
-        On peut parcourir un fichier ouvert en mode lecture comme s'il s'agissait d'une liste de lignes, à l'aide d'une boucle `for` :
-        ```python
-        with open("monfichier.txt", "r", encoding="utf-8") as f:
-            for ligne in f:
-                # On peut faire différentes choses avec chaque ligne.
-
-                # Par exemple, l'afficher seulement si elle contient le mot "gros" :
-                if "gros" in ligne:
-                    print(ligne, end="")  # end="" pour éviter d'ajouter un 2e retour de ligne \n à la fin
-
-                # Ou encore calculer et afficher sa longueur (en caractères) :
-                print(f"Longueur de la ligne : {len(ligne)} caractères")
-        ```
-
-        :::
-
-        ---
-
-        :::info Lire tout le contenu d'un coup : `read()`
-
-        Supposons que le fichier `monfichier.txt` contient :
-        ```
-        Y a pas deux gros.
-        Y en a qu'un seul.
-        Et il est pas gros.
-        ```
-        ```python
-        with open("monfichier.txt", "r", encoding="utf-8") as f:
-            contenu = f.read()
-
-        print(contenu)
-        ```
-        La variable `contenu` contiendra alors la chaîne de caractères complète du fichier, y compris les sauts de ligne :
-        ```
-        Y a pas deux gros.
-        Y en a qu'un seul.
-        Et il est pas gros.
-        ```
-        :::
-
-        ---
-
-        :::info Lire toutes les lignes dans une liste : `readlines()`
-
-        ```python
-        with open("monfichier.txt", "r", encoding="utf-8") as f:
-            lignes = f.readlines()
-
-        print(lignes)
-        ```
-        La variable `lignes` contiendra une liste de chaînes de caractères, chaque chaîne représentant une ligne du fichier, avec les sauts de ligne (`\n`) inclus :
-        ```
-        ["Y a pas deux gros.\n", "Y en a qu'un seul.\n", "Et il est pas gros.\n"]
-        ```
-
-        Pour retirer les `\n`, on peut utiliser la méthode `strip()` qui retire les espaces et sauts de ligne en début et en fin de chaque chaîne. \
-        C'est l'occasion parfaite d'utiliser une [compréhension de liste](/cours/rencontre9?onglet=listcomp) :
-
-        ```python
-        with open("monfichier.txt", "r", encoding="utf-8") as f:
-            lignes = [ligne.strip() for ligne in f.readlines()]
-
-        print(lignes)
-        ```
-        Résultat :
-        ```
-        ["Y a pas deux gros.", "Y en a qu'un seul.", "Et il est pas gros."]
-        ```
-
-        :::
-
-        ---
-
-        ## ✏️ Mode `"w"` : Écriture
-
-        :::info Écrire dans un fichier : `write()`
-
-        ```python
-        with open("monfichier.txt", "w", encoding="utf-8") as f:
-            f.write("Bonjour le monde!\n")
-            f.write("Ceci est un fichier texte.\n")
-        ```
-
-        Plutôt que d'écrire ligne par ligne, on peut aussi construire une liste puis utiliser `join()` :
-        ```python
-        lignes = ["Y a pas deux gros.", "Y en a qu'un seul.", "Et il est pas gros."]
-
-        with open("monfichier.txt", "w", encoding="utf-8") as f:
-            f.write("\n".join(lignes))
-        ```
-        La fonction `join()` prend une liste de chaînes et les combine en une seule chaîne, en insérant le séparateur (ici `\n`) entre chaque élément.
-
-        ⚠️ATTENTION : Le mode `"w"` **écrase** le contenu existant à chaque ouverture. Si le fichier `monfichier.txt` existait déjà, il sera ***écrasé***, c'est-à-dire effacé et remplacé par le nouveau contenu.
-
-        :::
-
-        ---
-
-        ## ➕ Mode `"a"` : Ajout (*append*)
-
-        :::info Ajouter à la fin sans effacer : `write()` avec `"a"`
-
-        Si on veut **ajouter** des données à la fin d'un fichier sans effacer ce qui s'y trouve déjà, on utilise le mode `"a"`.
-
-        Imaginons un fichier `journal.txt` qui enregistre les héros qui complètent un niveau, au fur et à mesure :
-
-        ```python
-        # Première exécution — crée le fichier et écrit la première ligne
-        with open("journal.txt", "a", encoding="utf-8") as f:
-            f.write("Mario a complété le niveau 1.\n")
-
-        # Deuxième exécution — ajoute à la fin sans effacer
-        with open("journal.txt", "a", encoding="utf-8") as f:
-            f.write("Link a complété le niveau 1.\n")
-
-        # Troisième exécution — ajoute encore
-        with open("journal.txt", "a", encoding="utf-8") as f:
-            f.write("Kirby a complété le niveau 1.\n")
-        ```
-
-        Après ces trois exécutions, `journal.txt` contiendra :
-        ```
-        Mario a complété le niveau 1.
-        Link a complété le niveau 1.
-        Kirby a complété le niveau 1.
-        ```
-
-        Si on avait utilisé `"w"` à la place de `"a"`, seule la dernière ligne aurait été conservée.
-
-        :::
-
-        ---
-
-        ## ⚠️ Pourquoi toujours utiliser `with`?
-
-        :::warning Oublier de fermer un fichier peut causer des problèmes
-
-        Sans `with`, on doit fermer le fichier manuellement avec `fichier.close()`. \
-        Si une erreur survient avant cette ligne, le fichier reste ouvert et les données peuvent être corrompues ou l'accès au fichier bloqué.
-
-        ```python
-        # ❌ À éviter
-        fichier = open("monfichier.txt", "r", encoding="utf-8")
-        contenu = fichier.read()
-        # Si une erreur survient ici, fichier.close() ne sera jamais appelée!
-        fichier.close()
-        ```
-
-        ```python
-        # ✅ Avec with : le fichier est toujours fermé, même en cas d'erreur
-        with open("monfichier.txt", "r", encoding="utf-8") as f:
-            contenu = f.read()
-        # Automatiquement fermé ici, quoi qu'il arrive
-        ```
-
-        :::
-
-        ---
-
-        ## 🚨 Erreur fréquente : fichier introuvable
-
-        :::danger `FileNotFoundError` : le fichier n'existe pas
-
-        Si le nom ou le chemin du fichier est mal écrit, Python lève une `FileNotFoundError` :
-
-        ```python
-        with open("monfichierr.txt", "r", encoding="utf-8") as f:  # faute de frappe!
-            contenu = f.read()
-        ```
-        ```
-        FileNotFoundError: [Errno 2] No such file or directory: 'monfichierr.txt'
-        ```
-
-        Cette erreur survient **uniquement en mode lecture** (`"r"`). En mode écriture (`"w"`) ou ajout (`"a"`), Python crée le fichier automatiquement s'il n'existe pas.
-
-        Pour l'éviter, vérifiez :
-        - que le nom du fichier est écrit correctement (majuscules, extension, fautes de frappe)
-        - que le fichier se trouve dans le **même dossier** que votre script Python
-
-        :::
-
-        ---
-
-        ::::note 📋 AIDE-MÉMOIRE : Fichier texte
-
-        <AideMemoireFichiersTexte />
-
-        ::::
-
-        {/* <Feedback feedbackId="Rencontre #10 - Fichier texte" /> */}
+    <TabItem value="listcomp" label="Compréhension de liste">
+        <Mod_ComprehensionListe />
     </TabItem>
 
-    <TabItem value="csv" label="Fichier CSV">
-
-        :::info Qu'est-ce qu'un fichier CSV?
-
-        Un fichier **CSV** (*Comma-Separated Values*) est un fichier texte qui organise des données sous forme de tableau.
-        - Chaque ligne représente un enregistrement.
-        - Les valeurs de chaque ligne sont séparées par un **délimiteur**. La virgule (`,`) est le plus courant, mais certains fichiers utilisent le point-virgule (`;`), la tabulation (touche Tab, ou `\t`), ou même l'espace (` `). C'est pourquoi on parle parfois de fichiers *délimités* plutôt que strictement *CSV*.
-        - C'est l'un des formats les plus utilisés pour échanger des données tabulaires : tableurs, bases de données, résultats d'expériences, etc.
-
-        Exemple de contenu d'un fichier `mesures.csv` :
-        ```
-        experience,tentative,ph_mesure,reaction_observee
-        Acide-base,1,4.7,True
-        Acide-base,2,5.1,True
-        Acide-base,3,6.9,False
-        ```
-
-        Dans cette rencontre, l'objectif est surtout de **comprendre ce qu'est un fichier CSV et comment Python peut le lire**.
-        Les bibliothèques **NumPy** et **Pandas** seront utilisées plus tard dans le cours pour manipuler et analyser des données plus efficacement.
-
-        👉 Il n'est donc **pas nécessaire d'exécuter tous les exemples** qui suivent : il suffit d'en comprendre le fonctionnement général.
-
-        :::
-
-        ---
-
-        ::::tip Comment lire un fichier CSV?
-
-        Il existe plusieurs façons de lire un fichier CSV en Python. Le choix dépend surtout de ce qu'on veut faire avec les données.
-
-        :::note-nt
-        Rappel : il n'est pas nécessaire d'exécuter ces exemples, l'objectif est surtout d'en comprendre le fonctionnement.
-        :::
-
-        À partir du fichier `mesures.csv` :
-
-        ```csv
-        experience,tentative,ph_mesure,reaction_observee
-        Acide-base,1,4.7,True
-        Acide-base,2,5.1,True
-        Acide-base,3,6.9,False
-        ```
-
-        On pourrait lire les données de plusieurs façons.
-
-        ### 1. À la main, comme un fichier texte
-
-        ✅ *Inclus avec Python — aucune installation requise.*
-
-        ```python
-        with open("mesures.csv", "r", encoding="utf-8") as fichier:
-            for ligne in fichier: # Boucle sur toutes les lignes du fichier
-                valeurs = ligne.strip().split(",")
-                print(valeurs)
-        ```
-
-        Résultat :
-        ```python
-        ['experience', 'tentative', 'ph_mesure', 'reaction_observee']
-        ['Acide-base', '1', '4.7', 'True']
-        ['Acide-base', '2', '5.1', 'True']
-        ['Acide-base', '3', '6.9', 'False']
-        ```
-
-        Mais comment chaque ligne de texte est-elle devenue une liste? Tout se joue dans `valeurs = ligne.strip().split(",")`. \
-        Suivons la transformation **étape par étape**, en prenant la 3e liste affichée ci-dessus (`['Acide-base', '2', '5.1', 'True']`) :
-
-        ```python
-        # Étape 1 — la ligne lue dans le fichier contient un saut de ligne "\n" à la fin :
-        #   "Acide-base,2,5.1,True\n"
-        #
-        # Étape 2 — .strip() retire les espaces et les saut de lignes présents :
-        #   "Acide-base,2,5.1,True"
-        #
-        # Étape 3 — .split(",") coupe la chaîne à chaque virgule et retourne une LISTE :
-        #
-        #   "Acide-base,2,5.1,True"
-        #         │     │  │   │
-        #         │     │  │   └─────────┐
-        #         │     │  └──────┐      │
-        #         │     └───┐     │      │
-        #         │         │     │      │
-        #         ▼         ▼     ▼      ▼
-        #   ['Acide-base', '2', '5.1', 'True']
-        #
-        # ⚠️ Chaque valeur est une CHAÎNE de caractères (notez les guillemets),
-        #    même les nombres : '2' et '5.1' ne sont PAS encore des nombres.
-        ```
-
-        Cette méthode permet de comprendre qu'un fichier CSV est d'abord un simple fichier texte. \
-        Par contre, il faut tout gérer soi-même : séparer les valeurs, ignorer l'en-tête, convertir les nombres, traiter les erreurs, etc.
-
-        ### 2. Avec le module `csv` de Python
-
-        ✅ *Inclus avec Python — aucune installation requise.*
-
-        ```python
-        import csv
-
-        with open("mesures.csv", "r", encoding="utf-8") as fichier:
-            lecteur = csv.reader(fichier)
-
-            for ligne in lecteur:
-                print(ligne)
-        ```
-
-        Résultat :
-        ```python
-        ['experience', 'tentative', 'ph_mesure', 'reaction_observee']
-        ['Acide-base', '1', '4.7', 'True']
-        ['Acide-base', '2', '5.1', 'True']
-        ['Acide-base', '3', '6.9', 'False']
-        ```
-
-        Le module `csv` est inclus avec Python. Il gère mieux la lecture des lignes et des séparateurs qu'une lecture entièrement manuelle.
-        Cependant, les valeurs sont encore lues comme du texte. Il faut donc convertir soi-même les nombres, les booléens ou les dates au besoin.
-
-        ### 3. Avec NumPy
-
-        📦 *Bibliothèque externe — à installer avec `pip install numpy`.*
-
-        ```python
-        import numpy as np
-
-        donnees = np.genfromtxt(
-            "mesures.csv",
-            delimiter=",",
-            names=True,
-            dtype=None,
-            encoding="utf-8"
-        )
-
-        print(donnees)
-        ```
-
-        Résultat :
-        ```python
-        [('Acide-base', 1, 4.7,  True) ('Acide-base', 2, 5.1,  True)
-         ('Acide-base', 3, 6.9, False)]
-        ```
-
-        NumPy peut lire des fichiers CSV, surtout lorsqu'ils contiennent principalement des données numériques.
-        C'est pratique pour faire des calculs efficacement, lorsque toutes les valeurs sont du même type, par exemple des `float`, mais moins agréable lorsque les colonnes contiennent des types variés, comme du texte, des nombres et des valeurs booléennes.
-
-        ### 4. Avec Pandas
-
-        📦 *Bibliothèque externe — à installer avec `pip install pandas`.*
-
-        ```python
-        import pandas as pd
-
-        df = pd.read_csv("mesures.csv")
-        print(df)
-        ```
-
-        Résultat :
-        ```python
-          experience  tentative  ph_mesure  reaction_observee
-        0  Acide-base          1        4.7               True
-        1  Acide-base          2        5.1               True
-        2  Acide-base          3        6.9              False
-        ```
-
-        Pandas est plus pratique pour travailler avec des fichiers CSV qui contiennent toutes sortes de données (des mesures, des catégories, etc.). Plus tard dans le cours, nous verrons en détail la bibliothèque Pandas.
-        Il charge les données dans un tableau structuré appelé ***DataFrame***, reconnaît souvent automatiquement les types de données et facilite ensuite le filtrage, le tri, les calculs et les visualisations.
-
-        ### Comparaison rapide
-
-        | Méthode | Installation | Avantage principal | Limite principale |
-        |---|---|---|---|
-        | Lecture manuelle | ✅ Aucune | Permet de comprendre la structure du fichier, Permet un contrôle total (parfois utile) | Il faut tout gérer soi-même |
-        | Module `csv` | ✅ Aucune | Inclus avec Python et adapté aux fichiers CSV simples | Les valeurs restent principalement du texte |
-        | NumPy | 📦 `pip install numpy` | Très utile pour les données numériques (par exemple tous des `float`) | Moins pratique pour les tableaux avec des types variés |
-        | Pandas | 📦 `pip install pandas` | Très pratique pour analyser des données tabulaires | Bibliothèque externe à installer |
-
-        ::::
-
-        {/* <Feedback feedbackId="Rencontre #10 - Fichier CSV" /> */}
+    <TabItem value="set" label="Ensemble (set)">
+        <Mod_Set />
     </TabItem>
 
-    <TabItem value="json" label="Fichier JSON">
-
-        :::info Qu'est-ce que le format JSON?
-
-        Le **JSON** (*JavaScript Object Notation*) est un format de fichier texte conçu pour stocker et échanger des données structurées.
-        - Il est **lisible par les humains** : on peut l'ouvrir dans n'importe quel éditeur de texte et comprendre son contenu d'un coup d'œil.
-        - Il est **facile à utiliser avec Python** : le module `json` (inclus avec Python, aucune installation nécessaire) permet de lire et d'écrire du JSON en quelques lignes.
-        - Il supporte les mêmes types que Python : chaînes, nombres, booléens, listes et dictionnaires.
-
-        :::
-
-        ---
-
-        :::info Pourquoi utiliser JSON plutôt qu'un fichier texte?
-
-        Un fichier `.txt` contient du texte brut sans structure. Si on veut sauvegarder plusieurs informations liées entre elles (par exemple le profil d'un joueur avec son nom, son score et ses niveaux complétés), il faut inventer soi-même une façon d'organiser les données, et la relire devient vite compliqué.
-
-        Le JSON résout ce problème : il sauvegarde directement la **structure** des données (dictionnaires, listes imbriquées) et Python peut la reconstruire automatiquement à la lecture.
-
-        :::
-
-        ---
-
-        :::info Importer le module
-
-        ```python
-        import json
-        ```
-
-        :::
-
-        ---
-
-        :::info Sauvegarder des données : `json.dump()`
-
-        Imaginons qu'on veuille sauvegarder les données d'une expérience en laboratoire :
-
-        ```python
-        import json
-
-        experience = {
-            "nom": "Réaction acide-base",
-            "tentative": 3,
-            "ph_mesure": 4.7,
-            "reaction_observee": True,
-            "reactifs": ["HCl", "NaOH", "eau distillée"]
-        }
-
-        with open("experience.json", "w", encoding="utf-8") as f:
-            json.dump(experience, f, indent=4, ensure_ascii=False)
-        ```
-
-        Le fichier `experience.json` contiendra alors :
-        ```json
-        {
-            "nom": "Réaction acide-base",
-            "tentative": 3,
-            "ph_mesure": 4.7,
-            "reaction_observee": true,
-            "reactifs": ["HCl", "NaOH", "eau distillée"]
-        }
-        ```
-
-        💡 L'argument `indent=4` ajoute des indentations pour rendre le fichier plus lisible. Sans lui, tout serait sur une seule ligne.
-
-        💡 L'argument `ensure_ascii=False` permet de conserver les caractères spéciaux (comme les accents) tels quels, au lieu de les convertir en séquences d'échappement ASCII. Le fichier JSON restera ainsi plus lisible.
-
-        :::
-
-        ---
-
-        :::info Lire des données : `json.load()`
-
-        Pour récupérer les données sauvegardées et les utiliser dans Python, on utilise `json.load()`. \
-        Le résultat est directement un **dictionnaire Python**, prêt à être utilisé.
-
-        ```python
-        import json
-
-        with open("experience.json", "r", encoding="utf-8") as f:
-            experience = json.load(f)
-
-        print(f"Expérience : {experience['nom']}")                       # Expérience : Réaction acide-base
-        print(f"Tentative #{experience['tentative']}")                   # Tentative #3
-        print(f"pH mesuré : {experience['ph_mesure']}")                  # pH mesuré : 4.7
-        print(f"Réaction observée : {experience['reaction_observee']}")  # Réaction observée : True
-        print(f"Réactifs : {experience['reactifs']}")                    # Réactifs : ['HCl', 'NaOH', 'eau distillée']
-        ```
-
-        👉 On accède aux valeurs exactement comme dans n'importe quel dictionnaire Python, parce que c'en est un!
-
-        :::
-
-        ---
-
-        :::info JSON et Python : ressemblant… mais pas identique
-
-        Le JSON ressemble beaucoup à la syntaxe Python, et ce n'est pas un hasard : les deux utilisent des accolades `{}` pour les structures clé-valeur et des crochets `[]` pour les listes. Si on sait déjà lire du Python, un fichier JSON semblera familier du premier coup d'œil.
-
-        Par contre, JSON est un format d'échange universel (pas lié à Python), donc il a ses propres règles strictes :
-
-        <div style={{display: "flex", justifyContent: "center"}}>
-
-        | Python | JSON |
-        |--------|------|
-        | <C><K>True</K> &#47; <K>False</K></C> | <C>true &#47; false</C> (minuscules) |
-        | <C><K>None</K></C> | <C>null</C> |
-        | Guillemets simples <C><S>'abc'</S></C> acceptés | Seulement guillemets doubles <C><S>"abc"</S></C> |
-        | Tuples <C>(<N>1</N>, <N>2</N>)</C> | Pas de tuples, convertis en listes <C>[<N>1</N>, <N>2</N>]</C> |
-        | Commentaires <C><S># ...</S></C> | Pas de commentaires |
-
-        </div>
-
-        La bonne nouvelle : `json.dump()` et `json.load()` gèrent toutes ces conversions automatiquement. \
-        On écrit du Python, Python traduit en JSON, et vice-versa. On n'a pas à s'en préoccuper, ni à le retenir.
-
-        :::
-
-        ---
-
-        :::tip JSON dans le cours 420-4A4-EM
-        Le format JSON est particulièrement utile dans le cours [420-4A4 : Réseaux de neurones et sciences](https://simonll.github.io/420-4A4/), où il est utilisé pour conserver les **hyperparamètres des réseaux de neurones** entre les expériences (taux d'apprentissage, nombre de couches, taille des lots, etc.).
-        :::
-
-        ---
-
-        :::tip JSON vs fichier texte : quand choisir quoi?
-
-        | Situation | Format recommandé |
-        |-----------|-------------------|
-        | Données simples, ligne par ligne | Fichier texte (`.txt`) |
-        | Données structurées (dictionnaires, listes imbriquées) | JSON (`.json`) |
-        | Données tabulaires (tableau de valeurs) | CSV (`.csv`) |
-
-        :::
-
-        ---
-
-        ::::note 📋 AIDE-MÉMOIRE : Fichier JSON
-
-        <AideMemoireFichiersJSON />
-
-        ::::
-
-        {/* <Feedback feedbackId="Rencontre #10 - Fichier JSON" /> */}
+    <TabItem value="tuple" label="Tuple (tuple)">
+        <Mod_Tuple />
     </TabItem>
 
-    <TabItem value="numpy" label="NumPy (intro)">
-
-        :::tip 🥧 NumPy, une tarte aux pommes?
-
-        📣 ***NumPy*** se prononce *nomme-paille*
-
-        Jusqu’ici, pour travailler avec une liste de nombres, il fallait utiliser des boucles `for` : une itération par élément, une opération à la fois. \
-        Ça fonctionne, mais c’est lent et verbeux dès qu’on manipule des milliers de valeurs.
-
-        C’est là qu’intervient 🔢 **NumPy** : une bibliothèque Python conçue pour effectuer des calculs
-        sur des tableaux **en une seule instruction**, sans boucle, et à une vitesse bien supérieure!
-
-        :::
-
-        ---
-
-        :::info 🔢 Ce qu'on va apprendre dans les onglets NumPy
-
-        | Onglet | Ce qu’on y apprend |
-        |---|---|
-        | **Tableaux NumPy** | Créer un tableau, comprendre `shape` et `dtype` |
-        | **Calcul vectorisé** | Appliquer une opération à tout un tableau sans boucle |
-        | **Bornes et correction** | Encadrer des valeurs avec `clip()`, `maximum()`, `minimum()` |
-        | **Filtres et masques** | Filtrer, vérifier et transformer selon des conditions |
-        | **Restructurer sauvegarder** | Restructurer, combiner, générer aléatoirement, sauvegarder |
-        | **NumPy et Matplotlib** | Tracer des graphiques à partir de tableaux NumPy |
-
-        :::
-
-        ---
-
-        :::note 🧰 NumPy dans l’écosystème Python
-
-        NumPy n’est qu’une des bibliothèques Python très utilisées en sciences. \
-        Pour votre culture générale, voici comment elle s’inscrit dans l’écosystème Python scientifique :
-
-        - 🔢 **NumPy** : calcul sur des tableaux numériques - **c’est le sujet de ces onglets**
-        - 🐼 **Pandas** : manipulation de données tabulaires - **sera vue à la rencontre 11**
-        - 📊 **Matplotlib** : visualisation de données - **on la connait déjà**
-        - 🤖 **Scikit-learn** : apprentissage automatique - **un aperçu à la rencontre 15**
-        - 🧠 **Keras / TensorFlow** : apprentissage profond - **utilisées dans le cours *Réseaux de neurones***
-
-        :::
-
-        ---
-
-        :::warning Installation requise
-        NumPy n’est pas inclus avec Python. Il faut l’installer avant de pouvoir l’utiliser. \
-        Consulter la [recette d’installation de bibliothèques](/recettes/ajouter-librairie) pour savoir comment faire, ou exécuter cette commande dans le terminal :
-        ```
-        pip install numpy
-        ```
-        :::
-
-        {/* <Feedback feedbackId="Rencontre #10 - NumPy Intro" /> */}
+    <TabItem value="dict" label="Dictionnaire (dict)">
+        <Mod_Dict />
     </TabItem>
 
-    <TabItem value="numpy-tableaux" label="Tableaux NumPy">
-
-        :::tip 💡 Le tableau NumPy : un conteneur de nombres ultra-rapide
-
-        En Python, une liste peut contenir n’importe quoi : des nombres, des strings, des listes, des objets mélangés.
-        ```python
-        ma_liste = [1, "deux", 3.0, [4, 5], {"six": 6}]
-        ```
-        C’est très flexible, mais cette flexibilité a un coût : Python doit vérifier le type de chaque élément un par un.
-
-        Un tableau NumPy (`ndarray`) est différent : **tous ses éléments ont le même type**. \
-        NumPy tire profit de cette contrainte pour effectuer des calculs beaucoup plus rapidement, en traitant le tableau entier d’un seul bloc plutôt qu’élément par élément.
-
-        :::
-
-        ---
-
-        :::info 📦 Importer NumPy
-
-        La convention universelle est d’importer NumPy avec l’alias `np` :
-
-        ```python
-        import numpy as np
-        ```
-
-        Vous verrez `import numpy as np` au début de tous les scripts qui utilisent NumPy. C’est une convention que tout le monde respecte. Utilisez-la aussi.
-
-        :::
-
-        ---
-
-        ::::info 🏗️ Créer un tableau NumPy
-
-        Il existe plusieurs façons de créer un tableau selon le contexte :
-
-        **À partir d’une liste existante :**
-        ```python
-        liste = [1, 2, 3, 4, 5]
-        tab_numpy = np.array(liste)
-
-        print(tab_numpy)        # [1 2 3 4 5]
-        print(type(tab_numpy))  # <class ‘numpy.ndarray’>
-        ```
-
-        **Avec des valeurs prédéfinies :**
-        ```python
-        zeros  = np.zeros(5)      # [0. 0. 0. 0. 0.]  5 zéros (initialiser un tableau vide)
-        uns    = np.ones(5)       # [1. 1. 1. 1. 1.]  5 uns
-        neufs  = np.full(5, 9)    # [9 9 9 9 9]       5 fois la valeur 9
-        ```
-
-        **Avec des séquences de valeurs :**
-        ```python
-        sequence   = np.arange(0, 10, 2)   # [0 2 4 6 8]                 entiers de 0 à 9 par pas de 2
-        #                                                                (fonctionne comme la fonction range())
-
-        intervalle = np.linspace(0, 1, 5)  # [0.   0.25 0.5  0.75 1.  ]  5 valeurs régulièrement espacées entre 0 et 1
-        ```
-
-        💡 La différence clé entre `np.arange()` et `np.linspace()` :
-        - avec `np.arange()` on choisit le **pas** entre chaque valeur
-        - avec `np.linspace()` on choisit le **nombre de points** souhaité.
-
-        Pour les graphiques, `np.linspace()` est presque toujours préférable, car on sait exactement combien de points on aura.
-
-        ::::
-
-        ---
-
-        :::note 💡 L'affichage d'un tableau NumPy est différent d'une liste Python
-        ```python
-        liste     = [1, 2, 3, 4, 5]
-        tab_numpy = np.array(liste)
-
-        print(liste)        # [1, 2, 3, 4, 5]
-        print(tab_numpy)    # [1 2 3 4 5]
-
-        print(type(liste))      # <class 'list'>
-        print(type(tab_numpy))  # <class 'numpy.ndarray'>
-        ```
-        Les valeurs sont les mêmes, mais NumPy retire les virgules à l'affichage. Le `type()` confirme qu'il s'agit bien de deux objets différents — une `list` Python et un `ndarray` NumPy.
-        :::
-
-        ---
-
-        ::::info 🔬 `shape` et `dtype` : deux propriétés essentielles
-
-        Ce sont les deux premières choses à vérifier sur un tableau inconnu.
-
-        **`shape`** - la forme du tableau (ses dimensions), sous forme de tuple :
-
-        ```python
-        tab_1d = np.array([10, 20, 30, 40, 50])
-        print(tab_1d.shape)   # (5,)    tableau 1D de 5 éléments
-        ```
-
-        :::note 💡 Les tableaux 2D existent, mais ce cours se concentre sur le 1D
-        NumPy supporte les tableaux à plusieurs dimensions. Un tableau 2D ressemble à une grille (lignes et colonnes) :
-
-        ```python
-        tab_2d = np.array([[1, 2, 3],
-                           [4, 5, 6]])
-        print(tab_2d.shape)   # (2, 3)  2 lignes, 3 colonnes
-        ```
-
-        Dans ce cours, nous travaillerons presque exclusivement avec des tableaux **1D**. Les tableaux 2D seront davantage utilisés dans les cours suivants (*Réseaux de neurones*, *Projet scientifique*), mais il est bon de savoir que NumPy peut gérer des tableaux de n'importe quelle dimension (2D, 42D, ...).
-        :::
-
-        :::note **`size`** - le nombre total d’éléments
-
-        ```python
-        print(tab_2d.size)   # 6  (2 lignes x 3 colonnes)
-        ```
-
-        :::
-
-        **`dtype`** - le type des données stockées :
-
-        ```python
-        tab_entiers  = np.array([1, 2, 3])
-        tab_decimaux = np.array([1.0, 2.0, 3.0])
-        tab_booleens = np.array([True, False, True])
-
-        print(tab_entiers.dtype)   # int64    entiers
-        print(tab_decimaux.dtype)  # float64  décimaux
-        print(tab_booleens.dtype)  # bool     booléens
-        ```
-
-        :::warning ⚠️ Mélanger des types change le dtype
-        Si on crée un tableau avec par exemple à la fois des nombres entiers et des nombres décimaux, NumPy choisit automatiquement le type le plus général :
-
-        ```python
-        tab_mixte = np.array([1, 2, 3.0])
-        print(tab_mixte.dtype)  # float64     NumPy a converti tous les entiers en décimaux
-        print(tab_mixte)        # [1. 2. 3.]  Les décimaux sont affichés avec un point décimal
-        ```
-
-        C’est souvent le comportement voulu, mais il faut en être conscient.
-        :::
-
-        :::danger `shape`, `size` et `dtype` sont des propriétés
-        Notez bien que `shape`, `size` et `dtype` sont des **propriétés** du tableau, pas des fonctions. \
-        On les appelle sans parenthèses, contrairement à une fonction :
-        ```python
-        nb_elements = tab_1d.size    # Correct : nb_elements contient le nombre d'éléments
-        nb_elements = tab_1d.size()  # Incorrect : TypeError, car size n'est pas une fonction
-        ```
-        :::
-
-        ::::
-
-        ---
-
-        :::info 🎯 Accéder aux éléments : indexation et slicing
-
-        On accède aux éléments d’un tableau exactement comme pour une liste Python :
-
-        ```python
-        tableau = np.array([10, 20, 30, 40, 50])
-
-        print(tableau[0])    # 10          →  premier élément
-        print(tableau[-1])   # 50          →  dernier élément
-        print(tableau[1:4])  # [20 30 40]  →  éléments de l'index 1 (inclus) à l'index 4 (exclus)
-        ```
-
-        :::
-
-        ---
-
-        ::::note 📋 AIDE-MÉMOIRE : Tableaux NumPy
-
-        <AideMemoireNumpyTableaux />
-
-        ::::
-
-        {/* <Feedback feedbackId="Rencontre #10 - NumPy Tableaux" /> */}
-    </TabItem>
-
-    <TabItem value="numpy-vectorise" label="Calcul vectorisé">
-
-        :::tip 💡 Le concept central de NumPy : vectorisation
-
-        En Python ordinaire, pour ajouter 5 à toutes les valeurs d’une liste, on doit écrire une boucle :
-
-        ```python
-        # Avec une liste Python : une boucle obligatoire
-        valeurs = [10, 20, 30, 40, 50]
-        doubles = [v + 5 for v in valeurs]  # [15, 25, 35, 45, 55]
-        ```
-
-        Avec NumPy, **l’opération s’applique à tout le tableau d’un seul coup**, sans boucle :
-
-        ```python
-        # Avec NumPy : une seule ligne, bien plus rapide
-        import numpy as np
-        valeurs = np.array([10, 20, 30, 40, 50])
-        doubles = valeurs + 5   # [15 25 35 45 55]
-        ```
-
-        C’est ce qu’on appelle la **vectorisation** : NumPy effectue l’opération sur tous les éléments simultanément.
-
-        :::
-
-        ---
-
-        :::info ⚡ NumPy vs boucles Python : comparaison de performance
-
-        Sur de petites listes la différence de vitesse est imperceptible, mais sur des millions de valeurs, elle devient dramatique. Voici un exemple concret avec la mesure du temps de calcul pour doubler une liste de 1 million de valeurs :
-
-        ```python
-        import numpy as np
-        import time
-
-        n = 1_000_000  # 1 million de valeurs
-
-        # Avec une liste Python
-        valeurs_liste = list(range(n))
-        debut = time.time()
-        doubles_liste = [v * 2 for v in valeurs_liste]
-        print(f"Boucle Python : {time.time() - debut:.4f} secondes")
-
-        # Avec NumPy
-        valeurs_numpy = np.arange(n)
-        debut = time.time()
-        doubles_numpy = valeurs_numpy * 2
-        print(f"NumPy         : {time.time() - debut:.4f} secondes")
-        ```
-
-        Le résultat typique ressemble à :
-        ```
-        Boucle Python : 0.0850 secondes
-        NumPy         : 0.0012 secondes
-        ```
-
-        NumPy est environ **70 fois plus rapide** sur cet exemple. L’écart grandit encore sur des opérations plus complexes.
-
-        :::
-
-        ---
-
-        :::info ➕ Opérateurs arithmétiques vectorisés
-
-        Tous les opérateurs habituels (`+`, `-`, `*`, `/`, `**`) s’appliquent élément par élément sur un tableau NumPy :
-
-        ```python
-        x = np.array([1, 2, 3, 4, 5])
-
-        print(x + 10)    # [11 12 13 14 15]
-        print(x * 3)     # [ 3  6  9 12 15]
-        print(x ** 2)    # [ 1  4  9 16 25]
-        print(x / 2)     # [0.5 1.  1.5 2.  2.5]
-        ```
-
-        On peut aussi faire des opérations entre deux tableaux de même taille, et NumPy appliquera l’opération à chaque paire d’éléments correspondants :
-
-        ```python
-        a = np.array([1, 2, 3])
-        b = np.array([10, 20, 30])
-        print(a + b)   # [11 22 33]
-        print(a * b)   # [10 40 90]
-        ```
-
-        :::
-
-        ---
-
-        :::info 📐 Fonctions mathématiques vectorisées
-
-        NumPy fournit des versions vectorisées de toutes les fonctions mathématiques courantes. Elles s’appliquent à chaque élément du tableau sans boucle :
-
-        ```python
-        angles = np.linspace(0, np.pi, 5)  # [0, π/4, π/2, 3π/4, π]
-
-        print(np.sin(angles))   # [0.    0.707 1.    0.707 0.   ]
-        print(np.cos(angles))   # [1.    0.707 0.   -0.707 -1.  ]
-        ```
-
-        ```python
-        valeurs = np.array([4.0, 9.0, 16.0, 25.0])
-        print(np.sqrt(valeurs))  # [2. 3. 4. 5.]
-        ```
-
-        ```python
-        donnees = np.array([-3.7, 1.2, -0.5, 4.9])
-        print(np.abs(donnees))    # [3.7 1.2 0.5 4.9]  valeur absolue : retire le signe négatif
-        print(np.floor(donnees))  # [-4.  1. -1.  4.]  arrondi vers le bas  (ex. -3.7 → -4, pas -3)
-        print(np.ceil(donnees))   # [-3.  2.  0.  5.]  arrondi vers le haut (ex. -3.7 → -3, pas -4)
-        ```
-
-        :::
-
-        ---
-
-        :::info 📊 Fonctions d’agrégation
-
-        Ces fonctions calculent une valeur unique à partir de tout le tableau :
-
-        ```python
-        scores = np.array([72, 85, 61, 90, 78])
-
-        print(np.sum(scores))    # 386
-        print(np.mean(scores))   # 77.2
-        print(np.min(scores))    # 61
-        print(np.max(scores))    # 90
-        print(np.std(scores))    # 10.88  écart-type : mesure à quel point les valeurs s'éloignent de la moyenne
-                                 #                     (0 = toutes identiques, grand = très dispersées)
-        ```
-
-        :::
-
-        ---
-
-        ::::info 🏆 `argmax()` et `argmin()` : trouver l’indice du maximum/minimum
-
-        Plutôt que de retourner la valeur maximale ou minimale, `argmax()` et `argmin()` retournent **l’index** de cet élément dans le tableau. \
-        C’est utile pour retrouver quel élément a obtenu le meilleur (ou le pire) résultat.
-
-        ```python
-        scores = np.array([72, 85, 61, 90])
-        noms   = ["Astro", "Peluche", "Chatmouraï", "Mini-boulette"]
-
-        indice_max = np.argmax(scores)   # 3  Mini-boulette a le score le plus élevé
-        indice_min = np.argmin(scores)   # 2  Chatmouraï a le score le plus bas
-
-        print(f"Meilleur score : {noms[indice_max]} avec {scores[indice_max]}")
-        # Meilleur score : Mini-boulette avec 90
-        ```
-
-        :::note 💡 `argmax()` vs `max()`
-        `np.max(scores)` retourne `90` (la valeur). \
-        `np.argmax(scores)` retourne `3` (la position).
-
-        Les deux sont utiles selon le contexte.
-        :::
-
-        ::::
-
-        ---
-
-        ::::note 📋 AIDE-MÉMOIRE : Calcul vectorisé
-
-        <AideMemoireNumpyVectorise />
-
-        ::::
-
-        {/* <Feedback feedbackId="Rencontre #10 - NumPy Vectorisé" /> */}
-    </TabItem>
-
-    <TabItem value="numpy-bornes" label="Bornes et correction">
-
-        :::tip 💡 Pourquoi encadrer des valeurs ?
-
-        Dans de nombreuses situations réelles, les valeurs calculées ou mesurées peuvent dépasser des limites physiques ou logiques : une luminosité ne peut pas être négative ni dépasser 1, une coordonnée sur un écran ne peut pas sortir de la fenêtre, un pourcentage doit rester entre 0 et 100.
-
-        NumPy fournit des fonctions pour **corriger ou encadrer automatiquement des valeurs hors limites**, sans écrire de conditions `if` ni de boucles.
-
-        :::
-
-        ---
-
-        :::info ✂️ `np.clip()` - ramener des valeurs entre une borne minimum et un maximum
-
-        On utilise `np.clip(tableau, min, max)` quand on connait à l’avance **deux bornes** (un minimum ET un maximum) et qu'on veut garantir que toutes les valeurs restent dans cet intervalle en une seule instruction.
-        Pour chaque élément du tableau :
-        - si la valeur est inférieure à `min`, elle devient `min`;
-        - si la valeur est supérieure à `max`, elle devient `max`;
-        - sinon, elle reste inchangée.
-
-        Un capteur de pH mesure l’acidité d’une solution. Les valeurs valides se situent entre 0 et 14, mais le capteur peut retourner des valeurs aberrantes à cause du bruit de mesure. On veut corriger ces mesures avant de les analyser :
-
-        ```python
-        mesures_ph = np.array([-0.3, 4.2, 7.1, 14.8, 6.9])
-
-        mesures_valides = np.clip(mesures_ph, 0, 14)
-        print(mesures_valides)  # [ 0.   4.2  7.1 14.   6.9]
-        ```
-
-        La mesure `-0.3` est ramenée à `0` et la mesure `14.8` est ramenée à `14`. Les autres sont restées intactes.
-
-        :::
-
-        ---
-
-        :::info 🔼🔽 `np.maximum()` et `np.minimum()` - appliquer une borne ou comparer deux tableaux
-
-        Les fonctions `np.maximum()` et `np.minimum()` peuvent servir à deux choses différentes :
-
-        1. appliquer **une seule borne** à un tableau;
-        2. comparer **deux tableaux** position par position.
-
-        Contrairement à `np.clip()`, qui applique une borne minimale et une borne maximale en une seule instruction, `np.maximum()` et `np.minimum()` permettent de corriger seulement un côté à la fois.
-
-        ---
-
-        ### 1. Appliquer une borne avec une constante
-
-        On utilise `np.maximum(tableau, valeur_min)` pour imposer un **minimum**.
-
-        Autrement dit, chaque valeur plus petite que `valeur_min` est remplacée par `valeur_min`.
-
-        ```python
-        import numpy as np
-
-        intensites = np.array([-0.2, 0.0, 0.4, 0.8, 1.3])
-        intensites_sans_negatif = np.maximum(intensites, 0)
-
-        print(intensites_sans_negatif)
-        ```
-
-        Résultat :
-
-        ```python
-        [0.  0.  0.4 0.8 1.3]
-        ```
-
-        Ici, la valeur `-0.2` est ramenée à `0`. Les autres valeurs restent inchangées.
-
-        On utilise plutôt `np.minimum(tableau, valeur_max)` pour imposer un **maximum**.
-
-        Autrement dit, chaque valeur plus grande que `valeur_max` est remplacée par `valeur_max`.
-
-        ```python
-        intensites_limitees = np.minimum(intensites_sans_negatif, 1)
-
-        print(intensites_limitees)
-        ```
-
-        Résultat :
-
-        ```python
-        [0.  0.  0.4 0.8 1. ]
-        ```
-
-        Ici, la valeur `1.3` est ramenée à `1`.
-
-        Dans cet exemple, les valeurs représentent une intensité normalisée, par exemple une luminosité ou une probabilité.
-        Elles devraient normalement rester entre `0` et `1`, mais un calcul ou une mesure peut parfois produire une valeur légèrement hors limites.
-
-        On pourrait donc écrire :
-
-        ```python
-        intensites = np.array([-0.2, 0.0, 0.4, 0.8, 1.3])
-
-        intensites_corrigees = np.maximum(intensites, 0)
-        intensites_corrigees = np.minimum(intensites_corrigees, 1)
-
-        print(intensites_corrigees)
-        ```
-
-        Résultat :
-
-        ```python
-        [0.  0.  0.4 0.8 1. ]
-        ```
-
-        Cette méthode donne un résultat semblable à `np.clip(intensites, 0, 1)`, mais en appliquant les deux bornes séparément.
-
-        ---
-
-        ### 2. Comparer deux tableaux position par position
-
-        `np.maximum()` et `np.minimum()` peuvent aussi comparer deux tableaux de même taille.
-
-        Dans ce cas :
-
-        - `np.maximum(tableau_a, tableau_b)` prend la plus grande valeur à chaque position;
-        - `np.minimum(tableau_a, tableau_b)` prend la plus petite valeur à chaque position.
-
-        Par exemple, imaginons deux séries de mesures prises par deux capteurs différents :
-
-        ```python
-        capteur_a = np.array([12.1, 13.5, 11.8, 14.2])
-        capteur_b = np.array([12.4, 13.1, 12.0, 13.9])
-
-        mesures_max = np.maximum(capteur_a, capteur_b)
-        mesures_min = np.minimum(capteur_a, capteur_b)
-
-        print(mesures_max)
-        print(mesures_min)
-        ```
-
-        Résultat :
-
-        ```python
-        [12.4 13.5 12.  14.2]
-        [12.1 13.1 11.8 13.9]
-        ```
-
-        Le premier tableau contient donc, pour chaque position, la mesure la plus élevée des deux capteurs.
-        Le deuxième tableau contient, pour chaque position, la mesure la plus basse.
-
-        Cela peut être utile lorsqu'on veut créer un tableau des **extrêmes locaux** entre deux séries de données : par exemple les valeurs les plus hautes et les plus basses mesurées par deux instruments, deux simulations ou deux scénarios.
-
-        :::
-
-        ---
-
-        :::note 💡 `np.max()` vs `np.maximum()` : ne pas confondre
-        ```python
-        valeurs = np.array([3, 7, 1, 9, 4])
-
-        print(np.max(valeurs))          # 9            une seule valeur : le maximum du tableau
-        print(np.maximum(valeurs, 5))   # [5 7 5 9 5]  un tableau : compare chaque élément à 5
-        ```
-        `np.max()` résume le tableau en une valeur. \
-        `np.maximum()` produit un nouveau tableau de même taille.
-        :::
-
-        ---
-
-        ::::note 📋 AIDE-MÉMOIRE : Bornes et correction
-
-        <AideMemoireNumpyBornes />
-
-        ::::
-
-        {/* <Feedback feedbackId="Rencontre #10 - NumPy Bornes" /> */}
-    </TabItem>
-
-    <TabItem value="numpy-conditions" label="Filtres et masques">
-
-        :::tip 💡 Sélectionner, filtrer et transformer des données selon des critères
-
-        En sciences, on travaille rarement avec toutes les données en même temps. On veut souvent isoler les mesures qui dépassent un seuil, remplacer les valeurs aberrantes, ou classer les résultats selon une condition : par exemple garder seulement les températures au-dessus de 0°C, ou étiqueter les concentrations selon qu’elles sont en zone sûre ou non.
-
-        En Python ordinaire, chacune de ces opérations demande une boucle avec un `if`. \
-        Avec NumPy, on exprime la condition directement sur le tableau entier en une seule ligne, peu importe s’il contient 10 ou 10 millions de valeurs.
-
-        :::
-
-        ---
-
-        ::::info 🎭 Les masques booléens
-
-        Un **masque booléen** est un tableau de `True` et `False` de la même taille qu'un tableau de données. \
-        Chaque `True` indique un élément qui satisfait la condition, chaque `False` un élément qui ne la satisfait pas.
-
-        ```python
-        valeurs = np.array([4, -2, 7, -1, 0, 3])
-
-        masque = valeurs < 0
-        print(masque)  # [False True False True False False]
-        ```
-
-        On peut ensuite utiliser ce masque pour **extraire/filtrer** les éléments qui satisfont la condition :
-
-        ```python
-        negatifs = valeurs[masque]
-        print(negatifs)  # [-2 -1]
-        ```
-
-        :::note 💡 Raccourci en une ligne
-        Ces deux blocs sont équivalents. Le raccourci est plus courant en pratique :
-
-        ```python
-        # Version avec masque intermédiaire
-        masque   = valeurs < 0
-        negatifs = valeurs[masque]
-
-        # Version directe (raccourci)
-        negatifs = valeurs[valeurs < 0]
-        ```
-        :::
-
-        ::::
-
-        ---
-
-        ::::info 🔗 Combiner plusieurs conditions
-
-        On peut combiner plusieurs conditions avec `&` (ET) et `|` (OU). **Chaque condition doit être entre parenthèses.**
-
-        ```python
-        tableau = np.array([5, 12, 18, 25, 30, 3])
-
-        # ET : les deux conditions vraies simultanément
-        entre_10_et_20 = tableau[(tableau >= 10) & (tableau <= 20)]
-        print(entre_10_et_20)  # [12 18]
-
-        # OU : au moins une condition vraie
-        extremes = tableau[(tableau < 5) | (tableau > 25)]
-        print(extremes)  # [30  3]
-        ```
-
-        :::note-nt
-        Si on crée d'abord un masque, il faut aussi des parenthèses autour de chaque condition lorsqu'il y en a plusieurs :
-
-        ```python
-        masque = (tableau >= 10) & (tableau <= 20)
-        entre_10_et_20 = tableau[masque]
-        ```
-        :::
-
-        ::::
-
-        ---
-
-        :::info ✅ `np.any()` et `np.all()` - vérifier des conditions globales
-
-        Ces deux fonctions posent une question sur l’ensemble du tableau et retournent un seul `True` ou `False` :
-        - `np.any(condition)` : est-ce qu’**au moins un** élément satisfait la condition?
-        - `np.all(condition)` : est-ce que **tous** les éléments satisfont la condition?
-
-        Par exemple, un chercheur a mesuré la pression atmosphérique à 6 stations météo. Avant d’analyser les données, il veut vérifier leur validité :
-
-        ```python
-        pressions = np.array([1012.3, 998.7, 1021.5, -5.0, 1008.1, 1015.4])
-
-        anomalie_detectee = np.any(pressions < 0)   # Y a-t-il au moins une mesure invalide (pression négative)?
-        print(anomalie_detectee)                    # True → une valeur aberrante a été détectée
-
-        toutes_valides = np.all((pressions >= 900) & (pressions <= 1100))   # Toutes les mesures sont-elles dans une plage réaliste?
-        print(toutes_valides)                                               # False → la valeur -5.0 sort de la plage
-        ```
-
-        On utilise souvent ces fonctions dans un `if` pour stopper le traitement si les données sont invalides :
-
-        ```python
-        if np.any(pressions < 0):
-            print("Attention : des mesures invalides ont été détectées.")
-        else:
-            print("Toutes les mesures sont valides, analyse en cours.")
-        ```
-
-        :::
-
-        ---
-
-        :::info 🔀 `np.where()` - choisir une valeur selon une condition
-
-        Le filtrage vu précédemment permet d'**extraire** des valeurs selon une condition.
-        Mais parfois, on ne veut pas réduire le tableau : on veut produire un nouveau tableau de même taille, où chaque position reçoit une valeur selon une condition.
-
-        C'est exactement le rôle de `np.where()`.
-
-        `np.where()` prend trois arguments :
-
-        ```python
-        np.where(condition, choix_si_vrai, choix_si_faux)
-        ```
-
-        Pour **chaque élément**, NumPy pose la question de la condition :
-
-        - si la réponse est **vraie**, le résultat prend la valeur de `choix_si_vrai`;
-        - si la réponse est **fausse**, le résultat prend la valeur de `choix_si_faux`.
-
-        Le tableau résultant a toujours **la même taille** que le tableau de départ.
-
-        ---
-
-        ### Que peut-on mettre dans les deux choix?
-
-        Les deux choix peuvent être :
-
-        - une **nouvelle valeur fixe**;
-        - la **valeur originale du tableau**;
-        - une valeur provenant d’un **autre tableau**.
-
-        Par exemple :
-
-        ```python
-        # Remplacer certaines valeurs et garder les autres
-        corrigees = np.where(concentrations < 0, 0, concentrations)
-
-        # Même idée, mais avec la condition inversée
-        corrigees = np.where(concentrations >= 0, concentrations, 0)
-
-        # Choisir entre deux nouvelles valeurs
-        classification = np.where(mesures_ph < 7, "acide", "basique/neutre")
-
-        # Choisir entre deux tableaux
-        resultat = np.where(condition, tableau_a, tableau_b)
-        ```
-
-        Dans tous les cas, NumPy fait le même travail : il choisit une valeur à chaque position.
-
-        ---
-
-        ### Exemple 1 : remplacer certaines valeurs et garder les autres
-
-        Par exemple, un biologiste mesure des concentrations en solution.
-
-        Les valeurs négatives sont physiquement impossibles et doivent être remplacées par `0`.
-        Les valeurs valides, elles, doivent rester telles quelles.
-
-        ```python
-        import numpy as np
-
-        concentrations = np.array([4.2, -0.3, 7.1, -1.5, 0.0, 3.8])
-
-        corrigees = np.where(concentrations < 0,  # condition : est-ce que la valeur est négative?
-                             0,                   # si oui : remplacer par 0
-                             concentrations)      # si non : garder la valeur d’origine
-
-        print(corrigees)
-        ```
-
-        Résultat :
-
-        ```python
-        [4.2 0.  7.1 0.  0.  3.8]
-        ```
-
-        Ici, les valeurs négatives sont remplacées par `0`.
-        Les autres valeurs sont conservées.
-
-        On aurait aussi pu écrire la condition dans l’autre sens :
-
-        ```python
-        corrigees = np.where(concentrations >= 0,  # condition : est-ce que la valeur est valide?
-                             concentrations,       # si oui : garder la valeur d’origine
-                             0)                    # si non : remplacer par 0
-        ```
-
-        Le résultat serait le même.
-
-        ---
-
-        ### Exemple 2 : choisir entre deux nouvelles valeurs
-
-        Parfois, on ne veut pas garder les valeurs d’origine.
-        On veut plutôt produire un nouveau tableau où chaque élément reçoit une nouvelle valeur selon la condition.
-
-        Par exemple, un technicien veut attribuer automatiquement une étiquette à chaque mesure de pH :
-
-        ```python
-        mesures_ph = np.array([3.1, 7.0, 8.5, 4.2, 6.9])
-
-        classification = np.where(mesures_ph < 7,    # condition : est-ce que le pH est inférieur à 7?
-                                  "acide",           # si oui : écrire "acide"
-                                  "basique/neutre")  # si non : écrire "basique/neutre"
-
-        print(classification)
-        ```
-
-        Résultat :
-
-        ```python
-        ['acide' 'basique/neutre' 'basique/neutre' 'acide' 'acide']
-        ```
-
-        Dans cet exemple, aucune valeur numérique d’origine n’est conservée.
-        Chaque élément est remplacé par une nouvelle valeur.
-
-        Cette forme peut servir à créer des catégories, comme ici, mais aussi des codes numériques :
-
-        ```python
-        codes = np.where(mesures_ph < 7, 0, 1)
-
-        print(codes)
-        ```
-
-        Résultat :
-
-        ```python
-        [0 1 1 0 0]
-        ```
-
-        ---
-
-        ### Exemple 3 : choisir entre deux tableaux
-
-        Les deux choix peuvent aussi être deux tableaux (de même taille).
-
-        Dans ce cas, NumPy choisit, à chaque position, une valeur provenant du premier ou du deuxième tableau.
-
-        ```python
-        mesures_a = np.array([10.2, 11.5, 9.8, 12.1])
-        mesures_b = np.array([10.0, 11.8, 10.1, 11.9])
-
-        utiliser_a = np.array([True, False, False, True])
-
-        resultat = np.where(utiliser_a, mesures_a, mesures_b)
-
-        print(resultat)
-        ```
-
-        Résultat :
-
-        ```python
-        [10.2 11.8 10.1 12.1]
-        ```
-
-        Pour chaque position :
-
-        - si `utiliser_a` vaut `True`, NumPy prend la valeur de `mesures_a`;
-        - si `utiliser_a` vaut `False`, NumPy prend la valeur de `mesures_b`.
-
-        :::
-
-        ---
-
-        :::warning 💡 `np.where()` vs filtre : ne pas confondre
-        Filtre `t[t > 0]` : le tableau résultant est **plus court** (seuls les éléments qui satisfont sont conservés). \
-        `np.where()` : le tableau résultant a **la même longueur** (chaque élément reçoit une valeur selon la condition).
-        :::
-
-        ---
-
-        ::::note 📋 AIDE-MÉMOIRE : Conditions et masques
-
-        <AideMemoireNumpyConditions />
-
-        ::::
-
-        {/* <Feedback feedbackId="Rencontre #10 - NumPy Conditions" /> */}
-    </TabItem>
-
-    <TabItem value="restructurer-sauvegarder" label="Restructurer sauvegarder">
-
-        :::tip 💡 Restructurer, combiner, générer et sauvegarder
-
-        En sciences, les données n’arrivent pas toujours dans le bon format. Des séries de mesures doivent parfois être regroupées, des jeux de données provenant de sources différentes doivent être combinés, et les résultats d’un calcul long doivent être conservés pour ne pas avoir à tout recalculer à chaque fois.
-
-        Cet onglet couvre les outils NumPy qui permettent de faire exactement ça : **restructurer**, **combiner**, **générer** et **sauvegarder** des tableaux.
-
-        :::
-
-        ---
-
-        :::info 🔄 `reshape()` - changer la forme sans changer les données
-
-        `reshape()` réorganise les éléments d’un tableau dans une nouvelle forme, sans modifier leur contenu. C’est utile quand un algorithme ou une bibliothèque attend des données dans un format précis : par exemple, un réseau de neurones qui attend une matrice plutôt qu’une liste à plat. Le nombre total d’éléments doit rester identique.
-
-        ```python
-        mesures = np.arange(12)       # 12 mesures en une seule ligne
-        print(mesures)                # [ 0  1  2  3  4  5  6  7  8  9 10 11]
-        print(mesures.shape)          # (12,)
-
-        grille = mesures.reshape(3, 4)  # réorganiser en 3 séries de 4 mesures
-        print(grille)
-        # [[ 0  1  2  3]
-        #  [ 4  5  6  7]
-        #  [ 8  9 10 11]]
-        print(grille.shape)           # (3, 4)
-        ```
-
-        :::
-
-        ---
-
-        :::info 🔗 `np.concatenate()` - combiner des tableaux
-
-        `np.concatenate()` met plusieurs tableaux bout à bout pour en former un seul :
-
-        ```python
-        mesures_matin = np.array([36.5, 37.0, 36.8])
-        mesures_soir  = np.array([37.2, 36.9, 37.5])
-
-        toutes_mesures = np.concatenate([mesures_matin, mesures_soir])
-        print(toutes_mesures)  # [36.5 37.  36.8 37.2 36.9 37.5]
-        ```
-
-        :::
-
-        ---
-
-        ::::info 🎲 Génération aléatoire
-
-        NumPy offre deux fonctions principales pour générer des données aléatoires :
-
-        **`np.random.uniform()`** génère des nombres décimaux aléatoires dans un intervalle `[min, max[` :
-
-        ```python
-        # 5 mesures de température entre 36.0 (inclus) et 38.5 (exclus)
-        temperatures = np.random.uniform(36.0, 38.5, 5)
-        print(temperatures)  # ex : [37.2  36.8  38.1  37.5  36.3]
-        ```
-
-        **`np.random.randint()`** génère des nombres entiers aléatoires dans un intervalle `[min, max[` :
-
-        ```python
-        # 10 valeurs de dés (entre 1 et 6 inclus)
-        des = np.random.randint(1, 7, 10)
-        print(des)  # ex : [3 1 6 2 4 5 2 1 6 3]
-        ```
-
-        :::warning ⚠️ Résultats différents à chaque exécution
-        Les fonctions aléatoires donnent un résultat différent chaque fois. Si l'on veut reproduire exactement le même résultat (pour déboguer ou tester), il faut utiliser `np.random.seed(42)` avant la génération. Le nombre entre parenthèses est arbitraire, c’est juste un point de départ fixe pour le générateur de nombres aléatoires.
-        :::
-
-        ::::
-
-        ---
-
-        ::::info 💾 Sauvegarder et charger un tableau
-
-        `np.save()` permet de sauvegarder un tableau dans un fichier `.npy`, et `np.load()` de le recharger. \
-        C’est utile pour conserver les résultats d’un calcul long et les réutiliser plus tard sans tout recalculer.
-
-        ```python
-        # Sauvegarder
-        scores = np.array([85, 92, 78, 90, 88])
-        np.save("scores.npy", scores)
-
-        # Charger dans un autre script (ou plus tard dans le même)
-        scores_charges = np.load("scores.npy")
-        print(scores_charges)           # [85 92 78 90 88]
-        print(np.mean(scores_charges))  # 86.6
-        ```
-
-        Le fichier `scores.npy` est créé dans le même dossier que le script.
-
-        :::warning ⚠️ Un fichier `.npy` n’est pas lisible dans un éditeur de texte
-        Un fichier `.npy` n'est pas un fichier texte, c'est un format **binaire** : les nombres sont stockés directement en mémoire, sans conversion en texte. Cela le rend beaucoup plus rapide à lire et à écrire qu’un fichier texte `.txt`, `.csv` ou `.json`, et plus compact sur le disque. En contrepartie, son contenu apparaîtra comme des caractères illisibles si on l’ouvre dans un éditeur. C’est tout à fait normal. Le fichier n’est pas corrompu. Il faut simplement le lire avec `np.load()`.
-
-        Pour inspecter les données à la main ou les partager avec d’autres logiciels, mieux vaut utiliser un fichier texte `.csv`, `.json` ou `.txt`.
-        :::
-
-        ::::
-
-        ---
-
-        ::::note 📋 AIDE-MÉMOIRE : Manipulation et sauvegarde
-
-        <AideMemoireNumpyManipulation />
-
-        ::::
-
-        {/* <Feedback feedbackId="Rencontre #10 - NumPy Manipulation" /> */}
-    </TabItem>
-
-    <TabItem value="matplotlib" label="NumPy et Matplotlib">
-
-        :::tip 💡 NumPy + Matplotlib : le duo parfait pour la visualisation
-
-        Matplotlib s’intègre naturellement avec NumPy : on génère les données avec NumPy (tableaux de valeurs `x` et `y`), puis on les transmet directement à Matplotlib pour tracer le graphique. Ensemble, ils permettent de visualiser n’importe quelle fonction mathématique ou jeu de données en quelques lignes.
-
-        :::
-
-        ---
-
-        :::info 📐 Le schéma typique : `linspace()` → fonction → `plot()`
-
-        Le pattern de base est toujours le même :
-
-        1. Créer un tableau de valeurs `x` avec `np.linspace()`
-        2. Calculer les valeurs `y` correspondantes avec une opération vectorisée
-        3. Tracer le graphique avec `plt.plot(x, y)`
-
-        ```python
-        import numpy as np
-        import matplotlib.pyplot as plt
-
-        x = np.linspace(0, 10, 100)  # 100 points entre 0 et 10
-        y = np.sin(x)                # calcul vectorisé : sin() sur chaque point
-
-        plt.plot(x, y)
-        plt.title("Fonction sinus")
-        plt.xlabel("x")
-        plt.ylabel("sin(x)")
-        plt.grid()
-        plt.show()
-        ```
-        <img src={require('/img/cours/R10GraphiqueSinus.png').default} width="50%"/>
-
-        :::
-
-        ---
-
-        ::::info 📊 Exemples de graphiques avec NumPy
-
-        Les trois exemples qui suivent illustrent les cas les plus courants : tracer une fonction algébrique, superposer plusieurs courbes sur le même graphique, et tracer une courbe paramétrique. Dans chaque cas, NumPy génère les tableaux `x` et `y`, et Matplotlib s'occupe de l'affichage.
-
-        :::note Exemple #1 Fonction linéaire : y = 2x - 15
-
-        Grâce à la vectorisation, on peut exprimer la formule directement sur le tableau `x` :
-
-        ```python
-        import numpy as np
-        import matplotlib.pyplot as plt
-
-        x = np.linspace(-10, 100, 1000)
-        y = 2 * x - 15              # opération vectorisée : appliquée à chaque élément de x
-
-        plt.plot(x, y)
-        plt.title("Fonction linéaire : y = 2x - 15")
-        plt.xlabel("x")
-        plt.ylabel("y")
-        plt.grid()
-        plt.show()
-        ```
-        <img src={require('/img/cours/R10GraphiqueLineaire.png').default} width="50%"/>
-        :::
-
-        ---
-
-        :::note Exemple #2 Plusieurs courbes sur le même graphique
-
-        On peut tracer plusieurs courbes sur le même graphique en appelant `plt.plot()` plusieurs fois :
-
-        ```python
-        import numpy as np
-        import matplotlib.pyplot as plt
-
-        x = np.linspace(-5, 5, 200)
-
-        plt.plot(x, np.sin(x),  label="sin(x)")
-        plt.plot(x, np.cos(x),  label="cos(x)")
-        plt.plot(x, np.sin(2*x), label="sin(2x)")
-
-        plt.title("Fonctions trigonométriques")
-        plt.xlabel("x")
-        plt.ylabel("y")
-        plt.legend()
-        plt.grid()
-        plt.show()
-        ```
-        <img src={require('/img/cours/R10GraphiqueTrigo.png').default} width="50%"/>
-        :::
-
-        ---
-
-        :::note Exemple #3 — Coordonnées d’un cercle
-
-        Un cercle n’est pas le graphique d’une fonction de la forme $y = f(x)$, car une même valeur de $x$ peut correspondre à deux valeurs de $y$.
-        On peut toutefois le tracer avec des tableaux de coordonnées paramétriques `(cos(θ), sin(θ))` :
-
-        ```python
-        import numpy as np
-        import matplotlib.pyplot as plt
-
-        angles = np.linspace(0, 2 * np.pi, 100)  # 100 angles de 0 à 2π
-        x = np.cos(angles)
-        y = np.sin(angles)
-
-        plt.plot(x, y)
-        plt.axis("equal")   # force la même échelle sur les deux axes
-        plt.title("Cercle unité")
-        plt.grid()
-        plt.show()
-        ```
-
-        <img src={require('/img/cours/R10GraphiqueCercle.png').default} width="40%"/>
-
-        `plt.axis("equal")` est essentiel ici : sans cette ligne, Matplotlib peut utiliser une échelle différente sur les deux axes, ce qui fait apparaître le cercle comme une ellipse. En forçant la même échelle sur `x` et `y`, on garantit que le cercle apparaît bien rond.
-
-        :::
-
-        ::::
-
-        ---
-
-        ::::note 📋 AIDE-MÉMOIRE : NumPy et Matplotlib
-
-        <AideMemoireNumpyMatplotlib />
-
-        ::::
-
-        {/* <Feedback feedbackId="Rencontre #10 - NumPy et Matplotlib" /> */}
+    <TabItem value="matplotlib" label="Matplotlib">
+        <Mod_Matplotlib />
     </TabItem>
 
     <TabItem value="Activités" label="Activités">
 
         <RappelFonctionnementClasseInverse/>
         <Tabs>
-            <TabItem value="1" label="🏠 Activités à faire à la maison">
-                ## 🧠 Auto-validation des connaissances
+            <TabItem value="1" label="Activités à faire à la maison">
+                ## Auto-validation des connaissances
 
-                [**Ce formulaire**](https://docs.google.com/forms/d/e/1FAIpQLSestBSb6PIhksrMY1jaOtV3cmADR1XE44WXG2AxM7MNRAEGNg/viewform) sert à vérifier votre compréhension des éléments les plus importants de la rencontre R10. Ne faites ce questionnaire **que lorsque vous vous sentez en très bonne maîtrise de la matière**. En classe, dès votre arrivée, vous aurez un **questionnaire très similaire**, évalué **sommativement**, à compléter sans accès à **aucune documentation**.
+                [**Ce formulaire**](https://forms.gle/SU1rJpYeoJ6XB1QA8) sert à vérifier votre compréhension des éléments les plus importants de la rencontre R09. Ne faites ce questionnaire **que lorsque vous vous sentez en très bonne maîtrise de la matière**. En classe, dès votre arrivée, vous aurez un **questionnaire très similaire**, évalué **sommativement**, à compléter sans accès à **aucune documentation**.
 
                 ::::warning
-                Ne pas remplir le formulaire diminue fortement vos chances de réussir l’évaluation sommative en début de rencontre. \
-                Assurez-vous de bien comprendre toutes les notions derrière chaque question.
+                Ne pas remplir le formulaire diminue fortement vos chances de réussir l’évaluation sommative en début de rencontre.                 Assurez-vous de bien comprendre toutes les notions derrière chaque question.
                 ::::
             </TabItem>
+	        <TabItem value="2" label="Activités à faire en classe">
 
-	        <TabItem value="2" label=" 🏫 Activités à faire en classe">
-                ## 🔨 Exercices de création
+                ## Exercices de création
 
                 Pour chacun des exercices de cette section, vous devez créer des fichiers `.py` avec les noms indiqués.
 
                 <DocumentationAutorisee />
 
-                ::::info Exercice - Créer et inspecter des tableaux
-                📁 Créez un fichier `r10_creer_inspecter_tableaux_numpy.py` pour votre réponse.
+                ::::info Exercice - Affichage des virus - liste simple
+                Créez un fichier `r10_virus_liste_simple.py` pour votre réponse.
 
-                Un technicien en laboratoire prépare des séries de mesures. Créez les tableaux suivants dans l'ordre ci-dessous, et affichez les valeurs, le `shape` et le `dtype` de chacun. Ajoutez une ligne vide entre chaque tableau pour que l'affichage soit lisible.
+                Umbrella Corporation souhaite afficher la liste des virus qu'elle possède.                 La présentation souhaitée est détaillée ci-dessous. La liste est contenue dans la variable **virus**.
 
-                - Un tableau de valeurs de pH mesurées : `[4.2, 6.8, 7.1, 5.5, 8.3]`
-                - Un tableau de 8 zéros représentant des températures initiales
-                - Un tableau de 5 uns représentant des facteurs de calibration
-                - Un tableau de 6 valeurs fixes à `9.81` représentant la constante gravitationnelle
-                - Un tableau de 6 positions espacées régulièrement entre 0 et 50 mètres
-                - Un tableau des entiers de 0 à 20 par pas de 2
-
-                Pour chaque tableau, l'affichage doit suivre ce format, séparé par une ligne vide :
-
-                ```
-                valeurs : [4.2 6.8 7.1 5.5 8.3]
-                shape   : (5,)
-                dtype   : float64
-
-                valeurs : [0. 0. 0. 0. 0. 0. 0. 0.]
-                shape   : (8,)
-                dtype   : float64
-
-                valeurs : [1. 1. 1. 1. 1.]
-                shape   : (5,)
-                dtype   : float64
-
-                valeurs : [9.81 9.81 9.81 9.81 9.81 9.81]
-                shape   : (6,)
-                dtype   : float64
-
-                valeurs : [ 0. 10. 20. 30. 40. 50.]
-                shape   : (6,)
-                dtype   : float64
-
-                valeurs : [ 0  2  4  6  8 10 12 14 16 18 20]
-                shape   : (11,)
-                dtype   : int64
+                ```python showLineNumbers
+                virus = ["Virus-T", "Virus-C", "Virus-G", "Uroboros"]
                 ```
 
-                💡 Créer une fonction pour l'affichage d'un tableau vous ferait sauver beaucoup de lignes de code!
+                <br/>
+                ##### CONTRAINTES À RESPECTER
+
+                - Votre code doit fonctionner peu importe le nombre d'éléments dans la liste.
+                - Si la liste est vide, afficher un message sympa à l'utilisateur.
+                - Si la liste n'est pas vide, vous devez utiliser un `for element in liste` pour parcourir les éléments de la liste.
+                - Vous pouvez modifier le contenu de la liste fournie pour tester différents scénarios.
+
+                <br/>
+                ##### RÉSULTAT ATTENDU AVEC LA LISTE DE DÉPART FOURNIE
+
+                ```
+                Liste des 4 virus :
+                    Virus-T
+                    Virus-C
+                    Virus-G
+                    Uroboros
+                ```
+
+                <br/>
+                ##### RÉSULTAT ATTENDU AVEC UNE LISTE À 2 ÉLÉMENTS
+
+                ```
+                Liste des 2 virus :
+                    Virus-T
+                    Virus-C
+                ```
+
+                <br/>
+                ##### RÉSULTAT ATTENDU AVEC UNE LISTE VIDE
+
+                ```
+                Désolé aucun produit pharmaceutique mortel disponible
+                ```
 
                 :::note Notions visées
-                Création de tableaux NumPy, `shape`, `dtype`
+                Listes, boucle `for ... in`, fonction `len()`, test de liste vide
                 :::
 
                 ::::
 
                 ---
 
-                ::::info Exercice - NumPy vs boucles
-                📁 Créez un fichier `r10_numpy_vs_boucles.py` pour votre réponse.
+                ::::info Exercice - Affichage des virus - listes parallèles
+                Créez un fichier `r10_virus_listes_paralleles.py` pour votre réponse.
 
-                Un physicien calcule la vitesse finale de 10 000 000 objets à l'aide de la formule
+                Recopiez le code de l'exercice précédent, il vous servira de point de départ.
 
-                $$
-                v \quad = \quad v_0 + a \cdot t,
-                $$
+                La Umbrella Corporation souhaite améliorer le rapport précédent fait.                 Elle vous fournit sous la forme d'une liste des caractéristiques sur chaque virus.
 
-                où :
-                - $v_0 = 5.0$ m/s est la vitesse initiale (la même pour tous les objets)
-                - $a$ est l'accélération propre à chaque objet (chargée depuis un fichier)
-                - $t = 3.0$ s est le temps écoulé (le même pour tous les objets)
-
-                Par exemple, pour le premier objet ($a = 4.1$ m/s²) :
-
-                $$
-                \begin{aligned}
-                v \quad &= \quad 5.0 + 4.1 \times 3.0 \\
-                  &= \quad 17.3 \ \text{m/s}
-                \end{aligned}
-                $$
-
-                Téléchargez le fichier <a href={useBaseUrl('/ressources/npy/accelerations.npy')} download="accelerations.npy">`accelerations.npy`</a> et placez-le dans le même répertoire que votre script.
-
-                :::warning ⚠️ Ne pas committer `accelerations.npy`
-                Ce fichier pèse ~70 Mo et ne doit pas être ajouté à GitHub.\
-                Ajoutez-le à votre `.gitignore` :
+                ```python showLineNumbers
+                virus = ["Virus-T", "Virus-C", "Virus-G", "Uroboros"]
+                caracteristiques = [
+                    "Transforme les humains en zombies et armes biologiques",
+                    "Provoque des mutations extrêmes et régénère les tissus",
+                    "Cause des mutations incontrôlables avec régénération cellulaire rapide",
+                    "Consomme les organismes incompatibles et renforce les hôtes compatibles"
+                ]
                 ```
-                accelerations.npy
-                ```
-                ou encore, pour carrément exclure tous les fichiers se terminant par `.npy` :
-                ```
-                *.npy
-                ```
+
+                :::warning
+                Comme les deux listes doivent être parcourues en parallèle via un index commun, un `for element in liste` ne fonctionnera pas. Utilisez `for i in range(len())`.
                 :::
 
-                Utilisez le code suivant pour charger les données sous deux formes :
-
-                ```python
-                import numpy as np
-                import time
-
-                accelerations_np   = np.load("accelerations.npy")  # tableau NumPy
-                accelerations_list = list(accelerations_np)        # liste Python
-                ```
-
-                **Calcul des vitesses**
-
-                1. Calculez les vitesses finales **avec une boucle Python** (à partir de `accelerations_list`) et mesurez le temps d'exécution avec `time.time()`.
-                2. Calculez les vitesses finales **avec NumPy** (sans boucle, à partir de `accelerations_np`) et mesurez le temps d'exécution.
-                3. Avec **NumPy**, calculez :
-                    - la vitesse finale minimale, maximale et moyenne parmi les 10 millions d'objets.
-                    - les 3 premières accélérations et les 3 premières vitesses finales calculées.
-                    - l'indice de la vitesse finale la plus élevée.
-                4. Affichez les résultats en respectant le format suivant :
+                <br/>
+                ##### RÉSULTAT ATTENDU AVEC LES LISTES DE DÉPART FOURNIES
 
                 ```
-                Temps d'exécution
-                    - Solution avec boucle : 1.35896015 secondes
-                    - Solution avec NumPy  : 0.14341521 secondes
+                Liste des 4 virus :
+                    Virus-T - Transforme les humains en zombies et armes biologiques
+                    Virus-C - Provoque des mutations extrêmes et régénère les tissus
+                    Virus-G - Cause des mutations incontrôlables avec régénération cellulaire rapide
+                    Uroboros - Consomme les organismes incompatibles et renforce les hôtes compatibles
+                ```
 
-                Statistiques sur les vitesses finales
-                    - minimum : 6.5
-                    - maximum : 35.0
-                    - moyenne : 20.74975367
+                <br/>
+                ##### RÉSULTAT ATTENDU AVEC DES LISTES À 2 ÉLÉMENTS
 
-                Détails
-                    - Les 3 premières accélérations : [4.1 9.5 7.5]
-                    - Les 3 premières vitesses finales calculées : [17.3 33.5 27.5]
-                    - Indice de la vitesse finale la plus élevée : 531
+                ```
+                Liste des 2 virus :
+                    Virus-T - Transforme les humains en zombies et armes biologiques
+                    Virus-C - Provoque des mutations extrêmes et régénère les tissus
                 ```
 
                 :::note Notions visées
-                Opérateurs arithmétiques vectorisés, NumPy vs boucles Python, fonctions d'agrégation
+                Listes parallèles, boucle `for i in range(len(...))`, parcours par index
                 :::
 
                 ::::
 
                 ---
 
-                ::::info Exercice - Oscillation amortie
-                📁 Créez un fichier `r10_oscillation_amortie.py` pour votre réponse.
+                ::::info Exercice - Affichage des virus - liste à 2 dimensions
+                Créez un fichier `r10_virus_liste_2d.py` pour votre réponse.
 
-                Un ingénieur simule le déplacement vertical d'une bille sur un ressort selon la formule d'une oscillation amortie :
+                Recopiez le code du premier exercice, il vous servira de point de départ.
 
-                $$
-                y = A \cdot \sin(\omega t) \cdot e^{-\alpha  t}
-                $$
+                La Umbrella Corporation souhaite améliorer le rapport précédent fait.                 La corporation souhaite désormais afficher dans le rapport le taux de succès de mutation.                 Elle vous fournit désormais toutes les données sous la forme d'une seule liste!
 
-                Les paramètres de la simulation sont les suivants :
-
-                ```python
-                A = 5             # amplitude
-                omega = 2 * np.pi # fréquence angulaire (le ω)
-                alpha = 0.3       # coefficient d'amortissement (le α)
+                ```python showLineNumbers
+                virus_et_autres_info = [
+                    ["Virus-T", 0.9 ,"Transforme les humains en zombies et armes biologiques"],
+                    ["Virus-C", 0.0001 ,"Provoque des mutations extrêmes et régénère les tissus"],
+                    ["Virus-G", 0.85, "Cause des mutations incontrôlables avec régénération cellulaire rapide"],
+                    ["Uroboros", 0.005, "Consomme les organismes incompatibles et renforce les hôtes compatibles"]
+                ]
                 ```
-
-                **Préparation des données**
-
-                1. Créez un tableau `t` de 200 valeurs de temps entre 0 et 4 secondes.
-                2. Calculez le tableau des positions `y` à partir de la formule ci-dessus : $y = A \times \sin(\text{omega} \times t) \times e^{-\text{alpha} \times t}$
-
-                **Analyse des résultats**
-
-                3. Affichez la position maximale atteinte et la position minimale (en mètres).
-                4. Affichez à quel indice la bille est au plus haut, ainsi que l'instant correspondant (en secondes).
-
-                **Visualisation**
-
-                5. Tracez un graphique du déplacement `y` en fonction du temps, avec un titre, des étiquettes d'axes et une grille.
-
-                **Résultat attendu à la console :**
-                ```
-                Position maximale : 4.6438734623073290 m
-                Position minimale : -3.9969968857329263 m
-                Indice au plus haut : 12
-                Instant correspondant : 0.2412060301507538 s
-                ```
-
-                **Résultat attendu du graphique :**
-                <img src={require('/img/cours/r10_oscillation_amortie.png').default} width="60%"/>
-
-                :::note Notions visées
-                Fonctions mathématiques vectorisées, fonctions d'agrégation, opérateurs arithmétiques
-                :::
-
-                ::::
-
-                ---
-
-                ::::info Exercice - Notes d'étudiants
-                📁 Créez un fichier `r10_notes_etudiants.py` pour votre réponse.
-
-                Un enseignant dispose des notes de 10 étudiants (sur 100 points) :
-
-                ```python
-                resultats = np.array([45, 72, 38, 91, 60, 55, 83, 29, 74, 66])
-                ```
-
-                À chaque étape, réalisez l'action demandée puis affichez le résultat.
-
-                **Filtrage**
-
-                1. Créez un masque booléen identifiant les étudiants en échec (note inférieure à 60).
-                2. Créez un tableau `notes_echec` contenant uniquement les notes des étudiants en échec.
-                3. Affichez le nombre d'étudiants en échec.
-
-                **Transformation**
-
-                4. Créez un tableau `mentions` qui attribue automatiquement une mention à chaque étudiant : `"réussite"` si la note est ≥ 60, `"échec"` sinon.
-
-                **Analyse**
-
-                5. Calculez la note moyenne, affichez-la, puis affichez combien d'étudiants sont au-dessus de la moyenne.
-
-                **Résultat attendu :**
-                ```
-                Masque échec                      : [ True False  True False False  True False  True False False]
-                Notes en échec                    : [45 38 55 29]
-                Nombre en échec                   : 4
-
-                Mentions                          : ['échec' 'réussite' 'échec' 'réussite' 'réussite' 'échec' 'réussite' 'échec' 'réussite' 'réussite']
-
-                Moyenne                           : 61.3
-                Étudiants au-dessus de la moyenne : 5
-                ```
-
-                :::note Notions visées
-                Masques booléens, filtrage direct, transformation conditionnelle, fonctions d'agrégation
-                :::
-
-                ::::
-
-                ---
-
-                ::::info Exercice - Traitement des pixels
-                📁 Créez un fichier `r10_traitement_pixels.py` pour votre réponse.
-
-                Un système de traitement d'images reçoit des valeurs de pixels brutes qui peuvent dépasser les limites valides `[0, 255]`. Le pipeline de traitement se déroule en trois phases : d'abord **détecter et corriger** les valeurs invalides, puis **normaliser** les pixels entre 0 et 1, et enfin **binariser** l'image en noir et blanc.
-
-                ```python
-                pixels = np.array([-30, 0, 85, 128, 260, 300, 72, -5, 200, 255])
-                ```
-
-                À chaque étape, réalisez l'action demandée puis affichez le résultat.
-
-                **Détection et correction**
-
-                1. Calculez un masque booléen indiquant quelles valeurs sont hors limites (inférieures à 0 **ou** supérieures à 255).
-                2. Vérifiez s'il existe au moins une valeur hors limites.
-                3. Corrigez les pixels en forçant toute valeur inférieure à `0` à `0` et toute valeur supérieure à `255` à `255`.
-                4. Vérifiez que toutes les valeurs sont maintenant valides.
-
-                **Transformation**
-
-                5. Ramenez les pixels dans l'intervalle `[0.0, 1.0]` en divisant chaque valeur par 255 (0 reste 0, 255 devient 1.0).
-                6. Convertissez chaque pixel en noir ou blanc : les valeurs inférieures à `0.5` deviennent `0.0` (noir) et les autres deviennent `1.0` (blanc).
-
-                **Résultat attendu :**
-                ```
-                Masque hors limites        : [ True False False False  True  True False  True False False]
-                Au moins une hors limite   : True
-                Pixels corrigés            : [  0   0  85 128 255 255  72   0 200 255]
-                Toutes les valeurs valides : True
-                Pixels normalisés          : [0.     0.     0.3333 0.502  1.     1.     0.2824 0.     0.7843 1.    ]
-                Pixels binarisés           : [0. 0. 0. 1. 1. 1. 0. 0. 1. 1.]
-                ```
-
-                :::note Notions visées
-                Masques booléens, filtrage direct, vérification de conditions globales, encadrement de valeurs, opérateurs arithmétiques, transformation conditionnelle
-                :::
-
-                ::::
-
-                ---
-
-                ::::info Exercice - Manipulation et aléatoire
-                📁 Créez un fichier `r10_manipulation_aleatoire.py` pour votre réponse.
-
-                Un chercheur simule deux séries de mesures de pression atmosphérique (en hPa) et veut les combiner, les analyser et les sauvegarder.
-
-                À chaque étape, réalisez l'action demandée puis affichez le résultat.
-
-                **Génération**
-
-                1. Générez une première série de 6 mesures décimales aléatoires entre 990 et 1010 à l'aide de **NumPy** (sans utiliser le module `random` de Python).
-                2. Générez une deuxième série de 6 mesures entières aléatoires entre 995 et 1005 à l'aide de **NumPy**.
-
-                **Manipulation**
-
-                3. Combinez les deux séries en un seul tableau de 12 valeurs et affichez-le.
-                4. Remplacez toutes les valeurs inférieures à 1000 par `1000.0` et affichez le résultat.
-                5. Restructurez le tableau en une matrice de 3 lignes × 4 colonnes et affichez-la avec son `shape`.
 
                 :::note
-                Les valeurs seront différentes à chaque exécution puisqu'elles sont aléatoires, mais le format doit être identique. Exemple :
-                ```
-                Tableau combiné : [ 997.49  1009.01  1004.64  1001.97  993.12  993.12  1005.  1005.  1002.   999.   998.  1002.]
-
-                Valeurs corrigées : [1000.   1009.01  1004.64  1001.97  1000.   1000.   1005.  1005.  1002.  1000.  1000.  1002.]
-
-                Matrice (3, 4) :
-                [[1000.   1009.01  1004.64  1001.97]
-                 [1000.   1000.   1005.   1005.  ]
-                 [1002.   1000.   1000.   1002.  ]]
-                ```
+                Le taux de mutation est stocké comme un nombre décimal (ex. `0.9`). Pour l'afficher en pourcentage, multipliez par 100 (ex. `0.9 * 100 = 90.0%`).
                 :::
 
+                <br/>
+                ##### RÉSULTAT ATTENDU AVEC LA LISTE DE DÉPART FOURNIE
+
+                ```
+                Liste des 4 virus :
+                    Virus-T - Transforme les humains en zombies et armes biologiques (taux de mutation estimé : 90.0%)
+                    Virus-C - Provoque des mutations extrêmes et régénère les tissus (taux de mutation estimé : 0.01%)
+                    Virus-G - Cause des mutations incontrôlables avec régénération cellulaire rapide (taux de mutation estimé : 85.0%)
+                    Uroboros - Consomme les organismes incompatibles et renforce les hôtes compatibles (taux de mutation estimé : 0.5%)
+                ```
+
+                <br/>
+                ##### RÉSULTAT ATTENDU AVEC UNE LISTE DE 2 LISTES
+
+                ```
+                Liste des 2 virus :
+                    Virus-T - Transforme les humains en zombies et armes biologiques (taux de mutation estimé : 90.0%)
+                    Virus-C - Provoque des mutations extrêmes et régénère les tissus (taux de mutation estimé : 0.01%)
+                ```
+
                 :::note Notions visées
-                Génération aléatoire, combinaison de tableaux, encadrement de valeurs, restructuration
+                Listes à 2 dimensions (listes imbriquées), accès par index multiple, f-strings, formatage de pourcentage
                 :::
 
                 ::::
 
                 ---
 
-                :::info Exercice - Fichier JSON
-                📁 Créez un fichier `r10_fichiers_json.py` pour votre réponse.
+                ::::info Exercice - Manipulation de listes par compréhension
+                Créez un fichier `r10_comprehension_liste.py` pour votre réponse.
 
-                Un étudiant en sciences veut sauvegarder les résultats d'une expérience de laboratoire dans un fichier JSON, puis les relire pour les afficher.
+                La compréhension de liste permet de transformer, filtrer et manipuler des données de manière concise et efficace.                 À partir de la liste suivante :
 
-                Voici les données de l'expérience :
-                - Nom de l'expérience : `"Réaction acide-base"`
-                - Température ambiante : `22.5`
-                - Réaction observée : `True`
-                - Mesures de pH relevées : `[4.2, 5.1, 6.7, 7.0, 6.3]`
+                ```python showLineNumbers
+                liste = [1, 2, 3, 4, 5]
+                ```
 
-                **Sauvegarde**
+                Vous devez créer **6 nouvelles listes** en utilisant **exclusivement la [compréhension de liste](?onglet=listcomp)**.                 Chaque cas représente une transformation ou une opération **différente**.
 
-                1. Créez un dictionnaire Python contenant ces données.
-                2. Sauvegardez ce dictionnaire dans un fichier `experience.json` avec une indentation de 4.
+                ##### CAS À COMPLÉTER
+                1. Multiplier chaque élément par 5                    <i>Résultat attendu : [5, 10, 15, 20, 25]</i>
 
-                Le fichier `experience.json` généré doit ressembler à :
-                ```json
-                {
-                    "nom": "Réaction acide-base",
-                    "temperature": 22.5,
-                    "reaction_observee": true,
-                    "mesures_ph": [
-                        4.2,
-                        5.1,
-                        6.7,
-                        7.0,
-                        6.3
-                    ]
+                2. Garder uniquement les nombres supérieurs à 2                    <i>Résultat attendu : [3, 4, 5]</i>
+
+                3. Créer une liste de booléens indiquant si chaque nombre est supérieur à 3                    <i>Résultat attendu : [False, False, False, True, True]</i>
+
+                4. Créer une nouvelle liste contenant les carrés sous forme de texte                    <i>Résultat attendu : ['Le carré de 1 est 1', 'Le carré de 2 est 4', ..., 'Le carré de 5 est 25']</i>
+
+                :::tip Indice
+                Une f-string sera nécessaire dans la section `expression` de la compréhension de liste.
+                :::
+
+                5. Remplacer les nombres impairs par le mot "impair"                    <i>Résultat attendu : ['impair', 2, 'impair', 4, 'impair']</i>
+
+                :::tip Indice
+                Un [if/else compacte](/cours/rencontre4?onglet=compacte) est nécessaire dans la section `expression` de la compréhension de liste.
+                :::
+
+                6. Doubler uniquement les nombres pairs                    <i>Résultat attendu : [4, 8]</i>
+
+                ##### FORMAT ATTENDU
+
+                Pour chaque cas, vous devez écrire votre code comme ceci :
+
+                ```python showLineNumbers
+                casX = [ ... ]  # Remplacez les "..." par votre compréhension de liste
+                print(casX)
+                ```
+
+                :::note Notions visées
+                Compréhension de liste, filtrage (`if`), transformation (`expression`), if/else compact, f-strings
+                :::
+
+                ::::
+
+                ---
+
+                ::::info Exercice - Manipulation d'ensembles
+                Créez un fichier `r10_ensembles.py` pour votre réponse.
+
+                Les ensembles (set) permettent de stocker des éléments uniques et d'effectuer des opérations mathématiques comme l’union, l’intersection ou la différence.                 À partir des ensembles suivants :
+
+                ```python showLineNumbers
+                ensemble1 = {1, 2, 3, 4, 5}
+                ensemble2 = {4, 5, 6, 7, 8}
+                ```
+
+                Vous devez créer **3 nouveaux ensembles** et compléter **1 cas de conversion** en utilisant **exclusivement des opérations sur les `set`** et la fonction `list()`.                 Pas de boucles, ni de compréhension de liste. Chaque cas représente une transformation ou une opération différente.
+
+                <br/>
+                ##### CAS À COMPLÉTER
+                1. <i>Résultat attendu : \{1, 2, 3, 4, 5, 6, 7, 8}</i>
+
+                2. <i>Résultat attendu : \{4, 5}</i>
+
+                3. <i>Résultat attendu : \{1, 2, 3}</i>
+
+                4. La liste suivante contient des doublons. Convertissez-la en ensemble pour les supprimer, puis reconvertissez-la en liste triée.
+                   ```python
+                   mesures = [3, 7, 3, 1, 7, 9, 1, 5]
+                   ```
+                   <i>Résultat attendu : [1, 3, 5, 7, 9]</i>
+
+                :::tip Indice
+                La fonction `sorted()` peut être utile pour trier la liste finale.
+                :::
+
+                <br/>
+                ##### FORMAT ATTENDU
+
+                Pour chaque cas, vous devez écrire votre code comme ceci :
+
+                ```python showLineNumbers
+                casX = ...  # Remplacez les "..." par une opération sur les ensembles
+                print(casX)
+                ```
+
+                :::note Notions visées
+                Ensembles (`set`), union, intersection, différence, conversion `list()` / `sorted()`
+                :::
+
+                ::::
+
+                ---
+
+                ::::info Exercice - Dictionnaires - Dictionnaire imbriqué
+                Créez un fichier `r10_dictionnaires_imbrique.py` pour votre réponse.
+
+                Les données de température d'une journée d'une ville sont stockées sous forme de dictionnaire.
+
+                ```python showLineNumbers
+                info = {
+                    "lieu": "Raccoon City",
+                    "date": "2025-07-12",
+                    "temperatures_C": {
+                        "Matin": 18.2,
+                        "Midi": 22.5,
+                        "Après-midi": 24.1,
+                        "Soir": 20.3
+                    }
                 }
                 ```
 
-                **Lecture et affichage**
+                Écrivez un programme qui :
 
-                3. Relisez le fichier `experience.json` et stockez son contenu dans une variable.
-                4. Affichez le nom de l'expérience, la température ambiante et la moyenne des mesures de pH.
+                1. Affiche le lieu et la date en en-tête.
+                2. Affiche chaque moment de la journée avec sa température, alignés en colonnes.
+                3. Calcule et affiche la température moyenne.
 
-                Le résultat attendu est :
+                Le résultat doit correspondre exactement au format suivant (y compris les espaces, les lignes vides et les indentations) :
                 ```
-                Expérience : Réaction acide-base
-                Température : 22.5 °C
-                pH moyen : 5.86
+                Températures à Raccoon City le 2025-07-12
+
+                    Matin       : 18.2 °C
+                    Midi        : 22.5 °C
+                    Après-midi  : 24.1 °C
+                    Soir        : 20.3 °C
+
+                Température moyenne : 21.28 °C
                 ```
 
+                :::tip Indice - Accès au dictionnaire imbriqué
+                Pour accéder aux températures, utilisez `info['temperatures_C']`. C'C'est lui-même un dictionnaire que vous pouvez parcourir avec `.items()`.
                 :::
+
+                :::tip Indice - Alignement
+                Consultez l'[aide-mémoire sur les f-strings](/aidememoire/f-string) pour les options de formatage permettant d'aligner du texte sur une largeur fixe.
+                :::
+
+                :::note Notions visées
+                Dictionnaires imbriqués, accès par clé, `.items()`, calcul de moyenne, alignement avec f-strings
+                :::
+
+                ::::
 
                 ---
 
-                ::::info Exercice - Fichiers texte
-                📁 Créez un fichier `r10_fichiers_texte.py` pour votre réponse.
+                ::::info Exercice - Jeu de devinette amélioré
+                Créez un fichier `r10_jeu_devinette_ameliore.py` pour votre réponse.
 
-                Un système de capteurs enregistre des mesures de température au fil du temps. Simulez ce système en trois étapes.
+                Partez du code suivant (version de base du jeu de devinette) et **améliorez-le** afin d'insulter gentiment l'utilisateur s'il saisit un nombre déjà saisi.                 Malgré sa stupidité, vous devez quand même lui indiquer si la bonne réponse est plus haute ou plus basse!
 
-                **Étape 1 - Créer le fichier** (mode `"w"`)
+                ```python showLineNumbers
+                import random
 
-                Générez 5 nombres entiers aléatoires entre -10 et 35 à l'aide de **NumPy** (sans utiliser le module `random` de Python) et \
-                écrivez-les dans un fichier `temperatures.txt`, un nombre par ligne.
+                nombre_secret = random.randint(1, 100)
+                devine = -1
 
-                **Étape 2 - Ajouter des mesures** (mode `"a"`)
+                while devine != nombre_secret:
+                    devine = int(input("Tente de trouver le nombre que j'ai en tête : "))
 
-                Générez 3 nouveaux nombres entiers aléatoires entre -10 et 35 à l'aide de **NumPy** et \
-                ajoutez-les à la suite du fichier `temperatures.txt`, sans effacer les données existantes.
+                    if devine < nombre_secret:
+                        print("Plus haut!\n")
+                    elif devine > nombre_secret:
+                        print("Plus bas!\n")
 
-                **Étape 3 - Lire et analyser** (mode `"r"`)
-
-                1. Lisez toutes les lignes du fichier.
-                2. Retirez les sauts de ligne de chaque valeur.
-                3. Convertissez chaque valeur en entier.
-                4. Créez un tableau NumPy à partir des valeurs lues.
-                5. Affichez la liste complète des 8 températures.
-                6. Affichez la somme des températures à l'aide de NumPy.
-                7. Affichez la température maximale à l'aide de NumPy.
-                8. Affichez la température minimale à l'aide de NumPy.
-
-                :::note
-                Les valeurs seront différentes à chaque exécution puisqu'elles sont aléatoires, mais le format doit être identique :
+                print("Bravo humain, tu as trouvé le nombre!")
                 ```
-                Températures enregistrées : [  3  17  -5  22   8  11  -2  30]
-                Somme : 84
-                Maximum : 30
-                Minimum : -5
+
+                ##### CONTRAINTES À RESPECTER
+
+                - Stockez tous les essais de l'utilisateur dans un ensemble.
+                - Utilisez l'opérateur `in` pour vérifier si un essai a déjà été saisi.
+
+                <br/>
+                ##### EXEMPLE DE RÉSULTAT ATTENDU
+
+                <i>**Rappel** : le nombre est choisi aléatoirement par l'ordinateur à chaque partie.</i>
+                <br/>
+
                 ```
+                Tente de trouver le nombre que j'ai en tête : 50
+                Plus haut!
+
+                Tente de trouver le nombre que j'ai en tête : 95
+                Plus bas!
+
+                Tente de trouver le nombre que j'ai en tête : 92
+                Plus bas!
+
+                Tente de trouver le nombre que j'ai en tête : 50
+                Tu ne sembles pas être le pingouin glissant le plus loin...
+                Tu avais déjà essayé cette réponse...
+                Plus haut!
+
+                Tente de trouver le nombre que j'ai en tête : 89
+                Bravo humain, tu as trouvé le nombre!
+                ```
+
+                :::note Notions visées
+                Boucle `while`, ensembles (accumulation), opérateur `in`, module `random`
+                :::
+
+                ::::
+
+                ---
+
+                ::::info Exercice - Graphique - Courbe simple
+                Créez un fichier `r10_graphique_courbe_simple.py` pour votre réponse.
+
+                Vous devez reproduire, **le plus fidèlement possible**, le graphique suivant :
+
+                <img src={require('/img/cours/Graphique1.png').default} width="50%"/>
+                <br/>
+                <br/>
+                Les données nécessaires au graphique sont fournies sous la forme de 2 listes :
+
+                ```python showLineNumbers
+                temperatures = [5.0, 5.816326530612245, 6.63265306122449, 7.448979591836735,
+                                8.26530612244898, 9.081632653061224, 9.89795918367347, 10.714285714285715,
+                                11.53061224489796, 12.346938775510203, 13.16326530612245, 13.979591836734695,
+                                14.795918367346939, 15.612244897959183, 16.42857142857143, 17.244897959183675,
+                                18.06122448979592, 18.877551020408163, 19.693877551020407, 20.510204081632654,
+                                21.3265306122449, 22.142857142857142, 22.95918367346939, 23.775510204081634,
+                                24.591836734693878, 25.408163265306122, 26.224489795918366, 27.040816326530614,
+                                27.857142857142858, 28.6734693877551, 29.48979591836735, 30.306122448979593,
+                                31.122448979591837, 31.93877551020408, 32.755102040816325, 33.57142857142857,
+                                34.38775510204081, 35.20408163265306, 36.02040816326531, 36.83673469387755,
+                                37.6530612244898, 38.46938775510204, 39.285714285714285, 40.10204081632653,
+                                40.91836734693878, 41.734693877551024, 42.55102040816327, 43.36734693877551,
+                                44.183673469387756, 45.0]
+
+                photosynthese = [-0.4208586207089154, -0.9002982388093212, 2.90695296113819, -2.3816678390159787,
+                                1.6301613438564548, -0.6395165673646073, 0.4062406047933971, -3.0807857229738986,
+                                0.7630986943366226, -7.109276797690082, 1.0400704458874834, -1.6231609563256293,
+                                3.5158201201035792, 0.7073045481852345, 4.462535684066591, 3.469725363276981,
+                                7.800055142339156, 3.6581720517708147, 12.848632806212834, 17.01723976662892,
+                                21.583172080660294, 32.30270168260925, 34.27508939188592, 43.959441989933595,
+                                52.391688150519585, 61.14262118477141, 81.52320747993383, 80.49707329499296,
+                                90.43305211916575, 99.87264809035379, 99.64218123860432, 103.57940043588764,
+                                101.38268425121551, 92.5592720723287, 83.62418715159393, 84.92142209312819,
+                                70.6148436983045, 59.1725221343123, 49.47349737546689, 44.62045689259768,
+                                31.310564654507512, 24.072064122012684, 16.917980484652784, 13.408756457014197,
+                                7.579626366114782, 8.420568754382284, 5.911835499055119, 3.4010226647009074,
+                                3.2056589365442028, 3.021178647669223]
+
+                ```
+
+                :::note Notions visées
+                Matplotlib, `plt.plot()`, courbe simple, titre et étiquettes d'axes
+                :::
+
+                ::::
+
+                ---
+
+                ::::info Exercice - Graphique - Températures annuelles
+                Créez un fichier `r10_graphique_temperatures_annuelles.py` pour votre réponse.
+
+                Un chercheur suit la température moyenne enregistrée chaque mois dans une réserve naturelle.                 Les données sont stockées sous forme d’une liste de tuples, où chaque tuple contient :
+
+                - le nom du mois
+                - la température moyenne en °C
+
+                Votre objectif :
+                - Extraire les noms des mois et les températures depuis la liste de tuples ci-dessous.
+                    - Créer par programmation une liste pour les noms des mois et une liste pour les valeurs.
+                    - [**La compréhension de liste**](/cours/rencontre10?onglet=listcomp) peut vous aider à créer ces 2 listes rapidement.
+                - Afficher ces données dans un graphique linéaire pour visualiser l’évolution de la température au fil des mois.
+                    - Ajouter un titre, une grille et des étiquettes d’axes claires en lien avec le graphique.
+                    - Définissez les dimensions du graphique à 12x5 pouces en utilisant `plt.figure(...)`.
+                        - Cette instruction doit être placée avant toutes les autres instructions de traçage de votre graphique.
+
+                ```python showLineNumbers
+                temperatures = [
+                    ("Janvier", 2.5),
+                    ("Février", 3.0),
+                    ("Mars", 6.2),
+                    ("Avril", 10.5),
+                    ("Mai", 15.3),
+                    ("Juin", 19.1),
+                    ("Juillet", 22.4),
+                    ("Août", 21.9),
+                    ("Septembre", 17.0),
+                    ("Octobre", 12.1),
+                    ("Novembre", 6.8),
+                    ("Décembre", 3.4)
+                ]
+                ```
+                <br/>
+                ##### Exemple de graphique attendu
+
+                <img src={require('/img/cours/ExerciceTupleGraphique.png').default} width="100%"/>
+
+                :::note Notions visées
+                Liste de tuples, compréhension de liste pour extraire des données, Matplotlib (graphique linéaire)
+                :::
+
+                ::::
+
+                ---
+
+                ::::info Exercice - Graphique - Barres et moyennes
+                Créez un fichier `r10_graphique_barres_moyennes.py` pour votre réponse.
+
+                 Vous devez reproduire, **le plus fidèlement possible**, le graphique ci-dessous.                  Il représente la consommation moyenne d’eau (millions de m<sup>3</sup>/an) au Canada.
+
+                <img src={require('/img/cours/Graphique2.png').default} width="70%"/>
+
+                :::tip Indice
+                Vous devez créer une nouvelle liste représentant la moyenne pour chaque secteur.
+                :::
+
+                Les données nécessaires au graphique sont fournies sous la forme des listes ci-dessous :
+
+
+                ```python showLineNumbers
+                secteurs = ["Résidentiel", "Agricole", "Industriel", "Énergie", "Municipal", "Autres"]
+                couleur_barres = ['skyblue', 'limegreen', 'gold', 'salmon', 'orchid', 'gray']
+
+                # Données totales pour l’ensemble du Canada (12 données par liste, une donnée par province/territoire)
+                residentiel = [410, 380, 220, 200, 890, 860, 170, 180, 60, 100, 40, 30, 25]
+                agricole = [780, 640, 850, 600, 720, 670, 230, 210, 150, 180, 20, 15, 10]
+                industriel = [520, 410, 290, 310, 1100, 970, 190, 200, 50, 130, 60, 40, 20]
+                energie = [300, 270, 180, 150, 400, 420, 100, 110, 30, 90, 25, 20, 10]
+                municipal = [260, 250, 130, 120, 680, 700, 90, 100, 25, 70, 15, 10, 8]
+                autres = [90, 80, 60, 50, 130, 120, 40, 40, 10, 25, 5, 5, 3]
+                 ```
+
+                :::note Notions visées
+                Calcul de moyennes sur des listes, Matplotlib `plt.bar()`, couleurs des barres, construction de nouvelles listes
+                :::
+
+                ::::
+
+                ---
+
+                ::::info Exercice - Graphique - Populations par saison
+                Créez un fichier `r10_graphique_populations_saison.py` pour votre réponse.
+
+                Vous devez analyser les populations de différentes espèces animales dans une réserve naturelle.                 Pour chaque espèce, une liste du nombre d’individus observés pour chacune des 4 saisons est fournie :
+
+                ```python showLineNumbers
+                populations = {
+                    "Cerfs": [32, 45, 50, 41],
+                    "Renards": [12, 15, 13, 10],
+                    "Lapins": [85, 102, 98, 76],
+                    "Aigles": [5, 7, 6, 5]
+                }
+                saisons = ["Printemps", "Été", "Automne", "Hiver"]
+                ```
+                <br/>
+                ##### ÉTAPE 1 - VOLET CONSOLE
+
+                Calculez et affichez à la console le résultat ci-dessous.                 Les valeurs doivent être calculées à partir des données de la variable population.
+
+                ```
+                Recensement pour les 4 espèces :
+
+                Cerfs : moyenne par saison = 42.0 individus
+                Renards : moyenne par saison = 12.5 individus
+                Lapins : moyenne par saison = 90.2 individus
+                Aigles : moyenne par saison = 5.8 individus
+                ```
+                **REMARQUES**
+                - Votre code doit fonctionner peu importe le nombre d’animaux dans le dictionnaire `populations`.
+                - Les couleurs des courbes seront automatiquement les bonnes.
+
+                <br/>
+                ##### ÉTAPE 2 - VOLET GRAPHIQUE
+
+                Générez le graphique ci-dessous.
+
+                <img src={require('/img/cours/ExerciceDictionnaireGraphique.png').default} width="75%"/>
+
+                :::note Notions visées
+                Dictionnaires, parcours avec `.items()`, calcul de moyenne, Matplotlib (courbes multiples), code générique
+                :::
+
+                ::::
+
+                ---
+
+                ::::info Exercice - Graphique - Nuage de points et courbe
+                📁 Créez un fichier `r10_graphique_nuage_courbe.py` pour votre réponse.
+
+                 Vous devez reproduire, **le plus fidèlement possible**, le graphique ci-dessous. <br/>\
+                Il représente la croissance de 10 plantes sur 30 jours.                 Chaque point en vert semi-transparent représente une mesure d’une plante, il y a donc 300 points.                 La courbe représente la moyenne de leur croissance.
+
+                <img src={require('/img/cours/Graphique3.png').default} width="70%"/>
+
+                <br/><br/>
+
+                **Étape 1 - Tracer une seule plante**
+
+                Commencez par tracer uniquement les points de `plante1` en vert semi-transparent, sans ligne entre les points.                 Vérifiez que votre graphique ressemble aux mesures de la première plante avant de continuer.
+
+                **Étape 2 - Tracer les 10 plantes**
+
+                Ajoutez les 9 autres plantes de la même façon. La fonction `plot(...)` doit être appelée une fois par plante (10 appels au total).
+
+                **Étape 3 - Calculer et tracer la moyenne**
+
+                Créez une liste `moyennes` contenant la moyenne des 10 plantes pour chacun des 30 jours, puis tracez-la comme une courbe (avec une ligne).
+
+                :::tip Indices
+                - La transparence des points peut être déterminée avec le paramètre `alpha` (ex : `alpha=0.25`).
+                - Pour la courbe des moyennes, créez une nouvelle liste représentant la moyenne de chacun des 30 jours.
+                :::
+
+                <br/>
+                Les données nécessaires au graphique sont fournies sous la forme d’une liste par plante (1 donnée par jour) :
+
+                ```python showLineNumbers
+               jour = list(range(1, 31)) #Génère une liste [1,2,3,...,28,29,30]
+               plante1 = [0.8976591646433567, 0.0, 0.15498324299736432, 0.9841528009536402, 0.15657204065985764, 0.0, 0.33447160605066895, 4.6283876633678975, 5.266817494776518, 3.4487692867267548, 5.870556870585399, 5.59921181812971, 9.151254660249002, 7.310614349370278, 9.851989318343366, 13.824188176315175, 15.464723326276136, 15.702426828326931, 13.512838407325102, 12.809356526359828, 17.47960344645509, 15.123420443868309, 17.40785829723269, 19.197800939941423, 20.154793311136707, 17.915665513991193, 20.104929315636344, 17.305250783347308, 19.13156508363107, 21.033513462238393]
+               plante2 = [0.17528353328795931, 0.2756336458541735, 0.0, 0.0, 0.0, 0.6309221590379746, 3.727550566214523, 1.2508511778721294, 0.7024180814306074, 6.830442869157721, 4.936682177229124, 4.5291192276271754, 4.990690106855183, 9.895431855587745, 11.417271004590937, 10.827200698671112, 12.598193409811389, 12.815001837722994, 16.14637147427025, 14.621077844225155, 17.03212243808826, 17.027520550344995, 16.747459643059045, 19.755682219447348, 20.9180585108655, 23.47304450933025, 17.30950120875156, 17.337504826772005, 19.26714999504858, 21.294379182578343]
+               plante3 = [0.7102632701578836, 0.0, 0.0, 0.0, 2.3343028391462797, 2.3438873675900336, 0.6454097889242174, 1.0996724026369975, 3.286045694345812, 3.9285399427808274, 3.612599736185482, 4.30020407797379, 9.145504683557949, 9.21225840090138, 8.562279898630978, 10.377545561479028, 10.300619634750328, 12.13895510845491, 14.769665211706135, 13.690346592845321, 15.37871243532946, 16.583317142828676, 16.57879523525781, 16.756826717506286, 17.604537555459814, 18.40131885619254, 16.404259701325834, 18.89079355214781, 20.288042085972553, 18.21005148218242]
+               plante4 = [0.0, 0.0, 0.8973792501708838, 0.9830097528856888, 0.0, 0.6461179782755417, 0.23226953686786578, 1.2472478853272517, 6.401366814252393, 2.0415819065854146, 3.891611111275125, 5.262117713514414, 7.876585352377606, 7.183706437052258, 12.426333923266526, 9.649513617333888, 12.73628479093696, 12.478132650678955, 15.249038804916301, 17.805230262139887, 13.063427000000233, 15.159135971994353, 17.14983145120984, 21.307851142556363, 17.03068748570027, 20.253810785360578, 19.569583288170133, 19.743382094110608, 22.00312569974368, 21.748919012129882]
+               plante5 = [0.6694150780194975, 1.4938014956025913, 0.35368890690893984, 0.9833023284099253, 1.2338260363941644, 2.192373222056616, 0.7787428769386353, 1.6909990215262607, 3.4065845701224866, 4.510530462984979, 4.769874841771353, 6.539463845509872, 10.129871941734269, 11.25078568737028, 12.01651914074369, 9.673096507429102, 11.77202031960022, 14.999346444191085, 14.834671920744888, 15.668917765971251, 15.638377444681467, 19.014525684346527, 16.407694562665597, 18.564642981001583, 17.46831271855271, 16.90077670848018, 20.338978550282203, 18.906724587915743, 19.694358440253918, 16.657933007109023]
+               plante6 = [1.3443398103456938, 1.7153571861619716, 0.1333277692479119, 1.6103108806176778, 0.0, 2.6826886678064543, 0.7904991374065058, 4.151998225725303, 1.508265561315599, 3.980472455562051, 5.12564841025743, 6.54192202156568, 9.19733810691179, 10.520195804652623, 9.10149309227341, 13.48939226520939, 13.149708808238799, 13.883893735070835, 15.228942187800202, 17.639327729443565, 18.317677985660385, 15.481336669078772, 18.548569162881705, 19.176333920189357, 17.836996378597085, 21.095745501671274, 20.171253471005997, 19.018100870312136, 17.274245444905446, 21.26052545093896]
+               plante7 = [0.0, 0.8985906272911144, 0.0, 2.0769771214349646, 0.0, 0.1303882294417198, 3.0373598089846636, 4.5034510344243515, 2.6102761908237677, 4.0807103767398845, 5.082159908953121, 6.926619478650151, 6.845441288816597, 10.789809579653474, 9.57315458379442, 9.12607939931834, 14.263096787065773, 11.63195582037034, 14.232154873258024, 15.820119635528503, 19.262088637822018, 15.523011851191633, 17.47956143053687, 17.34668556294283, 19.63177817156293, 16.291851406997555, 20.408500890879306, 18.695461783200003, 20.966068097868853, 20.542745168091884]
+               plante8 = [0.0, 0.0, 0.31593716941831607, 1.797879409074148, 1.3549021087528006, 2.72834888395552, 3.8987228957550815, 1.4887672079330272, 2.5269437973885465, 2.3589672604919345, 5.361937377304439, 6.7009581034667764, 5.728281913775275, 8.740111897509529, 11.79561232423084, 12.380547993337167, 12.103145069789937, 13.47668835211402, 16.290659431434516, 14.372002381487956, 16.470123949718353, 17.309302440725823, 14.597188305730064, 15.981267855499347, 18.953169075105787, 16.98465673667939, 18.473607004645785, 18.227860154572642, 14.21517584840647, 21.26330654419327]
+               plante9 = [0.0, 0.4522723346745793, 1.7586043686210397, 0.0, 1.2458737753703606, 2.015879463453331, 1.417370812307034, 1.8886807926980338, 2.2707244139301315, 2.7734256465247826, 5.501813520535498, 4.751188398387352, 10.846530040610622, 4.8128866460687805, 9.089459498762263, 11.772422596289898, 11.254134423545405, 13.530654216426512, 17.50499431491864, 16.576957278084116, 11.990172734262561, 16.994063860033176, 18.276243579795942, 19.50467136528814, 20.242796584353783, 18.524683668288525, 17.51022351284659, 17.155392328472765, 18.613109151742346, 17.347847505152078]
+               plante10 = [0.0, 1.6617879828120876, 1.1114070518778814, 1.2413536244030396, 1.0957815500862658, 1.5336617782080486, 1.6312859846759336, 4.19868256424098, 3.416719289385172, 4.608614661530128, 3.5593769395445642, 6.521317626985673, 5.077549860821263, 9.603200324467075, 5.755340324739416, 9.639255450256496, 14.271414716495176, 12.778076460254391, 15.402533086111394, 16.708734436876853, 14.17417569230928, 17.100934078054095, 18.80519666846201, 14.897059850615431, 21.046899131076906, 15.375114293061099, 16.463903627318345, 20.611482792264987, 19.857870964605823, 19.38782379439097]
+                 ```
+
+                :::note Notions visées
+                Nuage de points avec Matplotlib, multiples appels à `plot()`, calcul de moyennes par index
                 :::
 
                 ::::
@@ -2164,147 +662,125 @@ import AideMemoireNumpyMatplotlib from '@site/docs/_components/AideMemoireNumpyM
 
                 ## ✏️ Exercices sur papier
 
-                :::warning-nt
-                Les exercices suivants ne visent pas nécessairement à pratiquer la matière de cette rencontre, \
-                mais plutôt à vous entraîner à l'écriture de code "papier" sur des concepts plus simples, comme il pourrait y avoir à l'examen.
-                :::
-
                 <DocumentationInterdite />
 
-                :::info Exercice - Écrire du code **sans PyCharm** #1
+                ::::info Exercice - Tracer un graphique à la main
 
-                **Sur papier, sans ordinateur,** écrivez du code permettant de connaitre le nombre de valeurs supérieures à 50 dans une liste. \
-                Prenez la liste suivante comme référence :
+                Dessinez sur papier, approximativement, le graphique qui serait produit par l'exécution du code ci-dessous.
 
-                ```python showLineNumbers
-                liste = [20, 60, 50, 10, 70, 90]
-                ```
-
-                Avec ce contenu de `liste`, le programme devrait afficher le résultat suivant :
-
-                ```
-                3
-                ```
-
-                Votre programme doit fonctionner peu importe le nombre d'éléments dans la liste et quels que soient ces nombres.
-
-                📁 Créez un fichier `r10_sans_pycharm_1.py` pour valider votre réponse à l'aide de **PyCharm**.
-
-
-                :::
-
-                ---
-
-                :::info Exercice - Écrire du code **sans Pycharm** #2
-
-                **Sur papier, sans ordinateur,** écrivez du code permettant de résoudre le problème ci-dessous. \
-                On dispose d'une liste nommée `liste` contenant des tuples. Chaque tuple est composé d'une lettre et d'un nombre. \
-                On dispose également d'une variable `lettre` qui contient le caractère à rechercher.
-
-                ```python showLineNumbers
-                liste = [("a", 1), ("b", 2), ("a", 3), ("c", 4), ("b", 5)]
-                lettre = "a"
-                ```
-
-                L'objectif est d'afficher la somme des deuxième éléments de chaque tuple, mais uniquement lorsque le premier élément du tuple correspond à la valeur stockée dans la variable `lettre`.
-
-                **Résultats attendus** \
-                Voici les résultats attendues selons différentes lettres :
-                - si `lettre = "a"` ➡️ votre programme doit afficher : ```4```
-                - si `lettre = "b"` ➡️ votre programme doit afficher : ```7```
-                - si `lettre = "c"` ➡️ votre programme doit afficher : ```4```
-                - si `lettre = "d"` ➡️ votre programme doit afficher : ```0```
-
-
-                Votre programme doit fonctionner correctement quelles que soient les valeurs contenues dans `liste` et dans `lettre`.
-
-
-                📁 Créez un fichier `r10_sans_pycharm_2.py` pour valider votre réponse à l'aide de **PyCharm**.
-                :::
-
-                ---
-
-                :::info Exercice - Tracer un graphique #1 (simple)
-                📁 Créez un fichier `r10_graphique_main_1.py` pour votre réponse.
-
-                **Sur papier, sans ordinateur**, tracez le graphique correspondant au code suivant le plus fidèlement possible. Graduez vos axes.
+                **N'exécutez pas le code avant d'avoir terminé votre dessin !**
 
                 ```python showLineNumbers
                 import matplotlib.pyplot as plt
 
-                x = [0, 1, 2, 3, 4, 5]
-                y = [0, 1, 4, 9, 16, 25]
+                transport = ["Bus", "Voiture", "Vélo", "Skateboard", "Trottinette", "Marche"]
+                etudiants = [40, 30, 20, 15, 10, 5]
 
-                plt.plot(x, y, marker='o', label='y = x^2')
+                plt.bar(transport, etudiants)
 
-                plt.title("Graphique de la fonction y = x^2")
-                plt.xlabel("x")
-                plt.ylabel("y")
-                plt.grid()
-                plt.legend()
+                plt.title("Comment les étudiants viennent au cégep")
+                plt.xlabel("Mode de transport")
+                plt.ylabel("Nombre d'étudiants")
 
                 plt.show()
                 ```
 
-                **Une fois votre graphique tracé sur papier**, validez votre réponse à l'aide de Pycharm.
+                Créez un fichier `r10_graphique_main.py` pour valider votre réponse en exécutant le code.
 
-
+                :::note Notions visées
+                Lecture de code Matplotlib, `plt.bar()`, anticipation du résultat d'un graphique
                 :::
+
+                ::::
 
                 ---
 
-                :::info Exercice - Tracer un graphique #2 (avec NumPy)
-                📁 Créez un fichier `r10_graphique_main_2.py` pour votre réponse.
+                ::::info Exercice - Prédire le résultat avec des ensembles
 
-                **Sur papier, sans ordinateur**, tracez le graphique correspondant au code suivant le plus fidèlement possible. Graduez vos axes.
+                Écrivez sur papier ce qui sera affiché dans la console par l'exécution du code ci-dessous.
+
+                **N'exécutez pas le code avant d'avoir terminé vos réponses !**
 
                 ```python showLineNumbers
-                import matplotlib.pyplot as plt
-                import numpy as np
+                virus_a = {"T", "G", "Uroboros"}
+                virus_b = {"G", "C", "Las Plagas"}
 
-                x = np.linspace(-10, 10, 100)
-                y = x ** 2
+                virus_a.add("T")
+                virus_a.add("C")
 
-                plt.plot(x, y, label='y = x^2')
-
-                plt.title("Graphique de la fonction y = x^2")
-                plt.xlabel("x")
-                plt.ylabel("y")
-                plt.grid()
-                plt.legend()
-
-                plt.show()
+                print(len(virus_a))
+                print("Uroboros" in virus_b)
+                print(virus_a & virus_b)
+                print(virus_a - virus_b)
+                print(virus_a | virus_b)
                 ```
 
-                💡 La courbe n'a pas besoin d'être parfaite, mais elle doit passer par des **points clés**.
+                Créez un fichier `r10_comprehension_set.py` pour valider votre réponse en exécutant le code.
 
-                **Une fois votre graphique tracé sur papier**, validez votre réponse à l'aide de Pycharm.
-
-
+                :::note Notions visées
+                Ensembles (`set`), unicité des éléments, `add()`, `len()`, opérateur `in`, union, intersection, différence
                 :::
 
+                ::::
+
                 ---
+
+                ::::info Exercice - Prédire le résultat avec un dictionnaire
+
+                Écrivez sur papier ce qui sera affiché dans la console par l'exécution du code ci-dessous.
+
+                **N'exécutez pas le code avant d'avoir terminé vos réponses !**
+
+                ```python showLineNumbers
+                joueur = {
+                    "pseudo": "Sakura99",
+                    "score": 4200,
+                    "niveau": 12,
+                    "inventaire": ["clé", "herbe verte"]
+                }
+
+                joueur["score"] = joueur["score"] + 300
+                joueur["inventaire"].append("ruban encreur")
+                joueur["region"] = "QC"
+
+                print(joueur["pseudo"])
+                print(joueur["score"])
+                print("niveau" in joueur)
+                print("clé" in joueur)
+                print(len(joueur))
+                print(joueur["inventaire"])
+                ```
+
+                Créez un fichier `r10_comprehension_dict.py` pour valider votre réponse en exécutant le code.
+
+                :::note Notions visées
+                Dictionnaires (`dict`), accès par clé, modification d'une valeur, ajout d'une nouvelle clé, liste comme valeur, opérateur `in`, fonction `len()`
+                :::
+
+                ::::
 
                 <IntroSolutionsExercices />
 
                 🔨 Solution des **exercices de création** :
-                - Créer et inspecter des tableaux *(solutionnaire à venir)*
-                - NumPy vs boucles *(solutionnaire à venir)*
-                - Oscillation amortie *(solutionnaire à venir)*
-                - Notes d'étudiants *(solutionnaire à venir)*
-                - Traitement des pixels *(solutionnaire à venir)*
-                - Manipulation et aléatoire *(solutionnaire à venir)*
-                - Fichier JSON *(solutionnaire à venir)*
-                - Fichiers texte *(solutionnaire à venir)*
+                - Affichage des virus - liste simple *(solutionnaire à venir)*
+                - Affichage des virus - listes parallèles *(solutionnaire à venir)*
+                - Affichage des virus - liste à 2 dimensions *(solutionnaire à venir)*
+                - Manipulation de listes par compréhension *(solutionnaire à venir)*
+                - Manipulation d'ensembles *(solutionnaire à venir)*
+                - Dictionnaires - Dictionnaire imbriqué *(solutionnaire à venir)*
+                - Jeu de devinette amélioré *(solutionnaire à venir)*
+                - Graphique - Courbe simple *(solutionnaire à venir)*
+                - Graphique - Températures annuelles *(solutionnaire à venir)*
+                - Graphique - Barres et moyennes *(solutionnaire à venir)*
+                - Graphique - Populations par saison *(solutionnaire à Regions)*
+                - Graphique - Nuage de points et courbe *(solutionnaire à venir)*
 
-                ✏️ Solution des **exercices sur papier** :
-                - Écrire du code sans PyCharm #1 *(solutionnaire à venir)*
-                - Écrire du code sans Pycharm #2 *(solutionnaire à venir)*
-                - Tracer un graphique #1 (simple) *(solutionnaire à venir)*
-                - Tracer un graphique #2 (avec NumPy) *(solutionnaire à venir)*
-            </TabItem>
+                ✏️ Solution des **exercices de compréhension** :
+                - Tracer un graphique à la main *(solutionnaire à venir)*
+                - Prédire le résultat avec des ensembles *(solutionnaire à venir)*
+                - Prédire le résultat avec un dictionnaire *(solutionnaire à venir)*
+           </TabItem>
         </Tabs>
 
     </TabItem>
-
 </Tabs>

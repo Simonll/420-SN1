@@ -1,0 +1,126 @@
+
+        :::info Sans compréhension de liste, ça ressemble à quoi?
+
+        Imaginons qu'on veuille créer une nouvelle liste contenant le carré de chaque nombre d'une liste. Avec une boucle `for` classique, ça ressemble à ceci :
+
+        ```python showLineNumbers
+        nombres = [1, 2, 3, 4, 5, 6]
+        carres = []
+        for x in nombres:
+            carres.append(x ** 2)
+        print(carres)  # Affiche [1, 4, 9, 16, 25, 36]
+        ```
+
+        C'est correct, mais ça prend 3 lignes juste pour construire la liste. La compréhension de liste permet d'écrire la même chose en une seule ligne.
+
+        :::
+
+        ---
+
+        :::info Compréhension de liste (*List Comprehension*)
+
+        La compréhension de liste est une manière concise et élégante de créer des listes en Python. Elle permet de générer une nouvelle liste en appliquant une expression à chaque élément d'une séquence (comme une liste, un tuple, etc.).
+
+        La syntaxe générale est la suivante :
+        ```python
+        nouvelle_liste = [expression for element in sequence]
+        ```
+
+        Voici comment réécrire l'exemple précédent avec une compréhension de liste :
+        ```python showLineNumbers
+        nombres = [1, 2, 3, 4, 5, 6]
+        carres = [x ** 2 for x in nombres]
+        print(carres)  # Affiche [1, 4, 9, 16, 25, 36]
+        ```
+
+        Chaque partie de `[x ** 2 for x in nombres]` a un rôle précis :
+        ```python
+        #  ┌─ expression ─┐        ┌─ element ─┐  ┌── sequence ──┐
+          [     x ** 2        for        x      in    nombres     ]
+        ```
+        - `expression` (`x ** 2`) : la transformation à appliquer à chaque élément.
+        - `element` (`x`) : la variable qui prend chaque valeur de la séquence.
+        - `sequence` (`nombres`) : la liste qu'on parcourt.
+
+        Exécutez ce code en mode débogage pour bien comprendre son fonctionnement.
+
+        :::
+
+        ---
+
+        :::info Ajouter une condition (filtre)
+
+        On peut aussi ajouter une condition optionnelle pour ne garder que certains éléments :
+        ```python
+        nouvelle_liste = [expression for element in sequence if condition]
+        ```
+
+        Par exemple, pour ne garder que les carrés des nombres **pairs** :
+        ```python showLineNumbers
+        nombres = [1, 2, 3, 4, 5, 6]
+        carres_pairs = [x ** 2 for x in nombres if x % 2 == 0]
+        print(carres_pairs)  # Affiche [4, 16, 36]
+        ```
+
+        ```python
+        #  ┌─ expression ─┐        ┌─ element ─┐  ┌── sequence ──┐  ┌──── condition ────┐
+          [     x ** 2        for        x      in     nombres    if    x % 2 == 0       ]
+        ```
+
+        Le même résultat avec une boucle `for` classique :
+        ```python showLineNumbers
+        nombres = [1, 2, 3, 4, 5, 6]
+        carres_pairs = []
+        for x in nombres:
+            if x % 2 == 0:
+                carres_pairs.append(x ** 2)
+        print(carres_pairs)  # Affiche [4, 16, 36]
+        ```
+
+        Les deux approches produisent exactement le même résultat. \
+        La compréhension de liste est simplement une façon plus compacte d'écrire ce même code.
+
+        :::
+
+        ---
+
+        :::tip Avantages de la compréhension de liste
+        - **Concision** : La compréhension de liste permet d'écrire moins de lignes de code pour accomplir la même tâche.
+        - **Lisibilité** : Elle rend le code plus lisible en exprimant clairement l'intention de créer une nouvelle liste basée sur une transformation ou un filtrage.
+        - **Performance** : La compréhension de liste est souvent plus rapide que l'utilisation de boucles `for` traditionnelles pour créer des listes.
+        :::
+
+        ---
+
+        :::warning Pour aller plus loin : Imbrication (hors du cadre de ce cours)
+
+        Il est possible d'imbriquer des compréhensions de liste à l'intérieur d'autres compréhensions de liste. \
+        Ce concept, appelé *nested list comprehensions*, n'est **pas requis dans le cadre de ce cours**, mais il est bon de savoir que ça existe.
+
+        👉 Si ce qui suit semble difficile à suivre, c'est tout à fait normal. Cette notion dépasse les attentes du cours. Vous pouvez passer directement à l'onglet suivant sans culpabiliser.
+
+        Une compréhension de liste imbriquée, c'est simplement une compréhension de liste dont l'`expression`
+        est elle-même une compréhension de liste. Par exemple, pour créer une liste de listes :
+        ```python showLineNumbers
+        liste = [[j for j in range(i)] for i in range(5)]
+        print(liste)  # Affiche [[], [0], [0, 1], [0, 1, 2], [0, 1, 2, 3]]
+        ```
+
+        La compréhension extérieure (`for i in range(5)`) génère 5 éléments. \
+        Pour chaque valeur de `i`, la compréhension intérieure (`[j for j in range(i)]`) crée une sous-liste contenant les entiers de `0` à `i - 1`.
+
+        Le même résultat avec des boucles `for` classiques :
+        ```python showLineNumbers
+        liste = []
+        for i in range(5):
+            sous_liste = []
+            for j in range(i):
+                sous_liste.append(j)
+            liste.append(sous_liste)
+        print(liste)  # Affiche [[], [0], [0, 1], [0, 1, 2], [0, 1, 2, 3]]
+        ```
+
+        :::
+
+
+        {/* <Feedback feedbackId="Rencontre #9 - Compréhension de liste" /> */}

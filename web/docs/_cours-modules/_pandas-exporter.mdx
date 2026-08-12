@@ -1,0 +1,63 @@
+
+        :::tip 💾 Pourquoi exporter ses données ?
+
+        Une fois les données nettoyées, transformées ou analysées, on veut souvent les sauvegarder pour les réutiliser ailleurs : les partager avec un collègue, les intégrer dans une autre application. Pandas permet d'exporter un DataFrame en quelques lignes.
+
+        :::
+
+        ---
+
+        :::info 📂 Données utilisées dans cet onglet
+
+        Les exemples qui suivent utilisent le fichier <a href={useBaseUrl('/ressources/csv/tips_dataset.csv')} download="tips_dataset.csv">tips_dataset.csv</a> chargé et transformé dans un DataFrame `df` :
+
+        ```python
+        import pandas as pd
+
+        df = pd.read_csv("tips_dataset.csv")
+        df["tip_percentage"] = (df["tip"] / df["total_bill"]) * 100
+        ```
+
+        :::
+
+        ---
+
+        :::info 🔁 Préparer les données avant d'exporter
+
+        On prépare d'abord le DataFrame à exporter en enchaînant les manipulations souhaitées. Ici, on filtre les repas du soir avec un pourboire supérieur à 15 % et on trie par pourcentage décroissant :
+
+        ```python
+        df_export = df[(df["time"] == "Dinner") & (df["tip_percentage"] > 15)].sort_values("tip_percentage", ascending=False)
+        ```
+
+        `df_export` est maintenant prêt à être sauvegardé dans le format de son choix.
+
+        :::
+
+        ---
+
+        ::::info 📄 Exporter en CSV
+
+        Le format CSV est le plus universel : lisible par Excel, Python, R, et la plupart des outils d'analyse.
+
+        ```python
+        df_export.to_csv("soupers_genereux.csv", index=False)
+        ```
+
+        Le fichier `soupers_genereux.csv` est créé dans le même dossier que le script.
+
+        :::note 💡 `index=False`
+        Par défaut, Pandas ajoute une colonne d'index (0, 1, 2...) au début du fichier. `index=False` évite cette colonne, souvent inutile dans un fichier CSV destiné à être lu par d'autres outils.
+        :::
+
+        ::::
+
+        ---
+
+        :::note 📋 AIDE-MÉMOIRE : Exporter un DataFrame
+
+        <AideMemoirePandasExporter />
+
+        :::
+
+        {/* <Feedback feedbackId="Rencontre #11 - Exporter" /> */}

@@ -1,0 +1,127 @@
+
+        :::tip 💡 NumPy + Matplotlib : le duo parfait pour la visualisation
+
+        Matplotlib s’intègre naturellement avec NumPy : on génère les données avec NumPy (tableaux de valeurs `x` et `y`), puis on les transmet directement à Matplotlib pour tracer le graphique. Ensemble, ils permettent de visualiser n’importe quelle fonction mathématique ou jeu de données en quelques lignes.
+
+        :::
+
+        ---
+
+        :::info 📐 Le schéma typique : `linspace()` → fonction → `plot()`
+
+        Le pattern de base est toujours le même :
+
+        1. Créer un tableau de valeurs `x` avec `np.linspace()`
+        2. Calculer les valeurs `y` correspondantes avec une opération vectorisée
+        3. Tracer le graphique avec `plt.plot(x, y)`
+
+        ```python
+        import numpy as np
+        import matplotlib.pyplot as plt
+
+        x = np.linspace(0, 10, 100)  # 100 points entre 0 et 10
+        y = np.sin(x)                # calcul vectorisé : sin() sur chaque point
+
+        plt.plot(x, y)
+        plt.title("Fonction sinus")
+        plt.xlabel("x")
+        plt.ylabel("sin(x)")
+        plt.grid()
+        plt.show()
+        ```
+        <img src={require('/img/cours/GraphiqueSinus.png').default} width="50%"/>
+
+        :::
+
+        ---
+
+        ::::info 📊 Exemples de graphiques avec NumPy
+
+        Les trois exemples qui suivent illustrent les cas les plus courants : tracer une fonction algébrique, superposer plusieurs courbes sur le même graphique, et tracer une courbe paramétrique. Dans chaque cas, NumPy génère les tableaux `x` et `y`, et Matplotlib s'occupe de l'affichage.
+
+        :::note Exemple #1 Fonction linéaire : y = 2x - 15
+
+        Grâce à la vectorisation, on peut exprimer la formule directement sur le tableau `x` :
+
+        ```python
+        import numpy as np
+        import matplotlib.pyplot as plt
+
+        x = np.linspace(-10, 100, 1000)
+        y = 2 * x - 15              # opération vectorisée : appliquée à chaque élément de x
+
+        plt.plot(x, y)
+        plt.title("Fonction linéaire : y = 2x - 15")
+        plt.xlabel("x")
+        plt.ylabel("y")
+        plt.grid()
+        plt.show()
+        ```
+        <img src={require('/img/cours/GraphiqueLineaire.png').default} width="50%"/>
+        :::
+
+        ---
+
+        :::note Exemple #2 Plusieurs courbes sur le même graphique
+
+        On peut tracer plusieurs courbes sur le même graphique en appelant `plt.plot()` plusieurs fois :
+
+        ```python
+        import numpy as np
+        import matplotlib.pyplot as plt
+
+        x = np.linspace(-5, 5, 200)
+
+        plt.plot(x, np.sin(x),  label="sin(x)")
+        plt.plot(x, np.cos(x),  label="cos(x)")
+        plt.plot(x, np.sin(2*x), label="sin(2x)")
+
+        plt.title("Fonctions trigonométriques")
+        plt.xlabel("x")
+        plt.ylabel("y")
+        plt.legend()
+        plt.grid()
+        plt.show()
+        ```
+        <img src={require('/img/cours/GraphiqueTrigo.png').default} width="50%"/>
+        :::
+
+        ---
+
+        :::note Exemple #3 — Coordonnées d’un cercle
+
+        Un cercle n’est pas le graphique d’une fonction de la forme $y = f(x)$, car une même valeur de $x$ peut correspondre à deux valeurs de $y$.
+        On peut toutefois le tracer avec des tableaux de coordonnées paramétriques `(cos(θ), sin(θ))` :
+
+        ```python
+        import numpy as np
+        import matplotlib.pyplot as plt
+
+        angles = np.linspace(0, 2 * np.pi, 100)  # 100 angles de 0 à 2π
+        x = np.cos(angles)
+        y = np.sin(angles)
+
+        plt.plot(x, y)
+        plt.axis("equal")   # force la même échelle sur les deux axes
+        plt.title("Cercle unité")
+        plt.grid()
+        plt.show()
+        ```
+
+        <img src={require('/img/cours/GraphiqueCercle.png').default} width="40%"/>
+
+        `plt.axis("equal")` est essentiel ici : sans cette ligne, Matplotlib peut utiliser une échelle différente sur les deux axes, ce qui fait apparaître le cercle comme une ellipse. En forçant la même échelle sur `x` et `y`, on garantit que le cercle apparaît bien rond.
+
+        :::
+
+        ::::
+
+        ---
+
+        ::::note 📋 AIDE-MÉMOIRE : NumPy et Matplotlib
+
+        <AideMemoireNumpyMatplotlib />
+
+        ::::
+
+        {/* <Feedback feedbackId="Rencontre #10 - NumPy et Matplotlib" /> */}

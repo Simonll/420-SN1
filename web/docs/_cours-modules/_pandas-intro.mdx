@@ -1,0 +1,60 @@
+
+        :::tip 💡 Cette rencontre en bref
+
+        À la rencontre 10, nous avons appris à utiliser NumPy faire des calculs sur des tableaux de nombres. NumPy est puissant, mais il a une limite : il travaille sur des données **d’un seul type** (tous des nombres, ou tous des textes). Dans la réalité, un jeu de données scientifiques contient souvent des colonnes de types différents : des mesures numériques, des dates, des catégories, des noms. Pour manipuler ce genre de données, NumPy seul devient vite insuffisant :
+
+        ```python
+        import numpy as np
+
+        # Avec NumPy : difficile de mélanger des types
+        patient_ids    = np.array(["P001", "P002", "P003", "P004"])
+        ages           = np.array([34, 58, 45, 27])
+        glycemies      = np.array([5.2, 7.8, 6.1, 4.9])
+        diagnostics    = np.array(["normal", "diabete", "pre_diabete", "normal"])
+
+        # Pour filtrer les patients avec une glycémie élevée, il faut jongler entre 4 tableaux séparés...
+        masque = glycemies > 6.0
+        print(patient_ids[masque])  # ["P002" "P003"]
+        print(diagnostics[masque])  # ["diabete" "pre_diabete"]
+        ```
+
+        C’est là qu’intervient 🐼 **Pandas** : il regroupe toutes ces colonnes dans un seul objet, le ***DataFrame***, et offre des outils pour les manipuler facilement.
+
+        :::
+
+        ---
+
+        :::info 📋 Ce qu'on va apprendre dans cette rencontre
+
+        Pour le **TP2**, vous devrez manipuler des **données réelles**. Voici les étapes typiques d’un *pipeline* d’analyse, et les onglets qui y correspondent :
+
+        | Étape | Ce qu’on fait | Onglet |
+        |---|---|---|
+        | 📥 Charger | Importer un fichier CSV dans un DataFrame | **Explorer** |
+        | 🔍 Filtrer | Filtrer et trier les données | **Filtrer / Trier** |
+        | 🎯 Sélectionner | Choisir des colonnes ou des lignes | **Sélectionner** |
+        | 🔁 Parcourir | Itérer sur les lignes ou colonnes | **Parcourir** |
+        | 🧹 Nettoyer | Gérer les valeurs manquantes et les doublons | **Nettoyer** |
+        | 🧮 Transformer | Créer de nouvelles colonnes | **Transformer** |
+        | 📊 Analyser | Calculer des statistiques, regrouper | **Statistiques** |
+        | 📤 Exporter | Enregistrer un DataFrame dans un fichier CSV | **Exporter** |
+        | 📈 Visualiser | Tracer des graphiques | **Visualiser** |
+
+        :::
+
+        ---
+
+        :::note 🧰 Le contexte plus large
+
+        Pandas n’est qu’une des bibliothèques utilisées en science des données. \
+        Pour votre culture générale, voici l’écosystème Python dans ce domaine :
+
+        - 🐼 **Pandas** : manipulation de données tabulaires (**c’est le sujet de cette rencontre**)
+        - 🎨 **Matplotlib** : visualisation de données (**on la connait déjà**)
+        - 🔢 [**NumPy**](/cours/rencontre10?onglet=numpy) : calcul scientifique sur des tableaux (**vue à la rencontre 10**)
+        - 🤖 **Scikit-learn** : apprentissage automatique (**prochain cours**)
+        - 🧠 **Keras / TensorFlow** : apprentissage profond (*deep learning*) (**cours ultérieurs**)
+
+        :::
+
+        {/* <Feedback feedbackId="Rencontre #11 - Intro" /> */}

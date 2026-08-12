@@ -1,0 +1,177 @@
+
+        :::info Qu'est-ce qu'un fichier CSV?
+
+        Un fichier **CSV** (*Comma-Separated Values*) est un fichier texte qui organise des données sous forme de tableau.
+        - Chaque ligne représente un enregistrement.
+        - Les valeurs de chaque ligne sont séparées par un **délimiteur**. La virgule (`,`) est le plus courant, mais certains fichiers utilisent le point-virgule (`;`), la tabulation (touche Tab, ou `\t`), ou même l'espace (` `). C'est pourquoi on parle parfois de fichiers *délimités* plutôt que strictement *CSV*.
+        - C'est l'un des formats les plus utilisés pour échanger des données tabulaires : tableurs, bases de données, résultats d'expériences, etc.
+
+        Exemple de contenu d'un fichier `mesures.csv` :
+        ```
+        experience,tentative,ph_mesure,reaction_observee
+        Acide-base,1,4.7,True
+        Acide-base,2,5.1,True
+        Acide-base,3,6.9,False
+        ```
+
+        Dans cette rencontre, l'objectif est surtout de **comprendre ce qu'est un fichier CSV et comment Python peut le lire**.
+        Les bibliothèques **NumPy** et **Pandas** seront utilisées plus tard dans le cours pour manipuler et analyser des données plus efficacement.
+
+        👉 Il n'est donc **pas nécessaire d'exécuter tous les exemples** qui suivent : il suffit d'en comprendre le fonctionnement général.
+
+        :::
+
+        ---
+
+        ::::tip Comment lire un fichier CSV?
+
+        Il existe plusieurs façons de lire un fichier CSV en Python. Le choix dépend surtout de ce qu'on veut faire avec les données.
+
+        :::note-nt
+        Rappel : il n'est pas nécessaire d'exécuter ces exemples, l'objectif est surtout d'en comprendre le fonctionnement.
+        :::
+
+        À partir du fichier `mesures.csv` :
+
+        ```csv
+        experience,tentative,ph_mesure,reaction_observee
+        Acide-base,1,4.7,True
+        Acide-base,2,5.1,True
+        Acide-base,3,6.9,False
+        ```
+
+        On pourrait lire les données de plusieurs façons.
+
+        ### 1. À la main, comme un fichier texte
+
+        ✅ *Inclus avec Python — aucune installation requise.*
+
+        ```python
+        with open("mesures.csv", "r", encoding="utf-8") as fichier:
+            for ligne in fichier: # Boucle sur toutes les lignes du fichier
+                valeurs = ligne.strip().split(",")
+                print(valeurs)
+        ```
+
+        Résultat :
+        ```python
+        ['experience', 'tentative', 'ph_mesure', 'reaction_observee']
+        ['Acide-base', '1', '4.7', 'True']
+        ['Acide-base', '2', '5.1', 'True']
+        ['Acide-base', '3', '6.9', 'False']
+        ```
+
+        Mais comment chaque ligne de texte est-elle devenue une liste? Tout se joue dans `valeurs = ligne.strip().split(",")`. \
+        Suivons la transformation **étape par étape**, en prenant la 3e liste affichée ci-dessus (`['Acide-base', '2', '5.1', 'True']`) :
+
+        ```python
+        # Étape 1 — la ligne lue dans le fichier contient un saut de ligne "\n" à la fin :
+        #   "Acide-base,2,5.1,True\n"
+        #
+        # Étape 2 — .strip() retire les espaces et les saut de lignes présents :
+        #   "Acide-base,2,5.1,True"
+        #
+        # Étape 3 — .split(",") coupe la chaîne à chaque virgule et retourne une LISTE :
+        #
+        #   "Acide-base,2,5.1,True"
+        #         │     │  │   │
+        #         │     │  │   └─────────┐
+        #         │     │  └──────┐      │
+        #         │     └───┐     │      │
+        #         │         │     │      │
+        #         ▼         ▼     ▼      ▼
+        #   ['Acide-base', '2', '5.1', 'True']
+        #
+        # ⚠️ Chaque valeur est une CHAÎNE de caractères (notez les guillemets),
+        #    même les nombres : '2' et '5.1' ne sont PAS encore des nombres.
+        ```
+
+        Cette méthode permet de comprendre qu'un fichier CSV est d'abord un simple fichier texte. \
+        Par contre, il faut tout gérer soi-même : séparer les valeurs, ignorer l'en-tête, convertir les nombres, traiter les erreurs, etc.
+
+        ### 2. Avec le module `csv` de Python
+
+        ✅ *Inclus avec Python — aucune installation requise.*
+
+        ```python
+        import csv
+
+        with open("mesures.csv", "r", encoding="utf-8") as fichier:
+            lecteur = csv.reader(fichier)
+
+            for ligne in lecteur:
+                print(ligne)
+        ```
+
+        Résultat :
+        ```python
+        ['experience', 'tentative', 'ph_mesure', 'reaction_observee']
+        ['Acide-base', '1', '4.7', 'True']
+        ['Acide-base', '2', '5.1', 'True']
+        ['Acide-base', '3', '6.9', 'False']
+        ```
+
+        Le module `csv` est inclus avec Python. Il gère mieux la lecture des lignes et des séparateurs qu'une lecture entièrement manuelle.
+        Cependant, les valeurs sont encore lues comme du texte. Il faut donc convertir soi-même les nombres, les booléens ou les dates au besoin.
+
+        ### 3. Avec NumPy
+
+        📦 *Bibliothèque externe — à installer avec `pip install numpy`.*
+
+        ```python
+        import numpy as np
+
+        donnees = np.genfromtxt(
+            "mesures.csv",
+            delimiter=",",
+            names=True,
+            dtype=None,
+            encoding="utf-8"
+        )
+
+        print(donnees)
+        ```
+
+        Résultat :
+        ```python
+        [('Acide-base', 1, 4.7,  True) ('Acide-base', 2, 5.1,  True)
+         ('Acide-base', 3, 6.9, False)]
+        ```
+
+        NumPy peut lire des fichiers CSV, surtout lorsqu'ils contiennent principalement des données numériques.
+        C'est pratique pour faire des calculs efficacement, lorsque toutes les valeurs sont du même type, par exemple des `float`, mais moins agréable lorsque les colonnes contiennent des types variés, comme du texte, des nombres et des valeurs booléennes.
+
+        ### 4. Avec Pandas
+
+        📦 *Bibliothèque externe — à installer avec `pip install pandas`.*
+
+        ```python
+        import pandas as pd
+
+        df = pd.read_csv("mesures.csv")
+        print(df)
+        ```
+
+        Résultat :
+        ```python
+          experience  tentative  ph_mesure  reaction_observee
+        0  Acide-base          1        4.7               True
+        1  Acide-base          2        5.1               True
+        2  Acide-base          3        6.9              False
+        ```
+
+        Pandas est plus pratique pour travailler avec des fichiers CSV qui contiennent toutes sortes de données (des mesures, des catégories, etc.). Plus tard dans le cours, nous verrons en détail la bibliothèque Pandas.
+        Il charge les données dans un tableau structuré appelé ***DataFrame***, reconnaît souvent automatiquement les types de données et facilite ensuite le filtrage, le tri, les calculs et les visualisations.
+
+        ### Comparaison rapide
+
+        | Méthode | Installation | Avantage principal | Limite principale |
+        |---|---|---|---|
+        | Lecture manuelle | ✅ Aucune | Permet de comprendre la structure du fichier, Permet un contrôle total (parfois utile) | Il faut tout gérer soi-même |
+        | Module `csv` | ✅ Aucune | Inclus avec Python et adapté aux fichiers CSV simples | Les valeurs restent principalement du texte |
+        | NumPy | 📦 `pip install numpy` | Très utile pour les données numériques (par exemple tous des `float`) | Moins pratique pour les tableaux avec des types variés |
+        | Pandas | 📦 `pip install pandas` | Très pratique pour analyser des données tabulaires | Bibliothèque externe à installer |
+
+        ::::
+
+        {/* <Feedback feedbackId="Rencontre #10 - Fichier CSV" /> */}

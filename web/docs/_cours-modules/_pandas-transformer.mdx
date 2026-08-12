@@ -1,0 +1,201 @@
+
+        ::::tip 🔄 Qu'est-ce qu'une transformation ?
+
+        Transformer un DataFrame, c'est **créer ou modifier une colonne** à partir des données existantes, sans toucher aux lignes. \
+        On calcule de nouvelles valeurs, on convertit des types ou on remplace des codes par des étiquettes lisibles.
+
+        La forme est toujours la même : on assigne une expression à une colonne du DataFrame. \
+        Si la colonne n'existe pas encore, elle est créée. Si elle existe déjà, son contenu est remplacé :
+
+        ```python
+        df["nouvelle_colonne"] = expression   # crée une nouvelle colonne
+        df["colonne_existante"] = expression  # modifie une colonne existante
+        ```
+
+        Contrairement au filtrage et au tri (qui retournent un nouveau DataFrame), les transformations **modifient `df` en place** en réassignant directement la colonne dans le DataFrame.
+
+        :::note 💡 La vectorisation qu'on connaît déjà de NumPy
+        En NumPy, on a appris que `tableau * 2` applique l'opération à tous les éléments sans boucle. Pandas utilise exactement le même principe : `df["col"] * 2` applique la multiplication à toute la colonne en une seule instruction. On n'a pas besoin de boucle `for`, pour la même raison qu'en NumPy.
+        :::
+
+        ::::
+
+        ---
+
+        :::info 📂 Données utilisées dans cet onglet
+
+        Les exemples qui suivent utilisent le fichier <a href={useBaseUrl('/ressources/csv/tips_dataset.csv')} download="tips_dataset.csv">tips_dataset.csv</a> chargé dans un DataFrame `df` :
+
+        ```python
+        import pandas as pd
+
+        df = pd.read_csv("tips_dataset.csv")
+        ```
+
+        :::
+
+        ---
+
+        ::::info 🧮 Créer une colonne par calcul numérique
+
+        On crée une nouvelle colonne en lui assignant le résultat d'un calcul sur des colonnes existantes :
+
+        ```python
+        df["tip_percentage"] = (df["tip"] / df["total_bill"]) * 100
+        ```
+
+        Pour vérifier le résultat, on peut afficher les colonnes source et la nouvelle colonne :
+
+        ```python
+        print(df[["total_bill", "tip", "tip_percentage"]].head(3))
+        ```
+
+        Résultat :
+        ```
+           total_bill   tip  tip_percentage
+        0       16.99  1.01        5.944673
+        1       10.34  1.66       16.054159
+        2       21.01  3.50       16.658258
+        ```
+
+        On peut vérifier mentalement : 1.01 / 16.99 × 100 ≈ 5.94 ✓. La colonne `tip_percentage` est maintenant disponible dans `df` comme n'importe quelle autre colonne.
+
+        :::note 💡 Vectorisation
+        Pandas applique le calcul sur toutes les lignes en une seule instruction, sans avoir besoin d'une boucle `for`. \
+        C'est ce qu'on appelle une **transformation vectorielle** : c'est rapide et concis.
+        :::
+
+        ::::
+
+        ---
+
+        ::::info ✅ Créer une colonne par comparaison (type `bool`)
+
+        On peut créer une colonne dont les valeurs sont `True` ou `False` en appliquant une condition sur une colonne existante. \
+        Ces colonnes booléennes sont particulièrement utiles pour filtrer ensuite.
+
+        **Comparaison simple :**
+
+        ```python
+        df["is_dinner"] = df["time"] == "Dinner"
+        ```
+
+        **Comparaison numérique :**
+
+        ```python
+        df["is_generous"] = df["tip"] > 5
+        ```
+
+        **Comparaison avec une liste de valeurs (`.isin()`) :**
+
+        ```python
+        df["is_weekend"] = df["day"].isin(["Sun", "Sat"])
+        ```
+
+        Pour visualiser le résultat, on peut afficher les premières lignes avec les colonnes concernées :
+
+        ```python
+        print(df[["time", "tip", "day", "is_dinner", "is_generous", "is_weekend"]].head())
+        ```
+
+        Résultat :
+        ```
+              time   tip   day  is_dinner  is_generous  is_weekend
+        0   Dinner  1.01   Sun       True        False        True
+        1   Dinner  1.66   Sun       True        False        True
+        2   Dinner  3.50   Sun       True        False        True
+        3   Dinner  3.31   Sun       True        False        True
+        4   Dinner  3.61   Sun       True        False        True
+        ```
+
+        Résumé des colonnes créées :
+
+        | Colonne | Type | Description |
+        |---|---|---|
+        | `is_dinner` | `bool` | Vrai si le repas est un souper |
+        | `is_generous` | `bool` | Vrai si le pourboire dépasse 5 $ |
+        | `is_weekend` | `bool` | Vrai si le jour est samedi ou dimanche |
+
+        :::note 💡 `.isin()` vs `==`
+        `==` compare à une seule valeur. `.isin([...])` compare à plusieurs valeurs à la fois et est l'équivalent d'un `or` sur plusieurs `==`.
+        :::
+
+        ::::
+
+        ---
+
+        :::note 🔗 Les colonnes créées s'utilisent comme toutes les autres
+        Une fois créées, `tip_percentage`, `is_generous`, `is_weekend` et `is_dinner` sont disponibles dans `df` comme n'importe quelle colonne existante. On peut les utiliser pour filtrer, trier, sélectionner ou visualiser, exactement comme on le ferait avec `tip` ou `day`.
+        :::
+
+        ---
+
+        ::::info 🗺️ Mapper une colonne à l'aide d'un dictionnaire
+
+        La méthode `map()` permet de **remplacer chaque valeur d'une colonne** par la valeur correspondante dans un dictionnaire. \
+        C'est utile pour convertir des codes en noms lisibles, des abréviations en texte complet, etc.
+
+        ```python
+        df_cryptos = pd.DataFrame({
+            "symbole": ["BTC", "ETH", "SOL", "ADA", "XRP", "DOT"],
+            "valeur_courante": [94406.0, 3101.57, 137.55, 0.4854, 2.22, 2.80]
+        })
+
+        dict_symboles_noms = {
+            "BTC": "Bitcoin",
+            "ETH": "Ethereum",
+            "SOL": "Solana",
+            "ADA": "Cardano",
+            "XRP": "Ripple",
+            "DOT": "Polkadot"
+        }
+
+        df_cryptos["nom"] = df_cryptos["symbole"].map(dict_symboles_noms)
+        print(df_cryptos.head())
+        ```
+
+        Résultat :
+        ```
+          symbole  valeur_courante       nom
+        0     BTC       94406.0000   Bitcoin
+        1     ETH        3101.5700  Ethereum
+        2     SOL         137.5500    Solana
+        3     ADA           0.4854   Cardano
+        4     XRP           2.2200    Ripple
+        ```
+
+        `map()` regarde chaque valeur de `symbole`, cherche la clé correspondante dans le dictionnaire, et retourne une nouvelle colonne avec les noms complets.
+
+        :::warning ⚠️ Valeur absente du dictionnaire
+        Si une valeur de la colonne n'est pas présente comme clé dans le dictionnaire, Pandas la remplace silencieusement par `NaN`. On s'assure que le dictionnaire couvre toutes les valeurs possibles, ou on vérifie après coup avec `df["col"].isnull().sum()`.
+        :::
+
+        ::::
+
+        ---
+
+        :::note 💡 `np.where()` vs Pandas : deux façons de faire la même chose
+        On connaît déjà `np.where()` de la [rencontre 10](/cours/rencontre10?onglet=numpy-conditions). En Pandas, on peut faire exactement la même opération avec `np.where()` directement sur une colonne, ou avec `apply()` :
+
+        ```python
+        import numpy as np
+
+        # Avec np.where() (qu'on connaît déjà de NumPy)
+        df["categorie"] = np.where(df["tip"] > 5, "généreux", "normal")
+
+        # Avec apply() + lambda (façon Pandas)
+        df["categorie"] = df["tip"].apply(lambda x: "généreux" if x > 5 else "normal")
+        ```
+
+        Les deux produisent le même résultat. `np.where()` est plus rapide sur de grands jeux de données; `apply` est plus lisible pour des conditions complexes.
+        :::
+
+        ---
+
+        :::note 📋 AIDE-MÉMOIRE : Transformer un DataFrame
+
+        <AideMemoirePandasTransformer />
+
+        :::
+
+        {/* <Feedback feedbackId="Rencontre #11 - Transformer" /> */}

@@ -1,0 +1,286 @@
+
+        :::tip 💡 Sélectionner, filtrer et transformer des données selon des critères
+
+        En sciences, on travaille rarement avec toutes les données en même temps. On veut souvent isoler les mesures qui dépassent un seuil, remplacer les valeurs aberrantes, ou classer les résultats selon une condition : par exemple garder seulement les températures au-dessus de 0°C, ou étiqueter les concentrations selon qu’elles sont en zone sûre ou non.
+
+        En Python ordinaire, chacune de ces opérations demande une boucle avec un `if`. \
+        Avec NumPy, on exprime la condition directement sur le tableau entier en une seule ligne, peu importe s’il contient 10 ou 10 millions de valeurs.
+
+        :::
+
+        ---
+
+        ::::info 🎭 Les masques booléens
+
+        Un **masque booléen** est un tableau de `True` et `False` de la même taille qu'un tableau de données. \
+        Chaque `True` indique un élément qui satisfait la condition, chaque `False` un élément qui ne la satisfait pas.
+
+        ```python
+        valeurs = np.array([4, -2, 7, -1, 0, 3])
+
+        masque = valeurs < 0
+        print(masque)  # [False True False True False False]
+        ```
+
+        On peut ensuite utiliser ce masque pour **extraire/filtrer** les éléments qui satisfont la condition :
+
+        ```python
+        negatifs = valeurs[masque]
+        print(negatifs)  # [-2 -1]
+        ```
+
+        :::note 💡 Raccourci en une ligne
+        Ces deux blocs sont équivalents. Le raccourci est plus courant en pratique :
+
+        ```python
+        # Version avec masque intermédiaire
+        masque   = valeurs < 0
+        negatifs = valeurs[masque]
+
+        # Version directe (raccourci)
+        negatifs = valeurs[valeurs < 0]
+        ```
+        :::
+
+        ::::
+
+        ---
+
+        ::::info 🔗 Combiner plusieurs conditions
+
+        On peut combiner plusieurs conditions avec `&` (ET) et `|` (OU). **Chaque condition doit être entre parenthèses.**
+
+        ```python
+        tableau = np.array([5, 12, 18, 25, 30, 3])
+
+        # ET : les deux conditions vraies simultanément
+        entre_10_et_20 = tableau[(tableau >= 10) & (tableau <= 20)]
+        print(entre_10_et_20)  # [12 18]
+
+        # OU : au moins une condition vraie
+        extremes = tableau[(tableau < 5) | (tableau > 25)]
+        print(extremes)  # [30  3]
+        ```
+
+        :::note-nt
+        Si on crée d'abord un masque, il faut aussi des parenthèses autour de chaque condition lorsqu'il y en a plusieurs :
+
+        ```python
+        masque = (tableau >= 10) & (tableau <= 20)
+        entre_10_et_20 = tableau[masque]
+        ```
+        :::
+
+        ::::
+
+        ---
+
+        :::info ✅ `np.any()` et `np.all()` - vérifier des conditions globales
+
+        Ces deux fonctions posent une question sur l’ensemble du tableau et retournent un seul `True` ou `False` :
+        - `np.any(condition)` : est-ce qu’**au moins un** élément satisfait la condition?
+        - `np.all(condition)` : est-ce que **tous** les éléments satisfont la condition?
+
+        Par exemple, un chercheur a mesuré la pression atmosphérique à 6 stations météo. Avant d’analyser les données, il veut vérifier leur validité :
+
+        ```python
+        pressions = np.array([1012.3, 998.7, 1021.5, -5.0, 1008.1, 1015.4])
+
+        anomalie_detectee = np.any(pressions < 0)   # Y a-t-il au moins une mesure invalide (pression négative)?
+        print(anomalie_detectee)                    # True → une valeur aberrante a été détectée
+
+        toutes_valides = np.all((pressions >= 900) & (pressions <= 1100))   # Toutes les mesures sont-elles dans une plage réaliste?
+        print(toutes_valides)                                               # False → la valeur -5.0 sort de la plage
+        ```
+
+        On utilise souvent ces fonctions dans un `if` pour stopper le traitement si les données sont invalides :
+
+        ```python
+        if np.any(pressions < 0):
+            print("Attention : des mesures invalides ont été détectées.")
+        else:
+            print("Toutes les mesures sont valides, analyse en cours.")
+        ```
+
+        :::
+
+        ---
+
+        :::info 🔀 `np.where()` - choisir une valeur selon une condition
+
+        Le filtrage vu précédemment permet d'**extraire** des valeurs selon une condition.
+        Mais parfois, on ne veut pas réduire le tableau : on veut produire un nouveau tableau de même taille, où chaque position reçoit une valeur selon une condition.
+
+        C'est exactement le rôle de `np.where()`.
+
+        `np.where()` prend trois arguments :
+
+        ```python
+        np.where(condition, choix_si_vrai, choix_si_faux)
+        ```
+
+        Pour **chaque élément**, NumPy pose la question de la condition :
+
+        - si la réponse est **vraie**, le résultat prend la valeur de `choix_si_vrai`;
+        - si la réponse est **fausse**, le résultat prend la valeur de `choix_si_faux`.
+
+        Le tableau résultant a toujours **la même taille** que le tableau de départ.
+
+        ---
+
+        ### Que peut-on mettre dans les deux choix?
+
+        Les deux choix peuvent être :
+
+        - une **nouvelle valeur fixe**;
+        - la **valeur originale du tableau**;
+        - une valeur provenant d’un **autre tableau**.
+
+        Par exemple :
+
+        ```python
+        # Remplacer certaines valeurs et garder les autres
+        corrigees = np.where(concentrations < 0, 0, concentrations)
+
+        # Même idée, mais avec la condition inversée
+        corrigees = np.where(concentrations >= 0, concentrations, 0)
+
+        # Choisir entre deux nouvelles valeurs
+        classification = np.where(mesures_ph < 7, "acide", "basique/neutre")
+
+        # Choisir entre deux tableaux
+        resultat = np.where(condition, tableau_a, tableau_b)
+        ```
+
+        Dans tous les cas, NumPy fait le même travail : il choisit une valeur à chaque position.
+
+        ---
+
+        ### Exemple 1 : remplacer certaines valeurs et garder les autres
+
+        Par exemple, un biologiste mesure des concentrations en solution.
+
+        Les valeurs négatives sont physiquement impossibles et doivent être remplacées par `0`.
+        Les valeurs valides, elles, doivent rester telles quelles.
+
+        ```python
+        import numpy as np
+
+        concentrations = np.array([4.2, -0.3, 7.1, -1.5, 0.0, 3.8])
+
+        corrigees = np.where(concentrations < 0,  # condition : est-ce que la valeur est négative?
+                             0,                   # si oui : remplacer par 0
+                             concentrations)      # si non : garder la valeur d’origine
+
+        print(corrigees)
+        ```
+
+        Résultat :
+
+        ```python
+        [4.2 0.  7.1 0.  0.  3.8]
+        ```
+
+        Ici, les valeurs négatives sont remplacées par `0`.
+        Les autres valeurs sont conservées.
+
+        On aurait aussi pu écrire la condition dans l’autre sens :
+
+        ```python
+        corrigees = np.where(concentrations >= 0,  # condition : est-ce que la valeur est valide?
+                             concentrations,       # si oui : garder la valeur d’origine
+                             0)                    # si non : remplacer par 0
+        ```
+
+        Le résultat serait le même.
+
+        ---
+
+        ### Exemple 2 : choisir entre deux nouvelles valeurs
+
+        Parfois, on ne veut pas garder les valeurs d’origine.
+        On veut plutôt produire un nouveau tableau où chaque élément reçoit une nouvelle valeur selon la condition.
+
+        Par exemple, un technicien veut attribuer automatiquement une étiquette à chaque mesure de pH :
+
+        ```python
+        mesures_ph = np.array([3.1, 7.0, 8.5, 4.2, 6.9])
+
+        classification = np.where(mesures_ph < 7,    # condition : est-ce que le pH est inférieur à 7?
+                                  "acide",           # si oui : écrire "acide"
+                                  "basique/neutre")  # si non : écrire "basique/neutre"
+
+        print(classification)
+        ```
+
+        Résultat :
+
+        ```python
+        ['acide' 'basique/neutre' 'basique/neutre' 'acide' 'acide']
+        ```
+
+        Dans cet exemple, aucune valeur numérique d’origine n’est conservée.
+        Chaque élément est remplacé par une nouvelle valeur.
+
+        Cette forme peut servir à créer des catégories, comme ici, mais aussi des codes numériques :
+
+        ```python
+        codes = np.where(mesures_ph < 7, 0, 1)
+
+        print(codes)
+        ```
+
+        Résultat :
+
+        ```python
+        [0 1 1 0 0]
+        ```
+
+        ---
+
+        ### Exemple 3 : choisir entre deux tableaux
+
+        Les deux choix peuvent aussi être deux tableaux (de même taille).
+
+        Dans ce cas, NumPy choisit, à chaque position, une valeur provenant du premier ou du deuxième tableau.
+
+        ```python
+        mesures_a = np.array([10.2, 11.5, 9.8, 12.1])
+        mesures_b = np.array([10.0, 11.8, 10.1, 11.9])
+
+        utiliser_a = np.array([True, False, False, True])
+
+        resultat = np.where(utiliser_a, mesures_a, mesures_b)
+
+        print(resultat)
+        ```
+
+        Résultat :
+
+        ```python
+        [10.2 11.8 10.1 12.1]
+        ```
+
+        Pour chaque position :
+
+        - si `utiliser_a` vaut `True`, NumPy prend la valeur de `mesures_a`;
+        - si `utiliser_a` vaut `False`, NumPy prend la valeur de `mesures_b`.
+
+        :::
+
+        ---
+
+        :::warning 💡 `np.where()` vs filtre : ne pas confondre
+        Filtre `t[t > 0]` : le tableau résultant est **plus court** (seuls les éléments qui satisfont sont conservés). \
+        `np.where()` : le tableau résultant a **la même longueur** (chaque élément reçoit une valeur selon la condition).
+        :::
+
+        ---
+
+        ::::note 📋 AIDE-MÉMOIRE : Conditions et masques
+
+        <AideMemoireNumpyConditions />
+
+        ::::
+
+        {/* <Feedback feedbackId="Rencontre #10 - NumPy Conditions" /> */}

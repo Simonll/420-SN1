@@ -1,0 +1,111 @@
+
+        :::tip 💡 Restructurer, combiner, générer et sauvegarder
+
+        En sciences, les données n’arrivent pas toujours dans le bon format. Des séries de mesures doivent parfois être regroupées, des jeux de données provenant de sources différentes doivent être combinés, et les résultats d’un calcul long doivent être conservés pour ne pas avoir à tout recalculer à chaque fois.
+
+        Cet onglet couvre les outils NumPy qui permettent de faire exactement ça : **restructurer**, **combiner**, **générer** et **sauvegarder** des tableaux.
+
+        :::
+
+        ---
+
+        :::info 🔄 `reshape()` - changer la forme sans changer les données
+
+        `reshape()` réorganise les éléments d’un tableau dans une nouvelle forme, sans modifier leur contenu. C’est utile quand un algorithme ou une bibliothèque attend des données dans un format précis : par exemple, un réseau de neurones qui attend une matrice plutôt qu’une liste à plat. Le nombre total d’éléments doit rester identique.
+
+        ```python
+        mesures = np.arange(12)       # 12 mesures en une seule ligne
+        print(mesures)                # [ 0  1  2  3  4  5  6  7  8  9 10 11]
+        print(mesures.shape)          # (12,)
+
+        grille = mesures.reshape(3, 4)  # réorganiser en 3 séries de 4 mesures
+        print(grille)
+        # [[ 0  1  2  3]
+        #  [ 4  5  6  7]
+        #  [ 8  9 10 11]]
+        print(grille.shape)           # (3, 4)
+        ```
+
+        :::
+
+        ---
+
+        :::info 🔗 `np.concatenate()` - combiner des tableaux
+
+        `np.concatenate()` met plusieurs tableaux bout à bout pour en former un seul :
+
+        ```python
+        mesures_matin = np.array([36.5, 37.0, 36.8])
+        mesures_soir  = np.array([37.2, 36.9, 37.5])
+
+        toutes_mesures = np.concatenate([mesures_matin, mesures_soir])
+        print(toutes_mesures)  # [36.5 37.  36.8 37.2 36.9 37.5]
+        ```
+
+        :::
+
+        ---
+
+        ::::info 🎲 Génération aléatoire
+
+        NumPy offre deux fonctions principales pour générer des données aléatoires :
+
+        **`np.random.uniform()`** génère des nombres décimaux aléatoires dans un intervalle `[min, max[` :
+
+        ```python
+        # 5 mesures de température entre 36.0 (inclus) et 38.5 (exclus)
+        temperatures = np.random.uniform(36.0, 38.5, 5)
+        print(temperatures)  # ex : [37.2  36.8  38.1  37.5  36.3]
+        ```
+
+        **`np.random.randint()`** génère des nombres entiers aléatoires dans un intervalle `[min, max[` :
+
+        ```python
+        # 10 valeurs de dés (entre 1 et 6 inclus)
+        des = np.random.randint(1, 7, 10)
+        print(des)  # ex : [3 1 6 2 4 5 2 1 6 3]
+        ```
+
+        :::warning ⚠️ Résultats différents à chaque exécution
+        Les fonctions aléatoires donnent un résultat différent chaque fois. Si l'on veut reproduire exactement le même résultat (pour déboguer ou tester), il faut utiliser `np.random.seed(42)` avant la génération. Le nombre entre parenthèses est arbitraire, c’est juste un point de départ fixe pour le générateur de nombres aléatoires.
+        :::
+
+        ::::
+
+        ---
+
+        ::::info 💾 Sauvegarder et charger un tableau
+
+        `np.save()` permet de sauvegarder un tableau dans un fichier `.npy`, et `np.load()` de le recharger. \
+        C’est utile pour conserver les résultats d’un calcul long et les réutiliser plus tard sans tout recalculer.
+
+        ```python
+        # Sauvegarder
+        scores = np.array([85, 92, 78, 90, 88])
+        np.save("scores.npy", scores)
+
+        # Charger dans un autre script (ou plus tard dans le même)
+        scores_charges = np.load("scores.npy")
+        print(scores_charges)           # [85 92 78 90 88]
+        print(np.mean(scores_charges))  # 86.6
+        ```
+
+        Le fichier `scores.npy` est créé dans le même dossier que le script.
+
+        :::warning ⚠️ Un fichier `.npy` n’est pas lisible dans un éditeur de texte
+        Un fichier `.npy` n'est pas un fichier texte, c'est un format **binaire** : les nombres sont stockés directement en mémoire, sans conversion en texte. Cela le rend beaucoup plus rapide à lire et à écrire qu’un fichier texte `.txt`, `.csv` ou `.json`, et plus compact sur le disque. En contrepartie, son contenu apparaîtra comme des caractères illisibles si on l’ouvre dans un éditeur. C’est tout à fait normal. Le fichier n’est pas corrompu. Il faut simplement le lire avec `np.load()`.
+
+        Pour inspecter les données à la main ou les partager avec d’autres logiciels, mieux vaut utiliser un fichier texte `.csv`, `.json` ou `.txt`.
+        :::
+
+        ::::
+
+        ---
+
+        ::::note 📋 AIDE-MÉMOIRE : Manipulation et sauvegarde
+
+        <AideMemoireNumpyManipulation />
+
+        ::::
+
+        {/* <Feedback feedbackId="Rencontre #10 - NumPy Manipulation" /> */}

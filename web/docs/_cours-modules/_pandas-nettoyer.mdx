@@ -1,0 +1,283 @@
+
+        :::tip 💡 Pourquoi nettoyer ses données ?
+
+        Le principe du *Garbage In, Garbage Out* s'applique directement en analyse de données : si les données de base sont erronées, tous les calculs qui en découlent le seront aussi.
+
+        On nettoie pour trois raisons principales : éviter les **erreurs de calcul** causées par les valeurs manquantes (`NaN`, *Not A Number*), assurer la **précision** en éliminant les doublons ou les valeurs aberrantes, et **faciliter la visualisation** en évitant que des points parasites faussent l'échelle d'un graphique.
+
+        :::
+
+        ---
+
+        :::info 🎮 Données utilisées dans cet onglet
+
+        Les exemples qui suivent utilisent le DataFrame `df_joueurs`, qui contient des données volontairement imparfaites : valeurs manquantes et doublons inclus.
+
+        ```python
+        import pandas as pd
+
+        df_joueurs = pd.DataFrame({
+            "Pseudo":  ["Sakura99", "DarkLink", "Sakura99", "NovaStar", "GhostX"],
+            "Score":   [4200, None, 4200, 3100, None],
+            "Niveau":  ["12", None, "12", None, "5"],
+            "Région":  ["QC", "ON", "QC", None, "BC"]
+        })
+        ```
+
+        Résultat :
+        ```
+             Pseudo   Score Niveau Région
+        0  Sakura99  4200.0     12     QC
+        1  DarkLink     NaN    NaN     ON
+        2  Sakura99  4200.0     12     QC
+        3  NovaStar  3100.0    NaN    NaN
+        4    GhostX     NaN      5     BC
+        ```
+
+        On remarque déjà que la ligne 2 est un doublon exact de la ligne 0, que `Score` et `Niveau` ont des `NaN`, et que `Région` est manquante pour NovaStar.
+
+        On peut aussi vérifier le type de chaque colonne avec `.dtypes` :
+
+        ```python
+        print(df_joueurs.dtypes)
+        ```
+
+        Résultat :
+        ```text
+        Pseudo     object
+        Score     float64
+        Niveau     object
+        Région     object
+        dtype: object
+        ```
+
+        La colonne `Niveau` est de type `object`, car les valeurs ont été écrites entre guillemets (`"12"`, `"5"`) dans les données de départ.
+        Pour Pandas, ce ne sont donc pas encore des nombres, mais du texte. On corrigera ce problème plus loin.
+
+        :::
+
+        ---
+
+        :::info 🔍 Détecter les valeurs manquantes
+
+        Avant de nettoyer, il est utile de savoir quelles colonnes contiennent des `NaN` et combien. `.isnull().sum()` retourne le nombre de valeurs manquantes par colonne :
+
+        ```python
+        print(df_joueurs.isnull().sum())
+        ```
+
+        Résultat :
+        ```
+        Pseudo    0
+        Score     2
+        Niveau    2
+        Région    1
+        dtype: int64
+        ```
+
+        On voit immédiatement que `Score` et `Niveau` ont chacun 2 valeurs manquantes, et que `Région` en a 1. `Pseudo` est complet. C'est ce qui guide le choix de nettoyage : quelles colonnes cibler et quelle approche utiliser.
+
+        :::
+
+        ---
+
+        ::::info 🗑️ Supprimer les lignes avec des valeurs manquantes
+
+        `dropna()` retourne un **nouveau DataFrame** sans modifier l'original.
+
+        **Supprimer toutes les lignes qui contiennent au moins un `NaN` :**
+
+        ```python
+        df_propre = df_joueurs.dropna()
+        print(df_propre)
+        ```
+
+        Résultat :
+        ```
+             Pseudo   Score Niveau Région
+        0  Sakura99  4200.0     12     QC
+        2  Sakura99  4200.0     12     QC
+        ```
+
+        Seules les lignes sans aucun `NaN` sont conservées. C'est une approche radicale : on perd beaucoup de données.
+
+        **Supprimer une ligne uniquement si une colonne critique est manquante :**
+
+        ```python
+        df_propre = df_joueurs.dropna(subset=["Score"])
+        print(df_propre)
+        ```
+
+        Résultat :
+        ```
+             Pseudo   Score Niveau Région
+        0  Sakura99  4200.0     12     QC
+        2  Sakura99  4200.0     12     QC
+        3  NovaStar  3100.0    NaN    NaN
+        ```
+
+        Cette forme est plus prudente : on ne supprime que les lignes où `Score` est vide, et on conserve les autres même si elles ont d'autres `NaN`.
+
+        :::note 💡 Retourne un nouveau DataFrame
+        `dropna()` ne modifie pas `df_joueurs`. Il faut assigner le résultat à une nouvelle variable (ou à `df_joueurs` pour écraser l'original).
+        :::
+
+        :::note 🎯 On nettoie seulement les colonnes dont on a besoin
+        Le réflexe naturel est d'appeler `dropna()` sans argument pour tout nettoyer d'un coup. \
+        Le problème : on perd souvent des lignes à cause de `NaN` dans des colonnes qu'on n'utilise même pas.
+
+        **On identifie d'abord les colonnes nécessaires à la requête.** \
+        Par exemple, si l'objectif est d'afficher les 3 joueurs avec les meilleurs scores de la région QC :
+
+        ```python
+        df_joueurs[df_joueurs["Région"] == "QC"][["Pseudo", "Score"]].sort_values("Score", ascending=False).head(3)
+        ```
+
+        Cette requête utilise `Région` (filtrer), `Score` (trier) et `Pseudo` (afficher). La colonne `Niveau` n'intervient pas.
+
+        ```python
+        df_propre = df_joueurs.dropna()                              # ❌ perd aussi les lignes où Niveau est NaN
+        df_propre = df_joueurs.dropna(subset=["Région", "Score"])    # ✅ cible uniquement les colonnes importantes
+        ```
+        :::
+
+        ::::
+
+        ---
+
+        ::::info 🔁 Supprimer les doublons
+
+        `drop_duplicates()` élimine les lignes qui sont des copies exactes d'autres lignes. C'est fréquent lors de la fusion de plusieurs fichiers.
+
+        ```python
+        df_propre = df_joueurs.drop_duplicates()
+        print(df_propre)
+        ```
+
+        Résultat :
+        ```
+             Pseudo   Score Niveau Région
+        0  Sakura99  4200.0     12     QC
+        1  DarkLink     NaN    NaN     ON
+        3  NovaStar  3100.0    NaN    NaN
+        4    GhostX     NaN      5     BC
+        ```
+
+        La ligne 2 (doublon exact de Sakura99) a été supprimée. Pandas conserve la première occurrence et retire les suivantes.
+
+        :::note 💡 Retourne un nouveau DataFrame
+        Comme `dropna()`, `drop_duplicates()` ne modifie pas `df_joueurs`. Il faut assigner le résultat à une nouvelle variable (ou à `df_joueurs` pour écraser l'original).
+        :::
+
+        ::::
+
+        ---
+
+        ::::info 🩹 Remplacer les valeurs manquantes
+
+        Au lieu de supprimer une ligne, on peut parfois remplacer un `NaN` par une valeur de remplacement.
+
+        ⚠️ Il ne faut toutefois pas remplacer les valeurs manquantes automatiquement.
+        Le choix de la valeur dépend du contexte, de la colonne et de la question qu’on veut analyser.
+
+        Quelques stratégies possibles :
+
+        | Situation | Exemple de remplacement possible |
+        |---|---|
+        | Catégorie inconnue | `"Inconnue"` |
+        | Valeur numérique manquante | moyenne, médiane ou valeur fixe |
+        | Valeur absente qui signifie réellement zéro | `0` |
+        | Colonne peu importante pour l’analyse | ne pas remplacer, ou ignorer la colonne |
+
+        Les exemples ci-dessous montrent différentes possibilités.
+        Ils ne veulent pas dire qu’il faut toujours remplacer les valeurs manquantes par la moyenne ou par la médiane.
+
+        Contrairement à `dropna()` et `drop_duplicates()`, `fillna()` est ici utilisé pour **modifier le contenu d'une colonne directement** : on applique une transformation sur la colonne et on réassigne le résultat dans `df_joueurs`. C'est le même principe que les transformations vues dans l'onglet [**Transformer**](/cours/rencontre11?onglet=pandastransformer).
+
+        **Exemple : remplacer par une valeur fixe (colonne texte)**
+
+        ```python
+        df_joueurs["Région"] = df_joueurs["Région"].fillna("Inconnue")
+        print(df_joueurs["Région"])
+        ```
+
+        Résultat :
+        ```
+        0          QC
+        1          ON
+        2          QC
+        3    Inconnue
+        4          BC
+        ```
+
+        **Exemple : remplacer par la moyenne de la colonne**
+
+        ```python
+        moyenne_score = df_joueurs["Score"].mean()
+        df_joueurs["Score"] = df_joueurs["Score"].fillna(moyenne_score)
+        print(df_joueurs["Score"])
+        ```
+
+        Résultat :
+        ```
+        0    4200.0
+        1    3766.666...
+        2    4200.0
+        3    3100.0
+        4    3766.666...
+        ```
+
+        Les `NaN` ont été remplacés par la moyenne des scores existants :
+        (4200 + 4200 + 3100) / 3 ≈ 3766.
+
+        Ce n’est pas une règle générale : c’est seulement un exemple de stratégie possible.
+        Dans une vraie analyse, il faudrait se demander si remplacer les scores inconnus par la moyenne a du sens.
+
+        On note aussi que le doublon Sakura99 (ligne 2) est inclus dans ce calcul.
+        Si on avait d'abord supprimé les doublons, la moyenne serait différente : (4200 + 3100) / 2 = 3650.
+
+        **L'ordre des opérations de nettoyage influence donc les résultats.**
+
+        :::note ⚠️ `.mean()` s'applique aux colonnes numériques seulement
+        Pour une colonne texte, on peut utiliser une valeur fixe comme `"Inconnu"` ou la valeur la plus fréquente (`df["col"].mode()[0]`).
+        :::
+
+        ::::
+
+        ---
+
+        ::::info 🔧 Convertir le type d'une colonne avec `astype()`
+
+        Pandas importe parfois des nombres sous forme de texte à cause d'un caractère inattendu dans le fichier CSV. \
+        C'est le cas de la colonne `Niveau` dans `df_joueurs` : elle a été définie avec des chaînes de caractères comme `"12"` plutôt que des entiers.
+
+        ```python
+        print(df_joueurs["Niveau"].dtype)  # → object (texte)
+        ```
+
+        Avant de pouvoir faire des calculs sur `Niveau` (moyenne, comparaisons numériques, etc.), il faut d'abord gérer les `NaN`, puis convertir le type :
+
+        ```python
+        # Étape 1 : remplacer les NaN par 0 (ou une autre valeur appropriée)
+        df_joueurs["Niveau"] = df_joueurs["Niveau"].fillna(0)
+
+        # Étape 2 : convertir en nombre
+        df_joueurs["Niveau"] = df_joueurs["Niveau"].astype(int)
+        print(df_joueurs["Niveau"].dtype)  # → int64
+        ```
+
+        :::warning ⚠️ La conversion échoue si des valeurs non convertibles sont présentes
+        Si la colonne contient des valeurs comme `"N/A"` ou `"–"`, `astype()` produira une erreur. Il faut les nettoyer avec `fillna()` ou `replace()` avant de convertir.
+        :::
+
+        ::::
+
+        ---
+
+        :::note 📋 AIDE-MÉMOIRE : Nettoyer un DataFrame
+
+        <AideMemoirePandasNettoyer />
+
+        :::
+
+        {/* <Feedback feedbackId="Rencontre #11 - Nettoyer" /> */}

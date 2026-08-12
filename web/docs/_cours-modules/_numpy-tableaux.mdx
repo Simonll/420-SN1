@@ -1,0 +1,175 @@
+
+        :::tip 💡 Le tableau NumPy : un conteneur de nombres ultra-rapide
+
+        En Python, une liste peut contenir n’importe quoi : des nombres, des strings, des listes, des objets mélangés.
+        ```python
+        ma_liste = [1, "deux", 3.0, [4, 5], {"six": 6}]
+        ```
+        C’est très flexible, mais cette flexibilité a un coût : Python doit vérifier le type de chaque élément un par un.
+
+        Un tableau NumPy (`ndarray`) est différent : **tous ses éléments ont le même type**. \
+        NumPy tire profit de cette contrainte pour effectuer des calculs beaucoup plus rapidement, en traitant le tableau entier d’un seul bloc plutôt qu’élément par élément.
+
+        :::
+
+        ---
+
+        :::info 📦 Importer NumPy
+
+        La convention universelle est d’importer NumPy avec l’alias `np` :
+
+        ```python
+        import numpy as np
+        ```
+
+        Vous verrez `import numpy as np` au début de tous les scripts qui utilisent NumPy. C’est une convention que tout le monde respecte. Utilisez-la aussi.
+
+        :::
+
+        ---
+
+        ::::info 🏗️ Créer un tableau NumPy
+
+        Il existe plusieurs façons de créer un tableau selon le contexte :
+
+        **À partir d’une liste existante :**
+        ```python
+        liste = [1, 2, 3, 4, 5]
+        tab_numpy = np.array(liste)
+
+        print(tab_numpy)        # [1 2 3 4 5]
+        print(type(tab_numpy))  # <class ‘numpy.ndarray’>
+        ```
+
+        **Avec des valeurs prédéfinies :**
+        ```python
+        zeros  = np.zeros(5)      # [0. 0. 0. 0. 0.]  5 zéros (initialiser un tableau vide)
+        uns    = np.ones(5)       # [1. 1. 1. 1. 1.]  5 uns
+        neufs  = np.full(5, 9)    # [9 9 9 9 9]       5 fois la valeur 9
+        ```
+
+        **Avec des séquences de valeurs :**
+        ```python
+        sequence   = np.arange(0, 10, 2)   # [0 2 4 6 8]                 entiers de 0 à 9 par pas de 2
+        #                                                                (fonctionne comme la fonction range())
+
+        intervalle = np.linspace(0, 1, 5)  # [0.   0.25 0.5  0.75 1.  ]  5 valeurs régulièrement espacées entre 0 et 1
+        ```
+
+        💡 La différence clé entre `np.arange()` et `np.linspace()` :
+        - avec `np.arange()` on choisit le **pas** entre chaque valeur
+        - avec `np.linspace()` on choisit le **nombre de points** souhaité.
+
+        Pour les graphiques, `np.linspace()` est presque toujours préférable, car on sait exactement combien de points on aura.
+
+        ::::
+
+        ---
+
+        :::note 💡 L'affichage d'un tableau NumPy est différent d'une liste Python
+        ```python
+        liste     = [1, 2, 3, 4, 5]
+        tab_numpy = np.array(liste)
+
+        print(liste)        # [1, 2, 3, 4, 5]
+        print(tab_numpy)    # [1 2 3 4 5]
+
+        print(type(liste))      # <class 'list'>
+        print(type(tab_numpy))  # <class 'numpy.ndarray'>
+        ```
+        Les valeurs sont les mêmes, mais NumPy retire les virgules à l'affichage. Le `type()` confirme qu'il s'agit bien de deux objets différents — une `list` Python et un `ndarray` NumPy.
+        :::
+
+        ---
+
+        ::::info 🔬 `shape` et `dtype` : deux propriétés essentielles
+
+        Ce sont les deux premières choses à vérifier sur un tableau inconnu.
+
+        **`shape`** - la forme du tableau (ses dimensions), sous forme de tuple :
+
+        ```python
+        tab_1d = np.array([10, 20, 30, 40, 50])
+        print(tab_1d.shape)   # (5,)    tableau 1D de 5 éléments
+        ```
+
+        :::note 💡 Les tableaux 2D existent, mais ce cours se concentre sur le 1D
+        NumPy supporte les tableaux à plusieurs dimensions. Un tableau 2D ressemble à une grille (lignes et colonnes) :
+
+        ```python
+        tab_2d = np.array([[1, 2, 3],
+                           [4, 5, 6]])
+        print(tab_2d.shape)   # (2, 3)  2 lignes, 3 colonnes
+        ```
+
+        Dans ce cours, nous travaillerons presque exclusivement avec des tableaux **1D**. Les tableaux 2D seront davantage utilisés dans les cours suivants (*Réseaux de neurones*, *Projet scientifique*), mais il est bon de savoir que NumPy peut gérer des tableaux de n'importe quelle dimension (2D, 42D, ...).
+        :::
+
+        :::note **`size`** - le nombre total d’éléments
+
+        ```python
+        print(tab_2d.size)   # 6  (2 lignes x 3 colonnes)
+        ```
+
+        :::
+
+        **`dtype`** - le type des données stockées :
+
+        ```python
+        tab_entiers  = np.array([1, 2, 3])
+        tab_decimaux = np.array([1.0, 2.0, 3.0])
+        tab_booleens = np.array([True, False, True])
+
+        print(tab_entiers.dtype)   # int64    entiers
+        print(tab_decimaux.dtype)  # float64  décimaux
+        print(tab_booleens.dtype)  # bool     booléens
+        ```
+
+        :::warning ⚠️ Mélanger des types change le dtype
+        Si on crée un tableau avec par exemple à la fois des nombres entiers et des nombres décimaux, NumPy choisit automatiquement le type le plus général :
+
+        ```python
+        tab_mixte = np.array([1, 2, 3.0])
+        print(tab_mixte.dtype)  # float64     NumPy a converti tous les entiers en décimaux
+        print(tab_mixte)        # [1. 2. 3.]  Les décimaux sont affichés avec un point décimal
+        ```
+
+        C’est souvent le comportement voulu, mais il faut en être conscient.
+        :::
+
+        :::danger `shape`, `size` et `dtype` sont des propriétés
+        Notez bien que `shape`, `size` et `dtype` sont des **propriétés** du tableau, pas des fonctions. \
+        On les appelle sans parenthèses, contrairement à une fonction :
+        ```python
+        nb_elements = tab_1d.size    # Correct : nb_elements contient le nombre d'éléments
+        nb_elements = tab_1d.size()  # Incorrect : TypeError, car size n'est pas une fonction
+        ```
+        :::
+
+        ::::
+
+        ---
+
+        :::info 🎯 Accéder aux éléments : indexation et slicing
+
+        On accède aux éléments d’un tableau exactement comme pour une liste Python :
+
+        ```python
+        tableau = np.array([10, 20, 30, 40, 50])
+
+        print(tableau[0])    # 10          →  premier élément
+        print(tableau[-1])   # 50          →  dernier élément
+        print(tableau[1:4])  # [20 30 40]  →  éléments de l'index 1 (inclus) à l'index 4 (exclus)
+        ```
+
+        :::
+
+        ---
+
+        ::::note 📋 AIDE-MÉMOIRE : Tableaux NumPy
+
+        <AideMemoireNumpyTableaux />
+
+        ::::
+
+        {/* <Feedback feedbackId="Rencontre #10 - NumPy Tableaux" /> */}

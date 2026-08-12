@@ -1,0 +1,123 @@
+
+        ::::info 🔁 Qu’est-ce que parcourir ?
+
+        Parcourir un DataFrame, c’est **passer sur chaque ligne ou chaque valeur une par une** pour effectuer une opération personnalisée. C’est utile quand on veut faire un traitement pour chaque élément, appliquer une logique conditionnelle complexe, ou encore construire une nouvelle liste à partir des données.
+
+        :::note 💡 Filtrer et trier avant de parcourir
+        Si on n’a besoin que d’une partie des données, **on filtre et on trie le DataFrame avant** de le parcourir. Parcourir moins de lignes, c’est un code plus rapide et plus lisible.
+        :::
+
+        ::::
+
+        ---
+
+        :::info 🎮 Données utilisées dans cet onglet
+
+        Les exemples qui suivent utilisent le DataFrame `df_consoles`, qui regroupe des données sur les consoles de jeux vidéo les plus vendues. Chaque ligne représente une console, avec son année de sortie, ses ventes estimées (en millions d’unités) et son jeu le plus vendu.
+
+        ```python
+        import pandas as pd
+
+        df_consoles = pd.DataFrame({
+            "Console": ["PlayStation 5", "Xbox Series X", "Nintendo Switch 2"],
+            "Année_Sortie": [2020, 2020, 2025],
+            "Unités_Vendues_Millions": [92.0, 35.0, 19.6],
+        })
+        ```
+
+        :::
+
+        ---
+
+        ::::info 🔁 Parcourir ligne par ligne avec iterrows()
+
+        `iterrows()` permet de parcourir les lignes d’un DataFrame avec une boucle `for`. À chaque itération, on reçoit l’**index** de la ligne et son **contenu** sous forme de Series.
+        Cette Series a pour index les **noms des colonnes** du DataFrame. On peut donc accéder à une valeur par nom, exactement comme dans un dictionnaire.
+
+        **Exemple simple avec une seule colonne :**
+
+        ```python
+        for index, row in df_consoles.iterrows():
+            print(row["Console"])
+        ```
+
+        *l'instruction `row["Console"]` retourne la valeur de la colonne `Console` pour la ligne courante.*
+
+
+        Résultat :
+        ```
+        PlayStation 5
+        Xbox Series X
+        Nintendo Switch 2
+        ```
+
+        **Exemple avec plusieurs colonnes :**
+
+        ```python
+        for index, row in df_consoles.iterrows():
+            print(f"{row["Console"]} ({row["Année_Sortie"]}) : {row["Unités_Vendues_Millions"]}M unités vendues")
+        ```
+
+        Résultat :
+        ```
+        PlayStation 5 (2020) : 92.0M unités vendues
+        Xbox Series X (2020) : 35.0M unités vendues
+        Nintendo Switch 2 (2025) : 19.6M unités vendues
+        ```
+
+        :::note 💡 Les noms `index` et `row` sont des conventions
+        On peut les remplacer par n’importe quel nom de variable. `for i, ligne in df.iterrows()` fonctionne exactement pareil.
+        :::
+
+        :::warning ⚠️ `iterrows()` est lent sur de grands jeux de données
+        Pour limiter l'impact, **on filtre le DataFrame avant** de le parcourir : moins de lignes à traiter, c'est un code plus rapide. \
+        Si le but est de **créer de nouvelles colonnes** ou **modifier des colonnes existantes**, `iterrows()` n'est pas la bonne approche. \
+        Les transformations vectorielles de Pandas sont nettement plus performantes et sont vues dans l'onglet [**Transformer**](/cours/rencontre11?onglet=pandastransformer).
+        :::
+
+        ::::
+
+        ---
+
+        :::info 🔢 Parcourir les valeurs d’une colonne
+
+        Pour parcourir les valeurs d’une seule colonne (une Series), on itère directement sur la colonne comme sur une liste :
+
+        ```python
+        for console in df_consoles["Console"]:
+            print(console)
+        ```
+
+        Résultat :
+        ```
+        PlayStation 5
+        Xbox Series X
+        Nintendo Switch 2
+        ```
+
+        :::
+
+        ---
+
+        :::info 🔄 Convertir une Series en liste Python
+
+        Une Series Pandas n’est pas une liste Python ordinaire. Certaines fonctions Python n’acceptent que des listes, pas des Series. Pour convertir, on utilise `.tolist()` :
+
+        ```python
+        liste_consoles = df_consoles["Console"].tolist()
+        print(liste_consoles) # → [‘PlayStation 5’, ‘Xbox Series X’, ‘Nintendo Switch 2’]
+        ```
+
+        Certaines fonctions Python s’attendent à recevoir une liste et produisent une erreur si on leur passe une Series. `.tolist()` règle ce problème.
+
+        :::
+
+        ---
+
+        :::note 📋 AIDE-MÉMOIRE : Parcourir un DataFrame
+
+        <AideMemoirePandasParcourir />
+
+        :::
+
+        {/* <Feedback feedbackId="Rencontre #11 - Parcourir" /> */}

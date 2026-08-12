@@ -1,76 +1,616 @@
-import Admonition from '@theme/Admonition';
-import Link from '@docusaurus/Link';
-import Column from '../../src/components/Column';
-import Row from '../../src/components/Row';
-import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
-import RappelFonctionnementClasseInverse from '@site/docs/_components/RappelFonctionnementClasseInverse.mdx';
-import DocumentationAutorisee from '@site/docs/_components/DocumentationAutorisee.mdx';
-import DocumentationInterdite from '@site/docs/_components/DocumentationInterdite.mdx';
-import IntroSolutionsExercices from '@site/docs/_components/IntroSolutionsExercices.mdx';
-import AideMemoireListe from '@site/docs/_components/AideMemoireListe.mdx';
 
+        :::info Matplotlib
+        Matplotlib est une bibliothèque de visualisation de données en Python qui permet de créer des graphiques statiques, animés et interactifs. Elle est largement utilisée pour l'analyse de données, la science des données et l'apprentissage-machine (*machine learning*).
 
+        N'hésitez pas à consulter la [documentation officielle de Matplotlib](https://matplotlib.org/stable/contents.html) pour plus de détails et d'exemples.
+        :::
 
+        :::tip Installation
+        Afin de pouvoir utiliser Matplotlib dans un projet, il faut d'abord [installer la bibliothèque](../recettes/ajouter-librairie) Matplotlib dans votre projet.
+        :::
 
-:::warning Onglet facultatif
-        Les onglets dont le titre est entouré d'étoiles (comme celui-ci) sont **facultatifs** : ils ne font pas partie de la matière évaluée de la rencontre et peuvent être lus à votre rythme ou même ignoré.
-        Cela dit, **cet onglet vaut la peine d'être lu!** Vous allez produire des graphiques plus tard dans ce cours avec cette bibliothèque.
+        :::note Importation
+
+        Matplotlib est une bibliothèque qui contient plusieurs modules.<br />
+        Le module le plus couramment utilisé pour créer des graphiques est `pyplot`.<br />
+        Pour l'importer dans un script, on utilise la commande suivante :
+        ```python showLineNumbers
+        import matplotlib.pyplot as plt
+        ```
+        Ici, nous importons le module `pyplot` de Matplotlib et lui donnons l'alias `plt` pour simplifier son utilisation dans le code.<br />
+        Nous pourrons ainsi appeler les fonctions du module `pyplot` en utilisant le préfixe `plt.`<br />
+
+        <Row>
+            <Column>
+                Par exemple :
+                ```python showLineNumbers
+                plt.plot(x, y)  # Pour tracer un graphique
+                plt.show()      # Pour afficher le graphique
+                ```
+            </Column>
+            <Column>
+                qui est plus court et lisible que :
+                ```python showLineNumbers
+                matplotlib.pyplot.plot(x, y)
+                matplotlib.pyplot.show()
+                ```
+            </Column>
+        </Row>
+        :::
+
+        :::info Création de graphiques
+
+        Créons d'abord un graphique très simple, avec 3 points :
+        <Row>
+            <Column>
+                ```python showLineNumbers
+                import matplotlib.pyplot as plt
+
+                # Données à tracer
+                x = [-100, 0, 100]     # Liste des abscisses (x) des 3 points
+                y = [10000, 0, 10000]  # Liste des ordonnées (y) des 3 points
+
+                # Tracer les points (-100, 10000), (0, 0) et (100, 10000)
+                plt.plot(x, y)
+
+                # Afficher le graphique
+                plt.show()
+                ```
+                Exécutez ce code pour voir le résultat.
+            </Column>
+            <Column>
+                ![](/img/cours/matplotlib_1.png)
+            </Column>
+        </Row>
+
+        La fonction `plt.plot(x, y)` trace les points définis par les listes `x` et `y`.\
+        Elle nécessite qu'on lui fournisse deux listes de même longueur : une pour les abscisses (`x`) et une pour les ordonnées (`y`).\
+        Mais elle peut aussi prendre des paramètres optionnels pour personnaliser le graphique, comme la couleur, le style de ligne, les marqueurs, etc.\
+        Nous allons en voir quelques-uns. Commençons par leurs valeurs par défaut :
+        <Row>
+            <Column>
+                ```python showLineNumbers
+                import matplotlib.pyplot as plt
+
+                # Données à tracer
+                x = [-100, 0, 100]
+                y = [10000, 0, 10000]
+
+                # Tracer les points
+                plt.plot(
+                    x, y,
+                    color = 'C0',     # couleur
+                    linestyle = '-',  # type de ligne
+                    marker = None,    # type de point
+                    linewidth = 1.5,  # épaisseur de la ligne
+                    markersize = 6,   # taille des marqueurs
+                    alpha = 1.0,      # opacité (0.0 - 1.0)
+                    label = None      # étiquette pour la légende
+                )
+
+                plt.show()
+                ```
+            </Column>
+            <Column>
+                ![](/img/cours/matplotlib_1.png)
+            </Column>
+        </Row>
+
+        Le résultat est le même qu'avec `plt.plot(x, y)`, car les paramètres que nous avons spécifiés sont les valeurs par défaut.
+
+        Changeons quelques paramètres pour voir leur effet :
+        <Row>
+            <Column>
+                ```python showLineNumbers
+                import matplotlib.pyplot as plt
+
+                x = [-100, 0, 100]
+                y = [10000, 0, 10000]
+
+                plt.plot(
+                    x, y,
+                    color = 'darkorange',  # orange foncé
+                    linestyle = '',        # pas de ligne
+                    marker = 'o',          # cercle pour les points
+                    markersize = 16        # points plus gros
+                )
+
+                plt.show()
+                ```
+            </Column>
+            <Column>
+                ![](/img/cours/matplotlib_3.png)
+            </Column>
+        </Row>
+
+        Ajoutons maintenant plus de points pour obtenir une courbe de $y = x^2$ :
+        <Row>
+            <Column>
+                ```python showLineNumbers
+                import matplotlib.pyplot as plt
+
+                # Données à tracer
+                x = [i for i in range(-100, 101)]  # Entiers de -100 à 100
+                y = [i ** 2 for i in x]            # Carrés des entiers
+
+                plt.plot(x, y)
+
+                plt.show()
+                ```
+                On obtient une belle parabole.
+            </Column>
+            <Column>
+                ![](/img/cours/matplotlib_2.png)
+            </Column>
+        </Row>
+
+        On peut appeler plusieurs fois `plt.plot()` pour ajouter plusieurs éléments sur le même graphique.\
+        Par exemple, affichons en orange foncé les points où x est un multiple de 10 :
+        - Le premier appel à `plt.plot()` dessine les lignes.
+        - Puis un deuxième appel à `plt.plot()` dessine les points en orange avec une opacité de 0.75.
+        <Row>
+            <Column>
+                ```python showLineNumbers
+                import matplotlib.pyplot as plt
+
+                x = [i for i in range(-100, 101)]
+                y = [i ** 2 for i in x]
+
+                # Points oranges pour les x multiples de 10
+                x_orange = [i for i in x if i % 10 == 0]
+                y_orange = [i ** 2 for i in x_orange]
+
+                # les lignes :
+                plt.plot(x, y)
+
+                # les points :
+                plt.plot(
+                    x_orange, y_orange,
+                    color = 'darkorange',
+                    linestyle = '',        # pas de ligne
+                    marker = 'o',
+                    markersize = 12,
+                    alpha = 0.75
+                )
+
+                plt.show()
+                ```
+            </Column>
+            <Column>
+                ![](/img/cours/matplotlib_4.png)
+            </Column>
+        </Row>
+
+        Ajoutons maintenant la courbe miroir en vert pour $y = -x^2$ :
+        <Row>
+            <Column>
+                ```python showLineNumbers
+                import matplotlib.pyplot as plt
+
+                x = [i for i in range(-100, 101)]
+                y = [i ** 2 for i in x]
+                y_miroir = [-i for i in y]  # miroir de y
+
+                x_orange = [i for i in x if i % 10 == 0]
+                y_orange = [i ** 2 for i in x_orange]
+
+                plt.plot(x, y)
+                plt.plot(
+                    x_orange, y_orange,
+                    color = 'darkorange',
+                    linestyle = '',
+                    marker = 'o',
+                    markersize = 12,
+                    alpha = 0.75
+                )
+                plt.plot(
+                    x, y_miroir,
+                    color = 'green'
+                )
+
+                plt.show()
+                ```
+            </Column>
+            <Column>
+                ![](/img/cours/matplotlib_5.png)
+            </Column>
+        </Row>
 
         :::
+
+        :::note Grilles, titres et légendes
+
+        On peut ajouter une grille pour mieux visualiser les points, à l'aide de la fonction `plt.grid()` :
+        <Row>
+            <Column>
+                ```python showLineNumbers
+                import matplotlib.pyplot as plt
+
+                x = [i for i in range(-100, 101)]
+                y = [i ** 2 for i in x]
+                y_miroir = [-i for i in y]
+
+                plt.plot(x, y)
+                plt.plot(x, y_miroir, color = 'darkorange')
+
+                # Ajouter une grille (valeurs par défaut)
+                plt.grid(
+                    axis = 'both',      # 'both' : les 2 axes
+                                        # 'x' : lignes verticales
+                                        # 'y' : lignes horizontales
+                    linestyle = '-',    # ligne pleine
+                    linewidth = 0.8,    # épaisseur fine
+                    color = '#b0b0b0',  # gris pâle
+                    alpha = 1.0         # opaque
+                )
+                # Si la grille passe par-dessus des points, ajouter :
+                plt.gca().set_axisbelow(True)
+
+                plt.show()
+                ```
+            </Column>
+            <Column>
+                ![](/img/cours/matplotlib_8.png)
+            </Column>
+        </Row>
+
+        Pour rendre le graphique plus compréhensible, on peut ajouter un titre au graphique, des étiquettes (*labels*) aux axes et on peut aussi personnaliser les ticks (valeurs affichées) d'un axe, en modifiant leur rotation, leur alignement et la taille de leur police :
+        <Row>
+            <Column>
+                ```python showLineNumbers
+                import matplotlib.pyplot as plt
+
+                x = [i for i in range(-100, 101)]
+                y = [i ** 2 for i in x]
+                y_miroir = [-i for i in y]
+
+                plt.plot(x, y)
+                plt.plot(x, y_miroir, color = 'darkorange')
+
+                # Titre du graphique
+                plt.title("Graphique de y = x² et y = -x²")
+
+                # Titres des axes
+                plt.xlabel("Axe des X")
+                plt.ylabel("Axe des Y")
+
+                # Personnalisation des ticks
+                # (valeurs affichées) de l'axe des X
+                plt.xticks(
+                    rotation=30, # rotation des ticks
+                    ha='right',  # alignement horizontal
+                    fontsize=20  # taille de la police
+                )
+
+                # Ajuste la mise en page pour éviter les coupures
+                plt.tight_layout()
+
+                plt.show()
+                ```
+            </Column>
+            <Column>
+                ![](/img/cours/matplotlib_6.png)
+            </Column>
+        </Row>
+
+        Lorsque nous avons plusieurs courbes sur le même graphique, il est important de les différencier en ajoutant une légende.\
+        Pour cela, on peut utiliser le paramètre `label` dans les appels à `plt.plot()` pour donner une étiquette à chaque courbe, puis appeler la fonction `plt.legend()` pour afficher la légende avec les étiquettes correspondantes :
+        <Row>
+            <Column>
+                ```python showLineNumbers
+                import matplotlib.pyplot as plt
+
+                x = [i for i in range(-100, 101)]
+                y = [i ** 2 for i in x]
+                y_miroir = [-i for i in y]
+
+                plt.plot(
+                    x, y,
+                    label='y = x²'  # étiquette pour la légende
+                )
+                plt.plot(
+                    x, y_miroir,
+                    marker='o',
+                    color = 'darkorange',
+                    label='y = -x²' # étiquette pour la légende
+                )
+
+                # Affiche la légende avec les
+                # étiquettes définies dans les appels à plt.plot()
+                plt.legend(
+                    loc='lower right', # position
+                    title="Fonction",  # titre de la légende
+                    title_fontsize=30, # taille du titre
+                    prop={'size': 20}, # taille des étiquettes
+                    markerscale=2      # taille des marqueurs
+                )
+
+                plt.show()
+                ```
+            </Column>
+            <Column>
+                ![](/img/cours/matplotlib_7.png)
+            </Column>
+        </Row>
+
+        :::
+
+        :::tip Taille de la figure
+
+        Si on souhaite décider de la taille exacte de notre graphique, on peut utiliser la fonction `plt.figure()`, qui doit être appelée **avant** les appels à `plt.plot()` :
+        <Row>
+            <Column>
+                ```python showLineNumbers
+                import matplotlib.pyplot as plt
+
+                x = [i for i in range(-100, 101)]
+                y = [i ** 2 for i in x]
+                y_miroir = [-i for i in y]
+
+                # largeur = 9 pouces, hauteur = 4 pouces
+                plt.figure(figsize=(9, 4))
+
+                plt.plot(x, y)
+                plt.plot(x, y_miroir, color = 'darkorange')
+
+                plt.show()
+                ```
+            </Column>
+            <Column>
+                ![](/img/cours/matplotlib_9.png)
+            </Column>
+        </Row>
+
+        :::
+
+        :::info Sauvegarde
+
+        Au lieu d'afficher le graphique à l'écran avec `plt.show()`, on peut le sauvegarder dans un fichier image (PNG, JPG, SVG, etc.) en utilisant la fonction `plt.savefig()` :
+        ```python showLineNumbers=28
+        plt.savefig("mon_graphique.png")  # Sauvegarde le graphique en format PNG
+        plt.savefig("mon_graphique.svg")  # Sauvegarde le graphique en format SVG
+        plt.savefig("mon_graphique.jpg")  # Sauvegarde le graphique en format JPG
+        plt.savefig("mon_graphique.pdf")  # Sauvegarde le graphique en format PDF
+        ```
+        Il faut ajouter ce code avant `plt.show()`, et un fichier image sera créé dans le même répertoire que le script, avec le nom spécifié.
+
+        :::
+
+        :::tip Plusieurs figures
+
+        Lorsqu'on génère plusieurs graphiques dans le même script, il est important de les gérer correctement pour éviter les confusions entre les différentes figures.
+
+        <Row>
+            <Column>
+                Ce code génère 3 courbes différentes sur le même graphique :
+                ```python showLineNumbers
+                import matplotlib.pyplot as plt
+
+                x = [i for i in range(-10, 11)]
+                y = [i ** 2 for i in x]
+
+                plt.plot(x, y)
+                plt.plot(x, [-i for i in y])
+                plt.plot(x, x)
+
+                plt.savefig("figure.pdf")
+                plt.show()
+                ```
+                Remarque : par défaut, chaque appel à `plt.plot()` utilise une couleur différente, ce qui permet de différencier les courbes.
+            </Column>
+            <Column>
+                ![](/img/cours/matplotlib_10.png)
+            </Column>
+        </Row>
 
         ---
 
-        ::::info Générer des graphiques
-
-        Nous allons utiliser **Matplotlib**, une bibliothèque Python très flexible pour la visualisation de données.<br />
-        Elle permet de créer des graphiques simples ou complexes et de personnaliser pratiquement tous les éléments :
-
-        - Graphiques à lignes, à barres, histogrammes, nuages de points
-        - Superposition de plusieurs graphiques sur une seule figure
-        - Compatibilité avec d'autres bibliothèques scientifiques comme **NumPy**, **Pandas** ou **SciPy**
-
-        Il existe aussi d'autres excellentes bibliothèques de visualisation graphique, comme **Seaborn** ou **ggplot2**.
-
-        Voici un exemple simple, testez-le dans un script Python!<br />
-        Ne vous inquiétez pas si vous ne comprenez le code pour l'instant, on verra plus en détail comment faire des graphiques dans un prochain cours.
-
-        :::tip Installer Matplotlib
-        Pour utiliser une bibliothèque Python comme Matplotlib, il faut d’abord l’installer dans votre environnement de travail. Dans le terminal de VS Code (où votre environnement virtuel est activé), exécutez la commande :
-        `pip install matplotlib`
-        :::
+        Mais si on voulait créer plusieurs graphiques séparés, il faut utiliser `plt.figure()` pour créer une nouvelle figure avant de tracer un nouveau graphique :
 
         ```python showLineNumbers
-        # Importer le module "pyplot" de la bibliothèque "matplotlib" et l'utiliser sous l'alias "plt"
+        import matplotlib.pyplot as plt
 
-        # Âge en années
-        # Liste de données pour l'axe horizontal (axe des abscisses), 11 éléments
-        age = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+        x = [i for i in range(-10, 11)]
+        y = [i ** 2 for i in x]
 
-        # Taille correspondante en cm (exemple fictif)
-        # Liste de données pour l'axe vertical (axe des ordonnées), 11 éléments
-        taille = [50, 75, 85, 95, 105, 112, 118, 124, 130, 135, 140]
+        plt.figure()                # Crée une première figure
+        plt.plot(x, y)              # Trace une courbe dans cette première figure
+        plt.savefig("figure1.pdf")  # Sauvegarde la figure
 
-        # Création du graphique
+        plt.figure()                # Crée une nouvelle figure
+        plt.plot(x, [-i for i in y])
+        plt.savefig("figure2.pdf")
 
-        # Création d'une courbe (11 points)
-        plt.plot(age, taille, marker='o', color='g', label="Taille en fonction de l'âge")
+        plt.figure()
+        plt.plot(x, x)
+        plt.savefig("figure3.pdf")
 
-        # Ajout de titres et labels
-        plt.xlabel("Âge (années)")                    # Ajout d'un label sur l'axe horizontal
-        plt.ylabel("Taille (cm)")                     # Ajout d'un label sur l'axe vertical
-        plt.title("Courbe de croissance de l'enfant") # Ajout d'un titre au graphique
-        plt.grid(linestyle="--")                      # Ajout d'une grille en pointillé
-        plt.legend()                                  # Générer une légende
+        plt.show()                  # Affiche toutes les figures
+        ```
+        - L’appel à `plt.show()` est optionnel et sert uniquement à afficher les figures à l’écran.
+        - Sans `plt.figure()`, les courbes seraient toutes tracées sur la même figure.
 
-        # Affichage du graphique
+        <Row>
+            <Column>
+                ![](/img/cours/matplotlib_11.png)
+            </Column>
+            <Column>
+                ![](/img/cours/matplotlib_12.png)
+            </Column>
+            <Column>
+                ![](/img/cours/matplotlib_13.png)
+            </Column>
+        </Row>
+
+        :::
+
+        :::info Types de graphiques
+
+        Matplotlib offre une grande variété de types de graphiques pour visualiser les données de différentes manières.\
+        Vous pouvez les explorer dans la [documentation officielle de Matplotlib](https://matplotlib.org/stable/plot_types/index.html).
+
+        Voici quelques exemples qui vous seront utiles :
+
+        ---
+
+        `plt.scatter()` : pour créer des [nuages de points](https://matplotlib.org/stable/plot_types/basic/scatter_plot.html)
+        <Row>
+            <Column>
+                ```python showLineNumbers
+                import matplotlib.pyplot as plt
+
+                x = [i for i in range(10)]
+                y = [i ** 2 for i in x]
+
+                tailles_points = [i * 10 for i in y]
+                # [0, 10, 40, 90, 160, 250, 360, 490, 640, 810]
+
+                plt.scatter(x, y, alpha=0.5, s=tailles_points)
+                plt.scatter(x, x, alpha=0.5, s=200)
+
+                plt.show()
+                ```
+                `plt.scatter()` permet de dessiner des points, tout comme `plt.plot()` avec `marker='o'` et `linestyle=''`.
+
+                Cependant, `plt.scatter()` offre plus de contrôle, notamment en permettant de modifier la taille (`s`) de chaque point individuellement (ici les points bleus).
+            </Column>
+            <Column>
+                ![](/img/cours/matplotlib_16.png)
+            </Column>
+        </Row>
+
+        ---
+
+        `plt.bar()` : pour créer des [graphiques à barres](https://matplotlib.org/stable/plot_types/basic/bar.html)
+        <Row>
+            <Column>
+                ```python showLineNumbers
+                import matplotlib.pyplot as plt
+
+                categories = ['A', 'B', 'C', 'D']
+                valeurs = [10, 15, 7, 12]
+
+                plt.bar(categories, valeurs)
+
+                plt.show()
+                ```
+            </Column>
+            <Column>
+                ![](/img/cours/matplotlib_14.png)
+            </Column>
+        </Row>
+
+        ---
+
+        `plt.boxplot()` : pour créer des [boîtes à moustaches](https://matplotlib.org/stable/plot_types/stats/boxplot_plot.html)
+
+        Contrairement à `plt.bar()`, qui affiche une seule valeur par catégorie, `plt.boxplot()` permet de visualiser la distribution complète des données pour chaque catégorie.
+        <Row>
+            <Column>
+                ```python showLineNumbers
+                import matplotlib.pyplot as plt
+
+                categories = ['A', 'B', 'C', 'D']
+                data = [
+                    [1, 2, 3, 4, 5],
+                    [2, 3, 4, 5, 6],
+                    [1, 3, 5, 7, 9],
+                    [2, 2, 3, 3, 4, 10]
+                ]
+
+                plt.boxplot(data, tick_labels=categories)
+
+                plt.show()
+                ```
+            </Column>
+            <Column>
+                ![](/img/cours/matplotlib_15.png)
+            </Column>
+        </Row>
+        Comment interpréter une boîte à moustaches :
+        - La **ligne du milieu (orange)** représente la **médiane** : 50 % des valeurs sont en dessous, 50 % au-dessus.
+        - Le **bas de la boîte** représente le **1er quartile (Q1)** : 25 % des valeurs sont en dessous.
+        - Le **haut de la boîte** représente le **3e quartile (Q3)** : 75 % des valeurs sont en dessous.
+        - La **hauteur de la boîte** est l’**intervalle interquartile (IQR)** = Q3 − Q1 : il contient le 50 % central des données.
+        - Les **moustaches (les traits)** s’étendent jusqu’à 1,5 × IQR au-delà de Q1 et Q3.
+        - Les **cercles (•)** sont les **valeurs aberrantes** (*outliers*) : valeurs qui dépassent les moustaches.
+
+        :::
+
+
+        ---
+
+        ::::note 🐛 Erreurs courantes avec Matplotlib
+
+        Voici les problèmes les plus fréquents : certains génèrent une erreur explicite, d'autres produisent silencieusement un résultat inattendu.
+
+        :::tip 🔍 On utilise le débogueur en premier
+        Avant de chercher l'erreur à la main, **on utilise le débogueur PyCharm**. \
+        On place un point d'arrêt avant `plt.plot()` et on inspecte les listes dans le panneau des variables :
+        - on vérifie leur longueur avec `len()`
+        - on vérifie leur type avec `type()`
+        - on vérifie leurs valeurs
+
+        Le débogueur montre exactement ce que Matplotlib reçoit comme données.
+        :::
+
+        :::danger 1. `ValueError: x and y must have same first dimension`
+        Les listes `x` et `y` n'ont pas le même nombre d'éléments. On vérifie que leurs longueurs sont identiques.
+
+        ```
+        ValueError: x and y must have same first dimension, but have shapes (3,) and (2,)
+        ```
+
+        ```python
+        x = [1, 2, 3]
+        y = [10, 20]       # ❌ 2 éléments au lieu de 3
+        plt.plot(x, y)     # → ValueError
+        ```
+
+        ```python
+        x = [1, 2, 3]
+        y = [10, 20, 30]   # ✅ même nombre d'éléments
+        plt.plot(x, y)
+        ```
+        :::
+
+        :::danger 2. Le graphique s'affiche vide ou ne s'affiche pas
+        On a oublié `plt.show()`, ou on a appelé `plt.show()` avant de tracer les données. `plt.show()` doit toujours venir **en dernier**.
+
+        ```python
+        plt.show()         # ❌ avant de tracer
+        plt.plot(x, y)
+        ```
+
+        ```python
+        plt.plot(x, y)
+
+        plt.show()         # ✅ en dernier
+        ```
+        :::
+
+        :::danger 3. Les courbes se superposent à celles du graphique précédent
+        Matplotlib réutilise la même figure par défaut. Il faut appeler `plt.figure()` avant de commencer un nouveau graphique pour repartir d'une ardoise vide.
+
+        ```python
+        plt.plot(x, y1)
+        plt.show()
+
+        plt.plot(x, y2)    # ❌ s'ajoute à la figure précédente
         plt.show()
         ```
 
-        <p align="center">
-            <img src={require('/img/cours/r01-exemple_graphique_coubre_croissance_enfant.png').default} alt="Résultat du graphique généré" style={{ verticalAlign: 'middle' }} width="50%" />
-        </p>
+        ```python
+        plt.figure()       # ✅ nouvelle figure vide
+        plt.plot(x, y1)
+
+        plt.figure()       # ✅ nouvelle figure vide
+        plt.plot(x, y2)
+
+        plt.show()         # ✅ affiche les deux figures séparément
+        ```
+        :::
 
         ::::
 
-
-        {/* <Feedback feedbackId="Rencontre #2 - Matplotlib" /> */}
+        {/* <Feedback feedbackId="Rencontre #9 - Matplotlib" /> */}

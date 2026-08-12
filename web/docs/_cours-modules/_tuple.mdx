@@ -1,0 +1,186 @@
+
+        :::info Introduction aux tuples
+
+        Un tuple est une collection **ordonnée** et **immuable** d'éléments. \
+        Contrairement à une liste, un tuple ne peut pas être modifié après sa création : on ne peut pas ajouter, retirer ou remplacer ses éléments.
+
+        Il est défini avec des parenthèses `()` :
+
+        ```python
+        coordonnees = (10, 20)
+        ```
+
+        On l'utilise quand les valeurs sont **fixes par nature** : des coordonnées, une date, les dimensions d'une image. \
+        Le fait qu'il soit immuable est une garantie que ces valeurs ne changeront pas accidentellement.
+
+        :::
+
+        ---
+
+        :::info Création d'un tuple
+
+        On crée un tuple avec des parenthèses `()` et des valeurs séparées par des virgules :
+
+        ```python
+        mon_tuple = (1, 2, 3, "quatre", True)
+        ```
+
+        :::
+
+        ---
+
+        :::info Création sans parenthèses
+
+        Les parenthèses sont optionnelles : Python reconnaît le tuple grâce aux virgules.
+
+        ```python
+        mon_tuple = 1, 2, 3, "quatre", True
+        ```
+
+        :::
+
+        ---
+
+        :::info Convertir une liste en tuple
+
+        On peut transformer une liste existante en tuple avec la fonction `tuple()` :
+
+        ```python
+        ma_liste = [1, 2, 3]
+        mon_tuple = tuple(ma_liste)
+        print(mon_tuple)  # Résultat : (1, 2, 3)
+        ```
+
+        :::
+
+        ---
+
+        :::info Convertir un tuple en liste
+        On peut transformer un tuple en une liste avec la fonction `list()` :
+
+        ```python
+        mon_tuple = (1, 2, 3)
+        ma_liste = list(mon_tuple)
+        print(ma_liste)  # Résultat : [1, 2, 3]
+        ```
+        :::
+
+        ---
+
+        :::info Accès aux éléments d'un tuple
+        On peut accéder aux éléments d'un tuple en utilisant des indices, de la même manière que pour les listes :
+
+        ```python
+        mon_tuple = (10, 20, 30, 40, 50)
+        print(mon_tuple[0])  # Résultat : 10
+        print(mon_tuple[2])  # Résultat : 30
+        ```
+
+        Comme les listes, les indices négatifs fonctionnent aussi :
+
+        ```python
+        print(mon_tuple[-1])  # Résultat : 50
+        print(mon_tuple[-3])  # Résultat : 30
+        ```
+
+        Cependant, comme les tuples sont immuables (contrairement aux listes), on ne peut pas modifier leurs éléments :
+
+        ```python
+        mon_tuple[0] = 100  # Cela provoquera une erreur
+        ```
+        :::
+
+        ---
+
+        :::info Vérifier la présence d'une valeur
+
+        On peut vérifier si une valeur est dans un tuple avec `in` :
+
+        ```python showLineNumbers
+        coordonnees = (10, 20, 30)
+
+        print(10 in coordonnees)  # True
+        print(99 in coordonnees)  # False
+        ```
+
+        :::
+
+        ---
+
+        :::info Décomposer un tuple
+
+        On peut affecter chaque valeur d'un tuple à une variable distincte en une seule ligne. \
+        Le nombre de variables doit correspondre exactement au nombre d'éléments :
+
+        ```python showLineNumbers
+        coordonnees = (10, 20, 30)
+        x, y, z = coordonnees
+
+        print(x)  # 10
+        print(y)  # 20
+        print(z)  # 30
+        ```
+
+        :::
+
+        ---
+
+        :::note Retour de fonctions multiples
+
+        Une fonction qui retourne plusieurs valeurs utilise souvent un tuple pour les regrouper.
+        - Les parenthèses sont souvent omises après le `return`.
+        - Les valeurs retournées peuvent être soit capturées dans une seule variable (un tuple), soit décomposées en plusieurs variables, ce qui est très pratique.
+
+        ```python
+        def calculer_operations(a, b):
+            somme = a + b
+            produit = a * b
+            return somme, produit  # Retourne un tuple (somme, produit)
+
+        resultat = calculer_operations(3, 5)
+        print(resultat)  # Résultat : (8, 15)
+
+        somme, produit = calculer_operations(3, 5)
+        print(somme)     # Résultat : 8
+        print(produit)   # Résultat : 15
+        ```
+
+        :::
+
+        ---
+
+        :::danger Erreurs possibles avec les tuples
+
+        **`TypeError`** Se produit lorsqu'on tente de **modifier** un élément d'un tuple. Les tuples sont immuables, cette opération est donc interdite :
+        ```python
+        mon_tuple = (10, 20, 30)
+        mon_tuple[0] = 100  # ❌ TypeError: 'tuple' object does not support item assignment
+        ```
+
+        **`IndexError`** Se produit lorsqu'on tente d'accéder à un **index inexistant** :
+        ```python
+        mon_tuple = (10, 20, 30)
+        print(mon_tuple[5])  # ❌ IndexError: tuple index out of range
+        ```
+
+        :::
+
+
+        ---
+
+        :::tip Utilisations courantes des tuples
+        Les tuples sont très utiles pour :
+        - **Regrouper des valeurs liées** qui ne doivent pas changer (coordonnées GPS, dimensions, date).
+        - **Retourner plusieurs valeurs** depuis une fonction de façon claire et concise.
+        - **Décomposer** plusieurs variables en une seule ligne grâce à l'affectation multiple.
+        :::
+
+        ---
+
+        :::note AIDE-MÉMOIRE : tuples
+
+        <AideMemoireTuple />
+
+        :::
+
+        {/* <Feedback feedbackId="Rencontre #9 - Tuple (tuple)" /> */}

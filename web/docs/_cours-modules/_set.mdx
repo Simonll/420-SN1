@@ -1,0 +1,237 @@
+
+        :::info Introduction aux ensembles
+
+        Un ensemble (`set`) est une collection **non ordonnée** d'éléments **uniques**. \
+        Contrairement à une liste, un ensemble ne peut pas contenir de doublons et ses éléments n'ont pas d'index.
+
+        On l'utilise quand l'ordre n'a pas d'importance et qu'on veut garantir qu'un élément n'apparaît qu'une seule fois, \
+        ou effectuer des opérations mathématiques comme l'union, l'intersection et la différence.
+
+        :::
+
+        ---
+
+        :::info Créer un ensemble
+
+        On crée un ensemble avec des accolades `{}` et des valeurs séparées par des virgules :
+
+        ```python showLineNumbers
+        heros = {"Peach", "Link", "Kirby"}
+        ```
+
+        :::
+
+        ---
+
+        :::warning Créer un ensemble vide
+
+        `{}` crée un dictionnaire, pas un ensemble. \
+        Pour créer un ensemble vide, il faut utiliser `set()` :
+
+        ```python showLineNumbers
+        heros = set()
+        ```
+
+        :::
+
+        ---
+
+        :::info Ajouter un élément
+
+        On utilise `.add()` pour ajouter un élément. Si l'élément est déjà présent, il ne sera pas ajouté en double :
+
+        ```python showLineNumbers
+        heros = {"Peach", "Link", "Kirby"}
+        heros.add("Kirby")   # Ignoré, déjà présent
+        heros.add("Yoshi")   # Ajouté
+        print(heros)         # Résultat possible : {"Yoshi", "Kirby", "Peach", "Link"}
+        print(heros)         # Résultat possible : {"Link", "Peach", "Yoshi", "Kirby"}
+        ```
+
+        L'ordre des éléments peut varier d'un `print` à l'autre. Un ensemble ne garantit aucun ordre précis.
+
+        :::
+
+        ---
+
+        ::::info Supprimer un élément
+
+        On utilise `remove()` pour supprimer un élément d'un ensemble :
+
+        ```python showLineNumbers
+        heros = {"Peach", "Yoshi", "Kirby"}
+        heros.remove("Yoshi")
+        print(heros)  # {"Peach", "Kirby"} (ordre variable)
+        ```
+
+
+        ::::
+
+        ---
+
+        :::info Vérifier la présence d'un élément
+
+        On peut vérifier si un élément est dans un ensemble avec `in` :
+
+        ```python showLineNumbers
+        nombres = {1, 2, 3, 4, 5}
+
+        print(3 in nombres)  # True
+        print(9 in nombres)  # False
+        ```
+
+        👉 La vérification avec `in` est particulièrement rapide sur un ensemble, plus que sur une liste.
+
+        :::
+
+        ---
+
+        :::info Compter les éléments
+
+        On peut obtenir le nombre d'éléments d'un ensemble avec `len()` :
+
+        ```python showLineNumbers
+        nombres = {1, 2, 3, 4, 5}
+
+        print(len(nombres))  # 5
+        ```
+
+        :::
+
+        ---
+
+        :::info Convertir un ensemble en liste
+
+        Pour convertir un ensemble en une liste, il suffit d'appeler la fonction `list()` en passant l'ensemble en paramètre.
+        ```python showLineNumbers
+        mon_ensemble = {1, 2, 3, 4}
+        ma_liste = list(mon_ensemble)
+        print(f"Ma liste : {ma_liste}") # Ma liste : [1, 2, 3, 4] (ordre variable)
+        ```
+        :::
+
+        ---
+
+        :::info Convertir une liste en ensemble
+        Pour convertir une liste en un ensemble, il suffit d'appeler la fonction `set()` en passant la liste en paramètre.
+        ```python showLineNumbers
+        ma_liste = [1, 2, 2, 3, 4]
+        mon_ensemble = set(ma_liste)
+        print(f"Mon ensemble : {mon_ensemble}")  # Mon ensemble : {1, 2, 3, 4} (ordre variable)
+        ```
+        On remarque que les doublons de la liste ont été automatiquement supprimés lors de la conversion en ensemble.\
+        Cette propriété est très utile pour éliminer les répétitions d'une liste.
+        :::
+
+        ---
+
+        :::info Union, intersection et différence
+
+        On peut combiner deux ensembles avec des opérateurs mathématiques :
+
+        ```python showLineNumbers
+        groupe_a = {1, 2, 3}
+        groupe_b = {3, 4, 5}
+        ```
+
+        **Union `|`** : tous les éléments des deux ensembles réunis, sans doublons. Comme si on fusionnait deux groupes en retirant les répétitions.
+        ```python showLineNumbers
+        print(groupe_a | groupe_b)  # {1, 2, 3, 4, 5}
+        ```
+
+        **Intersection `&`** : uniquement les éléments présents dans les **deux** ensembles à la fois. Ce qu'ils ont en commun.
+        ```python showLineNumbers
+        print(groupe_a & groupe_b)  # {3}
+        ```
+
+        **Différence `-`** : les éléments qui sont dans le premier ensemble mais **pas** dans le second. Ce que le premier a en exclusivité.
+        ```python showLineNumbers
+        print(groupe_a - groupe_b)  # {1, 2}
+        ```
+
+        <img src={require('/img/cours/SetUnionIntersectionDifference.png').default} width="50%"/>
+
+        :::
+
+        ---
+
+        :::note Itération sur un ensemble
+
+        On peut parcourir les éléments d'un ensemble avec une boucle `for` :
+
+        ```python showLineNumbers
+        heros = {"Peach", "Yoshi", "Kirby"}
+        for hero in heros:
+            print(hero)
+        ```
+
+        :::
+
+        ---
+
+        :::danger L'ordre des éléments n'est pas garanti!
+
+        Contrairement aux listes, un ensemble ne conserve aucun ordre. \
+        À chaque exécution, les éléments peuvent apparaître dans un ordre différent :
+
+        ```
+        # Exécution 1 :
+        Kirby
+        Peach
+        Yoshi
+
+        # Exécution 2 :
+        Yoshi
+        Kirby
+        Peach
+
+        # Exécution 3 :
+        Peach
+        Yoshi
+        Kirby
+        ```
+
+        Si l'ordre est important, on utilise une **liste** plutôt qu'un ensemble.
+
+        :::
+
+        ---
+
+        :::danger Erreurs possibles avec les ensembles
+
+        **`KeyError`** Se produit lorsqu'on tente de **supprimer** un élément absent avec `remove()` :
+        ```python
+        heros = {"Peach", "Yoshi", "Kirby"}
+        heros.remove("Pikachu")  # ❌ KeyError: 'Pikachu'
+        ```
+
+        Pour éviter cette erreur, on vérifie d'abord que l'élément est présent avec `in`, ou on utilise `discard()` :
+        ```python
+        if "Pikachu" in heros:
+            heros.remove("Pikachu")
+
+        # ou plus simplement :
+        heros.discard("Pikachu")  # Ne fait rien si absent
+        ```
+
+        :::
+
+        ---
+
+        :::tip Utilisations courantes des ensembles
+        Les ensembles sont très utiles pour :
+        - **Éliminer les doublons** d'une liste (convertir une liste en ensemble supprime automatiquement les répétitions).
+        - **Vérifier rapidement** si un élément est présent dans une collection (plus rapide qu'une liste).
+        - **Effectuer des opérations mathématiques** sur des groupes de données : union, intersection, différence.
+        :::
+
+        ---
+
+
+        :::note AIDE-MÉMOIRE : ensembles
+
+        <AideMemoireSet />
+
+        :::
+
+        {/* <Feedback feedbackId="Rencontre #9 - Ensemble (set)" /> */}

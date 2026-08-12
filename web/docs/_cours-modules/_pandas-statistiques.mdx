@@ -1,0 +1,205 @@
+
+        :::tip 📊 Qu’est-ce qu’une statistique en Pandas ?
+
+        Cet onglet couvre deux niveaux d’analyse : les **statistiques sur une colonne** (moyenne, somme, valeurs uniques) et les **statistiques par groupe** avec `groupby()`. L’idée est toujours la même : résumer les données pour en dégager des tendances.
+
+        :::
+
+        ---
+
+        :::info 📂 Données utilisées dans cet onglet
+
+        Les exemples qui suivent utilisent le fichier <a href={useBaseUrl('/ressources/csv/tips_dataset.csv')} download="tips_dataset.csv">tips_dataset.csv</a> chargé dans un DataFrame `df` :
+
+        ```python
+        import pandas as pd
+
+        df = pd.read_csv("tips_dataset.csv")
+        ```
+
+        :::
+
+        ---
+
+        ::::info 🧮 Statistiques sur une colonne
+
+        On peut appeler des méthodes statistiques directement sur une colonne (une Series). Voici les essentielles à connaître :
+
+        :::note 💡 Même concept que NumPy, syntaxe différente
+        On connaît déjà `np.mean()`, `np.min()`, `np.max()` de la [rencontre 10](/cours/rencontre10?onglet=numpy-vectorise). En Pandas, ces mêmes opérations s'appellent directement sur la colonne : `df["col"].mean()` plutôt que `np.mean(tableau)`. Le résultat est identique, seule la syntaxe change.
+        :::
+
+        ```python
+        print(df["tip"].mean())    # → 2.998...  (moyenne)
+        print(df["tip"].sum())     # → 731.58    (somme)
+        print(df["tip"].min())     # → 1.0       (minimum)
+        print(df["tip"].max())     # → 10.0      (maximum)
+        print(df["tip"].median())  # → 2.9       (médiane)
+        print(df["tip"].count())   # → 244       (nombre de valeurs non-nulles)
+        ```
+
+        :::note 📐 Méthodes plus avancées
+        L’écart-type `std()` et la variance `var()` mesurent la dispersion des données autour de la moyenne. Utiles en statistiques, mais moins prioritaires pour débuter.
+        :::
+
+        ::::
+
+        ---
+
+        ::::info 🔎 Explorer les valeurs d’une colonne catégorielle
+
+        Pour une colonne textuelle, plutôt que des moyennes, on veut savoir quelles valeurs existent et combien de fois elles apparaissent.
+
+        **Lister les valeurs distinctes et leur fréquence :**
+
+        ```python
+        print(df["day"].value_counts())
+        ```
+
+        Résultat :
+        ```
+        day
+        Sat     87
+        Sun     76
+        Thur    62
+        Fri     19
+        Name: count, dtype: int64
+        ```
+
+        `value_counts()` retourne les valeurs triées du plus fréquent au moins fréquent. C’est souvent la première chose à faire sur une colonne textuelle.
+
+        **Lister les valeurs uniques et en compter le nombre :**
+
+        ```python
+        print(df["day"].unique())    # → [‘Sun’ ‘Sat’ ‘Thur’ ‘Fri’]
+        print(df["day"].nunique())   # → 4
+        ```
+
+        On constate qu’il n’y a que 4 jours dans le jeu de données : lundi, mardi et mercredi sont absents.
+
+        :::note 💡 `nunique()` vs `unique()`
+        `nunique()` ne compte pas les `NaN`, alors que `unique()` les inclut dans la liste.
+        :::
+
+        ::::
+
+        ---
+
+        ::::info 📊 Regrouper et calculer avec `groupby()`
+
+        `groupby()` permet de **diviser le DataFrame en groupes** selon les valeurs d’une colonne, puis d’**appliquer une fonction statistique** sur chaque groupe.
+
+        Pandas suit trois étapes : il **sépare** les lignes en groupes, **applique** une fonction sur chacun, puis **combine** les résultats en une Series ou un DataFrame.
+
+        **Exemple — pourboire moyen par jour :**
+
+        ```python
+        tip_par_jour = df.groupby("day")["tip"].mean()
+        print(tip_par_jour)
+        ```
+
+        Résultat : (une Series)
+        ```
+        day
+        Fri     2.734737
+        Sat     2.993103
+        Sun     3.255132
+        Thur    2.771452
+        Name: tip, dtype: float64
+        ```
+
+        La colonne de regroupement (`day`) devient l’**index** du résultat (`Fri`, `Sat`, ...), et les valeurs sont les statistiques calculées par groupe (`2.734737`, `2.993103`, ...).
+
+        **Plusieurs statistiques à la fois avec `agg()` :**
+
+        ```python
+        df_stats = df.groupby("day")["tip"].agg(["mean", "sum", "count"])
+        print(df_stats)
+        ```
+
+        Résultat : (un DataFrame, avec une colonne par statistique)
+        ```
+                  mean     sum  count
+        day
+        Fri   2.734737   51.96     19
+        Sat   2.993103  260.40     87
+        Sun   3.255132  247.39     76
+        Thur  2.771452  171.83     62
+        ```
+
+        :::warning 🔍 Exemple avancé — regrouper sur plusieurs colonnes
+
+        On peut aussi regrouper selon plusieurs colonnes, ici `sex` et `day`, puis calculer plusieurs statistiques, ici `mean` et `count`, sur plusieurs colonnes numériques, ici `tip` et `total_bill` :
+
+        ```python
+        df.groupby(["sex", "day"])[["tip", "total_bill"]].agg(["mean", "count"])
+        ```
+
+        Cela produit un DataFrame avec un index hiérarchique sur les lignes (`sex`, puis `day`) et des colonnes hiérarchiques (`tip`/`total_bill`, puis `mean`/`count`).
+
+        Résultat possible :
+
+        ```text
+                          tip       total_bill
+                         mean count       mean count
+        sex    day
+        Female Fri   2.781111     9  14.145556     9
+               Sat   2.801786    28  19.680357    28
+               Sun   3.367222    18  19.872222    18
+               Thur  2.575625    32  16.715312    32
+        Male   Fri   2.693000    10  19.857000    10
+               Sat   3.083898    59  20.802542    59
+               Sun   3.220345    58  21.887241    58
+               Thur  2.980333    30  18.714667    30
+        ```
+
+        Par exemple, la ligne `Female / Fri` donne les statistiques des factures du vendredi pour les clientes identifiées comme `Female`.
+
+        Utile pour des analyses croisées, mais la lecture du résultat est plus complexe.
+
+        :::
+
+        ::::
+
+        ---
+
+        :::info 📋 Tables de pivot
+
+        `pivot_table()` ressemble à `groupby()`, mais organise les résultats en **tableau à deux dimensions** pour faciliter la comparaison visuelle. \
+        On choisit ce qui va sur les lignes, ce qui va sur les colonnes, et quelle valeur on calcule dans les cellules.
+
+        ```python
+        df_pivot = df.pivot_table(
+            values="tip",          # valeur à calculer
+            index="size",          # regroupement sur les lignes
+            columns="day",         # regroupement sur les colonnes
+            aggfunc="mean"         # fonction statistique
+        )
+        print(df_pivot)
+        ```
+
+        Résultat :
+        ```
+        day          Fri       Sat       Sun      Thur
+        size
+        1        1.000000  2.000000  1.500000       NaN
+        2        2.250000  2.592857  3.070588  2.428571
+        3        3.000000  3.622222  3.050000  2.250000
+        4        1.500000  3.500000  4.030303  3.683333
+        5             NaN  2.750000  4.566667  2.600000
+        6             NaN  5.000000       NaN  5.300000
+        ```
+
+        Chaque cellule contient le pourboire (`tip`) moyen (`mean`) pour une taille de groupe (`size`) et un jour (`day`) donnés. Les `NaN` indiquent qu’aucune donnée n’existe pour cette combinaison.
+
+        :::
+
+        ---
+
+        :::note 📋 AIDE-MÉMOIRE : Statistiques
+
+        <AideMemoirePandasStatistiques />
+
+        :::
+
+        {/* <Feedback feedbackId="Rencontre #11 - Statistiques" /> */}

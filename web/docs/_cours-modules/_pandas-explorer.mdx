@@ -1,0 +1,268 @@
+
+        ::::tip 💡 Le DataFrame : un dictionnaire de listes
+
+        On connait déjà les **dictionnaires** et les **listes** en Python. Un *DataFrame* Pandas, c'est exactement ça : un **dictionnaire dont les valeurs sont des listes de même longueur**.
+
+        ```python
+        import pandas as pd
+
+        data = {
+            "patient_id":          ["P001",    "P002",    "P003",       "P004"  ],
+            "age":                 [34,        58,        45,           27      ],
+            "glycemie_mmol_L":     [5.2,       7.8,       6.1,          4.9     ],
+            "tension_systolique":  [118,       142,       135,          112     ],
+            "diagnostic":          ["normal",  "diabete", "pre_diabete", "normal"],
+        }
+
+        df = pd.DataFrame(data)
+        print(df)
+        ```
+
+        ```
+          patient_id  age  glycemie_mmol_L  tension_systolique     diagnostic
+        0       P001   34              5.2                 118         normal
+        1       P002   58              7.8                 142        diabete
+        2       P003   45              6.1                 135    pre_diabete
+        3       P004   27              4.9                 112         normal
+        ```
+
+        Quelques points importants à observer :
+        - Les **clés** du dictionnaire deviennent les **noms des colonnes**.
+        - Chaque **liste** devient une **colonne** de données.
+        - La colonne `0, 1, 2, 3` à gauche est l'**index** (numéro de ligne automatique).
+        - Chaque ligne est un **enregistrement** (ici, un patient).
+        - `df` est juste le nom de la variable qui stocke le DataFrame : on aurait pu l'appeler `patients` ou `plantes` ou n'importe quoi d'autre.
+
+        Un *DataFrame* peut avoir des **milliers de lignes** : c'est là que Pandas devient indispensable, là où manipuler des listes et des dictionnaires à la main devient ingérable.
+
+        :::note 💡 Pandas est bâti sur NumPy
+        Sous le capot, chaque colonne d'un DataFrame est stockée comme un tableau NumPy (`ndarray`). C'est pour ça que Pandas hérite de la même rapidité de calcul que NumPy, et que des opérations comme `df["col"] * 2` fonctionnent sans boucle, exactement comme `tableau * 2` en NumPy.
+        :::
+
+        ::::
+
+        ---
+
+        :::info 📥 Charger un fichier CSV dans un DataFrame
+
+        Dans l'exemple précédent, les données étaient écrites directement dans le code. En pratique, les données proviennent presque toujours de **fichiers externes** : bases de données, exports Excel, JSON… Le format le plus courant est le **CSV** (*Comma-Separated Values*) : un simple fichier texte où chaque ligne est un enregistrement et chaque valeur est séparée par un délimiteur (souvent une virgule).
+
+        Pandas permet de charger un fichier CSV en une seule ligne avec `pd.read_csv()`, qui retourne directement un **DataFrame** prêt à être exploré.
+
+        Le fichier <a href={useBaseUrl('/ressources/csv/tips_dataset.csv')} download="tips_dataset.csv">tips_dataset.csv</a> regroupe des données collectées dans un restaurant : pour chaque repas, on y retrouve le montant de la facture, le pourboire laissé, le jour, le moment de la journée, la taille du groupe, et quelques informations sur le serveur.
+
+        Téléchargez-le, placez-le à la racine d'un projet PyCharm, puis chargez-le :
+
+        ```python
+        import pandas as pd
+
+        df = pd.read_csv('tips_dataset.csv')  # → retourne un DataFrame
+        ```
+
+        Ces données serviront à illustrer toutes les opérations qui suivent! 🎯
+
+        :::
+
+        ---
+
+        :::info 👁️ df.head() — aperçu des premières lignes
+
+        `df.head()` retourne les 5 premières lignes par défaut. On peut passer un nombre en argument pour en voir plus.
+
+        ```python
+        print(df.head())    # → les 5 premières lignes
+        print(df.head(20))  # → les 20 premières lignes
+        ```
+
+        Résultat :
+        ```
+           total_bill   tip     sex smoker  day    time  size
+        0       16.99  1.01  Female     No  Sun  Dinner     2
+        1       10.34  1.66    Male     No  Sun  Dinner     3
+        2       21.01  3.50    Male     No  Sun  Dinner     3
+        3       23.68  3.31    Male     No  Sun  Dinner     2
+        4       24.59  3.61  Female     No  Sun  Dinner     4
+        ```
+
+        :::
+
+        ---
+
+        :::warning Ajuster l'affichage des *DataFrames* dans la console
+        Si un *DataFrame* a trop de colonnes ou du contenu trop long, certaines colonnes peuvent être remplacées par des `...`. \
+        Dans ce cas, on peut ajouter ces 2 instructions juste après les importations en haut du script :
+
+        ```python showLineNumbers
+        import pandas as pd
+        pd.set_option('display.max_colwidth', None)
+        pd.set_option('display.expand_frame_repr', False)
+        ```
+        :::
+
+        ---
+
+        :::info 📐 df.shape — dimensions du DataFrame
+
+        `df.shape` retourne un tuple `(nombre de lignes, nombre de colonnes)`. \
+        C'est la façon la plus rapide de connaître la taille d'un DataFrame.
+
+        ```python
+        print(df.shape)        # → (244, 7)
+        print(df.shape[0])     # → 244  (nombre de lignes)
+        print(df.shape[1])     # → 7    (nombre de colonnes)
+        ```
+
+        :::
+
+        ---
+
+        :::info 🔢 len(df) — une autre façon d'obtenir le nombre de lignes
+
+        `len(df)` est une alternative à `df.shape[0]` pour obtenir uniquement le nombre de lignes.
+
+        ```python
+        print(len(df))      # → 244
+        print(df.shape[0])  # → 244  (même résultat)
+        ```
+
+        :::
+
+        ---
+
+        :::info 🏷️ df.columns — noms des colonnes
+
+        `df.columns` retourne les noms des colonnes. On appelle `.tolist()` pour obtenir une liste Python ordinaire.
+
+        ```python
+        print(df.columns.tolist()) # → ['total_bill', 'tip', 'sex', 'smoker', 'day', 'time', 'size']
+        ```
+
+        :::
+
+        ---
+
+        :::note 🏷️ Les types (Dtype) dans Pandas
+
+        Dans un DataFrame, chaque colonne a un type de données (`Dtype`). On a déjà rencontré ce concept en NumPy avec `tableau.dtype` : c'est exactement la même notion, appliquée à une colonne. Voici les types les plus courants et leur équivalent Python :
+
+        | Dtype Pandas | Équivalent Python | Description |
+        |---|---|---|
+        | <C>int64</C> | <C><B>int</B></C> | Nombre entier |
+        | <C>float64</C> | <C><B>float</B></C> | Nombre décimal |
+        | <C>object</C> | <C><B>str</B></C> | Texte (chaîne de caractères) |
+        | <C>bool</C> | <C><B>bool</B></C> | Valeur booléenne (<C><K>True</K></C> / <C><K>False</K></C>) |
+
+        :::
+
+        ---
+
+        :::info 🔎 df.info() — types et valeurs manquantes
+
+        `df.info()` affiche le nombre de lignes, le nom et le `Dtype` de chaque colonne, et le nombre de valeurs non-nulles. \
+        C'est souvent la première chose à appeler pour détecter des colonnes mal typées ou des valeurs manquantes.
+
+        ```python
+        df.info()   # affiche directement — pas besoin de print()
+        ```
+
+        Résultat :
+        ```
+        <class 'pandas.core.frame.DataFrame'>
+        RangeIndex: 244 entries, 0 to 243
+        Data columns (total 7 columns):
+         #   Column      Non-Null Count  Dtype
+        ---  ------      --------------  -----
+         0   total_bill  244 non-null    float64
+         1   tip         244 non-null    float64
+         2   sex         244 non-null    object
+         3   smoker      244 non-null    object
+         4   day         244 non-null    object
+         5   time        244 non-null    object
+         6   size        244 non-null    int64
+        dtypes: float64(2), int64(1), object(3)
+        memory usage: 13.5+ KB
+        ```
+
+        - <C>RangeIndex: 244 entries</C> — 244 lignes, indexées de 0 à 243
+        - <C>float64</C> — nombre décimal, aucune valeur manquante (<C>244 non-null</C>)
+        - <C>object</C> — texte (<C>str</C> en Python)
+        - <C>int64</C> — nombre entier
+        - <C>dtypes: float64(2), int64(1), object(3)</C> — résumé des types présents dans le DataFrame
+
+        :::
+
+        ---
+
+        ::::info 📊 df.describe() — statistiques descriptives
+
+        `df.describe()` retourne un résumé statistique rapide pour toutes les colonnes numériques.
+
+        ```python
+        print(df.describe())
+        ```
+
+        Résultat :
+        ```
+               total_bill         tip        size
+        count  244.000000  244.000000  244.000000
+        mean    19.785943    2.998279    2.569672
+        std      8.902412    1.383638    0.951100
+        min      3.070000    1.000000    1.000000
+        25%     13.347500    2.000000    2.000000
+        50%     17.795000    2.900000    2.000000
+        75%     24.127500    3.562500    3.000000
+        max     50.810000   10.000000    6.000000
+        ```
+
+        - <C>count</C> — nombre de valeurs non-nulles
+        - <C>mean</C> — moyenne
+        - <C>std</C> — écart-type (mesure la dispersion des valeurs)
+        - <C>min</C> / <C>max</C> — valeur minimale et maximale
+        - <C>25%</C> / <C>50%</C> / <C>75%</C> — quartiles (50% = médiane)
+
+        ::::
+
+        ---
+
+        :::note 💡 Astuce PyCharm : explorer un CSV visuellement
+
+        Avant d'écrire du code, on peut explorer un fichier CSV directement dans PyCharm en faisant un **double-clic** dessus. Deux modes sont disponibles en bas de l'éditeur : **Mode Text** (contenu brut) et **Mode Data** (tableau interactif avec filtre, tri et recherche).
+
+        <Row>
+          <Column size={6}>
+            <div style={{ textAlign: "center" }}>
+              <img
+                src={require('/img/cours/lecturecsv-mode-text.png').default}
+                alt="Mode Text dans PyCharm"
+                style={{ maxWidth: '100%', height: 'auto' }}
+              />
+              <p><strong>Mode Text</strong> - affichage brut du fichier</p>
+            </div>
+          </Column>
+          <Column size={6}>
+            <div style={{ textAlign: "center" }}>
+              <img
+                src={require('/img/cours/lecturecsv-mode-data.png').default}
+                alt="Mode Data dans PyCharm"
+                style={{ maxWidth: '100%', height: 'auto' }}
+              />
+              <p><strong>Mode Data</strong> - affichage tabulaire interactif</p>
+            </div>
+          </Column>
+        </Row>
+
+        <br />
+
+        ⚠️ PyCharm (comme Excel, limité à ~1 million de lignes) n'affiche pas nécessairement toutes les lignes pour des raisons de performance. C'est précisément pourquoi Pandas est indispensable : il peut traiter des fichiers de plusieurs millions de lignes sans limitation.
+
+        :::
+
+        ---
+
+        ::::note 📋 AIDE-MÉMOIRE : Explorer un DataFrame
+
+        <AideMemoirePandasExplorer />
+
+        ::::
+
+        {/* <Feedback feedbackId="Rencontre #11 - DataFrame" /> */}

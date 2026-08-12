@@ -1,0 +1,144 @@
+
+        :::info Qu'est-ce que le format JSON?
+
+        Le **JSON** (*JavaScript Object Notation*) est un format de fichier texte conçu pour stocker et échanger des données structurées.
+        - Il est **lisible par les humains** : on peut l'ouvrir dans n'importe quel éditeur de texte et comprendre son contenu d'un coup d'œil.
+        - Il est **facile à utiliser avec Python** : le module `json` (inclus avec Python, aucune installation nécessaire) permet de lire et d'écrire du JSON en quelques lignes.
+        - Il supporte les mêmes types que Python : chaînes, nombres, booléens, listes et dictionnaires.
+
+        :::
+
+        ---
+
+        :::info Pourquoi utiliser JSON plutôt qu'un fichier texte?
+
+        Un fichier `.txt` contient du texte brut sans structure. Si on veut sauvegarder plusieurs informations liées entre elles (par exemple le profil d'un joueur avec son nom, son score et ses niveaux complétés), il faut inventer soi-même une façon d'organiser les données, et la relire devient vite compliqué.
+
+        Le JSON résout ce problème : il sauvegarde directement la **structure** des données (dictionnaires, listes imbriquées) et Python peut la reconstruire automatiquement à la lecture.
+
+        :::
+
+        ---
+
+        :::info Importer le module
+
+        ```python
+        import json
+        ```
+
+        :::
+
+        ---
+
+        :::info Sauvegarder des données : `json.dump()`
+
+        Imaginons qu'on veuille sauvegarder les données d'une expérience en laboratoire :
+
+        ```python
+        import json
+
+        experience = {
+            "nom": "Réaction acide-base",
+            "tentative": 3,
+            "ph_mesure": 4.7,
+            "reaction_observee": True,
+            "reactifs": ["HCl", "NaOH", "eau distillée"]
+        }
+
+        with open("experience.json", "w", encoding="utf-8") as f:
+            json.dump(experience, f, indent=4, ensure_ascii=False)
+        ```
+
+        Le fichier `experience.json` contiendra alors :
+        ```json
+        {
+            "nom": "Réaction acide-base",
+            "tentative": 3,
+            "ph_mesure": 4.7,
+            "reaction_observee": true,
+            "reactifs": ["HCl", "NaOH", "eau distillée"]
+        }
+        ```
+
+        💡 L'argument `indent=4` ajoute des indentations pour rendre le fichier plus lisible. Sans lui, tout serait sur une seule ligne.
+
+        💡 L'argument `ensure_ascii=False` permet de conserver les caractères spéciaux (comme les accents) tels quels, au lieu de les convertir en séquences d'échappement ASCII. Le fichier JSON restera ainsi plus lisible.
+
+        :::
+
+        ---
+
+        :::info Lire des données : `json.load()`
+
+        Pour récupérer les données sauvegardées et les utiliser dans Python, on utilise `json.load()`. \
+        Le résultat est directement un **dictionnaire Python**, prêt à être utilisé.
+
+        ```python
+        import json
+
+        with open("experience.json", "r", encoding="utf-8") as f:
+            experience = json.load(f)
+
+        print(f"Expérience : {experience['nom']}")                       # Expérience : Réaction acide-base
+        print(f"Tentative #{experience['tentative']}")                   # Tentative #3
+        print(f"pH mesuré : {experience['ph_mesure']}")                  # pH mesuré : 4.7
+        print(f"Réaction observée : {experience['reaction_observee']}")  # Réaction observée : True
+        print(f"Réactifs : {experience['reactifs']}")                    # Réactifs : ['HCl', 'NaOH', 'eau distillée']
+        ```
+
+        👉 On accède aux valeurs exactement comme dans n'importe quel dictionnaire Python, parce que c'en est un!
+
+        :::
+
+        ---
+
+        :::info JSON et Python : ressemblant… mais pas identique
+
+        Le JSON ressemble beaucoup à la syntaxe Python, et ce n'est pas un hasard : les deux utilisent des accolades `{}` pour les structures clé-valeur et des crochets `[]` pour les listes. Si on sait déjà lire du Python, un fichier JSON semblera familier du premier coup d'œil.
+
+        Par contre, JSON est un format d'échange universel (pas lié à Python), donc il a ses propres règles strictes :
+
+        <div style={{display: "flex", justifyContent: "center"}}>
+
+        | Python | JSON |
+        |--------|------|
+        | <C><K>True</K> &#47; <K>False</K></C> | <C>true &#47; false</C> (minuscules) |
+        | <C><K>None</K></C> | <C>null</C> |
+        | Guillemets simples <C><S>'abc'</S></C> acceptés | Seulement guillemets doubles <C><S>"abc"</S></C> |
+        | Tuples <C>(<N>1</N>, <N>2</N>)</C> | Pas de tuples, convertis en listes <C>[<N>1</N>, <N>2</N>]</C> |
+        | Commentaires <C><S># ...</S></C> | Pas de commentaires |
+
+        </div>
+
+        La bonne nouvelle : `json.dump()` et `json.load()` gèrent toutes ces conversions automatiquement. \
+        On écrit du Python, Python traduit en JSON, et vice-versa. On n'a pas à s'en préoccuper, ni à le retenir.
+
+        :::
+
+        ---
+
+        :::tip JSON dans le cours 420-4A4-EM
+        Le format JSON est particulièrement utile dans le cours [420-4A4 : Réseaux de neurones et sciences](https://simonll.github.io/420-4A4/), où il est utilisé pour conserver les **hyperparamètres des réseaux de neurones** entre les expériences (taux d'apprentissage, nombre de couches, taille des lots, etc.).
+        :::
+
+        ---
+
+        :::tip JSON vs fichier texte : quand choisir quoi?
+
+        | Situation | Format recommandé |
+        |-----------|-------------------|
+        | Données simples, ligne par ligne | Fichier texte (`.txt`) |
+        | Données structurées (dictionnaires, listes imbriquées) | JSON (`.json`) |
+        | Données tabulaires (tableau de valeurs) | CSV (`.csv`) |
+
+        :::
+
+        ---
+
+        ::::note 📋 AIDE-MÉMOIRE : Fichier JSON
+
+        <AideMemoireFichiersJSON />
+
+        ::::
+
+        {/* <Feedback feedbackId="Rencontre #10 - Fichier JSON" /> */}

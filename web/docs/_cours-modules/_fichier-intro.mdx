@@ -1,0 +1,52 @@
+
+        :::info Introduction aux fichiers
+
+        Un fichier c'est quoi?
+
+        - un ensemble de données stockées sur un support de stockage (disque dur, SSD, clé USB, carte SD, etc.)
+        - chaque fichier a un nom et une extension (par exemple `monfichier.txt`)
+        - les fichiers peuvent contenir différents types de données : texte, images, vidéos, audio, etc.
+        - pour lire ou écrire dans un fichier, on utilise des programmes ou des scripts
+        - chaque fichier utilise un encodage de caractères (le standard étant l'UTF-8).
+            - c'est un peu comme la « table de traduction » permettant à l'ordinateur de transformer les bits (0 et 1) en lettres et en accents.
+            - sans le bon encodage, le mot `"expérience"` pourrait s'afficher comme `"expÃ©rience"`.
+            - c'est pourquoi il est important de toujours préciser `encoding="utf-8"` dans `open()` (ça s'en vient).
+
+        ### Types de fichiers courants (et exemples courants d'extensions)
+
+        - Fichiers texte (.txt, .csv, .json, .xml, etc.)
+        - Fichiers binaires (.bin, .exe, .dll, etc.)
+        - Fichiers image (.jpg, .png, .gif, etc.)
+        - Fichiers audio (.mp3, .wav, .flac, etc.)
+        - Fichiers vidéo (.mp4, .avi, .mkv, etc.)
+
+        ### Opérations courantes sur les fichiers
+
+        - Ouvrir un fichier : pour lire ou écrire des données
+        - Lire un fichier : pour extraire les données contenues dans le fichier
+        - Écrire dans un fichier : pour ajouter ou modifier des données dans le fichier
+        - Fermer un fichier : pour libérer les ressources utilisées par le fichier
+
+        :::
+
+        ---
+
+        :::info Ouvrir un fichier avec `open()` et `with`
+
+        En Python, on utilise la fonction `open()` pour ouvrir un fichier. \
+        Il est recommandé de l'utiliser avec le mot-clé `with`, qui garantit que le fichier est automatiquement fermé après utilisation, même en cas d'erreur.
+
+        ```python
+        with open("monfichier.txt", "r", encoding="utf-8") as f:  # "r" pour mode lecture
+            contenu = f.read()
+            print(contenu)
+
+        # Le fichier est automatiquement fermé lorsqu'on sort du bloc with.
+        ```
+
+        Les différents **modes d'ouverture** sont détaillés dans l'onglet **Fichier texte**.
+
+        :::
+
+
+        {/* <Feedback feedbackId="Rencontre #10 - Fichier" /> */}

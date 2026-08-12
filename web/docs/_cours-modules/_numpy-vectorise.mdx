@@ -1,0 +1,167 @@
+
+        :::tip 💡 Le concept central de NumPy : vectorisation
+
+        En Python ordinaire, pour ajouter 5 à toutes les valeurs d’une liste, on doit écrire une boucle :
+
+        ```python
+        # Avec une liste Python : une boucle obligatoire
+        valeurs = [10, 20, 30, 40, 50]
+        doubles = [v + 5 for v in valeurs]  # [15, 25, 35, 45, 55]
+        ```
+
+        Avec NumPy, **l’opération s’applique à tout le tableau d’un seul coup**, sans boucle :
+
+        ```python
+        # Avec NumPy : une seule ligne, bien plus rapide
+        import numpy as np
+        valeurs = np.array([10, 20, 30, 40, 50])
+        doubles = valeurs + 5   # [15 25 35 45 55]
+        ```
+
+        C’est ce qu’on appelle la **vectorisation** : NumPy effectue l’opération sur tous les éléments simultanément.
+
+        :::
+
+        ---
+
+        :::info ⚡ NumPy vs boucles Python : comparaison de performance
+
+        Sur de petites listes la différence de vitesse est imperceptible, mais sur des millions de valeurs, elle devient dramatique. Voici un exemple concret avec la mesure du temps de calcul pour doubler une liste de 1 million de valeurs :
+
+        ```python
+        import numpy as np
+        import time
+
+        n = 1_000_000  # 1 million de valeurs
+
+        # Avec une liste Python
+        valeurs_liste = list(range(n))
+        debut = time.time()
+        doubles_liste = [v * 2 for v in valeurs_liste]
+        print(f"Boucle Python : {time.time() - debut:.4f} secondes")
+
+        # Avec NumPy
+        valeurs_numpy = np.arange(n)
+        debut = time.time()
+        doubles_numpy = valeurs_numpy * 2
+        print(f"NumPy         : {time.time() - debut:.4f} secondes")
+        ```
+
+        Le résultat typique ressemble à :
+        ```
+        Boucle Python : 0.0850 secondes
+        NumPy         : 0.0012 secondes
+        ```
+
+        NumPy est environ **70 fois plus rapide** sur cet exemple. L’écart grandit encore sur des opérations plus complexes.
+
+        :::
+
+        ---
+
+        :::info ➕ Opérateurs arithmétiques vectorisés
+
+        Tous les opérateurs habituels (`+`, `-`, `*`, `/`, `**`) s’appliquent élément par élément sur un tableau NumPy :
+
+        ```python
+        x = np.array([1, 2, 3, 4, 5])
+
+        print(x + 10)    # [11 12 13 14 15]
+        print(x * 3)     # [ 3  6  9 12 15]
+        print(x ** 2)    # [ 1  4  9 16 25]
+        print(x / 2)     # [0.5 1.  1.5 2.  2.5]
+        ```
+
+        On peut aussi faire des opérations entre deux tableaux de même taille, et NumPy appliquera l’opération à chaque paire d’éléments correspondants :
+
+        ```python
+        a = np.array([1, 2, 3])
+        b = np.array([10, 20, 30])
+        print(a + b)   # [11 22 33]
+        print(a * b)   # [10 40 90]
+        ```
+
+        :::
+
+        ---
+
+        :::info 📐 Fonctions mathématiques vectorisées
+
+        NumPy fournit des versions vectorisées de toutes les fonctions mathématiques courantes. Elles s’appliquent à chaque élément du tableau sans boucle :
+
+        ```python
+        angles = np.linspace(0, np.pi, 5)  # [0, π/4, π/2, 3π/4, π]
+
+        print(np.sin(angles))   # [0.    0.707 1.    0.707 0.   ]
+        print(np.cos(angles))   # [1.    0.707 0.   -0.707 -1.  ]
+        ```
+
+        ```python
+        valeurs = np.array([4.0, 9.0, 16.0, 25.0])
+        print(np.sqrt(valeurs))  # [2. 3. 4. 5.]
+        ```
+
+        ```python
+        donnees = np.array([-3.7, 1.2, -0.5, 4.9])
+        print(np.abs(donnees))    # [3.7 1.2 0.5 4.9]  valeur absolue : retire le signe négatif
+        print(np.floor(donnees))  # [-4.  1. -1.  4.]  arrondi vers le bas  (ex. -3.7 → -4, pas -3)
+        print(np.ceil(donnees))   # [-3.  2.  0.  5.]  arrondi vers le haut (ex. -3.7 → -3, pas -4)
+        ```
+
+        :::
+
+        ---
+
+        :::info 📊 Fonctions d’agrégation
+
+        Ces fonctions calculent une valeur unique à partir de tout le tableau :
+
+        ```python
+        scores = np.array([72, 85, 61, 90, 78])
+
+        print(np.sum(scores))    # 386
+        print(np.mean(scores))   # 77.2
+        print(np.min(scores))    # 61
+        print(np.max(scores))    # 90
+        print(np.std(scores))    # 10.88  écart-type : mesure à quel point les valeurs s'éloignent de la moyenne
+                                 #                     (0 = toutes identiques, grand = très dispersées)
+        ```
+
+        :::
+
+        ---
+
+        ::::info 🏆 `argmax()` et `argmin()` : trouver l’indice du maximum/minimum
+
+        Plutôt que de retourner la valeur maximale ou minimale, `argmax()` et `argmin()` retournent **l’index** de cet élément dans le tableau. \
+        C’est utile pour retrouver quel élément a obtenu le meilleur (ou le pire) résultat.
+
+        ```python
+        scores = np.array([72, 85, 61, 90])
+        noms   = ["Astro", "Peluche", "Chatmouraï", "Mini-boulette"]
+
+        indice_max = np.argmax(scores)   # 3  Mini-boulette a le score le plus élevé
+        indice_min = np.argmin(scores)   # 2  Chatmouraï a le score le plus bas
+
+        print(f"Meilleur score : {noms[indice_max]} avec {scores[indice_max]}")
+        # Meilleur score : Mini-boulette avec 90
+        ```
+
+        :::note 💡 `argmax()` vs `max()`
+        `np.max(scores)` retourne `90` (la valeur). \
+        `np.argmax(scores)` retourne `3` (la position).
+
+        Les deux sont utiles selon le contexte.
+        :::
+
+        ::::
+
+        ---
+
+        ::::note 📋 AIDE-MÉMOIRE : Calcul vectorisé
+
+        <AideMemoireNumpyVectorise />
+
+        ::::
+
+        {/* <Feedback feedbackId="Rencontre #10 - NumPy Vectorisé" /> */}

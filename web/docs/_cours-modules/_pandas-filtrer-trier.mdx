@@ -1,0 +1,217 @@
+
+        :::info 🔍 Qu'est-ce qu'un filtre ?
+
+        Filtrer un DataFrame, c'est **ne garder que les lignes qui satisfont une condition**, comme un tamis qui laisse passer certaines données et en retient d'autres.
+
+        Par exemple, sur un DataFrame de 244 repas dans un restaurant, on pourrait vouloir garder seulement :
+        - les repas où le pourboire laissé dépasse 5 $
+        - les repas du dimanche soir
+        - les repas avec un groupe de plus de 4 personnes
+
+        Le résultat est toujours un **nouveau DataFrame**. Le DataFrame original `df` n'est pas modifié, et c'est pourquoi on va généralement stocker le résultat dans une nouvelle variable :
+        ```python
+        df_gros_pourboires = df[df["tip"] > 5]
+        ```
+
+        :::
+
+        ---
+
+        ::::info 🔬 Comment Pandas applique un filtre
+
+        Quand on écrit `df[df["tip"] > 5]`, Pandas effectue deux étapes :
+
+        1. `df["tip"] > 5` produit une **série de booléens** : `True` pour chaque ligne où le pourboire dépasse 5, `False` sinon
+        2. `df[...]` ne conserve que les lignes où la valeur est `True`
+
+        :::note 💡 On a déjà vu ce principe avec NumPy
+        C'est exactement la même logique que les **masques** booléens vus à la [rencontre 10](/cours/rencontre10?onglet=numpy-conditions) : `t[t > 5]` en NumPy et `df[df["tip"] > 5]` en Pandas utilisent le même mécanisme. La seule différence : NumPy filtre des valeurs dans un tableau, Pandas filtre des lignes dans un DataFrame.
+
+        Par exemple, on pourrait très bien d'abord créer le masque booléen, puis ensuite l'appliquer :
+
+        ```python
+        masque = df["tip"] > 5
+        df_gros_pourboires = df[masque]
+        ```
+        :::
+
+        Mais en général, on combine les deux étapes en une seule ligne pour plus de concision :
+
+        ```python
+        df_gros_pourboires = df[df["tip"] > 5]
+        print(df_gros_pourboires)
+        ```
+
+        Résultat :
+        ```
+             total_bill    tip     sex smoker   day    time  size
+        23        39.42   7.58    Male     No   Sat  Dinner     4
+        44        30.40   5.60    Male     No   Sun  Dinner     4
+        47        32.40   6.00    Male     No   Sun  Dinner     4
+        52        34.81   5.20  Female     No   Sun  Dinner     4
+        59        48.27   6.73    Male     No   Sat  Dinner     4
+        ...
+        ```
+
+        ::::
+
+        ---
+
+        :::info 🔢 Filtre simple
+
+        Un filtre simple compare les valeurs d'une colonne à une valeur de référence. On peut utiliser les opérateurs de comparaison habituels.
+
+        ```python
+        # Comparaison numérique
+        df_gros_pourboires  = df[df["tip"] > 5]              # pourboire supérieur à 5 $
+        df_petites_tables   = df[df["size"] <= 2]            # tables de 1 ou 2 personnes
+        df_facture_exacte   = df[df["total_bill"] == 16.99]  # montant exact
+
+        # Comparaison sur du texte (égalité exacte)
+        df_souper           = df[df["time"] == "Dinner"]     # repas du soir seulement
+        df_non_fumeurs      = df[df["smoker"] == "No"]       # tables non-fumeurs
+        df_samedi           = df[df["day"] == "Sat"]         # repas du samedi
+        ```
+
+        :::
+
+        ---
+
+        :::info 🔤 Filtre texte
+
+        Pour filtrer sur le contenu d'une colonne textuelle, Pandas offre des méthodes `.str.`. \
+        Elles sont utiles quand on veut chercher une sous-chaîne plutôt que vérifier une égalité exacte.
+
+        ```python
+        df_jours_th    = df[df["day"].str.contains("Th")]   # "Thur" contient "Th"
+        df_jours_longs = df[df["day"].str.len() > 3]        # "Thur" a 4 caractères, "Fri" en a 3
+        df_majuscule_f = df[df["sex"].str.startswith("F")]  # "Female" commence par "F"
+        ```
+
+        :::
+
+        ---
+
+        ::::info 🔗 Filtre ET / OU
+
+        On peut combiner plusieurs conditions avec `&` (ET) et `|` (OU). Chaque condition doit être entre parenthèses (comme avec NumPy).
+
+        ```python
+        # & : les deux conditions doivent être vraies
+        df_dimanche_souper     = df[(df["day"] == "Sun") & (df["time"] == "Dinner")]
+        df_fumeurs_genereux    = df[(df["smoker"] == "Yes") & (df["tip"] > 4)]
+
+        # | : au moins une des conditions doit être vraie
+        df_extremes_facture    = df[(df["total_bill"] < 5) | (df["total_bill"] > 45)]
+        df_repas_courts        = df[(df["time"] == "Lunch") | (df["size"] == 1)]
+        ```
+
+        :::warning ⚠️ Parenthèses obligatoires
+        Sans parenthèses autour de chaque condition, Python interprète mal l'expression et génère une erreur. Écris toujours `(cond1) & (cond2)`, jamais `cond1 & cond2`. C'est la même règle que pour les masques booléens en NumPy : les parenthèses sont nécessaires lorsque plusieurs conditions sont combinées.
+        :::
+
+        ::::
+
+        ---
+
+        ::::info 📋 Filtre liste
+
+        Quand on veut filtrer sur plusieurs valeurs d'une même colonne, `isin()` est plus lisible qu'une suite de `|`.
+
+        ```python
+        # Garder seulement les repas du jeudi et du vendredi
+        df_jours_semaine = df[df["day"].isin(["Thur", "Fri"])]
+
+        # Garder seulement les grandes tables (4, 5 ou 6 personnes)
+        df_grandes_tables = df[df["size"].isin([4, 5, 6])]
+        ```
+
+        :::note 💡 `isin()` vs `|`
+        `df[df["day"].isin(["Thur", "Fri"])]` est équivalent à `df[(df["day"] == "Thur") | (df["day"] == "Fri")]`, mais beaucoup plus lisible quand la liste grandit.
+        :::
+
+        ::::
+
+        ---
+
+        :::info 🔃 Trier les données
+
+        Trier un DataFrame, c'est **réordonner ses lignes selon les valeurs d'une ou plusieurs colonnes**. \
+        Par défaut, Pandas trie en ordre croissant (du plus petit au plus grand, ou de A à Z). On peut inverser cet ordre avec `ascending=False`.
+
+        `sort_values()` retourne un **nouveau DataFrame** trié. Le *DataFrame* original n'est pas modifié.
+
+        ```python
+        df_trie1 = df.sort_values(by="total_bill")              # → ordre croissant par défaut
+        df_trie2 = df.sort_values(by="tip", ascending=False)    # → ordre décroissant
+        df_trie3 = df.sort_values(by=["day", "total_bill"])     # → tri sur 2 colonnes
+        ```
+
+        :::
+
+        ---
+
+        ::::info 🔗 Chaîner les opérations
+
+        On peut **chaîner** un filtre et un tri en une seule instruction. Les deux versions ci-dessous produisent exactement le même résultat :
+
+        ```python
+        # Version détaillée : plus facile à lire et à déboguer
+        df_version1 = df[df["day"].isin(["Sun", "Sat"])]
+        df_version1 = df_version1.sort_values(by="total_bill")
+
+        # Version compacte ("Method Chaining") : une seule ligne
+        df_version2 = df[df["day"].isin(["Sun", "Sat"])].sort_values(by="total_bill")
+        ```
+
+        Les deux contiennent les repas de fin de semaine, triés par montant de facture.
+
+        :::note 💡 Performance : filtrer avant de trier
+        Plus tôt on réduit la taille du jeu de données, plus les opérations suivantes sont rapides. Commencez toujours par **filtrer** avant de **trier**.
+        :::
+
+        ::::
+
+        ---
+
+        :::warning 🐛 Astuce de débogage : View as DataFrame
+
+        Quand on **combine** plusieurs opérations, il peut être difficile d'identifier la source d'une erreur. Le débogage est souvent plus simple en **décomposant** les instructions sur des lignes distinctes : cela permet de vérifier l'état du *DataFrame* après **chaque transformation**.
+
+        En mode débogage, PyCharm offre une fonctionnalité très pratique : le lien **"View as DataFrame"**, visible dans le panneau des variables. Il permet d'**inspecter visuellement** le contenu d'un DataFrame sous forme de tableau interactif, directement depuis le débogueur.
+
+        <Row>
+          <Column size={6}>
+            <div style={{ textAlign: "center" }}>
+              <img
+                src={require('/img/cours/debogage-viewasdataframe-image1.png').default}
+                alt="Lien View as DataFrame dans le débogueur PyCharm"
+                style={{ maxWidth: '100%', height: 'auto' }}
+              />
+              <p>👆 Cliquez sur <strong>"View as DataFrame"</strong> dans le panneau des variables pour inspecter un <em>DataFrame</em> en cours d'exécution.</p>
+            </div>
+          </Column>
+          <Column size={6}>
+            <div style={{ textAlign: "center" }}>
+              <img
+                src={require('/img/cours/debogage-viewasdataframe-image2.png').default}
+                alt="Vue tabulaire du DataFrame dans PyCharm"
+                style={{ maxWidth: '100%', height: 'auto' }}
+              />
+              <p>📊 Le contenu du DataFrame s'affiche dans une vue tabulaire claire, avec toutes ses lignes et colonnes.</p>
+            </div>
+          </Column>
+        </Row>
+        :::
+
+
+
+        ---
+
+        ::::note 📋 AIDE-MÉMOIRE : Filtrer et trier un DataFrame
+
+        <AideMemoirePandasFiltrerTrier />
+
+        ::::
+
+        {/* <Feedback feedbackId="Rencontre #11 - Filtrer / Trier" /> */}

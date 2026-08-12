@@ -1,0 +1,224 @@
+
+        :::info Qu'est-ce qu'un fichier texte?
+
+        Un fichier texte est un type de fichier très courant et simple à manipuler.
+        - Il est simplement constitué d'une suite de caractères lisibles par l'humain.
+        - Il ne contient aucun formatage, juste du texte brut.
+        - Un fichier texte est organisé en lignes, séparées par des caractères spéciaux appelés sauts de ligne (`\n`).
+        - ✅ Les scripts Python (`.py`) que vous écrivez sont aussi des fichiers texte.
+        - ❌ Un fichier `.docx` (Word) ou `.pdf` contient du texte, mais aussi beaucoup d'autres informations de formatage, donc ce ne sont pas des fichiers texte.
+
+        On peut ouvrir ou créer un fichier texte à la main avec un éditeur de texte (Notepad, PyCharm, VSCode, ...) ou avec du code Python.
+
+        :::
+
+        ---
+
+        :::info Les modes d'ouverture
+
+        Lorsqu'on ouvre un fichier avec `open()`, on doit préciser ce qu'on veut faire avec lui en passant un **mode** :
+
+        | Mode | Signification | Effet |
+        |:----:|---------------|-------|
+        | <C><S>"r"</S></C> | *read* — lecture | Lit le contenu du fichier |
+        | <C><S>"w"</S></C> | *write* — écriture | Crée ou écrase le fichier |
+        | <C><S>"a"</S></C> | *append* — ajout | Ajoute à la fin sans effacer |
+
+        :::
+
+        ---
+
+        ## 📖 Mode `"r"` : Lecture
+
+        :::info Lire ligne par ligne : `for ligne in f`
+
+        On peut parcourir un fichier ouvert en mode lecture comme s'il s'agissait d'une liste de lignes, à l'aide d'une boucle `for` :
+        ```python
+        with open("monfichier.txt", "r", encoding="utf-8") as f:
+            for ligne in f:
+                # On peut faire différentes choses avec chaque ligne.
+
+                # Par exemple, l'afficher seulement si elle contient le mot "gros" :
+                if "gros" in ligne:
+                    print(ligne, end="")  # end="" pour éviter d'ajouter un 2e retour de ligne \n à la fin
+
+                # Ou encore calculer et afficher sa longueur (en caractères) :
+                print(f"Longueur de la ligne : {len(ligne)} caractères")
+        ```
+
+        :::
+
+        ---
+
+        :::info Lire tout le contenu d'un coup : `read()`
+
+        Supposons que le fichier `monfichier.txt` contient :
+        ```
+        Y a pas deux gros.
+        Y en a qu'un seul.
+        Et il est pas gros.
+        ```
+        ```python
+        with open("monfichier.txt", "r", encoding="utf-8") as f:
+            contenu = f.read()
+
+        print(contenu)
+        ```
+        La variable `contenu` contiendra alors la chaîne de caractères complète du fichier, y compris les sauts de ligne :
+        ```
+        Y a pas deux gros.
+        Y en a qu'un seul.
+        Et il est pas gros.
+        ```
+        :::
+
+        ---
+
+        :::info Lire toutes les lignes dans une liste : `readlines()`
+
+        ```python
+        with open("monfichier.txt", "r", encoding="utf-8") as f:
+            lignes = f.readlines()
+
+        print(lignes)
+        ```
+        La variable `lignes` contiendra une liste de chaînes de caractères, chaque chaîne représentant une ligne du fichier, avec les sauts de ligne (`\n`) inclus :
+        ```
+        ["Y a pas deux gros.\n", "Y en a qu'un seul.\n", "Et il est pas gros.\n"]
+        ```
+
+        Pour retirer les `\n`, on peut utiliser la méthode `strip()` qui retire les espaces et sauts de ligne en début et en fin de chaque chaîne. \
+        C'est l'occasion parfaite d'utiliser une [compréhension de liste](/cours/rencontre9?onglet=listcomp) :
+
+        ```python
+        with open("monfichier.txt", "r", encoding="utf-8") as f:
+            lignes = [ligne.strip() for ligne in f.readlines()]
+
+        print(lignes)
+        ```
+        Résultat :
+        ```
+        ["Y a pas deux gros.", "Y en a qu'un seul.", "Et il est pas gros."]
+        ```
+
+        :::
+
+        ---
+
+        ## ✏️ Mode `"w"` : Écriture
+
+        :::info Écrire dans un fichier : `write()`
+
+        ```python
+        with open("monfichier.txt", "w", encoding="utf-8") as f:
+            f.write("Bonjour le monde!\n")
+            f.write("Ceci est un fichier texte.\n")
+        ```
+
+        Plutôt que d'écrire ligne par ligne, on peut aussi construire une liste puis utiliser `join()` :
+        ```python
+        lignes = ["Y a pas deux gros.", "Y en a qu'un seul.", "Et il est pas gros."]
+
+        with open("monfichier.txt", "w", encoding="utf-8") as f:
+            f.write("\n".join(lignes))
+        ```
+        La fonction `join()` prend une liste de chaînes et les combine en une seule chaîne, en insérant le séparateur (ici `\n`) entre chaque élément.
+
+        ⚠️ATTENTION : Le mode `"w"` **écrase** le contenu existant à chaque ouverture. Si le fichier `monfichier.txt` existait déjà, il sera ***écrasé***, c'est-à-dire effacé et remplacé par le nouveau contenu.
+
+        :::
+
+        ---
+
+        ## ➕ Mode `"a"` : Ajout (*append*)
+
+        :::info Ajouter à la fin sans effacer : `write()` avec `"a"`
+
+        Si on veut **ajouter** des données à la fin d'un fichier sans effacer ce qui s'y trouve déjà, on utilise le mode `"a"`.
+
+        Imaginons un fichier `journal.txt` qui enregistre les héros qui complètent un niveau, au fur et à mesure :
+
+        ```python
+        # Première exécution — crée le fichier et écrit la première ligne
+        with open("journal.txt", "a", encoding="utf-8") as f:
+            f.write("Mario a complété le niveau 1.\n")
+
+        # Deuxième exécution — ajoute à la fin sans effacer
+        with open("journal.txt", "a", encoding="utf-8") as f:
+            f.write("Link a complété le niveau 1.\n")
+
+        # Troisième exécution — ajoute encore
+        with open("journal.txt", "a", encoding="utf-8") as f:
+            f.write("Kirby a complété le niveau 1.\n")
+        ```
+
+        Après ces trois exécutions, `journal.txt` contiendra :
+        ```
+        Mario a complété le niveau 1.
+        Link a complété le niveau 1.
+        Kirby a complété le niveau 1.
+        ```
+
+        Si on avait utilisé `"w"` à la place de `"a"`, seule la dernière ligne aurait été conservée.
+
+        :::
+
+        ---
+
+        ## ⚠️ Pourquoi toujours utiliser `with`?
+
+        :::warning Oublier de fermer un fichier peut causer des problèmes
+
+        Sans `with`, on doit fermer le fichier manuellement avec `fichier.close()`. \
+        Si une erreur survient avant cette ligne, le fichier reste ouvert et les données peuvent être corrompues ou l'accès au fichier bloqué.
+
+        ```python
+        # ❌ À éviter
+        fichier = open("monfichier.txt", "r", encoding="utf-8")
+        contenu = fichier.read()
+        # Si une erreur survient ici, fichier.close() ne sera jamais appelée!
+        fichier.close()
+        ```
+
+        ```python
+        # ✅ Avec with : le fichier est toujours fermé, même en cas d'erreur
+        with open("monfichier.txt", "r", encoding="utf-8") as f:
+            contenu = f.read()
+        # Automatiquement fermé ici, quoi qu'il arrive
+        ```
+
+        :::
+
+        ---
+
+        ## 🚨 Erreur fréquente : fichier introuvable
+
+        :::danger `FileNotFoundError` : le fichier n'existe pas
+
+        Si le nom ou le chemin du fichier est mal écrit, Python lève une `FileNotFoundError` :
+
+        ```python
+        with open("monfichierr.txt", "r", encoding="utf-8") as f:  # faute de frappe!
+            contenu = f.read()
+        ```
+        ```
+        FileNotFoundError: [Errno 2] No such file or directory: 'monfichierr.txt'
+        ```
+
+        Cette erreur survient **uniquement en mode lecture** (`"r"`). En mode écriture (`"w"`) ou ajout (`"a"`), Python crée le fichier automatiquement s'il n'existe pas.
+
+        Pour l'éviter, vérifiez :
+        - que le nom du fichier est écrit correctement (majuscules, extension, fautes de frappe)
+        - que le fichier se trouve dans le **même dossier** que votre script Python
+
+        :::
+
+        ---
+
+        ::::note 📋 AIDE-MÉMOIRE : Fichier texte
+
+        <AideMemoireFichiersTexte />
+
+        ::::
+
+        {/* <Feedback feedbackId="Rencontre #10 - Fichier texte" /> */}

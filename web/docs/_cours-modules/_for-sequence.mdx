@@ -1,0 +1,141 @@
+
+        :::info Boucle `for` sur une liste
+
+        À la rencontre 5, on a parcouru des listes avec `for i in range(len(liste))` et `liste[i]` pour accéder à l'élément à l'index `i`. \
+        Il existe une façon plus directe et plus lisible : parcourir les éléments **directement**, sans passer par l'index.
+
+        La syntaxe est la suivante :
+        ```python showLineNumbers
+        for element in liste:
+            # instructions à exécuter
+        ```
+
+        Voici un exemple avec une liste d'éléments chimiques :
+        ```python showLineNumbers
+        elements = ["Hydrogène", "Oxygène", "Carbone", "Azote"]
+        for element in elements:
+            print("Élément :", element)
+        ```
+        ```
+        Élément : Hydrogène
+        Élément : Oxygène
+        Élément : Carbone
+        Élément : Azote
+        ```
+
+        À chaque tour de boucle, la variable `element` prend automatiquement la valeur de l'élément suivant dans la liste. \
+        Son nom est libre : on aurait pu l'appeler `e`, `chimique`, ou n'importe quoi d'autre. C'est nous qui choisissons.
+
+        👉 Exécutez ce code en mode débogage. Mettez un point d'arrêt sur la ligne 2 et avancez une ligne à la fois pour suivre l'évolution de la variable `element`.
+
+        :::
+
+        ---
+
+        :::note Équivalence avec une boucle `for` et `range(len())` : ce qu'on connaissait déjà
+
+        Les deux versions ci-dessous produisent exactement le même résultat :
+
+        <Row>
+            <Column>
+                ## Boucle `for` sur la liste
+                ```python showLineNumbers
+                elements = ["Hydrogène", "Oxygène", "Carbone", "Azote"]
+                for element in elements:
+                    print("Élément :", element)
+                ```
+            </Column>
+            <Column>
+                ## Boucle `for` avec `range(len())`
+                ```python showLineNumbers
+                elements = ["Hydrogène", "Oxygène", "Carbone", "Azote"]
+                for i in range(len(elements)):
+                    print("Élément :", elements[i])
+                ```
+            </Column>
+        </Row>
+
+        La version `for element in elements` est plus concise et plus facile à lire, surtout quand on n'a pas besoin de l'index.
+        :::
+
+        ---
+
+        :::tip Quand utiliser quelle boucle?
+        - `for element in elements` : quand on veut traiter chaque élément et qu'on n'a **pas besoin de l'index**.
+        - `for i in range(len(elements))` : quand on a **besoin de l'index** pour modifier la liste ou comparer des positions.
+        - `while` : quand la condition d'arrêt est plus complexe qu'un simple parcours de liste.
+        :::
+
+        ---
+
+        :::warning Limitation : parcourir deux listes en parallèle
+
+        La syntaxe `for element in elements` est pratique, mais elle ne permet **pas** de parcourir deux listes en parallèle, puisqu'on n'a pas accès à l'index. \
+        Dans ce cas, il faut revenir à `for i in range(len(...))` :
+
+        ```python showLineNumbers
+        elements         = ["Hydrogène", "Oxygène", "Carbone", "Azote"]
+        masses_atomiques = [1.008,       15.999,    12.011,    14.007]
+
+        # ❌ Impossible avec for element in elements : pas d'accès à l'index
+        for element in elements:
+            print(f"{element} a une masse atomique de {masses_atomiques[???]}")  # On ne connaît pas l'index!
+
+        # ✅ Utiliser range() pour accéder aux deux listes via l'index
+        for i in range(len(elements)):
+            print(f"{elements[i]} a une masse atomique de {masses_atomiques[i]}")
+        ```
+        ```
+        Hydrogène a une masse atomique de 1.008
+        Oxygène a une masse atomique de 15.999
+        Carbone a une masse atomique de 12.011
+        Azote a une masse atomique de 14.007
+        ```
+
+        :::
+
+        ---
+
+        :::info Construire une nouvelle liste avec `append()`
+
+        Une boucle `for` sur une liste est souvent utilisée pour **construire une nouvelle liste** à partir d'une liste existante. \
+        Voici un exemple qui crée une liste de descriptions à partir de la liste d'éléments chimiques :
+
+        ```python showLineNumbers
+        elements = ["Hydrogène", "Oxygène", "Carbone", "Azote"]
+        descriptions = []
+        for element in elements:
+            descriptions.append(f"{element} est un élément chimique.")  # Ajoute une description à la liste
+        print(descriptions)
+        ```
+        ```
+        ['Hydrogène est un élément chimique.', 'Oxygène est un élément chimique.', 'Carbone est un élément chimique.', 'Azote est un élément chimique.']
+        ```
+
+        👉 Exécutez-le en mode débogage pour suivre l'évolution de la liste `descriptions` à chaque itération.
+        :::
+
+        ---
+
+        :::note Bonus : `enumerate()` pour obtenir l'index et la valeur en même temps
+
+        Parfois, on a besoin à la fois de l'index **et** de la valeur de chaque élément. \
+        La fonction `enumerate()` permet d'obtenir les deux sans avoir à gérer `i` manuellement :
+
+        ```python showLineNumbers
+        elements = ["Hydrogène", "Oxygène", "Carbone", "Azote"]
+        for index, element in enumerate(elements):
+            print(f"Élément #{index} : {element}")
+        ```
+        ```
+        Élément #0 : Hydrogène
+        Élément #1 : Oxygène
+        Élément #2 : Carbone
+        Élément #3 : Azote
+        ```
+
+        👉 Exécutez-le en mode débogage pour suivre l'évolution des variables `index` et `element` à chaque itération.
+        :::
+
+
+        {/* <Feedback feedbackId="Rencontre #9 - For (séquence)" /> */}

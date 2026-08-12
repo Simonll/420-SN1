@@ -1,0 +1,173 @@
+
+        :::tip 📊 Pandas + Matplotlib
+
+        Pandas s'intègre directement avec Matplotlib pour générer des graphiques à partir d'un DataFrame. \
+        On importe les deux bibliothèques, on charge les données, et on trace en quelques lignes seulement.
+
+        Pour se rafraîchir la mémoire sur Matplotlib, on peut consulter l'[onglet Matplotlib de la rencontre 9](/cours/rencontre9?onglet=matplotlib). \
+        Pour aller plus loin, on peut aussi consulter la [documentation officielle de Matplotlib](https://matplotlib.org/stable/contents.html).
+
+        :::
+
+        ---
+
+        :::info 📂 Données utilisées dans cet onglet
+
+        Les exemples qui suivent utilisent le fichier <a href={useBaseUrl('/ressources/csv/tips_dataset.csv')} download="tips_dataset.csv">tips_dataset.csv</a> chargé dans un DataFrame `df`, avec une colonne calculée `tip_percentage` :
+
+        ```python showLineNumbers
+        import pandas as pd
+        import matplotlib.pyplot as plt
+
+        df = pd.read_csv("tips_dataset.csv")
+        df["tip_percentage"] = (df["tip"] / df["total_bill"]) * 100
+        ```
+
+        :::
+
+        ---
+
+        :::info 📊 Histogramme : distribution d'une colonne numérique
+
+        Un histogramme montre comment les valeurs d'une colonne sont réparties (sa distribution). L'axe des X est divisé en intervalles de valeurs, et l'axe Y indique combien de données tombent dans chaque intervalle. Le paramètre `bins` détermine le nombre d'intervalles. Pandas calcule automatiquement la largeur de chaque intervalle en divisant l'écart entre la valeur minimale et maximale par le nombre de bins :
+
+        > largeur d'un intervalle = (max − min) / bins
+
+        Par exemple, si `tip_percentage` va de 3 % à 71 % et qu'on demande `bins=20`, chaque intervalle aura une largeur d'environ (71 − 3) / 20 ≈ 3,4 %.
+
+        <Row>
+            <Column>
+                ```python showLineNumbers
+                df["tip_percentage"].hist(
+                    bins=20  # diviser en 20 intervalles
+                )
+                plt.title("Distribution du pourcentage de pourboire")
+                plt.xlabel("Pourcentage de pourboire (%)")
+                plt.ylabel("Fréquence")
+                plt.grid(axis='both', linestyle='--', linewidth=0.5)
+                plt.show()
+                ```
+            </Column>
+            <Column>
+                ![](/img/cours/histogramme_pourcentage_pourboire.png)
+            </Column>
+        </Row>
+
+        :::
+
+        ---
+
+        :::info 📦 Boîte à moustaches : distribution par groupe
+
+        Une boîte à moustaches (*boxplot*) montre la distribution d'une variable numérique pour chaque groupe. Voici comment lire chaque élément du graphique :
+
+        Comment interpréter une boîte à moustaches :
+        - La **ligne du milieu (orange)** représente la **médiane** : 50 % des valeurs sont en dessous, 50 % au-dessus.
+        - Le **bas de la boîte** représente le **1er quartile (Q1)** : 25 % des valeurs sont en dessous.
+        - Le **haut de la boîte** représente le **3e quartile (Q3)** : 75 % des valeurs sont en dessous.
+        - La **hauteur de la boîte** est l'**intervalle interquartile (IQR)** = Q3 − Q1 : il contient le 50 % central des données.
+        - Les **moustaches (les traits)** s'étendent jusqu'à 1,5 × IQR au-delà de Q1 et Q3.
+        - Les **cercles (•)** sont les **valeurs aberrantes** (*outliers*) : valeurs qui dépassent les moustaches.
+
+        <Row>
+            <Column>
+                ```python showLineNumbers
+                df.boxplot(
+                    column="tip_percentage",  # axe des y
+                    by="day"                  # regroupement (axe des x)
+                )
+                plt.title("Pourcentage de pourboire par jour")
+                plt.suptitle("")  # retire le titre autogénéré
+                plt.xlabel("Jour")
+                plt.ylabel("Pourcentage de pourboire (%)")
+                plt.grid(axis='both', linestyle='--', linewidth=0.5)
+                plt.show()
+                ```
+            </Column>
+            <Column>
+                ![](/img/cours/boxplot_pourcentage_pourboire_par_jour.png)
+            </Column>
+        </Row>
+
+        :::
+
+        ---
+
+        :::info 🔵 Nuage de points : relation entre deux colonnes
+
+        Un nuage de points (*scatter plot*) montre la relation entre deux variables numériques. On peut ajouter une troisième variable en faisant varier la taille des points.
+
+        <Row>
+            <Column>
+                ```python showLineNumbers
+                plt.scatter(
+                    x=df["total_bill"],  # axe des x
+                    y=df["tip"],         # axe des y
+                    s=df["size"] * 20,   # taille des points
+                                         # (×20 pour la visibilité)
+                    alpha=0.5            # opacité
+                )
+                plt.xlabel("Montant total de la facture ($)")
+                plt.ylabel("Pourboire ($)")
+                plt.title("Pourboire en fonction du montant " +
+                    "total de la facture\n" +
+                    "(taille ∝ nombre de convives)")
+                plt.grid(axis='both', linestyle='--', linewidth=0.5)
+                plt.show()
+                ```
+            </Column>
+            <Column>
+                ![](/img/cours/size.png)
+            </Column>
+        </Row>
+
+        :::
+
+        ---
+
+        :::info 📈 Courbes groupées : comparer des tendances
+
+        En combinant `pivot_table()` et `.plot()`, on peut tracer plusieurs courbes sur un même graphique pour comparer des tendances selon une variable catégorielle.
+
+        <Row>
+            <Column>
+                ```python showLineNumbers
+                df["is_weekend"] = df["day"].isin(["Sun", "Sat"])
+
+                df_pivot = df.pivot_table(
+                    values="tip",         # axe des y
+                    index="size",         # axe des x
+                    columns="is_weekend", # une courbe par groupe
+                    aggfunc="mean"
+                )
+
+                df_pivot.plot(marker="o")
+                plt.xlabel("Taille du groupe")
+                plt.ylabel("Pourboire moyen ($)")
+                plt.title("Pourboire en fonction " +
+                    "de la taille du groupe\n" +
+                    "(par jour de la semaine)")
+                plt.legend(
+                    title="Jour de la semaine",
+                    labels=["Jour de semaine", "Fin de semaine"]
+                )
+                plt.grid(axis='both', linestyle='--', linewidth=0.5)
+                plt.show()
+                ```
+            </Column>
+            <Column>
+                ![](/img/cours/pivot.png)
+            </Column>
+        </Row>
+
+        :::
+
+        ---
+
+        :::note 📋 AIDE-MÉMOIRE : Visualiser avec Pandas et Matplotlib
+
+        <AideMemoirePandasVisualiser />
+
+        :::
+
+        {/* <Feedback feedbackId="Rencontre #11 - Visualiser" /> */}

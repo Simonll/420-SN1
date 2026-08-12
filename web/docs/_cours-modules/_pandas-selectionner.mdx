@@ -1,0 +1,218 @@
+
+        :::info 🎯 Qu’est-ce que sélectionner ?
+
+        Sélectionner, c’est **extraire une partie d’un DataFrame** : certaines colonnes, certaines lignes, ou une cellule précise. C’est différent de filtrer : filtrer choisit des lignes selon une condition, sélectionner choisit quelles colonnes ou positions on veut voir.
+
+        Selon ce qu’on sélectionne, Pandas retourne l’un de ces trois types :
+
+        - **DataFrame** : un tableau à deux dimensions, comme `df` lui-même
+        - **Series** : une seule colonne ou une seule ligne, c’est-à-dire une liste de valeurs avec un index
+        - **valeur scalaire** : une seule valeur, comme un `int` ou un `float`
+
+        Le type retourné dépend aussi des crochets utilisés :
+
+        | Ce qu’on sélectionne | Syntaxe | Type retourné |
+        |---|---|---|
+        | Plusieurs colonnes | <C>df[[<S>"col1"</S>, <S>"col2"</S>]]</C> | DataFrame |
+        | Une seule colonne | <C>df[<S>"col"</S>]</C> | Series |
+        | Une seule colonne (format tableau) | <C>df[[<S>"col"</S>]]</C> | DataFrame |
+        | Plusieurs lignes (par position) | <C>df.iloc[<N>2</N>:<N>5</N>]</C> | DataFrame |
+        | Une seule ligne (par position) | <C>df.iloc[<N>3</N>]</C> | Series |
+        | Une cellule (par position) | <C>df.iat[<N>3</N>, <N>0</N>]</C> | valeur scalaire (`float`, `string`, etc.) |
+        | Une cellule (par étiquette) | <C>df.at[<N>3</N>, <S>"tip"</S>]</C> | valeur scalaire (`float`, `string`, etc.) |
+
+        :::
+
+        ---
+
+        :::tip Series
+
+        Lorsqu'on sélectionne une seule colonne d'un DataFrame, le résultat est une ***Series***.\
+        Lorsqu'on sélectionne une seule ligne, le résultat est aussi une ***Series***.
+
+        Une *Series* ressemble à un dictionnaire parce qu’elle associe une **étiquette d’index** à chaque valeur :
+
+        - Dans une **colonne**, l’index correspond aux **lignes** du DataFrame.
+        - Dans une **ligne**, l’index correspond aux **colonnes** du DataFrame.
+
+        Mais une *Series* ressemble aussi à un tableau NumPy, parce qu’on peut faire des opérations sur toutes ses valeurs d’un coup :
+
+        ```python
+        df["tip"] * 2
+        ```
+
+        On peut donc voir une `Series` comme une colonne ou une ligne de données avec un index.
+        C’est un objet propre à Pandas, qui combine certaines idées du dictionnaire et du tableau numérique.
+
+        :::
+
+        ---
+
+        ::::info 👆 Sélectionner des colonnes
+
+        Pour extraire une ou plusieurs colonnes d'un DataFrame, on utilise les crochets `[]`. Le type retourné dépend du nombre de crochets utilisés.
+
+        **Plusieurs colonnes → DataFrame** (doubles crochets)
+
+        ```python
+        df_apercu = df[["total_bill", "tip", "day"]] # on donne une liste de colonnes → ["total_bill", "tip", "day"]
+        print(df_apercu.head(3))
+        ```
+        Résultat :
+        ```
+           total_bill   tip  day
+        0       16.99  1.01  Sun
+        1       10.34  1.66  Sun
+        2       21.01  3.50  Sun
+        ```
+
+        **Une seule colonne → Series** (crochets simples)
+
+        ```python
+        serie_tip = df["tip"] # on donne un seul nom de colonne (pas une liste) → "tip"
+        print(serie_tip.head(3))
+        ```
+        Résultat :
+        ```
+        0    1.01
+        1    1.66
+        2    3.50
+        Name: tip, dtype: float64
+        ```
+
+        **Une seule colonne → DataFrame** (doubles crochets)
+
+        ```python
+        df_tip = df[["tip"]] # on donne une liste qui contient un seul nom de colonne → ["tip"]
+        print(df_tip.head(3))
+        ```
+        Résultat :
+        ```
+            tip
+        0  1.01
+        1  1.66
+        2  3.50
+        ```
+
+        :::warning ⚠️ Crochets simples vs doubles : ça change tout
+        `df["tip"]` retourne une **Series** (une dimension). \
+        `df[["tip"]]` retourne un **DataFrame** (deux dimensions). \
+        En cas de doute, utilise `print(type(...))` pour vérifier.
+
+        ```python
+        print(type(df["tip"]))     # <class ‘pandas.core.series.Series’>
+        print(type(df[["tip"]]))   # <class ‘pandas.core.frame.DataFrame’>
+        ```
+        :::
+
+        ::::
+
+        ---
+
+        ::::info 👆 Sélectionner des lignes
+
+        `iloc` sélectionne des lignes par **position numérique**, exactement comme le slicing de liste.
+
+        ```python
+        # Plusieurs lignes → DataFrame
+        df_debut = df.iloc[0:3]
+        print(df_debut)
+        ```
+        Résultat :
+        ```
+           total_bill   tip     sex smoker  day    time  size
+        0       16.99  1.01  Female     No  Sun  Dinner     2
+        1       10.34  1.66    Male     No  Sun  Dinner     3
+        2       21.01  3.50    Male     No  Sun  Dinner     3
+        ```
+
+        On peut aussi sélectionner des lignes spécifiques par leur position :
+
+        ```python
+        df.iloc[[0, 5, 10]]     # → DataFrame — lignes 0, 5 et 10 précisément      - liste de lignes → [0, 5, 10]
+        df.iloc[[3]]            # → DataFrame — une seule ligne (doubles crochets) - liste d'une ligne → [3]
+        df.iloc[3]              # → Series    — une seule ligne (crochets simples) - ligne seule → 3
+        ```
+
+        ::::
+
+        ---
+
+        :::info 🔬 Sélectionner une cellule
+
+        Pour accéder à une seule valeur, `df.iat[]` (par position) et `df.at[]` (par étiquette) sont les méthodes recommandées.
+
+        ```python
+        # Par position : df.iat[numéro_ligne, numéro_colonne]
+        valeur = df.iat[0, 1]              # ligne 0, colonne 1 → tip = 1.01
+
+        # Par étiquette : df.at[index, nom_colonne]
+        valeur = df.at[0, "tip"]           # ligne d’index 0, colonne "tip" → 1.01
+        ```
+
+        :::
+
+        ---
+
+        :::info 🏷️ Sélectionner par étiquette avec loc
+
+        `loc` sélectionne par **étiquette de ligne**. Dans un DataFrame normal les étiquettes sont numériques (0, 1, 2, ...), donc `loc` et `iloc` donnent le même résultat. `loc` devient indispensable quand les lignes ont des étiquettes textuelles, comme avec `df.describe()` :
+
+        ```python
+        desc = df.describe()
+        print(desc)
+        ```
+        Résultat :
+        ```
+               total_bill         tip        size
+        count  244.000000  244.000000  244.000000
+        mean    19.785943    2.998279    2.569672
+        std      8.902412    1.383638    0.951100
+        min      3.070000    1.000000    1.000000
+        25%     13.347500    2.000000    2.000000
+        50%     17.795000    2.900000    2.000000
+        75%     24.127500    3.562500    3.000000
+        max     50.810000   10.000000    6.000000
+        ```
+
+        Les lignes portent des étiquettes textuelles (`mean`, `min`, `max`...). On utilise `loc` pour extraire une valeur précise :
+
+        ```python
+        # Extraire la moyenne de "tip"
+        mean_tip = desc.loc["mean", "tip"]        # → 2.998279
+
+        # Extraire le maximum de "total_bill"
+        max_bill = desc.loc["max", "total_bill"]  # → 50.81
+        ```
+
+        Syntaxe : `df.loc[étiquette_ligne, nom_colonne]`
+
+        :::
+
+        ---
+
+        :::info 💡 `.values` : récupérer le tableau NumPy sous-jacent
+
+        Sous le capot, chaque colonne Pandas est stockée comme un tableau NumPy. On peut y accéder directement avec `.values`, ce qui retourne un `ndarray` prêt à être utilisé avec toutes les fonctions NumPy que l'on connait :
+
+        ```python
+        import numpy as np
+
+        tips = df["tip"].values
+        print(type(tips))        # <class 'numpy.ndarray'>
+        print(np.clip(tips, 0, 5))  # plafonner les pourboires à 5 $
+        ```
+
+        C'est utile quand on veut appliquer des opérations NumPy (`np.clip`, `np.where`, `np.mean`, etc.) sur des données provenant d'un DataFrame.
+
+        :::
+
+        ---
+
+        ::::note 📋 AIDE-MÉMOIRE : Sélectionner dans un DataFrame
+
+        <AideMemoirePandasSelectionner />
+
+        ::::
+
+        {/* <Feedback feedbackId="Rencontre #11 - Sélectionner" /> */}

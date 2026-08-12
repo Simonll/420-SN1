@@ -10,7 +10,7 @@ import TabItem from '@theme/TabItem';
 
 import useBaseUrl from '@docusaurus/useBaseUrl';
 
-# TP2 🧮 Analyse de données
+# TP2 Analyse de données
 
 :::warning Explications
 Une vidéo expliquant en détail le TP et fournissant quelques conseils est disponible en bas de page.
@@ -18,14 +18,14 @@ Une vidéo expliquant en détail le TP et fournissant quelques conseils est disp
 
 <Row>
     <Column>
-        :::info 🧠 Contexte
+        :::info Contexte
         Les données sont partout autour de nous. Savoir les analyser et en tirer des conclusions est une compétence essentielle dans de nombreux domaines, en particulier en science.
 
         Dans ce TP, vous allez choisir un ensemble de données réelles, les analyser à l'aide de Python et produire des visualisations pour illustrer vos découvertes.
         :::
     </Column>
     <Column>
-        :::tip 🎯 Objectifs pédagogiques
+        :::tip Objectifs pédagogiques
         À la fin de ce travail, vous serez capable de :
 
         - Lire et traiter des fichiers CSV avec Pandas
@@ -37,14 +37,14 @@ Une vidéo expliquant en détail le TP et fournissant quelques conseils est disp
 </Row>
 
 :::note Créer le projet
-Pour faire ce TP, vous devez créer un nouveau projet PyCharm et utiliser un répertoire GitHub dès le début.
+Pour faire ce TP, vous devez créer un nouveau projet et utiliser un répertoire GitHub dès le début.
 
 - Si votre enseignant utilise GitHub Classroom, utilisez le répertoire créé par votre enseignant.
 - Si votre enseignant n'utilise pas GitHub Classroom, créez votre propre répertoire et partagez-lui l'accès en lecture.
 :::
 
-:::danger 👀 Plagiat
-# ❗🤖 👀 🚫
+:::danger Plagiat
+
 Si votre travail est suspecté de plagiat (code copié d'un(e) autre étudiant(e), code généré par IA, notions non
 abordées en classe, etc.), deux choses peuvent se produire :
         * Le plagiat est prouvé par nos outils : note de 0, automatiquement.
@@ -54,7 +54,7 @@ qui a été utilisé. Si vous ne réussissez pas à répondre à certaines quest
 de 0 (si vous ne comprenez pas votre propre code, c'est que vous avez plagié, d'une manière ou d'une autre).
 :::
 
-:::info 📝 Pour faire ce TP, vous devez :
+:::info Pour faire ce TP, vous devez :
 - Suivre le lien donné pour chercher, trouver et télécharger le fichier CSV de données approprié en lien avec le projet.
 - Écrire un script Python qui lit le fichier CSV, analyse les données et produit :
     - des figures (en format PNG) en utilisant les bibliothèques Pandas et Matplotlib.
@@ -62,12 +62,21 @@ de 0 (si vous ne comprenez pas votre propre code, c'est que vous avez plagié, d
 :::
 
 :::note <Highlight color="tip"><span style={{color: 'white'}}>1 point</span></Highlight> 📂 Fichiers dans le projet et structure du fichier analyse.py
-    Votre projet doit contenir exactement les 2 scripts Python mentionnés ci-dessous ainsi que le fichier `.gitignore` et rien d'autre (ne laissez traîner aucun script inutile).
+    Votre projet doit contenir exactement les 2 scripts Python mentionnés ci-dessous, un fichier `README.md` qui explique la structure du projet et comment utiliser les deux scripts, et un fichier `.gitignorea` et rien d'autre (ne laissez traîner aucun script inutile).
     ```
     tp2/
-    ├── autocorrection.py    # ce fichier vous est fourni et sert à l'autocorrection de votre travail
-    ├── analyse.py           # vous devez créer ce script, il va contenir le code de votre TP
-    └── .gitignore           # indique les fichiers que Git doit omettre lors de la création d'un commit
+    ├── README.md        # Contient la description du projet et les instructions pour exécuter les scripts
+    ├── .gitignore # indique les fichiers que Git doit omettre lors de la création d'un commit
+    ├── data/
+        ├── TXT
+        └── CSV
+    └── scripts/
+        ├── analyse.py # vous devez créer ce script, il va contenir le code de votre TP
+        └── autocorrection.py # ce fichier vous est fourni et sert à l'autocorrection de votre travail
+    └── rapport/
+        ├── PNG # ce dossier contiendra les figures générées par votre script analyse.py
+        └── sommaire.txt # ce fichier sera généré par votre script analyse.py
+
     ```
     Téléchargez le fichier <a href={useBaseUrl('/ressources/tp2/autocorrection.py')} download="autocorrection.py">`autocorrection.py`</a> et le fichier <a href={useBaseUrl('/ressources/tp2/.gitignore')} download=".gitignore" type="text/plain">`.gitignore`</a> et placez-les dans votre projet. \
     Si le fichier `.gitignore` est téléchargé sous un autre nom (ex : `gitignore.txt`), renommez-le en `.gitignore` (sans extension et avec le point au début).\
@@ -116,14 +125,14 @@ Bien qu'Excel soit l'outil par défaut pour lire des fichiers CSV, il n'est pas 
 - Commencez par explorer les données pour comprendre leur structure et leur contenu, en utilisant des fonctions comme `head()`, `info()` et `describe()` de Pandas.
 :::
 
-## 🌳 Analyse des arbres répertoriés dans la Ville de Québec
+## Analyse des arbres répertoriés dans la Ville de Québec
 
-:::info 📝 Description
+:::info Description
 - La Ville de Québec a répertorié les arbres situés sur son territoire. \
 L'objectif de ce projet est d'analyser ces données pour comprendre la répartition des espèces d'arbres, leur taille, etc.
 :::
 
-:::note 🔢 Source de données
+:::note Source de données
 - Données Québec : [Arbres répertoriés dans la Ville de Québec](https://www.donneesquebec.ca/recherche/dataset/vque_26)
 - Téléchargez le fichier CSV.
 :::
@@ -440,7 +449,7 @@ Assurez-vous que le DataFrame contient les bonnes données avant de débuter la 
 :::::
 
 
-:::tip ✅ Autocorrection des 6 questions d'analyse
+:::tip Autocorrection des 6 questions d'analyse
 
 Le script `autocorrection.py` se **limite à la correction des 6 questions d'analyse**. \
 Il détecte automatiquement votre progression et exécute des tests en conséquence.

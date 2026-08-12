@@ -1,0 +1,241 @@
+
+
+        :::info Introduction aux dictionnaires
+
+        Un dictionnaire associe chaque **clé** à une **valeur**, un peu comme un dictionnaire papier où chaque mot est associé à une définition. \
+        On peut accéder rapidement à une valeur en connaissant sa clé.
+
+        Par exemple, on peut stocker les données d'une expérience de chimie :
+        - la clé `"nom"` est associée à la valeur `"Électrolyse de l'eau"` (`str`)
+        - la clé `"tentative"` est associée à la valeur `2` (`int`)
+        - la clé `"tension_volts"` est associée à la valeur `1.5` (`float`)
+        - la clé `"succes"` est associée à la valeur `True` (`bool`)
+        - la clé `"gaz_produits"` est associée à la valeur `["hydrogène", "oxygène"]` (`list`)
+
+        :::
+
+        ---
+
+        :::info Créer un dictionnaire
+
+        On utilise des accolades `{}`, avec les clés et valeurs séparées par `:` et chaque paire séparée par une virgule `,` :
+
+        ```python
+        experience = {
+            "nom": "Électrolyse de l'eau",
+            "tentative": 2,
+            "tension_volts": 1.5,
+            "succes": True,
+            "gaz_produits": ["hydrogène", "oxygène"]
+        }
+        ```
+
+        :::
+
+        ---
+
+        :::info Créer un dictionnaire vide
+
+        On peut aussi partir d'un dictionnaire vide et y ajouter des paires clé-valeur une à une :
+
+        ```python
+        experience = {}
+        experience["nom"] = "Électrolyse de l'eau"
+        experience["tentative"] = 2
+        experience["tension_volts"] = 1.5
+        experience["succes"] = True
+        experience["gaz_produits"] = ["hydrogène", "oxygène"]
+        ```
+
+        :::
+
+        ---
+
+        :::info Accéder à une valeur
+
+        On accède à la valeur associée à une clé en utilisant les crochets `[]` :
+
+        ```python
+        experience = {"nom": "Électrolyse de l'eau", "tentative": 2, "succes": True}
+        print(experience["nom"])       # Résultat : Électrolyse de l'eau
+        print(experience["tentative"]) # Résultat : 2
+        ```
+
+        :::
+
+        ---
+
+        :::info Modifier une valeur
+
+        On peut modifier la valeur associée à une clé existante de la même façon :
+
+        ```python
+        experience["tentative"] = 3
+        print(experience["tentative"])  # Résultat : 3
+        ```
+
+        :::
+
+        ---
+
+        :::info Supprimer une entrée d'un dictionnaire
+
+        Pour supprimer une paire clé-valeur d'un dictionnaire, on utilise le mot-clé `del` suivi de la clé à supprimer :
+
+        ```python
+        experience = {"nom": "Électrolyse de l'eau", "tentative": 2, "succes": True}
+        del experience["succes"]
+        print(experience)  # Résultat : {'nom': "Électrolyse de l'eau", 'tentative': 2}
+        ```
+
+        :::
+
+        ---
+
+
+        :::info Types de clés et valeurs
+        - Les **clés** dans un dictionnaire doivent être de types immuables (comme les chaînes de caractères, les nombres ou les tuples immuables).
+        - Les **valeurs** peuvent être de n'importe quel type, y compris des listes, des ensembles, des tuples ou même d'autres dictionnaires.
+        ```python
+        experience = {
+            "nom": "Électrolyse de l'eau",            # clé str, valeur str
+            "tentative": 2,                           # clé str, valeur int
+            "tension_volts": 1.5,                     # clé str, valeur float
+            "succes": True,                           # clé str, valeur bool
+            "gaz_produits": ["hydrogène", "oxygène"]  # clé str, valeur list
+            "auteurs": {                              # clé str, valeur dict
+                "Alice": "chercheuse principale",
+                "Bob": "assistant"
+            }
+        }
+        ```
+
+        :::
+
+        ---
+
+        :::info Vérifier la présence d'une clé
+
+        On peut vérifier si une **clé** existe dans un dictionnaire avec `in` :
+
+        ```python showLineNumbers
+        experience = {"nom": "Électrolyse de l'eau", "tentative": 2, "succes": True}
+
+        print("nom" in experience)          # True
+        print("temperature" in experience)  # False
+        ```
+
+        ⚠️ `in` vérifie les **clés** uniquement, pas les valeurs.
+
+        :::
+
+        ---
+
+        :::info Compter les paires clé-valeur
+
+        On peut obtenir le nombre de paires `clé: valeur` avec `len()` :
+
+        ```python showLineNumbers
+        experience = {"nom": "Électrolyse de l'eau", "tentative": 2, "succes": True}
+
+        print(len(experience))  # 3
+        ```
+
+        :::
+
+        ---
+
+        :::info Accéder aux clés, valeurs et paires
+
+        Trois méthodes permettent d'accéder au contenu d'un dictionnaire :
+        - `.keys()` : retourne toutes les `clés` du dictionnaire.
+        - `.values()` : retourne toutes les `valeurs` du dictionnaire.
+        - `.items()` : retourne toutes les paires `(clé, valeur)` sous forme de tuples.
+
+        Ces méthodes retournent des types spéciaux (`dict_keys`, `dict_values`, `dict_items`) qui se comportent comme des listes pour l'itération. \
+        On peut les parcourir directement avec une boucle `for`, comme on le verra dans la section suivante.
+
+        :::
+
+        ---
+
+        :::info Itérer sur un dictionnaire : les 3 façons
+
+        On peut parcourir un dictionnaire avec une boucle `for` de trois manières selon ce dont on a besoin.
+
+        **Sur les clés : `.keys()`**
+        ```python showLineNumbers
+        experience = {"nom": "Électrolyse de l'eau", "tentative": 2, "succes": True}
+
+        for cle in experience.keys():  # cle → "nom", puis "tentative", puis "succes"
+            print(cle)
+        ```
+        ```
+        nom
+        tentative
+        succes
+        ```
+
+        **Sur les valeurs : `.values()`**
+        ```python showLineNumbers
+        for valeur in experience.values():  # valeur → "Électrolyse de l'eau", puis 2, puis True
+            print(valeur)
+        ```
+        ```
+        Électrolyse de l'eau
+        2
+        True
+        ```
+
+        **Sur les paires clé-valeur : `.items()`**
+        ```python showLineNumbers
+        for cle, valeur in experience.items():  # ("nom", "Électrolyse de l'eau"), puis ("tentative", 2), puis ("succes", True)
+            print(f"{cle} : {valeur}")
+        ```
+        ```
+        nom : Électrolyse de l'eau
+        tentative : 2
+        succes : True
+        ```
+
+        :::
+
+        ---
+
+        :::danger Erreurs possibles avec les dictionnaires
+
+        **`KeyError`** Levée dans deux situations : quand on **accède** à une clé inexistante ou quand on tente de la **supprimer** :
+        ```python
+        experience = {"nom": "Électrolyse de l'eau", "tentative": 2}
+
+        print(experience["temperature"])   # KeyError: 'temperature'
+        del experience["temperature"]      # KeyError: 'temperature'
+        ```
+
+        Pour éviter cette erreur, on vérifie d'abord que la clé est présente avec `in` :
+        ```python
+        if "temperature" in experience:
+            print(experience["temperature"])
+            del experience["temperature"]
+        ```
+
+        :::
+
+        ---
+
+        :::tip Utilisations courantes des dictionnaires
+        Les dictionnaires sont très utiles pour :
+        - **Stocker des données structurées** (comme les informations d'un joueur : nom, score, niveau).
+        - **Compter des occurrences** (par exemple, combien de fois chaque mot apparaît dans un texte).
+        - **Regrouper des données associées** (comme associer chaque héros à son score).
+        :::
+
+        ---
+
+        :::note AIDE-MÉMOIRE : dictionnaires
+
+        <AideMemoireDict />
+
+        :::
+
+        {/* <Feedback feedbackId="Rencontre #9 - Dictionnaire (dict)" /> */}
