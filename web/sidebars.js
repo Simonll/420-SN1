@@ -9,7 +9,7 @@ const sidebars = {
       customProps: { // Attention, il faut recompiler à chaque modification dans sidebar.js pour que les modifications s'appliquent.
         calendrier: {
           "Simon": [
-            {"grp1": "2026-08-21"}
+            {"gr. 20030": "2026-08-21"}
           ]
         },
         tooltip: "visible" // Valeurs possibles visible ou cache, valeur par défaut "visible"
@@ -21,7 +21,7 @@ const sidebars = {
       customProps: {
         calendrier: {
           "Simon": [
-            {"grp1": "2026-08-28"}
+            {"gr. 20030": "2026-08-28"}
           ]
         }
       }
@@ -32,7 +32,7 @@ const sidebars = {
       customProps: {
         calendrier: {
           "Simon": [
-            {"grp1": "2026-09-04"},
+            {"gr. 20030": "2026-09-04"},
           ]
         }
       }
@@ -43,7 +43,7 @@ const sidebars = {
       customProps: {
         calendrier: {
           "Simon": [
-            {"grp1": "2026-09-18"}
+            {"gr. 20030": "2026-09-18"}
           ]
         }
       }
@@ -54,7 +54,7 @@ const sidebars = {
       customProps: {
         calendrier: {
           "Simon": [
-           {"grp1": "2026-09-25"}
+           {"gr. 20030": "2026-09-25"}
           ]
         }
       }
@@ -65,7 +65,7 @@ const sidebars = {
       customProps: {
         calendrier: {
           "Simon": [
-            {"grp1": "2026-10-02"}          ]
+            {"gr. 20030": "2026-10-02"}          ]
         }
       }
     },
@@ -75,7 +75,7 @@ const sidebars = {
       customProps: {
         calendrier: {
           "Simon": [
-            {"grp1": "2026-10-09"}
+            {"gr. 20030": "2026-10-09"}
           ]
         }
       },
@@ -86,7 +86,7 @@ const sidebars = {
       customProps: {
         calendrier: {
           "Simon": [
-            {"grp1": "2026-10-23"}
+            {"gr. 20030": "2026-10-23"}
           ]
         }
       },
@@ -98,7 +98,7 @@ const sidebars = {
       customProps: {
         calendrier: {
           "Simon": [
-           {"grp1": "2026-10-30"}
+           {"gr. 20030": "2026-10-30"}
           ]
         },
         tooltip: "cache"
@@ -110,7 +110,7 @@ const sidebars = {
       customProps: {
         calendrier: {
           "Simon": [
-            {"grp1": "2026-11-06"}
+            {"gr. 20030": "2026-11-06"}
           ]
         },
         tooltip: "cache"
@@ -122,7 +122,7 @@ const sidebars = {
       customProps: {
         calendrier: {
           "Simon": [
-            {"grp1": "2026-11-13"}
+            {"gr. 20030": "2026-11-13"}
           ]
         },
         tooltip: "cache"
@@ -134,7 +134,7 @@ const sidebars = {
       customProps: {
         calendrier: {
           "Simon": [
-           {"grp1": "2026-11-20"}
+           {"gr. 20030": "2026-11-20"}
           ]
         },
         tooltip: "cache"
@@ -146,7 +146,7 @@ const sidebars = {
       customProps: {
         calendrier: {
           "Simon": [
-            {"grp1": "2026-11-27"}
+            {"gr. 20030": "2026-11-27"}
           ]
         },
         tooltip: "cache"
@@ -158,7 +158,7 @@ const sidebars = {
       customProps: {
         calendrier: {
           "Simon": [
-            {"grp1": "2026-12-04"}
+            {"gr. 20030": "2026-12-04"}
           ]
         },
         tooltip: "cache"
@@ -170,7 +170,7 @@ const sidebars = {
       customProps: {
         calendrier: {
           "Simon": [
-            {"grp1": "2026-12-11"}
+            {"gr. 20030": "2026-12-11"}
           ]
         },
         tooltip: "cache"
