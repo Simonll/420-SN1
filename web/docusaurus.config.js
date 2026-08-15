@@ -15,7 +15,7 @@ const config = {
     tagline: siteConfig.description,
     url: "https://simonll.github.io",
     baseUrl: `/${siteConfig.nomUrl}/`,
-    onBrokenLinks: "throw",
+    onBrokenLinks: "warn",
     favicon: "img/favicon.ico",
 
     organizationName: "simonll", // Usually your GitHub org/user name.
