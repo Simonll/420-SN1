@@ -43,7 +43,7 @@ const sidebars = {
       customProps: {
         calendrier: {
           "Simon": [
-            {"grp1": "2026-09-11"}
+            {"grp1": "2026-09-18"}
           ]
         }
       }
@@ -54,7 +54,7 @@ const sidebars = {
       customProps: {
         calendrier: {
           "Simon": [
-           {"grp1": "2026-09-18"}
+           {"grp1": "2026-09-25"}
           ]
         }
       }
@@ -65,7 +65,7 @@ const sidebars = {
       customProps: {
         calendrier: {
           "Simon": [
-            {"grp1": "2026-09-25"}          ]
+            {"grp1": "2026-10-02"}          ]
         }
       }
     },
@@ -75,11 +75,10 @@ const sidebars = {
       customProps: {
         calendrier: {
           "Simon": [
-            {"grp1": "2026-09-02"}
+            {"grp1": "2026-10-09"}
           ]
         }
       },
-      "className": "remise-tp1"
     },
     {
       type: "doc",
@@ -87,7 +86,7 @@ const sidebars = {
       customProps: {
         calendrier: {
           "Simon": [
-            {"grp1": "2026-10-09"}
+            {"grp1": "2026-10-23"}
           ]
         }
       },
@@ -99,7 +98,7 @@ const sidebars = {
       customProps: {
         calendrier: {
           "Simon": [
-           {"grp1": "2026-10-16"}
+           {"grp1": "2026-10-30"}
           ]
         },
         tooltip: "cache"
@@ -111,7 +110,7 @@ const sidebars = {
       customProps: {
         calendrier: {
           "Simon": [
-            {"grp1": "2026-10-23"}
+            {"grp1": "2026-11-06"}
           ]
         },
         tooltip: "cache"
@@ -123,7 +122,7 @@ const sidebars = {
       customProps: {
         calendrier: {
           "Simon": [
-            {"grp1": "2026-10-30"}
+            {"grp1": "2026-11-13"}
           ]
         },
         tooltip: "cache"
@@ -135,12 +134,11 @@ const sidebars = {
       customProps: {
         calendrier: {
           "Simon": [
-           {"grp1": "2026-11-06"}
+           {"grp1": "2026-11-20"}
           ]
         },
         tooltip: "cache"
       },
-      "className": "remise-tp2-partielle"
     },
     {
       type: "doc",
@@ -148,7 +146,7 @@ const sidebars = {
       customProps: {
         calendrier: {
           "Simon": [
-            {"grp1": "2026-11-13"}
+            {"grp1": "2026-11-27"}
           ]
         },
         tooltip: "cache"
@@ -160,7 +158,7 @@ const sidebars = {
       customProps: {
         calendrier: {
           "Simon": [
-            {"grp1": "2026-11-20"}
+            {"grp1": "2026-12-04"}
           ]
         },
         tooltip: "cache"
@@ -172,12 +170,11 @@ const sidebars = {
       customProps: {
         calendrier: {
           "Simon": [
-            {"grp1": "2026-11-27"}
+            {"grp1": "2026-12-11"}
           ]
         },
         tooltip: "cache"
       },
-      "className": "remise-tp2-finale"
     }
   ],
   "tp": [
