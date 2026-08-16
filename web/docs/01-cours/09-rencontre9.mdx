@@ -1,6 +1,6 @@
 ---
 title: 9 - Collections, Fichiers, Démarrage TP2
-#description: Set, Tuple, Dict, Compréhension de liste, Fichier CSV (via Pandas), Fichier JSON (via Pandas), Présentation et démarrage du TP2
+description: Set, Tuple, Dict, Compréhension de liste, Fichier texte (open/with/read/write), CSV (via Pandas), JSON (via Pandas), Présentation et démarrage du TP2
 hide_table_of_contents: true
 draft: true
 ---
@@ -20,12 +20,15 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
 import AideMemoireSet from '@site/docs/_components/AideMemoireSet.mdx';
 import AideMemoireTuple from '@site/docs/_components/AideMemoireTuple.mdx';
 import AideMemoireDict from '@site/docs/_components/AideMemoireDict.mdx';
+import AideMemoireFichiersTexte from '@site/docs/_components/AideMemoireFichiersTexte.mdx';
 import AideMemoireFichiersJSON from '@site/docs/_components/AideMemoireFichiersJSON.mdx';
 
 import Mod_Set from '../_cours-modules/_set.mdx';
 import Mod_Tuple from '../_cours-modules/_tuple.mdx';
 import Mod_Dict from '../_cours-modules/_dict.mdx';
 import Mod_ComprehensionListe from '../_cours-modules/_comprehension-liste.mdx';
+import Mod_FichierIntro from '../_cours-modules/_fichier-intro.mdx';
+import Mod_FichierTexte from '../_cours-modules/_fichier-texte.mdx';
 import Mod_FichierCsv from '../_cours-modules/_fichier-csv.mdx';
 import Mod_FichierJson from '../_cours-modules/_fichier-json.mdx';
 
@@ -49,6 +52,14 @@ import Mod_FichierJson from '../_cours-modules/_fichier-json.mdx';
         <Mod_ComprehensionListe />
     </TabItem>
 
+    <TabItem value="fichier-intro" label="Fichier — Introduction">
+        <Mod_FichierIntro />
+    </TabItem>
+
+    <TabItem value="fichier-texte" label="Fichier texte (lecture/écriture)">
+        <Mod_FichierTexte />
+    </TabItem>
+
     <TabItem value="csv" label="Fichier CSV (via Pandas)">
         <Mod_FichierCsv />
     </TabItem>
@@ -60,7 +71,7 @@ import Mod_FichierJson from '../_cours-modules/_fichier-json.mdx';
     <TabItem value="tp2" label="TP2 — Présentation et démarrage">
 
         :::info Objectif de cette rencontre
-        Cette rencontre marque le **démarrage du Travail Pratique 2 (TP2)**. Vous avez maintenant les bases des collections, des fichiers CSV et JSON via Pandas. Vous allez maintenant :
+        Cette rencontre marque le **démarrage du Travail Pratique 2 (TP2)**. Vous avez maintenant les bases des collections, de la manipulation de fichiers texte et des fichiers CSV/JSON via Pandas. Vous allez maintenant :
         - **Comprendre l'énoncé** du TP2
         - **Planifier** votre approche
         - **Démarrer** la mise en place de votre projet
@@ -83,7 +94,7 @@ import Mod_FichierJson from '../_cours-modules/_fichier-json.mdx';
         |-------|-----------|----------|
         | 1 | R9 | Présentation, lecture de l'énoncé, démarrage |
         | 2 | R10 | Poursuite — Pandas avancé, Matplotlib bases |
-        | 3 | R11 | Poursuite — NumPy bases |
+        | 3 | R11 | Poursuite — NumPy bases + Matplotlib intégration |
         | 4 | R12 | Poursuite — NumPy avancé, IA bases |
         | 5 | R13 | Poursuite — IA avancé, synthèse |
         | 6 | R14 | Finalisation et remise |
@@ -247,6 +258,37 @@ import Mod_FichierJson from '../_cours-modules/_fichier-json.mdx';
 
                 ---
 
+                ### Exercice - Lecture d'un fichier texte
+
+                Créez un fichier `fichier_texte.py` pour votre réponse.
+
+                Téléchargez le fichier <a href={useBaseUrl('/ressources/txt/journal_exemple.txt')} download="journal_exemple.txt">journal_exemple.txt</a> et placez-le dans le même dossier que votre script.
+
+                1. Ouvrez le fichier en mode lecture avec `open()` et le mot-clé `with`
+                2. Lisez tout le contenu avec `read()` et affichez-le
+                3. Réouvrez le fichier et lisez-le ligne par ligne avec une boucle `for ligne in f` — affichez uniquement les lignes qui contiennent le mot "Mario"
+                4. Réouvrez le fichier et utilisez `readlines()` pour créer une liste de toutes les lignes (avec `strip()` pour retirer les sauts de ligne)
+
+                :::note Notions visées
+                `open()`, `with`, modes `"r"`, `read()`, `readlines()`, `for ligne in f`, `strip()`, `FileNotFoundError`
+                ::::
+
+                ---
+
+                ### Exercice - Écriture dans un fichier texte
+
+                Créez un fichier `ecriture_fichier.py` pour votre réponse.
+
+                1. Créez un fichier texte `notes.txt` avec le mode `"w"` et écrivez-y 3 lignes de votre choix (ex: des notes de cours)
+                2. Réouvrez le fichier en mode `"a"` et ajoutez 2 lignes supplémentaires sans effacer le contenu précédent
+                3. Réouvrez le fichier en mode `"r"` et affichez tout le contenu final
+
+                :::note Notions visées
+                Modes `"w"` et `"a"`, `write()`, différence entre `"w"` (écrase) et `"a"` (ajoute), `read()`, `with`
+                ::::
+
+                ---
+
                 ### Exercice - Lecture CSV avec Pandas
 
                 Créez un fichier `csv_pandas.py` pour votre réponse.
@@ -305,7 +347,7 @@ import Mod_FichierJson from '../_cours-modules/_fichier-json.mdx';
                 1. Créer deux ensembles avec des données de votre choix
                 2. Afficher leur union, intersection et différence
                 3. Vérifier si un élément est présent dans l'un ou l'autre ensemble
-                :::
+                ::::
 
                 ---
 
@@ -325,7 +367,7 @@ import Mod_FichierJson from '../_cours-modules/_fichier-json.mdx';
                 1. Affiche les informations du produit de manière lisible
                 2. Calcule la valeur totale du stock
                 3. Tente (et intercepte) une modification du tuple pour montrer son immutabilité
-                :::
+                ::::
 
                 ---
 
@@ -347,7 +389,7 @@ import Mod_FichierJson from '../_cours-modules/_fichier-json.mdx';
                 2. Permet de rechercher un contact par nom
                 3. Ajoute un nouveau contact
                 4. Supprime un contact (cela doit fonctionner même si le contact n'existe pas — gérez l'erreur)
-                :::
+                ::::
 
                 ---
 
@@ -359,7 +401,21 @@ import Mod_FichierJson from '../_cours-modules/_fichier-json.mdx';
                 2. Créer une nouvelle liste ne contenant que les nombres pairs
                 3. Créer une nouvelle liste avec les carrés des nombres impairs
                 4. Créer une liste de chaînes formatées : "Le nombre X est pair/impair"
-                :::
+                ::::
+
+                ---
+
+                :::info Exercice - Manipulation de fichiers texte
+                Créez un fichier `manipulation_fichiers.py` pour votre réponse.
+
+                1. Créez un fichier texte `population.txt` avec le mode `"w"` contenant des données fictives (ex: noms de villes et leur population, un par ligne)
+                2. Réouvrez le fichier en mode `"r"` et comptez le nombre de lignes
+                3. Réouvrez le fichier et créez une liste contenant uniquement les noms des villes (sans la population) en utilisant une boucle `for ligne in f` et `split()`
+                4. Ajoutez une nouvelle ville au fichier avec le mode `"a"`
+
+                :::note Notions visées
+                `open()`, `with`, modes `"r"`/`"w"`/`"a"`, `read()`, `for ligne in f`, `split()`, `write()`, `readlines()`, `strip()`, `FileNotFoundError`
+                ::::
 
                 ---
 
@@ -403,7 +459,7 @@ import Mod_FichierJson from '../_cours-modules/_fichier-json.mdx';
                 :::info Questions et discussion
                 Prenez le temps de poser des questions sur :
                 - L'énoncé du TP2
-                - Les notions vues aujourd'hui (collections, fichiers CSV/JSON via Pandas)
+                - Les notions vues aujourd'hui (collections, fichiers texte, CSV/JSON via Pandas)
                 - La planification de votre projet
                 :::
 
