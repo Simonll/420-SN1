@@ -2,104 +2,104 @@
   {
     "id": "01-rencontre1",
     "title": "1 - Intro",
-    "description": "Plan de cours, Introduction, On commence!, Expressions, Opérateurs, Types, Variables, VS Code, GitHub, Env. virtuel, Aperçu",
+    "#description": "Plan de cours, Introduction, On commence!, Expressions, Opérateurs, Types, Variables, VS Code, GitHub, Env. virtuel, Aperçu",
     "hide_table_of_contents": "true"
   },
   {
     "id": "02-rencontre2",
     "title": "2 - Scripts et fonctions",
-    "description": "Scripts, Débogueur, Traces, Fonctions, f-strings, Modules, Bibliothèques, Listes (intro), Précision des flottants",
+    "#description": "Scripts, Débogueur, Traces, Fonctions, f-strings, Modules, Bibliothèques, Listes (intro), Précision des flottants",
     "hide_table_of_contents": "true",
     "draft": "true"
   },
   {
     "id": "03-rencontre3",
     "title": "3 - Création de fonctions",
-    "description": "Fonction, Paramètres, Retour, Portée, DRY, Commentaires, Pile d'appels",
+    "#description": "Fonction, Paramètres, Retour, Portée, DRY, Commentaires, Pile d'appels",
     "hide_table_of_contents": "true",
     "draft": "true"
   },
   {
     "id": "04-rencontre4",
     "title": "4 - Expressions booléennes",
-    "description": "Expressions booléennes, if, elif, else, Comparaison, Imbrication, DRY, Forme compacte, raise/try/catch",
+    "#description": "Expressions booléennes, if, elif, else, Comparaison, Imbrication, DRY, Forme compacte, raise/try/catch",
     "hide_table_of_contents": "true",
     "draft": "true"
   },
   {
     "id": "05-rencontre5",
     "title": "5 - Boucle while et répétitions",
-    "description": "Boucle while, opérateurs d'affectation (+=, -=), accumulateurs, validation de saisie, boucles infinies, break / continue",
+    "#description": "Boucle while, opérateurs d'affectation (+=, -=), accumulateurs, validation de saisie, boucles infinies, break / continue",
     "hide_table_of_contents": "true",
     "draft": "true"
   },
   {
     "id": "06-rencontre6",
     "title": "6 - Boucle for et listes",
-    "description": "Boucle for, fonction range(), listes, parcours de listes, accumulation, statistiques (min, max, moyenne), application au TP1",
+    "#description": "Boucle for, fonction range(), listes, parcours de listes, accumulation, statistiques (min, max, moyenne), application au TP1",
     "hide_table_of_contents": "true",
     "draft": "true"
   },
   {
     "id": "07-rencontre7",
     "title": "7 - Finalisation TP1 et Examen formatif",
-    "description": "Atelier final TP1, remise du TP1, simulation d'examen formatif et révision",
+    "#description": "Atelier final TP1, remise du TP1, simulation d'examen formatif et révision",
     "hide_table_of_contents": "true",
     "draft": "true"
   },
   {
     "id": "08-rencontre8",
     "title": "8 - Examen intra (20%)",
-    "description": "Volet 1 - Partie papier (sans ordinateur), Volet 2 - Partie sur ordinateur",
+    "#description": "",
     "hide_table_of_contents": "true",
     "draft": "true"
   },
   {
     "id": "09-rencontre9",
-    "title": "9 - 🗂 Fichiers, 🐼 Pandas",
-    "description": "Fichiers (texte/CSV/JSON), Intro, Explorer, Filtrer / Trier, Sélectionner, Parcourir, Nettoyer, Transformer, Statistiques, Exporter, Visualiser",
+    "title": "9 - Collections, Fichiers, Démarrage TP2",
+    "#description": "Set, Tuple, Dict, Compréhension de liste, Fichier CSV (via Pandas), Fichier JSON (via Pandas), Présentation et démarrage du TP2",
     "hide_table_of_contents": "true",
     "draft": "true"
   },
   {
     "id": "10-rencontre10",
-    "title": "10 - 📊 Graphiques, collections",
-    "description": "For (séquence), Compréhension de liste, Ensemble (set), Tuple (tuple), Dictionnaire (dict), Matplotlib",
+    "title": "10 - Pandas (avancé) + Matplotlib (bases) + TP2 poursuite",
+    "#description": "Sélection, Filtres et tri, Parcours, Nettoyage, Transformation, Agrégations, Graphiques bases sans Pandas, TP2 poursuite",
     "hide_table_of_contents": "true",
     "draft": "true"
   },
   {
     "id": "11-rencontre11",
-    "title": "11 - 🗂 Fichiers, 🔢 NumPy",
-    "description": "Fichier (texte/CSV/JSON), Tableaux NumPy, Calcul vectorisé, Bornes et correction, Filtres et masques, Restructurer / Sauvegarder, NumPy et Matplotlib",
+    "title": "11 - NumPy (bases) + Matplotlib (intégration)",
+    "#description": "NumPy (intro, tableaux), intégration NumPy avec Matplotlib, TP2 poursuite",
     "hide_table_of_contents": "true",
     "draft": "true"
   },
   {
     "id": "12-rencontre12",
-    "title": "12 - TP2 et IA",
-    "description": "Remise partielle TP2 (10%), Intelligence artificielle",
+    "title": "12 - NumPy (avancé) + IA (bases)",
+    "#description": "NumPy (vectorisé, bornes, conditions, restructurer), IA (intro, Machine Learning), TP2 poursuite",
     "hide_table_of_contents": "true",
     "draft": "true"
   },
   {
     "id": "13-rencontre13",
-    "title": "13 - TP2",
-    "description": "Remise finale TP2 (15%)",
+    "title": "13 - IA (avancé) + Synthèse + TP2 poursuite",
+    "#description": "Deep Learning, Empreinte écologique, Scikit-learn, Exercice de synthèse, Révision ciblée, TP2 poursuite (pas de remise)",
     "hide_table_of_contents": "true",
     "draft": "true"
   },
   {
     "id": "14-rencontre14",
-    "title": "14 - Examen formatif",
-    "description": "Autoévaluation, simulation d'examen, correction et révision",
+    "title": "14 - Examen formatif + Remise TP2",
+    "#description": "Autoévaluation, simulation d'examen, correction, révision des notions R9→R13, et remise finale du TP2",
     "hide_table_of_contents": "true",
     "draft": "true"
   },
   {
     "id": "15-rencontre15",
     "title": "15 - Examen final (35%)",
-    "description": "Volet 1 - Partie papier (sans ordinateur), Volet 2 - Partie sur ordinateur",
+    "#description": "",
     "hide_table_of_contents": "true",
     "draft": "true"
   }
