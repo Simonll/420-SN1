@@ -10,6 +10,14 @@ Pour aller plus loin : [documentation officielle de Matplotlib](https://matplotl
 
 ---
 
+## 🔹 Importation standard
+
+```python
+import matplotlib.pyplot as plt
+```
+
+---
+
 ## 🔹 Courbe simple
 
 ```python
@@ -44,6 +52,7 @@ plt.plot(
 ```python
 plt.plot(x, y, label="x²")
 plt.plot(x, [-i for i in y], color='green', label="-x²")
+plt.legend()
 plt.show()
 ```
 
@@ -184,6 +193,58 @@ data = [[1, 2, 3, 4, 5], [2, 3, 4, 5, 6]]
 plt.boxplot(data, tick_labels=["A", "B"])
 plt.show()
 ```
+
+---
+
+## 🔹 Sous-graphiques (subplots)
+
+Matplotlib permet d'afficher plusieurs graphiques dans une même figure en utilisant `plt.subplots()` ou `fig.add_subplot()`.
+
+### `plt.subplots()` — méthode recommandée
+
+```python
+# Crée une figure avec 2 lignes et 2 colonnes de sous-graphiques
+fig, axes = plt.subplots(2, 2, figsize=(10, 8))
+
+# Accès aux sous-graphiques via axes[row, col]
+axes[0, 0].plot(x, y)
+axes[0, 0].set_title("Graphique 1 (haut gauche)")
+
+axes[0, 1].scatter(x, y)
+axes[0, 1].set_title("Graphique 2 (haut droit)")
+
+axes[1, 0].bar(categories, valeurs)
+axes[1, 0].set_title("Graphique 3 (bas gauche)")
+
+axes[1, 1].hist(donnees, bins=20)
+axes[1, 1].set_title("Graphique 4 (bas droit)")
+
+plt.tight_layout()
+plt.show()
+```
+
+### `fig.add_subplot()` — méthode alternative
+
+```python
+fig = plt.figure(figsize=(10, 8))
+
+ax1 = fig.add_subplot(2, 2, 1)  # 2x2, position 1 (haut gauche)
+ax1.plot(x, y)
+ax1.set_title("Graphique 1")
+
+ax2 = fig.add_subplot(2, 2, 2)  # 2x2, position 2 (haut droite)
+ax2.scatter(x, y)
+ax2.set_title("Graphique 2")
+
+plt.tight_layout()
+plt.show()
+```
+
+:::note-nt
+- `plt.subplots()` retourne `(fig, axes)` où `axes` est un tableau NumPy 2D si `nrows > 1` et `ncols > 1`, ou un seul objet Axes si la grille est 1x1.
+- `plt.tight_layout()` ajuste automatiquement les espacements pour éviter que les titres ne se chevauchent.
+- Pour épacer les sous-graphiques manuellement : `plt.subplots_adjust(hspace=0.3, wspace=0.3)`.
+:::
 
 ---
 

@@ -92,6 +92,41 @@ for i, hero in enumerate(heros):
 
 ---
 
+## 🔹 Parcours de plusieurs listes en parallèle : `zip()`
+
+`zip()` permet de parcourir deux (ou plus) listes en parallèle, élément par élément.
+
+```python
+prenoms = ["Alice", "Bob", "Charlie"]
+notes = [85, 92, 78]
+
+for prenom, note in zip(prenoms, notes):
+    print(f"{prenom} a obtenu {note}")
+# Affiche : Alice a obtenu 85, Bob a obtenu 92, Charlie a obtenu 78
+```
+
+:::note-nt
+`zip()` s'arrête à la liste la plus courte. Si les listes ont des longueurs différentes, les éléments en surplus sont ignorés.
+:::
+
+---
+
+## 🔹 Compréhensions de liste
+
+Les compréhensions de liste permettent de créer une nouvelle liste à partir d'une boucle `for` en une seule ligne.
+
+```python
+# Créer une liste des carrés des nombres de 0 à 9
+carrés = [x ** 2 for x in range(10)]
+# → [0, 1, 4, 9, 16, 25, 36, 49, 64, 81]
+
+# Avec condition : seulement les pairs
+pairs = [x for x in range(20) if x % 2 == 0]
+# → [0, 2, 4, 6, 8, 10, 12, 14, 16, 18]
+```
+
+---
+
 ## 🔹 Boucles imbriquées
 
 Une boucle peut en contenir une autre. La boucle intérieure s'exécute entièrement à chaque tour de la boucle extérieure.
@@ -111,5 +146,50 @@ for i in range(3):          # Boucle pour chaque ligne
 | Instruction | Description | Exemple |
 |---|---|---|
 | `break` | Interrompt la boucle immédiatement | `break` dans un `for` ou `while` |
-| `continue` | Passe à l'itération suivante | Saute un tour sans interrompre |
+| `continue` | Passe à l'itération suivante (sans exécuter la suite du bloc) | Saute un tour sans interrompre la boucle |
 | `pass` | Ne fait rien, sert de placeholder | Utile dans une structure vide en développement |
+
+---
+
+## 🔹 Différence entre `break` et `continue`
+
+```python
+for i in range(5):
+    if i == 2:
+        continue    # Saute le tour i=2, continue avec i=3
+    if i == 4:
+        break       # Arrête la boucle quand i=4
+    print(i)
+# Affiche : 0, 1, 3
+```
+
+---
+
+## 🔹 Exemple complet : recherche dans une liste
+
+```python
+nombres = [7, 14, 21, 28, 35, 42, 49]
+
+for n in nombres:
+    if n % 3 == 0 and n > 20:
+        print(f"Trouvé : {n} est divisible par 3 et supérieur à 20")
+        break       # Arrête dès qu'on a trouvé ce que nous cherchons
+```
+
+---
+
+## 🔹 Pour aller plus loin
+
+- `while` avec `break` / `continue` pour contrôler finement le flux
+- `for` avec `else` (le bloc `else` s'exécute si la boucle se termine sans `break`)
+- Compréhensions de liste avec condition (`if`) et double boucle嵌套
+
+---
+
+:::tip-nt En examen
+La boucle `for` avec `range()` et les compréhensions de liste sont fréquemment évaluées. \\
+Assurez-vous de maîtriser :
+- Le début et la fin de `range()` (le dernier élément est exclus)
+- Le sens de `step` (positif = croissant, négatif = décroissant)
+- La différence entre `break` (arrête la boucle) et `continue` (passe au tour suivant)
+:::

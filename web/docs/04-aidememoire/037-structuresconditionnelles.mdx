@@ -105,7 +105,9 @@ match jour:
     case "mercredi":
         print("Milieu de la semaine")
     case "vendredi":
-        print("Fin de la semaine")
+        print("Fin de semaine (début du week-end)")
+    case "samedi" | "dimanche":
+        print("Week-end")
     case _:
         print("Jour ordinaire")
 ```

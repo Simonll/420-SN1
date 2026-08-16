@@ -132,19 +132,26 @@ print(saluer("Kirby"))   # Affiche la salutation, puis None
 ---
 ### Une fonction peut retourner une autre fonction
 
+Une fonction peut renvoyer une autre fonction comme résultat. C'est un concept avancé utilisé notamment pour créer des fonctions personnalisées à la volée.
+
 ```python
 def creer_courbe_calibration(pente, ordonnee):
     """
-    Cette fonction principale est une usine. 
+    Cette fonction principale est une usine.
     Elle fabrique et retourne une nouvelle fonction sur mesure.
     """
-    
-# 1. On définit la sous-fonction à l'intérieur
-def appliquer_calibration(valeur_brute: float) -> float:
-    return (pente * valeur_brute) + ordonnee
 
-# 2. On retourne la fonction ELLE-MÊME (attention : pas de parenthèses !)
-return appliquer_calibration
+    # 1. On définit la sous-fonction À L'INTÉRIEUR de la fonction principale
+    def appliquer_calibration(valeur_brute: float) -> float:
+        return (pente * valeur_brute) + ordonnee
+
+    # 2. On retourne la fonction ELLE-MÊME (attention : pas de parenthèses !)
+    return appliquer_calibration
+
+# 3. Utilisation : on crée une fonction calibrée spécifique
+calibration = creer_courbe_calibration(pente=2.0, ordonnee=10.0)
+resultat = calibration(5.0)   # → (2.0 * 5.0) + 10.0 = 20.0
+print(resultat)                # Affiche : 20.0
 ```
 
 ---
