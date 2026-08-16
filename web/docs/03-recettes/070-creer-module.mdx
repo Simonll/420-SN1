@@ -2,9 +2,12 @@
 
 Créer un module Python permet de réutiliser du code dans plusieurs programmes sans avoir à le copier-coller. Un module est simplement un fichier `.py` contenant des fonctions ou des variables que l'on peut importer dans d'autres fichiers Python.
 
-### Étapes pour créer un module Python
+---
 
-1. **Créer un fichier Python** : Créez un nouveau fichier avec l'extension `.py`. Par exemple, nommez-le `mon_module.py`.
+## Étapes pour créer un module Python
+
+1. **Créer un fichier Python** : Créez un nouveau fichier avec l'extension `.py`. Par exemple, nommez-le `mon_module.py`.  
+   [Voir la recette Créer un fichier Python](/recettes/creer-python) pour plus de détails.
 
 2. **Écrire des fonctions** : Dans ce fichier, écrivez les fonctions que vous souhaitez inclure dans votre module. Par exemple :
 
@@ -17,7 +20,36 @@ def additionner(a, b):
     return a + b
 ```
 
-### Utiliser le module dans un autre fichier
+3. **Enregistrer le fichier** dans le même répertoire que le programme qui l'utilisera, ou dans un sous-répertoire dédié (voir la section [Où placer le module](#où-placer-le-module)).
+
+---
+
+## Où placer le module
+
+- **Même répertoire** : Si le module et le programme qui l'importe sont dans le même dossier, l'importation est directe.
+- **Sous-répertoire** : Si vous placez le module dans un sous-dossier (par exemple `mes_modules/`), vous devez créer un fichier `__init__.py` (peut être vide) dans ce sous-dossier pour le transformer en paquet. Ensuite, l'import se fait avec `from mon_package import mon_module` ou `import mon_package.mon_module`.
+
+### Exemple avec sous-dossier
+
+Structure :
+```
+mon_projet/
+├── programme_principal.py
+└── mes_modules/
+    ├── __init__.py
+    └── mon_module.py
+```
+
+Dans `programme_principal.py` :
+```python
+from mes_modules import mon_module
+# ou
+import mes_modules.mon_module
+```
+
+---
+
+## Utiliser le module dans un autre fichier
 
 1. **Créer un autre fichier Python** : Créez un nouveau fichier Python dans le même répertoire ou dans un répertoire différent. Par exemple, nommez-le `utiliser_module.py`.
 
@@ -32,3 +64,56 @@ print(mon_module.saluer("Alice"))
 resultat = mon_module.additionner(5, 3)
 print(f"Le résultat de l'addition est : {resultat}")
 ```
+
+Ou importer directement une fonction :
+```python
+from mon_module import saluer
+
+print(saluer("Bob"))
+```
+
+---
+
+## Erreurs courantes
+
+### ModuleNotFoundError
+
+Si Python ne trouve pas votre module, vous aurez une erreur `ModuleNotFoundError`. Les causes possibles :
+
+- Le fichier `.py` du module n'est pas dans le même dossier que le script qui l'importe.
+- Le nom du fichier est mal orthographié (respectez la casse).
+- Le répertoire n'est pas dans le chemin de recherche de Python (`sys.path`). Pour vérifier, vous pouvez ajouter le répertoire au chemin :
+  ```python
+  import sys
+  sys.path.append("/chemin/vers/le/dossier")
+  ```
+
+- Le fichier ne s'appelle pas `mon_module.py` mais `mon-module.py` (les tirets sont interdits dans les noms de modules).
+
+### ImportError
+
+Si le module existe mais qu'une fonction spécifique n'est pas trouvée, vérifiez l'orthographe de la fonction et qu'elle est bien définie dans le module.
+
+---
+
+## Conventions de nommage
+
+- Le nom du fichier module doit être un **identifiant Python valide** : uniquement des lettres, chiffres et underscores, sans tirets, sans espaces, ne commençant pas par un chiffre.
+- Évitez de nommer votre module comme un module standard de Python (ex: `math.py`, `random.py`) pour éviter les conflits.
+- Utilisez des minuscules et des underscores si nécessaire (ex: `mes_outils.py`).
+
+---
+
+## Bonnes pratiques
+
+- Documentez vos fonctions avec des docstrings (voir la recette [Déboguer et points d'arrêt](/recettes/deboguer-point-arret) pour plus d'informations sur l'utilisation de la documentation).
+- Testez votre module dans un petit script avant de l'utiliser dans un projet plus grand.
+- Si le module devient volumineux, envisagez de le diviser en plusieurs fichiers ou de le transformer en paquet.
+
+---
+
+## Liens utiles
+
+- [Documentation officielle de Python — Modules](https://docs.python.org/3/tutorial/modules.html)
+- [Recette Créer un fichier Python](/recettes/creer-python)
+- [Recette Déboguer et points d'arrêt](/recettes/deboguer-point-arret)

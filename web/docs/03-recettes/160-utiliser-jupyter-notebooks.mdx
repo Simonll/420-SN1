@@ -1,42 +1,55 @@
 ---
-title: Utiliser les notebooks Jupyter
+title: Utiliser les notebooks Jupyter dans VS Code
 description: Guide pour utiliser les notebooks Jupyter dans VS Code.
 ---
 
-import Admonition from '@theme/Admonition';
+# Utiliser les notebooks Jupyter dans VS Code
 
 Les notebooks Jupyter sont des documents interactifs qui permettent de combiner du code exécutable, du texte formaté (Markdown), des équations mathématiques, des visualisations et d'autres médias. Ils sont très populaires en science des données pour l'exploration et l'analyse.
 
 Dans VS Code, l'expérience Jupyter est intégrée, ce qui permet de travailler avec des notebooks `.ipynb` directement dans l'éditeur.
 
-### Prérequis
+---
+
+## Prérequis
 
 Pour utiliser les notebooks Jupyter dans VS Code, vous devez avoir installé :
-1.  L'extension **Jupyter** de Microsoft.
-2.  L'extension **Python** de Microsoft.
 
-<Admonition type="info" title="Installation">
-Si vous avez suivi la recette d'installation de VS Code, ces extensions devraient déjà être installées.
-</Admonition>
+1. **VS Code** (voir la recette [Installer VS Code](/recettes/installer-vscode))
+2. **L'extension Python** de Microsoft (inclut le support Jupyter)
 
-### Créer un notebook
+   :::info-nt
+   Si vous avez suivi la recette d'installation de VS Code, l'extension Python est déjà installée. Cette extension inclut le support Jupyter.
+   :::
 
-1.  Ouvrez votre projet dans VS Code.
-2.  Dans l'explorateur de fichiers, faites un clic droit sur le dossier où vous souhaitez créer le notebook.
-3.  Choisissez **Nouveau fichier...**
-4.  Nommez le fichier avec l'extension `.ipynb`, par exemple `mon_notebook.ipynb`.
+3. **Un environnement virtuel** avec les bibliothèques nécessaires (voir la recette [Créer un environnement virtuel dans VS Code](/recettes/creer-venv-vscode))
+
+   :::info-nt
+   Pour les bibliothèques courantes (numpy, pandas, matplotlib), vous pouvez les installer avec `pip install numpy pandas matplotlib` dans votre environnement virtuel.
+   :::
+
+---
+
+## Créer un notebook
+
+1. Ouvrez votre projet dans VS Code.
+2. Dans l'explorateur de fichiers (colonne de gauche), faites un clic droit sur le dossier où vous souhaitez créer le notebook.
+3. Choisissez **Nouveau fichier...** (ou `New File`).
+4. Nommez le fichier avec l'extension `.ipynb`, par exemple `mon_notebook.ipynb`.
 
 VS Code ouvrira une interface de notebook avec une première cellule de code vide.
 
-### Les cellules
+---
+
+## Les cellules
 
 Un notebook est composé de **cellules**. Chaque cellule peut contenir soit du code, soit du texte (Markdown).
 
-#### Cellules de code
+### Cellules de code
 
 C'est ici que vous écrivez votre code Python.
 
-- **Pour exécuter une cellule** : Cliquez sur l'icône ▶️ à gauche de la cellule ou appuyez sur `Maj + Entrée`.
+- **Pour exécuter une cellule** : Cliquez sur l'icône ▶️ à gauche de la cellule ou appuyez sur `Maj + Entrée` (Shift + Enter).
 - Le résultat de l'exécution (texte, graphiques, erreurs) s'affiche directement sous la cellule.
 
 ```python
@@ -47,14 +60,14 @@ x = math.pi * 2
 print(f"La valeur de x est : {x:.2f}")
 ```
 
-#### Cellules de Markdown
+### Cellules de Markdown
 
 Elles permettent d'ajouter du texte, des titres, des listes, des images et des liens pour documenter votre travail.
 
-1.  Créez une nouvelle cellule avec le bouton **+ Code** ou **+ Markdown** en haut.
-2.  Si la cellule est de type "Code", changez-la en "Markdown" via le menu déroulant en bas à droite de la cellule.
-3.  Écrivez votre texte en utilisant la syntaxe Markdown.
-4.  Appuyez sur `Maj + Entrée` ou cliquez sur la coche ✔️ pour afficher le rendu.
+1. Créez une nouvelle cellule avec le bouton **+ Code** ou **+ Markdown** en haut.
+2. Si la cellule est de type "Code", changez-la en "Markdown" via le menu déroulant en bas à droite de la cellule.
+3. Écrivez votre texte en utilisant la syntaxe Markdown.
+4. Appuyez sur `Maj + Entrée` (Shift + Enter) ou cliquez sur la coche ✔️ pour afficher le rendu.
 
 ```markdown
 # Mon premier notebook
@@ -64,16 +77,23 @@ Ceci est une cellule de texte. On peut y mettre du **gras**, de l'*italique*, et
 - Point 2
 ```
 
-### Barre d'outils du notebook
+---
+
+## Barre d'outils du notebook
 
 Une barre d'outils en haut du notebook vous donne accès à des actions rapides :
 
-- **Exécuter tout** : Exécute toutes les cellules du notebook dans l'ordre.
-- **Interrompre** : Arrête l'exécution en cours (utile pour les boucles infinies).
-- **Redémarrer** : Redémarre le "noyau" (le moteur Python qui exécute le code), ce qui efface toutes les variables en mémoire.
-- **Effacer les sorties** : Permet de nettoyer les résultats de toutes les cellules.
+| Bouton | Description |
+|--------|-------------|
+| ▶️ Exécuter la cellule | Exécute la cellule sélectionnée |
+| ▶▶ Exécuter tout | Exécute toutes les cellules du notebook dans l'ordre |
+| ⏸ Interrompre | Arrête l'exécution en cours (utile pour les boucles infinies) |
+| 🔄 Redémarrer | Redémarre le "noyau" (le moteur Python qui exécute le code), ce qui efface toutes les variables en mémoire |
+| 🧹 Effacer les sorties | Permet de nettoyer les résultats de toutes les cellules |
 
-### Équations mathématiques (LaTeX)
+---
+
+## Équations mathématiques (LaTeX)
 
 Les cellules Markdown supportent l'affichage d'équations mathématiques en utilisant la syntaxe LaTeX.
 
@@ -87,8 +107,26 @@ La formule quadratique est :
 $$x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}$$
 ```
 
-<Admonition type="tip" title="Astuces">
-- Utilisez `Ctrl + S` pour sauvegarder votre notebook (même si VS Code sauvegarde souvent automatiquement).
-- Les variables et fonctions définies dans une cellule sont disponibles dans toutes les autres cellules du notebook (après exécution).
-- L'ordre d'exécution des cellules est important ! Si une cellule dépend d'une variable définie dans une autre, assurez-vous d'exécuter la cellule de définition en premier.
-</Admonition>
+---
+
+## Bonnes pratiques
+
+- **Sauvegarder régulièrement** : Utilisez `Ctrl + S` (ou `Cmd + S` sur Mac) pour sauvegarder votre notebook (même si VS Code sauvegarde souvent automatiquement).
+
+- **Ordre d'exécution** : L'ordre d'exécution des cellules est important ! Si une cellule dépend d'une variable définie dans une autre, assurez-vous d'exécuter la cellule de définition en premier.
+
+  :::danger-nt
+  **Attention** : Si vous exécutez les cellules dans le mauvais ordre, vous pouvez obtenir des erreurs ou des résultats inattendus. Par exemple, si une cellule utilise une variable définie dans une cellule précédente qui n'a pas été exécutée, vous obtiendrez une erreur `NameError`.
+  :::
+
+- **Redémarrer le noyau** : Si vous avez des erreurs inattendues ou si vous voulez recommencer "from scratch", utilisez le bouton **Redémarrer** pour effacer toutes les variables en mémoire et recommencer l'exécution du notebook.
+
+- **Documenter votre travail** : Utilisez des cellules Markdown pour expliquer ce que vous faites, ajouter des commentaires, et documenter vos analyses. Cela rend votre notebook plus compréhensible pour vous-même et pour les autres.
+
+---
+
+## Liens utiles
+
+- [Documentation officielle de Jupyter](https://jupyter.org/documentation)
+- [Documentation de VS Code — Jupyter](https://code.visualstudio.com/docs/datascience/jupyter-notebooks)
+- [Introduction aux notebooks Jupyter](https://jupyter.org/try)

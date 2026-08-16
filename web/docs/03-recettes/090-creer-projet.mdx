@@ -1,6 +1,7 @@
 # 🗂️ Créer un projet PyCharm
 
 Un **projet PyCharm** est un dossier contenant tous les fichiers liés à un programme Python.
+
 Il contient habituellement :
 
 - des fichiers `.py` (code Python)
@@ -12,17 +13,14 @@ Il contient habituellement :
 ## Étapes pour créer un projet
 
 1. Ouvrir **PyCharm**.
-2. Sur l’écran d’accueil, cliquer sur **New Project** (ou **File > New Project**
-si un autre projet est déjà ouvert).
-3. Choisir un **emplacement** pour le projet, idéalement dans votre [répertoire GitHub](/recettes/creer-repertoire-github)
-(par exemple : `Desktop/mon_repo/nom_du_nouveau_projet`).
+2. Sur l'écran d'accueil, cliquer sur **New Project** (ou **File > New Project** si un autre projet est déjà ouvert).
+3. Choisir un **emplacement** pour le projet, idéalement dans votre [répertoire GitHub](/recettes/creer-repertoire-github) (par exemple : `Desktop/mon_repo/nom_du_nouveau_projet`).
 4. Choisir un **environnement Python** :
    - Cocher *Create a welcome script* pour qu'un fichier `main.py` soit créé automatiquement.
-   - Laisser l’option *Project venv* cochée pour créer un environnement isolé.
-   - Vérifier que l’interpréteur sélectionné est bien une version de **Python 3.x**.
+   - Laisser l'option *Project venv* cochée pour créer un environnement isolé.
+   - Vérifier que l'interpréteur sélectionné est bien une version de **Python 3.x**.
 5. Cliquer sur **Create**.
-6. Si vous avez déjà un projet ouvert, cliquer sur **New Window**
-pour ouvrir le nouveau projet dans un nouvel onglet.
+6. Si vous avez déjà un projet ouvert, cliquer sur **New Window** pour ouvrir le nouveau projet dans un nouvel onglet.
 
 ---
 
@@ -31,9 +29,9 @@ pour ouvrir le nouveau projet dans un nouvel onglet.
 Une fois le projet créé, PyCharm affiche :
 
 - un dossier principal (nom du projet)
-- un dossier `venv/` contenant l’environnement virtuel
+- un dossier `venv/` contenant l'environnement virtuel
 - un fichier `main.py` (optionnel)
-- l’éditeur principal au centre, l’arborescence des fichiers à gauche
+- l'éditeur principal au centre, l'arborescence des fichiers à gauche
 
 ---
 
@@ -44,12 +42,39 @@ Une fois le projet créé, PyCharm affiche :
 3. Donner un nom au fichier (ex : `test`) et appuyer sur ⏎.
 4. Un nouveau fichier `test.py` est créé.
 
+[Voir la recette Créer un fichier Python](/recettes/creer-python) pour plus de détails.
+
+---
+
+## Créer un environnement virtuel
+
+Un **environnement virtuel** est une "bulle" isolée pour votre projet. Il contient sa propre installation de Python et ses propres bibliothèques (comme Matplotlib, Pandas, etc.), ce qui évite les conflits entre les différents projets sur votre machine.
+
+Pour créer un environnement virtuel dans PyCharm :
+
+1. Ouvrir **Settings** (ou `File > Settings`) : `Ctrl + Alt + S` (ou `Cmd + ,` sur macOS).
+2. Aller dans **Project > Python Interpreter**.
+3. Cliquer sur l'icône **+** (plus).
+4. Sélectionner **Add Local Environment** (ou **Conda Environment** si vous utilisez Conda).
+5. Choisir **Virtualenv Environment**.
+6. Sélectionner l'option **New environment** et choisir l'emplacement du dossier `venv`.
+7. Cliquer sur **OK**.
+
+PyCharm crée automatiquement le dossier `venv/` et configure l'interpréteur du projet pour utiliser cet environnement.
+
 ---
 
 ## Astuces
 
-- Toujours créer un projet avant d’écrire du code, pour bien organiser vos fichiers.
-- Éviter les accents, espaces ou caractères spéciaux dans les noms de dossiers.
+- Toujours créer un projet avant d'écrire du code, pour bien organiser vos fichiers.
+- Éviter les accents, espaces ou caractères spéciaux dans les noms de dossiers (utilisez des tirets bas `_` ou des tirets `-` à la place).
 - Le projet peut contenir aussi des notebooks Jupyter, des fichiers Markdown, etc.
+- Si vous utilisez VS Code au lieu de PyCharm, voir la recette [Créer un projet dans VS Code](/recettes/creer-projet-vscode).
 
 ---
+
+## Liens utiles
+
+- [Documentation officielle de PyCharm](https://www.jetbrains.com/pycharm/help/)
+- [Recette Installer PyCharm](/recettes/installer-pycharm)
+- [Recette Créer un environnement virtuel (VS Code)](/recettes/creer-venv-vscode) (pour VS Code)

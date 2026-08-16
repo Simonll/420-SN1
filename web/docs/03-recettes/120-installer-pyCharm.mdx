@@ -1,35 +1,40 @@
-# 🚀 Installer PyCharm
+---
+title: Installer PyCharm
+description: Guide d'installation de PyCharm sur Windows.
+---
+
+# Installer PyCharm
 
 :::danger-nt
-*PyCharm* est déjà installé sur les ordinateurs du cégep.\
+*PyCharm* est déjà installé sur les ordinateurs du cégep. \\
 Cette procédure est seulement pour installer *PyCharm* sur votre ordinateur personnel.
 :::
 
-*PyCharm* est le logiciel qui va nous servir pour coder en Python. \
-Il est gratuit et est l'un des logiciels de référence dans l'industrie pour le langage Python.
+*PyCharm* est le logiciel qui va nous servir pour coder en Python. \\
+Il est gratuit (version Community) et est l'un des logiciels de référence dans l'industrie pour le langage Python.
 
-<iframe 
-  width="560" 
-  height="315" 
-  src="https://www.youtube.com/embed/LVVwqinR7x0?si=R5W3rQpvNZ6uoXXI" 
-  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+<iframe
+  width="560"
+  height="315"
+  src="https://www.youtube.com/embed/LVVwqinR7x0?si=R5W3rQpvNZ6uoXXI"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
   allowFullScreen
 ></iframe>
 
 Pour installer PyCharm à la maison :
 
 1. Aller sur le site de [PyCharm](https://www.jetbrains.com/pycharm/download/).
-2. Trouver la version *PyCharm Unified Product*.
+2. Trouver la version **PyCharm Community** (gratuite) — il est inutile de télécharger la version Professionnelle pour ce cours.
 3. Cliquer sur le lien de téléchargement (*Download*).
-4. Double-cliquer sur le fichier "pycharm-2026.1.2.exe" dans vos téléchargements.
-5. Suivre les instructions d'installation et cocher les options suivants :
-    - *Create Desktop Shortcut / PyCharm*, afin de créer un raccourci de l'application sur votre bureau.
-    - *Create Associations / .py*, afin d'associer le double-clic sur un fichier Python à l'application PyCharm.
+4. Double-cliquer sur le fichier `.exe` dans vos téléchargements (ex: `pycharm-community-2025.3.1.exe`).
+5. Suivre les instructions d'installation et cocher les options suivantes :
+   - *Create Desktop Shortcut / PyCharm*, afin de créer un raccourci de l'application sur votre bureau.
+   - *Create Associations / .py*, afin d'associer le double-clic sur un fichier Python à l'application PyCharm.
 
 ## Tester l'installation de PyCharm
 
 1. Lancer PyCharm.
-2. [Créer un nouveau projet.](creer-projet)
+2. [Créer un nouveau projet](/recettes/creer-projet).
 3. Créer un nouveau fichier Python.
 4. Écrire un petit programme et le rouler, par exemple :
 
@@ -39,5 +44,29 @@ print("Hello world")
 
 5. Exécuter le programme.
 
-Vous devriez voir dans le bas de PyCharm sur fond noir, le message "Hello world" apparaitre. \
+Vous devriez voir dans le bas de PyCharm sur fond noir, le message "Hello world" apparaître. \\
 Si c'est bien le cas, votre installation est fonctionnelle.
+
+## Ajouter une bibliothèque (pip)
+
+Pour installer une bibliothèque externe (ex: `matplotlib`, `pandas`) :
+
+1. Ouvrir **Settings** (ou **Preferences** sur macOS) : `File > Settings` (ou `PyCharm > Settings` sur macOS).
+2. Aller dans **Project > Python Interpreter**.
+3. Cliquer sur l'icône **+** (plus).
+4. Rechercher la bibliothèque souhaitée (ex: `matplotlib`).
+5. Cliquer sur **Install Package**.
+6. Attendre que l'installation se termine.
+
+<!-- Alternative via terminal (si l'étudiant préfère) :
+```bash
+pip install nom-de-la-bibliotheque
+```
+-->
+
+## Liens utiles
+
+- [Documentation officielle de PyCharm](https://www.jetbrains.com/pycharm/help/)
+- [Tutoriel d'initiation à PyCharm](https://www.jetbrains.com/pycharm/guide/)
+
+<!-- TODO: ajouter lien vers la recette créer-projet (une fois créée) -->

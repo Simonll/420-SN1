@@ -3,59 +3,97 @@ title: Installer Python
 description: Guide d'installation de Python sur Windows et macOS.
 ---
 
-import Admonition from '@theme/Admonition';
-
 # Installer Python
 
 Python n'est pas toujours installé par défaut sur un ordinateur. Cette recette vous guide pour l'installer correctement sur Windows et macOS.
 
+## Prérequis
+
+- Un ordinateur connecté à Internet
+- Administrateur des droits sur l'ordinateur (pour l'installation)
+
+---
+
 ## Installation sur Windows
 
-1.  **Télécharger l'installeur**
-    Rendez-vous sur le [site officiel de Python](https://www.python.org/downloads/windows/).
-    Cliquez sur le bouton pour télécharger la dernière version stable pour Windows.
+### 1. Télécharger l'installeur
 
-2.  **Lancer l'installeur**
-    Ouvrez le fichier `.exe` que vous venez de télécharger.
+Rendez-vous sur le [site officiel de Python](https://www.python.org/downloads/windows/).
 
-3.  **Configuration de l'installation**
-    <Admonition type="danger" title="Étape cruciale">
-    Cochez la case **"Add Python to PATH"** en bas de la fenêtre. Cela vous permettra d'exécuter Python depuis n'importe quel terminal.
-    </Admonition>
-    Ensuite, cliquez sur **"Install Now"** pour lancer l'installation avec les options par défaut, qui sont suffisantes pour nos besoins.
+Cliquez sur le bouton pour télécharger la dernière version stable pour Windows (ex: `Python 3.12.x`).
 
-4.  **Vérifier l'installation**
-    Une fois l'installation terminée, ouvrez une invite de commandes (tapez `cmd` dans le menu Démarrer) ou PowerShell.
-    Tapez la commande suivante et appuyez sur Entrée :
-    ```bash
-    py --version
-    ```
-    Si l'installation a réussi, vous devriez voir la version de Python que vous venez d'installer s'afficher, par exemple : `Python 3.12.4`.
+### 2. Lancer l'installeur
 
-##  Installation sur macOS
+Ouvrez le fichier `.exe` que vous venez de télécharger.
+
+### 3. Configuration de l'installation
+
+:::danger-nt
+**Étape cruciale** : cochez la case **"Add Python to PATH"** en bas de la fenêtre.
+
+Sans cette case cochée, vous ne pourrez pas exécuter Python depuis le terminal.
+:::
+
+Ensuite, cliquez sur **"Install Now"** pour lancer l'installation avec les options par défaut, qui sont suffisantes pour nos besoins.
+
+<img src="/img/recettes/python-windows-install.png" width="50%" alt="Installation Python Windows"/>
+
+### 4. Vérifier l'installation
+
+Une fois l'installation terminée, ouvrez une invite de commandes (tapez `cmd` dans le menu Démarrer) ou PowerShell.
+
+Tapez la commande suivante et appuyez sur Entrée :
+
+```bash
+py --version
+```
+
+Si l'installation a réussi, vous devriez voir la version de Python que vous venez d'installer s'afficher, par exemple : `Python 3.12.4`.
+
+---
+
+## Installation sur macOS
 
 macOS vient souvent avec une version de Python préinstallée, mais elle est généralement ancienne et gérée par le système. Il est fortement recommandé d'installer une version moderne et indépendante.
 
-1.  **Télécharger l'installeur**
-    Rendez-vous sur le site officiel de Python.
-    Cliquez sur le lien de téléchargement pour la dernière version de Python (le fichier se termine par `.pkg`).
+### 1. Télécharger l'installeur
 
-2.  **Lancer l'installeur**
-    Ouvrez le fichier `.pkg` téléchargé. Suivez les instructions en cliquant sur "Continuer" et "Accepter" les termes de la licence.
+Rendez-vous sur le [site officiel de Python](https://www.python.org/downloads/macos/).
 
-3.  **Vérifier l'installation**
-    Une fois l'installation terminée, ouvrez l'application **Terminal** (vous pouvez la trouver via Spotlight avec `Cmd + Espace` puis en tapant "Terminal").
-    Tapez la commande suivante :
-    ```bash
-    python3 --version
-    ```
-    Vous devriez voir la version de Python que vous venez d'installer.
-    <Admonition type="info" title="Pourquoi python3 ?">
-    Sur macOS (et Linux), la commande `python3` est utilisée pour différencier la nouvelle version que vous avez installée de l'ancienne version (`python`) utilisée par le système d'exploitation.
-    </Admonition>
+Cliquez sur le lien de téléchargement pour la dernière version de Python (le fichier se termine par `.pkg`).
+
+### 2. Lancer l'installeur
+
+Ouvrez le fichier `.pkg` téléchargé. Suivez les instructions en cliquant sur "Continuer" et "Accepter" les termes de la licence.
+
+### 3. Vérifier l'installation
+
+Une fois l'installation terminée, ouvrez l'application **Terminal** (vous pouvez la trouver via Spotlight avec `Cmd + Espace` puis en tapant "Terminal").
+
+Tapez la commande suivante :
+
+```bash
+python3 --version
+```
+
+Vous devriez voir la version de Python que vous venez d'installer.
+
+:::info-nt
+Pourquoi `python3` ?
+
+Sur macOS (et Linux), la commande `python3` est utilisée pour différencier la nouvelle version que vous avez installée de l'ancienne version (`python`) utilisée par le système d'exploitation.
+:::
 
 ---
 
 ## Prochaines étapes
 
-Maintenant que Python est installé, la prochaine étape est de configurer un environnement de développement comme VS Code ou PyCharm pour commencer à coder !
+Maintenant que Python est installé, la prochaine étape est de configurer un environnement de développement.
+
+- Si vous utilisez **VS Code** : voir la recette [Installer VS Code](/recettes/installer-vscode) et [Créer un environnement virtuel](/recettes/creer-venv-vscode).
+- Si vous utilisez **PyCharm** : voir la recette [Installer PyCharm](/recettes/installer-pycharm).
+
+## Liens utiles
+
+- [Site officiel de Python](https://www.python.org/)
+- [Documentation de Python](https://docs.python.org/3/)

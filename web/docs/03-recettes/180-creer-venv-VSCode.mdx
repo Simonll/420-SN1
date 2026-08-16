@@ -1,9 +1,9 @@
 ---
-title: "Créer un environnement virtuel dans VS Code"
-description: "Guide pour créer un environnement virtuel Python (.venv) dans Visual Studio Code."
+title: Créer un environnement virtuel dans VS Code
+description: Guide pour créer un environnement virtuel Python (.venv) dans Visual Studio Code.
 ---
 
-import Admonition from '@theme/Admonition';
+# Créer un environnement virtuel dans VS Code
 
 Un environnement virtuel est une "bulle" isolée qui contient une version spécifique de Python et les bibliothèques nécessaires pour un projet. C'est une pratique essentielle pour éviter les conflits entre les dépendances de différents projets.
 
@@ -13,23 +13,34 @@ Un environnement virtuel est une "bulle" isolée qui contient une version spéci
 
 L'extension officielle Python de Microsoft intègre un outil automatisé qui s'occupe de tout en arrière-plan. C'est la méthode la plus fluide pour éviter les erreurs de syntaxe dans le terminal.
 
-1.  **Ouvrir la palette de commandes**
-    Utilisez le raccourci <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>P</kbd> (ou <kbd>Cmd</kbd> + <kbd>Shift</kbd> + <kbd>P</kbd> sur Mac).
+### Étapes pour créer l'environnement
 
-2.  **Lancer l'outil de création**
-    Tapez `Python: Create Environment` (ou `Python : Créer un environnement`) et sélectionnez cette option dans le menu déroulant.
+1. **Ouvrir la palette de commandes**
+   Utilisez le raccourci `Ctrl + Shift + P` (ou `Cmd + Shift + P` sur Mac).
 
-3.  **Choisir le type d'environnement**
-    VS Code vous demandera de choisir entre `Venv` et `Conda`. Pour le cours, choisissez **Venv**, qui est le standard intégré directement dans Python.
+   ![Palette de commandes VS Code](./img/recettes/vscode-command-palette.png)
 
-4.  **Sélectionner l'interpréteur**
-    Sélectionnez la version de Python à utiliser (ex: Python 3.11 ou 3.12).
+2. **Lancer l'outil de création**
+   Tapez `Python: Create Environment` (ou `Python : Créer un environnement`) et sélectionnez cette option dans le menu déroulant.
 
-    <Admonition type="info">
-    S'il y a un fichier `requirements.txt` dans le dossier, VS Code proposera même d'installer les dépendances automatiquement !
-    </Admonition>
+3. **Choisir le type d'environnement**
+   VS Code vous demandera de choisir entre `Venv` et `Conda`. Pour le cours, choisissez **Venv**, qui est le standard intégré directement dans Python.
+
+4. **Sélectionner l'interpréteur**
+   Sélectionnez la version de Python à utiliser (ex: Python 3.11 ou 3.12).
+
+   :::info-nt
+   S'il y a un fichier `requirements.txt` dans le dossier, VS Code proposera même d'installer les dépendances automatiquement !
+   :::
 
 VS Code va alors créer un dossier `.venv` dans l'explorateur de fichiers à gauche. Une fois terminé, une petite notification apparaîtra en bas à droite pour confirmer que l'environnement est actif.
+
+---
+
+### Comment savoir si l'environnement est actif ?
+
+- **Dans la barre d'état :** En bas à droite de la fenêtre de VS Code, vous devriez voir la version de Python suivie de `('.venv': venv)`. Cela indique que l'environnement de votre projet est sélectionné.
+- **Dans le terminal :** Si vous ouvrez un nouveau terminal (`Terminal > New Terminal`), le nom de l'environnement, `(.venv)`, apparaîtra au début de l'invite de commande. Cela signifie que toute commande `pip install` que vous exécuterez sera installée uniquement dans la "bulle" de votre projet.
 
 ---
 
@@ -37,15 +48,90 @@ VS Code va alors créer un dossier `.venv` dans l'explorateur de fichiers à gau
 
 Pour les étudiants qui se dirigent vers l'ingénierie et qui auront besoin de comprendre comment les choses fonctionnent "sous le capot", la commande manuelle est un incontournable.
 
-1.  Ouvrez un terminal intégré dans VS Code (<kbd>Ctrl</kbd> + <kbd>\`</kbd>).
-2.  Tapez la commande suivante pour créer l'environnement (le deuxième `.venv` est le nom du dossier qui sera créé) :
-    ```bash
-    python -m venv .venv
-    ```
-    <Admonition type="note">
-    Sur Mac ou Linux, il faut souvent taper `python3 -m venv .venv`.
-    </Admonition>
-3.  VS Code détectera généralement qu'un nouvel environnement a été créé et affichera une boîte de dialogue demandant : "We noticed a new environment has been created. Do you want to select it for the workspace folder?". Il suffit de cliquer sur **Yes**.
+### Étapes pour créer l'environnement manuellement
 
-----
+1. Ouvrez un terminal intégré dans VS Code (`Ctrl + \` ou le menu `Terminal > New Terminal`).
 
+   ![Terminal VS Code](./img/recettes/vscode-terminal.png)
+
+2. Tapez la commande suivante pour créer l'environnement (le deuxième `.venv` est le nom du dossier qui sera créé) :
+
+   ```bash
+   python -m venv .venv
+   ```
+
+   :::info-nt
+   Sur macOS ou Linux, il faut souvent taper `python3 -m venv .venv` à la place de `python`.
+   :::
+
+3. VS Code détectera généralement qu'un nouvel environnement a été créé et affichera une boîte de dialogue demandant : "We noticed a new environment has been created. Do you want to select it for the workspace folder?".
+
+   Il suffit de cliquer sur **Yes**.
+
+---
+
+## Installer des bibliothèques dans l'environnement
+
+Une fois l'environnement virtuel activé, vous pouvez installer des bibliothèques dans cet environnement isolé.
+
+### Via l'interface graphique de VS Code
+
+1. Ouvrir le panneau des extensions (`Ctrl+Shift+X`) et chercher l'extension **Python** de Microsoft (déjà installée avec l'extension Python).
+2. Dans la barre d'état inférieure, cliquer sur la version de Python pour ouvrir le menu des environnements.
+3. Sélectionner l'environnement `.venv` que vous venez de créer.
+
+### Via le terminal
+
+1. Ouvrir un terminal dans VS Code.
+2. S'assurer que l'environnement `.venv` est actif (le prompt doit afficher `(.venv)`).
+3. Utiliser `pip` pour installer les bibliothèques :
+
+   ```bash
+   pip install nom-de-la-bibliotheque
+   ```
+
+   Par exemple :
+
+   ```bash
+   pip install matplotlib
+   pip install pandas
+   ```
+
+---
+
+## Vérifier que l'environnement est bien créé
+
+1. Ouvrir le terminal dans VS Code.
+2. Tapez la commande suivante pour lister les paquets installés :
+
+   ```bash
+   pip list
+   ```
+
+3. Vous devriez voir la liste des bibliothèques installées dans l'environnement virtuel (au minimum `pip`, `setuptools`, `wheel`).
+
+---
+
+## Problèmes courants
+
+### L'environnement ne se active pas
+
+- Vérifier que le chemin du fichier `.venv` est bien dans le dossier racine du projet.
+- Redémarrer VS Code.
+- Dans la palette de commandes, taper `Python: Select Interpreter` et choisir l'interpréteur dans `.venv`.
+
+### Erreur "python: command not found" sous macOS/Linux
+
+- Utiliser `python3` au lieu de `python` dans les commandes.
+- S'assurer que Python est bien installé en suivant la recette [Installer Python](/recettes/installer-python).
+
+### Bibliothèques manquantes
+
+- Si une bibliothèque est manquante, l'installer avec `pip install nom-de-la-bibliotheque` dans le terminal avec l'environnement `.venv` actif.
+
+---
+
+## Liens utiles
+
+- [Documentation officielle de Python — venv](https://docs.python.org/3/library/venv.html)
+- [Documentation de VS Code — Python environments](https://code.visualstudio.com/docs/python/environments)
