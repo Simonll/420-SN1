@@ -1,14 +1,444 @@
 ---
-title: 13 - TP2
-description: Remise finale TP2 (25%)
+title: 13 - IA (avancé) + Synthèse + TP2 poursuite
+description: Deep Learning, Empreinte écologique, Scikit-learn, Exercice de synthèse, Révision ciblée, TP2 poursuite (pas de remise)
 hide_table_of_contents: true
 draft: true
 ---
 
-# Travail pratique 2
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import useBaseUrl from '@docusaurus/useBaseUrl';
+import Column from "../../src/components/Column";
+import Row from "../../src/components/Row";
+import RappelFonctionnementClasseInverse from '@site/docs/_components/RappelFonctionnementClasseInverse.mdx';
+import DocumentationAutorisee from '@site/docs/_components/DocumentationAutorisee.mdx';
+import DocumentationInterdite from '@site/docs/_components/DocumentationInterdite.mdx';
+import IntroSolutionsExercices from '@site/docs/_components/IntroSolutionsExercices.mdx';
+import Feedback from "../../src/components/Feedback";
+import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
 
-La période est dédiée pour avancer votre [travail pratique 2](/tp/tp2). \
-Celui-ci doit être complété avant minuit la journée indiquée par votre enseignant.e. \
-Le code de votre dépôt GIT sera automatiquement récupéré par votre enseignant.e, sans que vous ayez à intervenir.
+import Mod_DeepLearning from '../_cours-modules/_deep-learning.mdx';
+import Mod_EmpreinteEcologique from '../_cours-modules/_empreinte-ecologique.mdx';
+import Mod_ScikitLearn from '../_cours-modules/_scikit-learn.mdx';
 
-Le prochain cours est dédié au formatif de l'examen final.
+# IA (avancé) + Synthèse + TP2 poursuite
+
+<Tabs queryString="onglet">
+
+    <TabItem value="deep-learning" label="IA — Apprentissage profond">
+        <Mod_DeepLearning />
+    </TabItem>
+
+    <TabItem value="empreinte-ecologique" label="IA — Empreinte écologique">
+        <Mod_EmpreinteEcologique />
+    </TabItem>
+
+    <TabItem value="scikit-learn" label="IA — Scikit-learn (pratique)">
+        <Mod_ScikitLearn />
+    </TabItem>
+
+    <TabItem value="synthese" label="Synthèse pratique — Révision ciblée">
+
+        :::info Objectif de cette rencontre
+        Cette rencontre est consacrée à la **synthèse des notions vues de R9 à R12**, à la révision ciblée des points difficiles, et à la **poursuite du TP2** (sans remise — la remise finale aura lieu en R14).
+
+        ---
+
+        :::info Exercice de synthèse
+        **Exercice de synthèse — Analyse complète d'un jeu de données**
+
+        À partir d'un fichier CSV, réalisez l'analyse complète suivante :
+
+        1. **Exploration (Pandas)** :
+           - Charger les données avec `pd.read_csv()`
+           - Afficher `info()`, `dtypes`, `describe()`
+           - Identifier les valeurs manquantes, les types de données, les distributions
+
+        2. **Nettoyage (Pandas)** :
+           - Gérer les valeurs manquantes (`dropna()`, `fillna()`)
+           - Supprimer les doublons (`drop_duplicates()`)
+           - Corriger les formats de données si nécessaire
+
+        3. **Transformation (Pandas)** :
+           - Créer de nouvelles colonnes dérivées
+           - Appliquer des transformations (`apply()`, `map()`)
+           - Encoder les variables catégorielles si besoin
+
+        4. **Agrégation et statistiques (Pandas)** :
+           - Effectuer des regroupements (`groupby()`)
+           - Calculer des agrégations (`mean()`, `sum()`, `count()`)
+           - Interpréter les résultats
+
+        5. **Visualisation (Matplotlib — sans Pandas)** :
+           - Créer des graphiques à partir des données (courbes, barres, histogrammes, scatter)
+           - Ajouter titres, labels, légendes, styles
+           - Sauvegarder les graphiques
+
+        6. **Export** :
+           - Exporter les résultats dans un fichier CSV ou JSON
+
+        :::note Notions visées
+        Ensemble des notions de R9 à R12 : Collections, Pandas (bases et avancé), NumPy (bases et avancé), Matplotlib (bases et intégration), fichiers CSV/JSON
+        ::::
+
+        ---
+
+        :::info Révision ciblée — Points difficiles
+        Voici une liste des notions qui posent souvent difficulté. Prenez le temps de les réviser :
+
+        ### Pandas
+        - **groupby() et agrégations** : comprendre comment regrouper des données et calculer des statistiques par groupe
+        - **Filtres booléens complexes** : combiner plusieurs conditions avec `&`, `|`, `~`
+        - **Transformations** : créer de nouvelles colonnes avec `apply()`, `map()`, et les opérations vectorisées
+        - **Gestion des valeurs manquantes** : différence entre `dropna()` et `fillna()`, imputation par moyenne/médiane
+
+        ### NumPy
+        - **Broadcasting** : comprendre comment NumPy étend les opérations entre tableaux de formes différentes
+        - **Masques booléens** : créer et appliquer des masques pour filtrer des données
+        - **Manipulations de dimensions** : `reshape()`, `transpose()`, `concatenate()`
+        - **Opérations vectorisées vs boucles** : pourquoi la vectorisation est plus performante
+
+        ### Matplotlib
+        - **Graphiques sans Pandas** : créer des graphiques à partir de tableaux NumPy ou de listes Python
+        - **Personnalisation** : titres, labels, légendes, styles, sauvegarde
+        - **Différents types de graphiques** : courbes, barres, histogrammes, scatter
+
+        ### Fichiers
+        - **CSV avec Pandas** : `read_csv()`, `to_csv()`, paramètres importants
+        - **JSON avec Pandas** : `read_json()`, `to_json()`, structure JSON
+
+        ### Collections
+        - **Dictionnaires** : structure, méthodes, imbrication
+        - **Ensembles (set)** : opérations, unicité
+        - **Tuples** : immuabilité, utilisations
+        - **Compréhension de liste** : syntaxe, filtrage, transformation
+        :::
+
+        ---
+
+        :::info Auto-évaluation
+        **Check-list de compétences**
+
+        Pour chaque notion, cochez si vous pouvez l'utiliser seul·e :
+
+        | Catégorie | Compétence | ✅ / ❌ |
+        |-----------|-----------|--------|
+        | Collections | Créer et manipuler un set | ☐ |
+        | Collections | Créer et manipuler un tuple | ☐ |
+        | Collections | Créer et manipuler un dictionnaire (y compris imbriqué) | ☐ |
+        | Collections | Utiliser la compréhension de liste | ☐ |
+        | Fichiers | Lire un CSV avec Pandas | ☐ |
+        | Fichiers | Écrire un CSV avec Pandas | ☐ |
+        | Fichiers | Lire un JSON avec Pandas | ☐ |
+        | Fichiers | Écrire un JSON avec Pandas | ☐ |
+        | Pandas | Explorer un DataFrame (info, dtypes, describe, head) | ☐ |
+        | Pandas | Sélectionner des colonnes et des lignes (loc, iloc) | ☐ |
+        | Pandas | Filtrer des données (conditions simples et complexes) | ☐ |
+        | Pandas | Trier des données (sort_values) | ☐ |
+        | Pandas | Parcourir un DataFrame (itérations, avec précaution) | ☐ |
+        | Pandas | Nettoyer des données (dropna, fillna, drop_duplicates) | ☐ |
+        | Pandas | Transformer des données (nouvelles colonnes, apply, map) | ☐ |
+        | Pandas | Effectuer des regroupements et agrégations (groupby) | ☐ |
+        | NumPy | Créer et inspecter un tableau NumPy (array, shape, dtype, ndim, size) | ☐ |
+        | NumPy | Effectuer des opérations vectorisées (add, multiply, etc.) | ☐ |
+        | NumPy | Utiliser le broadcasting | ☐ |
+        | NumPy | Créer et appliquer des masques booléens | ☐ |
+        | NumPy | Reshape, transpose, concaténer des tableaux | ☐ |
+        | NumPy | Sauvegarder et charger des tableaux (.npy) | ☐ |
+        | Matplotlib | Créer un graphique de base (plot, scatter, bar, hist) | ☐ |
+        | Matplotlib | Personnaliser un graphique (titre, labels, légende, styles) | ☐ |
+        | Matplotlib | Sauvegarder un graphique (savefig) | ☐ |
+        | Matplotlib | Intégrer NumPy avec Matplotlib | ☐ |
+        | IA | Expliquer les concepts de base de l'IA et du ML | ☐ |
+        | IA | Utiliser scikit-learn pour une tâche simple (régression ou classification) | ☐ |
+
+        :::note
+        Cette auto-évaluation n'est pas soumise — c'est pour vous aider à identifier les points à réviser avant l'examen formatif (R14) et l'examen final (R15).
+        ::::
+
+        ---
+
+        :::info Préparation au formatif (R14)
+        Le prochain cours (R14) est consacré à :
+        - **Examen formatif** : simulation de l'examen sommatif sous contraintes réelles
+        - **Correction et révision** : retour sur les notions difficiles
+        - **Remise du TP2**
+
+        Pour vous préparer :
+        1. **Révisez les notions** où vous avez cochés ❌ dans la check-list
+        2. **Révisez les traces** et les exercices de code à écrire sans documentation
+        3. **Finissez votre TP2** (ou avancez autant que possible)
+
+        ::::
+
+    </TabItem>
+
+    <TabItem value="tp2" label="TP2 — Poursuite (pas de remise)">
+
+        :::info Objectif de cette rencontre
+        Cette rencontre est la **dernière période de travail sur le TP2 avant la remise**. Vous avez maintenant toutes les notions nécessaires (R9 → R12) pour finaliser votre analyse.
+
+        ---
+
+        :::info État d'avancement visé
+        Pour cette rencontre, l'objectif est d'avoir :
+        - **Toutes les analyses principales terminées**
+        - **Toutes les visualisations créées**
+        - **Le compte-rendu rédigé** (ou presque)
+        - **Le code finalisé** (ou presque)
+
+        La remise officielle aura lieu en R14.
+        :::
+
+        ---
+
+        :::info Checklist pour la remise (R14)
+        - [ ] Code du TP2 terminé et fonctionnel
+        - [ ] Analyse des données complète (exploration, nettoyage, transformation, agrégation)
+        - [ ] Visualisations incluses dans le projet
+        - [ ] Compte-rendu rédigé
+        - [ ] Code poussé sur GitHub
+        - [ ] Documentation des choix techniques
+        :::
+
+        ---
+
+        :::info Poursuite du TP2
+        Poursuivez votre TP2 en utilisant toutes les notions vues dans le cours :
+
+        1. **Collections** : utilisez des dictionnaires, tuples, ensembles si cela simplifie votre code
+        2. **Pandas** : pour l'exploration, le nettoyage, la transformation, les agrégations
+        3. **NumPy** : pour les calculs numériques, les filtres, les manipulations de données
+        4. **Matplotlib** : pour les visualisations (sans Pandas, comme demandé)
+        5. **Fichiers** : pour lire et écrire vos données
+
+        **N'oubliez pas** : le graphique de l'examen final doit être fait **sans Pandas**, donc pratiquez à créer des visualisations directement avec Matplotlib et NumPy.
+        :::
+
+        ---
+
+        :::info Questions et discussion
+        Prenez le temps de poser des questions sur :
+        - Les difficultés rencontrées dans votre TP2
+        - Les notions que vous souhaitez réviser
+        - Les aspects techniques de votre projet
+        - La préparation à l'examen formatif (R14)
+        :::
+
+    </TabItem>
+
+    <TabItem value="Activités" label="Activités">
+
+        <RappelFonctionnementClasseInverse/>
+        <Tabs>
+            <TabItem value="1" label="🏠 Activités à faire à la maison">
+
+                ## Auto-validation des connaissances
+
+                [**Ce formulaire**](https://forms.gle/SU1rJpYeoJ6XB1QA8) sert à vérifier votre compréhension des éléments les plus importants de la rencontre R13. Ne faites ce questionnaire **que lorsque vous vous sentez en très bonne maîtrise de la matière**. En classe, dès votre arrivée, vous aurez un **questionnaire très similaire**, évalué **sommativement**, à compléter sans accès à **aucune documentation**.
+
+                ::::warning
+                Ne pas remplir le formulaire diminue fortement vos chances de réussir l'évaluation sommative en début de rencontre. \\
+                Assurez-vous de bien comprendre toutes les notions derrière chaque question.
+                :::::
+
+                ---
+
+                ## Exercices de révision
+
+                ### Exercice - Synthèse Pandas + NumPy + Matplotlib
+
+                Créez un fichier `synthese.py` pour votre réponse.
+
+                Téléchargez le fichier <a href={useBaseUrl('/ressources/csv/tips_dataset.csv')} download="tips_dataset.csv">tips_dataset.csv</a> et placez-le dans le même dossier que votre script.
+
+                Réalisez l'analyse complète suivante :
+
+                1. **Chargement et exploration** :
+                   - Charger les données avec Pandas
+                   - Afficher `info()`, `describe()`, `dtypes`
+                   - Afficher les 5 premières lignes
+
+                2. **Nettoyage** :
+                   - Vérifier s'il y a des valeurs manquantes
+                   - S'il y en a, les gérer (dropna ou fillna)
+
+                3. **Transformation** :
+                   - Créer une colonne `tip_percentage` = `tip / total_bill * 100`
+                   - Créer une colonne `groupe` = "petit" si `size <= 2`, "moyen" si `size == 3` ou `4`, "grand" si `size >= 5`
+
+                4. **Agrégation** :
+                   - Calculer la facture moyenne par jour de la semaine
+                   - Calculer le total des pourboires par moment de la journée (Dinner/Lunch)
+                   - Compter le nombre de repas par jour
+
+                5. **NumPy** :
+                   - Extraire la colonne `total_bill` en tableau NumPy
+                   - Calculer la moyenne, l'écart-type, le min, le max avec NumPy
+                   - Créer un masque pour les factures supérieures à la moyenne
+
+                6. **Visualisation (Matplotlib sans Pandas)** :
+                   - Créer un histogramme des `total_bill` (extraire les valeurs depuis Pandas vers NumPy avec `.to_numpy()`)
+                   - Créer un scatter plot de `tip` vs `total_bill`
+                   - Ajouter titres, labels, et sauvegarder les graphiques
+
+                7. **Export** :
+                   - Exporter le DataFrame modifié dans un fichier CSV nommé `tips 분석에.csv` (ou `tips_analyse.csv`)
+
+                :::note Notions visées
+                Synthèse complète : Pandas (exploration, nettoyage, transformation, agrégation), NumPy (statistiques, masques), Matplotlib (histogramme, scatter), export CSV
+                ::::
+
+                ---
+
+                ### Exercice - Exercices de code sans documentation (préparation examen)
+
+                Créez un fichier `revision_code.py` pour votre réponse.
+
+                **Important** : faites ces exercices **sans PyCharm** (ou avec PyCharm mais sans documentation) et **sans aide extérieure**, comme lors de l'examen final.
+
+                1. Écrire une fonction qui renverse une liste (sans utiliser `reverse()` ou `[::-1]`)
+                2. Écrire une fonction qui compte les occurrences d'un élément dans une liste (sans utiliser `count()`)
+                3. Écrire une fonction qui trouve le maximum d'une liste (sans utiliser `max()`)
+                4. Écrire une fonction qui filtre une liste pour ne garder que les éléments pairs
+                5. Écrire une fonction qui calcule la moyenne d'une liste
+
+                :::note Notions visées
+                Algorithmes de base, boucles, fonctions, listes — révision pour l'examen final (volet papier)
+                ::::
+
+                ---
+
+                ### Exercice - Exercices de traces (préparation examen)
+
+                Imprimez le [tableau de trace d'exécution](/pdf/Traces_recto_verso.pdf) et réalisez les traces suivantes **sur papier**, sans ordinateur :
+
+                1. Trace d'un programme avec boucle `for` et condition `if`
+                2. Trace d'un programme avec fonction et boucle `while`
+                3. Trace d'un programme avec NumPy (Indexation de tableau)
+
+                :::note Notions visées
+                Traces d'exécution — révision pour l'examen final (volet papier, 2 points de traces/print)
+                ::::
+
+            </TabItem>
+
+            <TabItem value="2" label="🏫 Activités à faire en classe">
+
+                ## 🔨 Exercices de création
+
+                Pour chacun des exercices de cette section, vous devez créer des fichiers `.py` avec les noms indiqués.
+
+                <DocumentationAutorisee />
+
+                ---
+
+                :::info Exercice - Synthèse complète avec un nouveau jeu de données
+                Créez un fichier `synthese_complete.py` pour votre réponse.
+
+                Téléchargez le fichier <a href={useBaseUrl('/ressources/csv/Turing.csv')} download="Turing.csv">Turing.csv</a> et placez-le dans le même dossier que votre script.
+
+                Réalisez l'analyse complète :
+
+                1. **Exploration** : charger, info, dtypes, describe, shape
+                2. **Filtrage** : lauréats affiliés à MIT ou Stanford, lauréats entre 1980 et 1990
+                3. **Création de colonne** : décennie à partir de l'année
+                4. **Agrégation** : nombre de lauréats par décennie, par affiliation
+                5. **NumPy** : extraire une colonne en tableau NumPy, calculer statistiques, créer masque
+                6. **Visualisation** : histogramme des années, graphique des lauréats par décennie
+                7. **Export** : exporter le DataFrame filtré dans un CSV
+
+                :::note Notions visées
+                Synthèse complète sur un nouveau jeu de données
+                ::::
+
+                ---
+
+                :::info Exercice - Correction des erreurs fréquentes
+                Créez un fichier `erreurs_frequentes.py` pour votre réponse.
+
+                Corrigez les erreurs dans les extraits de code suivants :
+
+                ```python
+                # Erreur 1 : modification d'un tuple
+                coordonnees = (45.5, -73.5)
+                coordonnees[0] = 46.0  # Cela ne fonctionne pas!
+
+                # Correction :
+                coordonnees = (46.0, -73.5)
+                ```
+
+                ```python
+                # Erreur 2 : modification d'un ensemble pendant l'itération
+                ensemble = {1, 2, 3}
+                for element in ensemble:
+                    if element % 2 == 0:
+                        ensemble.remove(element)  # Risque de RuntimeError!
+
+                # Correction :
+                a_supprimer = {element for element in ensemble if element % 2 == 0}
+                ensemble = ensemble - a_supprimer
+                ```
+
+                ```python
+                # Erreur 3 : mauvaise utilisation de loc/iloc
+                import pandas as pd
+                df = pd.DataFrame({'A': [1, 2, 3], 'B': [4, 5, 6]})
+                valeur = df.loc[0, 'A']  # Correct, mais...
+                # df.loc[0, 0]  # Erreur si les colonnes ne sont pas nommées 0
+                # df.iloc[0, 0]  # Correct pour l'indexation positionnelle
+                ```
+
+                :::note Notions visées
+                Correction d'erreurs fréquentes, tuples, ensembles, loc/iloc
+                ::::
+
+                ---
+
+                :::info Exercice - Discussion en groupe
+                En groupes de 2-3 personnes, discutez des points suivants :
+
+                1. **Quelles notions avez-vous trouvées les plus difficiles** de R9 à R12 ?
+                2. **Quelles techniques prévoyez-vous d'utiliser** dans votre TP2 ?
+                3. **Quelles questions avez-vous** sur l'examen formatif (R14) ?
+                4. **Quelles stratégies de révision** prévoyez-vous pour les prochains cours ?
+
+                Préparez un bref résumé de votre discussion à partager avec la classe.
+                :::
+
+                ---
+
+                :::info Poursuite du TP2
+                **Poursuite du Travail Pratique 2 — Dernière période avant remise**
+
+                C'est la dernière rencontre où vous pouvez travailler sur votre TP2 avant la remise en R14. Utilisez ce temps pour :
+
+                1. **Finaliser votre code** : corrigez les bugs, optimisez les performances, commentez le code
+                2. **Finaliser vos visualisations** : assurez-vous qu'elles sont claires, bien étiquetées, sauvegardées
+                3. **Rédiger votre compte-rendu** : expliquez votre démarche, vos résultats, vos interprétations
+                4. **Vérifier l'ensemble** : code fonctionnel, analyses complètes, visualisations incluses
+
+                **Objectifs pour cette rencontre :**
+                - [ ] Toutes les analyses principales terminées
+                - [ ] Toutes les visualisations créées
+                - [ ] Compte-rendu en cours de rédaction (ou terminé)
+                - [ ] Code prêt pour la remise (ou presque)
+
+                :::note Important
+                Le TP2 sera REMIS en R14. Cette rencontre est la dernière période de travail — utilisez-la efficacement !
+                ::::
+
+                ---
+
+                :::info Questions et discussion
+                Prenez le temps de poser des questions sur :
+                - Les difficultés rencontrées dans votre TP2
+                - Les aspects techniques de votre projet
+                - La préparation à l'examen formatif (R14)
+                - La préparation à l'examen final (R15)
+                :::
+
+            </TabItem>
+        </Tabs>
+    </TabItem>
+</Tabs>

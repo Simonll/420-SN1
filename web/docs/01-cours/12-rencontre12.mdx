@@ -1,6 +1,6 @@
 ---
-title: 12 - TP2 et IA
-description: Remise partielle TP2 (10%), Intelligence artificielle
+title: 12 - NumPy (avancé) + IA (bases)
+description: NumPy (vectorisé, bornes, conditions, restructurer), IA (intro, Machine Learning), TP2 poursuite
 hide_table_of_contents: true
 draft: true
 ---
@@ -17,57 +17,302 @@ import IntroSolutionsExercices from '@site/docs/_components/IntroSolutionsExerci
 import Feedback from "../../src/components/Feedback";
 import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
 
-import AideMemoireDict from '@site/docs/_components/AideMemoireDict.mdx';
-import AideMemoireExpressionsBoolennes from '@site/docs/_components/AideMemoireExpressionsBoolennes.mdx';
-import AideMemoireFichiersJSON from '@site/docs/_components/AideMemoireFichiersJSON.mdx';
-import AideMemoireFichiersTexte from '@site/docs/_components/AideMemoireFichiersTexte.mdx';
-import AideMemoireListe from '@site/docs/_components/AideMemoireListe.mdx';
 import AideMemoireNumpyBornes from '@site/docs/_components/AideMemoireNumpyBornes.mdx';
 import AideMemoireNumpyConditions from '@site/docs/_components/AideMemoireNumpyConditions.mdx';
-import AideMemoireNumpyManipulation from '@site/docs/_components/AideMemoireNumpyManipulation.mdx';
-import AideMemoireNumpyMatplotlib from '@site/docs/_components/AideMemoireNumpyMatplotlib.mdx';
-import AideMemoireNumpyTableaux from '@site/docs/_components/AideMemoireNumpyTableaux.mdx';
 import AideMemoireNumpyVectorise from '@site/docs/_components/AideMemoireNumpyVectorise.mdx';
-import AideMemoirePandasExplorer from '@site/docs/_components/AideMemoirePandasExplorer.mdx';
-import AideMemoirePandasExporter from '@site/docs/_components/AideMemoirePandasExporter.mdx';
-import AideMemoirePandasFiltrerTrier from '@site/docs/_components/AideMemoirePandasFiltrerTrier.mdx';
-import AideMemoirePandasNettoyer from '@site/docs/_components/AideMemoirePandasNettoyer.mdx';
-import AideMemoirePandasParcourir from '@site/docs/_components/AideMemoirePandasParcourir.mdx';
-import AideMemoirePandasSelectionner from '@site/docs/_components/AideMemoirePandasSelectionner.mdx';
-import AideMemoirePandasStatistiques from '@site/docs/_components/AideMemoirePandasStatistiques.mdx';
-import AideMemoirePandasTransformer from '@site/docs/_components/AideMemoirePandasTransformer.mdx';
-import AideMemoirePandasVisualiser from '@site/docs/_components/AideMemoirePandasVisualiser.mdx';
-import AideMemoireSet from '@site/docs/_components/AideMemoireSet.mdx';
-import AideMemoireTuple from '@site/docs/_components/AideMemoireTuple.mdx';
+import AideMemoireNumpyManipulation from '@site/docs/_components/AideMemoireNumpyManipulation.mdx';
 
+import Mod_NumpyVectorise from '../_cours-modules/_numpy-vectorise.mdx';
+import Mod_NumpyBornes from '../_cours-modules/_numpy-bornes.mdx';
+import Mod_NumpyConditions from '../_cours-modules/_numpy-conditions.mdx';
+import Mod_RestructurerSauvegarder from '../_cours-modules/_restructurer-sauvegarder.mdx';
 import Mod_IaIntro from '../_cours-modules/_ia-intro.mdx';
 import Mod_MachineLearning from '../_cours-modules/_machine-learning.mdx';
-import Mod_DeepLearning from '../_cours-modules/_deep-learning.mdx';
-import Mod_EmpreinteEcologique from '../_cours-modules/_empreinte-ecologique.mdx';
-import Mod_ScikitLearn from '../_cours-modules/_scikit-learn.mdx';
 
-# TP2, Intelligence artificielle
+# NumPy (avancé) + IA (bases)
 
 <Tabs queryString="onglet">
 
-    <TabItem value="ia" label="*🤖 Intelligence artificielle*" default>
+    <TabItem value="numpy-vectorise" label="NumPy — Calcul vectorisé">
+        <Mod_NumpyVectorise />
+    </TabItem>
+
+    <TabItem value="numpy-bornes" label="NumPy — Bornes et correction">
+        <Mod_NumpyBornes />
+    </TabItem>
+
+    <TabItem value="numpy-conditions" label="NumPy — Filtres et masques">
+        <Mod_NumpyConditions />
+    </TabItem>
+
+    <TabItem value="restructurer" label="NumPy — Restructurer / Sauvegarder">
+        <Mod_RestructurerSauvegarder />
+    </TabItem>
+
+    <TabItem value="ia-intro" label="IA — Introduction">
         <Mod_IaIntro />
     </TabItem>
 
-    <TabItem value="ml" label="*🧠🧮 Apprentissage machine*">
+    <TabItem value="machine-learning" label="IA — Apprentissage machine">
         <Mod_MachineLearning />
     </TabItem>
 
-    <TabItem value="dl" label="*🧠🕸️ Apprentissage profond*">
-        <Mod_DeepLearning />
+    <TabItem value="tp2" label="TP2 — Poursuite">
+
+        :::info Objectif de cette rencontre
+        Cette rencontre marque la **poursuite du Travail Pratique 2 (TP2)**. Vous avez maintenant les notions avancées de NumPy et une introduction à l'Intelligence Artificielle et au Machine Learning. Vous pouvez maintenant :
+        - Utiliser des opérations vectorisées avancées pour manipuler efficacement des données
+        - Donner une vue d'ensemble de l'IA et du Machine Learning
+        - Poursuivre votre analyse de données pour le TP2
+        :::
+
+        ---
+
+        :::info Lien avec le TP2
+        Les notions vues aujourd'hui (NumPy avancé, introduction à l'IA/ML) peuvent enrichir votre TP2 :
+        - **NumPy avancé** : pour des manipulations de données plus sophistiquées (filtres complexes, restructuration de données)
+        - **IA/ML** : pour situer votre analyse dans un contexte plus large (votre analyse descriptive peut être un préliminaire à des analyses prédictives)
+        :::
+
+        ---
+
+        :::info Poursuite du TP2
+        Poursuivez votre TP2 en exploitant les nouvelles notions :
+        1. **Utilisez des opérations vectorisées** pour optimiser vos calculs
+        2. **Appliquez des filtres et masques** pour extraire les données pertinentes
+        3. **Restructurez vos données** si nécessaire pour vos analyses ou visualisations
+        4. **Référez-vous au contexte IA/ML** si votre analyse touche à des prédictions ou des classifications
+        :::
+
     </TabItem>
 
-    <TabItem value="ecologisation" label="*🌳 Empreinte écologique*">
-        <Mod_EmpreinteEcologique />
-    </TabItem>
+    <TabItem value="Activités" label="Activités">
 
-    <TabItem value="learn" label="*🤖 Scikit-learn*">
-        <Mod_ScikitLearn />
-    </TabItem>
+        <RappelFonctionnementClasseInverse/>
+        <Tabs>
+            <TabItem value="1" label="🏠 Activités à faire à la maison">
 
+                ## Auto-validation des connaissances
+
+                [**Ce formulaire**](https://forms.gle/SU1rJpYeoJ6XB1QA8) sert à vérifier votre compréhension des éléments les plus importants de la rencontre R12. Ne faites ce questionnaire **que lorsque vous vous sentez en très bonne maîtrise de la matière**. En classe, dès votre arrivée, vous aurez un **questionnaire très similaire**, évalué **sommativement**, à compléter sans accès à **aucune documentation**.
+
+                ::::warning
+                Ne pas remplir le formulaire diminue fortement vos chances de réussir l'évaluation sommative en début de rencontre. \\
+                Assurez-vous de bien comprendre toutes les notions derrière chaque question.
+                :::::
+
+                ---
+
+                ## Exercices de compréhension
+
+                ### Exercice - Broadcasting NumPy
+
+                Créez un fichier `numpy_broadcasting.py` pour votre réponse.
+
+                1. Créez un tableau NumPy 2D de forme (3, 4) contenant des nombres aléatoires entre 0 et 10
+                2. Ajoutez un vecteur ligne de 4 éléments à chaque ligne du tableau (broadcasting)
+                3. Multipliez chaque colonne par un scalaire différent (utilisez un vecteur colonne)
+                4. Affichez le résultat final
+
+                :::note Notions visées
+                NumPy, broadcasting, opérations vectorisées, dimensions
+                ::::
+
+                ---
+
+                ### Exercice - Filtres et masques avancés
+
+                Créez un fichier `numpy_filtres.py` pour votre réponse.
+
+                1. Générez un tableau NumPy de 1000 nombres aléatoires suivant une loi normale (moyenne=50, écart-type=10)
+                2. Créez un masque pour les valeurs comprises entre 40 et 60
+                3. Appliquez le masque pour extraire les valeurs dans cette plage
+                4. Créez un second masque pour les valeurs en dehors de l'intervalle [30, 70]
+                5. Comptez le nombre de valeurs dans chaque catégorie
+                6. Utilisez `np.where()` pour créer un tableau indiquant "dans l'intervalle" ou "hors intervalle" selon les valeurs
+
+                :::note Notions visées
+                NumPy, masques booléens, `np.where()`, filtrage, `logical_and`, `logical_or`
+                ::::
+
+                ---
+
+                ### Exercice - Reshape et manipulation de dimensions
+
+                Créez un fichier `numpy_reshape.py` pour votre réponse.
+
+                1. Créez un tableau NumPy 1D contenant les nombres de 0 à 23
+                2. Reshape en un tableau 2D de forme (4, 6)
+                3. Reshape en un tableau 3D de forme (2, 3, 4)
+                4. Extrayez une "slice" 2D du tableau 3D (ex: la première matrice 2D)
+                5. Utilisez `np.vstack()` pour combiner deux tableaux 2D verticalement
+                6. Utilisez `np.hstack()` pour combiner deux tableaux 2D horizontalement
+                7. Sauvegardez le tableau final dans un fichier `.npy` et le recharger
+
+                :::note Notions visées
+                NumPy, `reshape`, `vstack`, `hstack`, `save`, `load`, manipulation de dimensions
+                ::::
+
+                ---
+
+                ### Exercice - Introduction à l'IA
+
+                Créez un fichier `ia_introduction.py` pour votre réponse.
+
+                Répondez par écrit (dans un fichier markdown ou un commentaire dans le fichier Python) aux questions suivantes :
+
+                1. Qu'est-ce que l'Intelligence Artificielle (IA) ?
+                2. Quelle est la différence entre IA faible et IA forte ?
+                3. Qu'est-ce que le Machine Learning (ML) ?
+                4. Quelles sont les principales catégories de ML ?
+                5. Donnez un exemple concret d'application du ML dans un domaine scientifique
+
+                :::note Notions visées
+                IA, Machine Learning, catégories de ML, applications
+                ::::
+
+                ---
+
+                ### Exercice - Machine Learning — Régression linéaire simple
+
+                Créez un fichier `ml_regression.py` pour votre réponse.
+
+                1. Générez des données synthétiques : `x` (100 points entre 0 et 10), `y = 2 * x + 1 + bruit` (bruit normal centré réduit)
+                2. Utilisez NumPy pour calculer les paramètres d'une régression linéaire simple (pente et intercept) via la méthode des moindres carrés
+                3. Tracez les points et la droite de régression avec Matplotlib
+                4. Calculez le coefficient de détermination (R²)
+                5. Affichez les résultats (pente, intercept, R²)
+
+                :::note Notions visées
+                Machine Learning, régression linéaire, moindres carrés, NumPy, Matplotlib
+                ::::
+
+                ---
+
+                ### Exercice - Machine Learning — Classification simple
+
+                Créez un fichier `ml_classification.py` pour votre réponse.
+
+                1. Générez des données synthétiques pour 2 classes (ex: points autour de (2, 2) pour la classe 0, et autour de (8, 8) pour la classe 1)
+                2. Utilisez un algorithme de classification simple (k-NN ou classification par seuil) pour prédire la classe d'un nouveau point
+                3. Tracez les points avec des couleurs différentes pour chaque classe
+                4. Marquez le nouveau point à classifier avec une couleur/marker différent
+
+                :::note Notions visées
+                Machine Learning, classification, k-NN, visualisation de classes
+                ::::
+
+            </TabItem>
+
+            <TabItem value="2" label="🏫 Activités à faire en classe">
+
+                ## 🔨 Exercices de création
+
+                Pour chacun des exercices de cette section, vous devez créer des fichiers `.py` avec les noms indiqués.
+
+                <DocumentationAutorisee />
+
+                ---
+
+                :::info Exercice - Opérations vectorisées avancées
+                Créez un fichier `numpy_avance.py` pour votre réponse.
+
+                1. Chargez le fichier <a href={useBaseUrl('/ressources/csv/mpg_dataset.csv')} download="mpg_dataset.csv">mpg_dataset.csv</a> avec Pandas
+                2. Extrayez les colonnes `mpg`, `horsepower`, `weight` en tableaux NumPy
+                3. Normalisez chaque colonne (soustraire la moyenne, diviser par l'écart-type)
+                4. Calculez la matrice de corrélation entre ces 3 colonnes (utilisez `np.corrcoef` ou `np.cov`)
+                5. Affichez la matrice de corrélation
+
+                :::note Notions visées
+                NumPy, normalisation, `corrcoef`, `cov`, statistiques multivariées
+                ::::
+
+                ---
+
+                :::info Exercice - Filtres multiples avec NumPy
+                Créez un fichier `numpy_filtres_multiples.py` pour votre réponse.
+
+                Téléchargez le fichier <a href={useBaseUrl('/ressources/csv/tips_dataset.csv')} download="tips_dataset.csv">tips_dataset.csv</a> et placez-le dans le même dossier que votre script.
+
+                1. Chargez les données avec Pandas
+                2. Extrayez les colonnes `total_bill`, `tip`, `size` en tableaux NumPy
+                3. Créez un masque pour les repas où :
+                   - `total_bill > 20` ET
+                   - `tip > 3` ET
+                   - `size >= 2`
+                4. Appliquez le masque et affichez les données filtrées
+                5. Comptez le nombre de repas correspondant aux critères
+                6. Créez un second masque pour les repas où `total_bill < 10` OU `tip < 2`
+
+                :::note Notions visées
+                NumPy, masques booléens multiples, `logical_and`, `logical_or`, filtrage
+                ::::
+
+                ---
+
+                :::info Exercice - Restructurer des données
+                Créez un fichier `numpy_restructurer.py` pour votre réponse.
+
+                1. Générez un tableau NumPy 1D de 24 éléments
+                2. Reshape en (2, 3, 4) — 2 matrices de 3 lignes et 4 colonnes
+                3. Extrayez chaque matrice 2D
+                4. Calculez la somme par matrice
+                5. Utilisez `np.transpose` pour transposer l'une des matrices
+                6. Concaténez les deux matrices transposées avec `np.concatenate`
+                7. Sauvegardez le résultat dans un fichier `.npy` et recharger pour vérifier
+
+                :::note Notions visées
+                NumPy, `reshape`, `transpose`, `concatenate`, `save`, `load`, manipulation de dimensions
+                ::::
+
+                ---
+
+                :::info Exercice - Machine Learning avec scikit-learn (optionnel)
+                Créez un fichier `ml_scikit_learn.py` pour votre réponse.
+
+                1. Utilisez le jeu de données `make_regression` de scikit-learn pour générer des données
+                2. Entraînez un modèle de régression linéaire
+                3. Évaluez le modèle avec le R² sur les données d'entraînement
+                4. Tracez les points et la droite de régression
+
+                :::note Notions visées
+                Machine Learning, scikit-learn, régression linéaire, évaluation de modèle
+                ::::
+
+                ---
+
+                :::info Poursuite du TP2
+                **Poursuite du Travail Pratique 2**
+
+                Poursuivez votre TP2 en utilisant les notions vues aujourd'hui :
+
+                1. **NumPy avancé** : appliquez des opérations vectorisées, des filtres complexes, des restructurations de données si votre analyse le nécessite
+
+                2. **IA/ML** : si votre TP2 inclut des analyses prédictives ou des classifications, utilisez les concepts vus aujourd'hui (régression, classification)
+
+                3. **Documentation** : expliquez dans votre rapport comment les techniques NumPy avancées ou les concepts ML ont enrichi votre analyse
+
+                **Objectifs pour cette rencontre :**
+                - [ ] Avancer d'au moins une section du TP2
+                - [ ] Utiliser au moins une technique NumPy avancée (broadcasting, filtres multiples, reshape)
+                - [ ] Documenter vos choix techniques
+
+                :::note Important
+                Le TP2 n'est PAS à remettre cette rencontre. Vous aurez le temps de le finaliser en R13 et R14.
+                ::::
+
+                ---
+
+                :::info Questions et discussion
+                Prenez le temps de poser des questions sur :
+                - Les techniques de broadcasting et quand les utiliser
+                - Les filtres et masques complexes
+                - La manipulation de dimensions (reshape, transpose)
+                - Les concepts de base du Machine Learning
+                - Les difficultés rencontrées dans votre TP2
+                :::
+
+            </TabItem>
+        </Tabs>
+    </TabItem>
 </Tabs>

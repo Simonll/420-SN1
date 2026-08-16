@@ -1,31 +1,186 @@
 ---
-title: 14 - Examen formatif
-description: Autoévaluation, simulation d'examen, correction et révision
+title: 14 - Examen formatif + Remise TP2
+description: Autoévaluation, simulation d'examen, correction, révision des notions R9→R13, et remise finale du TP2
 hide_table_of_contents: true
 draft: true
 ---
 
-# Examen intra formatif
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import useBaseUrl from '@docusaurus/useBaseUrl';
+import Column from "../../src/components/Column";
+import Row from "../../src/components/Row";
+import DocumentationAutorisee from '@site/docs/_components/DocumentationAutorisee.mdx';
+import DocumentationInterdite from '@site/docs/_components/DocumentationInterdite.mdx';
 
+# Examen formatif + Remise TP2
 
 ## Déroulement
 
-
 ### **Les 20 premières minutes**
-
 🔸 Autoévaluation de votre performance et rétroaction sur le cours
 
-
 ### **Les deux heures suivantes**
-
-🔹 Simulation de l’examen sommatif \
-🔹 Réalisée avec les mêmes [contraintes et directives](/cours/rencontre15) que pour l’examen sommatif
+🔹 Simulation de l'examen sommatif \\
+🔹 Réalisée avec les mêmes [contraintes et directives](/cours/rencontre15) que pour l'examen sommatif
 
 ### **Le reste du temps**
-
-🔸 Observation de la correction de l’examen formatif \
-🔸 Révision des notions avec lesquelles vous avez eu le plus de difficulté
+🔸 Observation de la correction de l'examen formatif \\
+🔸 Révision des notions avec lesquelles vous avez eu le plus de difficulté \\
+🔸 **Remise officielle du TP2** (poussée sur GitHub — dernière vérification)
 
 ### Important
-**Les étudiants absents ne pourront pas accéder à l’examen formatif.** \
+**Les étudiants absents ne pourront pas accéder à l'examen formatif.** \\
 Aucune copie ne sera partagée.
+
+---
+
+## Notions évaluées à l'examen formatif
+
+L'examen formatif couvre l'ensemble des notions vues de **R9 à R13**, soit :
+
+| Blocs | Notions |
+|-------|---------|
+| **R9 — Collections, Fichiers, Démarrage TP2** | Set, Tuple, Dict, Compréhension de liste, Lecture/Écriture CSV avec Pandas, Lecture/Écriture JSON avec Pandas |
+| **R10 — Pandas avancé + Matplotlib bases** | Sélection (`loc`, `iloc`), Filtres et tri (`sort_values`, conditions complexes), Parcours, Nettoyage (`dropna`, `fillna`, `drop_duplicates`), Transformation (nouvelles colonnes, `apply`, `map`), Agrégations (`groupby`, `mean`, `sum`, `count`), Graphiques de base sans Pandas (courbes, barres, scatter, histogrammes, légendes, styles) |
+| **R11 — NumPy bases + Matplotlib intégration** | Création et inspection de tableaux NumPy (`array`, `shape`, `dtype`, `ndim`, `size`), Indexation et slicing, Opérations vectorisées, Masques booléens, Intégration NumPy + Matplotlib (graphiques depuis arrays), Histogrammes, Scatter plots |
+| **R12 — NumPy avancé + IA bases** | Broadcasting, Filtres et masques avancés, Reshape et manipulation de dimensions, Sauvegarde/chargement `.npy`, Introduction à l'IA, Machine Learning (régression, classification) |
+| **R13 — IA avancé + Synthèse** | Deep Learning (vue d'ensemble), Empreinte écologique de l'IA, Scikit-learn (pratique), Exercice de synthèse (Pandas + NumPy + Matplotlib), Révision ciblée |
+
+:::note
+Les notions suivantes **ne sont PAS au programme de l'examen final** et donc peu évaluées au formatif :
+- Exceptions (`try/except`, `raise`) — vues en R4, hors programme de l'examen final
+- Dépôts Git — hors programme
+- Docstrings — hors programme
+- NumPy avancé (broadcasting, reshape, masques complexes) — hors programme de l'examen final (mais vue en cours)
+- Scikit-learn et IA — hors programme de l'examen final (mais vue en cours)
+- Dépôts Git — hors programme
+- Docstrings — hors programme
+- Exceptions (try/except, raise) — hors programme
+- NumPy — hors programme de l'examen final (mais vue en cours)
+- Scikit-Learn et IA (Intelligence artificielle) — hors programme de l'examen final
+:::
+
+---
+
+## Exercices de révision (à faire avant le formatif)
+
+### Révision — Volet papier (traces et code à écrire)
+
+**Matériel autorisé :** aucune documentation, aucun ordinateur.
+
+**Préparez-vous en révisant :**
+
+1. **Traces d'exécution** :
+   - Imprimez le [tableau de trace d'exécution](/pdf/Traces_recto_verso.pdf)
+   - Révisez les traces vues en classe (R1 à R6, R9 à R13)
+   - Pratiquez avec les exercices de traces sur papier
+
+2. **Code à écrire sans documentation** :
+   - Révisez les exercices de code des rencontres R9, R10, R11, R12, R13
+   - Révisez les fonctions de base (liste, dictionnaire, set, tuple)
+   - Révisez les algorithmes de base (compter, filtrer, transformer, agréger)
+
+3. **Graphique sans Pandas** :
+   - Révisez la création de graphiques avec Matplotlib **sans utiliser Pandas**
+   - Pratiquez avec des tableaux NumPy ou des listes Python
+
+:::note
+L'examen final (R15) comporte 3 questions au volet papier :
+- Tracer un graphique correspondant au code présenté (2 points)
+- Trouver le contenu affiché par les instructions `print()` (2 points)
+- Écrire du code pour résoudre un problème (2 points) — niveau similaire aux exercices de R11-R13
+:::
+
+### Révision — Volet ordinateur (Pandas + Matplotlib)
+
+**Matériel autorisé :** ordinateur, documentation locale du cours, Python/Pandas/Matplotlib.
+
+**Préparez-vous en révisant :**
+
+1. **Fichiers CSV avec Pandas** :
+   - `read_csv()` — paramètres importants (delimiter, header, etc.)
+   - `to_csv()` — exportation
+   - Exploration (`info()`, `dtypes`, `describe()`, `head()`, `shape`)
+   - Sélection (`loc`, `iloc`)
+   - Filtres booléens (conditions simples et complexes)
+   - Tri (`sort_values()`)
+   - Nettoyage (`dropna()`, `fillna()`, `drop_duplicates()`)
+   - Transformation (nouvelles colonnes, `apply()`, `map()`)
+   - Agrégations (`groupby()`, `mean()`, `sum()`, `count()`)
+
+2. **Fichiers JSON avec Pandas** :
+   - `read_json()` — lecture
+   - `to_json()` — écriture
+
+3. **Graphiques sans Pandas (Matplotlib)** :
+   - Création de graphiques depuis tableaux NumPy ou listes
+   - `plot()`, `scatter()`, `bar()`, `hist()`
+   - Personnalisation (`title`, `xlabel`, `ylabel`, `legend`, `grid`, `savefig`)
+   - Sauvegarde des graphiques
+
+4. **Synthèse** :
+   - Combiner toutes les notions dans un projet complet (comme l'exercice de synthèse de R13)
+
+---
+
+## Formatif — Simulation
+
+### Conditions réelles
+- **Internet désactivé**
+- **Documentation locale uniquement** (site du cours)
+- **Aucune question** sauf problème technique avec l'IDE
+- **Vidéos YouTube non accessibles**
+
+### Structure de l'examen
+- **Volet 1 — Papier (sans ordinateur, sans documentation)** : 3 questions (6 points)
+  - Tracer un graphique (2 points) — graphique sans Pandas, difficulté similaire à R10/R11
+  - Trouver le contenu affiché par `print()` (2 points) — code à analyser, pas de trace
+  - Écrire du code pour résoudre un problème (2 points) — niveau similaire aux exercices de R11-R13
+
+- **Volet 2 — Ordinateur** : 3 questions (6 points)
+  - Graphique sans Pandas (2 points) — données à adapter pour Matplotlib
+  - Fichier CSV avec Pandas (2 points) — analyse d'un fichier CSV avec Pandas
+  - Synthèse (2 points) — intégration d'un large ensemble de notions
+
+---
+
+## Remise du TP2
+
+### Checklist de remise
+- [ ] Code du TP2 terminé et fonctionnel
+- [ ] Analyse des données complète (exploration, nettoyage, transformation, agrégation)
+- [ ] Visualisations incluses dans le projet (Matplotlib sans Pandas)
+- [ ] Compte-rendu rédigé
+- [ ] Code poussé sur GitHub (dernier commit avant minuit)
+- [ ] Documentation des choix techniques
+
+### Procédure
+1. **Dernier commit** sur votre dépôt GitHub du TP2 avant minuit
+2. **Push** de toutes les modifications
+3. **Vérification** que le dépôt est accessible et complet
+4. **Remise** : le code de votre dépôt GIT sera automatiquement récupéré par votre enseignant.e, sans que vous ayez à intervenir
+
+:::note
+Le TP2 représente 25% de la note finale. Assurez-vous que votre dépôt est complet et fonctionnel avant la remise.
+:::
+
+---
+
+## Après l'examen formatif
+
+### Correction collective
+Après l'examen, nous ferons une **correction collective** de l'examen formatif. Prenez des notes sur :
+- Vos erreurs et comment les corriger
+- Les notions que vous devez réviser
+- Les stratégies pour l'examen final (R15)
+
+### Révision personnalisée
+Identifiez vos points faibles à partir de l'examen formatif et révisez spécifiquement :
+- Les notions où vous avez perdu des points
+- Les types de questions qui vous ont posé problème
+- Les stratégies de gestion du temps
+
+:::info Prochain cours
+La rencontre suivante est **l'examen final (R15)**, qui compte pour **35% de la note finale**.
+:::

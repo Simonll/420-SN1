@@ -1,6 +1,6 @@
 ---
-title: 9 - Fichiers, Pandas
-description: Fichiers (texte/CSV/JSON), Intro, Explorer, Filtrer / Trier, Sélectionner, Parcourir, Nettoyer, Transformer, Statistiques, Exporter, Visualiser
+title: 9 - Collections, Fichiers, Démarrage TP2
+description: Set, Tuple, Dict, Compréhension de liste, Fichier CSV (via Pandas), Fichier JSON (via Pandas), Présentation et démarrage du TP2
 hide_table_of_contents: true
 draft: true
 ---
@@ -17,116 +17,278 @@ import IntroSolutionsExercices from '@site/docs/_components/IntroSolutionsExerci
 import Feedback from "../../src/components/Feedback";
 import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
 
-import AideMemoireDict from '@site/docs/_components/AideMemoireDict.mdx';
-import AideMemoireExpressionsBoolennes from '@site/docs/_components/AideMemoireExpressionsBoolennes.mdx';
-import AideMemoireFichiersJSON from '@site/docs/_components/AideMemoireFichiersJSON.mdx';
-import AideMemoireFichiersTexte from '@site/docs/_components/AideMemoireFichiersTexte.mdx';
-import AideMemoireListe from '@site/docs/_components/AideMemoireListe.mdx';
-import AideMemoireNumpyBornes from '@site/docs/_components/AideMemoireNumpyBornes.mdx';
-import AideMemoireNumpyConditions from '@site/docs/_components/AideMemoireNumpyConditions.mdx';
-import AideMemoireNumpyManipulation from '@site/docs/_components/AideMemoireNumpyManipulation.mdx';
-import AideMemoireNumpyMatplotlib from '@site/docs/_components/AideMemoireNumpyMatplotlib.mdx';
-import AideMemoireNumpyTableaux from '@site/docs/_components/AideMemoireNumpyTableaux.mdx';
-import AideMemoireNumpyVectorise from '@site/docs/_components/AideMemoireNumpyVectorise.mdx';
-import AideMemoirePandasExplorer from '@site/docs/_components/AideMemoirePandasExplorer.mdx';
-import AideMemoirePandasExporter from '@site/docs/_components/AideMemoirePandasExporter.mdx';
-import AideMemoirePandasFiltrerTrier from '@site/docs/_components/AideMemoirePandasFiltrerTrier.mdx';
-import AideMemoirePandasNettoyer from '@site/docs/_components/AideMemoirePandasNettoyer.mdx';
-import AideMemoirePandasParcourir from '@site/docs/_components/AideMemoirePandasParcourir.mdx';
-import AideMemoirePandasSelectionner from '@site/docs/_components/AideMemoirePandasSelectionner.mdx';
-import AideMemoirePandasStatistiques from '@site/docs/_components/AideMemoirePandasStatistiques.mdx';
-import AideMemoirePandasTransformer from '@site/docs/_components/AideMemoirePandasTransformer.mdx';
-import AideMemoirePandasVisualiser from '@site/docs/_components/AideMemoirePandasVisualiser.mdx';
 import AideMemoireSet from '@site/docs/_components/AideMemoireSet.mdx';
 import AideMemoireTuple from '@site/docs/_components/AideMemoireTuple.mdx';
+import AideMemoireDict from '@site/docs/_components/AideMemoireDict.mdx';
+import AideMemoireFichiersJSON from '@site/docs/_components/AideMemoireFichiersJSON.mdx';
 
-import Mod_FichierIntro from '../_cours-modules/_fichier-intro.mdx';
-import Mod_FichierTexte from '../_cours-modules/_fichier-texte.mdx';
+import Mod_Set from '../_cours-modules/_set.mdx';
+import Mod_Tuple from '../_cours-modules/_tuple.mdx';
+import Mod_Dict from '../_cours-modules/_dict.mdx';
+import Mod_ComprehensionListe from '../_cours-modules/_comprehension-liste.mdx';
 import Mod_FichierCsv from '../_cours-modules/_fichier-csv.mdx';
 import Mod_FichierJson from '../_cours-modules/_fichier-json.mdx';
-import Mod_PandasIntro from '../_cours-modules/_pandas-intro.mdx';
-import Mod_PandasExplorer from '../_cours-modules/_pandas-explorer.mdx';
-import Mod_PandasFiltrerTrier from '../_cours-modules/_pandas-filtrer-trier.mdx';
-import Mod_PandasSelectionner from '../_cours-modules/_pandas-selectionner.mdx';
-import Mod_PandasParcourir from '../_cours-modules/_pandas-parcourir.mdx';
-import Mod_PandasNettoyer from '../_cours-modules/_pandas-nettoyer.mdx';
-import Mod_PandasTransformer from '../_cours-modules/_pandas-transformer.mdx';
-import Mod_PandasStatistiques from '../_cours-modules/_pandas-statistiques.mdx';
-import Mod_PandasExporter from '../_cours-modules/_pandas-exporter.mdx';
-import Mod_PandasVisualiser from '../_cours-modules/_pandas-visualiser.mdx';
 
-# Fichiers, Pandas
+# Collections, Fichiers, Démarrage TP2
 
 <Tabs queryString="onglet">
 
-    <TabItem value="fichier" label="Fichier (intro)">
-        <Mod_FichierIntro />
+    <TabItem value="set" label="Ensemble (set)">
+        <Mod_Set />
     </TabItem>
 
-    <TabItem value="texte" label="Fichier texte">
-        <Mod_FichierTexte />
+    <TabItem value="tuple" label="Tuple (tuple)">
+        <Mod_Tuple />
     </TabItem>
 
-    <TabItem value="csv" label="Fichier CSV">
+    <TabItem value="dict" label="Dictionnaire (dict)">
+        <Mod_Dict />
+    </TabItem>
+
+    <TabItem value="listcomp" label="Compréhension de liste">
+        <Mod_ComprehensionListe />
+    </TabItem>
+
+    <TabItem value="csv" label="Fichier CSV (via Pandas)">
         <Mod_FichierCsv />
     </TabItem>
 
-    <TabItem value="json" label="Fichier JSON">
+    <TabItem value="json" label="Fichier JSON (via Pandas)">
         <Mod_FichierJson />
     </TabItem>
 
-    <TabItem value="pandas" label="Explorer" default>
-        <Mod_PandasExplorer />
+    <TabItem value="tp2" label="TP2 — Présentation et démarrage">
+
+        :::info Objectif de cette rencontre
+        Cette rencontre marque le **démarrage du Travail Pratique 2 (TP2)**. Vous avez maintenant les bases des collections, des fichiers CSV et JSON via Pandas. Vous allez maintenant :
+        - **Comprendre l'énoncé** du TP2
+        - **Planifier** votre approche
+        - **Démarrer** la mise en place de votre projet
+        :::
+
+        ---
+
+        :::info Présentation du TP2
+        Le TP2 est un projet qui s'étale sur plusieurs rencontres. Il consiste à analyser un jeu de données réel et à produire une analyse complète incluant :
+        - Le chargement et l'exploration de données (Pandas)
+        - Le nettoyage et la transformation des données
+        - Des visualisations (Matplotlib)
+        - Un compte-rendu écrit
+        :::
+
+        ---
+
+        :::info Planification
+        | Étape | Rencontre | Objectif |
+        |-------|-----------|----------|
+        | 1 | R9 | Présentation, lecture de l'énoncé, démarrage |
+        | 2 | R10 | Poursuite — Pandas avancé, Matplotlib bases |
+        | 3 | R11 | Poursuite — NumPy bases |
+        | 4 | R12 | Poursuite — NumPy avancé, IA bases |
+        | 5 | R13 | Poursuite — IA avancé, synthèse |
+        | 6 | R14 | Finalisation et remise |
+        :::
+
+        ---
+
+        :::info Démarrage
+        Pour commencer, vous devez :
+        1. **Lire attentivement l'énoncé** du TP2
+        2. **Cloner ou vérifier** votre dépôt GitHub TP2
+        3. **Démarrer** la mise en place de votre environnement de travail
+        4. **Commencer** par les premières étapes du projet
+        :::
+
+        ---
+
+        :::info Ressources
+        - [Documentation Pandas](https://pandas.pydata.org/docs/)
+        - [Documentation Matplotlib](https://matplotlib.org/stable/contents.html)
+        - [Documentation NumPy](https://numpy.org/doc/stable/)
+        - [Guide GitHub du cours](/docs/github)
+        :::
+
     </TabItem>
 
-    <TabItem value="pandasfiltrer" label="Filtrer / Trier">
-        <Mod_PandasFiltrerTrier />
-    </TabItem>
-
-    <TabItem value="pandasselectionner" label="Sélectionner">
-        <Mod_PandasSelectionner />
-    </TabItem>
-
-    <TabItem value="pandasparcourir" label="Parcourir">
-        <Mod_PandasParcourir />
-    </TabItem>
-
-    <TabItem value="pandasnettoyer" label="Nettoyer">
-        <Mod_PandasNettoyer />
-    </TabItem>
-
-    <TabItem value="pandastransformer" label="Transformer">
-        <Mod_PandasTransformer />
-    </TabItem>
-
-    <TabItem value="pandasgrouper" label="Statistiques">
-        <Mod_PandasStatistiques />
-    </TabItem>
-
-    <TabItem value="pandasexporter" label="Exporter">
-        <Mod_PandasExporter />
-    </TabItem>
-
-    <TabItem value="pandasvisualiser" label="Visualiser">
-        <Mod_PandasVisualiser />
-    </TabItem>
-
-<TabItem value="Activités" label="Activités">
+    <TabItem value="Activités" label="Activités">
 
         <RappelFonctionnementClasseInverse/>
         <Tabs>
             <TabItem value="1" label="🏠 Activités à faire à la maison">
-                ## 🧠 Auto-validation des connaissances
 
-                [**Ce formulaire**](https://forms.gle/PVFuF6aH8kcRrbaYA) sert à vérifier votre compréhension des éléments les plus importants de la rencontre R11. Ne faites ce questionnaire **que lorsque vous vous sentez en très bonne maîtrise de la matière**. En classe, dès votre arrivée, vous aurez un **questionnaire très similaire**, évalué **sommativement**, à compléter sans accès à **aucune documentation**.
+                ## Auto-validation des connaissances
+
+                [**Ce formulaire**](https://forms.gle/PVFuF6aH8kcRrbaYA) sert à vérifier votre compréhension des éléments les plus importants de la rencontre R09. Ne faites ce questionnaire **que lorsque vous vous sentez en très bonne maîtrise de la matière**. En classe, dès votre arrivée, vous aurez un **questionnaire très similaire**, évalué **sommativement**, à compléter sans accès à **aucune documentation**.
 
                 ::::warning
-                Ne pas remplir le formulaire diminue fortement vos chances de réussir l’évaluation sommative en début de rencontre. \
+                Ne pas remplir le formulaire diminue fortement vos chances de réussir l'évaluation sommative en début de rencontre. \\
                 Assurez-vous de bien comprendre toutes les notions derrière chaque question.
+                :::::
+
+                ---
+
+                ## Exercices de compréhension
+
+                ### Exercice - Manipulation de set
+
+                Créez un fichier `set_manipulation.py` pour votre réponse.
+
+                À partir des ensembles suivants :
+
+                ```python
+                ensemble1 = {1, 2, 3, 4, 5}
+                ensemble2 = {4, 5, 6, 7, 8}
+                ```
+
+                Créez 3 nouveaux ensembles et complétez 1 cas de conversion :
+
+                1. Union des deux ensembles → `{1, 2, 3, 4, 5, 6, 7, 8}`
+                2. Intersection des deux ensembles → `{4, 5}`
+                3. Différence ensemble1 - ensemble2 → `{1, 2, 3}`
+                4. La liste suivante contient des doublons. Convertissez-la en ensemble pour les supprimer, puis reconvertissez-la en liste triée.
+
+                   ```python
+                   mesures = [3, 7, 3, 1, 7, 9, 1, 5]
+                   ```
+                   Résultat attendu : `[1, 3, 5, 7, 9]`
+
+                :::note Notions visées
+                Ensembles (`set`), union, intersection, différence, conversion `list()` / `sorted()`
                 ::::
+
+                ---
+
+                ### Exercice - Tuples et données immuables
+
+                Créez un fichier `tuple_exercice.py` pour votre réponse.
+
+                Un tuple est une collection **immuable** qui peut contenir des données de types différents.
+
+                ```python
+                coordonnee = (45.5, -73.5, "Montreal")
+                ```
+
+                Écrivez un programme qui :
+                1. Affiche chaque élément du tuple sur une ligne séparée avec un label
+                2. Tente de modifier le 3e élément (ça doit lever une erreur — c'est normal!)
+                3. Créez un nouveau tuple avec les mêmes données mais avec un quatrième élément (ex: "Canada")
+
+                :::note Notions visées
+                Tuples, immuabilité, accès par index, unpacking
+                ::::
+
+                ---
+
+                ### Exercice - Dictionnaires
+
+                Créez un fichier `dictionnaire_exercice.py` pour votre réponse.
+
+                Les données de température d'une journée d'une ville sont stockées sous forme de dictionnaire.
+
+                ```python
+                info = {
+                    "lieu": "Raccoon City",
+                    "date": "2025-07-12",
+                    "temperatures_C": {
+                        "Matin": 18.2,
+                        "Midi": 22.5,
+                        "Après-midi": 24.1,
+                        "Soir": 20.3
+                    }
+                }
+                ```
+
+                Écrivez un programme qui :
+                1. Affiche le lieu et la date en en-tête.
+                2. Affiche chaque moment de la journée avec sa température, alignés en colonnes.
+                3. Calcule et affiche la température moyenne.
+
+                Résultat attendu :
+
+                ```
+                Températures à Raccoon City le 2025-07-12
+
+                    Matin       : 18.2 °C
+                    Midi        : 22.5 °C
+                    Après-midi  : 24.1 °C
+                    Soir        : 20.3 °C
+
+                Température moyenne : 21.275 °C
+                ```
+
+                :::note Notions visées
+                Dictionnaires imbriqués, accès par clé, `.items()`, calcul de moyenne, f-strings
+                ::::
+
+                ---
+
+                ### Exercice - Compréhension de liste
+
+                Créez un fichier `comprehension_liste.py` pour votre réponse.
+
+                À partir de la liste suivante :
+
+                ```python
+                liste = [1, 2, 3, 4, 5]
+                ```
+
+                Créez 6 nouvelles listes en utilisant **exclusivement la compréhension de liste** :
+
+                1. Multiplier chaque élément par 5 → `[5, 10, 15, 20, 25]`
+                2. Garder uniquement les nombres supérieurs à 2 → `[3, 4, 5]`
+                3. Créer une liste de booléens indiquant si chaque nombre est supérieur à 3 → `[False, False, False, True, True]`
+                4. Créer une nouvelle liste contenant les carrés sous forme de texte → `['Le carré de 1 est 1', ..., 'Le carré de 5 est 25']`
+                5. Remplacer les nombres impairs par le mot "impair" → `['impair', 2, 'impair', 4, 'impair']`
+                6. Doubler uniquement les nombres pairs → `[4, 8]`
+
+                :::note Notions visées
+                Compréhension de liste, filtrage (`if`), transformation (`expression`), if/else compact, f-strings
+                ::::
+
+                ---
+
+                ### Exercice - Lecture CSV avec Pandas
+
+                Créez un fichier `csv_pandas.py` pour votre réponse.
+
+                Téléchargez le fichier <a href={useBaseUrl('/ressources/csv/mpg_dataset.csv')} download="mpg_dataset.csv">mpg_dataset.csv</a> et placez-le dans le même dossier que votre script.
+
+                1. Chargez les données dans un DataFrame avec `pd.read_csv()`
+                2. Affichez les 5 premières lignes avec `head()`
+                3. Affichez le résumé technique avec `info()`
+                4. Affichez les types de données de chaque colonne avec `dtypes`
+
+                :::note Notions visées
+                Pandas, `read_csv()`, `head()`, `info()`, `dtypes`
+                ::::
+
+                ---
+
+                ### Exercice - Lecture JSON avec Pandas
+
+                Créez un fichier `json_pandas.py` pour votre réponse.
+
+                Créez un fichier JSON nommé `donnees.json` contenant :
+
+                ```json
+                {
+                    "eleves": [
+                        {"nom": "Alice", "age": 20, "note": 85},
+                        {"nom": "Bob", "age": 22, "note": 90},
+                        {"nom": "Charlie", "age": 19, "note": 78}
+                    ]
+                }
+                ```
+
+                Lisez le fichier avec Pandas et affichez le DataFrame.
+
+                :::note Notions visées
+                JSON, `read_json()`, structure de données JSON, conversion en DataFrame
+                ::::
+
             </TabItem>
 
-	        <TabItem value="2" label=" 🏫 Activités à faire en classe">
+            <TabItem value="2" label="🏫 Activités à faire en classe">
 
                 ## 🔨 Exercices de création
 
@@ -134,556 +296,118 @@ import Mod_PandasVisualiser from '../_cours-modules/_pandas-visualiser.mdx';
 
                 <DocumentationAutorisee />
 
-                ::::info Exercice - Analyse : Modèles de véhicules
-                📁 Créez un fichier `modeles_vehicules.py` pour votre réponse.
+                ---
 
-                Téléchargez le fichier <a href={useBaseUrl('/ressources/csv/mpg_dataset.csv')} download="mpg_dataset.csv">mpg_dataset.csv</a> et placez-le dans le même dossier que votre script.
+                :::info Exercice - Ensemble de données (set)
+                Créez un fichier `ensemble.py` pour votre réponse.
 
-                **Exploration**
-
-                1. Chargez les données dans un *DataFrame*.
-                2. Affichez le résumé technique avec `info()` (types, valeurs manquantes, taille).
-                3. Affichez les types de données de chaque colonne avec `dtypes`.
-                4. Affichez les statistiques descriptives avec `describe()`.
-
-                Résultat attendu pour `dtypes` :
-                ```
-                mpg             float64
-                cylinders         int64
-                displacement    float64
-                horsepower      float64
-                weight            int64
-                acceleration    float64
-                model_year        int64
-                origin           object
-                name             object
-                dtype: object
-                ```
-
-                Résultat attendu pour `describe()` :
-                ```
-                              mpg   cylinders  displacement  horsepower       weight  acceleration  model_year
-                count  398.000000  398.000000    398.000000  392.000000   398.000000    398.000000  398.000000
-                mean    23.514573    5.454774    193.425879  104.469388  2970.424623     15.568090   76.010050
-                std      7.815984    1.701004    104.269838   38.491160   846.841774      2.757689    3.697627
-                min      9.000000    3.000000     68.000000   46.000000  1613.000000      8.000000   70.000000
-                25%     17.500000    4.000000    104.250000   75.000000  2223.750000     13.825000   73.000000
-                50%     23.000000    4.000000    148.500000   93.500000  2803.500000     15.500000   76.000000
-                75%     29.000000    8.000000    262.000000  126.000000  3608.000000     17.175000   79.000000
-                max     46.600000    8.000000    455.000000  230.000000  5140.000000     24.800000   82.000000
-                ```
-
-                **Filtrage et tri**
-
-                4. Filtrez et affichez les modèles japonais ayant une accélération de 19.4 et plus.
-
-                Résultat attendu :
-                ```
-                Les modèles japonais ayant une accélération de 19.4 et plus :
-                    - toyota corolla 1200
-                    - mazda glc deluxe
-                    - datsun 210 mpg
-                ```
-
-                5. Filtrez et affichez les 5 voitures avec le plus de horsepower.
-
-                Résultat attendu :
-                ```
-                Les 5 voitures avec le plus de horsepower :
-                    - horsepower : 230.0 - pontiac grand prix
-                    - horsepower : 225.0 - buick electra 225 custom
-                    - horsepower : 225.0 - pontiac catalina
-                    - horsepower : 225.0 - buick estate wagon (sw)
-                    - horsepower : 220.0 - chevrolet impala
-                ```
-
-                **Comptage**
-
-                6. Affichez le nombre de voitures japonaises avec un poids supérieur à 2500.
-
-                Résultat attendu :
-                ```
-                Le nombre de voitures japonaises avec un poids supérieur à 2500 : 17
-                ```
-
-                **Exportation**
-
-                7. Filtrez le *DataFrame* pour ne conserver que les voitures japonaises, puis exportez ce nouveau *DataFrame* dans un fichier nommé `mpg_japonaises.csv` sans l'index. Ouvrez ensuite le fichier dans un éditeur ou un tableur pour vérifier qu'il ne contient bien que des voitures japonaises.
-
-                :::note Notions visées
-                Pandas, chargement CSV `read_csv()`, `info()`, `dtypes`, `describe()`, filtrage booléen, tri `sort_values()`, comptage, exportation `to_csv()`
+                Écrivez un programme qui utilise des ensembles pour :
+                1. Créer deux ensembles avec des données de votre choix
+                2. Afficher leur union, intersection et différence
+                3. Vérifier si un élément est présent dans l'un ou l'autre ensemble
                 :::
-
-                ::::
 
                 ---
 
-                ::::info Exercice - Analyse : Prix Turing
-                📁 Créez un fichier `prix_turing.py` pour votre réponse.
+                :::info Exercice - Tuple de données
+                Créez un fichier `tuple_produit.py` pour votre réponse.
 
-                Téléchargez le fichier <a href={useBaseUrl('/ressources/csv/Turing.csv')} download="Turing.csv">Turing.csv</a> et placez-le dans le même dossier que votre script. Il contient tous les gagnants du Prix Turing.
-
-                **Exploration**
-
-                1. Chargez les données dans un *DataFrame*.
-                2. Affichez le nombre de lignes et de colonnes du *DataFrame* ainsi que la liste de ses colonnes.
-
-                Résultat attendu :
-                ```
-                Dimensions : (79, 4)
-                Colonnes   : ['year', 'laureate', 'contribution', 'affiliation']
-                ```
-
-                **Comptage**
-
-                3. Affichez le nombre total de lauréats.
-
-                Résultat attendu :
-                ```
-                Nombre total de lauréats : 79
-                ```
-
-                **Filtrage**
-
-                4. Affichez les lauréats dont la contribution contient le mot `'intelligence'`.
-
-                Résultat attendu :
-                ```
-                Lauréats avec 'intelligence' dans la contribution :
-                    - Marvin Minsky
-                    - Allen Newell
-                    - Herbert A. Simon
-                    - Raj Reddy
-                ```
-
-                5. Affichez les lauréats affiliés à MIT **ou** Stanford.
-
-                Résultat attendu :
-                ```
-                Lauréats affiliés à MIT ou Stanford :
-                    - Marvin Minsky (MIT)
-                    - John McCarthy (Stanford University)
-                    - Donald E. Knuth (Stanford University)
-                    - Robert W. Floyd (Stanford University)
-                    - Fernando J. Corbató (MIT)
-                    - Edward A. Feigenbaum (Stanford University)
-                    - Douglas C. Engelbart (Stanford Research Institute (SRI))
-                    - Ronald L. Rivest (MIT)
-                    - Barbara H. Liskov (MIT)
-                    - Shafi Goldwasser (MIT / Weizmann Institute)
-                    - Silvio Micali (MIT)
-                    - Michael Stonebraker (MIT)
-                    - Whitfield Diffie (Stanford / Sun Microsystems)
-                    - Martin E. Hellman (Stanford University)
-                    - Tim Berners-Lee (CERN / W3C / MIT)
-                    - John L. Hennessy (Stanford University)
-                    - Patrick M. Hanrahan (Stanford University / Pixar)
-                    - Jeffrey D. Ullman (Stanford University)
-                ```
-
-                6. Affichez les lauréats ayant reçu le prix entre 1980 et 1990 inclusivement.
-
-                Résultat attendu :
-                ```
-                Lauréats entre 1980 et 1990 :
-                    - 1980 : C.A.R. (Tony) Hoare
-                    - 1981 : Edgar F. Codd
-                    - 1982 : Stephen A. Cook
-                    - 1983 : Kenneth L. Thompson
-                    - 1983 : Dennis M. Ritchie
-                    - 1984 : Niklaus Wirth
-                    - 1985 : Richard M. Karp
-                    - 1986 : John E. Hopcroft
-                    - 1986 : Robert E. Tarjan
-                    - 1987 : John Cocke
-                    - 1988 : Ivan E. Sutherland
-                    - 1989 : William (Velvel) Kahan
-                    - 1990 : Fernando J. Corbató
-                ```
-
-                7. Affichez les 5 lauréats les plus récents.
-
-                Résultat attendu :
-                ```
-                Les 5 lauréats les plus récents :
-                    - 2024 : Richard S. Sutton
-                    - 2024 : Andrew G. Barto
-                    - 2023 : Avi Wigderson
-                    - 2022 : Robert M. Metcalfe
-                    - 2021 : Jack J. Dongarra
-                ```
-
-                **Statistiques**
-
-                8. Créez une nouvelle colonne `decennie` en appliquant la formule `(year // 10) * 10` utilisant la colonne `year` (ex. 1986 → 1980, 2023 → 2020).
-
-                9. Affichez le nombre de lauréats par décennie. *(indice : regroupement + compte)*
-
-                Résultat attendu :
-                ```
-                Lauréats par décennie :
-                    - 1960s : 4 lauréats
-                    - 1970s : 12 lauréats
-                    - 1980s : 12 lauréats
-                    - 1990s : 12 lauréats
-                    - 2000s : 16 lauréats
-                    - 2010s : 16 lauréats
-                    - 2020s : 7 lauréats
-                ```
-
-                :::note Notions visées
-                Pandas, dimensions (`shape`), liste des colonnes, filtrage par texte `str.contains()`, conditions multiples (`|`), tri, création de nouvelle colonne, regroupement `groupby()` et comptage
-                :::
-
-                ::::
-
-                ---
-
-                ::::info Exercice - groupby et moyenne
-                📁 Créez un fichier `groupby_moyenne.py` pour votre réponse.
-
-                Téléchargez le fichier <a href={useBaseUrl('/ressources/csv/tips_dataset.csv')} download="tips_dataset.csv">tips_dataset.csv</a> et placez-le dans le même dossier que votre script.
-
-                1. Chargez les données dans un *DataFrame*.
-                2. Calculez et affichez la **facture moyenne** (`total_bill`) par jour de la semaine.
-
-                Résultat attendu :
-                ```
-                day
-                Fri     17.151579
-                Sat     20.441379
-                Sun     21.410000
-                Thur    17.682742
-                Name: total_bill, dtype: float64
-                ```
-
-                3. Calculez et affichez le **total des pourboires** (`tip`) par moment de la journée (dîner/lunch).
-
-                Résultat attendu :
-                ```
-                time
-                Dinner    546.07
-                Lunch     185.51
-                Name: tip, dtype: float64
-                ```
-
-                4. Calculez et affichez la **taille moyenne du groupe** (`size`) par jour de la semaine.
-
-                Résultat attendu :
-                ```
-                day
-                Fri     2.105263
-                Sat     2.517241
-                Sun     2.842105
-                Thur    2.451613
-                Name: size, dtype: float64
-                ```
-
-                5. Calculez et affichez le **nombre de repas** par sexe (`sex`).
-
-                Résultat attendu :
-                ```
-                sex
-                Female     87
-                Male      157
-                Name: total_bill, dtype: int64
-                ```
-
-                6. Calculez et affichez la **facture moyenne** par statut fumeur (`smoker`).
-
-                Résultat attendu :
-                ```
-                smoker
-                No     19.188278
-                Yes    20.756344
-                Name: total_bill, dtype: float64
-                ```
-
-                En observant ces résultats, répondez aux questions suivantes :
-                - Quel jour de la semaine génère les factures les plus élevées? Et le plus faibles?
-                - Le dîner ou le lunch génère-t-il plus de pourboires au total? Pourquoi selon vous?
-                - Est-ce que les fumeurs dépensent plus en moyenne que les non-fumeurs?
-                - Quel jour vient-on en plus grand groupe? Est-ce cohérent avec la facture moyenne de ce jour?
-                - Les hommes ou les femmes viennent-ils manger plus souvent au restaurant?
-
-                :::note Notions visées
-                Pandas, regroupement `groupby()`, fonctions d'agrégation (`mean`, `sum`, `count`), interprétation de résultats
-                :::
-
-                ::::
-
-                ---
-
-                ::::info Exercice - Nettoyage et sélection de données
-                📁 Créez un fichier `nettoyage_selection.py` pour votre réponse.
-
-                Un registraire de cégep dispose d'un tableau d'étudiants en Sciences de la nature contenant des données manquantes et des doublons. Les programmes sont :
-                - **200.BA** : Sciences de la santé
-                - **200.BB** : Sciences pures et appliquées
-                - **200.BC** : Sciences de la nature (Découverte / Enrichi)
-
-                Utilisez le dictionnaire suivant pour créer votre *DataFrame* :
+                Un produit dans un magasin est représenté par un tuple contenant :
+                - Nom du produit (str)
+                - Prix (float)
+                - Quantité en stock (int)
 
                 ```python
-                import pandas as pd
-
-                data = {
-                    'prenom':      ['Léa', 'Mathis', 'Léa', 'Yasmine', 'Tristan', None, 'Émile'],
-                    'programme':   ['200.BA', '200.BB', '200.BA', '200.BC', '200.BA', '200.BB', '200.BC'],
-                    'session':     [3, None, 3, 2, None, 4, 1],
-                    'note_finale': [78, 85, 78, None, 91, 67, None],
-                    'nb_absences': [2, 0, 2, 5, None, 1, 3]
-                }
-                df = pd.DataFrame(data)
+                produit = ("Laptop", 999.99, 50)
                 ```
 
-                Le *DataFrame* initial ressemble à ceci :
-                ```
-                    prenom programme  session  note_finale  nb_absences
-                0      Léa    200.BA      3.0         78.0          2.0
-                1   Mathis    200.BB      NaN         85.0          0.0
-                2      Léa    200.BA      3.0         78.0          2.0
-                3  Yasmine    200.BC      2.0          NaN          5.0
-                4  Tristan    200.BA      NaN         91.0          NaN
-                5      NaN    200.BB      4.0         67.0          1.0
-                6    Émile    200.BC      1.0          NaN          3.0
-                ```
-
-                **Nettoyage**
-
-                1. Affichez les lignes ne contenant **aucune valeur manquante**.
-
-                Résultat attendu :
-                ```
-                  prenom programme  session  note_finale  nb_absences
-                0    Léa    200.BA      3.0         78.0          2.0
-                2    Léa    200.BA      3.0         78.0          2.0
-                ```
-
-                2. Remplacez les valeurs manquantes comme suit, puis affichez le *DataFrame* corrigé :
-                    - `session` : remplacez par la **moyenne** des sessions
-                    - `note_finale` : remplacez par la **médiane** des notes
-                    - `nb_absences` : remplacez par `0`
-
-                Résultat attendu :
-                ```
-                    prenom programme  session  note_finale  nb_absences
-                0      Léa    200.BA      3.0         78.0          2.0
-                1   Mathis    200.BB      2.6         85.0          0.0
-                2      Léa    200.BA      3.0         78.0          2.0
-                3  Yasmine    200.BC      2.0         78.0          5.0
-                4  Tristan    200.BA      2.6         91.0          0.0
-                5      NaN    200.BB      4.0         67.0          1.0
-                6    Émile    200.BC      1.0         78.0          3.0
-                ```
-
-                Continuez avec ce *DataFrame* corrigé pour les étapes suivantes.
-
-                3. Supprimez les lignes dupliquées et affichez le *DataFrame* résultant.
-
-                Résultat attendu :
-                ```
-                    prenom programme  session  note_finale  nb_absences
-                0      Léa    200.BA      3.0         78.0          2.0
-                1   Mathis    200.BB      2.6         85.0          0.0
-                3  Yasmine    200.BC      2.0         78.0          5.0
-                4  Tristan    200.BA      2.6         91.0          0.0
-                5      NaN    200.BB      4.0         67.0          1.0
-                6    Émile    200.BC      1.0         78.0          3.0
-                ```
-
-                **Sélection**
-
-                4. À partir du *DataFrame* corrigé (avant suppression des doublons), affichez le prénom et la note finale des étudiants en **200.BA** (Sciences de la santé).
-
-                Résultat attendu :
-                ```
-                    prenom  note_finale
-                0      Léa         78.0
-                2      Léa         78.0
-                4  Tristan         91.0
-                ```
-
-                5. Affichez les 3 premières lignes et les colonnes `prenom`, `programme` et `session` du *DataFrame* corrigé.
-
-                Résultat attendu :
-                ```
-                   prenom programme  session
-                0     Léa    200.BA      3.0
-                1  Mathis    200.BB      2.6
-                2     Léa    200.BA      3.0
-                ```
-
-                :::note Notions visées
-                Création d'un *DataFrame* depuis un dictionnaire, valeurs manquantes `dropna()`, `fillna()`, `mean`/`median`, suppression de doublons `drop_duplicates()`, sélection de colonnes et de lignes `loc`, `iloc`, `head()`
+                Écrivez un programme qui :
+                1. Affiche les informations du produit de manière lisible
+                2. Calcule la valeur totale du stock
+                3. Tente (et intercepte) une modification du tuple pour montrer son immutabilité
                 :::
-
-                ::::
 
                 ---
 
-                ::::info Exercice - Visualisation : Pourboire par personne
-                📁 Créez un fichier `pourboire_par_personne.py` pour votre réponse.
+                :::info Exercice - Dictionnaire de contacts
+                Créez un fichier `contacts.py` pour votre réponse.
+
+                Créez un dictionnaire qui représente des contacts :
+
+                ```python
+                contacts = {
+                    "alice": {"email": "alice@example.com", "telephone": "555-0101", "entreprise": "TechCorp"},
+                    "bob": {"email": "bob@example.com", "telephone": "555-0102", "entreprise": "DataInc"},
+                    "charlie": {"email": "charlie@example.com", "telephone": "555-0103", "entreprise": "AnalyticsLLC"}
+                }
+                ```
+
+                Écrivez un programme qui :
+                1. Affiche tous les contacts avec leurs informations
+                2. Permet de rechercher un contact par nom
+                3. Ajoute un nouveau contact
+                4. Supprime un contact (cela doit fonctionner même si le contact n'existe pas — gérez l'erreur)
+                :::
+
+                ---
+
+                :::info Exercice - Compréhension de liste avancée
+                Créez un fichier `list_comprehension.py` pour votre réponse.
+
+                Écrivez un programme qui utilise la compréhension de liste pour :
+                1. Générer une liste de 10 nombres aléatoires entre 1 et 100
+                2. Créer une nouvelle liste ne contenant que les nombres pairs
+                3. Créer une nouvelle liste avec les carrés des nombres impairs
+                4. Créer une liste de chaînes formatées : "Le nombre X est pair/impair"
+                :::
+
+                ---
+
+                :::info Exercice - Analyse rapide d'un CSV
+                Créez un fichier `analyse_csv_rapide.py` pour votre réponse.
 
                 Téléchargez le fichier <a href={useBaseUrl('/ressources/csv/tips_dataset.csv')} download="tips_dataset.csv">tips_dataset.csv</a> et placez-le dans le même dossier que votre script.
 
-                **Transformation**
-
-                1. Chargez les données dans un *DataFrame*.
-                2. Créez une nouvelle colonne `tip_par_person` qui calcule le pourboire par personne (`tip` divisé par `size`).
-                3. Affichez les 5 premières lignes du *DataFrame* modifié.
-
-                Résultat attendu :
-                ```
-                   total_bill   tip     sex smoker  day    time  size  tip_par_person
-                0       16.99  1.01  Female     No  Sun  Dinner     2        0.505000
-                1       10.34  1.66    Male     No  Sun  Dinner     3        0.553333
-                2       21.01  3.50    Male     No  Sun  Dinner     3        1.166667
-                3       23.68  3.31    Male     No  Sun  Dinner     2        1.655000
-                4       24.59  3.61  Female     No  Sun  Dinner     4        0.902500
-                ```
-
-                **Visualisation**
-
-                4. Générez un histogramme de `tip_par_person` avec `bins=10` pour visualiser la distribution des pourboires par personne.
-                5. Générez un boxplot de `tip_par_person` regroupé par taille de groupe (`size`) pour voir comment le pourboire par personne varie selon la taille du groupe.
-
-                Résultats attendus :
-                <Row>
-                  <Column size={6}>
-                    <div style={{ textAlign: "left" }}>
-                      <img
-                        src={require('/img/cours/exercice_2a.png').default}
-                        alt="Histogramme du pourboire par personne"
-                        style={{ maxWidth: '100%', height: 'auto' }}
-                      />
-                    </div>
-                  </Column>
-                    <Column size={6}>
-                        <div style={{ textAlign: "right" }}>
-                        <img
-                            src={require('/img/cours/exercice_2b.png').default}
-                            alt="Boxplot tip par person par size"
-                            style={{ maxWidth: '100%', height: 'auto' }}
-                        />
-                        </div>
-                    </Column>
-                </Row>
-
-                <br />
-
-                Voyez-vous des tendances intéressantes ? Par exemple, est-ce que le pourboire par personne augmente ou diminue avec la taille du groupe?
+                1. Chargez les données dans un DataFrame avec `pd.read_csv()`
+                2. Affichez la forme du DataFrame (`shape`)
+                3. Affichez les 3 premières lignes avec `head(3)`
+                4. Affichez les colonnes du DataFrame
+                5. Affichez le type de données de chaque colonne avec `dtypes`
 
                 :::note Notions visées
-                Pandas, création de colonne calculée, `head()`, visualisation (histogramme avec `bins`, boxplot par groupe)
-                :::
-
+                Pandas, `read_csv()`, `shape`, `head()`, colonnes, `dtypes`
                 ::::
 
                 ---
 
-                ::::info Exercice - Visualisation : Consommation d'essence
-                📁 Créez un fichier `consommation_essence.py` pour votre réponse.
+                :::info Présentation du TP2
+                **Présentation du Travail Pratique 2**
 
-                Téléchargez le fichier <a href={useBaseUrl('/ressources/csv/mpg_dataset.csv')} download="mpg_dataset.csv">mpg_dataset.csv</a> et placez-le dans le même dossier que votre script.
+                Le TP2 sera réalisé sur une période de plusieurs rencontres (R9 à R14). Durant cette rencontre, vous devez :
 
-                **Transformation**
+                1. **Lire l'énoncé** du TP2 (disponible dans votre dépôt GitHub ou sur le site du cours)
+                2. **Comprendre les exigences** et le contexte du projet
+                3. **Planifier** votre approche :
+                   - Quelles données allez-vous analyser ?
+                   - Quelles questions cherchez-vous à répondre ?
+                   - Quelles visualisations prévoyez-vous de créer ?
+                4. **Démarrer** la mise en place de votre environnement de travail
+                5. **Commencer** par les premières étapes du projet (chargement des données, exploration initiale)
 
-                1. Chargez les données dans un *DataFrame*.
-                2. Créez une nouvelle colonne `l_par_100km` en convertissant `mpg` en litres aux 100 km à l'aide de la formule :
-
-                $$
-                \text{l\_par\_100km} \quad = \quad \frac{235.214}{\text{mpg}}
-                $$
-
-                **Visualisation**
-
-                3. Générez un histogramme de `l_par_100km` pour visualiser la distribution de la consommation.
-                4. Générez un graphique en barres de la consommation moyenne (`l_par_100km`) par nombre de cylindres (`cylinders`).
-                <Row>
-                  <Column size={6}>
-                    <div style={{ textAlign: "left" }}>
-                      <img
-                        src={require('/img/cours/exercice_3a.png').default}
-                        alt="Histogramme de la consommation en litres aux 100 km"
-                        style={{ maxWidth: '100%', height: 'auto' }}
-                      />
-                    </div>
-                  </Column>
-                    <Column size={6}>
-                        <div style={{ textAlign: "right" }}>
-                        <img
-                            src={require('/img/cours/exercice_3b.png').default}
-                            alt="Consommation moyenne par nombre de cylindres"
-                            style={{ maxWidth: '100%', height: 'auto' }}
-                        />
-                        </div>
-                    </Column>
-                </Row>
-
-                <br />
-
-                Voyez-vous des tendances intéressantes ? Par exemple, est-ce que la consommation varie selon le nombre de cylindres?
-
-                :::note Notions visées
-                Pandas, création de colonne calculée, visualisation (histogramme, graphique en barres), regroupement `groupby()` pour la moyenne
-                :::
-
+                :::note Important
+                Le TP2 n'est PAS à remettre cette rencontre. Vous aurez le temps de le développer tout au long des rencontres R9 à R13, avec une remise finale en R14.
                 ::::
 
                 ---
 
-                ## ✏️ Exercices sur papier
-
-                :::warning-nt
-                Les exercices suivants ne visent pas nécessairement à pratiquer la matière de cette rencontre, \
-                mais plutôt à vous entraîner à l'écriture de code "papier" sur des concepts plus simples, comme il pourrait y avoir à l'examen.
+                :::info Questions et discussion
+                Prenez le temps de poser des questions sur :
+                - L'énoncé du TP2
+                - Les notions vues aujourd'hui (collections, fichiers CSV/JSON via Pandas)
+                - La planification de votre projet
                 :::
 
-                <DocumentationInterdite />
-
-                ::::info Exercice - Écrire du code sans PyCharm
-
-                Sur papier, sans ordinateur, écrivez un code demandant à l'utilisateur de saisir un nombre. \
-                Tant que le nombre saisi est positif, le programme redemande de saisir un nouveau nombre. \
-                Lorsqu'un nombre saisi est négatif, le programme affiche tous les nombres saisis ainsi que leur somme. \
-                Le programme prend alors fin.
-
-                #### Exemple d'exécution
-
-                ```
-                Saisir un nombre : 20
-                Saisir un nombre : 50
-                Saisir un nombre : 10
-                Saisir un nombre : -5
-                Nombres saisis : [20, 50, 10, -5]
-                Somme : 75
-                ```
-
-                📁 Créez un fichier `sans_pycharm.py` pour valider votre réponse à l'aide de **Pycharm**.
-
-                :::note Notions visées
-                Boucle `while`, saisie utilisateur `input()`, accumulation dans une liste, calcul de somme
-                :::
-
-                ::::
-
-                ---
-
-                <IntroSolutionsExercices />
-
-                🔨 Solution des **exercices de création** :
-                - Analyse : Modèles de véhicules *(solutionnaire à venir)*
-                - Analyse : Prix Turing *(solutionnaire à venir)*
-                - groupby et moyenne *(solutionnaire à venir)*
-                - Nettoyage et sélection de données *(solutionnaire à venir)*
-                - Visualisation : Pourboire par personne *(solutionnaire à venir)*
-                - Visualisation : Consommation d'essence *(solutionnaire à venir)*
-
-                ✏️ Solution des **exercices sur papier** :
-                - Écrire du code sans PyCharm *(solutionnaire à venir)*
             </TabItem>
         </Tabs>
     </TabItem>
-
 </Tabs>

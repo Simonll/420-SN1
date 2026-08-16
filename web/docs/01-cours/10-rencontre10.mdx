@@ -1,6 +1,6 @@
 ---
-title: 10 - 📊 Graphiques, collections
-description: For (séquence), Compréhension de liste, Ensemble (set), Tuple (tuple), Dictionnaire (dict), Matplotlib
+title: 10 - Pandas (avancé) + Matplotlib (bases) + TP2 poursuite
+description: Sélection, Filtres et tri, Parcours, Nettoyage, Transformation, Agrégations, Graphiques bases sans Pandas, TP2 poursuite
 hide_table_of_contents: true
 draft: true
 ---
@@ -17,131 +17,137 @@ import IntroSolutionsExercices from '@site/docs/_components/IntroSolutionsExerci
 import Feedback from "../../src/components/Feedback";
 import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
 
-import AideMemoireDict from '@site/docs/_components/AideMemoireDict.mdx';
-import AideMemoireExpressionsBoolennes from '@site/docs/_components/AideMemoireExpressionsBoolennes.mdx';
-import AideMemoireFichiersJSON from '@site/docs/_components/AideMemoireFichiersJSON.mdx';
-import AideMemoireFichiersTexte from '@site/docs/_components/AideMemoireFichiersTexte.mdx';
-import AideMemoireListe from '@site/docs/_components/AideMemoireListe.mdx';
-import AideMemoireNumpyBornes from '@site/docs/_components/AideMemoireNumpyBornes.mdx';
-import AideMemoireNumpyConditions from '@site/docs/_components/AideMemoireNumpyConditions.mdx';
-import AideMemoireNumpyManipulation from '@site/docs/_components/AideMemoireNumpyManipulation.mdx';
-import AideMemoireNumpyMatplotlib from '@site/docs/_components/AideMemoireNumpyMatplotlib.mdx';
-import AideMemoireNumpyTableaux from '@site/docs/_components/AideMemoireNumpyTableaux.mdx';
-import AideMemoireNumpyVectorise from '@site/docs/_components/AideMemoireNumpyVectorise.mdx';
-import AideMemoirePandasExplorer from '@site/docs/_components/AideMemoirePandasExplorer.mdx';
-import AideMemoirePandasExporter from '@site/docs/_components/AideMemoirePandasExporter.mdx';
-import AideMemoirePandasFiltrerTrier from '@site/docs/_components/AideMemoirePandasFiltrerTrier.mdx';
-import AideMemoirePandasNettoyer from '@site/docs/_components/AideMemoirePandasNettoyer.mdx';
-import AideMemoirePandasParcourir from '@site/docs/_components/AideMemoirePandasParcourir.mdx';
 import AideMemoirePandasSelectionner from '@site/docs/_components/AideMemoirePandasSelectionner.mdx';
-import AideMemoirePandasStatistiques from '@site/docs/_components/AideMemoirePandasStatistiques.mdx';
+import AideMemoirePandasFiltrerTrier from '@site/docs/_components/AideMemoirePandasFiltrerTrier.mdx';
+import AideMemoirePandasParcourir from '@site/docs/_components/AideMemoirePandasParcourir.mdx';
+import AideMemoirePandasNettoyer from '@site/docs/_components/AideMemoirePandasNettoyer.mdx';
 import AideMemoirePandasTransformer from '@site/docs/_components/AideMemoirePandasTransformer.mdx';
+import AideMemoirePandasStatistiques from '@site/docs/_components/AideMemoirePandasStatistiques.mdx';
 import AideMemoirePandasVisualiser from '@site/docs/_components/AideMemoirePandasVisualiser.mdx';
-import AideMemoireSet from '@site/docs/_components/AideMemoireSet.mdx';
-import AideMemoireTuple from '@site/docs/_components/AideMemoireTuple.mdx';
+import AideMemoirePandasExporter from '@site/docs/_components/AideMemoirePandasExporter.mdx';
+import AideMemoireNumpyMatplotlib from '@site/docs/_components/AideMemoireNumpyMatplotlib.mdx';
 
-import Mod_ForSequence from '../_cours-modules/_for-sequence.mdx';
-import Mod_ComprehensionListe from '../_cours-modules/_comprehension-liste.mdx';
-import Mod_Set from '../_cours-modules/_set.mdx';
-import Mod_Tuple from '../_cours-modules/_tuple.mdx';
-import Mod_Dict from '../_cours-modules/_dict.mdx';
+import Mod_PandasSelectionner from '../_cours-modules/_pandas-selectionner.mdx';
+import Mod_PandasFiltrerTrier from '../_cours-modules/_pandas-filtrer-trier.mdx';
+import Mod_PandasParcourir from '../_cours-modules/_pandas-parcourir.mdx';
+import Mod_PandasNettoyer from '../_cours-modules/_pandas-nettoyer.mdx';
+import Mod_PandasTransformer from '../_cours-modules/_pandas-transformer.mdx';
+import Mod_PandasStatistiques from '../_cours-modules/_pandas-statistiques.mdx';
 import Mod_Matplotlib from '../_cours-modules/_matplotlib.mdx';
 
-# 📊 Graphiques, 📦collections (set, tuple, dict)
+# Pandas (avancé) + Matplotlib (bases) + TP2 poursuite
 
 <Tabs queryString="onglet">
 
-    <TabItem value="foreach" label="For (séquence)" default>
-        <Mod_ForSequence />
+    <TabItem value="pandas-selectionner" label="Pandas — Sélection">
+        <Mod_PandasSelectionner />
     </TabItem>
 
-    <TabItem value="listcomp" label="Compréhension de liste">
-        <Mod_ComprehensionListe />
+    <TabItem value="pandas-filtrer" label="Pandas — Filtres et tri">
+        <Mod_PandasFiltrerTrier />
     </TabItem>
 
-    <TabItem value="set" label="Ensemble (set)">
-        <Mod_Set />
+    <TabItem value="pandas-parcourir" label="Pandas — Parcourir">
+        <Mod_PandasParcourir />
     </TabItem>
 
-    <TabItem value="tuple" label="Tuple (tuple)">
-        <Mod_Tuple />
+    <TabItem value="pandas-nettoyer" label="Pandas — Nettoyer">
+        <Mod_PandasNettoyer />
     </TabItem>
 
-    <TabItem value="dict" label="Dictionnaire (dict)">
-        <Mod_Dict />
+    <TabItem value="pandas-transformer" label="Pandas — Transformer">
+        <Mod_PandasTransformer />
     </TabItem>
 
-    <TabItem value="matplotlib" label="Matplotlib">
+    <TabItem value="pandas-statistiques" label="Pandas — Agrégations et statistiques">
+        <Mod_PandasStatistiques />
+    </TabItem>
+
+    <TabItem value="matplotlib" label="Matplotlib — Bases (sans Pandas)">
         <Mod_Matplotlib />
     </TabItem>
 
-<TabItem value="Activités" label="Activités">
+    <TabItem value="tp2" label="TP2 — Poursuite">
+
+        :::info Objectif de cette rencontre
+        Cette rencontre marque la **poursuite du Travail Pratique 2 (TP2)**. Vous avez maintenant les notions avancées de Pandas et les bases de Matplotlib (sans Pandas). Vous pouvez maintenant :
+        - Sélectionner, filtrer et trier des données Pandas de manière avancée
+        - Nettoyer et transformer vos données
+        - Effectuer des regroupements et des agrégations
+        - Créer des visualisations avec Matplotlib (sans Pandas)
+        - Poursuivre votre analyse de données pour le TP2
+        :::
+
+        ---
+
+        :::info Lien avec le TP2
+        Les notions vues aujourd'hui (Pandas avancé, Matplotlib bases) sont directement applicables au TP2 :
+        - **Pandas avancé** : pour explorer, nettoyer, transformer et agréger vos données
+        - **Matplotlib bases** : pour créer des visualisations de vos données sans passer par Pandas
+        :::
+
+        ---
+
+        :::info Poursuite du TP2
+        Poursuivez votre TP2 en exploitant les nouvelles notions :
+        1. **Utilisez les techniques Pandas avancées** pour votre analyse (filtres complexes, transformations, agrégations)
+        2. **Créez des visualisations avec Matplotlib** (sans Pandas) pour vos résultats
+        3. **Documentez** vos choix techniques dans votre rapport
+        :::
+
+    </TabItem>
+
+    <TabItem value="Activités" label="Activités">
 
         <RappelFonctionnementClasseInverse/>
         <Tabs>
-            <TabItem value="1" label="Activités à faire à la maison">
+            <TabItem value="1" label="🏠 Activités à faire à la maison">
+
                 ## Auto-validation des connaissances
 
-                [**Ce formulaire**](https://forms.gle/PVFuF6aH8kcRrbaYA) sert à vérifier votre compréhension des éléments les plus importants de la rencontre R11. Ne faites ce questionnaire **que lorsque vous vous sentez en très bonne maîtrise de la matière**. En classe, dès votre arrivée, vous aurez un **questionnaire très similaire**, évalué **sommativement**, à compléter sans accès à **aucune documentation**.
+                [**Ce formulaire**](https://forms.gle/PVFuF6aH8kcRrbaYA) sert à vérifier votre compréhension des éléments les plus importants de la rencontre R10. Ne faites ce questionnaire **que lorsque vous vous sentez en très bonne maîtrise de la matière**. En classe, dès votre arrivée, vous aurez un **questionnaire très similaire**, évalué **sommativement**, à compléter sans accès à **aucune documentation**.
 
                 ::::warning
-                Ne pas remplir le formulaire diminue fortement vos chances de réussir l’évaluation sommative en début de rencontre. \
+                Ne pas remplir le formulaire diminue fortement vos chances de réussir l'évaluation sommative en début de rencontre. \\
                 Assurez-vous de bien comprendre toutes les notions derrière chaque question.
-                ::::
-            </TabItem>
+                :::::
 
-	        <TabItem value="2" label="Activités à faire en classe">
+                ---
 
-                ## Exercices de création
+                ## Exercices de compréhension
 
-                Pour chacun des exercices de cette section, vous devez créer des fichiers `.py` avec les noms indiqués.
+                ### Exercice - Sélection avancée avec Pandas
 
-                <DocumentationAutorisee />
-
-                ::::info Exercice - Analyse : Modèles de véhicules
-                Créez un fichier `r9_modeles_vehicules.py` pour votre réponse.
+                Créez un fichier `pandas_selection.py` pour votre réponse.
 
                 Téléchargez le fichier <a href={useBaseUrl('/ressources/csv/mpg_dataset.csv')} download="mpg_dataset.csv">mpg_dataset.csv</a> et placez-le dans le même dossier que votre script.
 
-                **Exploration**
+                1. Chargez les données dans un DataFrame
+                2. Sélectionnez uniquement les colonnes `mpg`, `cylinders`, `horsepower` avec `loc`
+                3. Sélectionnez les 5 premières lignes avec `iloc`
+                4. Utilisez `loc` pour sélectionner les lignes où `origin` est "japan" et affichez uniquement les colonnes `name` et `mpg`
+                5. Sélectionnez les 3 dernières lignes du DataFrame avec `iloc`
 
-                1. Chargez les données dans un *DataFrame*.
-                2. Affichez le résumé technique avec `info()` (types, valeurs manquantes, taille).
-                3. Affichez les types de données de chaque colonne avec `dtypes`.
-                4. Affichez les statistiques descriptives avec `describe()`.
+                :::note Notions visées
+                Pandas, `loc`, `iloc`, indexation par étiquettes et positionnelle
+                ::::
 
-                Résultat attendu pour `dtypes` :
-                ```
-                mpg             float64
-                cylinders         int64
-                displacement    float64
-                horsepower      float64
-                weight            int64
-                acceleration    float64
-                model_year        int64
-                origin           object
-                name             object
-                dtype: object
-                ```
+                ---
 
-                Résultat attendu pour `describe()` :
-                ```
-                              mpg   cylinders  displacement  horsepower       weight  acceleration  model_year
-                count  398.000000  398.000000    398.000000  392.000000   398.000000    398.000000  398.000000
-                mean    23.514573    5.454774    193.425879  104.469388  2970.424623     15.568090   76.010050
-                std      7.815984    1.701004    104.269838   38.491160   846.841774      2.757689    3.697627
-                min      9.000000    3.000000     68.000000   46.000000  1613.000000      8.000000   70.000000
-                25%     17.500000    4.000000    104.250000   75.000000  2223.750000     13.825000   73.000000
-                50%     23.000000    4.000000    148.500000   93.500000  2803.500000     15.500000   76.000000
-                75%     29.000000    8.000000    262.000000  126.000000  3608.000000     17.175000   79.000000
-                max     46.600000    8.000000    455.000000  230.000000  5140.000000     24.800000   82.000000
-                ```
+                ### Exercice - Filtres et tri avec Pandas
 
-                **Filtrage et tri**
+                Créez un fichier `pandas_filtres.py` pour votre réponse.
 
-                4. Filtrez et affichez les modèles japonais ayant une accélération de 19.4 et plus.
+                Téléchargez le fichier <a href={useBaseUrl('/ressources/csv/mpg_dataset.csv')} download="mpg_dataset.csv">mpg_dataset.csv</a> et placez-le dans le même dossier que votre script.
 
-                Résultat attendu :
+                1. Chargez les données dans un DataFrame
+                2. Filtrez et affichez les modèles japonais ayant une accélération de 19.4 et plus
+                3. Filtrez et affichez les 5 voitures avec le plus de horsepower
+                4. Triez le DataFrame par `mpg` décroissant et affichez les 10 premières lignes
+                5. Triez le DataFrame par `model_year` puis par `mpg` (croissant pour les deux)
+
+                Résultat attendu pour le filtrage japonais :
+
                 ```
                 Les modèles japonais ayant une accélération de 19.4 et plus :
                     - toyota corolla 1200
@@ -149,244 +155,15 @@ import Mod_Matplotlib from '../_cours-modules/_matplotlib.mdx';
                     - datsun 210 mpg
                 ```
 
-                5. Filtrez et affichez les 5 voitures avec le plus de horsepower.
-
-                Résultat attendu :
-                ```
-                Les 5 voitures avec le plus de horsepower :
-                    - horsepower : 230.0 - pontiac grand prix
-                    - horsepower : 225.0 - buick electra 225 custom
-                    - horsepower : 225.0 - pontiac catalina
-                    - horsepower : 225.0 - buick estate wagon (sw)
-                    - horsepower : 220.0 - chevrolet impala
-                ```
-
-                **Comptage**
-
-                6. Affichez le nombre de voitures japonaises avec un poids supérieur à 2500.
-
-                Résultat attendu :
-                ```
-                Le nombre de voitures japonaises avec un poids supérieur à 2500 : 17
-                ```
-
-                **Exportation**
-
-                7. Filtrez le *DataFrame* pour ne conserver que les voitures japonaises, puis exportez ce nouveau *DataFrame* dans un fichier nommé `mpg_japonaises.csv` sans l'index. Ouvrez ensuite le fichier dans un éditeur ou un tableur pour vérifier qu'il ne contient bien que des voitures japonaises.
-
                 :::note Notions visées
-                Pandas, chargement CSV `read_csv()`, `info()`, `dtypes`, `describe()`, filtrage booléen, tri `sort_values()`, comptage, exportation `to_csv()`
-                :::
-
+                Pandas, filtrage booléen, `sort_values()`, conditions complexes
                 ::::
 
                 ---
 
-                ::::info Exercice - Analyse : Prix Turing
-                Créez un fichier `r9_prix_turing.py` pour votre réponse.
+                ### Exercice - Nettoyage de données avec Pandas
 
-                Téléchargez le fichier <a href={useBaseUrl('/ressources/csv/Turing.csv')} download="Turing.csv">Turing.csv</a> et placez-le dans le même dossier que votre script. Il contient tous les gagnants du Prix Turing.
-
-                **Exploration**
-
-                1. Chargez les données dans un *DataFrame*.
-                2. Affichez le nombre de lignes et de colonnes du *DataFrame* ainsi que la liste de ses colonnes.
-
-                Résultat attendu :
-                ```
-                Dimensions : (79, 4)
-                Colonnes   : ['year', 'laureate', 'contribution', 'affiliation']
-                ```
-
-                **Comptage**
-
-                3. Affichez le nombre total de lauréats.
-
-                Résultat attendu :
-                ```
-                Nombre total de lauréats : 79
-                ```
-
-                **Filtrage**
-
-                4. Affichez les lauréats dont la contribution contient le mot `'intelligence'`.
-
-                Résultat attendu :
-                ```
-                Lauréats avec 'intelligence' dans la contribution :
-                    - Marvin Minsky
-                    - Allen Newell
-                    - Herbert A. Simon
-                    - Raj Reddy
-                ```
-
-                5. Affichez les lauréats affiliés à MIT **ou** Stanford.
-
-                Résultat attendu :
-                ```
-                Lauréats affiliés à MIT ou Stanford :
-                    - Marvin Minsky (MIT)
-                    - John McCarthy (Stanford University)
-                    - Donald E. Knuth (Stanford University)
-                    - Robert W. Floyd (Stanford University)
-                    - Fernando J. Corbató (MIT)
-                    - Edward A. Feigenbaum (Stanford University)
-                    - Douglas C. Engelbart (Stanford Research Institute (SRI))
-                    - Ronald L. Rivest (MIT)
-                    - Barbara H. Liskov (MIT)
-                    - Shafi Goldwasser (MIT / Weizmann Institute)
-                    - Silvio Micali (MIT)
-                    - Michael Stonebraker (MIT)
-                    - Whitfield Diffie (Stanford / Sun Microsystems)
-                    - Martin E. Hellman (Stanford University)
-                    - Tim Berners-Lee (CERN / W3C / MIT)
-                    - John L. Hennessy (Stanford University)
-                    - Patrick M. Hanrahan (Stanford University / Pixar)
-                    - Jeffrey D. Ullman (Stanford University)
-                ```
-
-                6. Affichez les lauréats ayant reçu le prix entre 1980 et 1990 inclusivement.
-
-                Résultat attendu :
-                ```
-                Lauréats entre 1980 et 1990 :
-                    - 1980 : C.A.R. (Tony) Hoare
-                    - 1981 : Edgar F. Codd
-                    - 1982 : Stephen A. Cook
-                    - 1983 : Kenneth L. Thompson
-                    - 1983 : Dennis M. Ritchie
-                    - 1984 : Niklaus Wirth
-                    - 1985 : Richard M. Karp
-                    - 1986 : John E. Hopcroft
-                    - 1986 : Robert E. Tarjan
-                    - 1987 : John Cocke
-                    - 1988 : Ivan E. Sutherland
-                    - 1989 : William (Velvel) Kahan
-                    - 1990 : Fernando J. Corbató
-                ```
-
-                7. Affichez les 5 lauréats les plus récents.
-
-                Résultat attendu :
-                ```
-                Les 5 lauréats les plus récents :
-                    - 2024 : Richard S. Sutton
-                    - 2024 : Andrew G. Barto
-                    - 2023 : Avi Wigderson
-                    - 2022 : Robert M. Metcalfe
-                    - 2021 : Jack J. Dongarra
-                ```
-
-                **Statistiques**
-
-                8. Créez une nouvelle colonne `decennie` en appliquant la formule `(year // 10) * 10` utilisant la colonne `year` (ex. 1986 → 1980, 2023 → 2020).
-
-                9. Affichez le nombre de lauréats par décennie. *(indice : regroupement + compte)*
-
-                Résultat attendu :
-                ```
-                Lauréats par décennie :
-                    - 1960s : 4 lauréats
-                    - 1970s : 12 lauréats
-                    - 1980s : 12 lauréats
-                    - 1990s : 12 lauréats
-                    - 2000s : 16 lauréats
-                    - 2010s : 16 lauréats
-                    - 2020s : 7 lauréats
-                ```
-
-                :::note Notions visées
-                Pandas, dimensions (`shape`), liste des colonnes, filtrage par texte `str.contains()`, conditions multiples (`|`), tri, création de nouvelle colonne, regroupement `groupby()` et comptage
-                :::
-
-                ::::
-
-                ---
-
-                ::::info Exercice - groupby et moyenne
-                Créez un fichier `groupby_moyenne.py` pour votre réponse.
-
-                Téléchargez le fichier <a href={useBaseUrl('/ressources/csv/tips_dataset.csv')} download="tips_dataset.csv">tips_dataset.csv</a> et placez-le dans le même dossier que votre script.
-
-                1. Chargez les données dans un *DataFrame*.
-                2. Calculez et affichez la **facture moyenne** (`total_bill`) par jour de la semaine.
-
-                Résultat attendu :
-                ```
-                day
-                Fri     17.151579
-                Sat     20.441379
-                Sun     21.410000
-                Thur    17.682742
-                Name: total_bill, dtype: float64
-                ```
-
-                3. Calculez et affichez le **total des pourboires** (`tip`) par moment de la journée (dîner/lunch).
-
-                Résultat attendu :
-                ```
-                time
-                Dinner    546.07
-                Lunch     185.51
-                Name: tip, dtype: float64
-                ```
-
-                4. Calculez et affichez la **taille moyenne du groupe** (`size`) par jour de la semaine.
-
-                Résultat attendu :
-                ```
-                day
-                Fri     2.105263
-                Sat     2.517241
-                Sun     2.842105
-                Thur    2.451613
-                Name: size, dtype: float64
-                ```
-
-                5. Calculez et affichez le **nombre de repas** par sexe (`sex`).
-
-                Résultat attendu :
-                ```
-                sex
-                Female     87
-                Male      157
-                Name: total_bill, dtype: int64
-                ```
-
-                6. Calculez et affichez la **facture moyenne** par statut fumeur (`smoker`).
-
-                Résultat attendu :
-                ```
-                smoker
-                No     19.188278
-                Yes    20.756344
-                Name: total_bill, dtype: float64
-                ```
-
-                En observant ces résultats, répondez aux questions suivantes :
-                - Quel jour de la semaine génère les factures les plus élevées? Et le plus faibles?
-                - Le dîner ou le lunch génère-t-il plus de pourboires au total? Pourquoi selon vous?
-                - Est-ce que les fumeurs dépensent plus en moyenne que les non-fumeurs?
-                - Quel jour vient-on en plus grand groupe? Est-ce cohérent avec la facture moyenne de ce jour?
-                - Les hommes ou les femmes viennent-ils manger plus souvent au restaurant?
-
-                :::note Notions visées
-                Pandas, regroupement `groupby()`, fonctions d'agrégation (`mean`, `sum`, `count`), interprétation de résultats
-                :::
-
-                ::::
-
-                ---
-
-                ::::info Exercice - Nettoyage et sélection de données
-                Créez un fichier `r9_nettoyage_selection.py` pour votre réponse.
-
-                Un registraire de cégep dispose d'un tableau d'étudiants en Sciences de la nature contenant des données manquantes et des doublons. Les programmes sont :
-                - **200.BA** : Sciences de la santé
-                - **200.BB** : Sciences pures et appliquées
-                - **200.BC** : Sciences de la nature (Découverte / Enrichi)
-
-                Utilisez le dictionnaire suivant pour créer votre *DataFrame* :
+                Créez un fichier `pandas_nettoyage.py` pour votre réponse.
 
                 ```python
                 import pandas as pd
@@ -401,253 +178,318 @@ import Mod_Matplotlib from '../_cours-modules/_matplotlib.mdx';
                 df = pd.DataFrame(data)
                 ```
 
-                Le *DataFrame* initial ressemble à ceci :
+                1. Affichez les lignes ne contenant aucune valeur manquante
+                2. Remplacez les valeurs manquantes : `session` par la moyenne, `note_finale` par la médiane, `nb_absences` par 0
+                3. Supprimez les lignes dupliquées
+                4. Affichez le DataFrame nettoyé
+
+                Résultat attendu après nettoyage :
+
                 ```
                     prenom programme  session  note_finale  nb_absences
                 0      Léa    200.BA      3.0         78.0          2.0
-                1   Mathis    200.BB      NaN         85.0          0.0
-                2      Léa    200.BA      3.0         78.0          2.0
-                3  Yasmine    200.BC      2.0          NaN          5.0
-                4  Tristan    200.BA      NaN         91.0          NaN
+                1   Mathis    200.BB      2.6         85.0          0.0
+                3  Yasmine    200.BC      2.0         78.0          5.0
+                4  Tristan    200.BA      2.6         91.0          0.0
                 5      NaN    200.BB      4.0         67.0          1.0
-                6    Émile    200.BC      1.0          NaN          3.0
+                6    Émile    200.BC      1.0         78.0          3.0
+                ```
+
+                :::note Notions visées
+                Pandas, `dropna()`, `fillna()`, `mean()`, `median()`, `drop_duplicates()`
+                ::::
+
+                ---
+
+                ### Exercice - Transformation de données avec Pandas
+
+                Créez un fichier `pandas_transformation.py` pour votre réponse.
+
+                Téléchargez le fichier <a href={useBaseUrl('/ressources/csv/tips_dataset.csv')} download="tips_dataset.csv">tips_dataset.csv</a> et placez-le dans le même dossier que votre script.
+
+                1. Chargez les données dans un DataFrame
+                2. Créez une nouvelle colonne `tip_par_person` = `tip / size`
+                3. Créez une nouvelle colonne `total_conso` = `total_bill + tip`
+                4. Utilisez `apply()` pour créer une colonne catégorielle : "élevé" si `total_bill > 20`, "moyen" si entre 10 et 20, "faible" sinon
+                5. Utilisez `map()` pour créer une colonne `jour_français` : "Fri" → "Vendredi", "Sat" → "Samedi", "Sun" → "Dimanche", "Thur" → "Jeudi"
+                6. Affichez les 5 premières lignes du DataFrame transformé
+
+                :::note Notions visées
+                Pandas, nouvelles colonnes, `apply()`, `map()`, transformation de données
+                ::::
+
+                ---
+
+                ### Exercice - Agrégations et groupby avec Pandas
+
+                Créez un fichier `pandas_groupby.py` pour votre réponse.
+
+                Téléchargez le fichier <a href={useBaseUrl('/ressources/csv/tips_dataset.csv')} download="tips_dataset.csv">tips_dataset.csv</a> et placez-le dans le même dossier que votre script.
+
+                1. Chargez les données dans un DataFrame
+                2. Calculez la facture moyenne (`total_bill`) par jour de la semaine
+                3. Calculez le total des pourboires (`tip`) par moment de la journée (Dinner/Lunch)
+                4. Calculez la taille moyenne du groupe (`size`) par jour de la semaine
+                5. Comptez le nombre de repas par sexe (`sex`)
+                6. Calculez la facture moyenne par statut fumeur (`smoker`)
+
+                Résultat attendu pour la facture moyenne par jour :
+
+                ```
+                day
+                Fri     17.151579
+                Sat     20.441379
+                Sun     21.410000
+                Thur    17.682742
+                Name: total_bill, dtype: float64
+                ```
+
+                :::note Notions visées
+                Pandas, `groupby()`, `mean()`, `sum()`, `count()`, agrégations
+                ::::
+
+                ---
+
+                ### Exercice - Visualisation avec Matplotlib (sans Pandas)
+
+                Créez un fichier `matplotlib_bases.py` pour votre réponse.
+
+                1. Créez des données sous forme de listes Python :
+                   - `x = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]`
+                   - `y = [2, 4, 6, 8, 10, 12, 14, 16, 18, 20]`
+                2. Tracez un graphique de `y` en fonction de `x` (ligne)
+                3. Ajoutez un titre "Graphique linéaire", un label x "Abscisses", un label y "Ordonnées"
+                4. Ajoutez une grille
+                5. Sauvegardez le graphique dans `graphique_lineaire.png`
+
+                6. Créez des données pour un scatter plot :
+                   - `x_scatter = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]`
+                   - `y_scatter = [3, 5, 7, 6, 9, 11, 12, 14, 15, 17]`
+                7. Tracez un scatter plot de ces données avec des points rouges
+                8. Ajoutez titre et labels
+                9. Sauvegardez dans `scatter_plot.png`
+
+                :::note Notions visées
+                Matplotlib, `plot()`, `scatter()`, `title()`, `xlabel()`, `ylabel()`, `grid()`, `savefig()`, graphiques sans Pandas
+                ::::
+
+                ---
+
+                ### Exercice - Histogramme avec Matplotlib
+
+                Créez un fichier `matplotlib_histogramme.py` pour votre réponse.
+
+                1. Générez 100 nombres aléatoires entre 0 et 100 avec le module `random`
+                2. Triez les nombres
+                3. Tracez un histogramme avec 10 bins
+                4. Ajoutez titre "Distribution des nombres aléatoires", label x "Valeur", label y "Fréquence"
+                5. Ajoutez une grille
+                6. Sauvegardez dans `histogramme.png`
+
+                :::note Notions visées
+                Matplotlib, `hist()`, histogramme, génération de données aléatoires
+                ::::
+
+            </TabItem>
+
+            <TabItem value="2" label="🏫 Activités à faire en classe">
+
+                ## 🔨 Exercices de création
+
+                Pour chacun des exercices de cette section, vous devez créer des fichiers `.py` avec les noms indiqués.
+
+                <DocumentationAutorisee />
+
+                ---
+
+                :::info Exercice - Analyse complète d'un jeu de données avec Pandas
+                Créez un fichier `analyse_pandas.py` pour votre réponse.
+
+                Téléchargez le fichier <a href={useBaseUrl('/ressources/csv/Turing.csv')} download="Turing.csv">Turing.csv</a> et placez-le dans le même dossier que votre script.
+
+                **Exploration**
+
+                1. Chargez les données dans un DataFrame
+                2. Affichez le nombre de lignes et de colonnes (`shape`)
+                3. Affichez la liste des colonnes
+                4. Affichez les types de données (`dtypes`)
+                5. Affichez le résumé technique (`info()`)
+                6. Affichez les statistiques descriptives (`describe()`)
+
+                **Filtrage et tri**
+
+                4. Affichez les lauréats dont la contribution contient le mot "intelligence"
+                5. Affichez les lauréats affiliés à MIT ou Stanford
+                6. Affichez les lauréats ayant reçu le prix entre 1980 et 1990 inclusivement
+                7. Affichez les 5 lauréats les plus récents (tri par année décroissant)
+
+                Résultat attendu pour les lauréats avec "intelligence" :
+
+                ```
+                Lauréats avec 'intelligence' dans la contribution :
+                    - Marvin Minsky
+                    - Allen Newell
+                    - Herbert A. Simon
+                    - Raj Reddy
+                ```
+
+                **Agrégation et statistiques**
+
+                8. Créez une nouvelle colonne `decennie` = `(year // 10) * 10`
+                9. Affichez le nombre de lauréats par décennie (groupby + count)
+                10. Affichez le nombre de lauréats par affiliation (groupby + count)
+
+                Résultat attendu pour les lauréats par décennie :
+
+                ```
+                Lauréats par décennie :
+                    - 1960s : 4 lauréats
+                    - 1970s : 12 lauréats
+                    - 1980s : 12 lauréats
+                    - 1990s : 12 lauréats
+                    - 2000s : 16 lauréats
+                    - 2010s : 16 lauréats
+                    - 2020s : 7 lauréats
+                ```
+
+                :::note Notions visées
+                Pandas, shape, colonnes, dtypes, info(), describe(), filtrage booléen, str.contains(), conditions multiples (|), sort_values(), création de colonne, groupby(), count()
+                ::::
+
+                ---
+
+                :::info Exercice - Nettoyage et sélection
+                Créez un fichier `nettoyage_selection.py` pour votre réponse.
+
+                Un registraire de cégep dispose d'un tableau d'étudiants en Sciences de la nature contenant des données manquantes et des doublons.
+
+                Utilisez le dictionnaire suivant pour créer votre DataFrame :
+
+                ```python
+                import pandas as pd
+
+                data = {
+                    'prenom':      ['Léa', 'Mathis', 'Léa', 'Yasmine', 'Tristan', None, 'Émile'],
+                    'programme':   ['200.BA', '200.BB', '200.BA', '200.BC', '200.BA', '200.BB', '200.BC'],
+                    'session':     [3, None, 3, 2, None, 4, 1],
+                    'note_finale': [78, 85, 78, None, 91, 67, None],
+                    'nb_absences': [2, 0, 2, 5, None, 1, 3]
+                }
+                df = pd.DataFrame(data)
                 ```
 
                 **Nettoyage**
 
-                1. Affichez les lignes ne contenant **aucune valeur manquante**.
-
-                Résultat attendu :
-                ```
-                  prenom programme  session  note_finale  nb_absences
-                0    Léa    200.BA      3.0         78.0          2.0
-                2    Léa    200.BA      3.0         78.0          2.0
-                ```
-
-                2. Remplacez les valeurs manquantes comme suit, puis affichez le *DataFrame* corrigé :
-                    - `session` : remplacez par la **moyenne** des sessions
-                    - `note_finale` : remplacez par la **médiane** des notes
-                    - `nb_absences` : remplacez par `0`
-
-                Résultat attendu :
-                ```
-                    prenom programme  session  note_finale  nb_absences
-                0      Léa    200.BA      3.0         78.0          2.0
-                1   Mathis    200.BB      2.6         85.0          0.0
-                2      Léa    200.BA      3.0         78.0          2.0
-                3  Yasmine    200.BC      2.0         78.0          5.0
-                4  Tristan    200.BA      2.6         91.0          0.0
-                5      NaN    200.BB      4.0         67.0          1.0
-                6    Émile    200.BC      1.0         78.0          3.0
-                ```
-
-                Continuez avec ce *DataFrame* corrigé pour les étapes suivantes.
-
-                3. Supprimez les lignes dupliquées et affichez le *DataFrame* résultant.
-
-                Résultat attendu :
-                ```
-                    prenom programme  session  note_finale  nb_absences
-                0      Léa    200.BA      3.0         78.0          2.0
-                1   Mathis    200.BB      2.6         85.0          0.0
-                3  Yasmine    200.BC      2.0         78.0          5.0
-                4  Tristan    200.BA      2.6         91.0          0.0
-                5      NaN    200.BB      4.0         67.0          1.0
-                6    Émile    200.BC      1.0         78.0          3.0
-                ```
+                1. Affichez les lignes ne contenant aucune valeur manquante
+                2. Remplacez les valeurs manquantes : `session` par la moyenne, `note_finale` par la médiane, `nb_absences` par 0
+                3. Supprimez les lignes dupliquées
 
                 **Sélection**
 
-                4. À partir du *DataFrame* corrigé (avant suppression des doublons), affichez le prénom et la note finale des étudiants en **200.BA** (Sciences de la santé).
+                4. À partir du DataFrame corrigé (avant suppression des doublons), affichez le prénom et la note finale des étudiants en 200.BA
+                5. Affichez les 3 premières lignes et les colonnes `prenom`, `programme`, `session`
 
-                Résultat attendu :
-                ```
-                    prenom  note_finale
-                0      Léa         78.0
-                2      Léa         78.0
-                4  Tristan         91.0
-                ```
+                Résultat attendu après suppression des doublons :
 
-                5. Affichez les 3 premières lignes et les colonnes `prenom`, `programme` et `session` du *DataFrame* corrigé.
-
-                Résultat attendu :
                 ```
-                   prenom programme  session
-                0     Léa    200.BA      3.0
-                1  Mathis    200.BB      2.6
-                2     Léa    200.BA      3.0
+                    prenom programme  session  note_finale  nb_absences
+                0      Léa    200.BA      3.0         78.0          2.0
+                1   Mathis    200.BB      2.6         85.0          0.0
+                3  Yasmine    200.BC      2.0         78.0          5.0
+                4  Tristan    200.BA      2.6         91.0          0.0
+                5      NaN    200.BB      4.0         67.0          1.0
+                6    Émile    200.BC      1.0         78.0          3.0
                 ```
 
                 :::note Notions visées
-                Création d'un *DataFrame* depuis un dictionnaire, valeurs manquantes `dropna()`, `fillna()`, `mean`/`median`, suppression de doublons `drop_duplicates()`, sélection de colonnes et de lignes `loc`, `iloc`, `head()`
-                :::
-
+                Pandas, création de DataFrame depuis un dictionnaire, dropna(), fillna(), mean()/median(), drop_duplicates(), sélection loc/iloc, head()
                 ::::
 
                 ---
 
-                ::::info Exercice - Visualisation : Pourboire par personne
-                Créez un fichier `r9_pourboire_par_personne.py` pour votre réponse.
+                :::info Exercice - Visualisation Matplotlib — Pourboire par personne
+                Créez un fichier `matplotlib_pourboire.py` pour votre réponse.
 
                 Téléchargez le fichier <a href={useBaseUrl('/ressources/csv/tips_dataset.csv')} download="tips_dataset.csv">tips_dataset.csv</a> et placez-le dans le même dossier que votre script.
 
-                **Transformation**
+                1. Chargez les données avec Pandas
+                2. Extrayez les colonnes `total_bill`, `tip`, `size` en tableaux NumPy avec `.to_numpy()` ou `.values`
+                3. Créez une nouvelle colonne `tip_par_person` = `tip / size` (en utilisant les tableaux NumPy)
+                4. Tracez un histogramme des valeurs de `tip_par_person` avec 15 bins
+                5. Ajoutez titre "Distribution du pourboire par personne", label x "Pourboire par personne ($)", label y "Nombre de repas"
+                6. Ajoutez une grille
+                7. Sauvegardez dans `tip_par_person_histogram.png`
 
-                1. Chargez les données dans un *DataFrame*.
-                2. Créez une nouvelle colonne `tip_par_person` qui calcule le pourboire par personne (`tip` divisé par `size`).
-                3. Affichez les 5 premières lignes du *DataFrame* modifié.
-
-                Résultat attendu :
-                ```
-                   total_bill   tip     sex smoker  day    time  size  tip_par_person
-                0       16.99  1.01  Female     No  Sun  Dinner     2        0.505000
-                1       10.34  1.66    Male     No  Sun  Dinner     3        0.553333
-                2       21.01  3.50    Male     No  Sun  Dinner     3        1.166667
-                3       23.68  3.31    Male     No  Sun  Dinner     2        1.655000
-                4       24.59  3.61  Female     No  Sun  Dinner     4        0.902500
-                ```
-
-                **Visualisation**
-
-                4. Générez un histogramme de `tip_par_person` avec `bins=10` pour visualiser la distribution des pourboires par personne.
-                5. Générez un boxplot de `tip_par_person` regroupé par taille de groupe (`size`) pour voir comment le pourboire par personne varie selon la taille du groupe.
-
-                Résultats attendus :
-                <Row>
-                  <Column size={6}>
-                    <div style={{ textAlign: "left" }}>
-                      <img
-                        src={require('/img/cours/exercice_2a.png').default}
-                        alt="Histogramme du pourboire par personne"
-                        style={{ maxWidth: '100%', height: 'auto' }}
-                      />
-                    </div>
-                  </Column>
-                    <Column size={6}>
-                        <div style={{ textAlign: "right" }}>
-                        <img
-                            src={require('/img/cours/exercice_2b.png').default}
-                            alt="Boxplot tip par person par size"
-                            style={{ maxWidth: '100%', height: 'auto' }}
-                        />
-                        </div>
-                    </Column>
-                </Row>
-
-                <br />
-
-                Voyez-vous des tendances intéressantes ? Par exemple, est-ce que le pourboire par personne augmente ou diminue avec la taille du groupe?
+                8. Tracez un scatter plot de `tip` vs `total_bill` avec les tableaux NumPy
+                9. Ajoutez titre "Pourboire vs Facture", label x "Facture ($)", label y "Pourboire ($)"
+                10. Ajoutez une grille
+                11. Sauvegardez dans `tips_scatter.png`
 
                 :::note Notions visées
-                Pandas, création de colonne calculée, `head()`, visualisation (histogramme avec `bins`, boxplot par groupe)
-                :::
-
+                Matplotlib, histogramme (`hist`), scatter plot (`scatter`), titres, labels, grille, sauvegarde (`savefig`), conversion Pandas → NumPy
                 ::::
 
                 ---
 
-                ::::info Exercice - Visualisation : Consommation d'essence
-                Créez un fichier `consommation_essence.py` pour votre réponse.
+                :::info Exercice - Synthèse — Moyennes et interprétation
+                Créez un fichier `synthese_interpretation.py` pour votre réponse.
 
-                Téléchargez le fichier <a href={useBaseUrl('/ressources/csv/mpg_dataset.csv')} download="mpg_dataset.csv">mpg_dataset.csv</a> et placez-le dans le même dossier que votre script.
+                Téléchargez le fichier <a href={useBaseUrl('/ressources/csv/tips_dataset.csv')} download="tips_dataset.csv">tips_dataset.csv</a> et placez-le dans le même dossier que votre script.
 
-                **Transformation**
+                1. Chargez les données avec Pandas
+                2. Calculez la facture moyenne par jour de la semaine avec `groupby()` et `mean()`
+                3. Calculez le total des pourboires par moment de la journée (`time`) avec `groupby()` et `sum()`
+                4. Calculez la taille moyenne du groupe par jour avec `groupby()` et `mean()`
+                5. Comptez le nombre de repas par sexe avec `groupby()` et `count()`
+                6. Calculez la facture moyenne par statut fumeur (`smoker`) avec `groupby()` et `mean()`
 
-                1. Chargez les données dans un *DataFrame*.
-                2. Créez une nouvelle colonne `l_par_100km` en convertissant `mpg` en litres aux 100 km à l'aide de la formule :
+                En observant ces résultats, répondez aux questions suivantes dans des commentaires dans votre fichier :
 
-                $$
-                \text{l\_par\_100km} \quad = \quad \frac{235.214}{\text{mpg}}
-                $$
-
-                **Visualisation**
-
-                3. Générez un histogramme de `l_par_100km` pour visualiser la distribution de la consommation.
-                4. Générez un graphique en barres de la consommation moyenne (`l_par_100km`) par nombre de cylindres (`cylinders`).
-                <Row>
-                  <Column size={6}>
-                    <div style={{ textAlign: "left" }}>
-                      <img
-                        src={require('/img/cours/exercice_3a.png').default}
-                        alt="Histogramme de la consommation en litres aux 100 km"
-                        style={{ maxWidth: '100%', height: 'auto' }}
-                      />
-                    </div>
-                  </Column>
-                    <Column size={6}>
-                        <div style={{ textAlign: "right" }}>
-                        <img
-                            src={require('/img/cours/exercice_3b.png').default}
-                            alt="Consommation moyenne par nombre de cylindres"
-                            style={{ maxWidth: '100%', height: 'auto' }}
-                        />
-                        </div>
-                    </Column>
-                </Row>
-
-                <br />
-
-                Voyez-vous des tendances intéressantes ? Par exemple, est-ce que la consommation varie selon le nombre de cylindres?
+                - Quel jour de la semaine génère les factures les plus élevées ? Et le plus faible ?
+                - Le dîner ou le lunch génère-t-il plus de pourboires au total ? Pourquoi selon vous ?
+                - Est-ce que les fumeurs dépensent plus en moyenne que les non-fumeurs ?
+                - Quel jour vient-on en plus grand groupe ? Est-ce cohérent avec la facture moyenne de ce jour ?
+                - Les hommes ou les femmes viennent-ils manger plus souvent au restaurant ?
 
                 :::note Notions visées
-                Pandas, création de colonne calculée, visualisation (histogramme, graphique en barres), regroupement `groupby()` pour la moyenne
-                :::
-
+                Pandas, groupby(), mean(), sum(), count(), interprétation des résultats
                 ::::
 
                 ---
 
-                ## Exercices sur papier
+                :::info Poursuite du TP2
+                **Poursuite du Travail Pratique 2**
 
-                :::warning-nt
-                Les exercices suivants ne visent pas nécessairement à pratiquer la matière de cette rencontre, \
-                mais plutôt à vous entraîner à l'écriture de code "papier" sur des concepts plus simples, comme il pourrait y avoir à l'examen.
-                :::
+                Poursuivez votre TP2 en utilisant les notions vues aujourd'hui :
 
-                <DocumentationInterdite />
+                1. **Pandas avancé** : utilisez les techniques de sélection, filtrage, nettoyage, transformation et agrégation pour votre analyse de données
 
-                ::::info Exercice - Écrire du code sans PyCharm
+                2. **Matplotlib bases** : créez des visualisations de vos données sans passer par Pandas (utilisez `.to_numpy()` ou `.values` pour extraire les données depuis Pandas vers NumPy, puis tracez avec Matplotlib)
 
-                Sur papier, sans ordinateur, écrivez un code demandant à l'utilisateur de saisir un nombre. \
-                Tant que le nombre saisi est positif, le programme redemande de saisir un nouveau nombre. \
-                Lorsqu'un nombre saisi est négatif, le programme affiche tous les nombres saisis ainsi que leur somme. \
-                Le programme prend alors fin.
+                3. **Documentation** : expliquez dans votre rapport pourquoi vous avez choisi certaines visualisations et comment elles aident à répondre à vos questions de recherche
 
-                #### Exemple d'exécution
+                **Objectifs pour cette rencontre :**
+                - [ ] Avancer d'au moins une section du TP2
+                - [ ] Utiliser au moins 2 techniques Pandas avancées (filtres complexes, transformations, groupby)
+                - [ ] Créer au moins 1 visualisation avec Matplotlib (sans Pandas)
+                - [ ] Documenter vos choix techniques
 
-                ```
-                Saisir un nombre : 20
-                Saisir un nombre : 50
-                Saisir un nombre : 10
-                Saisir un nombre : -5
-                Nombres saisis : [20, 50, 10, -5]
-                Somme : 75
-                ```
-
-                Créez un fichier `sans_pycharm.py` pour valider votre réponse à l'aide de **Pycharm**.
-
-                :::note Notions visées
-                Boucle `while`, saisie utilisateur `input()`, accumulation dans une liste, calcul de somme
-                :::
-
+                :::note Important
+                Le TP2 n'est PAS à remettre cette rencontre. Vous aurez le temps de le finaliser en R13 et R14.
                 ::::
 
                 ---
 
-                <IntroSolutionsExercices />
+                :::info Questions et discussion
+                Prenez le temps de poser des questions sur :
+                - Les techniques de sélection et de filtrage avancées
+                - Le nettoyage et la transformation des données
+                - Les aggregations avec groupby
+                - Les techniques de visualisation avec Matplotlib (sans Pandas)
+                - Les difficultés rencontrées dans votre TP2
+                :::
 
-                Solution des **exercices de création** :
-                - Analyse : Modèles de véhicules *(solutionnaire à venir)*
-                - Analyse : Prix Turing *(solutionnaire à venir)*
-                - groupby et moyenne *(solutionnaire à venir)*
-                - Nettoyage et sélection de données *(solutionnaire à venir)*
-                - Visualisation : Pourboire par personne *(solutionnaire à venir)*
-                - Visualisation : Consommation d'essence *(solutionnaire à venir)*
-
-                Solution des **exercices sur papier** :
-                - Écrire du code sans PyCharm *(solutionnaire à venir)*
             </TabItem>
         </Tabs>
     </TabItem>
-
 </Tabs>
