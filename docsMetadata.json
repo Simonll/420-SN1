@@ -7,35 +7,35 @@
   },
   {
     "id": "02-rencontre2",
-    "title": "2 - Scripts et fonctions",
+    "title": "2 - Scripts et fonctions + TP1 (démarrage)",
     "#description": "Scripts, Débogueur, Traces, Fonctions, f-strings, Modules, Bibliothèques, Listes (intro), Précision des flottants",
     "hide_table_of_contents": "true",
     "draft": "true"
   },
   {
     "id": "03-rencontre3",
-    "title": "3 - Création de fonctions",
+    "title": "3 - Création de fonctions + TP1 poursuite",
     "#description": "Fonction, Paramètres, Retour, Portée, DRY, Commentaires, Pile d'appels",
     "hide_table_of_contents": "true",
     "draft": "true"
   },
   {
     "id": "04-rencontre4",
-    "title": "4 - Expressions booléennes",
+    "title": "4 - Expressions booléennes + TP1 poursuite",
     "#description": "Expressions booléennes, if, elif, else, Comparaison, Imbrication, DRY, Forme compacte, raise/try/catch",
     "hide_table_of_contents": "true",
     "draft": "true"
   },
   {
     "id": "05-rencontre5",
-    "title": "5 - Boucle while et répétitions",
+    "title": "5 - Boucle while et répétitions + TP1 poursuite",
     "#description": "Boucle while, opérateurs d'affectation (+=, -=), accumulateurs, validation de saisie, boucles infinies, break / continue",
     "hide_table_of_contents": "true",
     "draft": "true"
   },
   {
     "id": "06-rencontre6",
-    "title": "6 - Boucle for et listes",
+    "title": "6 - Boucle for et listes + TP1 poursuite",
     "#description": "Boucle for, fonction range(), listes, parcours de listes, accumulation, statistiques (min, max, moyenne), application au TP1",
     "hide_table_of_contents": "true",
     "draft": "true"
@@ -56,8 +56,8 @@
   },
   {
     "id": "09-rencontre9",
-    "title": "9 - Collections, Fichiers, Démarrage TP2",
-    "#description": "Set, Tuple, Dict, Compréhension de liste, Fichier CSV (via Pandas), Fichier JSON (via Pandas), Présentation et démarrage du TP2",
+    "title": "9 - Les collections de base, type de fichiers, analyse de données avec Pandas (les bases) et TP2 (démarrage)",
+    "description": "Set, Tuple, Dict, Compréhension de liste, Introduction aux fichiers, Fichier texte (lecture/écriture), CSV et JSON via Pandas, Démarrage du TP2",
     "hide_table_of_contents": "true",
     "draft": "true"
   },
@@ -70,21 +70,21 @@
   },
   {
     "id": "11-rencontre11",
-    "title": "11 - NumPy (bases) + Matplotlib (intégration)",
+    "title": "11 - NumPy (bases) + Matplotlib (intégration) + TP2 poursuite",
     "#description": "NumPy (intro, tableaux), intégration NumPy avec Matplotlib, TP2 poursuite",
     "hide_table_of_contents": "true",
     "draft": "true"
   },
   {
     "id": "12-rencontre12",
-    "title": "12 - NumPy (avancé) + IA (bases)",
+    "title": "12 - NumPy (avancé) + IA (bases) + TP2 poursuite",
     "#description": "NumPy (vectorisé, bornes, conditions, restructurer), IA (intro, Machine Learning), TP2 poursuite",
     "hide_table_of_contents": "true",
     "draft": "true"
   },
   {
     "id": "13-rencontre13",
-    "title": "13 - IA (avancé) + Synthèse + TP2 poursuite",
+    "title": "13 - IA (avancé) + TP2 poursuite",
     "#description": "Deep Learning, Empreinte écologique, Scikit-learn, Exercice de synthèse, Révision ciblée, TP2 poursuite (pas de remise)",
     "hide_table_of_contents": "true",
     "draft": "true"
