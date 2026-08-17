@@ -54,22 +54,6 @@ Dans ce cours, vous allez apprendre à programmer (en Python).
         label: "Simon", // Modifier pour le nom de l'enseignant
         component: <MainDocsCalendar professorName="Simon" />, // Doit matcher le nom du professeur qui est dans l'attribut "calendrier" des cours qui sont dans sidebar.js
     },
-    {
-        id: "dispos-labos",
-        label: "Dispos labos",
-        component:
-        <div>
-            <iframe
-                src={useBaseUrl()}
-                style={{
-                    width: '100%',
-                    aspectRatio: '1 / 1.294',   // hauteur d’une page PDF letter US
-                    border: 'none',
-                }}
-                title="Disponibilités des labos"
-            />
-        </div>
-    },
     ]}
     defaultTabId="grid"
     extra={<PlanDeCoursMenu />}
