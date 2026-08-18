@@ -9,96 +9,89 @@ import DocumentationInterdite from '@site/docs/_components/DocumentationInterdit
 import IntroSolutionsExercices from '@site/docs/_components/IntroSolutionsExercices.mdx';
 import AideMemoireListe from '@site/docs/_components/AideMemoireListe.mdx';
 
+:::tip Pourquoi utiliser le débogueur
+Le débogueur est un outil puissant qui permet de suivre l'exécution de votre code pas à pas.
+Il vous permet de voir la valeur des variables, d'arrêter l'exécution à des points spécifiques (points d'arrêt),
+et de comprendre comment votre programme fonctionne en détail.
 
+Utiliser le débogueur est essentiel pour :
+- Comprendre le flux d'exécution de votre programme.
+- Analyser le comportement de votre code dans des situations spécifiques.
+- Identifier et corriger les erreurs dans votre code.
+:::
 
-<Admonition type="tip" title="Faire les exercices dans Colab">
-            <p>Si vous préférez, vous pouvez aussi faire les exercices de cette section dans un notebook Google Colab. Cliquez sur le badge ci-dessous pour ouvrir le notebook préparé pour vous.</p>
-            <a href="https://colab.research.google.com/github/Simonll/420-SN1/blob/develop/code/notebooks/exercices_semaine_2.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
-        </Admonition>
+---
 
-        :::tip Pourquoi utiliser le débogueur
-        Le débogueur est un outil puissant qui permet de suivre l'exécution de votre code pas à pas.
-        Il vous permet de voir la valeur des variables, d'arrêter l'exécution à des points spécifiques (points d'arrêt),
-        et de comprendre comment votre programme fonctionne en détail.
+::::info Bonjour le monde dans un environnement de développement
 
-        Utiliser le débogueur est essentiel pour :
-        - Comprendre le flux d'exécution de votre programme.
-        - Analyser le comportement de votre code dans des situations spécifiques.
-        - Identifier et corriger les erreurs dans votre code.
-        :::
+On va être honnête, vos scripts ne vont pas souvent faire ce que vous voulez. Par contre, ils vont faire exactement ce que vous avez écrit. On va donc avoir besoin d'une méthode efficace pour comprendre ce qui se passe dans notre code.
 
-        ---
+Dans un environnement de développement (ou *IDE, Integrated Development Environment*) comme VS Code, on va pouvoir :
+- arrêter le temps!
+- et voir à l'intérieur de l'ordinateur!
 
-        ::::info Bonjour le monde dans un environnement de développement
+Ce module vous guide dans l'utilisation du débogueur pas à pas pour comprendre l'exécution de votre code ligne par ligne.
 
-        On va être honnête, vos scripts ne vont pas souvent faire ce que vous voulez. Par contre, ils vont faire exactement ce que vous avez écrit. On va donc avoir besoin d'une méthode efficace pour comprendre ce qui se passe dans notre code.
+Ensuite, mettez un point d'arrêt à la ligne de la première instruction (les commentaires ne sont pas des instructions) dans le script Python créé à la section [Script](/cours/rencontre2?onglet=script), donc à la ligne `print("bonjour...` :
+```python showLineNumbers
+# ceci est un commentaire, cette ligne est pour les humains
+# l'ordinateur va l'ignorer car elle commence par un "#"
+print("bonjour bonjour cher maitre humain")
+6 / 2 * (1 + 2)
+print("Ca va aujourd' hui?")
+print( 4 / 5 * (9 + 6) )
+x = 6
+y = 7
+resultat = x * y
+x = 0
+y = resultat
+```
 
-        Dans un environnement de développement (ou *IDE, Integrated Developpement Environment*) comme VS Code, on va pouvoir :
-        - arrêter le temps!
-        - et voir à l'intérieur de l'ordinateur!
+Lancez le débogage en allant dans la vue « Exécuter et déboguer » (icône 🐞 sur la gauche) et en cliquant sur le bouton vert, ou en appuyant sur `F5`.
+- L'exécution va s'arrêter sur le point d'arrêt.
+- La ligne de code où se trouve le point d'arrêt sera mise en surbrillance et n'aura pas encore été exécutée.
+- Si vous cliquez sur le bouton **Step Over**, l'instruction sera exécutée et vous pourrez voir le résultat dans la console.
+- Si vous continuez à cliquer sur **Step Over**, vous pourrez exécuter le script ligne par ligne et observer son comportement.
+- Si vous avez plus d'un point d'arrêt, vous pouvez cliquer sur le bouton **Continue** qui permet de continuer l'exécution jusqu'au prochain point d'arrêt.
+- Vous pouvez également arrêter l'exécution à tout moment en cliquant sur le bouton **Stop**.
 
-        Lisez la section Déboguer pour apprendre à utiliser le débogueur.
+Avancez une ligne à la fois et, lorsque vous arrivez à la ligne `x = 6`, observez les variables qui sont créées et affichées dans la fenêtre de débogage, ainsi que leurs modification. En particulier, notez le changement du contenu des variables `x` et `y` lorsqu'elles sont modifiées.
 
-        Ensuite, mettez un point d'arrêt à la ligne de la première instruction (les commentaires ne sont pas des instructions) dans le script Python créé à la section [Script](/cours/rencontre2?onglet=script), donc à la ligne `print("bonjour...` :
-        ```python showLineNumbers
-        # ceci est un commentaire, cette ligne est pour les humains
-        # l'ordinateur va l'ignorer car elle commence par un "#"
-        print("bonjour bonjour cher maitre humain")
-        6 / 2 * (1 + 2)
-        print("Ca va aujourd' hui?")
-        print( 4 / 5 * (9 + 6) )
-        x = 6
-        y = 7
-        resultat = x * y
-        x = 0
-        y = resultat
-        ```
+:::warning À l'aide!
+Si vous avez des difficultés à utiliser le débogueur, n'hésitez pas à demander de l'aide à votre enseignant.e ou à vos camarades de classe.
+:::
 
-        Lancez le débogage en allant dans la vue « Exécuter et déboguer » (icône 🐞 sur la gauche) et en cliquant sur le bouton vert, ou en appuyant sur `F5`.
-        - L'exécution va s'arrêter sur le point d'arrêt.
-        - La ligne de code où se trouve le point d'arrêt sera mise en surbrillance et n'aura pas encore été exécutée.
-        - Si vous cliquez sur le bouton **Step Over**, l'instruction sera exécutée et vous pourrez voir le résultat dans la console.
-        - Si vous continuez à cliquer sur **Step Over**, vous pourrez exécuter le script ligne par ligne et observer son comportement.
-        - Si vous avez plus d'un point d'arrêt, vous pouvez cliquer sur le bouton **Continue** qui permet de continuer l'exécution jusqu'au prochain point d'arrêt.
-        - Vous pouvez également arrêter l'exécution à tout moment en cliquant sur le bouton **Stop**.
+::::
 
-        Avancez une ligne à la fois et, lorsque vous arrivez à la ligne `x = 6`, observez les variables qui sont créées et affichées dans la fenêtre de débogage, ainsi que leurs modification. En particulier, notez le changement du contenu des variables `x` et `y` lorsqu'elles sont modifiées.
+---
 
-        :::warning À l'aide!
-        Si vous avez des difficultés à utiliser le débogueur, n'hésitez pas à demander de l'aide à votre enseignant.e ou à vos camarades de classe.
-        :::
+:::info Raccourcis clavier
+Vous pouvez exécuter les actions de débogage plus rapidement en utilisant des **raccourcis clavier**.
 
-        ::::
+| Action | Windows / Linux | macOS |
+|:---|:---|:---|
+| **Continuer** | `F5` | `F5` |
+| **Passer par dessus** | `F10` | `F10` |
+| **Arrêter** | `Shift` + `F5` | `⇧F5` |
 
-        ---
+:::
 
-        :::info Raccourcis clavier
-        Vous pouvez exécuter les actions de débogage plus rapidement en utilisant des **raccourcis clavier**.
+---
 
-        | Action | Windows / Linux | macOS |
-        |:---|:---|:---|
-        | **Continuer** | `F5` | `F5` |
-        | **Passer par dessus** | `F10` | `F10` |
-        | **Arrêter** | `F5` + `Shift` + `F5` | `⇧F5` |
+:::danger Débogueur inutilisable en présence d'erreurs de syntaxe
 
-        :::
+Lorsqu’une erreur de syntaxe est soulignée en rouge dans VS Code, Python est incapable d’exécuter votre script, que ce soit en mode normal ou en mode débogage. Le programme ne comprend tout simplement pas ce qu’il doit faire. Pour le débogueur, il faut garder en tête que :
 
-        ---
+    - Le débogueur ne fonctionne **que sur un programme valide**, c'est-à-dire sans erreur de syntaxe, même si le code contient des erreurs de logique.
+    - Une erreur de syntaxe empêche le code d’être transformé en instructions compréhensibles pour l'ordinateur.
+    - Tant que la syntaxe n’est pas corrigée, le débogueur reste inutilisable.
 
-        :::danger Débogueur inutilisable en présence d'erreurs de syntaxe
+Votre IDE souligne les erreurs de syntaxe en rouge et les liste dans le panneau « Problèmes » en bas de l'éditeur. Tant que ces erreurs ne sont pas corrigées, le débogage ne pourra pas démarrer.
 
-        Lorsqu’une erreur de syntaxe est soulignée en rouge dans VS Code, Python est incapable d’exécuter votre script, que ce soit en mode normal ou en mode débogage. Le programme ne comprend tout simplement pas ce qu’il doit faire. Pour le débogueur, il faut garder en tête que :
+Les erreurs de syntaxe à corriger **dans le programme ci-dessous** sont :
+- **Ligne 4** : Le symbole d'assignation `=` est manquant
+- **Ligne 5** : Il manque une parenthèse fermante `)`
+- **Ligne 7** : Le nom de la variable est invalide, les espaces sont interdites, utilisez plutôt des underscores `_`
 
-            - Le débogueur ne fonctionne **que sur un programme valide**, c'est-à-dire sans erreur de syntaxe, même si le code contient des erreurs de logique.
-            - Une erreur de syntaxe empêche le code d’être transformé en instructions compréhensibles pour l'ordinateur.
-            - Tant que la syntaxe n’est pas corrigée, le débogueur reste inutilisable.
-
-        Votre IDE souligne les erreurs de syntaxe en rouge et les liste dans le panneau « Problèmes » en bas de l'éditeur. Tant que ces erreurs ne sont pas corrigées, le débogage ne pourra pas démarrer.
-
-        Les erreurs de syntaxe à corriger dans cet exemple sont :
-        - **Ligne 4** : Le symbole d'assignation `=` est manquant
-        - **Ligne 5** : Il manque une parenthèse fermante `)`
-        - **Ligne 7** : Le nom de la variable est invalide, les espaces sont interdites, utilisez plutôt des underscores `_`
-
-        Il faut aussi garder en tête que Python fait réellement de son mieux pour identifier l’emplacement exact d’une erreur. Selon la nature du problème, ce n’est pas toujours simple pour lui : l’erreur peut se trouver avant ou après la ligne indiquée. Il arrive donc que le numéro de ligne signalé ne corresponde pas parfaitement à la source du problème.
-        :::
+Il faut aussi garder en tête que Python fait réellement de son mieux pour identifier l’emplacement exact d’une erreur. Selon la nature du problème, ce n’est pas toujours simple pour lui : l’erreur peut se trouver avant ou après la ligne indiquée. Il arrive donc que le numéro de ligne signalé ne corresponde pas parfaitement à la source du problème.
+:::

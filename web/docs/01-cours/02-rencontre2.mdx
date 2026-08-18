@@ -24,6 +24,7 @@ import Mod_Matplotlib from '../_cours-modules/_matplotlib.mdx';
 import DocumentationAutorisee from '@site/docs/_components/DocumentationAutorisee.mdx';
 import DocumentationInterdite from '@site/docs/_components/DocumentationInterdite.mdx';
 import IntroSolutionsExercices from '@site/docs/_components/IntroSolutionsExercices.mdx';
+import AideMemoireListe from '@site/docs/_components/AideMemoireListe.mdx';
 
 # Scripts et fonctions
 
@@ -46,8 +47,9 @@ import IntroSolutionsExercices from '@site/docs/_components/IntroSolutionsExerci
     <TabItem value="modules" label="Modules et bibliothèques">
         <Mod_Modules />
     </TabItem>
-    <TabItem value="liste" label="Liste (intro)" default>
+    <TabItem value="liste" label="Liste (intro)">
         <Mod_Liste />
+        <AideMemoireListe />
     </TabItem>
     <TabItem value="precision-flottants" label="Précision des flottants">
         <Mod_PrecisionFlottants />
@@ -57,10 +59,10 @@ import IntroSolutionsExercices from '@site/docs/_components/IntroSolutionsExerci
 
             ## Auto-validation des connaissances
 
-            [**Ce formulaire**](https://example.com) sert à vérifier votre compréhension des éléments les plus importants de la rencontre R02. Ne faites ce questionnaire **que lorsque vous vous sentez en très bonne maîtrise de la matière**. En classe, dès votre arrivée, vous aurez un **questionnaire très similaire**, évalué **sommativement**, à compléter sans accès à **aucune documentation**. /**https://forms.gle/YYzQgMACNvrF6mLSA**/
+            Le [formulaire de vérification](https://forms.gle/YYzQgMACNvrF6mLSA) permet de vérifier votre compréhension des éléments les plus importants de la rencontre R02. Ne faites ce questionnaire **que lorsque vous vous sentez en très bonne maîtrise de la matière**. En classe, dès votre arrivée, vous aurez un **questionnaire très similaire**, évalué **sommativement**, à compléter sans accès à **aucune documentation**.
 
             ::::warning
-            Ne pas remplir le formulaire diminue fortement vos chances de réussir l’évaluation sommative en début de rencontre. \
+            Ne pas remplir le formulaire diminue fortement vos chances de réussir l'évaluation sommative en début de rencontre. \\
             Assurez-vous de bien comprendre toutes les notions derrière chaque question.
             ::::
 
@@ -68,15 +70,18 @@ import IntroSolutionsExercices from '@site/docs/_components/IntroSolutionsExerci
 
             ## Exercices de compréhension
 
-            ::::info Exercice - Trace simple
+            ::::info Exercice 1 — Trace simple
 
-            :::note-nt ️
+            :::note-nt
             Pour réaliser cet exercice, imprimez le [tableau de trace d'exécution](/pdf/Traces_recto_verso.pdf).
             :::
 
             :::warning-nt
             En situation d'**examen**, vous devrez compléter une trace d'exécution sur **papier** sans utiliser d'ordinateur.
             :::
+            Sans exécuter le code, déterminez ce que le programme ci-dessous va afficher dans la console. \\
+            En suivant [**la recette simplifiée**](/recettes/produire-une-trace?recette-activite=Exemple+simple), complétez le tableau de trace d'exécution ligne par ligne. \\
+            La feuille de trace contient plus de colonnes que la recette simplifiée : laissez vides celles qui ne sont pas dans la recette.
             Sans exécuter le code, déterminez ce que le programme ci-dessous va afficher dans la console. \\
             En suivant [**la recette simplifiée**](/recettes/produire-une-trace?recette-activite=Exemple+simple), complétez le tableau de trace d'exécution ligne par ligne. \\
             La feuille de trace contient plus de colonnes que la recette simplifiée : laissez vides celles qui ne sont pas dans la recette.
@@ -129,10 +134,14 @@ import IntroSolutionsExercices from '@site/docs/_components/IntroSolutionsExerci
 
                 <Admonition type="tip" title="Faire les exercices dans Colab">
                     <p>Si vous préférez, vous pouvez aussi faire les exercices de cette section dans un notebook Google Colab. Cliquez sur le badge ci-dessous pour ouvrir le notebook préparé pour vous.</p>
-                    <a href="https://colab.research.google.com/github/Simonll/420-SN1/blob/develop/code/notebooks/exercices_semaine_2.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+                    Supprimez le pointeur **↩** sur le badge pour revenir au notebook localement.
+
+                    Ensuite, savourez l'expérience Colab !
+
+                    <a href="https://colab.research.google.com/github/Simonll/420-SN1/blob/develop/code/notebooks/02-rencontre2.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
                 </Admonition>
 
-                ::::info Exercice - *Free style*
+                ::::info Exercice 2 — *Free style*
                 Créez un fichier `free_style.py` pour votre réponse.
 
                 Dans un fichier, écrivez une dizaine de lignes de commandes Python.<br />
@@ -152,7 +161,7 @@ import IntroSolutionsExercices from '@site/docs/_components/IntroSolutionsExerci
 
                 ---
 
-                ::::info Exercice - QUESTION DE GRAVITÉ
+                ::::info Exercice 3 — QUESTION DE GRAVITÉ
                 Créez un fichier `question_de_gravite.py` pour votre réponse.
 
                 La gravité sur Mars est d’environ 3,71 m/s². \
@@ -182,7 +191,7 @@ import IntroSolutionsExercices from '@site/docs/_components/IntroSolutionsExerci
 
                 ---
 
-                ::::info Exercice - MOYENNE PRESSION SYSTOLIQUE
+                ::::info Exercice 4 — MOYENNE PRESSION SYSTOLIQUE
                 Créez un fichier `pression_systolique.py` pour votre réponse.
 
                 Créez un programme calculant la moyenne de la pression systolique d'un patient.
