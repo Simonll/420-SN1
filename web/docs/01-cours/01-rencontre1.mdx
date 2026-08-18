@@ -22,16 +22,16 @@ import Mod_apercu from '../_cours-modules/_apercu.mdx';
 
 # Intro - aperçu - premier code
 
-## Expressions, opérateurs, types, variables
+## Expressions, opérateurs, types, variables, environnement
 
 <Tabs queryString="onglet">
     <TabItem value="admin" label="Plan de cours" default>
         <PlanDeCoursModule />
     </TabItem>
-    <TabItem value="intro" label="Intro">
+    <TabItem value="intro" label="Introduction">
         <Mod_intro />
     </TabItem>
-    <TabItem value="code" label="On commence!">
+    <TabItem value="code" label="Premier code">
         <Mod_code />
     </TabItem>
     <TabItem value="expressions" label="Expressions">
@@ -52,13 +52,13 @@ import Mod_apercu from '../_cours-modules/_apercu.mdx';
     <TabItem value="github" label="GitHub">
         <Mod_github />
     </TabItem>
-    <TabItem value="venv" label="Env. virtuel">
+    <TabItem value="venv" label="Environnement virtuel">
         <Mod_venv />
     </TabItem>
     <TabItem value="apercu" label="Aperçu">
         <Mod_apercu />
     </TabItem>
-    <TabItem value="Activités à faire à la maison" label="Activités à faire à la maison">
+    <TabItem value="prepa" label="Activités à faire à la maison">
         :::info Organisation du cours
         Pour maximiser votre apprentissage, ce cours est structuré pour vous permettre de découvrir les concepts à votre rythme à la maison, et de profiter du temps en classe pour mettre en pratique, poser des questions et solidifier vos connaissances avec l'aide de l'enseignant.
 
@@ -69,52 +69,62 @@ import Mod_apercu from '../_cours-modules/_apercu.mdx';
 
         ## Exercices d'environnement de travail
 
-        Complétez les exercices de cette section avant de poursuivre avec les autres exercices plus bas.
+        Ces exercices préparent votre environnement de travail. Complétez-les **avant** les exercices de programmation de l'onglet "Activités à faire en classe".
 
-        :::info Devoir #1 - Créer un Compte GitHub
-        En suivant [cette recette](/recettes/creer-compte-github), créez-vous un compte GitHub si vous n'en avez pas déjà un. \
+        :::info Devoir #1 — Créer un compte GitHub
+        En suivant [cette recette](/recettes/creer-compte-github), créez-vous un compte GitHub si vous n'en avez pas déjà un.
         Vous pouvez utiliser votre adresse courriel personnelle ou celle du Cégep, selon votre préférence.
         :::
 
         ---
 
-        :::info Devoir #2 - Création des dépôts de code GitHub
-        Une fois votre compte GitHub créé, vous devez rejoindre **trois dépôts** distincts :
+        :::info Devoir #2 — Création des dépôts de code GitHub
+        Une fois votre compte GitHub créé, vous devez créer **trois dépôts** distincts :
+
         1. **General** : Pour vos exercices et exemples vus en classe.
         2. **TP1** : Pour le code de votre premier travail pratique.
         3. **TP2** : Pour le code de votre second travail pratique.
 
-        **Procédure à suivre** :
+        **Procédure à suivre :**
 
-        1. **Connexion :** Connectez-vous à votre compte sur [github.com](https://www.github.com)
-        2. **Acceptation des travaux :** Pour chaque lien présent dans le tableau ci-dessous :
-            - Ouvrez le lien.
-            - Cliquez sur le bouton vert "**Accept this assignment**"
+        1. **Connexion :** Connectez-vous à votre compte sur [github.com](https://www.github.com).
+        2. **Création des dépôts :** Suivez [cette recette](/recettes/creer-repertoire-github) pour créer vos trois dépôts avec la nomenclature appropriée.
 
-        | Groupe | Date/Heure | Enseignant | Liens pour créer les dépôts de code |
+        | Groupe | Date/Heure | Enseignant | Nomenclature |
         | :--- | :--- | :--- | :--- |
-        | 1010 | Lundi 8h00 | Nom de l'enseignant | [Lien 1](https://google.com) [Lien 2](https://google.com) [Lien 3](https://google.com) |
+        | 20030 | Vendredi 14h10 | Voir horaire | `a26-gr20030-MATRICULE-PRENOM-NOM` |
 
+        :::note Nomenclature
+        Pour votre dépôt **General**, le format est :
+        `a26-grXXXX-MATRICULE-PRENOM-NOM` *(ex : a26-gr20030-123456-John-Doe)* où
+        `XXXX` est votre numéro de groupe,
+        `MATRICULE` votre matricule étudiant,
+        `PRENOM` et `NOM` votre prénom et nom de famille (sans accents, séparés par un tiret).
         :::
+
         ---
+
         :::info Installation sur votre ordinateur personnel (fortement recommandé)
         Pour travailler sur vos projets en classe et à la maison avec les vrais outils de programmation, vous devez installer les logiciels suivants sur votre ordinateur personnel :
+
         1. [Python](https://www.python.org/downloads/) (version 3.11 ou plus récente)
         2. [VS Code](https://code.visualstudio.com/download) (version 1.80 ou plus récente)
         3. [Git](https://git-scm.com/downloads) (version 2.42 ou plus récente)
         :::
 
     </TabItem>
-    <TabItem value="Activités à faire en classe" label="Activités à faire en classe">
-        ## Exercices de compréhension
+    <TabItem value="class" label="Activités à faire en classe">
+        ## Exercices de compréhension — Rencontre 1
 
-        Pour les exercices de cette section, vous pouvez écrire vos réponses sur papier ou vous pouvez [créer un fichier *markdown*](/recettes/creer-markdown).
+        Pour les exercices de cette section, vous pouvez écrire vos réponses sur papier ou [créer un fichier *markdown*](/recettes/creer-markdown).
 
-        ::::info Exercice - EXPRESSIONS
+        ---
+
+        ::::info Exercice 1 — Expressions
 
         Créez un fichier `r01_expressions.md` pour votre réponse.
 
-        Sans exécuter le code, déterminez le résultat de chacune des expressions ci-dessous.<br />
+        Sans exécuter le code, déterminez le résultat de chacune des expressions ci-dessous.
         Par la suite, tapez (ou copiez) et exécutez le code dans la console, et comparez le résultat avec vos réponses.
 
         <Row>
@@ -152,11 +162,20 @@ import Mod_apercu from '../_cours-modules/_apercu.mdx';
             </Column>
         </Row>
 
-        La fonction `round()` permet d'arrondir :
+        :::note Notions visées
+        Opérateurs arithmétiques (`/`, `//`, `**`), priorité des opérations, division entière vs décimale, concaténation de chaînes, conversion de types `str()`, `float()`
+        ::::
+
+        ---
+
+        ::::info Exercice 2 — Arrondissement avec `round()`
+
+        La fonction `round()` permet d'arrondir un nombre :
         - Le 1er paramètre est la valeur à arrondir.
         - Le 2ème paramètre est le nombre de décimales à conserver.
 
-        Poursuivez l'exercice avec les expressions suivantes :
+        Sans exécuter le code, déterminez ce que ces instructions affichent :
+
         <Row>
             <Column>
                 ```python
@@ -171,24 +190,23 @@ import Mod_apercu from '../_cours-modules/_apercu.mdx';
         </Row>
 
         :::note Notions visées
-        Opérateurs arithmétiques (`/`, `//`, `**`), priorité des opérations, division entière vs décimale, concaténation de chaînes, `round()`, conversion de types `str()`, `float()`
-        :::
-
+        Appel de fonction, paramètres, arrondissement, précision décimale
         ::::
 
         ---
 
-        ::::info Exercice - Trace simplifiée #1
+        ::::info Exercice 3 — Trace simplifiée #1
 
-        :::note-nt ️
+        :::note-nt
         Pour réaliser cet exercice, imprimez le [tableau de trace d'exécution](/pdf/Traces_recto_verso.pdf).
         :::
 
         :::warning-nt
         En situation d'**examen**, vous devrez compléter une trace d'exécution sur **papier** sans utiliser d'ordinateur.
         :::
-        Sans exécuter le code, déterminez ce que le programme ci-dessous va afficher dans la console. \
-        En suivant [**la recette simplifiée**](/recettes/produire-une-trace?recette-activite=Exemple+simple), complétez le tableau de trace d'exécution ligne par ligne. \
+
+        Sans exécuter le code, déterminez ce que le programme ci-dessous va afficher dans la console.
+        En suivant [**la recette simplifiée**](/recettes/produire-une-trace?recette-activite=Exemple+simple), complétez le tableau de trace d'exécution ligne par ligne.
         La feuille de trace contient plus de colonnes que la recette simplifiée : laissez vides celles qui ne sont pas dans la recette.
 
         ```python showLineNumbers
@@ -198,24 +216,24 @@ import Mod_apercu from '../_cours-modules/_apercu.mdx';
         nombre3 = nombre2 - nombre1 - 10
         print(nombre1, nombre2, nombre3)
         ```
-        Validez ensuite votre trace en exécutant le programme en mode débogage. \
+
+        Validez ensuite votre trace en exécutant le programme en mode débogage.
         Avancez pas à pas et observez l'évolution de chaque variable à chaque ligne.
+
         :::note Notions visées
         Variables, réaffectation, ordre d'exécution, opérateurs arithmétiques, trace d'exécution, débogueur (points d'arrêt)
-        :::
-
         ::::
 
         ---
 
-        ::::info Exercice - Trace simplifiée #2
+        ::::info Exercice 4 — Trace simplifiée #2
 
-        :::note-nt ️
+        :::note-nt
         Pour réaliser cet exercice, imprimez le [tableau de trace d'exécution](/pdf/Traces_recto_verso.pdf).
         :::
 
-        Sans exécuter le code, déterminez ce que le programme ci-dessous va afficher dans la console. \
-        En suivant [**la recette simplifiée**](/recettes/produire-une-trace?recette-activite=Exemple+simple), complétez le tableau de trace d'exécution ligne par ligne. \
+        Sans exécuter le code, déterminez ce que le programme ci-dessous va afficher dans la console.
+        En suivant [**la recette simplifiée**](/recettes/produire-une-trace?recette-activite=Exemple+simple), complétez le tableau de trace d'exécution ligne par ligne.
         La feuille de trace contient plus de colonnes que la recette simplifiée : laissez vides celles qui ne sont pas dans la recette.
 
         ```python showLineNumbers
@@ -226,28 +244,29 @@ import Mod_apercu from '../_cours-modules/_apercu.mdx';
         x = temporaire
         print(x, y)
         ```
-        Validez ensuite votre trace en exécutant le programme en mode débogage. \
+
+        Validez ensuite votre trace en exécutant le programme en mode débogage.
         Avancez pas à pas et observez l'évolution de chaque variable à chaque ligne.
 
-        Que s'est-il passé avec le contenu des variables `x` et `y`?
+        Que s'est-il passé avec le contenu des variables `x` et `y` ?
 
         :::note Notions visées
         Variables, échange de valeurs avec une variable temporaire, réaffectation, ordre d'exécution, trace d'exécution, débogueur
-        :::
-
         ::::
+
         ---
 
-        # Solutionnaire
+        ## Solutionnaire
 
         :::warning
-        Consultez le solutionnaire **uniquement après avoir complété l'exercice par vous-même**. \
-        Comparer votre réponse avec une solution vous permet de valider votre raisonnement et de corriger vos erreurs. \
+        Consultez le solutionnaire **uniquement après avoir complété l'exercice par vous-même**.
+        Comparer votre réponse avec une solution vous permet de valider votre raisonnement et de corriger vos erreurs.
         Consulter la solution avant d'avoir tenté l'exercice prive votre cerveau de l'occasion de construire des connexions durables.
         :::
 
-        - Expression — [solutionnaire.pdf](/pdf/expressions_solutionnaire.pdf)
-        - Trace simplifiée #1 — [solutionnaire.pdf](/pdf/trace_simplifiée_1.pdf)
-        - Trace simplifiée #2 — [solutionnaire.pdf](/pdf/trace_simplifiée_2.pdf)
+        - Exercice 1 (Expressions) — [solutionnaire.pdf](/pdf/expressions_solutionnaire.pdf)
+        - Exercice 2 (Arrondissement) — [solutionnaire.pdf](/pdf/arrondissement_solutionnaire.pdf)
+        - Exercice 3 (Trace #1) — [solutionnaire.pdf](/pdf/trace_simplifiée_1.pdf)
+        - Exercice 4 (Trace #2) — [solutionnaire.pdf](/pdf/trace_simplifiée_2.pdf)
     </TabItem>
 </Tabs>
