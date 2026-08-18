@@ -74,12 +74,6 @@ Pour les étudiants qui se dirigent vers l'ingénierie et qui auront besoin de c
 
 Une fois l'environnement virtuel activé, vous pouvez installer des bibliothèques dans cet environnement isolé.
 
-### Via l'interface graphique de VS Code
-
-1. Ouvrir le panneau des extensions (`Ctrl+Shift+X`) et chercher l'extension **Python** de Microsoft (déjà installée avec l'extension Python).
-2. Dans la barre d'état inférieure, cliquer sur la version de Python pour ouvrir le menu des environnements.
-3. Sélectionner l'environnement `.venv` que vous venez de créer.
-
 ### Via le terminal
 
 1. Ouvrir un terminal dans VS Code.
@@ -96,6 +90,18 @@ Une fois l'environnement virtuel activé, vous pouvez installer des bibliothèqu
    pip install matplotlib
    pip install pandas
    ```
+
+   > **Important :** Tant que l'environnement `.venv` est actif dans le terminal, `pip install` installera la bibliothèque uniquement dans cet environnement. Si le prompt ne montre pas `(.venv)`, activez-le d'abord.
+
+### Installer depuis un fichier `requirements.txt` (optionnel)
+
+Si votre projet contient un fichier `requirements.txt` listant les dépendances :
+
+```bash
+pip install -r requirements.txt
+```
+
+Cela installera toutes les bibliothèques listées en une seule commande.
 
 ---
 
