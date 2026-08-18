@@ -1,15 +1,47 @@
-# 📥 Créer un répertoire GitHub
+# 📥 Créer un dépôt GitHub
 
 :::info-nt
 
-1. Allez sur [github.com](https://github.com)
-2. Connectez-vous à votre compte
-3. Cliquez sur l'onglet `Repositories`
-4. Cliquez sur le bouton `New` en haut à droite
-5. (Optionnel) Ajoutez un fichier `README.md`, un `.gitignore` et choisissez une licence
-6. Donnez un nom à votre nouveau répertoire, par exemple `Cours_420-SN1`
-7. Dans `Configuration` > `Choose visibility`, sélectionnez `Private` pour que vos fichiers **ne soient pas publics** (accessibles par tout le monde)
-8. Cliquez sur `Create repository`
+1. Allez sur [github.com](https://github.com) et connectez-vous à votre compte.
+2. Cliquez sur l'onglet **`Repositories`** en haut de la page.
+3. Cliquez sur le bouton vert **`New`** en haut à droite.
+4. Dans la section **`General`** :
+   - Dans le champ **`Repository name`**, nommer votre dépôt selon la nomenclature du cours.
+     Le format attendu est :<br/><br/>
+     `a26-grXXXX-MATRICULE-PRENOM-NOM-type-de-depot` *(ex : a26-gr20030-123456-John-Doe-general)* où
+     <br/>`XXXX` est votre numéro de groupe,
+     <br/>`MATRICULE` votre matricule étudiant,
+     <br/>`PRENOM` et `NOM` votre prénom et nom de famille (sans accents, séparés par un tiret),
+     <br/>et `general` le type de dépôt (exercices généraux, TP1, TP2, etc.).
+
+   - Le champ **`Description`** est optionnel, mais il est recommandé d'y décrire au minimum le rôle du dépôt. Par exemple : *"Exercices réalisés dans le cadre du cours 420-SN1"*.
+
+5. Dans la section **`Configuration`** :
+   - **`Choose visibility`** : sélectionnez **`Private`**. Votre dépôt ne sera visible que par vous et les collaborateurs que vous invitez.
+   - **`Add README`** : activez pour mettre à **`ON`**. Le contenu de ce fichier s'affiche sur la page d'accueil de votre dépôt et sert de carte de visite. GitHub créera automatiquement un fichier `README.md` en reprenant la description.
+   - **`Add .gitignore`** : sélectionnez **`Python`**. Cela exclut automatiquement les fichiers inutiles de votre dépôt de code.
+   - **`Add license`** : laissez à **`No license`**.
+6. Cliquez sur **`Create repository`**.
+
+:::
+
+---
+
+# Ajouter un collaborateur à votre dépôt
+
+:::info-nt
+
+Une fois votre dépôt créé, vous devez y inviter votre enseignant comme collaborateur pour qu'il puisse consulter votre code. Vous pouvez trouver le nom de votre enseignant sur votre horaire de cours reçu en début de session.
+
+1. Sur la page de votre dépôt, cliquez sur l'onglet **`Settings`**.
+2. Dans le menu de gauche, cliquez sur **`Collaborators`**.
+3. Cliquez sur le bouton **`Add people`**.
+4. Entrez le nom d'utilisateur GitHub de votre enseignant, puis cliquez sur **`Add [nom] to this repository`**.
+5. Votre enseignant recevra une invitation par courriel qu'il devra accepter.
+
+À préciser par l'enseignant selon le groupe :
+- Vérifiez l'adresse GitHub de votre enseignant auprès de lui ou dans le syllabus de votre groupe.
+- Si vous avez plusieurs enseignants (entraînement, tutorat), invitez ceux qui doivent avoir accès à vos dépôts.
 
 :::
 
@@ -17,14 +49,15 @@
 
 ## Après la création
 
-Une fois le répertoire créé, vous devrez le cloner sur votre ordinateur pour pouvoir travailler dans vos fichiers localement.
+Une fois le dépôt créé, vous devrez le cloner sur votre ordinateur pour pouvoir travailler sur vos fichiers localement.
 
-- Si vous utilisez **PyCharm** : voir la recette [Cloner avec PyCharm](/recettes/enclasse_pycharm#1-cloner-un-répertoire-github)
-- Si vous utilisez **GitHub Desktop** : voir la recette [Autres recettes](/recettes/autres-recettes?onglet=git-avec-github-desktop#2-ouvrir-un-projet-dans-pycharm)
+- Si vous utilisez **VS Code** : voir la recette [Cloner un dépôt avec VS Code](/recettes/creer-projet-VSCode).
+- Si vous utilisez **PyCharm** : voir la recette [Cloner avec PyCharm](/recettes/enclasse_pycharm#1-cloner-un-répertoire-github).
+- Si vous utilisez **GitHub Desktop** : voir la section GitHub Desktop dans [Autres recettes](/recettes/autres-recettes?onglet=installer-github-desktop).
 
 ---
 
-## Pourquoi un répertoire privé ?
+## Pourquoi un dépôt privé ?
 
 - Vos travaux sont protégés : seuls vous et les personnes autorisées (votre enseignant) pouvez y accéder.
 - Vous pouvez travailler à plusieurs sur le même projet sans exposer votre code au public.
