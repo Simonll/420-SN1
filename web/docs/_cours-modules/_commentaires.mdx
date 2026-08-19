@@ -11,57 +11,57 @@ import AideMemoireListe from '@site/docs/_components/AideMemoireListe.mdx';
 
 :::info Commentaires dans le code
 
-        Il est possible d'ajouter des commentaires dans le code pour expliquer ce que fait une fonction ou pour donner des indications sur son utilisation.<br />
-        Les commentaires sont ignorés par l'interpréteur Python et n'affectent pas l'exécution du code.<br />
-        Ils sont utiles pour rendre le code plus lisible et compréhensible pour les autres développeurs (et pour vous-même dans le futur!).
+Il est possible d'ajouter des commentaires dans le code pour expliquer ce que fait une fonction ou pour donner des indications sur son utilisation.<br />
+Les commentaires sont ignorés par l'interpréteur Python et n'affectent pas l'exécution du code.<br />
+Ils sont utiles pour rendre le code plus lisible et compréhensible pour les autres développeurs (et pour vous-même dans le futur!).
 
-        En Python, les commentaires sont créés en utilisant le symbole `#` pour commenter **une ligne entière** ou **une partie de ligne**.
+En Python, les commentaires sont créés en utilisant le symbole `#` pour commenter **une ligne entière** ou **une partie de ligne**.
 
-        Pour documenter une fonction, il est possible d'utiliser les triples guillemets `"""` (ou `'''`). \
-        Ce type de documentation se nomme un ***docstring*** et est toujours placé au début de la définition d'une fonction. \
-        Créer une fonction sans mettre une documentation est une mauvaise pratique!
+Pour documenter une fonction, il est possible d'utiliser les triples guillemets `"""` (ou `'''`). \
+Ce type de documentation se nomme un ***docstring*** et est toujours placé au début de la définition d'une fonction. \
+**Une fonction devrait toujours avoir une documentation.**
 
-        Par exemple :
-        ```python showLineNumbers
-        # Ceci est un commentaire sur une seule ligne
-        def energie_cinetique(masse, vitesse): # Ceci est un commentaire en fin de ligne
-            """
-            Calcule l'énergie cinétique d'un objet en mouvement.
+Par exemple :
+```python showLineNumbers
+# Ceci est un commentaire sur une seule ligne
+def energie_cinetique(masse, vitesse): # Ceci est un commentaire en fin de ligne
+    """
+    Calcule l'énergie cinétique d'un objet en mouvement.
 
-            Paramètres :
-            masse (float) : Masse de l'objet en kilogrammes (kg)
-            vitesse (float) : Vitesse de l'objet en mètres par seconde (m/s)
+    Paramètres :
+    masse (float) : Masse de l'objet en kilogrammes (kg)
+    vitesse (float) : Vitesse de l'objet en mètres par seconde (m/s)
 
-            Retourne :
-            float : Énergie cinétique en Joules (J)
+    Retourne :
+    float : Énergie cinétique en Joules (J)
 
-            Exemple d'utilisation :
-            energie_cinetique(10, 5)
-            """
-            nb_joules = 0.5 * masse * pow(vitesse,2)
-            return nb_joules
+    Exemple d'utilisation :
+    energie_cinetique(10, 5)
+    """
+    nb_joules = 0.5 * masse * pow(vitesse,2)
+    return nb_joules
 
-        # Exemple avec différentes valeurs
-        objet1 = energie_cinetique(2, 3) # Masse de 2 kg, vitesse de 3 m/s
-        objet2 = energie_cinetique(5, 7) # Masse de 5 kg, vitesse de 7 m/s
+# Exemple avec différentes valeurs
+objet1 = energie_cinetique(2, 3) # Masse de 2 kg, vitesse de 3 m/s
+objet2 = energie_cinetique(5, 7) # Masse de 5 kg, vitesse de 7 m/s
 
-        # Affichage des résultats
-        print("Énergie cinétique de l'objet 1 :", objet1, "Joules")
-        print("Énergie cinétique de l'objet 2 :", objet2, "Joules")
-        ```
+# Affichage des résultats
+print("Énergie cinétique de l'objet 1 :", objet1, "Joules")
+print("Énergie cinétique de l'objet 2 :", objet2, "Joules")
+```
 
-        Les lignes 3 à 15 constituent un ***docstring*** : un bloc utilisant des triples guillemets pour expliquer en détail la fonction `energie_cinetique`.\
-        Lorsqu'une fonction possède une documentation sous forme de ***docstring***, l'IDE vous permet de visualiser cette documentation rapidement. \
-        Par exemple, si vous placez votre souris sur l'un des deux appels de fonction `energie_cinetique`, la documentation sera affichée.
+Les lignes 3 à 15 constituent un ***docstring*** : un bloc utilisant des triples guillemets pour expliquer en détail la fonction `energie_cinetique`.\
+Lorsqu'une fonction possède un ***docstring***, la plupart des IDEs permettent de visualiser cette documentation rapidement en passant la souris sur le nom de la fonction. \
+Par exemple, si vous placez votre souris sur l'un des deux appels de fonction `energie_cinetique`, la documentation sera affichée.
 
-        <p align="left">
-            <img src={require('/img/cours/exemple_docstring_affiché.png').default} alt="Résultat du graphique généré" style={{ verticalAlign: 'middle' }} width="50%" />
-        </p>
+<p align="left">
+    <img src={require('/img/cours/exemple_docstring_affiché.png').default} alt="Résultat du graphique généré" style={{ verticalAlign: 'middle' }} width="50%;" />
+</p>
 
-        Les docstrings ne servent qu'à la documentation et elles sont ignorées par Python lors de l'exécution du code. \
-        Il en est de même pour les lignes 1, 19 et 23, qui sont des commentaires sur une seule ligne, ainsi que tout ce qui se trouve à droite du `#` à la ligne 2.
+Les docstrings ne servent qu'à la documentation et elles sont ignorées par Python lors de l'exécution du code. \
+Il en est de même pour les lignes 1, 19 et 23, qui sont des commentaires sur une seule ligne, ainsi que tout ce qui se trouve à droite du `#` à la ligne 2.
 
-        :::
+:::
 
 
-        {/* <Feedback feedbackId="Rencontre #3 - Commentaires" /> */}
+{/* <Feedback feedbackId="Rencontre #3 - Commentaires" /> */}
