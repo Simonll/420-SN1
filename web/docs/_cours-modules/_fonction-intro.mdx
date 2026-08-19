@@ -9,123 +9,119 @@ import DocumentationInterdite from '@site/docs/_components/DocumentationInterdit
 import IntroSolutionsExercices from '@site/docs/_components/IntroSolutionsExercices.mdx';
 import AideMemoireListe from '@site/docs/_components/AideMemoireListe.mdx';
 
-<Admonition type="tip" title="Faire les exercices dans Colab">
-            <p>Si vous préférez, vous pouvez aussi faire les exercices de cette section dans un notebook Google Colab. Cliquez sur le badge ci-dessous pour ouvrir le notebook préparé pour vous.</p>
-            <a href="https://colab.research.google.com/github/Simonll/420-SN1/blob/develop/code/notebooks/exercices_semaine_3.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
-        </Admonition>
 
-        :::info Rappel sur les fonctions
-        - Une fonction est un bloc de code réutilisable qui effectue une tâche spécifique.
-        - Elle peut prendre des **paramètres** (des valeurs d'entrée) et retourner une **valeur de sortie**.
-        - Les fonctions permettent de **structurer le code**, de **réduire la répétition** et de **faciliter la maintenance** du code.
-        :::
+:::info Rappel sur les fonctions
+- Une fonction est un bloc de code réutilisable qui effectue une tâche spécifique.
+- Elle peut prendre des **paramètres** (des valeurs d'entrée) et retourner une **valeur de sortie**.
+- Les fonctions permettent de **structurer le code**, de **réduire la répétition** et de **faciliter la maintenance** du code.
+:::
 
-        ---
+---
 
-        :::info Fonction simple
+:::info Fonction simple
 
-        Voici une fonction très simple :
+Voici une fonction très simple :
 
-        ```python showLineNumbers
-        def double(x):
-            return 2 * x
-        ```
+```python showLineNumbers
+def double(x):
+    return 2 * x
+```
 
-        - **Première ligne** : `def double(x):`
-            - `def` est un mot-clé qui indique que nous sommes en train de définir une fonction.
-            - `double` est le nom que nous avons décidé de donner à notre fonction.
-            - Les parenthèses `()` indiquent que c'est une fonction, et peuvent contenir des paramètres (ici un seul : `x`).
-            - `x` est un paramètre que nous avons décidé de nommer `x` et qui prend la valeur transmise lors de l'appel de la fonction.
-            - Le `:` à la fin de la ligne indique que le corps (le code) de la fonction commence à la ligne suivante.
-        - **Toutes les lignes suivantes** (ici seulement une ligne : `return 2 * x`)
-            - Elles font partie du corps de la fonction, et sont indentées d'une tabulation **(touche `TAB`)** (espacement vers la droite).
-                - **En Python, l'indentation est essentielle pour délimiter les blocs de code.**
-            - `return` est un mot-clé qui indique quelle valeur la fonction renvoie, ici le résultat de l'évaluation de l'expression `2 * x`.
+- **Première ligne** : `def double(x):`
+    - `def` est un mot-clé qui indique que nous sommes en train de définir une fonction.
+    - `double` est le nom que nous avons décidé de donner à notre fonction.
+    - Les parenthèses `()` indiquent que c'est une fonction, et peuvent contenir des paramètres (ici un seul : `x`).
+    - `x` est un paramètre que nous avons décidé de nommer `x` et qui prend la valeur transmise lors de l'appel de la fonction.
+    - Le `:` à la fin de la ligne indique que le corps (le code) de la fonction commence à la ligne suivante.
+- **Toutes les lignes suivantes** (ici seulement une ligne : `return 2 * x`)
+    - Elles font partie du corps de la fonction, et sont indentées d'une tabulation **(touche `TAB`)** (espacement vers la droite).
+        - **En Python, l'indentation est essentielle pour délimiter les blocs de code.**
+    - `return` est un mot-clé qui indique quelle valeur la fonction renvoie, ici le résultat de l'évaluation de l'expression `2 * x`.
 
-        :::
+:::
 
-        ---
+---
 
-        :::info Indentation
-        En Python, l'indentation est utilisée pour définir les blocs de code (pas juste pour les fonctions, mais aussi pour les conditions, les boucles, etc., que l'on verra plus tard).
+:::info Indentation
+En Python, l'indentation est utilisée pour définir les blocs de code (pas juste pour les fonctions, mais aussi pour les conditions, les boucles, etc., que l'on verra plus tard).
 
-        Dans une fonction, tout le code qui fait partie de la fonction doit avoir la même indentation (généralement une tabulation ou 4 espaces).
-        ```python showLineNumbers
-        def double(x):
-            y = 2 * x  # Cette ligne fait partie de la fonction (indentée)
-            return y   # Cette ligne fait aussi partie de la fonction (indentée)
-        z = 3          # Cette ligne n'est pas indentée, elle ne fait pas partie de la fonction
-        ```
-        Dans cet exemple, les lignes `a = 1` et `b = 2` font partie du corps de la fonction `double`, tandis que la ligne `c = 3` est en dehors de la fonction.
+Dans une fonction, tout le code qui fait partie de la fonction doit avoir la même indentation (généralement une tabulation ou 4 espaces).
+```python showLineNumbers
+def double(x):
+    y = 2 * x  # Cette ligne fait partie de la fonction (indentée)
+    return y   # Cette ligne fait aussi partie de la fonction (indentée)
+z = 3          # Cette ligne n'est pas indentée, elle ne fait pas partie de la fonction
+```
+Dans cet exemple, les lignes `y = 2 * x` et `return y` font partie du corps de la fonction `double`, tandis que la ligne `z = 3` est en dehors de la fonction.
 
 
-        :::
+:::
 
-        ---
+---
 
-        ::::info Appel d'une fonction
+::::info Appel d'une fonction
 
-        Une fois qu'une fonction est ainsi définie, on peut *l'appeler*, en lui transmettant une valeur pour `x` :
+Une fois qu'une fonction est ainsi définie, on peut *l'appeler*, en lui transmettant une valeur pour `x` :
 
-        ```python showLineNumbers
-        def double(x):
-            return 2 * x
+```python showLineNumbers
+def double(x):
+    return 2 * x
 
-        double(5)  # Appel de la fonction en lui passant la valeur 5
-        ```
+double(5)  # Appel de la fonction en lui passant la valeur 5
+```
 
-        :::tip-nt
+:::tip-nt
 
-        Pour appeler une fonction, on écrit son nom suivi de parenthèses contenant les valeurs à transmettre aux paramètres. \
-        Lorsqu'une fonction est appelée, le code à l'intérieur de la fonction est exécuté, et la valeur spécifiée par `return` est renvoyée à l'endroit où la fonction a été appelée.
+Pour appeler une fonction, on écrit son nom suivi de parenthèses contenant les valeurs à transmettre aux paramètres. \
+Lorsqu'une fonction est appelée, le code à l'intérieur de la fonction est exécuté, et la valeur spécifiée par `return` est renvoyée à l'endroit où la fonction a été appelée.
 
-        :::
+:::
 
-        Ici, la fonction `double` est appelée en lui passant la valeur `5`, ce qui signifie que `x` reçoit la valeur `5` à l'intérieur de la fonction. \
-        La fonction calcule `2 * 5` et retourne `10`.
+Ici, la fonction `double` est appelée en lui passant la valeur `5`, ce qui signifie que `x` reçoit la valeur `5` à l'intérieur de la fonction. \
+La fonction calcule `2 * 5` et retourne `10`.
 
-        Cependant, ici, la valeur retournée par la fonction est perdue.\
-        La fonction fonctionne… mais le résultat disparaît si on ne le stocke pas.\
-        Il pourrait être plus utile de stocker cette valeur dans une variable :
+Cependant, ici, la valeur retournée par la fonction est perdue.\
+La fonction fonctionne… mais le résultat disparaît si on ne le stocke pas.\
+Il pourrait être plus utile de stocker cette valeur dans une variable :
 
-        ```python showLineNumbers=4
-        resultat = double(5)  # Appel de la fonction et stockage de la valeur retournée dans la variable 'resultat'
-        ```
+```python showLineNumbers=4
+resultat = double(5)  # Appel de la fonction et stockage de la valeur retournée dans la variable 'resultat'
+```
 
-        Une fonction ne montre rien à l’écran : elle retourne une valeur que l'on peut ensuite utiliser.
+Une fonction retourne une valeur qui n'est pas affichée automatiquement : il faut la stocker dans une variable ou l'afficher avec `print()` pour la voir.
 
-        ::::
+::::
 
-        ---
+---
 
-        :::note-nt
+:::note-nt
 
-        Une fois une fonction définie, elle peut être appelée autant de fois que souhaité dans le code, en utilisant son nom suivi de parenthèses et des valeurs nécessaires :
+Une fois une fonction définie, elle peut être appelée autant de fois que souhaité dans le code, en utilisant son nom suivi de parenthèses et des valeurs nécessaires :
 
-        ```python
-        resultat1 = double(5)  # Appel de la fonction avec la valeur 5
-        resultat2 = double(10) # Appel de la fonction avec la valeur 10
-        resultat3 = double(2)  # Appel de la fonction avec la valeur 2
-        ```
+```python
+resultat1 = double(5)  # Appel de la fonction avec la valeur 5
+resultat2 = double(10) # Appel de la fonction avec la valeur 10
+resultat3 = double(2)  # Appel de la fonction avec la valeur 2
+```
 
-        Après l'exécution de ces lignes, `resultat1` contiendra `10`, `resultat2` contiendra `20` et `resultat3` contiendra `4`.
+Après l'exécution de ces lignes, `resultat1` contiendra `10`, `resultat2` contiendra `20` et `resultat3` contiendra `4`.
 
-        :::
+:::
 
-        ---
+---
 
-        :::tip-nt
+:::tip-nt
 
-        Pour passer des valeurs à une fonction, il est aussi possible d’utiliser des variables :
+Pour passer des valeurs à une fonction, il est aussi possible d’utiliser des variables :
 
-        ```python
-        a = 5
-        resultat = double(a)  # Appel de la fonction en lui passant la valeur contenue dans la variable 'a'
-        ```
+```python
+a = 5
+resultat = double(a)  # Appel de la fonction en lui passant la valeur contenue dans la variable 'a'
+```
 
-         Ici, la variable `a` contient la valeur `5`, et lorsque nous appelons `double(a)`, la fonction reçoit la valeur de `a` (c’est-à-dire `5`) et retourne `10`.
+    Ici, la variable `a` contient la valeur `5`, et lorsque nous appelons `double(a)`, la fonction reçoit la valeur de `a` (c’est-à-dire `5`) et retourne `10`.
 
-        :::
+:::
 
 
-        {/* <Feedback feedbackId="Rencontre #3 - Fonction" /> */}
+{/* <Feedback feedbackId="Rencontre #3 - Fonction" /> */}
