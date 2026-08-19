@@ -9,193 +9,186 @@ import DocumentationInterdite from '@site/docs/_components/DocumentationInterdit
 import IntroSolutionsExercices from '@site/docs/_components/IntroSolutionsExercices.mdx';
 import AideMemoireListe from '@site/docs/_components/AideMemoireListe.mdx';
 
+:::warning ⚠️ Les nombres flottants ne sont pas toujours exacts
 
+Essayez ce code dans un script Python :
 
-<Admonition type="tip" title="Faire les exercices dans Colab">
-            <p>Si vous préférez, vous pouvez aussi faire les exercices de cette section dans un notebook Google Colab. Cliquez sur le badge ci-dessous pour ouvrir le notebook préparé pour vous.</p>
-            <a href="https://colab.research.google.com/github/Simonll/420-SN1/blob/develop/code/notebooks/exercices_semaine_2.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
-        </Admonition>
+```python showLineNumbers
+resultat = 0.1 + 0.2
+print(resultat)
+```
 
-        :::warning ⚠️ Les nombres flottants ne sont pas toujours exacts
+Vous obtiendrez :
+```
+0.30000000000000004
+```
 
-        Essayez ce code dans un script Python :
+Surprenant? Pourtant, Python n'a pas fait d'erreur. \
+C'est le comportement **normal et attendu** de tous les langages qui utilisent les nombres flottants selon la norme internationale **IEEE 754**.
 
-        ```python showLineNumbers
-        resultat = 0.1 + 0.2
-        print(resultat)
-        ```
+:::
 
-        Vous obtiendrez :
-        ```
-        0.30000000000000004
-        ```
+---
 
-        Surprenant? Pourtant, Python n'a pas fait d'erreur. \
-        C'est le comportement **normal et attendu** de tous les langages qui utilisent les nombres flottants selon la norme internationale **IEEE 754**.
+::::info Pourquoi ça arrive?
 
-        :::
+Les ordinateurs stockent les données en **binaire** (des 0 et des 1). Or, certaines fractions décimales simples, comme `0.1`, **ne peuvent pas être représentées exactement en binaire**, tout comme `1/3` ne peut pas être écrit exactement en décimal (`0.333333...`).
 
-        ---
+Quand Python écrit `0.1` en mémoire, il stocke en réalité quelque chose comme :
+```
+0.1000000000000000055511151231257827021181583404541015625
+```
 
-        ::::info Pourquoi ça arrive?
+:::tip pourquoi?
 
-        Les ordinateurs stockent les données en **binaire** (des 0 et des 1). Or, certaines fractions décimales simples, comme `0.1`, **ne peuvent pas être représentées exactement en binaire**, tout comme `1/3` ne peut pas être écrit exactement en décimal (`0.333333...`).
+C'est parce que `0.1` est une fraction décimale qui ne peut pas être représentée exactement en binaire. \
+En binaire, `0.1` est une fraction périodique infinie, et l'ordinateur doit faire un compromis en stockant une approximation très proche de `0.1`, mais pas exactement égale :
+```
+0.1 (décimal) = 0.0001100110011001100110011001100110011001100110011001101... (binaire)
+```
 
-        Quand Python écrit `0.1` en mémoire, il stocke en réalité quelque chose comme :
-        ```
-        0.1000000000000000055511151231257827021181583404541015625
-        ```
+:::
 
-        :::tip pourquoi?
+C'est infiniment proche de `0.1`, mais pas exactement égal. Et quand on additionne plusieurs de ces approximations, l'erreur s'accumule et peut devenir visible.
 
-        C'est parce que `0.1` est une fraction décimale qui ne peut pas être représentée exactement en binaire. \
-        En binaire, `0.1` est une fraction périodique infinie, et l'ordinateur doit faire un compromis en stockant une approximation très proche de `0.1`, mais pas exactement égale :
-        ```
-        0.1 (décimal) = 0.0001100110011001100110011001100110011001100110011001101... (binaire)
-        ```
 
-        :::
+:::note Analogie
+Imaginez que vous devez mesurer 1 litre d'eau, mais votre seul outil est une cuillère à thé de 5 ml légèrement imprécise (5,002 ml). Chaque mesure introduit une toute petite erreur. Au bout de 200 cuillères, l'erreur accumulée devient perceptible. C'est exactement ce qui se passe avec les flottants!
+:::
 
-        C'est infiniment proche de `0.1`, mais pas exactement égal. Et quand on additionne plusieurs de ces approximations, l'erreur s'accumule et peut devenir visible.
+::::
 
+---
 
-        :::note Analogie
-        Imaginez que vous devez mesurer 1 litre d'eau, mais votre seul outil est une cuillère à thé de 5 ml légèrement imprécise (5,002 ml). Chaque mesure introduit une toute petite erreur. Au bout de 200 cuillères, l'erreur accumulée devient perceptible. C'est exactement ce qui se passe avec les flottants!
-        :::
+:::danger Impacts concrets
 
-        ::::
+Ce problème peut causer des bugs subtils et difficiles à détecter.
 
-        ---
+**Comparaison de flottants :** ne jamais comparer des flottants avec `==` !
 
-        :::danger Impacts concrets
+```python showLineNumbers
+a = 0.1 + 0.2
+b = 0.3
 
-        Ce problème peut causer des bugs subtils et difficiles à détecter.
+print(a)        # Affiche 0.30000000000000004
+print(b)        # Affiche 0.3
+print(a == b)   # Affiche False  ← les deux valeurs semblent identiques, pourtant!
+```
 
-        **Comparaison de flottants :** ne jamais comparer des flottants avec `==` !
+*L'opérateur `==` vérifie si deux valeurs sont exactement identiques et retourne `True` (vrai) ou `False` (faux). Il sera étudié à la [rencontre 4](/cours/rencontre4).*
 
-        ```python showLineNumbers
-        a = 0.1 + 0.2
-        b = 0.3
 
-        print(a)        # Affiche 0.30000000000000004
-        print(b)        # Affiche 0.3
-        print(a == b)   # Affiche False  ← les deux valeurs semblent identiques, pourtant!
-        ```
+**Accumulation d'erreurs dans un calcul répété :**
+```python showLineNumbers
+# Additionner 0.1 dix fois devrait donner 1.0... mais :
+total = 0.1 + 0.1 + 0.1 + 0.1 + 0.1 + 0.1 + 0.1 + 0.1 + 0.1 + 0.1
+print(total)        # Affiche 0.9999999999999999 au lieu de 1.0
+print(total == 1.0) # Affiche False
+```
 
-        *L'opérateur `==` vérifie si deux valeurs sont exactement identiques et retourne `True` (vrai) ou `False` (faux). Il sera étudié à la [rencontre 4](/cours/rencontre4).*
+**Résultats inattendus dans des conditions financières ou scientifiques :**
+```python showLineNumbers
+prix = 1.15
+taxe = 0.05
+total = prix + taxe
+print(total)        # Affiche 1.1999999999999998 au lieu de 1.2
+```
 
+:::
 
-        **Accumulation d'erreurs dans un calcul répété :**
-        ```python showLineNumbers
-        # Additionner 0.1 dix fois devrait donner 1.0... mais :
-        total = 0.1 + 0.1 + 0.1 + 0.1 + 0.1 + 0.1 + 0.1 + 0.1 + 0.1 + 0.1
-        print(total)        # Affiche 0.9999999999999999 au lieu de 1.0
-        print(total == 1.0) # Affiche False
-        ```
+---
 
-        **Résultats inattendus dans des conditions financières ou scientifiques :**
-        ```python showLineNumbers
-        prix = 1.15
-        taxe = 0.05
-        total = prix + taxe
-        print(total)        # Affiche 1.1999999999999998 au lieu de 1.2
-        ```
+::::info Comment y remédier
 
-        :::
+Il existe plusieurs stratégies selon le contexte.
 
-        ---
+---
 
-        ::::info Comment y remédier
+### Stratégie 1 : Arrondir l'affichage avec les f-strings
 
-        Il existe plusieurs stratégies selon le contexte.
+Si le problème est uniquement visuel, on peut simplement contrôler le nombre de décimales affichées :
 
-        ---
+```python showLineNumbers
+resultat = 0.1 + 0.2
+print(f"Résultat : {resultat:.2f}")  # Affiche : Résultat : 0.30
+```
 
-        ### Stratégie 1 : Arrondir l'affichage avec les f-strings
+C'est la solution la plus simple et suffisante dans la grande majorité des cas de ce cours.
 
-        Si le problème est uniquement visuel, on peut simplement contrôler le nombre de décimales affichées :
+---
 
-        ```python showLineNumbers
-        resultat = 0.1 + 0.2
-        print(f"Résultat : {resultat:.2f}")  # Affiche : Résultat : 0.30
-        ```
+### Stratégie 2 : Arrondir avec `round()`
 
-        C'est la solution la plus simple et suffisante dans la grande majorité des cas de ce cours.
+La fonction `round()` permet de limiter la précision d'un nombre flottant :
 
-        ---
+```python showLineNumbers
+resultat = round(0.1 + 0.2, 2)
+print(resultat)  # Affiche : 0.3
+```
 
-        ### Stratégie 2 : Arrondir avec `round()`
+:::warning Attention
+`round()` réduit l'erreur visible, mais n'élimine pas complètement les approximations internes.\
+Pour des comparaisons fiables, préférez la stratégie 3.
+:::
 
-        La fonction `round()` permet de limiter la précision d'un nombre flottant :
+---
 
-        ```python showLineNumbers
-        resultat = round(0.1 + 0.2, 2)
-        print(resultat)  # Affiche : 0.3
-        ```
+### Stratégie 3 : Comparer avec une tolérance
 
-        :::warning Attention
-        `round()` réduit l'erreur visible, mais n'élimine pas complètement les approximations internes.\
-        Pour des comparaisons fiables, préférez la stratégie 3.
-        :::
+Pour vérifier si deux flottants sont "pratiquement égaux", on compare leur différence à un seuil très petit :
 
-        ---
+```python showLineNumbers
+a = 0.1 + 0.2
+b = 0.3
+tolerance = 1e-9              # 0.000000001
 
-        ### Stratégie 3 : Comparer avec une tolérance
+difference = abs(a - b)
+print(difference)             # Affiche 5.551115123125783e-17  (quasi zéro)
+print(difference < tolerance) # Affiche True  ← la différence est négligeable
+```
 
-        Pour vérifier si deux flottants sont "pratiquement égaux", on compare leur différence à un seuil très petit :
+*L'opérateur `<` vérifie si la valeur de gauche est plus petite que celle de droite. Il sera étudié à la [rencontre 4](/cours/rencontre4).*
 
-        ```python showLineNumbers
-        a = 0.1 + 0.2
-        b = 0.3
-        tolerance = 1e-9              # 0.000000001
 
-        difference = abs(a - b)
-        print(difference)             # Affiche 5.551115123125783e-17  (quasi zéro)
-        print(difference < tolerance) # Affiche True  ← la différence est négligeable
-        ```
+---
 
-        *L'opérateur `<` vérifie si la valeur de gauche est plus petite que celle de droite. Il sera étudié à la [rencontre 4](/cours/rencontre4).*
+### Stratégie 4 : Utiliser le module `decimal`
 
+Quand la précision absolue est critique, Python offre le module `decimal` qui effectue les calculs en base 10, comme le ferait un humain :
 
-        ---
+```python showLineNumbers
+from decimal import Decimal
 
-        ### Stratégie 4 : Utiliser le module `decimal`
+a = Decimal("0.1")
+b = Decimal("0.2")
+print(a + b)        # Affiche exactement : 0.3
+```
 
-        Quand la précision absolue est critique, Python offre le module `decimal` qui effectue les calculs en base 10, comme le ferait un humain :
+:::note
+Notez que les valeurs sont passées comme des **chaînes de caractères** (`"0.1"` et non `0.1`). \
+Si on passait `0.1` directement, Python convertirait d'abord le flottant imprécis, et le problème reviendrait.
+:::
 
-        ```python showLineNumbers
-        from decimal import Decimal
+:::warning
+Alors, pourquoi ne pas utiliser `decimal` systématiquement?\
+Parce que c'est beaucoup plus lent et plus complexe à manipuler que les flottants classiques.
+:::
 
-        a = Decimal("0.1")
-        b = Decimal("0.2")
-        print(a + b)        # Affiche exactement : 0.3
-        ```
+::::
 
-        :::note
-        Notez que les valeurs sont passées comme des **chaînes de caractères** (`"0.1"` et non `0.1`). \
-        Si on passait `0.1` directement, Python convertirait d'abord le flottant imprécis, et le problème reviendrait.
-        :::
+---
 
-        :::warning
-        Alors, pourquoi ne pas utiliser `decimal` systématiquement?\
-        Parce que c'est beaucoup plus lent et plus complexe à manipuler que les flottants classiques.
-        :::
+:::tip À retenir pour ce cours
 
-        ::::
+Dans ce cours d'introduction, les deux réflexes essentiels sont :
 
-        ---
+- **Afficher des flottants** → utiliser `:.2f` (ou un autre nombre de décimales) dans une f-string pour contrôler la présentation.
+- **Comparer des flottants** → éviter `==` ou `round()` et préférer une tolérance.
 
-        :::tip À retenir pour ce cours
+Le module `decimal` est réservé aux situations où la précision absolue est indispensable (ex. logiciels bancaires). \
+Pour la majorité des calculs scientifiques ou pédagogiques, arrondir l'affichage est tout à fait suffisant.
 
-        Dans ce cours d'introduction, les deux réflexes essentiels sont :
+:::
 
-        - **Afficher des flottants** → utiliser `:.2f` (ou un autre nombre de décimales) dans une f-string pour contrôler la présentation.
-        - **Comparer des flottants** → éviter `==` ou `round()` et préférer une tolérance.
 
-        Le module `decimal` est réservé aux situations où la précision absolue est indispensable (ex. logiciels bancaires). \
-        Pour la majorité des calculs scientifiques ou pédagogiques, arrondir l'affichage est tout à fait suffisant.
-
-        :::
-
-
-        {/* <Feedback feedbackId="Rencontre #2 - Précision des flottants" /> */}
+{/* <Feedback feedbackId="Rencontre #2 - Précision des flottants" /> */}
