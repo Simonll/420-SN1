@@ -9,108 +9,108 @@ import DocumentationInterdite from '@site/docs/_components/DocumentationInterdit
 import IntroSolutionsExercices from '@site/docs/_components/IntroSolutionsExercices.mdx';
 import AideMemoireListe from '@site/docs/_components/AideMemoireListe.mdx';
 
-:::info `return`
+:::info `return` — retourner une ou plusieurs valeurs
 
-        Les valeurs retournées servent de sortie à la fonction ou *output*.
+Les valeurs retournées servent de sortie à la fonction ou *output*.
 
-        Une fonction peut retourner plusieurs valeurs, séparées par des virgules :
+Une fonction peut retourner plusieurs valeurs, séparées par des virgules. Les valeurs retournées peuvent être **déballées** (unpacked) directement lors de l'appel :
 
-        ```python showLineNumbers
-        def diviser(a, b):
-            quotient = a / b
-            reste = a % b
-            return quotient, reste
+```python showLineNumbers
+def diviser(a, b):
+    quotient = a / b
+    reste = a % b
+    return quotient, reste
 
-        q, r = diviser(10, 3)
-        ```
+q, r = diviser(10, 3)
+```
 
-        Dans cet exemple, la fonction `diviser` retourne à la fois le quotient et le reste de la division.\
-        Ces valeurs sont ensuite assignées à deux variables distinctes (`q` et `r`), séparées par une virgule lors de l'appel de la fonction.
+Dans cet exemple, la fonction `diviser` retourne à la fois le quotient et le reste de la division.\
+Ces valeurs sont ensuite assignées à deux variables distinctes (`q` et `r`), séparées par une virgule lors de l'appel de la fonction.
 
-        :::
+:::
 
-        ---
+---
 
-        :::tip-nt
+:::tip-nt
 
-        L'exécution de la fonction s'arrête dès qu'une instruction `return` est rencontrée. \
-        Pour cette raison, l'instruction `return` est généralement placée à la toute fin d'une fonction.
+L'exécution de la fonction s'arrête dès qu'une instruction `return` est rencontrée. \
+Pour cette raison, l'instruction `return` est généralement placée à la toute fin d'une fonction.
 
-        Cependant, une fonction peut comporter plusieurs instructions `return` à différents endroits du code, notamment dans des conditions différentes.\
-        Nous verrons les conditions plus tard, mais voici tout de même un exemple simple :
+Cependant, une fonction peut comporter plusieurs instructions `return` à différents endroits du code, notamment dans des conditions différentes.\
+Nous verrons les conditions plus tard, mais voici tout de même un exemple simple :
 
-        ```python showLineNumbers
-        def plus_grand(a, b):
-            if a > b:
-                return a
-            else:
-                return b
-        ```
+```python showLineNumbers
+def plus_grand(a, b):
+    if a > b:
+        return a
+    else:
+        return b
+```
 
-        :::
+:::
 
-        ---
+---
 
-        ::::warning Fonction sans return
+::::warning Fonction sans return
 
-        Une fonction peut ne pas avoir d'instruction `return`. \
-        Dans ce cas, elle retourne automatiquement la valeur `None`.
+Une fonction peut ne pas avoir d'instruction `return`. \
+Dans ce cas, elle retourne automatiquement la valeur `None`.
 
-        Par exemple, la fonction ci-dessous affiche simplement une salutation à la console sur 2 lignes :
+Par exemple, la fonction ci-dessous affiche simplement une salutation à la console sur 2 lignes :
 
-        ```python showLineNumbers
-        def salutation(nom, age):
-            print("Bonjour")
-            print(f"Je m'appelle {nom}, j'ai {age} ans")
-        ```
+```python showLineNumbers
+def salutation(nom, age):
+    print("Bonjour")
+    print(f"Je m'appelle {nom}, j'ai {age} ans")
+```
 
-        C'est pareil comme si `return None` était ajouté à la fin de la fonction :
+C'est pareil comme si `return None` était ajouté à la fin de la fonction :
 
-        ```python showLineNumbers
-        def salutation(nom, age):
-            print("Bonjour")
-            print(f"Je m'appelle {nom}, j'ai {age} ans")
-            return None
-        ```
+```python showLineNumbers
+def salutation(nom, age):
+    print("Bonjour")
+    print(f"Je m'appelle {nom}, j'ai {age} ans")
+    return None
+```
 
-        Par exemple, le code ci-dessous affichera `None` :
-        ```python showLineNumbers
-        resultat = salutation("Gustave", 32) # Affiche la salutation, puis stocke `None` dans `resultat`
-        print(resultat)                      # Affiche la valeur de `resultat`, qui est `None`
-        print(salutation("Sciel", 32))       # Affiche la salutation, puis affiche la valeur de retour `None`
-        ```
+Par exemple, le code ci-dessous affichera `None` :
+```python showLineNumbers
+resultat = salutation("Gustave", 32) # Affiche la salutation, puis stocke `None` dans `resultat`
+print(resultat)                      # Affiche la valeur de `resultat`, qui est `None`
+print(salutation("Sciel", 32))       # Affiche la salutation, puis affiche la valeur de retour `None`
+```
 
-        :::danger
-        Pour cette raison, n'affichez jamais le résultat d'une fonction qui ne retourne rien!<br />
-        Cela affichera toujours `None`, ce qui n'a aucun sens.
-        ```python showLineNumbers
-        # bonne utilisation :
-        salutation("Gustave", 32)  # Affiche la salutation
+:::danger
+Pour cette raison, **ne capturez jamais le résultat d'une fonction qui ne retourne rien dans une variable**, et **ne l'affichez jamais avec `print()`**.<br />
+Cela affichera toujours `None`, ce qui n'a aucun sens.
+```python showLineNumbers
+# bonne utilisation :
+salutation("Gustave", 32)  # Affiche la salutation
 
-        # mauvaise utilisation :
-        print(salutation("Gustave", 32))  # Affiche la salutation, puis `None`
-        ```
-        ::::
+# mauvaise utilisation :
+print(salutation("Gustave", 32))  # Affiche la salutation, puis `None`
+```
+::::
 
-        ---
+---
 
-        ::::info-nt
+::::info-nt
 
-        On peut aussi définir une fonction qui construit et retourne une chaîne de caractères, sans jamais afficher quoi que ce soit à l'écran :
+On peut aussi définir une fonction qui construit et retourne une chaîne de caractères, sans jamais afficher quoi que ce soit à l'écran :
 
-        ```python showLineNumbers
-        def salutation(nom, age):
-            return f"Bonjour\nJe m'appelle {nom}, j'ai {age} ans."
+```python showLineNumbers
+def salutation(nom, age):
+    return f"Bonjour\nJe m'appelle {nom}, j'ai {age} ans."
 
-        message = salutation("Gustave", 32)  # Stocke la chaîne de caractères retournée par la fonction
-                                             # dans la variable 'message'
+message = salutation("Gustave", 32)  # Stocke la chaîne de caractères retournée par la fonction
+                                        # dans la variable 'message'
 
-        print(message)  # Affiche le message stocké dans la variable 'message'
-        ```
+print(message)  # Affiche le message stocké dans la variable 'message'
+```
 
-        Si jamais vous êtes confus.e entre `print()` et `return`, lisez [cette section](/aidememoire/return-print).
+Si jamais vous êtes confus.e entre `print()` et `return`, lisez [cette section](/aidememoire/return-print).
 
-        ::::
+::::
 
 
-        {/* <Feedback feedbackId="Rencontre #3 - Retour" /> */}
+{/* <Feedback feedbackId="Rencontre #3 - Retour" /> */}
