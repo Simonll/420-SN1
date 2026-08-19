@@ -11,132 +11,127 @@ import AideMemoireListe from '@site/docs/_components/AideMemoireListe.mdx';
 
 :::info Appels
 
-        Les fonctions peuvent appeler d'autres fonctions.<br />
-        Cela est utile pour décomposer des tâches complexes en sous-tâches plus simples.
+Les fonctions peuvent appeler d'autres fonctions.<br />
+Cela est utile pour décomposer des tâches complexes en sous-tâches plus simples.
 
-        ```python showLineNumbers
-        def ajouter(x, y):
-            return x + y
+```python showLineNumbers
+def ajouter(x, y):
+    return x + y
 
-        def multiplier(x, y):
-            return x * y
+def multiplier(x, y):
+    return x * y
 
-        def calculer_expression(a, b, c):
-            somme = ajouter(a, b)
-            resultat = multiplier(somme, c)
-            return resultat
+def calculer_expression(a, b, c):
+    somme = ajouter(a, b)
+    resultat = multiplier(somme, c)
+    return resultat
 
-        valeur = calculer_expression(2, 3, 4)
-        print(valeur)  # Affiche 20
-        ```
+valeur = calculer_expression(2, 3, 4)
+print(valeur)  # Affiche 20
+```
 
-        Dans cet exemple, la fonction `calculer_expression()` appelle les fonctions `ajouter()` et `multiplier()` pour
-        effectuer une série de calculs.
+Dans cet exemple, la fonction `calculer_expression()` appelle les fonctions `ajouter()` et `multiplier()` pour
+effectuer une série de calculs.
 
-        :::
+:::
 
-        ---
+---
 
-        :::note Pile d'appels
+:::note Pile d'appels
 
-        Lorsque Python exécute un programme, il doit garder la trace de « qui a appelé qui ». Pour cela, il utilise un mécanisme interne appelé la pile d'appels.
+Lorsque Python exécute un programme, il doit garder la trace de « qui a appelé qui ». Pour cela, il utilise un mécanisme interne appelé la pile d'appels.
 
-        C'est une sorte de "GPS" qui permet à Python de toujours savoir où il en est rendu et où il doit retourner une fois qu'une tâche est terminée. Bien qu'elle soit invisible en temps normal, c'est exactement cette pile qui s'affiche à l'écran sous le nom de Traceback lorsque votre programme plante !
+C'est une sorte de "GPS" qui permet à Python de toujours savoir où il en est rendu et où il doit retourner une fois qu'une tâche est terminée. Bien qu'elle soit invisible en temps normal, c'est exactement cette pile qui s'affiche à l'écran sous le nom de Traceback lorsque votre programme plante !
 
+### Fonctionnement : Principe LIFO
 
-        Le fonctionnement (Principe LIFO)
-        La pile fonctionne comme une vraie pile de dossiers sur un bureau : elle suit le principe LIFO (Last In, First Out – Dernier arrivé, premier sorti).
+La pile fonctionne comme une vraie pile de dossiers sur un bureau : elle suit le principe LIFO (Last In, First Out – Dernier arrivé, premier sorti).
 
-        Voici comment Python procède :
+Voici comment Python procède :
 
-        L'empilement : Quand une instruction appelle une fonction, Python met le programme actuel sur pause et dépose la nouvelle fonction au sommet de la pile.
+1. **L'empilement** : Quand une instruction appelle une fonction, Python met le programme actuel sur pause et dépose la nouvelle fonction au sommet de la pile.
 
-        Priorité au sommet : Python ne peut faire qu'une seule chose à la fois. Il travaille toujours sur la fonction qui se trouve tout en haut de la pile.
+2. **Priorité au sommet** : Python ne peut faire qu'une seule chose à la fois. Il travaille toujours sur la fonction qui se trouve tout en haut de la pile.
 
-        Le retour : Dès que la fonction au sommet a terminé son travail, elle est retirée de la pile. Python reprend alors le travail sur la fonction qui se trouve juste en dessous, exactement là où il l'avait laissée.
-        
-        Principe LIFO
+3. **Le retour** : Dès que la fonction au sommet a terminé son travail, elle est retirée de la pile. Python reprend alors le travail sur la fonction qui se trouve juste en dessous, exactement là où il l'avait laissée.
 
-        La pile d'appels suit le principe LIFO (*Last In, First Out*) :
-        - La dernière fonction ajoutée est la première à être exécutée, et la première à être retirée.
-        - Ce mécanisme permet à Python de gérer les appels imbriqués de fonctions, et de revenir à l’état précédent une fois qu’une fonction a terminé son exécution.
+Cela signifie que **la dernière fonction ajoutée est la première à être exécutée et la première à être retirée**. Ce mécanisme permet à Python de gérer les appels imbriqués de fonctions, et de revenir à l'état précédent une fois qu'une fonction a terminé son exécution.
 
-        ```python showLineNumbers
-        def fonction_a():
-            print("Fonction A")
-            fonction_b()
+```python showLineNumbers
+def fonction_a():
+    print("Fonction A")
+    fonction_b()
 
-        def fonction_b():
-            print("Fonction B")
+def fonction_b():
+    print("Fonction B")
 
-        fonction_a()
-        ```
+fonction_a()
+```
 
-        Dans cet exemple :
+Dans cet exemple :
 
-        1. fonction_a() est appelée en premier. Elle va au sommet de la pile.
+1. `fonction_a()` est appelée en premier. Elle va au sommet de la pile.
 
-        2. À mi-chemin, elle appelle fonction_b(). Python met la fonction A sur pause et empile la fonction B par-dessus.
+2. À mi-chemin, elle appelle `fonction_b()`. Python met la fonction A sur pause et empile la fonction B par-dessus.
 
-        3. La fonction B s'exécute complètement, puis est retirée de la pile.
+3. La fonction B s'exécute complètement, puis est retirée de la pile.
 
-        4. Python retrouve la fonction A au sommet et termine son exécution.
+4. Python retrouve la fonction A au sommet et termine son exécution.
 
-        :::
+:::
 
-        ---
+---
 
-        :::info Débogueur
+:::info Débogueur
 
-        Le débogueur permet d'inspecter tous les détails de la pile d'appels.<br />
+Le débogueur permet d'inspecter tous les détails de la pile d'appels.<br />
 
-        Copiez le code ci-dessous dans un script, mettez un point d'arrêt sur la ligne 12 (`valeur = ...`) et exécutez le script en mode débogage.
+Copiez le code ci-dessous dans un script, mettez un point d'arrêt sur la ligne 12 (`valeur = ...`) et exécutez le script en mode débogage.
 
-        ```python showLineNumbers
-        def ajouter(x, y):
-            return x + y
+```python showLineNumbers
+def ajouter(x, y):
+    return x + y
 
-        def multiplier(x, y):
-            return x * y
+def multiplier(x, y):
+    return x * y
 
-        def calculer_expression(a, b, c):
-            somme = ajouter(a, b)
-            resultat = multiplier(somme, c)
-            return resultat
+def calculer_expression(a, b, c):
+    somme = ajouter(a, b)
+    resultat = multiplier(somme, c)
+    return resultat
 
-        valeur = calculer_expression(2, 3, 4)
-        print(valeur)  # Affiche 20
-        ```
+valeur = calculer_expression(2, 3, 4)
+print(valeur)  # Affiche 20
+```
 
-        Pour *entrer* dans les fonctions appelées en mode débogage, il faut utiliser le bouton **Step Into** <img src={require('/img/icons/stepinto.png').default} alt="Step Into" width="24" style={{ verticalAlign: 'middle' }} />.<br />
-        Lorsque vous entrez dans la fonction `calculer_expression()`, vous voyez :
-        - cette fonction s'ajouter au sommet de la pile d'appels (à gauche),
-        - les paramètres `a`, `b` et `c` apparaître dans la liste des variables (à droite) :
+Pour *entrer* dans les fonctions appelées en mode débogage, il faut utiliser le bouton **Step Into** <img src={require('/img/icons/stepinto.png').default} alt="Step Into" width="24" style={{ verticalAlign: 'middle' }} />.<br />
+Lorsque vous entrez dans la fonction `calculer_expression()`, vous voyez :
+- cette fonction s'ajouter au sommet de la pile d'appels (à gauche),
+- les paramètres `a`, `b` et `c` apparaître dans la liste des variables (à droite) :
 
-        <img src={require('/img/recettes/pile_appels1.png').default} width="70%"/>
+<img src={require('/img/recettes/pile_appels1.png').default} width="70%"/>
 
-        Si vous appuyez de nouveau sur <img src={require('/img/icons/stepinto.png').default} alt="Step Into" width="24" style={{ verticalAlign: 'middle' }} />, vous entrez dans la fonction `ajouter()`.\
-        Vous pouvez voir que la fonction `ajouter()` est maintenant au sommet de la pile d'appels, et les paramètres `x` et `y` sont affichés dans la liste des variables :
-        <img src={require('/img/recettes/pile_appels2.png').default} width="70%"/>
-        Remarquez que les paramètres `a`, `b` et `c` de `calculer_expression()` ne sont plus visibles,\
-        car vous êtes maintenant dans la fonction `ajouter()` et `a`, `b` et `c` sont **hors de portée**.
+Si vous appuyez de nouveau sur <img src={require('/img/icons/stepinto.png').default} alt="Step Into" width="24" style={{ verticalAlign: 'middle' }} />, vous entrez dans la fonction `ajouter()`.\
+Vous pouvez voir que la fonction `ajouter()` est maintenant au sommet de la pile d'appels, et les paramètres `x` et `y` sont affichés dans la liste des variables :
+<img src={require('/img/recettes/pile_appels2.png').default} width="70%"/>
+Remarquez que les paramètres `a`, `b` et `c` de `calculer_expression()` ne sont plus visibles,\
+car vous êtes maintenant dans la fonction `ajouter()` et `a`, `b` et `c` sont **hors de portée**.
 
-        Vous pouvez cliquer sur le nom de la fonction `calculer_expression()` dans la pile d'appels pour revenir à cette fonction et voir ses paramètres à nouveau, qui sont en attente du moment où `calculer_expression()` redeviendra la fonction sur le dessus de la pile :
-        <img src={require('/img/recettes/pile_appels3.png').default} width="70%"/>
+Vous pouvez cliquer sur le nom de la fonction `calculer_expression()` dans la pile d'appels pour revenir à cette fonction et voir ses paramètres à nouveau, qui sont en attente du moment où `calculer_expression()` redeviendra la fonction sur le dessus de la pile :
+<img src={require('/img/recettes/pile_appels3.png').default} width="70%"/>
 
-        :::
+:::
+---
 
-        ---
+:::tip Trace d'exécution
 
-        :::tip Trace d'exécution
+Lorsque vous faites la trace d'exécution d'un code qui contient des appels de fonctions,
+il est nécessaire de noter la pile d'appels et les variables locales à chaque étape
+comme dans l'[exemple de trace disponible ici](/recettes/produire-une-trace?recette-activite=Avec+fonction).
 
-        Lorsque vous faites la trace d'exécution d'un code qui contient des appels de fonctions,
-        il est nécessaire de noter la pile d'appels et les variables locales à chaque étape
-        comme dans l'[exemple de trace disponible ici](/recettes/produire-une-trace?recette-activite=Avec+fonction).
+Le débogueur est alors le meilleur outil pour valider votre trace... sauf pour le volet papier de l'examen!
 
-        Le débogueur est alors le meilleur outil pour valider votre trace... sauf pour le volet papier de l'examen!
-
-        :::
+:::
 
 
-        {/* <Feedback feedbackId="Rencontre #3 - Pile d" /> */}
+{/* <Feedback feedbackId="Rencontre #3 - Pile d" /> */}
