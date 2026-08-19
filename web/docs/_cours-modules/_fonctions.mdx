@@ -9,230 +9,158 @@ import DocumentationInterdite from '@site/docs/_components/DocumentationInterdit
 import IntroSolutionsExercices from '@site/docs/_components/IntroSolutionsExercices.mdx';
 import AideMemoireListe from '@site/docs/_components/AideMemoireListe.mdx';
 
+:::info Fonctions
+
+Une **fonction** est un ensemble d'instructions réutilisables regroupées sous un nom.<br />
+Le nom doit être **significatif** : par exemple, on devine que `print()` sert à afficher quelque chose.
+
+---
+
+### Comprendre une fonction
+Quand on utilise une fonction, il n'est pas nécessaire de connaître tout son code interne.<br />
+Il faut surtout comprendre :
+- Quels **paramètres** attend-elle ? (les infos entre `()`)
+- Est-ce qu'elle **retourne une valeur** qu'on peut stocker ?
+- Y a-t-il des **cas limites** ou erreurs possibles (exceptions) ?
+
+---
+
+### Les paramètres
+Pour appeler une fonction :
+`nom_de_fonction(param1, param2, ...)`<br />
+Le nombre et l'ordre des paramètres sont importants.
+
+---
+
+### Conserver une valeur de retour
+On peut stocker le résultat d'une fonction dans une variable, par exemple :
+```python showLineNumbers
+mon_age_arrondi = round(17.8)
+```
+:::
+
+:::warning La distinction `print()` vs `return`
+La distinction entre `print()` (afficher) et `return` (renvoyer une valeur) est cruciale. Consultez cette [page](/aidememoire/return-print) de l'aide-mémoire pour une explication détaillée.
+:::
 
 
-<Admonition type="tip" title="Faire les exercices dans Colab">
-            <p>Si vous préférez, vous pouvez aussi faire les exercices de cette section dans un notebook Google Colab. Cliquez sur le badge ci-dessous pour ouvrir le notebook préparé pour vous.</p>
-            <a href="https://colab.research.google.com/github/Simonll/420-SN1/blob/develop/code/notebooks/exercices_semaine_2.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
-        </Admonition>
-        :::info Fonctions
+::::note Quelques fonctions utiles
 
-        Une **fonction** est un ensemble d’instructions réutilisables regroupées sous un nom.<br />
-        Le nom doit être **significatif** : par exemple, on devine que `print()` sert à afficher quelque chose.
+Vous trouverez dans la section [Fonctions utiles](/aidememoire/fonctions) de l'aide-mémoire une liste non-exhaustive de fonctions utiles, et dans [Création de fonctions](/aidememoire/fonctions-creation) tout ce qui concerne la définition de ses propres fonctions.
 
-        ---
+Découvrons-en quelques-unes :
 
-        ### Comprendre une fonction
-        Quand on utilise une fonction, il n’est pas nécessaire de connaître tout son code interne.<br />
-        Il faut surtout comprendre :
-        - Quels **paramètres** attend-elle ? (les infos entre `()`)
-        - Est-ce qu’elle **retourne une valeur** qu’on peut stocker ?
-        - Y a-t-il des **cas limites** ou erreurs possibles (exceptions) ?
+---
 
-        ---
+### Les fonctions `min()` et `max()`
+Les fonctions `min()` et `max()` permettent de connaître le paramètre ayant la plus petite ou la plus grande valeur.<br />
+Ces deux fonctions doivent être utilisées avec des paramètres.<br />
 
-        ### Les paramètres
-        Pour appeler une fonction :
-        `nom_de_fonction(param1, param2, ...)`<br />
-        Le nombre et l’ordre des paramètres sont importants.
+Par exemple :
+```python showLineNumbers
+# Trouver le plus petit
+note1 = 85
+note2 = 72
+note3 = 91
+plus_petite = min(note1, note2, note3)
+print(f"La plus petite note est : {plus_petite}")  # 72
 
-        ---
+# Trouver le plus grand
+plus_grande = max(note1, note2, note3)
+print(f"La plus grande note est : {plus_grande}")  # 91
+```
 
-        ### Conserver une valeur de retour
-        On peut stocker le résultat d’une fonction dans une variable, par exemple :
-        ```python showLineNumbers
-        mon_age_arrondi = round(17.8)
-        ```
-        :::
+À noter : les fonctions `min()` et `max()` sont particulières en ce sens qu'elles peuvent prendre un nombre variable de paramètres, contrairement à la plupart des fonctions qui attendent un nombre fixe de paramètres.
 
-        :::warning La distinction `print()` vs `return`
-        La distinction entre `print()` (afficher) et `return` (renvoyer une valeur) est cruciale. Consultez cette [page](/aidememoire/return-print) de l'aide-mémoire pour une explication détaillée.
-        :::
+---
 
+### La fonction `len()`
+La fonction `len()` permet de calculer la longueur d'une séquence, comme une **chaîne de caractères** (nombre de caractères) ou une **liste** (nombre d'éléments).<br />
+Elle prend la séquence en paramètre et retourne un entier.
 
-        ::::note Quelques fonctions utiles
+```python showLineNumbers
+# Avec une chaîne de caractères
+prenom = "Alice"
+longueur_prenom = len(prenom)
+print(f"La longueur du prénom {prenom} est : {longueur_prenom}")  # La longueur du prénom Alice est : 5
 
-        Vous trouverez dans la section [Fonctions utiles](/aidememoire/fonctions) de l'aide-mémoire une liste non-exhaustive de fonctions utiles.
+# Avec une liste
+notes = [85, 92, 78]
+nombre_de_notes = len(notes)
+print(f"Il y a {nombre_de_notes} notes.") # Il y a 3 notes.
+```
+Le concept de liste sera abordé plus en détail dans l'onglet **Liste (list)**.
 
-        Découvrons-en quelques-unes :
+---
 
-        ---
+### Diverses fonctions
 
-        ### Les fonctions `min()` et `max()`
-        Les fonctions `min()` et `max()` permettent de connaître le paramètre ayant la plus petite ou la plus grande valeur.<br />
-        Ces deux fonctions doivent être utilisées avec des paramètres.<br />
+Voici quelques exemples de fonctions utiles en Python, qui prennent différents nombres de paramètres :
+```python showLineNumbers
+# Conversion de types
+valeur_entier = int("3")
+valeur_flottant = float("3.41")
+chaine_texte = str(42)
 
-        Par exemple :
-        ```python showLineNumbers
-        # Trouver le plus petit
-        note1 = 85
-        note2 = 72
-        note3 = 91
-        plus_petite = min(note1, note2, note3)
-        print(f"La plus petite note est : {plus_petite}")  # 72
+# Puissances et arrondi
+valeur_puissance = pow(2, 3)
+valeur_arrondie = round(3.14159, 2)
 
-        # Trouver le plus grand
-        plus_grande = max(note1, note2, note3)
-        print(f"La plus grande note est : {plus_grande}")  # 91
-        ```
+# Type d'une variable
+type_variable = type(longueur_prenom)
+```
 
-        À noter : les fonctions `min()` et `max()` sont particulières en ce sens qu'elles peuvent prendre un nombre variable de paramètres, contrairement à la plupart des fonctions qui attendent un nombre fixe de paramètres.
+---
 
-        ---
+### Appels imbriqués
 
-        ### La fonction `len()`
-        La fonction `len()` permet de calculer la longueur d'une séquence, comme une **chaîne de caractères** (nombre de caractères) ou une **liste** (nombre d'éléments).<br />
-        Elle prend la séquence en paramètre et retourne un entier.
+On peut imbriquer les appels de fonctions pour combiner plusieurs opérations en une seule ligne.<br />
+Ainsi, la valeur retournée par une fonction peut être utilisée directement comme paramètre d'une autre fonction.<br />
+```python showLineNumbers
+print(len(str(42)))
+```
+Dans cet exemple, où trois appels de fonctions sont imbriqués, l'exécution se fait de l'intérieur vers l'extérieur :
+1. La fonction `str(42)` convertit le nombre entier `42` en une chaîne de caractères `"42"`,
+2. puis la fonction `len(...)` calcule la longueur de cette chaîne, qui est `2`,
+3. et enfin la fonction `print(...)` affiche ce résultat.
 
-        ```python showLineNumbers
-        # Avec une chaîne de caractères
-        prenom = "Alice"
-        longueur_prenom = len(prenom)
-        print(f"La longueur du prénom {prenom} est : {longueur_prenom}")  # La longueur du prénom Alice est : 5
+---
 
-        # Avec une liste
-        notes = [85, 92, 78]
-        nombre_de_notes = len(notes)
-        print(f"Il y a {nombre_de_notes} notes.") # Il y a 3 notes.
-        ```
-        Le concept de liste sera abordé plus en détail dans l'onglet **Liste (list)**.
+### La fonction `print()`
 
-        ---
+`print()` est la fonction la plus utilisée pour afficher du texte ou des valeurs dans la console. \
+Elle peut prendre un nombre variable de paramètres, séparés par des virgules, qu'elle *concaténe* avec des espaces par défaut.
 
-        ### Diverses fonctions
+```python showLineNumbers
+nombre1 = 6
+nombre2 = 7
+print("Le résultat de", nombre1, "x", nombre2, "est :", nombre1 * nombre2)
+```
 
-        Voici quelques exemples de fonctions utiles en Python, qui prennent différents nombres de paramètres :
-        ```python showLineNumbers
-        # Conversion de types
-        valeur_entier = int("3")
-        valeur_flottant = float("3.41")
-        chaine_texte = str(42)
+Par défaut, chaque `print()` termine par un saut de ligne :
 
-        # Puissances et arrondi
-        valeur_puissance = pow(2, 3)
-        valeur_arrondie = round(3.14159, 2)
+```python showLineNumbers
+print("1")
+print("2")
+print("3")
+```
+```
+1
+2
+3
+```
 
-        # Type d’une variable
-        type_variable = type(longueur_prenom)
-        ```
+Il est possible de remplacer ce saut de ligne avec le paramètre nommé `end` :
 
-        ---
+```python showLineNumbers
+print("1", end=" ")
+print("2", end=" ")
+print("3", end=" ")
+```
+```
+1 2 3
+```
 
-        ### Appels imbriqués
+Le concept de paramètre nommé (comme `end=`) sera étudié dans la prochaine rencontre.
 
-        On peut imbriquer les appels de fonctions pour combiner plusieurs opérations en une seule ligne.<br />
-        Ainsi, la valeur retournée par une fonction peut être utilisée directement comme paramètre d'une autre fonction.<br />
-        ```python showLineNumbers
-        print(len(str(42)))
-        ```
-        Dans cet exemple, où trois appels de fonctions sont imbriqués, l'exécution se fait de l'intérieur vers l'extérieur :
-        1. La fonction `str(42)` convertit le nombre entier `42` en une chaîne de caractères `"42"`,
-        2. puis la fonction `len(...)` calcule la longueur de cette chaîne, qui est `2`,
-        3. et enfin la fonction `print(...)` affiche ce résultat.
-
-        ---
-
-        ### La fonction `print()`
-
-        Comme on a déjà vu, la fonction `print()` permet d'afficher du texte ou des valeurs dans la console. \
-        Elle peut prendre un nombre variable de paramètres, séparés par des virgules, qu'elle *concaténera* avec des espaces par défaut.
-
-        Par exemple, roulez ce code dans un script Python pour voir comment elle fonctionne :
-        ```python showLineNumbers
-        # Exemple d’entrées numériques
-        nombre1 = 6
-        nombre2 = 7
-
-        # Fonction avec paramètres multiples
-        print("Le résultat de", nombre1, "x", nombre2, "est :", nombre1 * nombre2)
-
-        # Variante moderne : f-string
-        message = f"Le résultat de {nombre1} x {nombre2} est : {nombre1 * nombre2}"
-        print(message)
-        ```
-        Par défaut, le contenu affiché à la console par la fonction print() est suivi d’un saut de ligne.
-        ```python showLineNumbers
-        print("1")
-        print("2")
-        print("3")
-        ```
-        La console affichera :
-        ```
-        1
-        2
-        3
-        ```
-        Il est possible de remplacer le saut de ligne automatique en ajoutant un paramètre nommé `end`. \
-        Par exemple :
-        ```python showLineNumbers
-        print("1", end=" ") # Remplacer le saut de ligne par une espace " "
-        print("2", end=" ")
-        print("3", end=" ")
-        ```
-        La console affichera :
-        ```
-        1 2 3
-        ```
-        Le concept de paramètre nommé (comme `end=`) sera étudié dans la prochaine rencontre.
-
-        Il est possible de créer une ligne vide en utilisant la fonction `print()` sans lui passer de valeur. \
-        Par exemple :
-        ```python showLineNumbers
-        print("Hello")
-        print()
-        print("World")
-        ```
-        La console affichera :
-        ```
-        Hello
-
-        World
-        ```
-
-        :::tip Saut de ligne à l'aide du caractère `\n`
-        Il est également possible de faire un saut de ligne à l'aide du caractère spécial `\n` (un backslash suivi de la lettre n).<br /><br />
-        Si vous exécutez ce code :
-        ```python showLineNumbers
-        print("A\nB\nC")
-        ```
-        La console affichera :
-        ```
-        A
-        B
-        C
-        ```
-        :::
-
-        :::tip Afficher un guillemet `"` à l'aide du caractère `\`
-        Comme une chaîne de caractères est délimitée par des guillemets (`"`), écrire un guillemet **à l'intérieur** de cette chaîne poserait problème : Python croirait que la chaîne se termine là.<br /><br />
-        Pour insérer un guillemet dans la chaîne, on le fait précéder d'un backslash `\`. On dit qu'on *échappe* le caractère.
-        ```python showLineNumbers
-        print("Elle a dit : \"Bonjour!\"")
-        ```
-        La console affichera :
-        ```
-        Elle a dit : "Bonjour!"
-        ```
-
-        Le backslash `\` permet d'échapper d'autres caractères spéciaux de la même façon :
-        - `\'` pour afficher une apostrophe dans une chaîne délimitée par des apostrophes
-        - `\\` pour afficher un backslash
-
-        Une autre astuce consiste à délimiter la chaîne avec des apostrophes (`'`) si elle contient des guillemets (ou l'inverse) :
-        ```python showLineNumbers
-        print('Elle a dit : "Bonjour!"')
-        ```
-        :::
-
-        :::info Le typage des fonctions
-        En Python, les fonctions sont **dynamiquement typées**, ce qui signifie que le type des paramètres et de la valeur de retour n'est pas explicitement déclaré. Cependant, il est possible d'utiliser des **annotations de type** pour indiquer les types attendus des paramètres et de la valeur de retour. Ces annotations sont facultatives et servent principalement à la documentation et à l'analyse statique du code. Elles n'affectent pas l'exécution du programme. Vous pouvez consulter l'aide-mémoire sur les [fonctions](/aidememoire/fonctions-creation) pour plus d'informations sur ce sujet.
-
-        ```python
-        def addition(a: int, b: int) -> int:
-            return a + b
-        ```
-
-        ::::
-
-
-        {/* <Feedback feedbackId="Rencontre #2 - Fonctions" /> */}
+:::`
