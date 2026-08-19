@@ -9,13 +9,12 @@ Liste ordonnée et modifiable, définie avec des crochets `[]`.
 | Modifier | <C>heros[<N>0</N>] = <S>"Samus"</S></C> | Remplacer un élément |
 | Longueur | <C>nb_elements = <B>len</B>(heros)</C> | Nombre d'éléments |
 | Présence | <C>est_present = <S>"Mario"</S> <K>in</K> heros</C> | Retourne <C><K>True</K></C> ou <C><K>False</K></C> |
-| Ajouter (fin) | <C>heros.<F>append</F>(<S>"Pikachu"</S>)</C> | Ajoute à la fin |
-| Insérer | <C>heros.<F>insert</F>(<N>1</N>, <S>"Samus"</S>)</C> | Insère à l'index 1 |
-| Supprimer (valeur) | <C>heros.<F>remove</F>(<S>"Samus"</S>)</C> | Supprime la 1re occurrence |
+| Ajouter (fin) | <C>heros.<F>append</F>(<S>"Pikachu"</S>)</C> | Ajoute un élément à la fin |
+| Supprimer (valeur) | <C>heros.<F>remove</F>(<S>"Mario"</S>)</C> | Supprime la première occurrence |
 | Supprimer (dernier) | <C>element_retire = heros.<F>pop</F>()</C> | Supprime et retourne le dernier élément |
 | Supprimer (index) | <C>element_retire = heros.<F>pop</F>(<N>0</N>)</C> | Supprime et retourne l'élément à l'index 0 |
-| Trier (nouvelle liste) | <C>liste_triee = <B>sorted</B>(heros)</C> | Retourne une copie triée |
-| Trier (en place) | <C>heros.<F>sort</F>()</C> | Modifie la liste directement |
+| Trier (copie) | <C>liste_triee = <B>sorted</B>(heros)</C> | Crée une nouvelle liste triée |
+| Trier (en place) | <C>heros.<F>sort</F>()</C> | Trie la liste directement |
 | Combiner | <C>liste_combinee = liste1 + liste2</C> | Concatène deux listes |
 | Copier | <C>liste_copie = heros.<F>copy</F>()</C> | Copie indépendante |
 | Maximum | <C>valeur_max = <B>max</B>(heros)</C> | Plus grande valeur (nombres seulement) |
