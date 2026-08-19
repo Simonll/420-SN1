@@ -10,185 +10,185 @@ import IntroSolutionsExercices from '@site/docs/_components/IntroSolutionsExerci
 import AideMemoireListe from '@site/docs/_components/AideMemoireListe.mdx';
 
 
+::::info Les modules en Python
 
-<Admonition type="tip" title="Faire les exercices dans Colab">
-            <p>Si vous préférez, vous pouvez aussi faire les exercices de cette section dans un notebook Google Colab. Cliquez sur le badge ci-dessous pour ouvrir le notebook préparé pour vous.</p>
-            <a href="https://colab.research.google.com/github/Simonll/420-SN1/blob/develop/code/notebooks/exercices_semaine_2.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
-        </Admonition>
+Python contient de nombreuses fonctions prêtes à l’emploi pour effectuer des calculs, manipuler des fichiers, gérer du texte, produire des nombres aléatoires, etc.\
+Cependant, elles ne sont pas toutes chargées automatiquement au démarrage.
+**Pourquoi?** Pour garder Python plus léger et éviter de charger inutilement des outils dont on n’a pas besoin.
 
-        ::::info Les modules en Python
+Ces fonctions sont regroupées dans des fichiers Python (`.py`) appelés **modules**.\
+Un **module**, c’est donc un fichier qui contient des fonctions organisées autour d’un thème.
 
-        Python contient de nombreuses fonctions prêtes à l’emploi pour effectuer des calculs, manipuler des fichiers, gérer du texte, produire des nombres aléatoires, etc.\
-        Cependant, elles ne sont pas toutes chargées automatiquement au démarrage.
-        **Pourquoi?** Pour garder Python plus léger et éviter de charger inutilement des outils dont on n’a pas besoin.
+Pour utiliser les fonctions d’un module, il existe deux approches principales :
 
-        Ces fonctions sont regroupées dans des fichiers Python (`.py`) appelés **modules**.\
-        Un **module**, c’est donc un fichier qui contient des fonctions organisées autour d’un thème.
+<Row>
+    <Column size={6}>
 
-        Pour utiliser les fonctions d’un module, il existe deux approches principales :
+        :::note MÉTHODE #1
 
-        <Row>
-            <Column size={6}>
-
-                :::note MÉTHODE #1
-
-                Importer le module complet
-
-                ```python showLineNumbers
-                # Importer le module "math"
-
-                print(math.sqrt(16)) # Résultat : 4.0
-                print(math.cos(5))   # Résultat : 0.28366218546322625
-                ```
-
-                C’est la méthode la plus courante.\
-                On accède aux fonctions du module avec la syntaxe :
-                ```python
-                nom_du_module.nom_de_la_fonction()
-                ```
-
-                Par exemple :
-                ```python
-                math.sqrt(16)
-                ```
-
-                :::
-
-            </Column>
-
-            <Column size={6}>
-
-                :::note MÉTHODE #2
-
-                Importer une fonction spécifique
-
-                ```python showLineNumbers
-                # Importer juste les fonctions "sqrt" et "cos"
-                from math import sqrt, cos
-
-                print(sqrt(16)) # Résultat : 4.0
-                print(cos(5))   # Résultat : 0.28366218546322625
-                ```
-
-                Cette méthode est utile lorsqu’on utilise seulement quelques fonctions précises d’un module.
-
-                L’avantage est qu’on n’a pas besoin de répéter le nom du module devant chaque fonction.
-
-                :::
-
-            </Column>
-        </Row>
-
-        En général, on écrit les `import` et les `from` au **début du fichier Python**.\
-        **Pourquoi?** Quand quelqu’un ouvre le fichier, il peut voir immédiatement quels modules le programme utilise.
-
-        ::::
-
-        ---
-
-        :::tip Les alias
-
-        On peut donner un **surnom** à un module ou à une fonction avec le mot-clé `as`.\
-        C’est très courant en Python, surtout pour les modules dont le nom est long.
-
-        <Row>
-            <Column size={6}>
-                ```python showLineNumbers
-                # Donner un alias à un module
-
-                print(rd.randint(1, 10))
-                ```
-            </Column>
-            <Column size={6}>
-                ```python showLineNumbers
-                # Donner un alias à une fonction spécifique
-                from time import sleep as pause
-
-                pause(2)  # Le programme s'arrête pendant 2 secondes
-                ```
-            </Column>
-        </Row>
-
-        :::
-
-        ---
-
-        :::info Modules utiles en Python
-        Vous trouverez la documentation officielle des modules de base sur le site officiel de Python. \
-        **Il n'est pas nécessaire de la consulter** pour l'instant : elle est très technique et peut être difficile à apprivoiser lorsqu'on débute la programmation.
-
-        - `math` → fonctions mathématiques avancées (racines, logarithmes, trigonométrie, etc.) - ([documentation officielle](https://docs.python.org/fr/3.13/library/math.html))
-        - `random` → génération de nombres aléatoires, choix au hasard, tirages probabilistes - ([doc](https://docs.python.org/fr/3.13/library/random.html))
-        - `os` → interaction avec le système d’exploitation (fichiers, dossiers, etc.) - ([doc](https://docs.python.org/fr/3.13/library/os.html))
-        - `sys` → informations sur l’environnement du programme, gestion des entrées/sorties - ([doc](https://docs.python.org/fr/3.13/library/sys.html))
-        - `time` → manipulation du temps et des dates (mesurer le temps écoulé, conversions de format) - ([doc](https://docs.python.org/fr/3.13/library/time.html))
-        - `csv` → lecture/écriture de fichiers CSV (format courant pour stocker des données tabulaires) - ([doc](https://docs.python.org/fr/3.13/library/csv.html))
-
-        :::
-
-        ---
-
-        :::tip Vulgariser des modules et des fonctions avec l’IA
-
-        **Si bien utilisés**, des outils d’intelligence artificielle comme Copilot (basé sur la technologie de ChatGPT et
-        accessible gratuitement en ligne) peuvent vous aider à mieux comprendre le fonctionnement de modules et de
-        fonctions Python.
-
-        Cela peut être particulièrement utile lorsque la documentation officielle vous semble complexe ou si vous avez
-        des doutes sur l’utilisation d’une fonction.
-
-        Accédez à Copilot à l’aide de ce [lien](https://copilot.microsoft.com/) et essayez le prompt suivant :
-        ```
-        Agis comme un formateur expert en Python.
-        Je suis étudiant en science de la nature débutant l'apprentissage de la programmation.
-
-        Peux-tu me donner une liste des principales fonctions du module Python math ?
-        Pour chaque fonction, je souhaite :
-            - Une explication simple (vulgarisée).
-            - Un exemple de code court et commenté.
-        ```
-
-        Répétez ce prompt pour explorer d’autres modules comme `random` et `time`.
-
-        :::
-
-        ---
-
-        :::info Bibliothèques
-
-        Parfois, plusieurs modules sont regroupés ensemble pour former un tout réutilisable et
-        partageable facilement.<br />
-        Nous appelons ce regroupement une **bibliothèque**.
-
-        **Points clés :**
-        - Chaque module d’une bibliothèque peut contenir des fonctions, classes ou constantes spécifiques.
-        - Pour utiliser une bibliothèque externe, il faut d'abord l'installer dans l'environnement virtuel de votre projet. Cela se fait généralement avec la commande `pip install nom_de_la_bibliothèque` dans le terminal.
-        - Une fois installée, on peut **importer ses modules** comme pour un module Python classique.
+        Importer le module complet
 
         ```python showLineNumbers
-        print(numpy.array([1, 2, 3]))
+        # Importer le module "math"
+        import math
+
+        print(math.sqrt(16)) # Résultat : 4.0
+        print(math.cos(5))   # Résultat : 0.28366218546322625
         ```
 
-        Voici quelques bibliothèques populaires en Python :
-        - `numpy` → calculs numériques avancés, manipulation de tableaux multidimensionnels - ([documentation officielle](https://numpy.org/doc/stable/))
-        - `pandas` → manipulation et analyse de données tabulaires (*DataFrames*) - ([doc](https://pandas.pydata.org/docs/))
-        - `matplotlib` → création de graphiques et visualisation de données - ([doc](https://matplotlib.org/stable/index.html))
-        - `scikit-learn` → apprentissage automatique (*machine learning*), modèles prédictifs - ([doc](https://scikit-learn.org/stable/user_guide.html))
-        - `keras` → création et entraînement de réseaux de neurones pour l'apprentissage profond (*deep learning*) - ([doc](https://keras.io/guides/))
+        C’est la méthode la plus courante.\
+        On accède aux fonctions du module avec la syntaxe :
+        ```python
+        nom_du_module.nom_de_la_fonction()
+        ```
+
+        Par exemple :
+        ```python
+        math.sqrt(16)
+        ```
 
         :::
 
-        ---
+    </Column>
 
-        :::tip Alias de bibliothèque
-        On peut donner un alias à une bibliothèque lors de son importation pour simplifier son utilisation.<br />
-        Par exemple, on peut importer la bibliothèque `numpy` avec l'alias `np` pour faciliter son utilisation dans le code et éviter d'écrire `numpy` au long.<br />
+    <Column size={6}>
 
-        Il suffit d'utiliser le mot-clé `as` lors de l'importation :
+        :::note MÉTHODE #2
+
+        Importer une fonction spécifique
+
         ```python showLineNumbers
-        print(np.array([1, 2, 3]))  # Utiliser l'alias "np" (au lieu d'écrire numpy) pour accéder à la fonction "array()"
+        # Importer juste les fonctions "sqrt" et "cos"
+        from math import sqrt, cos
+
+        print(sqrt(16)) # Résultat : 4.0
+        print(cos(5))   # Résultat : 0.28366218546322625
         ```
+
+        Cette méthode est utile lorsqu’on utilise seulement quelques fonctions précises d’un module.
+
+        L’avantage est qu’on n’a pas besoin de répéter le nom du module devant chaque fonction.
+
         :::
 
+    </Column>
+</Row>
 
-        {/* <Feedback feedbackId="Rencontre #2 - Modules" /> */}
+En général, on écrit les `import` et les `from` au **début du fichier Python**.\
+**Pourquoi?** Quand quelqu’un ouvre le fichier, il peut voir immédiatement quels modules le programme utilise.
+
+::::
+
+---
+
+:::tip Les alias
+
+On peut donner un **surnom** à un module ou à une fonction avec le mot-clé `as`.\
+C’est très courant en Python, surtout pour les modules dont le nom est long.
+
+<Row>
+    <Column size={6}>
+        ```python showLineNumbers
+        # Donner un alias à un module
+        import random as rd
+
+        print(rd.randint(1, 10))
+        ```
+    </Column>
+    <Column size={6}>
+        ```python showLineNumbers
+        # Donner un alias à une fonction spécifique
+        from time import sleep as pause
+
+        pause(2)  # Le programme s'arrête pendant 2 secondes
+        ```
+    </Column>
+</Row>
+
+:::
+
+---
+
+:::info Modules utiles en Python
+Vous trouverez la documentation officielle des modules de base sur le site officiel de Python. \
+**Il n'est pas nécessaire de la consulter** pour l'instant : elle est très technique et peut être difficile à apprivoiser lorsqu'on débute la programmation.
+
+- `math` → fonctions mathématiques avancées (racines, logarithmes, trigonométrie, etc.) - ([documentation officielle](https://docs.python.org/fr/3.13/library/math.html))
+- `random` → génération de nombres aléatoires, choix au hasard, tirages probabilistes - ([doc](https://docs.python.org/fr/3.13/library/random.html))
+- `os` → interaction avec le système d’exploitation (fichiers, dossiers, etc.) - ([doc](https://docs.python.org/fr/3.13/library/os.html))
+- `sys` → informations sur l’environnement du programme, gestion des entrées/sorties - ([doc](https://docs.python.org/fr/3.13/library/sys.html))
+- `time` → manipulation du temps et des dates (mesurer le temps écoulé, conversions de format) - ([doc](https://docs.python.org/fr/3.13/library/time.html))
+- `csv` → lecture/écriture de fichiers CSV (format courant pour stocker des données tabulaires) - ([doc](https://docs.python.org/fr/3.13/library/csv.html))
+
+:::
+
+---
+
+:::tip Vulgariser des modules et des fonctions avec l’IA
+
+**Si bien utilisés**, des outils d’intelligence artificielle comme Copilot (basé sur la technologie de ChatGPT et
+accessible gratuitement en ligne) peuvent vous aider à mieux comprendre le fonctionnement de modules et de
+fonctions Python.
+
+Cela peut être particulièrement utile lorsque la documentation officielle vous semble complexe ou si vous avez
+des doutes sur l’utilisation d’une fonction.
+
+Accédez à Copilot à l’aide de ce [lien](https://copilot.microsoft.com/) et essayez le prompt suivant :
+```
+Agis comme un formateur expert en Python.
+Je suis étudiant en science de la nature débutant l'apprentissage de la programmation.
+
+Peux-tu me donner une liste des principales fonctions du module Python math ?
+Pour chaque fonction, je souhaite :
+    - Une explication simple (vulgarisée).
+    - Un exemple de code court et commenté.
+```
+
+Répétez ce prompt pour explorer d’autres modules comme `random` et `time`.
+
+:::
+
+---
+
+:::info Bibliothèques
+
+Parfois, plusieurs modules sont regroupés ensemble pour former un tout réutilisable et
+partageable facilement.<br />
+Nous appelons ce regroupement une **bibliothèque**.
+
+**Points clés :**
+- Chaque module d’une bibliothèque peut contenir des fonctions, classes ou constantes spécifiques.
+- Pour utiliser une bibliothèque externe, il faut d'abord l'installer dans l'environnement virtuel de votre projet. Cela se fait généralement avec la commande `pip install nom_de_la_bibliothèque` dans le terminal.
+- Une fois installée, on peut **importer ses modules** comme pour un module Python classique.
+
+```python showLineNumbers
+import numpy
+
+print(numpy.array([1, 2, 3]))
+```
+
+Voici quelques bibliothèques populaires en Python :
+- `numpy` → calculs numériques avancés, manipulation de tableaux multidimensionnels - ([documentation officielle](https://numpy.org/doc/stable/))
+- `pandas` → manipulation et analyse de données tabulaires (*DataFrames*) - ([doc](https://pandas.pydata.org/docs/))
+- `matplotlib` → création de graphiques et visualisation de données - ([doc](https://matplotlib.org/stable/index.html))
+- `scikit-learn` → apprentissage automatique (*machine learning*), modèles prédictifs - ([doc](https://scikit-learn.org/stable/user_guide.html))
+- `keras` → création et entraînement de réseaux de neurones pour l'apprentissage profond (*deep learning*) - ([doc](https://keras.io/guides/))
+
+:::
+
+---
+
+:::tip Alias de bibliothèque
+On peut donner un alias à une bibliothèque lors de son importation pour simplifier son utilisation.<br />
+Par exemple, on peut importer la bibliothèque `numpy` avec l'alias `np` pour faciliter son utilisation dans le code et éviter d'écrire `numpy` au long.<br />
+
+Il suffit d'utiliser le mot-clé `as` lors de l'importation :
+```python showLineNumbers
+import numpy as np
+
+print(np.array([1, 2, 3]))  # Utiliser l'alias "np" (au lieu d'écrire numpy) pour accéder à la fonction "array()"
+```
+:::
+
+
+{/* <Feedback feedbackId="Rencontre #2 - Modules" /> */}
