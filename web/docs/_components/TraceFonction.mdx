@@ -1,37 +1,37 @@
 <Row>
     <Column>
-            ### Code
-            Si on a le code suivant :
+### Code
+Si on a le code suivant :
 
-            ```python showLineNumbers
-            def carre(n):
-                return n * n
+```python showLineNumbers
+def carre(n):
+    return n * n
 
-            def affiche_resultat():
-                a = 2
-                b = 3
-                total = carre(a) + carre(b)
-                print(f'La somme des carrés est : {total}')
+def affiche_resultat():
+    a = 2
+    b = 3
+    total = carre(a) + carre(b)
+    print(f'La somme des carrés est : {total}')
 
-            z = 42
-            affiche_resultat()
-            ```
+z = 42
+affiche_resultat()
+```
 
-            ### Trace
+### Trace
 
     </Column>
     <Column>
-        ### Explications détaillées de la trace et de sa validation
-        <iframe
-            style={{
-                width: "100%",
-                aspectRatio: "16 / 9",
-                border: "0",
-            }}
-            src="https://www.youtube.com/embed/Ko9W0CEBJWM?si=xHjO7ffRF_jdON5q"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-        ></iframe>
+### Explications détaillées de la trace et de sa validation
+<iframe
+    style={{
+        width: "100%",
+        aspectRatio: "16 / 9",
+        border: "0",
+    }}
+    src="https://www.youtube.com/embed/Ko9W0CEBJWM?si=xHjO7ffRF_jdON5q"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+></iframe>
     </Column>
 </Row>
 
@@ -154,19 +154,22 @@ Produire une trace à la main, c'est donc faire le travail du débogueur dans vo
 ---
 
 :::info Portée des variables
-On indique la portée des variables en les regroupant par portée (première ligne).<br/>
-Ici, on a la portée globale (variables définies en dehors de toute fonction), la portée de `affiche_resultat()` et la portée de `carre()`.<br/>
+On indique la portée des variables en les regroupant par colonne (première ligne du tableau).<br/>
+Ici, on a la **portée globale** (variables définies en dehors de toute fonction), la **portée de `affiche_resultat()`** et la **portée de `carre()`**.
 
-On remarque que la variable `n` n'existe que dans la portée de la fonction `carre()`, et que les variables `a`, `b` et `total` n'existent que dans la portée de la fonction `affiche_resultat()`.<br/>
-
-La variable `z` est dans la portée globale, c'est pourquoi elle est visible dans toute la trace.
+Remarques importantes :
+- La variable `n` n'existe que dans la portée de `carre()`
+- Les variables `a`, `b` et `total` n'existent que dans la portée de `affiche_resultat()`
+- La variable `z` est dans la portée globale, visible partout dans la trace
 
 :::
 
 ---
 
 :::info Fonction appelée et valeur retournée
-On indique aussi la fonction appelée (avant son exécution) et la valeur qu'elle retourne (après son exécution) (dernières colonnes).
+On indique dans les dernières colonnes :
+- **fonction appelée** : la fonction exécutée
+- **valeur retournée** : la valeur que la fonction produit
 
 :::
 
@@ -176,8 +179,11 @@ On indique aussi la fonction appelée (avant son exécution) et la valeur qu'ell
 
 On indique aussi la **pile d'appels**, c'est-à-dire les fonctions en cours d'exécution (3e colonne à partir de la droite).
 
-Ce genre de code fait souvent appel à plusieurs appels de fonctions **imbriqués**.<br />
-On peut donc visualiser la pile d'appels comme un empilement temporaire où chaque appel s’ajoute en haut de la pile, et disparaît dès qu’il est terminé.
+Lorsqu'une fonction en appelle une autre (appels **imbriqués**), on peut visualiser la pile d'appels comme un empilement temporaire où :
+- Chaque appel s'ajoute au **sommet** de la pile
+- Chaque retour de fonction **retire** l'appel du sommet
+
+Par exemple, dans ce code, `affiche_resultat()` appelle `carre()`, ce qui crée une pile imbriquée.
 
 :::
 
@@ -281,9 +287,16 @@ print(f'dans main, x vaut toujours {x}')
   </tbody>
 </table>
 
-:::warning Portée des variables
-- On voit que la variable `x` dans la portée de `ma_fonction()` n'a rien à voir avec la variable `x` dans la portée globale.
-- Cette dernière n'est pas modifiée par l'exécution de `ma_fonction()`, malgré le fait qu'on ait une instruction `x = 3 + y` dans `ma_fonction()` et que la variable globale `x` soit aussi accessible dans `ma_fonction()` (car elle est globale).
-- La raison est que l'instruction `x = 3 + y` crée une nouvelle variable ***locale*** `x` dans la portée de `ma_fonction()`, qui masque la variable ***globale*** `x`.
-- Si on voulait modifier la variable globale `x` dans `ma_fonction()`, il faudrait utiliser le mot-clé `global` (ce qui est déconseillé en général).
+:::warning Portée des variables : masquage (shadowing)
+
+Cet exemple démontre l'importance de bien distinguer les portées. On a une variable `x` dans la portée globale **et** une variable `x` dans la portée de `ma_fonction()`.
+
+**Observations clés** :
+1. La variable `x` locale ne modifie **pas** la variable `x` globale
+2. L'instruction `x = 3 + y` crée une nouvelle variable **locale** `x` dans `ma_fonction()`
+3. Cette variable locale **masque** (shadows) la variable globale `x`
+4. Après le retour de `ma_fonction()`, la variable globale `x` garde sa valeur initiale
+
+**Conseil** : Si tu voulais modifier la variable globale `x` dans `ma_fonction()`, il faudrait utiliser le mot-clé `global` (ce qui est généralement déconseillé en programmation).
+
 :::
