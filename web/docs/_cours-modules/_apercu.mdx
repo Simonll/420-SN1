@@ -8,6 +8,7 @@ import DocumentationAutorisee from '@site/docs/_components/DocumentationAutorise
 import DocumentationInterdite from '@site/docs/_components/DocumentationInterdite.mdx';
 import IntroSolutionsExercices from '@site/docs/_components/IntroSolutionsExercices.mdx';
 import AideMemoireListe from '@site/docs/_components/AideMemoireListe.mdx';
+import Feedback from "../../src/components/Feedback";
 
 Le code ci-dessous illustre différents exemples de notions abordées dans le cours.
 Ce code sert uniquement de démonstration globale pour le premier cours. Vous apprendrez à maîtriser chacune de ces lignes au fil des semaines!
@@ -135,3 +136,5 @@ donnees_ex2 = donnees_ex2.groupby("Type")["Masse_Atomique"].agg(["min", "max", "
 print("\nPandas - Exemple 2")
 print(donnees_ex2)
 ```
+
+<Feedback feedbackId="apercu" />

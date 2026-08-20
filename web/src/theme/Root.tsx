@@ -26,7 +26,7 @@ export default function Root({ children }: { children: ReactNode }): JSX.Element
         },
         allowComment: true,
         submitUrl:
-          'https://northamerica-northeast1-cegep-kevin.cloudfunctions.net/collect_retroaction',
+          'https://momgiqoavbjtpvgsjboe.supabase.co/functions/v1/collect-feedback',
       }}
     >
       {children}

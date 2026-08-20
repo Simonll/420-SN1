@@ -33,7 +33,7 @@ export const DEFAULT_CONFIG: Required<FeedbackConfig> = {
   },
   allowComment: true,
   submitUrl:
-    'https://northamerica-northeast1-cegep-kevin.cloudfunctions.net/collect_retroaction',
+    'https://momgiqoavbjtpvgsjboe.supabase.co/functions/v1/collect-feedback',
 };
 
 // ── Contexte React ─────────────────────────────────────────────────────────────
