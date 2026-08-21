@@ -35,6 +35,57 @@ Il contient habituellement :
 
 ---
 
+## Cloner un dépôt GitHub localement
+
+Si vous avez créé un dépôt GitHub et que vous souhaitez récupérer (cloner) sur votre ordinateur, suivez ces étapes :
+
+### Obtenir l'URL du dépôt
+
+1. Allez sur votre dépôt sur [github.com](https://github.com).
+2. Cliquez sur le bouton **Code** (vert, en haut à droite).
+3. Sélectionnez l'onglet **HTTPS** (par défaut).
+4. Copiez l'URL (elle ressemble à `https://github.com/votre-utilisateur/nom-depot.git`).
+
+### Cloner avec VS Code
+
+**Méthode 1 : Terminal intégré de VS Code**
+
+1. Ouvrir **VS Code**.
+2. Ouvrir le terminal intégré : **Terminal > New Terminal** (ou Ctrl+`).
+3. Naviguer vers le dossier où vous voulez stocker le projet (par exemple `Desktop`) :
+   ```bash
+   cd ~/Desktop
+   ```
+4. Taper la commande de clonage avec l'URL copiée :
+   ```bash
+   git clone https://github.com/votre-utilisateur/nom-depot.git
+   ```
+5. Appuyer sur ⏎.
+6. Un dossier portant le nom du dépôt est créé. Ouvrir ce dossier avec **File > Open Folder**.
+
+**Méthode 2 : Commande `git clone` depuis le terminal de votre ordinateur**
+
+1. Ouvrir un terminal (ou PowerShell sur Windows).
+2. Naviguer vers le dossier où vous voulez stocker le projet :
+   ```bash
+   cd ~/Desktop
+   ```
+3. Cloner le dépôt :
+   ```bash
+   git clone https://github.com/votre-utilisateur/nom-depot.git
+   ```
+4. Une fois le clonage terminé, ouvrir VS Code, puis **File > Open Folder** et sélectionner le dossier créé.
+
+### Après le clonage
+
+Une fois le dépôt cloné :
+
+- Le dossier contient tous les fichiers du dépôt GitHub.
+- L'historique Git est conservé (vous pouvez voir les commits antérieurs avec `git log`).
+- VS Code détecte automatiquement que c'est un dépôt Git et affiche les informations Git dans la barre de statut (en bas à droite).
+
+---
+
 ## Comprendre la structure du projet
 
 Une fois le projet créé, VS Code affiche :
