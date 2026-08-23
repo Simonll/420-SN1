@@ -161,9 +161,7 @@ const config = {
                         ],
                     },
                 ],
-                copyright: `Copyright © ${new Date().getFullYear()}. ${
-                    siteConfig.nom
-                }. Contenu original du CÉGEP Édouard-Montpetit. Adapté par Simon Laurin-Lemay`,
+                copyright: `Copyright © ${new Date().getFullYear()}. ${siteConfig.nom}`,
             },
             prism: {
                 theme: lightCodeTheme,

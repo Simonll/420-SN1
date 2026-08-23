@@ -8,7 +8,7 @@
     "description": "The label of footer link with label=GitHub linking to https://github.com/simonll/420-SN1"
   },
   "copyright": {
-    "message": "Copyright © 2026. 420-SN1 - Programmation en sciences. Adapté par Simon Laurin-Lemay",
+    "message": "Copyright © 2026. 420-SN1 - Programmation en sciences.<br>Adapté par Simon Laurin-Lemay, à partir du site <a href=\"https://info.cegepmontpetit.ca/420-SN1/\" target=\"_blank\" rel=\"noopener noreferrer\">« Programmation en sciences »</a> du CÉGEP Édouard-Montpetit.",
     "description": "The footer copyright"
   }
 }
