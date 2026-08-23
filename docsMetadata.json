@@ -9,8 +9,8 @@
     "id": "02-rencontre2",
     "title": "2 - Scripts et fonctions + TP1 (démarrage)",
     "#description": "Scripts, Débogueur, Traces, Fonctions, f-strings, Modules, Bibliothèques, Listes (intro), Précision des flottants",
-    "hide_table_of_contents": "true",
-    "draft": "true"
+    "hide_table_of_contents": "false",
+    "draft": "false"
   },
   {
     "id": "03-rencontre3",
