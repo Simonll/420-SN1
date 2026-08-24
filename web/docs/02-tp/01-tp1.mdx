@@ -91,6 +91,24 @@ Dans le fichier `cinetique.py`, implémentez les fonctions suivantes :
    $$C(t) = C_0 \cdot e^{-k \cdot t}$$
    *(Utilisez `math.exp()` du module `math`).*
 
+:::info 💡 Bien comprendre la formule C(t) = C₀ · e^(−k·t)
+Cette formule modélise une **décomposition de premier ordre** : la quantité d'une substance diminue de façon proportionnelle à la quantité encore présente, à chaque instant. C'est le modèle qui décrit, entre autres, l'élimination d'un médicament dans le sang ou la décomposition d'un réactif chimique.
+
+- **C(t)** — la concentration restante à l'instant `t` (le résultat retourné).
+- **C₀** — la concentration initiale, au temps `t = 0` (point de départ, toujours la valeur maximale).
+- **e** — la constante d'Euler (≈ 2,718), la base des logarithmes naturels. Son rôle est de décrire une décroissance « exponentielle ».
+- **k** — la constante de vitesse de décomposition (positive, en unités d'inverse du temps). Plus `k` est grand, plus la substance disparaît vite.
+- **t** — le temps écoulé.
+- **e^(−k·t)** — le facteur de décroissance : il vaut 1 à `t = 0` (donc C(0) = C₀), puis tend vers 0 sans jamais l'atteindre.
+
+**Propriétés importantes :**
+
+- La concentration **décroît de façon exponentielle** : elle chute rapidement au début, puis de plus en plus lentement.
+- La courbe **ne touche jamais zéro** — décroissance asymptotique.
+- Le temps de demi-vie t₁/₂ = ln(2)/k est constant : la substance met **toujours le même temps** pour perdre la moitié de sa concentration, quelle que soit la quantité de départ.
+- Un `k` plus grand = décroissance plus rapide ; un `k` plus petit = décroissance plus lente.
+:::
+
 2. **`calculer_demi_vie(k)`** :
    Calcule le temps de demi-vie ($t_{1/2}$) nécessaire pour que la concentration soit divisée par 2 :
    $$t_{1/2} = \frac{\ln(2)}{k}$$
