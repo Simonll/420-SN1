@@ -1,6 +1,6 @@
 ---
 hide_table_of_contents: true
-draft : true
+draft: false
 ---
 
 import useBaseUrl from '@docusaurus/useBaseUrl';
@@ -79,6 +79,53 @@ tp1/
 
 ---
 
+## 📖 Documentation du projet (README)
+
+Chaque étudiant doit créer un fichier **`README.md`** à la racine de son dépôt (`tp1/README.md`) qui décrit :
+
+1. **Titre et description brève** du projet
+2. **Comment installer et exécuter le programme** :
+   ```bash
+   python main.py
+   ```
+3. **Structure des fichiers** (`cinetique.py`, `analyse.py`, `main.py`)
+4. **Exemple de sortie** (qu'affiche le programme?)
+5. **Auteur** (votre nom/matricule)
+6. **Licence** (optionnel, par exemple MIT)
+
+:::info 📝 Exemple de README minimaliste
+```markdown
+# TP1 - Simulateur de Cinétique
+
+Simulation numérique de la décomposition d'un médicament dans le sang.
+
+## Installation
+
+Aucune dépendance externe. Python 3.8+ requis.
+
+## Utilisation
+
+\`\`\`bash
+python main.py
+\`\`\`
+
+Affiche un rapport détaillé de la simulation avec Cmax et durée optimale.
+
+## Structure
+
+- `cinetique.py` : Calculs de concentration et conversion
+- `analyse.py` : Simulation et analyse statistique
+- `main.py` : Point d'entrée
+
+## Auteur
+
+Nom : [Votre nom]
+Matricule : [Votre matricule]
+```
+:::
+
+---
+
 ## 🔧 Détail des consignes
 
 <Tabs>
@@ -89,7 +136,26 @@ Dans le fichier `cinetique.py`, implémentez les fonctions suivantes :
 1. **`calculer_concentration(c0, k, temps)`** :
    Calcul de la concentration restante selon la formule de décomposition de premier ordre :
    $$C(t) = C_0 \cdot e^{-k \cdot t}$$
-   *(Utilisez `math.exp()` du module `math`).*
+   *(Utilisez `math.exp()` du module `math`.)*
+   
+   :::danger ⚠️ Validation obligatoire (R4+)
+   À partir de **R4**, vous devez **valider les paramètres** avec `raise ValueError()` :
+   - `c0` doit être ≥ 0 (concentration non-négative)
+   - `k` doit être > 0 (constante positive)
+   - `temps` doit être ≥ 0 (temps non-négatif)
+   
+   **Exemple :**
+   ```python
+   def calculer_concentration(c0, k, temps):
+       if c0 < 0:
+           raise ValueError("c0 (concentration initiale) doit être non-négative")
+       if k <= 0:
+           raise ValueError("k (constante de vitesse) doit être strictement positive")
+       if temps < 0:
+           raise ValueError("temps doit être non-négatif")
+       return c0 * math.exp(-k * temps)
+   ```
+   :::
 
 :::info 💡 Bien comprendre la formule C(t) = C₀ · e^(−k·t)
 Cette formule modélise une **décomposition de premier ordre** : la quantité d'une substance diminue de façon proportionnelle à la quantité encore présente, à chaque instant. C'est le modèle qui décrit, entre autres, l'élimination d'un médicament dans le sang ou la décomposition d'un réactif chimique.
@@ -112,6 +178,22 @@ Cette formule modélise une **décomposition de premier ordre** : la quantité d
 2. **`calculer_demi_vie(k)`** :
    Calcule le temps de demi-vie ($t_{1/2}$) nécessaire pour que la concentration soit divisée par 2 :
    $$t_{1/2} = \frac{\ln(2)}{k}$$
+   
+   :::info Validation (R4+)
+   Validez que `k` > 0 (sinon lever `ValueError`).
+   :::
+
+3. **`convertir_concentration(valeur, unite_source, unite_cible)`** :
+   Convertit une concentration entre deux unités courantes en pharmacopée :
+   - `"mg/L"` ↔ `"µg/mL"` (facteur de conversion : 1 mg/L = 1000 µg/mL)
+   
+   :::info 💡 Conversions d'unités en pharmacologie
+   Les concentrations plasmatiques se mesurent en différentes unités selon le contexte :
+   - **mg/L** (milligrammes par litre) : standard pour les suivi sanguin courant
+   - **µg/mL** (microgrammes par millilitre) : pour les substances très puissantes
+   
+   La conversion est simple : 1 mg/L = 1000 µg/mL (ou inversement, ÷ 1000)
+   :::
 
 </TabItem>
 
@@ -125,6 +207,33 @@ Dans le fichier `cinetique.py`, ajoutez la fonction d'évaluation des seuils :
    - `"OPTIMAL"` si $\text{seuil\_min} \le C \le \text{seuil\_max}$
    - `"TOXIQUE / CRITIQUE"` si $C > \text{seuil\_max}$
 
+:::warning ⚠️ Attention aux cas limites
+Testez votre fonction avec les **valeurs exactes** des seuils :
+- Si concentration = 20 et seuil_min = 20, le résultat doit être `"OPTIMAL"` (pas `"INSUFFISANT"`)
+- Si concentration = 80 et seuil_max = 80, le résultat doit être `"OPTIMAL"` (pas `"TOXIQUE"`)
+
+**Exemples de test :**
+```python
+evaluer_niveau(15, 20, 80)  # → "INSUFFISANT"
+evaluer_niveau(20, 20, 80)  # → "OPTIMAL"
+evaluer_niveau(50, 20, 80)  # → "OPTIMAL"
+evaluer_niveau(80, 20, 80)  # → "OPTIMAL"
+evaluer_niveau(85, 20, 80)  # → "TOXIQUE / CRITIQUE"
+```
+:::
+
+:::info Validation (R4+)
+Validez avec `raise ValueError()` que :
+- `concentration`, `seuil_min`, `seuil_max` sont tous des nombres (float ou int)
+- `seuil_min` < `seuil_max` (sinon les seuils n'ont pas de sens)
+
+**Exemple de validation :**
+```python
+if seuil_min >= seuil_max:
+    raise ValueError("seuil_min doit être < seuil_max")
+```
+:::
+
 </TabItem>
 
 <TabItem value="partie3" label="Partie 3 : Simulation et statistiques (R5-R6)">
@@ -133,25 +242,76 @@ Dans le fichier `analyse.py` :
 
 4. **`simuler_evolution(c0, k, duree_heures)`** :
    Génère et retourne une **liste** contenant la concentration calculée pour chaque heure de $t = 0$ jusqu'à $t = \text{duree\_heures}$.
+   
+   :::info 💡 Fonction de simulation
+   Cette fonction doit appeler `calculer_concentration()` de `cinetique.py` pour chaque heure et accumuler les résultats dans une liste.
+   Utilisez une boucle `for` avec `range()` ou une boucle `while` pour itérer heure par heure.
+   :::
+
+   :::info Validation (R5+)
+   Validez avec `raise ValueError()` que :
+   - `c0` > 0 (concentration initiale positive)
+   - `k` > 0 (constante positive)
+   - `duree_heures` > 0 (durée positive)
+   :::
 
 5. **`analyser_resultats(liste_concentrations, seuil_min, seuil_max)`** :
-   Analyse la liste des concentrations et retourne un dictionnaire ou un rapport contenant :
+   Analyse la liste des concentrations et retourne un **rapport simple** (chaîne de caractères) contenant :
    - La concentration maximale ($C_{max}$).
    - Le nombre d'heures pendant lesquelles la concentration est restée dans la zone `"OPTIMAL"`.
 
+   :::info Validation (R6+)
+   Validez avec `raise ValueError()` que :
+   - `liste_concentrations` est une liste non-vide
+   - `seuil_min` < `seuil_max` (sinon les seuils n'ont pas de sens)
+   - Tous les éléments de la liste sont des nombres
+   :::
+
 Dans `main.py` :
 - Exécutez une simulation complète avec des valeurs d'exemple et affichez un rapport lisible dans la console.
+
+:::tip 💊 Exemple concret : simulation d'un médicament
+Voici un scénario réaliste pour tester votre programme :
+
+**Paramètres :**
+- Concentration initiale ($C_0$) : **100 mg/L** (injection intraveineuse standard)
+- Constante de dégradation ($k$) : **0.15 /h** (élimination modérée)
+- Durée de simulation : **24 heures**
+- Seuil thérapeutique minimum : **20 mg/L** (efficacité)
+- Seuil toxique maximum : **80 mg/L** (sécurité)
+
+**Résultat attendu :**
+```
+Rapport de simulation :
+- Concentration maximale (Cmax) : 100.0 mg/L
+- Heures en zone optimale (20-80 mg/L) : 12 heures
+- Demi-vie calculée : ~4.6 heures
+```
+
+Vous pouvez ajuster ces valeurs pour tester différents scénarios (médicament qui dure plus ou moins longtemps, seuils différents, etc.).
+:::
 
 </TabItem>
 </Tabs>
 
 ---
 
-## Grille d'évaluation (10 points)
+## Grille d'évaluation (20 points — R2 à R7)
 
-| Critère | Barème |
-| :--- | :--- |
-| **Git & Structure** (5 commits minimum, arborescence propre, docstrings) | **2 pts** |
-| **Partie 1** (Calculs mathématiques, `math.exp`, précision des retours) | **2.5 pts** |
-| **Partie 2** (Logique conditionnelle `if/elif/else`, cas limites) | **2.5 pts** |
-| **Partie 3** (Boucle temporelle, gestion de liste, calcul des statistiques) | **3 pts** |
+| Critère | Détails | Barème |
+|---------|---------|--------|
+| **Git, Structure & Documentation** | ✓ Au moins 5 commits significatifs répartis sur R2-R7 (pas de commit final massif) \| ✓ Messages de commit clairs en français \| ✓ Arborescence `tp1/` exacte (cinetique.py, analyse.py, main.py) \| ✓ README.md décrivant l'utilisation \| ✓ Chaque fonction a un **docstring complet** (description, paramètres, retour) | **3 pts** |
+| **Partie 1 : Fonctions mathématiques (R3)** | ✓ `calculer_concentration()` avec `math.exp()` correct \| ✓ `calculer_demi_vie()` avec formule ln(2)/k \| ✓ `convertir_concentration()` pour mg/L ↔ µg/mL (facteur 1000) \| ✓ **Validation obligatoire (R4+)** : `raise ValueError()` pour c0, k, temps invalides | **4 pts** |
+| **Partie 2 : Logique conditionnelle (R4)** | ✓ `evaluer_niveau()` avec `if/elif/else` correct \| ✓ **Cas limites gérés** : concentration = seuil_min/max → "OPTIMAL" \| ✓ **Validation obligatoire** : `raise ValueError()` pour seuil_min ≥ seuil_max | **4 pts** |
+| **Partie 3a : Simulation avec boucle (R5)** | ✓ `simuler_evolution()` génère une liste heure par heure (0 à duree_heures) \| ✓ Appelle `calculer_concentration()` pour chaque étape \| ✓ Boucle `for` avec `range()` OU `while` correcte \| ✓ **Validation obligatoire** : `raise ValueError()` pour c0, k, duree invalides | **5 pts** |
+| **Partie 3b : Analyse et statistiques (R6)** | ✓ `analyser_resultats()` retourne un **rapport simple** (string) lisible \| ✓ Calcule et affiche **Cmax** (max concentration) \| ✓ Compte le nombre d'heures en zone "OPTIMAL" \| ✓ `main.py` exécute une simulation complète avec exemple concret (C₀=100 mg/L, k=0.15/h, seuils 20-80) \| ✓ **Validation obligatoire** : `raise ValueError()` pour liste vide ou seuils invalides | **3 pts** |
+| **Code, Qualité & Tests (R7)** | ✓ Code lisible et bien indentéé \| ✓ Noms de variables explicites \| ✓ Tests des **cas limites** : c0=0, k très petit/grand, duree=0 \| ✓ Pas d'erreur non gérée lors de `python main.py` \| ✓ Programme complètement fonctionnel | **1 pt** |
+
+**Total : 20 pts**
+
+:::info Notes importantes
+- **Validation (raise ValueError)** est **exigence obligatoire**, pas bonus. Points perdus si absent.
+- Les fonctions appelées doivent bénéficier de la validation des fonctions qu'elles appellent. Ex: `evaluer_niveau()` n'a pas besoin de valider c0/k si elle appelle `calculer_concentration()` qui le fait.
+- **Deadline R7 avant minuit** — pas de prolongation.
+- **Plagiat = 0 automatique** (voir section danger ligne 42).
+:::
