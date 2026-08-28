@@ -86,7 +86,9 @@ Votre dépôt GitHub doit contenir exactement l'arborescence suivante :
 tp1/
 ├── cinetique.py       # Contient vos fonctions de calcul et de simulation
 ├── analyse.py        # Contient les fonctions d'analyse statistique de la simulation
-└── main.py           # Script principal qui exécute la démonstration complète
+├── main.py           # Script principal qui exécute la démonstration complète
+├── README.md         # Documentation du projet
+└── .gitignore        # Fichier pour ignorer les fichiers non nécessaires
 ```
 
 :::warning Exigences Git et Documentation (2 points)
@@ -113,7 +115,7 @@ Chaque étudiant doit créer un fichier **`README.md`** à la racine de son dép
 5. **Auteur** (votre nom/matricule)
 6. **Licence** (optionnel, par exemple MIT)
 
-:::info 📝 Exemple de README minimaliste
+:::info Exemple de README minimaliste
 ```markdown
 # TP1 - Simulateur de Cinétique
 
@@ -143,6 +145,31 @@ Nom : [Votre nom]
 Matricule : [Votre matricule]
 ```
 :::
+
+Exemple de .gitignore
+
+Pour ignorer les fichiers inutiles (fichiers compilés, environnements virtuels, fichiers d'IDE), créez un fichier `.gitignore` à la racine de `tp1/` avec ce contenu :
+
+```
+# Fichiers Python compilés
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Environnements virtuels
+venv/
+env/
+ENV/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+
+# Fichiers de test ou temporaires
+*.log
+.DS_Store
+```
 
 ---
 
