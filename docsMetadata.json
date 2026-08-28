@@ -16,15 +16,15 @@
     "id": "03-rencontre3",
     "title": "3 - Création de fonctions + TP1 poursuite",
     "#description": "Fonction, Paramètres, Retour, Portée, DRY, Commentaires, Pile d'appels",
-    "hide_table_of_contents": "true",
-    "draft": "true"
+    "hide_table_of_contents": "false",
+    "draft": "false"
   },
   {
     "id": "04-rencontre4",
     "title": "4 - Expressions booléennes + TP1 poursuite",
     "#description": "Expressions booléennes, if, elif, else, Comparaison, Imbrication, DRY, Forme compacte, raise/try/catch",
-    "hide_table_of_contents": "true",
-    "draft": "true"
+    "hide_table_of_contents": "false",
+    "draft": "false"
   },
   {
     "id": "05-rencontre5",
