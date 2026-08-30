@@ -1,24 +1,8 @@
 // =================================================================
 // Google Apps Script: Convertir les Google Sheets en Google Forms
-// VERSION AMÉLIORÉE : Code en description pour meilleur affichage
-// =================================================================
-// 
-// USAGE:
-// 1. Ouvrir Google Apps Script (tools.google.com/apps/script)
-// 2. Coller ce code dans l'éditeur
-// 3. Remplacer ID_DOSSIER par ton dossier Google Drive
-// 4. Exécuter creerFormulairesPourToutLeDossier()
-// 5. Autoriser les permissions Google
-//
-// CHANGEMENTS PAR RAPPORT À LA V1 :
-// - Le code est mis dans la DESCRIPTION de la question (mieux affiché)
-// - La question est nettoyée (sans "Après ce code")
-// - Support pour code multi-ligne dans la description
+// VERSION V3 : Gestion des titres dupliqués + code en description
 // =================================================================
 
-// =================================================================
-// 1. INSÈRE L'ID DE TON DOSSIER GOOGLE DRIVE JUSTE EN DESSOUS :
-// =================================================================
 var ID_DOSSIER = "1Rsl7KH0OFiRLm8DqQsGs7KJVVUi85Ja2"; 
 
 /**
@@ -40,24 +24,32 @@ function trouverFormulaireExistant(titre) {
 }
 
 /**
- * Nettoie la question : retire "Après ce code" et autres préfixes
+ * Nettoie la question mais GARDE UN DISCRIMINANT
+ * Si le code existe, on l'ajoute au titre pour éviter les doublons
  */
-function nettoyerQuestion(question) {
-  // Retirer "Après ce code, " ou "Après ce code:"
-  question = question.replace(/^Après ce code[,:]\s*/i, "");
+function creerTitreQuestion(question, codeBlock) {
+  // Retirer "Après ce code" du titre
+  var titreNettoyé = question.replace(/^Après ce code[,:]\s*/i, "");
+  titreNettoyé = titreNettoyé.replace(/^Soit le code[:\s]*/i, "");
+  titreNettoyé = titreNettoyé.trim();
   
-  // Retirer "Soit le code suivant:" ou "Soit le code :"
-  question = question.replace(/^Soit le code[:\s]*/i, "");
+  // SI le code existe ET le titre est générique, ajouter un aperçu du code
+  if (codeBlock && codeBlock.trim() !== "") {
+    // Extraire la première ligne du code (comme discriminant)
+    var premièreLigne = codeBlock.split("\n")[0];
+    
+    // Si le titre est très court ou générique, l'améliorer
+    if (titreNettoyé.length < 30 || titreNettoyé === "Que s'affiche ?" || titreNettoyé === "Que vaut") {
+      // Ajouter un aperçu du code
+      titreNettoyé = titreNettoyé + " [code: " + premièreLigne.substring(0, 30) + "...]";
+    }
+  }
   
-  // Trim
-  question = question.trim();
-  
-  return question;
+  return titreNettoyé;
 }
 
 /**
  * Convertit un code brut en format lisible pour Google Forms
- * Remplace les \n par des vrais retours à la ligne
  */
 function formatCodeForDescription(codeString) {
   if (!codeString || codeString.trim() === "") {
@@ -67,14 +59,13 @@ function formatCodeForDescription(codeString) {
   // Remplacer \n littéral par des vrais retours à la ligne
   var code = codeString.replace(/\\n/g, "\n");
   
-  // Formater avec un préfixe pour la clarté
+  // Formater avec backticks
   var formatted = "```\n" + code + "\n```";
   
   return formatted;
 }
 
 function creerFormulairesPourToutLeDossier() {
-  // 2. Cibler le dossier et récupérer uniquement les Google Sheets
   var dossier = DriveApp.getFolderById(ID_DOSSIER);
   var fichiers = dossier.getFilesByType(MimeType.GOOGLE_SHEETS);
   
@@ -84,11 +75,10 @@ function creerFormulairesPourToutLeDossier() {
   var resultats = [];
   var avertissements = [];
   
-  // 3. Boucle : on passe au fichier suivant tant qu'il y en a
   while (fichiers.hasNext()) {
     var fichier = fichiers.next();
     var ss = SpreadsheetApp.openById(fichier.getId());
-    var sheet = ss.getSheets()[0]; // On prend le premier onglet de chaque fichier
+    var sheet = ss.getSheets()[0];
     var data = sheet.getDataRange().getValues();
     
     var formTitle = sheet.getName() + " - Auto-evaluation";
@@ -97,29 +87,17 @@ function creerFormulairesPourToutLeDossier() {
     var formulaireExistantId = trouverFormulaireExistant(formTitle);
     
     if (formulaireExistantId) {
-      // Le formulaire existe déjà
       nbFormulairesExistants++;
       var urlExistant = "https://docs.google.com/forms/d/" + formulaireExistantId + "/edit";
-      var warning = {
-        fichier: fichier.getName(),
-        titre: formTitle,
-        action: "⚠️ FORMULAIRE EXISTANT",
-        url: urlExistant,
-        message: "Ce formulaire existe déjà. Vérifier avant de recréer."
-      };
-      avertissements.push(warning);
       
       Logger.log("");
       Logger.log("⚠️ ATTENTION : Formulaire existant détecté");
       Logger.log("Fichier : " + fichier.getName());
       Logger.log("Titre : " + formTitle);
       Logger.log("URL Existant : " + urlExistant);
-      Logger.log("DÉCISION : Vérifiez manuellement");
-      Logger.log("  - Si vous voulez recréer → supprimez le formulaire et relancez");
-      Logger.log("  - Si vous voulez garder → continuez sans action");
       Logger.log("");
       
-      continue; // Passer au fichier suivant (ne pas créer de doublons)
+      continue;
     }
     
     // ===== CRÉER NOUVEAU FORMULAIRE =====
@@ -136,17 +114,9 @@ function creerFormulairesPourToutLeDossier() {
     
     var nbCree = 0;
     var nbAvecCode = 0;
+    var questionsVues = {}; // Pour tracker les doublons
     
     // Création des questions pour ce fichier
-    // Format attendu des colonnes :
-    // [0] = CODE (peut être vide)
-    // [1] = QUESTION
-    // [2] = OPT_A
-    // [3] = OPT_B
-    // [4] = OPT_C
-    // [5] = OPT_D
-    // [6] = REPONSE (A, B, C, ou D)
-    
     for (var i = 1; i < data.length; i++) {
       // Ignorer les lignes d'en-tête
       if (i === 0 && String(data[i][0]).toUpperCase() === "CODE") {
@@ -174,15 +144,24 @@ function creerFormulairesPourToutLeDossier() {
       if (optD) options.push(optD);
       
       if (options.length < 2) {
-        continue; // Besoin au moins 2 options
+        continue;
       }
 
-      // Nettoyer la question
-      var questionNettoyee = nettoyerQuestion(question);
+      // Créer le titre (avec discriminant si code existe)
+      var titreQuestion = creerTitreQuestion(question, codeBlock);
+      
+      // Gérer les doublons : ajouter un numéro
+      var titreOriginal = titreQuestion;
+      var compteur = 1;
+      while (questionsVues[titreQuestion]) {
+        compteur++;
+        titreQuestion = titreOriginal + " (" + compteur + ")";
+      }
+      questionsVues[titreQuestion] = true;
 
       // Créer l'item de question
       var questionItem = form.addMultipleChoiceItem();
-      questionItem.setTitle(questionNettoyee).setRequired(true);
+      questionItem.setTitle(titreQuestion).setRequired(true);
 
       // ===== AJOUTER LE CODE EN DESCRIPTION =====
       if (codeBlock && codeBlock !== "") {
@@ -244,20 +223,6 @@ function creerFormulairesPourToutLeDossier() {
       Logger.log("Questions avec code : " + resultats[k].avecCode);
       Logger.log("🔗 Lien Édition : " + resultats[k].editUrl);
       Logger.log("🔗 Lien Élèves  : " + resultats[k].pubUrl);
-      Logger.log("-----------------------------------------");
-    }
-  }
-  
-  // Afficher les avertissements
-  if (avertissements.length > 0) {
-    Logger.log("");
-    Logger.log("⚠️ AVERTISSEMENTS (Formulaires existants):");
-    Logger.log("=========================================");
-    for (var m = 0; m < avertissements.length; m++) {
-      Logger.log(avertissements[m].action + " - " + avertissements[m].fichier);
-      Logger.log("Titre : " + avertissements[m].titre);
-      Logger.log("URL : " + avertissements[m].url);
-      Logger.log("Message : " + avertissements[m].message);
       Logger.log("-----------------------------------------");
     }
   }
