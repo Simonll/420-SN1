@@ -99,46 +99,7 @@ Il faut aussi garder en tête que Python fait réellement de son mieux pour iden
 
 ---
 
-:::tip Explications avec Google Colab
 
-Il est **possible de déboguer dans Colab** grâce aux commandes magiques IPython, notamment `%debug`. Voici comment :
-
-1. Ouvrir le notebook de la rencontre dans [Google Colab](https://colab.research.google.com/github/Simonll/420-SN1/blob/develop/code/notebooks/02-rencontre2.ipynb).
-2. Exécuter une cellule qui provoque une erreur (exception).
-3. Dans la cellule suivante, taper `%debug` : le débogueur s'ouvre **à l'endroit exact de l'erreur**.
-
-Par exemple :
-
-```python
-x = 6
-y = 7
-resultat = x * y
-print("avant l'erreur, resultat =", resultat)
-# Exécuter cette cellule provoque une exception
-erreur = x / 0
-```
-
-Puis, dans une nouvelle cellule :
-
-```
-%debug
-```
-
-Vous entrez alors dans le débogueur (`pdb`), où vous pouvez :
-- taper `p x` pour afficher la valeur d'une variable,
-- taper `n` (next) pour avancer d'une instruction,
-- taper `q` pour quitter.
-
-:::note Autres commandes utiles
-- `%pdb` : active le mode qui ouvre le débogueur **automatiquement** à chaque exception.
-- `import ipdb; ipdb.set_trace()` : insère un **point d'arrêt manuel** — l'exécution s'arrête à cette ligne, même sans erreur.
-:::
-
-:::note La différence avec le débogueur VS Code
-Le débogueur de VS Code offre une **interface visuelle** (fenêtre de variables, boutons Step Over, F5) et reste l'outil privilégié en développement. Dans Colab, `%debug` est une **alternative en ligne de commande** : pratique pour examiner rapidement une erreur, sans sortir du notebook.
-:::
-
-:::
 
 ---
 
