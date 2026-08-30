@@ -1,14 +1,19 @@
 // =================================================================
 // Google Apps Script: Convertir les Google Sheets en Google Forms
+// VERSION AMÉLIORÉE : Code en description pour meilleur affichage
 // =================================================================
 // 
 // USAGE:
-// 1. Ouvrir Google Apps Script Editor (tools.google.com/apps/script)
+// 1. Ouvrir Google Apps Script (tools.google.com/apps/script)
 // 2. Coller ce code dans l'éditeur
 // 3. Remplacer ID_DOSSIER par ton dossier Google Drive
 // 4. Exécuter creerFormulairesPourToutLeDossier()
 // 5. Autoriser les permissions Google
 //
+// CHANGEMENTS PAR RAPPORT À LA V1 :
+// - Le code est mis dans la DESCRIPTION de la question (mieux affiché)
+// - La question est nettoyée (sans "Après ce code")
+// - Support pour code multi-ligne dans la description
 // =================================================================
 
 // =================================================================
@@ -18,8 +23,6 @@ var ID_DOSSIER = "1Rsl7KH0OFiRLm8DqQsGs7KJVVUi85Ja2";
 
 /**
  * Cherche un formulaire existant avec le titre spécifié
- * @param {string} titre - Le titre du formulaire à chercher
- * @return {string|null} - L'ID du formulaire trouvé, ou null
  */
 function trouverFormulaireExistant(titre) {
   try {
@@ -37,18 +40,37 @@ function trouverFormulaireExistant(titre) {
 }
 
 /**
- * Affiche une alerte avec options
- * @param {string} titre - Titre de l'alerte
- * @param {string} message - Message à afficher
- * @return {string} - "continuer" ou "passer"
+ * Nettoie la question : retire "Après ce code" et autres préfixes
  */
-function afficherAlerte(titre, message) {
-  // Note: Google Apps Script n'a pas de UI.alert() standard
-  // On utilise Logger pour montrer le message et une interface manuelle
-  Logger.log("⚠️ ATTENTION : " + titre);
-  Logger.log(message);
-  Logger.log("ACTION REQUISE : Vérifier les logs et décider manuellement");
-  return "manuellement";
+function nettoyerQuestion(question) {
+  // Retirer "Après ce code, " ou "Après ce code:"
+  question = question.replace(/^Après ce code[,:]\s*/i, "");
+  
+  // Retirer "Soit le code suivant:" ou "Soit le code :"
+  question = question.replace(/^Soit le code[:\s]*/i, "");
+  
+  // Trim
+  question = question.trim();
+  
+  return question;
+}
+
+/**
+ * Convertit un code brut en format lisible pour Google Forms
+ * Remplace les \n par des vrais retours à la ligne
+ */
+function formatCodeForDescription(codeString) {
+  if (!codeString || codeString.trim() === "") {
+    return "";
+  }
+  
+  // Remplacer \n littéral par des vrais retours à la ligne
+  var code = codeString.replace(/\\n/g, "\n");
+  
+  // Formater avec un préfixe pour la clarté
+  var formatted = "```\n" + code + "\n```";
+  
+  return formatted;
 }
 
 function creerFormulairesPourToutLeDossier() {
@@ -107,34 +129,71 @@ function creerFormulairesPourToutLeDossier() {
     try { form.setRequireLogin(false); } catch (e) {}
     form.setDestination(FormApp.DestinationType.SPREADSHEET, ss.getId());
     
+    // Ajouter un champ nom
     var nomItem = form.addTextItem();
     nomItem.setTitle("Votre Nom et Prénom");
     nomItem.setRequired(true);
     
     var nbCree = 0;
+    var nbAvecCode = 0;
     
     // Création des questions pour ce fichier
-    for (var i = 2; i < data.length; i++) {
-      var question = data[i][0];
-      var optA = data[i][1];
-      var optB = data[i][2];
-      var optC = data[i][3];
-      var optD = data[i][4];
-      var reponse = String(data[i][5] || "").trim().toUpperCase();
-
-      if (!question || question.toString().trim() === "") continue;
-
-      var options = [optA, optB, optC, optD].filter(function (o) {
-        return o !== null && o !== undefined && String(o).trim() !== "";
-      });
+    // Format attendu des colonnes :
+    // [0] = CODE (peut être vide)
+    // [1] = QUESTION
+    // [2] = OPT_A
+    // [3] = OPT_B
+    // [4] = OPT_C
+    // [5] = OPT_D
+    // [6] = REPONSE (A, B, C, ou D)
+    
+    for (var i = 1; i < data.length; i++) {
+      // Ignorer les lignes d'en-tête
+      if (i === 0 && String(data[i][0]).toUpperCase() === "CODE") {
+        continue;
+      }
       
-      if (options.length === 0) continue;
+      var codeBlock = String(data[i][0] || "").trim();
+      var question = String(data[i][1] || "").trim();
+      var optA = String(data[i][2] || "").trim();
+      var optB = String(data[i][3] || "").trim();
+      var optC = String(data[i][4] || "").trim();
+      var optD = String(data[i][5] || "").trim();
+      var reponse = String(data[i][6] || "").trim().toUpperCase();
 
+      // Valider la question
+      if (!question || question === "") {
+        continue;
+      }
+
+      // Collecter les options valides
+      var options = [];
+      if (optA) options.push(optA);
+      if (optB) options.push(optB);
+      if (optC) options.push(optC);
+      if (optD) options.push(optD);
+      
+      if (options.length < 2) {
+        continue; // Besoin au moins 2 options
+      }
+
+      // Nettoyer la question
+      var questionNettoyee = nettoyerQuestion(question);
+
+      // Créer l'item de question
       var questionItem = form.addMultipleChoiceItem();
-      questionItem.setTitle(String(question)).setRequired(true);
+      questionItem.setTitle(questionNettoyee).setRequired(true);
 
-      var indexLettre = "ABCD".indexOf(reponse);
+      // ===== AJOUTER LE CODE EN DESCRIPTION =====
+      if (codeBlock && codeBlock !== "") {
+        var codeFormate = formatCodeForDescription(codeBlock);
+        questionItem.setHelpText("Code:\n" + codeFormate);
+        nbAvecCode++;
+      }
+
+      // ===== CRÉER LES CHOIX =====
       var choix = [];
+      var indexLettre = "ABCD".indexOf(reponse);
 
       for (var j = 0; j < options.length; j++) {
         var isCorrect = (reponse !== "" && j === indexLettre);
@@ -142,9 +201,12 @@ function creerFormulairesPourToutLeDossier() {
       }
 
       questionItem.setChoices(choix);
+      
+      // ===== ASSIGNER LES POINTS =====
       if (reponse && indexLettre >= 0 && indexLettre < options.length) {
         questionItem.setPoints(1);
       }
+
       nbCree++;
     }
     
@@ -156,6 +218,7 @@ function creerFormulairesPourToutLeDossier() {
       editUrl: form.getEditUrl(),
       pubUrl: form.getPublishedUrl(),
       questions: nbCree,
+      avecCode: nbAvecCode,
       statut: "✅ CRÉÉ"
     });
   }
@@ -178,6 +241,7 @@ function creerFormulairesPourToutLeDossier() {
     for (var k = 0; k < resultats.length; k++) {
       Logger.log(resultats[k].statut + " FICHIER : " + resultats[k].nom);
       Logger.log("Questions : " + resultats[k].questions);
+      Logger.log("Questions avec code : " + resultats[k].avecCode);
       Logger.log("🔗 Lien Édition : " + resultats[k].editUrl);
       Logger.log("🔗 Lien Élèves  : " + resultats[k].pubUrl);
       Logger.log("-----------------------------------------");

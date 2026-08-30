@@ -1,146 +1,187 @@
 # Google Sheets → Google Forms Auto-Converter
 
-Script Google Apps Script pour convertir automatiquement des Google Sheets en Google Forms (questionnaires à correction automatique).
+Script Google Apps Script pour convertir automatiquement des Google Sheets en Google Forms (questionnaires à correction automatique) **avec code affiché dans la description**.
 
 ## 📋 Prérequis
 
 - Google Account avec accès à Google Drive
-- Dossier Google Drive contenant des Google Sheets au format:
+- Google Sheets avec format TSV converti (voir `questionnaire-md-to-tsv.py`)
 
-| Colonne | Contenu |
-|---------|---------|
-| A | Question (text) |
-| B | Option A |
-| C | Option B |
-| D | Option C |
-| E | Option D |
-| F | Réponse correcte (A, B, C ou D) |
+### Format de la Spreadsheet
 
-Exemple :
+| Colonne | Contenu | Obligatoire |
+|---------|---------|-----------|
+| A | CODE (Python, multi-ligne) | Non |
+| B | QUESTION | ✅ Oui |
+| C | Option A | ✅ Oui |
+| D | Option B | ✅ Oui |
+| E | Option C | ✅ Oui |
+| F | Option D | ✅ Oui |
+| G | REPONSE correcte (A, B, C ou D) | ✅ Oui |
+
+### Exemple de Spreadsheet
+
 ```
-Quel est le nom du scientifique? | Darwin | Curie | Einstein | Newton | A
+CODE                           | QUESTION                  | A | B | C | D | REPONSE
+def double(x):\n    return...  | Que s'affiche ?          | 2 | 4 | 6 | 8 | D
+[vide]                         | Qu'est-ce qu'un param?   | X | Y | Z | W | A
 ```
 
 ## 🚀 Usage
 
-1. **Ouvrir Google Apps Script** : https://script.google.com
-2. **Créer un nouveau projet** (ou copier le code dans un existant)
-3. **Coller le contenu de `sheets-to-google-forms.gs`**
-4. **Remplacer `ID_DOSSIER`** par l'ID de ton dossier Google Drive
-   - Ouvrir le dossier sur drive.google.com → L'ID est dans l'URL
-   - Format : `https://drive.google.com/drive/folders/1Rsl7KH0OFiRLm8DqQsGs7KJVVUi85Ja2`
-   - ID = `1Rsl7KH0OFiRLm8DqQsGs7KJVVUi85Ja2`
+### Étape 1 : Préparer les Questionnaires
 
-5. **Exécuter la fonction**
-   - Cliquer sur `creerFormulairesPourToutLeDossier`
-   - Cliquer sur ▶️ Run
-   - Autoriser l'accès quand demandé
+```bash
+# Convertir les fichiers Markdown en Sheets
+python3 questionnaire-md-to-tsv.py Questionnaire-R3.md
+# Crée : Questionnaire-R3-import-google-forms.tsv
+```
 
-## ✅ Résultat
+### Étape 2 : Importer dans Google Sheets
+
+1. Créer une nouvelle Google Sheet
+2. Menu **File** → **Import** → **Upload**
+3. Sélectionner le fichier `.tsv`
+4. Options :
+   - ✅ **Replace spreadsheet** (ou créer dans un onglet)
+   - ✅ **Detect delimiter** (should be TAB)
+
+### Étape 3 : Créer les Formulaires
+
+1. Ouvrir [Google Apps Script](https://script.google.com)
+2. Créer un **nouveau projet**
+3. Coller le code de `sheets-to-google-forms.gs`
+4. Remplacer `ID_DOSSIER` par l'ID de ton dossier Google Drive
+5. Sauvegarder et exécuter `creerFormulairesPourToutLeDossier()`
+6. **Autoriser l'accès** quand demandé
+
+### Étape 4 : Vérifier les Formulaires
+
+- Les formulaires sont créés dans le même dossier
+- Les réponses sont enregistrées dans la **Spreadsheet source**
+- Chaque question a le code en **description** (bien formaté)
+
+## ✅ Ce que le script fait
 
 Pour chaque Google Sheet du dossier :
-- ✅ Crée un Google Form avec questions à choix multiples
-- ✅ Configure la correction automatique
-- ✅ Définit les points (1 point par bonne réponse)
-- ✅ Ajoute un champ "Nom et Prénom"
-- ✅ Affiche les liens d'édition et de partage
+- ✅ Crée un **Google Form** avec quiz auto-évaluation
+- ✅ Ajoute un champ **"Nom et Prénom"**
+- ✅ Pour chaque question :
+  - Titre : Question nettoyée (sans "Après ce code")
+  - Description : Code formaté (avec backticks)
+  - Réponses : Options A/B/C/D avec correction auto
+  - Points : 1 point par bonne réponse
+- ✅ Détecte les **doublons** (pas de crash, pas de recréation)
+- ✅ Affiche les **URLs d'édition et de partage**
 
 ## 🔄 Gestion des doublons (Mode Safe)
 
-**Le script détecte automatiquement les formulaires existants.**
+Le script détecte automatiquement les formulaires existants et ne les recrée pas.
 
-### Comportement si formulaire existe déjà :
-
+**Si un formulaire existe :**
 ```
 ⚠️ ATTENTION : Formulaire existant détecté
-Fichier : Quiz R02
-Titre : Quiz R02 - Auto-evaluation
+Fichier : Quiz R3
+Titre : Quiz R3 - Auto-evaluation
 URL Existant : https://docs.google.com/forms/d/.../edit
+
 DÉCISION : Vérifiez manuellement
-  - Si vous voulez recréer → supprimez le formulaire et relancez
-  - Si vous voulez garder → continuez sans action
+  - Pour recréer → supprimez le formulaire et relancez
+  - Pour garder → continuez sans action
 ```
-
-**Aucun doublon ne sera créé.**
-
-### Pour recréer un formulaire :
-
-1. Supprimer manuellement le formulaire existant dans Google Drive
-2. Relancer le script
-3. Un nouveau formulaire sera créé
 
 ## 📊 Logs d'exécution
 
-Après exécution, vérifie les logs dans Google Apps Script (View → Logs) :
+Après exécution, consultez les logs dans Google Apps Script (**View → Logs**) :
 
-### Exécution normale (premiers formulaires) :
 ```
 =========================================
 ✅ EXÉCUTION TERMINÉE
 =========================================
-Fichiers traités : 3
-Nouveaux formulaires : 3
+Fichiers traités : 1
+Nouveaux formulaires : 1
 Formulaires existants détectés : 0
 =========================================
 
 FORMULAIRES CRÉÉS :
 -----------------------------------------
-✅ CRÉÉ FICHIER : Quiz R02
-Questions : 12
+✅ CRÉÉ FICHIER : Quiz R3
+Questions : 20
+Questions avec code : 18
 🔗 Lien Édition : https://docs.google.com/forms/d/.../edit
 🔗 Lien Élèves  : https://docs.google.com/forms/d/.../viewform
 -----------------------------------------
 ```
 
-### 2e exécution (formulaires existants) :
-```
-=========================================
-✅ EXÉCUTION TERMINÉE
-=========================================
-Fichiers traités : 3
-Nouveaux formulaires : 0
-Formulaires existants détectés : 3
-=========================================
+## 🎨 Affichage du Code dans Google Forms
 
-⚠️ AVERTISSEMENTS (Formulaires existants):
-=========================================
-⚠️ FORMULAIRE EXISTANT - Quiz R02
-Titre : Quiz R02 - Auto-evaluation
-URL : https://docs.google.com/forms/d/.../edit
-Message : Ce formulaire existe déjà. Vérifier avant de recréer.
------------------------------------------
+### Dans l'éditeur (vue professeur) :
 ```
+TITRE : "Que s'affiche ?"
+
+DESCRIPTION (Help Text) :
+Code:
+```
+def double(x):
+    return x * 2
+
+print(double(4))
+```
+```
+
+### Pour les étudiants :
+- Quand ils ouvrent la question, le **code s'affiche clairement en gris**
+- Puis les **options A/B/C/D** en dessous
+- Format lisible et professionnel
 
 ## ⚙️ Configuration avancée
 
-### Modifier le nom du formulaire
-Ligne 59 : `var formTitle = sheet.getName() + " - Auto-evaluation";`
+### Modifier le titre du formulaire
+Ligne 55 : `var formTitle = sheet.getName() + " - Auto-evaluation";`
 
-### Modifier le titre du champ nom
-Ligne 76 : `nomItem.setTitle("Votre Nom et Prénom");`
+### Modifier le préfixe du code en description
+Ligne 128 : `questionItem.setHelpText("Code:\n" + codeFormate);`
 
-### Personnaliser les logs
-Sections "Logger.log(...)" à la fin du script
+### Modifier le format du code (ex: sans backticks)
+Fonction `formatCodeForDescription()` ligne 91
 
 ## 🐛 Troubleshooting
 
 | Problème | Solution |
 |----------|----------|
-| "ID_DOSSIER not found" | Vérifier l'ID du dossier, s'assurer qu'il existe |
-| Aucun formulaire créé | Vérifier que les Sheets existent dans le dossier |
-| Questions vides | Vérifier que colonne A n'est pas vide, que colonnes B-E ont des réponses |
-| Erreur de permissions | Autoriser l'accès quand l'UI demande (première exécution) |
-| Doublons créés | Vérifier la version du script (mise à jour 2026-08-30) |
+| "ID_DOSSIER not found" | Vérifier l'ID du dossier Google Drive |
+| Code ne s'affiche pas | Vérifier colonne A du Sheet (non vide) |
+| Questions vides | Vérifier colonne B non vide |
+| Erreur de permissions | Autoriser dans la popup (première exécution) |
+| Formulaires en doublons | Utiliser version V2+ avec détection (cette version) |
 
-## 📝 Notes
+## 📝 Historique des mises à jour
 
-- Les formulaires sont créés dans le **même Drive** que les Sheets
-- Les réponses sont enregistrées dans un **nouvel onglet** de la Spreadsheet
-- Le script **détecte et prévient les doublons** automatiquement
-- Aucun formulaire n'est supprimé automatiquement (safe mode)
-- Pour recréer un formulaire, supprimer manuellement l'ancien d'abord
+- **2026-08-30 V2** : ✨ **Code en description** (meilleur affichage)
+  - Code s'affiche en description (Help Text)
+  - Question nettoyée (sans "Après ce code")
+  - Support \n multi-ligne converti en vrais retours à ligne
+  
+- **2026-08-30 V1** : Création initiale avec détection doublons
 
-## 🔧 Historique des mises à jour
+## 🔗 Workflow complet
 
-- **2026-08-30** : Ajout de la détection des doublons (Mode Safe avec confirmation manuelle)
-- **2026-08-30** : Création initiale du script
+```
+Questionnaire-R3.md
+    ↓ (questionnaire-md-to-tsv.py)
+Questionnaire-R3-import-google-forms.tsv
+    ↓ (import dans Google Sheets)
+Google Sheet: Questionnaire-R3
+    ↓ (sheets-to-google-forms.gs)
+Google Form: "Quiz R3 - Auto-evaluation"
+    ↓ (étudiants répondent)
+Google Sheet: Réponses enregistrées automatiquement
+```
+
+## 💡 Conseils
+
+- **Format du code** : Bien indenter le code dans le `.md` (sera préservé)
+- **Options** : Garder courtes et claires
+- **Bon réponse** : Vérifier que la lettre (A/B/C/D) est correcte dans le Sheet
+- **Doublons** : Ne pas paniquer, le script détecte et prévient
+- **Partage** : Récupérer le lien "Lien Élèves" pour partager aux étudiants
