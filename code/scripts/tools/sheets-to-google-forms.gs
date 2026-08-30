@@ -1,6 +1,6 @@
 // =================================================================
 // Google Apps Script: Convertir les Google Sheets en Google Forms
-// VERSION V3 : Gestion des titres dupliqués + code en description
+// VERSION V4 : Formulation standard + code en description
 // =================================================================
 
 var ID_DOSSIER = "1Rsl7KH0OFiRLm8DqQsGs7KJVVUi85Ja2"; 
@@ -24,24 +24,35 @@ function trouverFormulaireExistant(titre) {
 }
 
 /**
- * Nettoie la question mais GARDE UN DISCRIMINANT
- * Si le code existe, on l'ajoute au titre pour éviter les doublons
+ * Nettoie et normalise la question
+ * Remplace les formulations génériques par la standard
  */
 function creerTitreQuestion(question, codeBlock) {
-  // Retirer "Après ce code" du titre
+  // Retirer les préfixes "Après ce code", "Soit le code", etc.
   var titreNettoyé = question.replace(/^Après ce code[,:]\s*/i, "");
   titreNettoyé = titreNettoyé.replace(/^Soit le code[:\s]*/i, "");
   titreNettoyé = titreNettoyé.trim();
   
-  // SI le code existe ET le titre est générique, ajouter un aperçu du code
+  // SI un code existe, utiliser la formulation standard
   if (codeBlock && codeBlock.trim() !== "") {
-    // Extraire la première ligne du code (comme discriminant)
-    var premièreLigne = codeBlock.split("\n")[0];
-    
-    // Si le titre est très court ou générique, l'améliorer
-    if (titreNettoyé.length < 30 || titreNettoyé === "Que s'affiche ?" || titreNettoyé === "Que vaut") {
-      // Ajouter un aperçu du code
-      titreNettoyé = titreNettoyé + " [code: " + premièreLigne.substring(0, 30) + "...]";
+    // Remplacer les formulations génériques
+    if (/^que s'affiche\s*\?/i.test(titreNettoyé)) {
+      titreNettoyé = "Qu'est-ce que le code suivant va afficher ?";
+    }
+    else if (/^que vaut/i.test(titreNettoyé)) {
+      titreNettoyé = "Qu'est-ce que le code suivant va retourner ?";
+    }
+    else if (/^soit le code/i.test(titreNettoyé)) {
+      titreNettoyé = "Qu'est-ce que le code suivant va afficher ?";
+    }
+    // Si le titre commence par la formulation standard, laisser tel quel
+    else if (/^qu'est-ce que/i.test(titreNettoyé)) {
+      // Garder tel quel
+    }
+    else if (titreNettoyé.length < 30) {
+      // Pour les titres courts sans formulation standard,
+      // préfixer avec la formulation standard
+      titreNettoyé = "Qu'est-ce que le code suivant va afficher ? (" + titreNettoyé + ")";
     }
   }
   
@@ -147,7 +158,7 @@ function creerFormulairesPourToutLeDossier() {
         continue;
       }
 
-      // Créer le titre (avec discriminant si code existe)
+      // Créer le titre (avec formulation standard)
       var titreQuestion = creerTitreQuestion(question, codeBlock);
       
       // Gérer les doublons : ajouter un numéro
@@ -166,7 +177,7 @@ function creerFormulairesPourToutLeDossier() {
       // ===== AJOUTER LE CODE EN DESCRIPTION =====
       if (codeBlock && codeBlock !== "") {
         var codeFormate = formatCodeForDescription(codeBlock);
-        questionItem.setHelpText("Code:\n" + codeFormate);
+        questionItem.setHelpText("Code à analyser:\n" + codeFormate);
         nbAvecCode++;
       }
 
