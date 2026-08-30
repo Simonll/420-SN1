@@ -37,22 +37,22 @@ function creerTitreQuestion(question, codeBlock) {
   if (codeBlock && codeBlock.trim() !== "") {
     // Remplacer les formulations génériques
     if (/^que s'affiche\s*\?/i.test(titreNettoyé)) {
-      titreNettoyé = "Qu'est-ce que le code suivant va afficher ?";
+      titreNettoyé = "Quel est le résultat final du code suivant ?";
     }
     else if (/^que vaut/i.test(titreNettoyé)) {
-      titreNettoyé = "Qu'est-ce que le code suivant va retourner ?";
+      titreNettoyé = "Quel est le résultat final du code suivant ?";
     }
     else if (/^soit le code/i.test(titreNettoyé)) {
-      titreNettoyé = "Qu'est-ce que le code suivant va afficher ?";
+      titreNettoyé = "Quel est le résultat final du code suivant ?";
     }
     // Si le titre commence par la formulation standard, laisser tel quel
-    else if (/^qu'est-ce que/i.test(titreNettoyé)) {
+    else if (/^quel est/i.test(titreNettoyé)) {
       // Garder tel quel
     }
     else if (titreNettoyé.length < 30) {
       // Pour les titres courts sans formulation standard,
       // préfixer avec la formulation standard
-      titreNettoyé = "Qu'est-ce que le code suivant va afficher ? (" + titreNettoyé + ")";
+      titreNettoyé = "Quel est le résultat final du code suivant ? (" + titreNettoyé + ")";
     }
   }
   
