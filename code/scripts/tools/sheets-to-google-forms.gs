@@ -1,6 +1,6 @@
 // =================================================================
 // Google Apps Script: Convertir les Google Sheets en Google Forms
-// VERSION V4 : Formulation standard + code en description
+// VERSION V5 : Sélection manuelle du questionnaire
 // =================================================================
 
 var ID_DOSSIER = "1Rsl7KH0OFiRLm8DqQsGs7KJVVUi85Ja2"; 
@@ -25,36 +25,13 @@ function trouverFormulaireExistant(titre) {
 
 /**
  * Nettoie et normalise la question
- * Remplace les formulations génériques par la standard
  */
 function creerTitreQuestion(question, codeBlock) {
-  // Retirer les préfixes "Après ce code", "Soit le code", etc.
-  var titreNettoyé = question.replace(/^Après ce code[,:]\s*/i, "");
-  titreNettoyé = titreNettoyé.replace(/^Soit le code[:\s]*/i, "");
-  titreNettoyé = titreNettoyé.trim();
+  var titreNettoyé = question.trim();
   
-  // SI un code existe, utiliser la formulation standard
-  if (codeBlock && codeBlock.trim() !== "") {
-    // Remplacer les formulations génériques
-    if (/^que s'affiche\s*\?/i.test(titreNettoyé)) {
-      titreNettoyé = "Quel est le résultat final du code suivant ?";
-    }
-    else if (/^que vaut/i.test(titreNettoyé)) {
-      titreNettoyé = "Quel est le résultat final du code suivant ?";
-    }
-    else if (/^soit le code/i.test(titreNettoyé)) {
-      titreNettoyé = "Quel est le résultat final du code suivant ?";
-    }
-    // Si le titre commence par la formulation standard, laisser tel quel
-    else if (/^quel est/i.test(titreNettoyé)) {
-      // Garder tel quel
-    }
-    else if (titreNettoyé.length < 30) {
-      // Pour les titres courts sans formulation standard,
-      // préfixer avec la formulation standard
-      titreNettoyé = "Quel est le résultat final du code suivant ? (" + titreNettoyé + ")";
-    }
-  }
+  // Retirer les préfixes inutiles si présents
+  titreNettoyé = titreNettoyé.replace(/^Après ce code[,:]\s*/i, "");
+  titreNettoyé = titreNettoyé.replace(/^Soit le code[:\s]*/i, "");
   
   return titreNettoyé;
 }
@@ -76,6 +53,177 @@ function formatCodeForDescription(codeString) {
   return formatted;
 }
 
+/**
+ * NOUVELLE FONCTION : Créer un formulaire à partir d'une Sheet spécifique
+ */
+function creerFormulaireDepuisSheet() {
+  var ui = SpreadsheetApp.getUi();
+  
+  // Afficher un message d'instruction
+  ui.alert(
+    '📋 CRÉATION DE FORMULAIRE\n\n' +
+    'Cette fonction lit les données de la Sheet courante\n' +
+    'et crée un Google Form avec auto-correction.\n\n' +
+    'Format attendu des colonnes :\n' +
+    'A: CODE (code Python)\n' +
+    'B: QUESTION\n' +
+    'C: OPTION A\n' +
+    'D: OPTION B\n' +
+    'E: OPTION C\n' +
+    'F: OPTION D\n' +
+    'G: REPONSE (A, B, C ou D)\n\n' +
+    'Cliquez OK pour continuer...',
+    ui.ButtonSet.OK_CANCEL
+  );
+  
+  // Récupérer la Sheet courante
+  var ss = SpreadsheetApp.getActiveSpreadsheet();
+  var sheet = ss.getSheets()[0];
+  var data = sheet.getDataRange().getValues();
+  
+  var formTitle = sheet.getName() + " - Auto-evaluation";
+  
+  // ===== VÉRIFICATION : formulaire existant ? =====
+  var formulaireExistantId = trouverFormulaireExistant(formTitle);
+  
+  if (formulaireExistantId) {
+    var urlExistant = "https://docs.google.com/forms/d/" + formulaireExistantId + "/edit";
+    
+    var response = ui.alert(
+      '⚠️ FORMULAIRE EXISTANT\n\n' +
+      'Un formulaire avec ce nom existe déjà :\n' +
+      formTitle + '\n\n' +
+      'Voulez-vous :\n' +
+      '- OK : Continuer et créer un nouveau formulaire\n' +
+      '- ANNULER : Arrêter',
+      ui.ButtonSet.OK_CANCEL
+    );
+    
+    if (response == ui.Button.CANCEL) {
+      ui.alert('❌ Opération annulée.\n\nFormulaire existant : ' + urlExistant);
+      return;
+    }
+  }
+  
+  // ===== CRÉER NOUVEAU FORMULAIRE =====
+  var form = FormApp.create(formTitle);
+  form.setIsQuiz(true);
+  
+  try { form.setRequireLogin(false); } catch (e) {}
+  form.setDestination(FormApp.DestinationType.SPREADSHEET, ss.getId());
+  
+  // Ajouter un champ nom
+  var nomItem = form.addTextItem();
+  nomItem.setTitle("Votre Nom et Prénom");
+  nomItem.setRequired(true);
+  
+  var nbCree = 0;
+  var nbAvecCode = 0;
+  var questionsVues = {};
+  var erreurs = [];
+  
+  // Création des questions pour cette Sheet
+  for (var i = 1; i < data.length; i++) {
+    // Ignorer les lignes d'en-tête
+    if (i === 0 && String(data[i][0]).toUpperCase() === "CODE") {
+      continue;
+    }
+    
+    var codeBlock = String(data[i][0] || "").trim();
+    var question = String(data[i][1] || "").trim();
+    var optA = String(data[i][2] || "").trim();
+    var optB = String(data[i][3] || "").trim();
+    var optC = String(data[i][4] || "").trim();
+    var optD = String(data[i][5] || "").trim();
+    var reponse = String(data[i][6] || "").trim().toUpperCase();
+
+    // Valider la question
+    if (!question || question === "") {
+      continue;
+    }
+
+    // Collecter les options valides
+    var options = [];
+    if (optA) options.push(optA);
+    if (optB) options.push(optB);
+    if (optC) options.push(optC);
+    if (optD) options.push(optD);
+    
+    if (options.length < 2) {
+      erreurs.push("Ligne " + (i + 1) + " : besoin au minimum 2 options");
+      continue;
+    }
+
+    // Créer le titre
+    var titreQuestion = creerTitreQuestion(question, codeBlock);
+    
+    // Gérer les doublons : ajouter un numéro
+    var titreOriginal = titreQuestion;
+    var compteur = 1;
+    while (questionsVues[titreQuestion]) {
+      compteur++;
+      titreQuestion = titreOriginal + " (" + compteur + ")";
+    }
+    questionsVues[titreQuestion] = true;
+
+    // Créer l'item de question
+    var questionItem = form.addMultipleChoiceItem();
+    questionItem.setTitle(titreQuestion).setRequired(true);
+
+    // ===== AJOUTER LE CODE EN DESCRIPTION =====
+    if (codeBlock && codeBlock !== "") {
+      var codeFormate = formatCodeForDescription(codeBlock);
+      questionItem.setHelpText("Code à analyser:\n" + codeFormate);
+      nbAvecCode++;
+    }
+
+    // ===== CRÉER LES CHOIX =====
+    var choix = [];
+    var indexLettre = "ABCD".indexOf(reponse);
+
+    for (var j = 0; j < options.length; j++) {
+      var isCorrect = (reponse !== "" && j === indexLettre);
+      choix.push(questionItem.createChoice(String(options[j]), isCorrect));
+    }
+
+    questionItem.setChoices(choix);
+    
+    // ===== ASSIGNER LES POINTS =====
+    if (reponse && indexLettre >= 0 && indexLettre < options.length) {
+      questionItem.setPoints(1);
+    }
+
+    nbCree++;
+  }
+  
+  // ===== AFFICHER LE RÉSULTAT =====
+  var editUrl = form.getEditUrl();
+  var pubUrl = form.getPublishedUrl();
+  
+  var message = 
+    '✅ FORMULAIRE CRÉÉ\n\n' +
+    'Titre : ' + formTitle + '\n' +
+    'Questions : ' + nbCree + '\n' +
+    'Questions avec code : ' + nbAvecCode + '\n\n' +
+    '🔗 Lien Édition :\n' + editUrl + '\n\n' +
+    '🔗 Lien Élèves :\n' + pubUrl;
+  
+  if (erreurs.length > 0) {
+    message += '\n\n⚠️ AVERTISSEMENTS :\n' + erreurs.join('\n');
+  }
+  
+  ui.alert(message);
+  
+  Logger.log('✅ Formulaire créé : ' + formTitle);
+  Logger.log('Questions : ' + nbCree);
+  Logger.log('Questions avec code : ' + nbAvecCode);
+  Logger.log('Édition : ' + editUrl);
+  Logger.log('Élèves : ' + pubUrl);
+}
+
+/**
+ * ANCIENNE FONCTION : Créer tous les formulaires du dossier (pour compatibilité)
+ */
 function creerFormulairesPourToutLeDossier() {
   var dossier = DriveApp.getFolderById(ID_DOSSIER);
   var fichiers = dossier.getFilesByType(MimeType.GOOGLE_SHEETS);
@@ -84,7 +232,6 @@ function creerFormulairesPourToutLeDossier() {
   var nbFormulairesExistants = 0;
   var nbNouvelsFormulaires = 0;
   var resultats = [];
-  var avertissements = [];
   
   while (fichiers.hasNext()) {
     var fichier = fichiers.next();
@@ -94,42 +241,29 @@ function creerFormulairesPourToutLeDossier() {
     
     var formTitle = sheet.getName() + " - Auto-evaluation";
     
-    // ===== VÉRIFICATION : formulaire existant ? =====
     var formulaireExistantId = trouverFormulaireExistant(formTitle);
     
     if (formulaireExistantId) {
       nbFormulairesExistants++;
-      var urlExistant = "https://docs.google.com/forms/d/" + formulaireExistantId + "/edit";
-      
-      Logger.log("");
-      Logger.log("⚠️ ATTENTION : Formulaire existant détecté");
-      Logger.log("Fichier : " + fichier.getName());
-      Logger.log("Titre : " + formTitle);
-      Logger.log("URL Existant : " + urlExistant);
-      Logger.log("");
-      
+      Logger.log("⚠️ " + formTitle + " existe déjà");
       continue;
     }
     
-    // ===== CRÉER NOUVEAU FORMULAIRE =====
     var form = FormApp.create(formTitle);
     form.setIsQuiz(true);
     
     try { form.setRequireLogin(false); } catch (e) {}
     form.setDestination(FormApp.DestinationType.SPREADSHEET, ss.getId());
     
-    // Ajouter un champ nom
     var nomItem = form.addTextItem();
     nomItem.setTitle("Votre Nom et Prénom");
     nomItem.setRequired(true);
     
     var nbCree = 0;
     var nbAvecCode = 0;
-    var questionsVues = {}; // Pour tracker les doublons
+    var questionsVues = {};
     
-    // Création des questions pour ce fichier
     for (var i = 1; i < data.length; i++) {
-      // Ignorer les lignes d'en-tête
       if (i === 0 && String(data[i][0]).toUpperCase() === "CODE") {
         continue;
       }
@@ -142,12 +276,10 @@ function creerFormulairesPourToutLeDossier() {
       var optD = String(data[i][5] || "").trim();
       var reponse = String(data[i][6] || "").trim().toUpperCase();
 
-      // Valider la question
       if (!question || question === "") {
         continue;
       }
 
-      // Collecter les options valides
       var options = [];
       if (optA) options.push(optA);
       if (optB) options.push(optB);
@@ -158,10 +290,8 @@ function creerFormulairesPourToutLeDossier() {
         continue;
       }
 
-      // Créer le titre (avec formulation standard)
       var titreQuestion = creerTitreQuestion(question, codeBlock);
       
-      // Gérer les doublons : ajouter un numéro
       var titreOriginal = titreQuestion;
       var compteur = 1;
       while (questionsVues[titreQuestion]) {
@@ -170,18 +300,15 @@ function creerFormulairesPourToutLeDossier() {
       }
       questionsVues[titreQuestion] = true;
 
-      // Créer l'item de question
       var questionItem = form.addMultipleChoiceItem();
       questionItem.setTitle(titreQuestion).setRequired(true);
 
-      // ===== AJOUTER LE CODE EN DESCRIPTION =====
       if (codeBlock && codeBlock !== "") {
         var codeFormate = formatCodeForDescription(codeBlock);
         questionItem.setHelpText("Code à analyser:\n" + codeFormate);
         nbAvecCode++;
       }
 
-      // ===== CRÉER LES CHOIX =====
       var choix = [];
       var indexLettre = "ABCD".indexOf(reponse);
 
@@ -192,7 +319,6 @@ function creerFormulairesPourToutLeDossier() {
 
       questionItem.setChoices(choix);
       
-      // ===== ASSIGNER LES POINTS =====
       if (reponse && indexLettre >= 0 && indexLettre < options.length) {
         questionItem.setPoints(1);
       }
@@ -200,7 +326,6 @@ function creerFormulairesPourToutLeDossier() {
       nbCree++;
     }
     
-    // On sauvegarde les infos de ce formulaire pour le bilan final
     nbFichiersTraites++;
     nbNouvelsFormulaires++;
     resultats.push({
@@ -208,36 +333,23 @@ function creerFormulairesPourToutLeDossier() {
       editUrl: form.getEditUrl(),
       pubUrl: form.getPublishedUrl(),
       questions: nbCree,
-      avecCode: nbAvecCode,
-      statut: "✅ CRÉÉ"
+      avecCode: nbAvecCode
     });
   }
   
-  // ===== AFFICHER LE BILAN GLOBAL =====
   Logger.log("");
-  Logger.log("=========================================");
   Logger.log("✅ EXÉCUTION TERMINÉE");
-  Logger.log("=========================================");
   Logger.log("Fichiers traités : " + nbFichiersTraites);
   Logger.log("Nouveaux formulaires : " + nbNouvelsFormulaires);
-  Logger.log("Formulaires existants détectés : " + nbFormulairesExistants);
-  Logger.log("=========================================");
+  Logger.log("Formulaires existants : " + nbFormulairesExistants);
   Logger.log("");
   
-  // Afficher les détails des formulaires créés
-  if (resultats.length > 0) {
-    Logger.log("FORMULAIRES CRÉÉS :");
-    Logger.log("-----------------------------------------");
-    for (var k = 0; k < resultats.length; k++) {
-      Logger.log(resultats[k].statut + " FICHIER : " + resultats[k].nom);
-      Logger.log("Questions : " + resultats[k].questions);
-      Logger.log("Questions avec code : " + resultats[k].avecCode);
-      Logger.log("🔗 Lien Édition : " + resultats[k].editUrl);
-      Logger.log("🔗 Lien Élèves  : " + resultats[k].pubUrl);
-      Logger.log("-----------------------------------------");
-    }
+  for (var k = 0; k < resultats.length; k++) {
+    Logger.log("✅ " + resultats[k].nom);
+    Logger.log("Questions : " + resultats[k].questions);
+    Logger.log("Questions avec code : " + resultats[k].avecCode);
+    Logger.log("Édition : " + resultats[k].editUrl);
+    Logger.log("Élèves : " + resultats[k].pubUrl);
+    Logger.log("---");
   }
-  
-  Logger.log("");
-  Logger.log("ℹ️ Consultez les logs pour plus de détails (View → Logs)");
 }
