@@ -45,27 +45,79 @@ Pour chaque Google Sheet du dossier :
 - ✅ Ajoute un champ "Nom et Prénom"
 - ✅ Affiche les liens d'édition et de partage
 
+## 🔄 Gestion des doublons (Mode Safe)
+
+**Le script détecte automatiquement les formulaires existants.**
+
+### Comportement si formulaire existe déjà :
+
+```
+⚠️ ATTENTION : Formulaire existant détecté
+Fichier : Quiz R02
+Titre : Quiz R02 - Auto-evaluation
+URL Existant : https://docs.google.com/forms/d/.../edit
+DÉCISION : Vérifiez manuellement
+  - Si vous voulez recréer → supprimez le formulaire et relancez
+  - Si vous voulez garder → continuez sans action
+```
+
+**Aucun doublon ne sera créé.**
+
+### Pour recréer un formulaire :
+
+1. Supprimer manuellement le formulaire existant dans Google Drive
+2. Relancer le script
+3. Un nouveau formulaire sera créé
+
 ## 📊 Logs d'exécution
 
 Après exécution, vérifie les logs dans Google Apps Script (View → Logs) :
+
+### Exécution normale (premiers formulaires) :
 ```
 =========================================
-✅ TERMINÉ ! 3 fichiers convertis.
+✅ EXÉCUTION TERMINÉE
 =========================================
-📄 FICHIER : Quiz R02
+Fichiers traités : 3
+Nouveaux formulaires : 3
+Formulaires existants détectés : 0
+=========================================
+
+FORMULAIRES CRÉÉS :
+-----------------------------------------
+✅ CRÉÉ FICHIER : Quiz R02
 Questions : 12
-🔗 Lien Édition : https://docs.google.com/forms/d/...
+🔗 Lien Édition : https://docs.google.com/forms/d/.../edit
 🔗 Lien Élèves  : https://docs.google.com/forms/d/.../viewform
+-----------------------------------------
+```
+
+### 2e exécution (formulaires existants) :
+```
+=========================================
+✅ EXÉCUTION TERMINÉE
+=========================================
+Fichiers traités : 3
+Nouveaux formulaires : 0
+Formulaires existants détectés : 3
+=========================================
+
+⚠️ AVERTISSEMENTS (Formulaires existants):
+=========================================
+⚠️ FORMULAIRE EXISTANT - Quiz R02
+Titre : Quiz R02 - Auto-evaluation
+URL : https://docs.google.com/forms/d/.../edit
+Message : Ce formulaire existe déjà. Vérifier avant de recréer.
 -----------------------------------------
 ```
 
 ## ⚙️ Configuration avancée
 
 ### Modifier le nom du formulaire
-Ligne 37 : `var formTitle = sheet.getName() + " - Auto-evaluation";`
+Ligne 59 : `var formTitle = sheet.getName() + " - Auto-evaluation";`
 
 ### Modifier le titre du champ nom
-Ligne 42 : `nomItem.setTitle("Votre Nom et Prénom");`
+Ligne 76 : `nomItem.setTitle("Votre Nom et Prénom");`
 
 ### Personnaliser les logs
 Sections "Logger.log(...)" à la fin du script
@@ -78,9 +130,17 @@ Sections "Logger.log(...)" à la fin du script
 | Aucun formulaire créé | Vérifier que les Sheets existent dans le dossier |
 | Questions vides | Vérifier que colonne A n'est pas vide, que colonnes B-E ont des réponses |
 | Erreur de permissions | Autoriser l'accès quand l'UI demande (première exécution) |
+| Doublons créés | Vérifier la version du script (mise à jour 2026-08-30) |
 
 ## 📝 Notes
 
 - Les formulaires sont créés dans le **même Drive** que les Sheets
 - Les réponses sont enregistrées dans un **nouvel onglet** de la Spreadsheet
-- Les anciens formulaires ne sont pas supprimés (vérifier manuellement si besoin)
+- Le script **détecte et prévient les doublons** automatiquement
+- Aucun formulaire n'est supprimé automatiquement (safe mode)
+- Pour recréer un formulaire, supprimer manuellement l'ancien d'abord
+
+## 🔧 Historique des mises à jour
+
+- **2026-08-30** : Ajout de la détection des doublons (Mode Safe avec confirmation manuelle)
+- **2026-08-30** : Création initiale du script
