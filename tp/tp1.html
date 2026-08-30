@@ -12,7 +12,7 @@
 
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"><link rel="stylesheet" href="/420-SN1/assets/css/styles.ac979c22.css">
-<script src="/420-SN1/assets/js/runtime~main.e37c32f8.js" defer="defer"></script>
+<script src="/420-SN1/assets/js/runtime~main.150c5210.js" defer="defer"></script>
 <script src="/420-SN1/assets/js/main.cc12b9b6.js" defer="defer"></script>
 </head>
 <body>
@@ -121,12 +121,12 @@ Calcule le temps de demi-vie (<span class="katex"><span class="katex-mathml"><ma
 <p><strong><code>convertir_concentration(valeur, unite_source, unite_cible)</code></strong> :
 Convertit une concentration entre deux unités courantes en pharmacopée :</p>
 <ul>
-<li class=""><code>&quot;mg/L&quot;</code> ↔ <code>&quot;µg/mL&quot;</code> (facteur de conversion : 1 mg/L = 1000 µg/mL)</li>
+<li class=""><code>&quot;mg/L&quot;</code> ↔ <code>&quot;µg/mL&quot;</code> (facteur de conversion : 1 mg/L = 1 µg/mL pusique 1 L = 1000 mL et 1 mg = 1000 µg)</li>
 </ul>
 <div class="theme-admonition theme-admonition-info admonition_xJq3 alert alert--info"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg></span>Conversions d&#x27;unités en pharmacologie</div><div class="admonitionContent_BuS1"><p>Les concentrations plasmatiques se mesurent en différentes unités selon le contexte :</p><ul>
 <li class=""><strong>mg/L</strong> (milligrammes par litre) : standard pour les suivi sanguin courant</li>
 <li class=""><strong>µg/mL</strong> (microgrammes par millilitre) : pour les substances très puissantes</li>
-</ul><p>La conversion est simple : 1 mg/L = 1000 µg/mL (ou inversement, ÷ 1000)</p></div></div>
+</ul><p>La conversion est simple : 1 mg/L = 1 µg/mL</p></div></div>
 </li>
 </ol></div><div role="tabpanel" class="tabItem_Ymn6" hidden=""><p>Dans le fichier <code>cinetique.py</code>, ajoutez la fonction d&#x27;évaluation des seuils :</p><ol start="4">
 <li class=""><strong><code>evaluer_niveau(concentration, seuil_min, seuil_max)</code></strong> :
