@@ -471,6 +471,85 @@ Assurez-vous que Python est installé et que vous pouvez exécuter des scripts `
                 ---
 
 
+
+                ---
+
+                ::::info Exercice - Filtrer avec `pass` (le bouche-trou)
+                Créez un fichier `filtre_pass.py` pour votre réponse.
+
+                On veut afficher uniquement les nombres **pairs** d'une liste, et simplement "ignorer" (sans planter) les impairs en utilisant le mot-clé `pass`.
+
+                ##### INSTRUCTIONS
+                1. Créez une liste `nombres = [3, 8, 1, 12, 7, 4, 9, 10]`.
+                2. Parcourez-la avec une boucle `for`.
+                3. Si le nombre est **impair**, utilisez `pass` (le programme ne fait rien de spécial, mais doit rester syntaxiquement valide).
+                4. Sinon (`else`), affichez le nombre avec un message du genre `-> pair : 8`.
+
+                ✅ **Résultat attendu :**
+                ```text
+                -> pair : 8
+                -> pair : 12
+                -> pair : 4
+                -> pair : 10
+                ```
+
+                :::note Notions visées
+                Boucle `for`, structure conditionnelle (`if`/`else`), mot-clé `pass` comme espace réservé, parcours de liste.
+                :::
+                ::::
+
+                ---
+
+                ::::info Exercice - Arrêt anticipé avec `break` dans un `for`
+                Créez un fichier `recherche_break.py` pour votre réponse.
+
+                On cherche si la valeur `42` se trouve dans une liste. Dès qu'on la trouve, on doit **arrêter de parcourir** la liste (pas besoin de continuer) en utilisant `break`.
+
+                ##### INSTRUCTIONS
+                1. Créez une liste `valeurs = [7, 13, 21, 42, 8, 42, 99]`.
+                2. Parcourez-la avec une boucle `for`.
+                3. Si l'élément vaut `42`, affichez `Trouvé à l'index X !` (où X est l'index) puis faites `break` pour quitter la boucle.
+                4. Après la boucle, si `42` n'a jamais été trouvé, affichez `Valeur absente`.
+
+                ✅ **Résultat attendu :**
+                ```text
+                Trouvé à l'index 3 !
+                ```
+
+                :::tip Indice
+                Utilisez `for i in range(len(valeurs))` pour avoir accès à l'index, ou `for i, v in enumerate(valeurs)` (si cette notion a été vue).
+                :::
+
+                :::note Notions visées
+                Boucle `for`, `break` pour sortir prématurément, index / `enumerate`, recherche dans une liste.
+                :::
+                ::::
+
+                ---
+
+                ::::info Exercice - Dessiner un rectangle (concaténation de chaînes)
+                Créez un fichier `rectangle.py` pour votre réponse.
+
+                Les boucles imbriquées permettent de dessiner, mais Python offre une astuce performante : **multiplier une chaîne de caractères** (`"#" * largeur`) pour éviter la boucle intérieure.
+
+                ##### INSTRUCTIONS
+                1. Demandez une `largeur` et une `hauteur` (entiers) à l'utilisateur via `input()` (n'oubliez pas la conversion `int()`).
+                2. Pour chaque ligne (boucle `for` sur `hauteur`), affichez `"#" * largeur` — la multiplication construit toute la ligne d'un coup.
+                3. **Pour aller plus loin :** affichez seulement le contour (bordure) du rectangle en utilisant des conditions `if` à l'intérieur de la boucle (les bords en `#`, l'intérieur en espace).
+
+                ✅ **Exemple (largeur=5, hauteur=3) :**
+                ```text
+                #####
+                #####
+                #####
+                ```
+
+                :::note Notions visées
+                Boucle `for`, multiplication de chaînes (`"#" * n`), `input()` + `int()`, conditions (`if`) pour le contour, alternative à la boucle imbriquée.
+                :::
+                ::::
+
+                ---
                 <IntroSolutionsExercices />
 
                 Solution des **exercices de compréhension** :
@@ -486,6 +565,9 @@ Assurez-vous que Python est installé et que vous pouvez exécuter des scripts `
                 - Énumérer des décimales *(solutionnaire à venir)*
                 - Refactorisation : Le générateur de nombres *(solutionnaire à venir)*
                 - Refactorisation : L'escalier d'étoiles *(solutionnaire à venir)*
+                - Filtrer avec `pass` *(solutionnaire à venir)*
+                - Arrêt anticipé avec `break` dans un `for` *(solutionnaire à venir)*
+                - Dessiner un rectangle (concaténation de chaînes) *(solutionnaire à venir)*
 
     </TabItem>
 </Tabs>
