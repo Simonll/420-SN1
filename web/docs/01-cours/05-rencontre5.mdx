@@ -552,31 +552,18 @@ Assurez-vous que Python est installé et que vous pouvez exécuter des scripts `
 
                 ---
 
-                ::::info Exercice - Refactorisation : Affichage d'étoiles
+                ::::info Exercice - Refactorisation : Affichage d'une ligne d'étoiles
 
                 Créez un fichier `etoile_1.py` pour votre réponse.
 
-                Nous allons transformer un code répétitif affichant des lignes d’étoiles sur plusieurs lignes \
-                en une version plus propre et flexible grâce à l’utilisation de boucles.
-
+                Nous allons transformer un code répétitif affichant une seule ligne d'étoiles en une version plus propre et flexible grâce à l'utilisation d'une boucle.
 
                 ```python showLineNumbers
-                #Ligne #1
-                print('*', end='')
-                print()
-
-                #Ligne #2
-                print('*', end='')  # Affiche une étoile et évite le saut de ligne
-                print('*', end='')
-                print()             # Génère une ligne vide
-
-                #Ligne #3
+                # Affiche 8 étoiles sur une seule ligne
                 print('*', end='')
                 print('*', end='')
                 print('*', end='')
-                print()
-
-                #Ligne #4
+                print('*', end='')
                 print('*', end='')
                 print('*', end='')
                 print('*', end='')
@@ -586,30 +573,23 @@ Assurez-vous que Python est installé et que vous pouvez exécuter des scripts `
 
                 #### ÉTAPES À SUIVRE
 
-                1. **COMPRENDRE LE MOTIF** \
-                Exécutez le code dans PyCharm et observez le motif affiché. \
-                Chaque ligne contient un nombre croissant d’étoiles, allant de 1 à 4.
+                1. **COMPRENDRE LE MOTIF**
+                Exécutez le code dans VS Code et observez le motif affiché.
+                Toutes les étoiles apparaissent sur une seule ligne (8 étoiles).
 
+                2. **IDENTIFIER LA RÉPÉTITION**
+                Tentez d'observer la répétition et de voir comment on peut la généraliser.
+                Vous remarquez que la même action (print('*', end='')) est répétée 8 fois, suivie d'un seul saut de ligne.
 
-                2. **IDENTIFIER LA RÉPÉTITION** \
-                Tentez d'observer la répétition et tentez de voir comment on peut généraliser le tout. \
-                Pour chaque ligne, vous remarquez qu'on fait toujours les mêmes 2 actions :
-                    - Afficher un nombre variable d'étoiles selon la ligne
-                    - Puis réaliser un saut de ligne.
+                3. **PLANIFIER LA RÉSOLUTION À L'AIDE D'UNE BOUCLE**
+                Vous aurez besoin d'une **seule boucle for** pour répéter l'affichage de l'étoile le bon nombre de fois, puis d'un print() final pour le saut de ligne.
 
-                3. **PLANIFIER LA RÉSOLUTION À L'AIDE DE BOUCLES** \
-                Vous aurez besoin d'une boucle pour répéter ces 2 ensembles d'actions pour chacune des lignes. \
-                Petit problème : le nombre d'instructions pour afficher des étoiles est variable selon la ligne... que faire? \
-                Vous allez avoir besoin d'une boucle pour représenter la création des étoiles! \
-                Vous aurez donc une boucle de création de lignes, et à l'intérieur une boucle de création d'étoiles.
-
-                4. **CODER** \
-                Vous avez assez philosophié, maintenant codez! \
-                Lorsque vous avez fini, votre code sera générique et flexible! \
-                Vous seriez capable d'afficher 20 lignes au lieu de 4 avec un p'tit changement mineur!
+                4. **CODER**
+                Lorsque vous avez fini, votre code sera générique et flexible !
+                Vous seriez capable d'afficher 50 étoiles au lieu de 8 avec un seul changement de valeur.
 
                 :::note Notions visées
-                Boucles imbriquées (`for`), affichage sans saut de ligne (`end`), identification de répétitions, généralisation d'un motif
+                Boucle for simple, fonction range(), affichage sans saut de ligne (end), identification de répétitions, généralisation d'un motif
                 :::
 
                 ::::
@@ -617,7 +597,7 @@ Assurez-vous que Python est installé et que vous pouvez exécuter des scripts `
                 ---
 
                 ::::info Exercice - Refactorisation : L'escalier d'étoiles
-                Créez un fichier `etoile_1.py` pour votre réponse.
+                Créez un fichier `escalier_etoiles.py` pour votre réponse.
 
                 Nous allons transformer ce script très répétitif (qui affiche un escalier d'étoiles) en une version élégante et flexible grâce à l’utilisation des **boucles imbriquées**.
 
