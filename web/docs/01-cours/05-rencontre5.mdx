@@ -1,9 +1,8 @@
 ---
-title: 5 - Boucle while et répétitions + TP1 poursuite
+title: 5 - Boucle while, contrôle de flux et validation de saisie + TP1 poursuite
 #description: Boucle while, opérateurs d'affectation (+=, -=), accumulateurs, validation de saisie, boucles infinies, break / continue
 hide_table_of_contents: true
 draft : true
----
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
@@ -96,7 +95,6 @@ Assurez-vous que Python est installé et que vous pouvez exécuter des scripts `
 
                 ::::
 
-                ---
 
                 ::::info Exercice - Trace `while`
 
@@ -121,7 +119,6 @@ Assurez-vous que Python est installé et que vous pouvez exécuter des scripts `
 
                 ::::
 
-                ---
 
                 ::::info Exercice - Trace `while`, `if`, `break`
 
@@ -149,32 +146,6 @@ Assurez-vous que Python est installé et que vous pouvez exécuter des scripts `
 
                 ::::
 
-                ---
-
-                ::::info Exercice - Trace `range` imbriqué, `if`, `continue`
-
-                :::note-nt ️
-                Pour réaliser cet exercice, imprimez le [tableau de trace d'exécution](/pdf/Traces_recto_verso.pdf).
-                :::
-
-                En suivant **les recettes** de trace **[avec boucle](/recettes/produire-une-trace?recette-activite=Avec+boucle)** et **[avec condition](/recettes/produire-une-trace?recette-activite=condition)**, tracez son exécution.
-
-                ```python showLineNumbers
-                for i in range(1, 3):
-                    if i == 2:
-                        continue
-                    for j in range(4, 6):
-                        print(i + j)
-                ```
-                Validez **ensuite** votre trace en exécutant le programme en mode débogage.
-
-                :::note Notions visées
-                Boucles `for` imbriquées, `range()`, structure conditionnelle (`if`), `continue`, ordre d'exécution, trace d'exécution, débogueur
-                :::
-
-                ::::
-
-                ---
 
                 # Solutionnaires
 
@@ -197,47 +168,6 @@ Assurez-vous que Python est installé et que vous pouvez exécuter des scripts `
 
                 <DocumentationAutorisee />
 
-                
-                ::::info Exercice - Déboguer et compter
-                Créez un fichier `r05_evalue_expression.md` pour votre réponse.
-
-                En exécutant le code ci-dessous en **mode débogage**, déterminez :
-                1. Combien de fois la ligne 4 est-elle réellement exécutée ?
-                2. Quelles sont les valeurs successives que prend la variable `resultat` ? \
-                Lorsque l'exécution est **arrêtée sur la ligne 5** (mettez-y un point d'arrêt !) évaluer les expressions suivantes :
-
-                3. `compteur * 2`
-                4. `compteur > 3`
-                5. `compteur % 2 == 0`
-                6. `compteur + 100`
-
-                
-
-                ```python showLineNumbers
-                def factorielle(n):
-                    resultat = 1
-                    for i in range(1, n + 1):
-                        resultat *= i
-                    return resultat
-
-                r = factorielle(9)
-                print(r)
-
-                ```
-
-                7. Une fois la boucle complètement terminée, que représentent concrètement les valeurs affichées aux lignes 6 et 7 ?
-
-                :::tip Les variables accumulatrices
-                `total` et `compteur` sont des **variables accumulatrices**. Elles ne reçoivent pas une valeur fixe dès le départ, mais s'enrichissent à chaque passage dans la boucle. On les reconnaît à leur initialisation à `0` juste avant la boucle, et à l'utilisation de l'opérateur `+=` pour accumuler les valeurs au fil des itérations.
-                :::
-
-                :::note Notions visées
-                Boucle `for` avec `range()`, débogueur (compter les itérations, observer une variable), `return`.
-                :::
-
-                ::::
-
-                ---
 
                 ## Exercices de création
 
@@ -245,20 +175,6 @@ Assurez-vous que Python est installé et que vous pouvez exécuter des scripts `
 
                 <DocumentationAutorisee />
 
-                ::::info Exercice - Afficher 5 chiffres aléatoires
-
-                Créez un fichier `aleatoire.py` pour votre réponse.
-
-                Écrivez un programme qui affiche 5 chiffres aléatoires, les uns en dessous des autres.
-                - Les chiffres doivent être choisis parmi cet ensemble : **1, 2, 3, 4, 5**.
-                - Un même chiffre a le droit d'apparaître plusieurs fois.
-
-                :::note Notions visées
-                Boucle (`for`), module `random`.
-                :::
-                ::::
-
-                ---
 
                 Créez un fichier `cible.py` pour votre réponse.
 
@@ -292,7 +208,6 @@ Assurez-vous que Python est installé et que vous pouvez exécuter des scripts `
                 :::
                 ::::
 
-                ---
 
                 ::::info Exercice - Le juste prix (Devinette numérique)
                 Créez un fichier `devine.py` pour votre réponse.
@@ -320,354 +235,21 @@ Assurez-vous que Python est installé et que vous pouvez exécuter des scripts `
                 :::
                 ::::
 
-                ---
 
-                ::::info Exercice - Remplir et analyser une liste
-                Créez un fichier `liste_aleatoire_boucle.py` pour votre réponse.
-
-                À la **Rencontre #2**, vous aviez dû remplir une liste en copiant-collant **cinq fois** la commande `.append()`. Un petit mot dans le cours disait : *« une boucle ferait ça automatiquement… vous verrez ça bientôt ! »*.
-
-                Ce moment est arrivé.
-
-                ##### PARTIE 1 - Construire la liste avec une boucle
-                1. Partez d'une **liste vide**.
-                2. À l'aide d'**une boucle**, ajoutez **10** nombres entiers aléatoires (entre 1 et 100 inclusivement) à la liste.
-                3. Affichez la liste complète générée.
-
-                ##### PARTIE 2 - Parcourir la liste par index
-                4. Parcourez maintenant cette liste avec **une boucle `for`** pour afficher chaque nombre sur sa propre ligne, précédé d'une flèche « → ».
-                5. Profitez de ce parcours pour **compter** combien de nombres sont **supérieurs à 50**, à l'aide d'une variable accumulatrice `compteur`.
-
-                :::tip L'accumulateur conditionnel
-                Utilisez une **variable accumulatrice** (initialisée à `0` avant la boucle). À l'intérieur de la boucle, une structure conditionnelle (`if`) vous permettra de décider à quel moment l'incrémenter.
-                :::
-
-                ✅ **Exemple de sortie** *(les valeurs changeront à chaque exécution)* :
-                ```text
-                Liste générée : [42, 7, 91, 55, 23, 88, 3, 67, 50, 12]
-
-                → 42
-                → 7
-                → 91
-                ...
-                → 12
-
-                Nombres supérieurs à 50 : 4
-
-                ```
-
-                ::::
-
-
-                ---
-
-                ::::info Exercice - Umbrella Corporation, version boucle
-                Créez un fichier `umbrella_boucle.py` pour votre réponse.
-
-                À la **Rencontre #3**, vous aviez amélioré un rapport de l'Umbrella Corporation en créant une fonction `afficher_echantillon(...)` que vous appeliez **3 fois manuellement** sur des **listes parallèles**. 
-                La promesse était : *« avec une boucle, un seul appel suffira pour traiter tous les échantillons »*. Tenons cette promesse !
-
-                #### INSTRUCTIONS
-                1. **Recopiez intégralement** le code de cet ancien exercice (`umbrella_corporation.py`) dans votre nouveau script `umbrella_boucle.py`.
-                2. **Ne modifiez absolument pas** la fonction `afficher_echantillon(...)`. Vous devez l'utiliser telle quelle.
-                3. Remplacez vos **3 appels manuels** par une **seule boucle `for`** qui appellera la fonction en lui passant les valeurs de l'échantillon correspondant à l'index `i`.
-
-                Lorsqu'on exécute votre nouvelle version, le résultat à l'écran doit être **exactement le même** qu'à la rencontre 3, mais le code sera beaucoup plus intelligent.
-
-                #### Pour aller plus loin
-                Ajoutez les données d'un **4e échantillon** dans vos listes de départ. Votre boucle devrait l'afficher automatiquement **sans aucune autre modification** au code ! C'est ça, la véritable puissance de la combinaison listes et boucles.
-
-                :::note Notions visées
-                Boucle `for`, parcours de **listes parallèles** par index, réutilisation et appel d'une fonction dans une boucle, généralisation via `len()`.
-                :::
-                ::::
-
-                ---
-
-                ::::info Exercice - Créer ses propres statistiques
-                Créez un fichier `statistiques.py` pour votre réponse.
-
-                La corporation Umbrella remarque des variations de température dans l'une de ses salles d'entreposage. Différentes mesures ont été prises durant la journée :
-
-                ```python showLineNumbers
-                temperatures = [23.5, 25.4, 27.6, 21.9, 26.7, 24.6]
-
-                ```
-
-                :::warning Contrainte majeure
-                Vous **n'avez pas** le droit d'utiliser les fonctions prédéfinies de Python telles que `min()`, `max()`, `sum()`, `len()`, `sort()` ou `sorted()`.
-                Votre algorithme doit fonctionner correctement peu importe le nombre de mesures contenues dans la liste.
-                :::
-
-                ---
-
-                ##### PARTIE 1 : Compteur, somme et moyenne
-
-                À l'aide d'une boucle, parcourez la liste pour calculer et afficher :
-                - Le nombre total de mesures prises
-                - La somme de toutes les températures
-                - La température moyenne
-
-                ✅ **Résultat attendu :**
-                ```text
-                Températures : [23.5, 25.4, 27.6, 21.9, 26.7, 24.6]
-                nb. mesures : 6
-                    somme : 149.7
-                    moyenne : 24.95
-                ```
-
-                :::tip Astuces
-                * **Compteur** : Utilisez une variable accumulatrice pour compter le nombre d'éléments.
-                * **Somme** : Utilisez une deuxième variable accumulatrice pour additionner les températures au fil de la boucle.
-                * **Moyenne** : Calculez-la **une fois la boucle terminée**, en divisant votre somme par votre compteur.
-                :::
-
-                ---
-
-                ##### PARTIE 2 : Minimum et maximum
-
-                Ajoutez une deuxième boucle pour trouver et afficher la température la plus basse et la plus élevée.
-
-                ✅ **Résultat attendu (en plus de la Partie 1) :**
-                ```text
-                        min : 21.9
-                        max : 27.6
-                ```
-
-                :::tip Astuces de pro pour le min/max
-
-                * **L'initialisation :** Initialisez vos variables `min_temp` et `max_temp` avec la valeur du **premier élément** de la liste (l'index `0`) *avant* de démarrer la boucle. Ne les initialisez surtout pas à `0` !
-                * **La comparaison :** À chaque tour de boucle, utilisez un `if` pour vérifier si la température actuelle "bat le record" (est-elle plus petite que `min_temp` ? Est-elle plus grande que `max_temp` ?). Si oui, mettez à jour vos variables.
-                * Une fois la boucle terminée, vos variables contiendront les valeurs extrêmes recherchées.
-                :::
-
-                #### Pour aller plus loin
-
-                Pourquoi parcourir la liste deux fois ? Fusionnez vos deux boucles en **une seule boucle maîtresse** qui calcule les 5 statistiques en un seul et unique parcours de la liste !
-
-                :::note Notions visées
-                Boucle (`for`/`while`), parcours d'une liste, variables accumulatrices (compteur, somme), algorithmes de recherche de min/max sans fonction prédéfinie, structures conditionnelles, généralisation.
-                :::
-                ::::
-
-                ---
-
-                ::::info Exercice - Énumérer des décimales (Précision de l'ordinateur)
-                Créez un fichier `decimales.py` pour votre réponse.
-
-                À la **Rencontre #2**, vous avez découvert que les nombres à virgule flottante ne sont **pas toujours exacts** en informatique (`0.1 + 0.2` donne `0.30000000000000004`). On va maintenant utiliser une **boucle imbriquée** pour observer ce phénomène à plus grande échelle.
-
-                Bob veut énumérer les décimales de `0.1` à `0.9`, puis de `0.01` à `0.09`, puis de `0.001` à `0.009`. Il les calcule en multipliant un chiffre `i` (allant de 1 à 9) par une puissance négative de 10 :
-
-                ```python showLineNumbers
-                for puissance in range(1, 4):       # puissance vaut 1, puis 2, puis 3
-                    for i in range(1, 10):          # i vaut 1, 2, ..., 9
-                        nombre = i * 10 ** -puissance
-                        print(nombre, end="  ")
-                    print()                         # Saut de ligne après chaque groupe de 9
-
-                ```
-
-                ##### PARTIE 1 - Observer
-
-                Exécutez ce code et observez la sortie. Repérez visuellement les nombres qui **ne s'affichent pas exactement** comme prévu (par exemple, `0.30000000000000004` au lieu de `0.3`).
-
-                ##### PARTIE 2 - Comparer avec `round()`
-
-                Modifiez la boucle intérieure pour afficher, à côté de chaque nombre, sa version proprement arrondie avec `round(nombre, puissance)`.
-                Pour chaque valeur, utilisez une condition (`if`) pour afficher si les deux valeurs sont "identiques" ou si elles sont "DIFFÉRENTES".
-
-                ✅ **Exemple de sortie attendue** *(extrait)* :
-
-                ```text
-                0.1 → round: 0.1 → identique
-                0.2 → round: 0.2 → identique
-                0.30000000000000004 → round: 0.3 → DIFFÉRENT
-                0.4 → round: 0.4 → identique
-
-                ```
-
-                #### Pour aller plus loin
-
-                1. Augmentez la portée du programme pour générer des décimales jusqu'à `0.000000001` en changeant **une seule valeur** dans votre code.
-                2. Bob a essayé une **autre méthode** pour générer les mêmes décimales : au lieu d'utiliser une multiplication, il construit le texte de la décimale, puis le convertit en nombre réel (`float`).
-                Remplacez la ligne de calcul (`nombre = i * 10 ** -puissance`) par celle-ci :
-                ```python
-                nombre = float("0." + "0" * (puissance - 1) + str(i))
-
-                ```
-
-
-                Exécutez à nouveau votre programme de la Partie 2 avec cette nouvelle méthode. Que remarquez-vous ? Y a-t-il encore des nombres marqués « DIFFÉRENT » ?
-
-                > **La morale de l'histoire :** Cette expérience illustre une notion fondamentale en programmation : le niveau de précision dépend souvent de **la façon dont on calcule** la valeur, et pas seulement de la valeur elle-même !
-
-                :::note Notions visées
-                Boucles imbriquées (`for`), `range()`, opérateur de puissance (`**`), précision des flottants, `round()`, structure conditionnelle, paramètre `end` dans `print()`, conversion `str` → `float`.
-                :::
-                ::::
-
-
-                ---
-
-                ::::info Exercice - Refactorisation : Le générateur de nombres
-                Créez un fichier `generer_nombre.py` pour votre réponse.
-
-                Le code ci-dessous permet de générer un nombre de 3 chiffres (sans aucun zéro à l'intérieur), mais il souffre d'un sérieux problème de répétition :
-
-                ```python showLineNumbers
-                import random
-
-                def generer_nombre():
-                    nombre = 0
-
-                    position = 0
-                    chiffre_aleatoire = random.randint(1, 9)
-                    nombre += chiffre_aleatoire * 10 ** position   # 10**0 = 1
-
-                    position = 1
-                    chiffre_aleatoire = random.randint(1, 9)
-                    nombre += chiffre_aleatoire * 10 ** position   # 10**1 = 10
-
-                    position = 2
-                    chiffre_aleatoire = random.randint(1, 9)
-                    nombre += chiffre_aleatoire * 10 ** position   # 10**2 = 100
-
-                    return nombre
-
-                resultat = generer_nombre()
-                print(f"Nombre généré : {resultat}")
-
-                ```
-
-                #### VOTRE MISSION
-
-                * **Modifiez** le code de cette fonction en utilisant une boucle pour éliminer complètement la répétition (application du fameux principe **DRY** - *Don't Repeat Yourself*).
-                * **Ajoutez un paramètre optionnel** à la fonction pour permettre de choisir la longueur du nombre à générer. La valeur par défaut de ce paramètre doit rester `3`.
-
-                :::note Notions visées
-                Boucles (`for`/`while`), refactorisation (DRY), définition de fonction, paramètre avec valeur par défaut, module `random`, opérateurs arithmétiques (puissances de 10).
-                :::
-                ::::
-
-                ---
-
-                ::::info Exercice - Refactorisation : Affichage d'une ligne d'étoiles
-
-                Créez un fichier `etoile_1.py` pour votre réponse.
-
-                Nous allons transformer un code répétitif affichant une seule ligne d'étoiles en une version plus propre et flexible grâce à l'utilisation d'une boucle.
-
-                ```python showLineNumbers
-                # Affiche 8 étoiles sur une seule ligne
-                print('*', end='')
-                print('*', end='')
-                print('*', end='')
-                print('*', end='')
-                print('*', end='')
-                print('*', end='')
-                print('*', end='')
-                print('*', end='')
-                print()
-                ```
-
-                #### ÉTAPES À SUIVRE
-
-                1. **COMPRENDRE LE MOTIF**
-                Exécutez le code dans VS Code et observez le motif affiché.
-                Toutes les étoiles apparaissent sur une seule ligne (8 étoiles).
-
-                2. **IDENTIFIER LA RÉPÉTITION**
-                Tentez d'observer la répétition et de voir comment on peut la généraliser.
-                Vous remarquez que la même action (print('*', end='')) est répétée 8 fois, suivie d'un seul saut de ligne.
-
-                3. **PLANIFIER LA RÉSOLUTION À L'AIDE D'UNE BOUCLE**
-                Vous aurez besoin d'une **seule boucle for** pour répéter l'affichage de l'étoile le bon nombre de fois, puis d'un print() final pour le saut de ligne.
-
-                4. **CODER**
-                Lorsque vous avez fini, votre code sera générique et flexible !
-                Vous seriez capable d'afficher 50 étoiles au lieu de 8 avec un seul changement de valeur.
-
-                :::note Notions visées
-                Boucle for simple, fonction range(), affichage sans saut de ligne (end), identification de répétitions, généralisation d'un motif
-                :::
-
-                ::::
-
-                ---
-
-                ::::info Exercice - Refactorisation : L'escalier d'étoiles
-                Créez un fichier `escalier_etoiles.py` pour votre réponse.
-
-                Nous allons transformer ce script très répétitif (qui affiche un escalier d'étoiles) en une version élégante et flexible grâce à l’utilisation des **boucles imbriquées**.
-
-                ```python showLineNumbers
-                # Ligne 1
-                print('*', end='')
-                print()
-
-                # Ligne 2
-                print('*', end='')  # Affiche une étoile sans sauter de ligne
-                print('*', end='')
-                print()             # Saute à la ligne
-
-                # Ligne 3
-                print('*', end='')
-                print('*', end='')
-                print('*', end='')
-                print()
-
-                # Ligne 4
-                print('*', end='')
-                print('*', end='')
-                print('*', end='')
-                print('*', end='')
-                print()
-
-                ```
-
-                #### ÉTAPES À SUIVRE
-
-                1. **COMPRENDRE LE MOTIF**
-                Exécutez le code dans votre éditeur et observez le motif affiché. Chaque ligne contient un nombre croissant d’étoiles, allant de 1 à 4.
-                2. **IDENTIFIER LA RÉPÉTITION**
-                Observez la structure pour tenter de la généraliser. Pour chaque ligne, vous remarquerez que l'on fait toujours les deux mêmes actions :
-
-                * Afficher un nombre variable d'étoiles (selon la ligne actuelle).
-                * Effectuer un saut de ligne.
-
-                3. **PLANIFIER LES BOUCLES IMBRIQUÉES**
-                Vous aurez besoin d'une boucle principale pour gérer les **lignes** (boucle extérieure). Puisque le nombre de `print('*')` successifs dépend de la ligne actuelle, vous aurez besoin d'une sous-boucle pour générer ces **étoiles** (boucle intérieure) *avant* de faire votre saut de ligne. Rappelez-vous l'analogie de l'horloge !
-                4. **CODER !**
-                Assez philosophié, à vos claviers ! Une fois terminé, votre code sera totalement générique et flexible. Pour afficher un escalier de 20 marches plutôt que 4, vous n'aurez qu'un seul chiffre à changer !
-
-                :::note Notions visées
-                Boucles imbriquées (`for`), paramètre `end` de la fonction print, identification de répétitions, généralisation d'un motif.
-                :::
-                ::::
-
-                ---
-
+                
                 <IntroSolutionsExercices />
 
                 Solution des **exercices de compréhension** :
-                - Déboguer et compter *(solutionnaire à venir)*
-                - Évaluer une expression en direct *(solutionnaire à venir)*
+                - Révision : Trace avec fonction *(solutionnaire à venir)*
+                - Trace `while` *(solutionnaire à venir)*
+                - Trace `while`, `if`, `break` *(solutionnaire à venir)*
 
                 Solution des **exercices de création** :
-                - Afficher 5 chiffres aléatoires *(solutionnaire à venir)*
-                - Générer jusqu'à la cible *(solutionnaire à venir)*
                 - Le juste prix (Devinette numérique) *(solutionnaire à venir)*
-                - Remplir et analyser une liste *(solutionnaire à venir)*
-                - Umbrella Corporation, version boucle *(solutionnaire à venir)*
-                - Créer ses propres statistiques (Sans filet !) *(solutionnaire à venir)*
-                - Énumérer des décimales (Précision de l'ordinateur) *(solutionnaire à venir)*
-                - Refactorisation : Le générateur de nombres *(solutionnaire à venir)*
-                - Refactorisation : L'escalier d'étoiles *(solutionnaire à venir)*
 
                 Solution des **exercices sur papier** :
-                - Cote de passage *(solutionnaire à venir)*
-            </TabItem>
+                - (aucun pour cette rencontre)
+</TabItem>
         </Tabs>
     
     </TabItem>
