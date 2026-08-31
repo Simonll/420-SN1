@@ -309,6 +309,33 @@ Cliquez sur le badge pour ouvrir le notebook de cette rencontre dans [Google Col
 
                 ---
 
+
+                ---
+
+                ::::info Exercice - Machine Learning complet avec scikit-learn
+                Créez un fichier `ml_sklearn.py` pour votre réponse.
+
+                On veut prédire si un étudiant réussira (1) ou non (0) à partir de ses heures d'étude et de sa moyenne.
+
+                ##### INSTRUCTIONS
+                1. Créez un jeu de données `X` (2 colonnes : heures d'étude, moyenne sur 100) et `y` (0 ou 1) pour ~10 étudiants.
+                2. **Normalisez** les données avec `StandardScaler` (`fit_transform`) — essentiel avant un modèle.
+                3. Séparez en entraînement / test avec `train_test_split(X, y, test_size=0.3, random_state=42)`.
+                4. Entraînez un `LogisticRegression` avec `.fit(X_train, y_train)`.
+                5. Prédisez avec `.predict(X_test)` et calculez le score avec `accuracy_score(y_test, y_pred)`.
+                6. Affichez la précision (accuracy) en pourcentage.
+
+                ✅ **Résultat attendu (exemple) :**
+                ```text
+                Précision du modèle : 100.0 %
+                ```
+
+                :::note Notions visées
+                `sklearn.preprocessing.StandardScaler`, `sklearn.model_selection.train_test_split`, `sklearn.linear_model.LogisticRegression`, `sklearn.metrics.accuracy_score`, normalisation, division entraînement/test, évaluation d'un modèle.
+                :::
+                ::::
+
+                ---
                 :::info Questions et discussion
                 Prenez le temps de poser des questions sur :
                 - Les techniques de broadcasting et quand les utiliser

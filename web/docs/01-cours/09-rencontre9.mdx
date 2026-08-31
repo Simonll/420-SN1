@@ -442,6 +442,34 @@ Cliquez sur le badge pour ouvrir le notebook de cette rencontre dans [Google Col
 
                 ---
 
+
+                ---
+
+                ::::info Exercice - Sérialisation en JSON (écriture)
+                Créez un fichier `sauvegarder_json.py` pour votre réponse.
+
+                Jusqu'ici vous avez lu des données ; maintenant vous allez les **écrire** dans un fichier JSON.
+
+                ##### INSTRUCTIONS
+                1. Créez un dictionnaire `etudiants` contenant 3 entrées (clé = nom, valeur = dict avec `age` et `programme`).
+                2. Ouvrez (ou créez) un fichier `etudiants.json` en mode `"w"` avec `open()`.
+                3. Utilisez `json.dump(etudiants, f, ensure_ascii=False, indent=2)` pour y écrire le dictionnaire proprement (accents préservés, indentation lisible).
+                4. Rouvrez le fichier en mode `"r"` et utilisez `json.load(f)` pour le relire et afficher le contenu afin de confirmer que la sauvegarde a fonctionné.
+
+                ✅ **Résultat attendu (contenu de etudiants.json) :**
+                ```json
+                {
+                  "Alice": { "age": 19, "programme": "200.B1" },
+                  "Bob":   { "age": 20, "programme": "200.BC" }
+                }
+                ```
+
+                :::note Notions visées
+                Module `json`, `json.dump()` (écriture), `json.load()` (lecture), `open()` mode `"w"`/`"r"`, paramètre `ensure_ascii=False`, `indent`.
+                :::
+                ::::
+
+                ---
                 :::info Présentation du TP2
                 **Présentation du Travail Pratique 2**
 

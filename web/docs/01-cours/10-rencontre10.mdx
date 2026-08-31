@@ -486,6 +486,33 @@ Cliquez sur le badge pour ouvrir le notebook de cette rencontre dans [Google Col
 
                 ---
 
+
+                ---
+
+                ::::info Exercice - Diagramme à barres et conversion de dates
+                Créez un fichier `barres_dates.py` pour votre réponse.
+
+                ##### PARTIE 1 — Diagramme à barres
+                À partir d'un petit DataFrame de ventes par mois (ex: `mois = ['Jan','Fév','Mar']`, `ventes = [120, 150, 90]`),
+                utilisez `plt.bar(mois, ventes)` pour produire un **diagramme à barres** (et non une courbe).
+                Ajoutez un titre, les labels d'axes et une légende si pertinent.
+
+                ##### PARTIE 2 — Conversion de dates avec `to_datetime`
+                Ajoutez une colonne `date` à un DataFrame contenant des chaînes comme `'2024-01-15'`.
+                Convertissez-la en véritable date avec `pd.to_datetime(df['date'])` et stockez le résultat dans une nouvelle colonne `date_obj`.
+                Affichez le type (`dtype`) de la nouvelle colonne pour confirmer qu'il s'agit bien d'objets datetime (et non de texte).
+
+                ✅ **Résultat attendu (partie 2) :**
+                ```text
+                dtype de date_obj : datetime64[ns]
+                ```
+
+                :::note Notions visées
+                Matplotlib `plt.bar()` (diagramme à barres vs `plot`), `pd.to_datetime()` (conversion de texte en date), `dtype`, axes/légende, personnalisation de graphique.
+                :::
+                ::::
+
+                ---
                 :::info Questions et discussion
                 Prenez le temps de poser des questions sur :
                 - Les techniques de sélection et de filtrage avancées
