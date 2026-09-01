@@ -28,14 +28,14 @@
   },
   {
     "id": "05-rencontre5",
-    "title": "5 - Boucle while et répétitions + TP1 poursuite",
-    "#description": "Boucle while, opérateurs d'affectation (+=, -=), accumulateurs, validation de saisie, boucles infinies, break / continue",
+    "title": "5 - Boucle while, contrôle de flux et validation de saisie + TP1 poursuite",
+    "description": "\"Boucle while, opérateurs d'affectation, accumulateurs, validation de saisie, boucles infinies\"",
     "hide_table_of_contents": "true",
-    "draft": "true"
+    "draft": "false"
   },
   {
     "id": "06-rencontre6",
-    "title": "6 - Boucle for et listes + TP1 poursuite",
+    "title": "6 - Boucle for, listes et parcours + TP1 poursuite",
     "#description": "Boucle for, fonction range(), listes, parcours de listes, accumulation, statistiques (min, max, moyenne), application au TP1",
     "hide_table_of_contents": "true",
     "draft": "true"
