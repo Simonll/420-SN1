@@ -139,7 +139,6 @@ Assurez-vous que Python est installé et que vous pouvez exécuter des scripts `
 
                 ---
 
-
     </TabItem>
     <TabItem value="2" label="Activités à faire en classe">
 
@@ -156,11 +155,10 @@ Assurez-vous que Python est installé et que vous pouvez exécuter des scripts `
                 1. Combien de fois la ligne 4 est-elle réellement exécutée ?
                 2. Quelles sont les valeurs successives que prend la variable `resultat` ? \
                 Lorsque l'exécution est **arrêtée sur la ligne 5** (mettez-y un point d'arrêt !) évaluer les expressions suivantes :
-
-                3. `compteur * 2`
-                4. `compteur > 3`
-                5. `compteur % 2 == 0`
-                6. `compteur + 100`
+                3. `i * 2`
+                4. `i > 3`
+                5. `i % 2 == 0`
+                6. `i + 100`
 
                 
 
@@ -175,11 +173,10 @@ Assurez-vous que Python est installé et que vous pouvez exécuter des scripts `
                 print(r)
 
                 ```
-
                 7. Une fois la boucle complètement terminée, que représentent concrètement les valeurs affichées aux lignes 6 et 7 ?
 
                 :::tip Les variables accumulatrices
-                `total` et `compteur` sont des **variables accumulatrices**. Elles ne reçoivent pas une valeur fixe dès le départ, mais s'enrichissent à chaque passage dans la boucle. On les reconnaît à leur initialisation à `0` juste avant la boucle, et à l'utilisation de l'opérateur `+=` pour accumuler les valeurs au fil des itérations.
+                `resultat` est une **variable accumulatrice**. Elle ne reçoit pas une valeur fixe dès le départ, mais s'enrichit à chaque passage dans la boucle. On la reconnaît à son initialisation à `1` juste avant la boucle, et à l'utilisation de l'opérateur `*=` pour accumuler les valeurs au fil des itérations.
                 :::
 
                 :::note Notions visées
@@ -310,11 +307,63 @@ Assurez-vous que Python est installé et que vous pouvez exécuter des scripts `
 
                 #### Pour aller plus loin
 
-                Pourquoi parcourir la liste deux fois ? Fusionnez vos deux boucles en **une seule boucle maîtresse** qui calcule les 5 statistiques en un seul et unique parcours de la liste !
+                Pour bien comprendre comment ces statistiques se calculent **à la main**, fais ceci :
+
+                1. **Trace d'abord sur papier** la liste `[23.5, 25.4, 27.6, 21.9, 26.7, 24.6]` et note, à chaque itération, ce qui arrive à `nb_mesures`, `somme_temps`, `min_temp` et `max_temp`.
+
+                2. **Vérifie manuellement** le résultat obtenu pour la somme, la moyenne, le minimum et le maximum. Tu peux utiliser une calculatrice, mais pas de fonction toute faite comme `min()`, `max()`, `sum()` ou `len()`.
+
+                3. **Défi supplémentaire** : une fois que tu es certain d'avoir compris le calcul, essaie de faire le tout en une seule boucle au lieu de deux. Ce n'est pas obligatoire, c'est seulement pour aller plus loin.
+
+                ::::
+
+                ---
+
+                ::::info Exercice - Optimisation : une seule boucle pour toutes les statistiques
+                Créez un fichier `statistiques_une_boucle.py` pour votre réponse.
+
+                Pour l'exercice **Créer ses propres statistiques**, vous avez parcouru la liste deux fois : une boucle pour le compteur/somme/moyenne, une deuxième pour le min/max. C'est tout à fait correct, mais on peut faire mieux.
+
+                ##### VOTRE MISSION
+
+                Écrivez un **seul** parcours de boucle qui calcule les **5 statistiques** en une seule passe :
+                - Nombre total de mesures
+                - Somme de toutes les températures
+                - Température moyenne
+                - Température minimale
+                - Température maximale
+
+                À partir des mêmes données :
+                ```python showLineNumbers
+                temperatures = [23.5, 25.4, 27.6, 21.9, 26.7, 24.6]
+                ```
+
+                ##### RÈGLES
+
+                - Vous **n'avez pas** le droit d'utiliser `min()`, `max()`, `sum()`, `len()`, `sort()` ou `sorted()`.
+                - Toutes les 5 valeurs doivent être calculées dans une seule boucle `for`.
+                - Vous pouvez initialiser `min_temp` et `max_temp` avec le premier élément de la liste avant la boucle.
+                - La moyenne s'affiche après la boucle (on ne peut pas la calculer avant d'avoir la somme et le compteur).
+
+                ✅ **Résultat attendu :**
+                ```text
+                Températures : [23.5, 25.4, 27.6, 21.9, 26.7, 24.6]
+                nb. mesures : 6
+                    somme : 149.7
+                    moyenne : 24.95
+                        min : 21.9
+                        max : 27.6
+                ```
+
+                ##### Astuces de pro
+
+                * **Initialisation du min/max :** Initialisez `min_temp` et `max_temp` avec `temperatures[0]` (le premier élément) **avant** la boucle. Ne les initialisez pas à `0` ou à une autre valeur arbitraire.
+                * **Compteur et somme :** Utilisez deux accumulateurs simples (`nb_mesures` et `somme_temps`), incrémentés à chaque tour.
+                * **Comparisons :** À chaque tour, testez si la température actuelle "bat le record" pour le min et pour le max. Deux `if` séparés (pas de `elif`) car une température peut être à la fois la plus petite ET la plus grande du tout premier tour (c'est le cas quand il n'y a qu'une mesure, mais ça marche aussi quand il y en a plus).
+                * **Moyenne :** Calculez-la **après** la boucle, avec `somme_temps / nb_mesures`.
 
                 :::note Notions visées
-                Boucle (`for`/`while`), parcours d'une liste, variables accumulatrices (compteur, somme), algorithmes de recherche de min/max sans fonction prédéfinie, structures conditionnelles, généralisation.
-                :::
+                Boucle `for`, parcours d'une liste, variables accumulatrices (compteur, somme), recherche de min/max sans fonction prédéfinie, initialisation au premier élément, calcul de moyenne post-boucle, efficacité algorithmique (un seul parcours au lieu de deux).
                 ::::
 
                 ---
@@ -345,7 +394,6 @@ Assurez-vous que Python est installé et que vous pouvez exécuter des scripts `
                 Pour chaque valeur, utilisez une condition (`if`) pour afficher si les deux valeurs sont "identiques" ou si elles sont "DIFFÉRENTES".
 
                 ✅ **Exemple de sortie attendue** *(extrait)* :
-
                 ```text
                 0.1 → round: 0.1 → identique
                 0.2 → round: 0.2 → identique
@@ -363,7 +411,6 @@ Assurez-vous que Python est installé et que vous pouvez exécuter des scripts `
                 nombre = float("0." + "0" * (puissance - 1) + str(i))
 
                 ```
-
 
                 Exécutez à nouveau votre programme de la Partie 2 avec cette nouvelle méthode. Que remarquez-vous ? Y a-t-il encore des nombres marqués « DIFFÉRENT » ?
 
@@ -470,10 +517,7 @@ Assurez-vous que Python est installé et que vous pouvez exécuter des scripts `
 
                 ---
 
-
-
                 ---
-
                 ::::info Exercice - Filtrer avec `pass` (le bouche-trou)
                 Créez un fichier `filtre_pass.py` pour votre réponse.
 
@@ -553,23 +597,229 @@ Assurez-vous que Python est installé et que vous pouvez exécuter des scripts `
                 <IntroSolutionsExercices />
 
                 Solution des **exercices de compréhension** :
-                - Trace `range` imbriqué, `if`, `continue` *(solutionnaire à venir)*
-                - Afficher 5 chiffres aléatoires *(solutionnaire à venir)*
-                - Affichage d'une ligne d'étoiles *(solutionnaire à venir)*
+                - Trace `range` imbriqué, `if`, `continue`
+
+                ```python
+                for i in range(1, 3):
+                    if i == 2:
+                        continue
+                    for j in range(4, 6):
+                        print(i + j)
+                ```
+
+                Le programme affiche :
+                ```text
+                5
+                6
+                ```
+                Explication : `i = 1` produit `5` et `6`; quand `i = 2`, le `continue` saute la boucle intérieure.
+
+                - Afficher 5 chiffres aléatoires
+
+                ```python
+                import random
+
+                for _ in range(5):
+                    print(random.randint(1, 5))
+                ```
+
+                - Affichage d'une ligne d'étoiles
+
+                ```python
+                for _ in range(8):
+                    print('*', end='')
+                print()
+                ```
 
                 Solution des **exercices de création** :
-                - Déboguer et compter *(solutionnaire à venir)*
-                - Remplir et analyser une liste *(solutionnaire à venir)*
-                - Umbrella Corporation, version boucle *(solutionnaire à venir)*
-                - Créer ses propres statistiques *(solutionnaire à venir)*
-                - Énumérer des décimales *(solutionnaire à venir)*
-                - Refactorisation : Le générateur de nombres *(solutionnaire à venir)*
-                - Refactorisation : L'escalier d'étoiles *(solutionnaire à venir)*
-                - Filtrer avec `pass` *(solutionnaire à venir)*
-                - Arrêt anticipé avec `break` dans un `for` *(solutionnaire à venir)*
-                - Dessiner un rectangle (concaténation de chaînes) *(solutionnaire à venir)*
+
+                - Déboguer et compter
+
+                ```python
+                def factorielle(n):
+                    resultat = 1
+                    for i in range(1, n + 1):
+                        resultat *= i
+                    return resultat
+
+                r = factorielle(9)
+                print(r)
+                ```
+
+                Réponses attendues :
+                1. La ligne `resultat *= i` est exécutée **9 fois**.
+                2. Les valeurs successives de `resultat` sont : `1, 1, 2, 6, 24, 120, 720, 5040, 40320, 362880` (valeur initiale puis après chaque tour).
+                3. À la ligne d'arrêt, les expressions évaluées donnent `i * 2`, `i > 3`, `i % 2 == 0`, `i + 100` selon la valeur courante de `i`.
+                4. `r` contient le résultat final de `factorielle(9)`, soit `362880`.
+
+                - Remplir et analyser une liste
+
+                ```python
+                import random
+
+                nombres = []
+                for _ in range(10):
+                    nombres.append(random.randint(1, 100))
+
+                print(f"Liste générée : {nombres}")
+
+                compteur = 0
+                for nombre in nombres:
+                    print(f"→ {nombre}")
+                    if nombre > 50:
+                        compteur += 1
+
+                print(f"Nombres supérieurs à 50 : {compteur}")
+                ```
+
+                - Umbrella Corporation, version boucle
+
+                ```python
+                def afficher_echantillon(nom, valeur, unite):
+                    print(f"{nom} : {valeur} {unite}")
+
+                noms = ["Échantillon A", "Échantillon B", "Échantillon C"]
+                valeurs = [12.4, 15.1, 11.8]
+                unites = ["mg/L", "mg/L", "mg/L"]
+
+                for i in range(len(noms)):
+                    afficher_echantillon(noms[i], valeurs[i], unites[i])
+                ```
+
+                - Créer ses propres statistiques
+
+                ```python
+                temperatures = [23.5, 25.4, 27.6, 21.9, 26.7, 24.6]
+
+                nb_mesures = 0
+                somme_temps = 0
+
+                for temperature in temperatures:
+                    nb_mesures += 1
+                    somme_temps += temperature
+
+                moyenne = somme_temps / nb_mesures
+                print(f"Températures : {temperatures}")
+                print(f"nb. mesures : {nb_mesures}")
+                print(f"    somme : {somme_temps}")
+                print(f"    moyenne : {moyenne:.2f}")
+
+                min_temp = temperatures[0]
+                max_temp = temperatures[0]
+                for temperature in temperatures:
+                    if temperature < min_temp:
+                        min_temp = temperature
+                    if temperature > max_temp:
+                        max_temp = temperature
+
+                print(f"        min : {min_temp}")
+                print(f"        max : {max_temp}")
+                ```
+
+                - Optimisation : une seule boucle pour toutes les statistiques
+
+                ```python
+                temperatures = [23.5, 25.4, 27.6, 21.9, 26.7, 24.6]
+
+                nb_mesures = 0
+                somme_temps = 0
+                min_temp = temperatures[0]
+                max_temp = temperatures[0]
+
+                for temperature in temperatures:
+                    nb_mesures += 1
+                    somme_temps += temperature
+                    if temperature < min_temp:
+                        min_temp = temperature
+                    if temperature > max_temp:
+                        max_temp = temperature
+
+                moyenne = somme_temps / nb_mesures
+                print(f"Températures : {temperatures}")
+                print(f"nb. mesures : {nb_mesures}")
+                print(f"    somme : {somme_temps}")
+                print(f"    moyenne : {moyenne:.2f}")
+                print(f"        min : {min_temp}")
+                print(f"        max : {max_temp}")
+                ```
+
+                - Énumérer des décimales
+
+                ```python
+                for puissance in range(1, 4):
+                    for i in range(1, 10):
+                        nombre = i * 10 ** -puissance
+                        arrondi = round(nombre, puissance)
+                        etat = "identique" if nombre == arrondi else "DIFFÉRENT"
+                        print(f"{nombre} → round: {arrondi} → {etat}")
+                    print()
+                ```
+
+                - Refactorisation : Le générateur de nombres
+
+                ```python
+                import random
+
+                def generer_nombre(longueur=3):
+                    nombre = 0
+                    for position in range(longueur):
+                        chiffre_aleatoire = random.randint(1, 9)
+                        nombre += chiffre_aleatoire * 10 ** position
+                    return nombre
+
+                resultat = generer_nombre()
+                print(f"Nombre généré : {resultat}")
+                ```
+
+                - Refactorisation : L'escalier d'étoiles
+
+                ```python
+                marches = 4
+                for ligne in range(1, marches + 1):
+                    for _ in range(ligne):
+                        print('*', end='')
+                    print()
+                ```
+
+                - Filtrer avec `pass`
+
+                ```python
+                nombres = [3, 8, 1, 12, 7, 4, 9, 10]
+                for nombre in nombres:
+                    if nombre % 2 == 1:
+                        pass
+                    else:
+                        print(f"-> pair : {nombre}")
+                ```
+
+                - Arrêt anticipé avec `break` dans un `for`
+
+                ```python
+                valeurs = [7, 13, 21, 42, 8, 42, 99]
+
+                trouve = False
+                for i in range(len(valeurs)):
+                    if valeurs[i] == 42:
+                        print(f"Trouvé à l'index {i} !")
+                        trouve = True
+                        break
+
+                if not trouve:
+                    print("Valeur absente")
+                ```
+
+                - Dessiner un rectangle (concaténation de chaînes)
+
+                ```python
+                largeur = int(input("Largeur : "))
+                hauteur = int(input("Hauteur : "))
+
+                for _ in range(hauteur):
+                    print("#" * largeur)
+                ```
+
+                Solution des **exercices sur papier** :
+                - (aucun pour cette rencontre)
 
     </TabItem>
 </Tabs>
-
-
