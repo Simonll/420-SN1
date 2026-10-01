@@ -2,3 +2,5 @@
 .DS_Store
 package-lock.json
 video/
+# Archives locales des solutionnaires originaux (pre-correction)
+web/static/pdf/_archives/
