@@ -98,4 +98,35 @@ on a bien compris ce que fait le code.
 Pour plus de détails sur le placement de points d'arrêt et l'utilisation du débogueur, voir la recette [Déboguer et points d'arrêt](/recettes/deboguer-point-arret).
 
 </TabItem>
+
+<TabItem value="regles-trace" label="Règles de trace">
+
+:::info Règles de rédaction d'un tableau de trace
+
+Ces règles définissent la convention utilisée dans tous les solutionnaires du cours.
+
+**1. Une ligne du tableau = une instruction exécutée.**
+Chaque ligne du tableau correspond à une ligne de code qui s'exécute réellement, dans l'ordre d'exécution. On n'ajoute jamais une ligne qui répète l'état des variables sans qu'aucune instruction ne s'exécute.
+
+**2. L'affichage se note sur la ligne du `print`.**
+Quand un `print` s'exécute, la valeur affichée est inscrite dans la colonne « affichage » de cette même ligne — jamais sur la ligne suivante.
+
+**3. Le type s'écrit tel que Python l'affiche.**
+La division `/`, `math.sqrt()` et `**` avec exposant négatif ou fractionnaire produisent des **float** : on écrit `4.0`, pas `4`. À l'inverse, `//` sur des entiers produit un entier.
+
+**4. Les structures (`if`, `while`, `for`) apparaissent quand leur test est évalué.**
+On inscrit la ligne et le résultat du test, mais une structure ne « s'exécute » pas comme une affectation : c'est le branchement ou l'itération qui constitue l'effet.
+
+**5. `continue` et `break` sont des lignes exécutées.**
+Quand un `continue` ou un `break` s'exécute, il occupe sa propre ligne du tableau (avec son numéro de ligne), avant de passer à l'itération suivante.
+
+**6. Une variable mémorise une valeur, pas une formule.**
+Réaffecter une variable utilisée dans un calcul antérieur ne recalcule pas le résultat déjà stocké.
+
+**7. Dans une fonction, distinguer les portées.**
+Un paramètre reçu et une variable locale portent le même nom qu'une variable globale sans la modifier : noter la valeur dans la colonne de la portée concernée (masquage).
+
+:::
+
+</TabItem>
 </Tabs>

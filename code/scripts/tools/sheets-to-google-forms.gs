@@ -56,7 +56,7 @@ function formatCodeForDescription(codeString) {
 /**
  * NOUVELLE FONCTION : Créer un formulaire à partir d'une Sheet spécifique
  */
-function creerFormulaireDepuisSheet() {
+function creerFormulaireDepuisSheet(){
   var ui = SpreadsheetApp.getUi();
   
   // Afficher un message d'instruction
@@ -80,6 +80,14 @@ function creerFormulaireDepuisSheet() {
   var ss = SpreadsheetApp.getActiveSpreadsheet();
   var sheet = ss.getSheets()[0];
   var data = sheet.getDataRange().getValues();
+
+  // Liste des fichiers dans le dossier ID_DOSSIER (pour debug)
+  var dossier = DriveApp.getFolderById(ID_DOSSIER);
+  var fichiers = dossier.getFiles();
+  while (fichiers.hasNext()) {
+    var fichier = fichiers.next();
+    Logger.log('Fichier dans dossier : ' + fichier.getName());
+  }
   
   var formTitle = sheet.getName() + " - Auto-evaluation";
   
@@ -88,7 +96,6 @@ function creerFormulaireDepuisSheet() {
   
   if (formulaireExistantId) {
     var urlExistant = "https://docs.google.com/forms/d/" + formulaireExistantId + "/edit";
-    
     var response = ui.alert(
       '⚠️ FORMULAIRE EXISTANT\n\n' +
       'Un formulaire avec ce nom existe déjà :\n' +
@@ -98,7 +105,6 @@ function creerFormulaireDepuisSheet() {
       '- ANNULER : Arrêter',
       ui.ButtonSet.OK_CANCEL
     );
-    
     if (response == ui.Button.CANCEL) {
       ui.alert('❌ Opération annulée.\n\nFormulaire existant : ' + urlExistant);
       return;
@@ -108,7 +114,6 @@ function creerFormulaireDepuisSheet() {
   // ===== CRÉER NOUVEAU FORMULAIRE =====
   var form = FormApp.create(formTitle);
   form.setIsQuiz(true);
-  
   try { form.setRequireLogin(false); } catch (e) {}
   form.setDestination(FormApp.DestinationType.SPREADSHEET, ss.getId());
   
@@ -122,8 +127,14 @@ function creerFormulaireDepuisSheet() {
   var questionsVues = {};
   var erreurs = [];
   
+  // Déterminer l'index de départ (ignorer l'en-tête si présent)
+  var startIndex = 0;
+  if (data.length > 0 && String(data[0][0]).trim().toUpperCase() === "CODE") {
+    startIndex = 1;
+  }
+  
   // Création des questions pour cette Sheet
-  for (var i = 1; i < data.length; i++) {
+  for (var i = startIndex; i < data.length; i++) {
     // Ignorer les lignes d'en-tête
     if (i === 0 && String(data[i][0]).toUpperCase() === "CODE") {
       continue;
@@ -136,12 +147,12 @@ function creerFormulaireDepuisSheet() {
     var optC = String(data[i][4] || "").trim();
     var optD = String(data[i][5] || "").trim();
     var reponse = String(data[i][6] || "").trim().toUpperCase();
-
+    
     // Valider la question
     if (!question || question === "") {
       continue;
     }
-
+    
     // Collecter les options valides
     var options = [];
     if (optA) options.push(optA);
@@ -153,7 +164,7 @@ function creerFormulaireDepuisSheet() {
       erreurs.push("Ligne " + (i + 1) + " : besoin au minimum 2 options");
       continue;
     }
-
+    
     // Créer le titre
     var titreQuestion = creerTitreQuestion(question, codeBlock);
     
@@ -165,34 +176,34 @@ function creerFormulaireDepuisSheet() {
       titreQuestion = titreOriginal + " (" + compteur + ")";
     }
     questionsVues[titreQuestion] = true;
-
+    
     // Créer l'item de question
     var questionItem = form.addMultipleChoiceItem();
     questionItem.setTitle(titreQuestion).setRequired(true);
-
+    
     // ===== AJOUTER LE CODE EN DESCRIPTION =====
     if (codeBlock && codeBlock !== "") {
       var codeFormate = formatCodeForDescription(codeBlock);
       questionItem.setHelpText("Code à analyser:\n" + codeFormate);
       nbAvecCode++;
     }
-
+    
     // ===== CRÉER LES CHOIX =====
     var choix = [];
     var indexLettre = "ABCD".indexOf(reponse);
-
+    
     for (var j = 0; j < options.length; j++) {
       var isCorrect = (reponse !== "" && j === indexLettre);
       choix.push(questionItem.createChoice(String(options[j]), isCorrect));
     }
-
+    
     questionItem.setChoices(choix);
     
     // ===== ASSIGNER LES POINTS =====
     if (reponse && indexLettre >= 0 && indexLettre < options.length) {
       questionItem.setPoints(1);
     }
-
+    
     nbCree++;
   }
   
@@ -221,9 +232,6 @@ function creerFormulaireDepuisSheet() {
   Logger.log('Élèves : ' + pubUrl);
 }
 
-/**
- * ANCIENNE FONCTION : Créer tous les formulaires du dossier (pour compatibilité)
- */
 function creerFormulairesPourToutLeDossier() {
   var dossier = DriveApp.getFolderById(ID_DOSSIER);
   var fichiers = dossier.getFilesByType(MimeType.GOOGLE_SHEETS);

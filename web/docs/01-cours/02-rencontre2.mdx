@@ -510,17 +510,227 @@ Assurez-vous que Python est installé et que vous pouvez exécuter des scripts `
                 <IntroSolutionsExercices />
 
                 Solution des **exercices de création** :
-                - Question de gravité *(solutionnaire à venir)*
-                - Moyenne pression systolique *(solutionnaire à venir)*
-                - Générer un nombre aléatoire *(solutionnaire à venir)*
-                - Remplir une liste aléatoirement *(solutionnaire à venir)*
-                - Calcul de la distance entre 2 points *(solutionnaire à venir)*
-                - Construire un nombre décimal *(solutionnaire à venir)*
-                - Calcul de la note finale du cours *(solutionnaire à venir)*
-                - Décomposer un montant en billets *(solutionnaire à venir)*
+
+                - Question de gravité
+
+                ```python
+                masse = 50
+                gravite_mars = 3.71
+                poids = masse * gravite_mars
+                print(f"Poids sur Mars : {poids} N")
+                ```
+
+                ```text
+                Poids sur Mars : 185.5 N
+                ```
+
+                Explication : la formule du poids (masse × gravité) se traduit par une simple multiplication. Avec `masse = 50`, on obtient `50 * 3.71 = 185.5 N`. Modifiez la valeur de `masse` : le programme affiche toujours le bon poids.
+
+                - Moyenne pression systolique
+
+                ```python
+                mesures = [125, 130, 180]
+                print("Mesure du matin :", mesures[0])
+                print("Mesure de midi  :", mesures[1])
+                print("Mesure du soir  :", mesures[2])
+                moyenne = sum(mesures) / len(mesures)
+                print(f"Moyenne : {round(moyenne, 2)}")
+                ```
+
+                ```text
+                Mesure du matin : 125
+                Mesure de midi  : 130
+                Mesure du soir  : 180
+                Moyenne : 145.0
+                ```
+
+                Explication : on accède à chaque mesure par son **index** (`0`, `1`, `2`). La moyenne se calcule avec `sum(mesures) / len(mesures)` : la somme des éléments divisée par leur nombre. `round(moyenne, 2)` arrondit à 2 décimales.
+
+                - Générer un nombre aléatoire
+
+                ```python
+                import random
+
+                valeur_min = 50
+                valeur_max = 100
+                print("Nombre le plus bas :", valeur_min)
+                print("Nombre le plus haut :", valeur_max)
+                nombre_aleatoire = random.randint(valeur_min, valeur_max)
+                print("Nombre aléatoire généré :", nombre_aleatoire)
+                ```
+
+                ```text
+                Nombre le plus bas : 50
+                Nombre le plus haut : 100
+
+                Nombre aléatoire généré : 56
+                ```
+
+                Explication : `random.randint(min, max)` retourne un entier **entre min et max inclusivement** — c'est la fonction qu'il fallait trouver dans la documentation. Chaque exécution produit un nombre différent.
+
+                - Remplir une liste aléatoirement
+
+                ```python
+                import random
+
+                nombres = []
+                nombres.append(random.randint(0, 100))
+                nombres.append(random.randint(0, 100))
+                nombres.append(random.randint(0, 100))
+                nombres.append(random.randint(0, 100))
+                nombres.append(random.randint(0, 100))
+                print(nombres)
+                ```
+
+                ```text
+                [37, 89, 4, 62, 91]
+                ```
+
+                Explication : on part d'une **liste vide** `[]`, puis `.append(valeur)` ajoute chaque nombre **à la fin** de la liste. `random.randint(0, 100)` donne un entier entre 0 et 100 inclusivement. (Quand vous verrez les boucles, 5 lignes `append` deviendront une seule boucle de 2 lignes!)
+
+                - Calcul de la distance entre 2 points
+
+                ```python
+                import math
+
+                points = [
+                    [50, 70],   # point A : [x1, y1]
+                    [80, 60],   # point B : [x2, y2]
+                ]
+                x1 = points[0][0]
+                y1 = points[0][1]
+                x2 = points[1][0]
+                y2 = points[1][1]
+                distance = math.sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2)
+                print(f"Distance : {round(distance, 2)}")
+                ```
+
+                ```text
+                Distance : 31.62
+                ```
+
+                Explication : `points` contient deux sous-listes. `points[0]` est le point A, `points[0][0]` est son `x`. La formule de la distance se traduit avec `math.sqrt(...)` et `** 2` pour les carrés. Vérification : (80-50)² + (60-70)² = 900 + 100 = 1000, et racine de 1000 ≈ 31.62.
+
+                - Construire un nombre décimal
+
+                ```python
+                chiffre = 5
+                position_decimale = 3
+                nombre = chiffre / 10 ** position_decimale
+                print("chiffre :", chiffre)
+                print("position décimale :", position_decimale)
+                print("Le nombre généré est :", nombre)
+                ```
+
+                ```text
+                chiffre : 5
+                position décimale : 3
+
+                Le nombre généré est : 0.005
+                ```
+
+                Explication : mettre un chiffre à la position décimale n revient à le **diviser par 10^n**. `10 ** 3` = `1000`, donc `5 / 1000` = `0.005`. Testez avec `chiffre = 2` et `position_decimale = 1` : `2 / 10` = `0.2`.
+
+                - Calcul de la note finale du cours
+
+                ```python
+                nom_etudiant = "Nicola Tesla"
+                evaluations  = ["TP1",  "TP2",  "Examen 1", "Examen 2"]
+                notes        = [16,      21,      90,         95]
+                sur          = [20,     25,     100,        100]
+                ponderations = [0.20,   0.25,   0.20,       0.35]
+
+                note_tp1 = notes[0] / sur[0] * 100
+                note_tp2 = notes[1] / sur[1] * 100
+                note_ex1 = notes[2] / sur[2] * 100
+                note_ex2 = notes[3] / sur[3] * 100
+
+                note_finale = note_tp1 * ponderations[0] + note_tp2 * ponderations[1] + note_ex1 * ponderations[2] + note_ex2 * ponderations[3]
+
+                print(f"Étudiant : {nom_etudiant}")
+                print(f"{evaluations[0]}        ({ponderations[0]*100:.0f}%) : {notes[0]} / {sur[0]}")
+                print(f"{evaluations[1]}        ({ponderations[1]*100:.0f}%) : {notes[1]} / {sur[1]}")
+                print(f"{evaluations[2]}   ({ponderations[2]*100:.0f}%) : {notes[2]} / {sur[2]}")
+                print(f"{evaluations[3]}   ({ponderations[3]*100:.0f}%) : {notes[3]} / {sur[3]}")
+                print(f"Note obtenue pour ce cours : {round(note_finale, 2)} / 100")
+                print("Attention, l'application de la double sanction n'a pas été réalisée!")
+                ```
+
+                ```text
+                Étudiant : Nicola Tesla
+                TP1        (20%) : 16 / 20
+                TP2        (25%) : 21 / 25
+                Examen 1   (20%) : 90 / 100
+                Examen 2   (35%) : 95 / 100
+                Note obtenue pour ce cours : 88.25 / 100
+                Attention, l'application de la double sanction n'a pas été réalisée!
+                ```
+
+                Explication : chaque note est d'abord ramenée **sur 100** (`notes[0] / sur[0] * 100` donne `80.0`), puis multipliée par sa **pondération** : `80 * 0.20 + 84 * 0.25 + 90 * 0.20 + 95 * 0.35` = `16 + 21 + 18 + 33.25` = `88.25`. Les quatre listes sont **parallèles** : l'index `0` de chaque liste concerne le TP1.
+
+                - Décomposer un montant en billets
+
+                ```python
+                montant = 376.54
+                billets = [100, 50, 20, 10, 5]
+
+                montant_restant = int(montant)   # on ignore les centimes pour l'instant
+
+                nb_100 = montant_restant // billets[0]
+                montant_restant = montant_restant % billets[0]
+                nb_50 = montant_restant // billets[1]
+                montant_restant = montant_restant % billets[1]
+                nb_20 = montant_restant // billets[2]
+                montant_restant = montant_restant % billets[2]
+                nb_10 = montant_restant // billets[3]
+                montant_restant = montant_restant % billets[3]
+                nb_5 = montant_restant // billets[4]
+                montant_restant = montant_restant % billets[4]
+
+                reste_centimes = montant - int(montant)
+
+                print(f"Montant : {montant}")
+                print("Billets :")
+                print(f"{nb_100} x 100$")
+                print(f"{nb_50} x 50$")
+                print(f"{nb_20} x 20$")
+                print(f"{nb_10} x 10$")
+                print(f"{nb_5} x 5$")
+                print(f"Reste {round(reste_centimes, 2)}$")
+                ```
+
+                ```text
+                Montant : 376.54
+                Billets :
+                3 x 100$
+                1 x 50$
+                1 x 20$
+                0 x 10$
+                1 x 5$
+                Reste 1.54$
+                ```
+
+                Explication : la **division entière** `//` donne le nombre de billets (`376 // 100` → `3`), et le **modulo** `%` donne ce qui reste à décomposer (`376 % 100` → `76`). On traite les coupures de la plus grande à la plus petite. Les centimes (`0.54`) ne sont pas des billets : on les calcule à part avec `montant - int(montant)`.
 
                 Solution des **exercices de compréhension** :
-                - Vitesse d'impact *(solutionnaire à venir)*
+
+                - Vitesse d'impact
+
+                ```python
+                import math
+
+                hauteur = 50
+                g = 9.81
+                vitesse = math.sqrt(2 * g * hauteur)
+                print(f"Vitesse d'impact : {round(vitesse, 2)} m/s")
+                ```
+
+                ```text
+                Vitesse d'impact : 31.32 m/s
+                ```
+
+                Explication : la formule de la vitesse d'impact se traduit par `math.sqrt(2 * g * hauteur)`. Avec `h = 50` : 2 × 9,81 × 50 = 981, et racine de 981 ≈ 31,32 m/s.
+
     </TabItem>
     <TabItem value="matplotlib" label="*Matplotlib*">
         <Mod_Matplotlib />
