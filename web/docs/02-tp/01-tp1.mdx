@@ -331,9 +331,11 @@ Voici un scénario réaliste pour tester votre programme :
 ```
 Rapport de simulation :
 - Concentration maximale (Cmax) : 100.0 mg/L
-- Heures en zone optimale (20-80 mg/L) : 12 heures
+- Heures en zone optimale (20-80 mg/L) : 9 heures
 - Demi-vie calculée : ~4.6 heures
 ```
+
+*Vérification du rapport : la concentration reste dans la fenêtre 20-80 mg/L de t = 2 h (74.1) à t = 10 h (22.3), soit 9 valeurs horaires. Notez que t = 0 est inclus dans la simulation (C(0) = C₀ = 100.0 mg/L, au-dessus du seuil toxique).*
 
 Vous pouvez ajuster ces valeurs pour tester différents scénarios (médicament qui dure plus ou moins longtemps, seuils différents, etc.).
 :::
