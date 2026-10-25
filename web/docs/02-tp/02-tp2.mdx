@@ -1,6 +1,6 @@
 ---
 hide_table_of_contents: true
-draft : true
+draft : false
 ---
 
 import Row from "../../src/components/Row";
@@ -40,8 +40,6 @@ Une vidéo expliquant en détail le TP et fournissant quelques conseils est disp
 :::note Créer le projet
 Pour faire ce TP, vous devez créer un nouveau projet et utiliser un répertoire GitHub dès le début.
 
-- Si votre enseignant utilise GitHub Classroom, utilisez le répertoire créé par votre enseignant.
-- Si votre enseignant n'utilise pas GitHub Classroom, créez votre propre répertoire et partagez-lui l'accès en lecture.
 :::
 
 :::danger Plagiat
@@ -62,12 +60,12 @@ de 0 (si vous ne comprenez pas votre propre code, c'est que vous avez plagié, d
     - un fichier texte contenant les réponses à des questions d'analyse.
 :::
 
-:::note <Highlight color="tip"><span style={{color: 'white'}}>1 point</span></Highlight> 📂 Fichiers dans le projet et structure du fichier analyse.py
-    Votre projet doit contenir exactement les 2 scripts Python mentionnés ci-dessous, un fichier `README.md` qui explique la structure du projet et comment utiliser les deux scripts, et un fichier `.gitignorea` et rien d'autre (ne laissez traîner aucun script inutile).
+:::note <Highlight color="tip"><span style={{color: 'white'}}>1 point</span></Highlight> Fichiers dans le projet et structure du fichier analyse.py
+    Votre projet doit contenir exactement les 2 scripts Python mentionnés ci-dessous, un fichier `README.md` qui explique la structure du projet et comment utiliser les deux scripts, et un fichier `.gitignore` et rien d'autre (ne laissez traîner aucun script inutile).
     ```
     tp2/
     ├── README.md        # Contient la description du projet et les instructions pour exécuter les scripts
-    ├── .gitignore # indique les fichiers que Git doit omettre lors de la création d'un commit
+    ├── .gitignore # indique les fichiers que Git doit omettre lors de la création d'un commit (générer automatique à la création du dépôt GitHub)
     ├── data/
         ├── TXT
         └── CSV
@@ -79,8 +77,6 @@ de 0 (si vous ne comprenez pas votre propre code, c'est que vous avez plagié, d
         └── sommaire.txt # ce fichier sera généré par votre script analyse.py
 
     ```
-    Téléchargez le fichier <a href={useBaseUrl('/ressources/tp2/autocorrection.py')} download="autocorrection.py">`autocorrection.py`</a> et le fichier <a href={useBaseUrl('/ressources/tp2/.gitignore')} download=".gitignore" type="text/plain">`.gitignore`</a> et placez-les dans votre projet. \
-    Si le fichier `.gitignore` est téléchargé sous un autre nom (ex : `gitignore.txt`), renommez-le en `.gitignore` (sans extension et avec le point au début).\
     Tous les autres fichiers utilisés (`CSV`) ou produits (`PNG`, `TXT`) par votre programme ne doivent pas être commités dans votre dépôt Git.
 
     Concernant la structure du fichier `analyse.py`, il doit :
@@ -95,10 +91,10 @@ GitHub est avant tout une plateforme conçue pour héberger des fichiers légers
 Par principe, certains éléments ne doivent jamais figurer dans un dépôt Git :
 
 - **Les fichiers volumineux** : ils ralentissent les opérations de clonage et de mise à jour.
-- **Les fichiers de configuration d'IDE** : par exemple, le dossier `.idea` de **PyCharm**, qui est propre à votre environnement de travail local.
+- **Les fichiers de configuration d'IDE**
 - **Les fichiers générés** : tout ce qui peut être produit automatiquement par l'exécution de votre programme.
 
-En suivant ces principes, **le fichier CSV** que vous devrez télécharger est particulièrement massif et ne devrait pas être sauvegardé sur GitHub. Vous devrez donc retélécharger le fichier CSV et le replacer dans votre dossier de projet à chaque fois que vous changerez de poste dans les laboratoires du Cégep.
+En suivant ces principes, **le fichier CSV** que vous devrez télécharger est particulièrement massif et ne devrait pas être sauvegardé sur GitHub. 
 Concernant **les fichiers TXT et PNG**, ils sont dans le cadre de ce TP le résultat direct de l'exécution de votre code, il est donc inutile de les versionner :
 nous préférons que votre dépôt ne contienne que la "recette" (votre code) et non les produits finis.
 
@@ -107,13 +103,13 @@ Dans le cadre de ce projet, il a été configuré pour exclure automatiquement l
 
 :::
 
-:::info <Highlight color="tip"><span style={{color: 'white'}}>1 point</span></Highlight> Répertoire Git 🐈‍⬛ et documentation des fonctions
+:::info <Highlight color="tip"><span style={{color: 'white'}}>1 point</span></Highlight> Répertoire Git et documentation des fonctions
 - Au moins 5 commits de tailles comparables (il n'y a pas un commit avec tout dedans et les autres vides)
-- Les commits décrivent l'avancement du projet dans un français sans faute [(voir instructions)](https://simonll.github.io/420-SN1.git)
+- Les commits décrivent l'avancement du projet 
 - Chaque fonction doit être documentée à l'aide d'un  [docstring](/cours/rencontre3?onglet=comments)  dans un français sans faute.
 :::
 
-:::danger ⚠️ Note importante sur l'utilisation d'Excel ⚠️
+:::danger Note importante sur l'utilisation d'Excel
 Bien qu'Excel soit l'outil par défaut pour lire des fichiers CSV, il n'est pas adapté aux jeux de données massifs scientifiques que nous utilisons.
 
 - **Affichage incomplet** : Au-delà d'un certain seuil (environ 1 million de lignes), Excel tronque les données et n'affiche pas la totalité du fichier.
@@ -160,19 +156,10 @@ L'objectif de ce projet est d'analyser ces données pour comprendre la répartit
 
 **CONTRAINTES À RESPECTER** \
 Concernant ces fonctions, elles doivent :
-- Pouvoir être appelées sans paramètre;
 - Retourner le résultat dans le format indiqué;
 - Chacune faire appel à la fonction `pd.read_csv()`;
 - Chacune nettoyer, si nécessaire, les données en fonction des besoins de la question;
-- Posséder l'abréviation demandée dans les docstrings (nécessaire pour l'autocorrecteur);
-- N’utilisez aucune boucle (`for`, `while`) ni aucune liste de compréhension;
 
-Aucune de ces fonctions ne doit appeler la fonction `print()`!
-
-:::tip Autocorrecteur
-Ici, on joue selon les règles du réel : les réponses ne tombent pas du ciel. \
-Pour savoir si vous avez visé juste, fiez-vous au script d'autocorrection.
-:::
 ::::
 
 :::note <Highlight color="tip"><span style={{color: 'white'}}>1 point</span></Highlight> ✏️ Création du fichier sommaire.txt
@@ -182,7 +169,7 @@ Développez une fonction dont le rôle est d'enregistrer toutes les questions d'
 - **Contenu** : Il doit inclure à la fois :
     - l'énoncé de la question (ex : « Quel est... ? ») et la réponse obtenue (ex : « 52 »).
     - Les réponses ne doivent contenir ni accolades `{}`, ni crochets `[]`, ni parenthèses `()`, ni guillemets.
-- **Documentation** : La docstring de la fonction doit obligatoirement inclure l'abréviation `QASommaire`.
+- **Documentation** : La docstring est obligatoire.
 - **Structure** : Cette fonction doit appeler les six fonctions développées précédemment pour récupérer les données nécessaires.
 - **Clarté** : Le contenu du fichier doit être organisé de manière claire et lisible, avec une question suivie de sa réponse, puis la question suivante, etc.
 
@@ -448,26 +435,6 @@ Assurez-vous que le DataFrame contient les bonnes données avant de débuter la 
     </TabItem>
 </Tabs>
 :::::
-
-
-:::tip Autocorrection des 6 questions d'analyse
-
-Le script `autocorrection.py` se **limite à la correction des 6 questions d'analyse**. \
-Il détecte automatiquement votre progression et exécute des tests en conséquence.
-
-⚠️ Pour que le script fonctionne correctement, il faut absolument que les fonctions possèdent dans leurs docstrings les abréviations demandées.
-
-Le script nécessite au préalable l'installation du package `requests` ([voir la procédure d'installation d'un package](/recettes/ajouter-librairie)).
-Cette bibliothèque permet de télécharger des fichiers en ligne par programmation ; elle est utilisée ici pour vérifier si une nouvelle version du script est disponible et pour la télécharger automatiquement.
-
-
-**Limitations du script** \
-Le script possède certaines limites et ne vérifie pas les points suivants (qui peuvent vous faire perdre des points) :
-
-- La **cohérence de vos docstrings** ainsi que la **qualité du français**;
-- La présence de **code inutile ou redondant** à l'intérieur de vos fonctions;
-- Le respect de la consigne exigeant au moins **cinq commits** dans votre dépôt GitHub;
-- Les autres éléments à réaliser, comme la **création du fichier sommaire.txt** et la conformité des **figures à produire**.
 
 :::
 
