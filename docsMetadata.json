@@ -9,21 +9,21 @@
     "id": "02-rencontre2",
     "title": "2 - Scripts et fonctions + TP1 (démarrage)",
     "#description": "Scripts, Débogueur, Traces, Fonctions, f-strings, Modules, Bibliothèques, Listes (intro), Précision des flottants",
-    "hide_table_of_contents": "false",
+    "hide_table_of_contents": "true",
     "draft": "false"
   },
   {
     "id": "03-rencontre3",
     "title": "3 - Création de fonctions + TP1 poursuite",
     "#description": "Fonction, Paramètres, Retour, Portée, DRY, Commentaires, Pile d'appels",
-    "hide_table_of_contents": "false",
+    "hide_table_of_contents": "true",
     "draft": "false"
   },
   {
     "id": "04-rencontre4",
     "title": "4 - Expressions booléennes + TP1 poursuite",
     "#description": "Expressions booléennes, if, elif, else, Comparaison, Imbrication, DRY, Forme compacte, raise/try/catch",
-    "hide_table_of_contents": "false",
+    "hide_table_of_contents": "true",
     "draft": "false"
   },
   {
@@ -37,8 +37,8 @@
     "id": "06-rencontre6",
     "title": "6 - Boucle for, listes et parcours + TP1 poursuite",
     "#description": "Boucle for, fonction range(), listes, parcours de listes, accumulation, statistiques (min, max, moyenne), application au TP1",
-    "hide_table_of_contents": "False",
-    "draft": "False"
+    "hide_table_of_contents": "true",
+    "draft": "false"
   },
   {
     "id": "07-rencontre7",
@@ -59,7 +59,7 @@
     "title": "9 - Les collections de base, type de fichiers, analyse de données avec Pandas (les bases) et TP2 (démarrage)",
     "#description": "Set, Tuple, Dict, Compréhension de liste, Introduction aux fichiers, Fichier texte (lecture/écriture), CSV et JSON via Pandas, Démarrage du TP2",
     "hide_table_of_contents": "true",
-    "draft": "true"
+    "draft": "false"
   },
   {
     "id": "10-rencontre10",
