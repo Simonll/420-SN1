@@ -66,14 +66,14 @@
     "title": "10 - Pandas (avancé) + Matplotlib (bases) + TP2 poursuite",
     "#description": "Sélection, Filtres et tri, Parcours, Nettoyage, Transformation, Agrégations, Graphiques bases sans Pandas, TP2 poursuite",
     "hide_table_of_contents": "true",
-    "draft": "true"
+    "draft": "false"
   },
   {
     "id": "11-rencontre11",
     "title": "11 - NumPy (bases) + Matplotlib (intégration) + TP2 poursuite",
     "#description": "NumPy (intro, tableaux), intégration NumPy avec Matplotlib, TP2 poursuite",
     "hide_table_of_contents": "true",
-    "draft": "true"
+    "draft": "false"
   },
   {
     "id": "12-rencontre12",
