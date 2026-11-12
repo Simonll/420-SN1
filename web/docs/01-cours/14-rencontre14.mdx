@@ -48,17 +48,14 @@ L'examen formatif couvre l'ensemble des notions vues de **R9 à R13**, soit :
 | **R13 — IA avancé + Synthèse** | Deep Learning (vue d'ensemble), Empreinte écologique de l'IA, Scikit-learn (pratique), Exercice de synthèse (Pandas + NumPy + Matplotlib), Révision ciblée |
 
 :::note
-Les notions suivantes **ne sont PAS au programme de l'examen final** et donc peu évaluées au formatif :
-- Exceptions (`try/except`, `raise`) — vues en R4, hors programme de l'examen final
+L'examen final étant **100 % papier** (aucun ordinateur), Pandas, NumPy et l'IA sont évalués sur leurs **propriétés théoriques** (concepts, prédiction de sortie, interprétation), pas sur de l'écriture/exécution de code avec ces bibliothèques.
+
+Ne sont PAS au programme de l'examen final :
+- Exceptions (`try/except`, `raise`) — hors programme
 - Dépôts Git — hors programme
 - Docstrings — hors programme
-- NumPy avancé (broadcasting, reshape, masques complexes) — hors programme de l'examen final (mais vue en cours)
-- Scikit-learn et IA — hors programme de l'examen final (mais vue en cours)
-- Dépôts Git — hors programme
-- Docstrings — hors programme
-- Exceptions (try/except, raise) — hors programme
-- NumPy — hors programme de l'examen final (mais vue en cours)
-- Scikit-Learn et IA (Intelligence artificielle) — hors programme de l'examen final
+- L'API scikit-learn et le Deep Learning pratique (`StandardScaler`, `train_test_split`, `LogisticRegression`, réseaux de neurones) — hors programme (seul le **conceptuel** de l'IA est évalué)
+- Le code d'exécution de Pandas/NumPy/Matplotlib — hors programme (seul le **conceptuel et la prédiction de sortie** sont évalués)
 :::
 
 ---
@@ -92,35 +89,37 @@ L'examen final (R15) comporte 3 questions au volet papier :
 - Écrire du code pour résoudre un problème (2 points) — niveau similaire aux exercices de R11-R13
 :::
 
-### Révision — Volet ordinateur (Pandas + Matplotlib)
+### Révision — Propriétés théoriques de Pandas / NumPy / IA (papier)
 
-**Matériel autorisé :** ordinateur, documentation locale du cours, Python/Pandas/Matplotlib.
+**Matériel autorisé :** aucune documentation, aucun ordinateur.
 
-**Préparez-vous en révisant :**
+L'examen étant **100 % papier**, on ne peut pas exécuter Pandas/NumPy/Matplotlib. On évalue donc les **propriétés théoriques** (concepts et prédiction de sortie) :
 
-1. **Fichiers CSV avec Pandas** :
-   - `read_csv()` — paramètres importants (delimiter, header, etc.)
-   - `to_csv()` — exportation
-   - Exploration (`info()`, `dtypes`, `describe()`, `head()`, `shape`)
-   - Sélection (`loc`, `iloc`)
-   - Filtres booléens (conditions simples et complexes)
-   - Tri (`sort_values()`)
-   - Nettoyage (`dropna()`, `fillna()`, `drop_duplicates()`)
-   - Transformation (nouvelles colonnes, `apply()`, `map()`)
-   - Agrégations (`groupby()`, `mean()`, `sum()`, `count()`)
+**Pandas (concepts + prédiction de sortie)**
+- `DataFrame` vs `Series` ; `loc` (étiquettes) vs `iloc` (positions entières) ; attributs `shape`, `dtypes`, `columns`
+- Filtrage booléen : combiner des conditions (`&`, `|`, `~`, parenthèses), erreur « ambiguous truth value »
+- Nettoyage : `dropna()` vs `fillna()`, `drop_duplicates()`
+- Transformation : nouvelles colonnes, `apply()`, `map()`
+- Agrégation : structure de la sortie d'un `groupby()`, `.mean()/sum()/count()`
+- Fichiers : `read_csv()`/`to_csv()`, `read_json()`/`to_json()`
+- Type de question : « quelle est la sortie de ce code ? » sur un petit DataFrame
 
-2. **Fichiers JSON avec Pandas** :
-   - `read_json()` — lecture
-   - `to_json()` — écriture
+**NumPy (théorie + calcul à la main)**
+- `shape`/`ndim`/`dtype`/`size` ; opérations vectorisées (élément par élément)
+- Masques booléens `arr[arr > 5]` ; `np.where()`
+- Broadcasting (prédire la forme résultante) ; `reshape` ; `transpose` ; sauvegarde `.npy`
+- Statistiques : `mean`, `std`, `min`, `max`, `sum`
 
-3. **Graphiques sans Pandas (Matplotlib)** :
-   - Création de graphiques depuis tableaux NumPy ou listes
-   - `plot()`, `scatter()`, `bar()`, `hist()`
-   - Personnalisation (`title`, `xlabel`, `ylabel`, `legend`, `grid`, `savefig`)
-   - Sauvegarde des graphiques
+**IA (conceptuel)**
+- IA vs Machine Learning vs Deep Learning (hiérarchie)
+- Supervisé vs non supervisé ; **régression vs classification** (exemples)
+- Vocabulaire : `feature`, `label`, modèle, entraînement, inférence
+- Sur-apprentissage vs sous-apprentissage ; **exactitude (accuracy)**
+- Empreinte écologique de l'IA
 
-4. **Synthèse** :
-   - Combiner toutes les notions dans un projet complet (comme l'exercice de synthèse de R13)
+:::note
+Toutes ces propriétés sont détaillées dans l'onglet **« Théorie — Examen papier »** de la rencontre R13. Ici, concentrez la révision sur les notions où vous hésitez encore.
+:::
 
 ---
 
@@ -132,16 +131,11 @@ L'examen final (R15) comporte 3 questions au volet papier :
 - **Aucune question** sauf problème technique avec l'IDE
 - **Vidéos YouTube non accessibles**
 
-### Structure de l'examen
-- **Volet 1 — Papier (sans ordinateur, sans documentation)** : 3 questions (6 points)
+### Structure de l'examen (100 % papier — sans ordinateur, sans documentation)
+- **Volet unique — Papier** : 3 questions (6 points)
   - Tracer un graphique (2 points) — graphique sans Pandas, difficulté similaire à R10/R11
   - Trouver le contenu affiché par `print()` (2 points) — code à analyser, pas de trace
   - Écrire du code pour résoudre un problème (2 points) — niveau similaire aux exercices de R11-R13
-
-- **Volet 2 — Ordinateur** : 3 questions (6 points)
-  - Graphique sans Pandas (2 points) — données à adapter pour Matplotlib
-  - Fichier CSV avec Pandas (2 points) — analyse d'un fichier CSV avec Pandas
-  - Synthèse (2 points) — intégration d'un large ensemble de notions
 
 ---
 
