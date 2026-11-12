@@ -179,6 +179,95 @@ Cliquez sur le badge pour ouvrir le notebook de cette rencontre dans [Google Col
 
     </TabItem>
 
+    <TabItem value="theorie-papier" label="Théorie — Examen papier">
+
+        :::info Objectif
+        L'examen final est **100 % papier** : on ne peut pas y exécuter Pandas, NumPy ni Matplotlib. On teste donc leur **compréhension théorique** — concepts, prédiction de sortie, interprétation. Voici les propriétés à maîtriser.
+        :::
+
+        ## 📌 Pandas — propriétés à connaître
+
+        **Structure**
+        - `DataFrame` (2D, lignes + colonnes) vs `Series` (1D) vs `Index`
+        - Accès : `loc` (par **étiquettes**) vs `iloc` (par **positions** entières)
+        - Attributs utiles : `shape`, `dtypes`, `columns`, `index`, `head()`, `info()`, `describe()`
+
+        **Filtrage et booléens**
+        - Comment combiner des conditions : `&`, `|`, `~` (toujours entre parenthèses) et pourquoi une condition seule (`df[df.A > 5 and ...]`) lève une erreur « ambiguous truth value »
+        - `str.contains()` pour filtrer du texte
+
+        **Nettoyage**
+        - `dropna()` : supprime les lignes avec valeurs manquantes
+        - `fillna(valeur/moyenne/médiane)` : **remplace** les manquantes (préserve le nombre de lignes)
+        - `drop_duplicates()` : retire les doublons
+
+        **Transformation**
+        - Nouvelle colonne : `df['col'] = ...` ou `df['col'] = df['a'] / df['b']` (vectorisé)
+        - `apply()` : applique une fonction à chaque ligne/colonne
+        - `map()` : remplace des valeurs selon un dictionnaire (surtout sur une Series)
+
+        **Agrégation**
+        - `groupby('col')` : la colonne de regroupement devient l'**index** de la sortie par défaut
+        - Combinaisons : `.mean()`, `.sum()`, `.count()`
+        - À savoir : prédire la forme d'un `groupby().mean()`
+
+        **Fichiers**
+        - `read_csv()`, `to_csv()` ; `read_json()`, `to_json()`
+
+        ## 📌 NumPy — propriétés à connaître
+
+        **Structure**
+        - `array` : `shape` (tuple de dimensions), `ndim` (nb de dimensions), `dtype` (type), `size` (nb d'éléments)
+        - Liste Python vs array NumPy : l'array est **vectorisé** (opérations élément par élément) et plus rapide
+
+        **Opérations vectorisées**
+        - `arr * 2`, `arr + arr2`, `arr ** 2` : élément par élément (pas comme une liste)
+
+        **Broadcasting**
+        - Étendre automatiquement un tableau de petite taille pour l'aligner sur un plus grand
+        - Savoir prédire la **forme résultante** (ex. `(3,4) + (4,)` → `(3,4)`)
+
+        **Masques booléens**
+        - `arr[arr > 5]` : sélectionner par condition (attention : le résultat est **aplati en 1D**)
+        - `np.where(cond, a, b)` : choisir entre deux valeurs selon une condition
+
+        **Restructuration**
+        - `reshape()`, `transpose()`, `concatenate()`, `vstack()`/`hstack()`
+        - Sauvegarde/chargement `.npy` : `np.save()`/`np.load()`
+
+        **Statistiques**
+        - `mean()`, `std()`, `min()`, `max()`, `sum()`
+
+        ## 📌 IA — propriétés théoriques à connaître
+
+        **Concepts de base**
+        - IA > Machine Learning > Deep Learning (hiérarchie, IA = la plus large)
+        - IA faible (spécialisée) vs IA forte (générale) ; Deep Learning = ML avec réseaux de neurones
+
+        **Apprentissage**
+        - **Supervisé** : données étiquetées (on connaît la réponse) → prédiction
+        - **Non supervisé** : données non étiquetées → regroupement/structuration
+        - **Régression** : prédire une **valeur continue** (ex. prix, température)
+        - **Classification** : prédire une **catégorie** (ex. passe/échoue, espèce)
+
+        **Vocabulaire**
+        - `feature` (variable d'entrée), `label`/`cible` (à prédire), `modèle`, `entraînement` (fit), `inférence` (prédiction)
+        - **Sur-apprentissage (overfitting)** : le modèle apprend par cœur l'entraînement, échoue sur du nouveau
+        - **Sous-apprentissage (underfitting)** : le modèle est trop simple pour la tâche
+        - **train/test** : séparer les données pour évaluer honnêtement un modèle
+        - Métrique : **exactitude (accuracy)** = bonnes prédictions / total
+
+        **Empreinte écologique de l'IA**
+        - Coûts : énergie, calcul, données, eau ; questions éthiques et environnementales des grands modèles
+
+        :::note Question type à l'examen papier
+        - QCM / vrai-faux sur les notions ci-dessus
+        - « Quelle est la sortie de ce code ? » (prédiction Pandas/NumPy)
+        - Appariement : méthode ↔ effet, code ↔ type de graphique
+        :::
+
+    </TabItem>
+
     <TabItem value="tp2" label="TP2 — Poursuite (pas de remise)">
 
         :::info Objectif de cette rencontre
@@ -218,7 +307,7 @@ Cliquez sur le badge pour ouvrir le notebook de cette rencontre dans [Google Col
         4. **Matplotlib** : pour les visualisations (sans Pandas, comme demandé)
         5. **Fichiers** : pour lire et écrire vos données
 
-        **N'oubliez pas** : le graphique de l'examen final doit être fait **sans Pandas**, donc pratiquez à créer des visualisations directement avec Matplotlib et NumPy.
+        **N'oubliez pas** : l'examen final étant **100 % papier**, on n'y crée aucun graphique. On teste la lecture, la prédiction et l'interprétation de visualisations (et, pour le TP2, savoir créer des graphiques avec Pandas/NumPy sans aide). Pratiquez donc à prédire à quoi ressemble la sortie d'un graphique plutôt qu'à l'exécuter.
         :::
 
         ---

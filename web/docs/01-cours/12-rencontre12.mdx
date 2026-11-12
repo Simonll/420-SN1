@@ -2,7 +2,7 @@
 title: 12 - NumPy (avancé) + IA (bases) + TP2 poursuite
 #description: NumPy (vectorisé, bornes, conditions, restructurer), IA (intro, Machine Learning), TP2 poursuite
 hide_table_of_contents: true
-draft: true
+draft: false
 ---
 
 import Tabs from '@theme/Tabs';
@@ -208,7 +208,47 @@ Cliquez sur le badge pour ouvrir le notebook de cette rencontre dans [Google Col
                 Machine Learning, classification, k-NN, visualisation de classes
                 ::::
 
-            </TabItem>
+                ---
+
+                ### Exercice - Prédire la sortie — NumPy (préparation examen papier)
+
+                **Sans ordinateur**, prédisez la sortie de chaque extrait, puis vérifiez dans un fichier `numpy_prediction.py` (optionnel) :
+
+                1. `np.array([10, 20, 30]) + 5` → quelle liste ?
+                2. `arr = np.array([[1, 2, 3], [4, 5, 6]])` : `arr.shape` ? `arr.ndim` ? `arr.size` ?
+                3. `a = np.array([1, 2, 3, 4, 5]); a[a > 3]` → quelle liste et **quelle forme** ?
+                4. `np.where(np.array([1, 3, 5]) > 2, 'oui', 'non')` → ?
+                5. `np.ones((2, 3)).reshape((3, 2))` → quelle forme résultante ?
+                6. Broadcasting : `np.zeros((3, 4)) + np.array([1, 0, 0, 1])` → quelle forme ?
+
+                :::note Notions visées
+                Prédiction de sortie, broadcasting, masques, reshape — préparation examen papier (NumPy est testable à la main)
+                ::::
+
+                ---
+
+                ### Exercice - Propriétés théoriques de l'IA (préparation examen papier)
+
+                Répondez **par écrit** (dans un fichier `ia_theorie.md` ou en commentaire) :
+
+                1. Classez : IA, Machine Learning, Deep Learning — lequel contient les autres ?
+                2. Différence entre apprentissage **supervisé** et **non supervisé** ? Donnez un exemple de chacun.
+                3. Différence entre **régression** et **classification** ? Donnez un exemple de chaque.
+                4. Qu'est-ce que le **sur-apprentissage** (overfitting) ? Le **sous-apprentissage** ?
+                5. Qu'est-ce qu'une `feature` ? un `label` ? un `modèle` ?
+                6. Que mesure l'**exactitude** (accuracy) d'un modèle ?
+
+                :::note Notions visées
+                Théorie IA/ML : vocabulaire, supervisé/non, régression/classification, sur/sous-apprentissage, métriques — préparation examen papier
+                ::::
+
+                ---
+
+                :::warning Important — ce qui est évalué à l'examen papier
+                Les exercices de régression/classification et l'API scikit-learn ci-dessous (et sur la page en classe) sont de l'**entraînement pratique, non évalué à l'examen papier**. À l'examen, seul le **conceptuel** compte : vocabulaire, types d'apprentissage, métriques. Ne mémorisez pas les API.
+                :::
+
+                </TabItem>
 
             <TabItem value="2" label="🏫 Activités à faire en classe">
 
