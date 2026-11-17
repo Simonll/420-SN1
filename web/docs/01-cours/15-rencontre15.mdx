@@ -16,56 +16,56 @@ import TabItem from '@theme/TabItem';
     <TabItem value="directives" label="Directives" default>
 
         ## Durée de l'examen : 120 minutes
-        ## L'examen comporte 2 volets
+        ## L'examen est **entièrement sur papier — sans ordinateur, sans documentation**
 
-        ### Volet 1 : Partie papier (sans ordinateur, sans documentation)
-        3 questions :
+        ### Structure (20 points)
 
-            🔹Tracer un graphique correspondant au code présenté (2 points)  \
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- dessiner des graphiques de difficulté similaire à ce qui est dans R02, R09 et R10 (graphique sans Pandas)
+        | Section | Format | Points |
+        |---|---|---|
+        | **A. Choix multiples** | 40 QCM (R1→R13, dont théorie Pandas/NumPy/IA) × 0,25 | 10 |
+        | **B. Trace d'exécution** | tableau à compléter (boucle `for`) | 2 |
+        | **C. Écriture de code** | programme (filtre, moyenne, max) | 3 |
+        | **D. Correction de code** | trouver 3 erreurs | 3 |
+        | **E. Notions + code à compléter** | définition de diagramme + snippets (TP1/TP2) | 2 |
 
-            🔹Trouver le contenu affiché par les instructions `print()` du code présenté (2 points) \
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- pas de trace à l'examen, vous devez écrire le contenu affiché par le programme \
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- plus d'une trentaine d'exercices de ce genre vous sont proposés dans l'onglet suivant \
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- ces exercices révisent beaucoup d'éléments du cours, à consommer sans modération!
+        **Il n'y a AUCUN volet sur ordinateur.** Tout se fait au crayon sur papier.
 
-            🔹Écrire du code pour résoudre un problème (2 points) \
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- niveau de difficulté similaire aux exercices de ce genre dans R11 \
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- quelques exercices supplémentaires vous sont proposés dans l'onglet suivant \
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- aucune utilisation de modules, de bibliothèques (Matplotlib, Pandas, NumPy, etc) ou de fichiers \
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- il est nécessaire de connaître le reste des notions par cœur (ex : condition, boucle, liste, dictionnaire, tuple)
+        ### Détail des sections
 
-        Une fois terminé :
-
-            🔹Remettez votre copie à l’enseignant.e. \
-            🔹L’enseignant déverrouillera votre ordinateur pour accéder au volet 2.
-
-        ---
-        ### 💻 Volet 2 : Partie sur ordinateur
-
-        3 questions :
-
-        🔸 Graphique (2 points) : *Réaliser un graphique. Les données devront être adaptées pour être utilisables par Matplotlib (graphique sans Pandas).*   \
-        🔸 Fichier CSV (2 points) : *Analyser un fichier CSV afin de répondre à différentes questions d'analyse à l'aide de Pandas.*  \
-        🔸 Synthèse (2 points) : *Intégration d'un large ensemble de notions pour résoudre un problème.*
-
-        Vous devez **identifier par vous-même** les notions nécessaires à chaque question.
+        - **40 QCM** : une seule réponse, on encercle la bonne lettre (variables, types, conditions, boucles, listes, dict, set, fichiers, Pandas, NumPy, IA).
+        - **Trace** : compléter le tableau ligne par ligne (comme en classe).
+        - **Écriture de code** : aucun module, aucune bibliothèque (Matplotlib, Pandas, NumPy…) — algorithmes de base par cœur.
+        - **Correction de code** : identifier et corriger 3 erreurs dans un extrait.
+        - **Code à compléter** : remplir les mots manquants dans un snippet (boucle, `return`, `pd.read_csv`, `bins=`, `plt.bar`/`plt.hist`).
 
         ---
 
-        ### 🚫 Restrictions techniques
-        - 🌐 Internet désactivé
-        - ❌ Aucune question ne recevra de réponse pendant l’examen, sauf en cas de problème technique avec PyCharm.
-        - 📁 Le site du cours sera accessible via une **copie locale**.
-        - 📹 Les vidéos YouTube des solutionnaires **ne seront pas accessibles**.
+        ### ✏️ Type de question papier
+        🔹 **Choix multiple / théorie** (Pandas, NumPy, IA)  \
+        🔹 **Prédiction de sortie** : lire du code et écrire l'affichage ou la trace  \
+        🔹 **Écrire du code** : résoudre un problème sans bibliothèque  \
+        🔹 **Corriger du code** : trouver les erreurs  \
+        🔹 **Compléter du code** : remplir les `____`
+
+        ---
+
+        ### 🚫 Restrictions
+        - 🌐 **Internet désactivé**
+        - 💻 **Aucun ordinateur ni appareil électronique** (il n'y a pas de volet ordinateur)
+        - ❌ Aucune réponse aux questions pendant l'examen, sauf pour une clarification.
+        - 📹 Les vidéos YouTube des solutionnaires ne seront pas accessibles.
 
         ---
         ### 📚 Notions exclues de l’examen
         - ❌ Dépôts Git
         - ❌ Docstrings
         - ❌ Exceptions (try/except, raise)
-        - ❌ NumPy
-        - ❌ Scikit-Learn et IA (Intelligence artificielle)
+        - ❌ L'**écriture de code** avec Pandas/NumPy/Matplotlib (ces bibliothèques ne s'utilisent pas sur papier)
+
+        ### 📘 Notions incluses, en THÉORIE (QCM)
+        - Image Pandas : loc/iloc, dropna/fillna, groupby, filtres
+        - Image NumPy : masques, shape/ndim/broadcasting
+        - Image IA : supervisé/non, régression/classification, Deep Learning, sur-apprentissage
 
         ---
         ### ⚠️ Règles à respecter
@@ -73,8 +73,8 @@ import TabItem from '@theme/TabItem';
         - 🎒 Tous les sacs à l’avant
         - 📵 Téléphones interdits
         - 🔌 Aucun appareil électronique (doivent être **fermés et rangés**)
-        - 🧮 Pas de calculatrice, montre/lunettes intelligentes, ni implants neuronaux façon Cyberpunk 2077 🤖
-        - 🚫 Une fois la partie papier remise, **vous ne pouvez plus y revenir**.
+        - 🧮 Pas de calculatrice ni montre/lunettes intelligentes
+        - 🚫 Une fois la copie remise, **vous ne pouvez plus y revenir**.
 
 
     </TabItem>
