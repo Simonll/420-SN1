@@ -122,6 +122,27 @@ Cliquez sur le badge pour ouvrir le notebook de cette rencontre dans [Google Col
 
         ---
 
+        :::info 🎯 Ce que le TP2 utilise réellement — concentrez-vous ici
+        La solution de référence du TP2 (arbres de la Ville de Québec) se sert **presque exclusivement de Pandas et Matplotlib** :
+
+        **Pandas**
+        - `pd.read_csv()` — charger les données
+        - `dropna()`, `drop_duplicates()`, `fillna()` — nettoyer
+        - `groupby(...).mean()`, `.value_counts()` — agréger / compter
+        - `sort_values()`, `.unique()`, `.tolist()`, `str.contains()`, `idxmax()`, `head()`
+
+        **Matplotlib**
+        - `plt.scatter(...)` (carte / nuage de points), `df.plot(kind="bar")` (barres), `plt.boxplot(...)` (boîtes à moustaches)
+        - `plt.hist(data, bins=np.linspace(min, max, nbins+1))` — **histogramme à intervalles réguliers** (chaque case de largeur égale)
+        - `legend`, `title`, `xlabel`, `ylabel`, `xticks(rotation=45)`, `savefig`
+
+        **NumPy** : **très peu voire pas utilisé** dans le TP2 — ne conserver que les bases (masques, shape) si votre analyse en a besoin. Ne révisez pas NumPy avancé pour le TP.
+
+        :::note Structures R9
+        Le TP2 privilégie Pandas, mais les **structures de R9** (set, tuple, dictionnaire, compréhension de liste) restent à savoir : elles servent à lire/comprendre du code et sont évaluables à l'examen. La compréhension de liste, en particulier, fait souvent partie des analyses « à la main ».
+        :::
+        :::
+
         :::info Auto-évaluation
         **Check-list de compétences**
 
@@ -154,6 +175,8 @@ Cliquez sur le badge pour ouvrir le notebook de cette rencontre dans [Google Col
         | Matplotlib | Créer un graphique de base (plot, scatter, bar, hist) | ☐ |
         | Matplotlib | Personnaliser un graphique (titre, labels, légende, styles) | ☐ |
         | Matplotlib | Sauvegarder un graphique (savefig) | ☐ |
+        | Matplotlib | Histogramme : `bins = np.linspace(min, max, nbins+1)` (intervalles réguliers) | ☐ |
+        | Matplotlib | Distinguer un diagramme à barres d'un histogramme | ☐ |
         | Matplotlib | Intégrer NumPy avec Matplotlib | ☐ |
         | IA | Expliquer les concepts de base de l'IA et du ML | ☐ |
         | IA | Utiliser scikit-learn pour une tâche simple (régression ou classification) | ☐ |
