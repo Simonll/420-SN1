@@ -1,9 +1,17 @@
 import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
 
         :::info 🧠🕸️ Qu'est-ce que l'apprentissage profond?
-        L'apprentissage profond (*Deep Learning*, DL) est une sous-catégorie de l'apprentissage machine qui utilise des réseaux de neurones artificiels profonds pour modéliser et résoudre des problèmes complexes. Ces réseaux sont composés de plusieurs couches de neurones interconnectés, permettant au modèle d'apprendre des représentations hiérarchiques des données.
+        L'**apprentissage profond** (*Deep Learning*, DL), c'est de l'**apprentissage machine** avec des **réseaux** de **beaucoup de couches** de neurones artificiels. Il brille sur les **images**, le **son** et le **texte**.
+        :::
 
-        Le DL est particulièrement efficace pour traiter des données non structurées telles que les images, le texte et l'audio, et a conduit à des avancées significatives dans des domaines comme la vision par ordinateur, le traitement du langage naturel et la reconnaissance vocale.
+        :::note 🎯 Ce qui est évaluable à l'examen papier dans cet onglet
+        - Le **neurone artificiel** : entrées × **poids**, additionnées, + **biais**, puis **fonction d'activation** → **sortie**.
+        - Le **réseau** : **couche d'entrée**, **couches cachées**, **couche de sortie**. **Profond** = **plusieurs couches cachées**.
+        - Les **poids et les biais** sont les **paramètres** appris pendant l'entraînement.
+        - Le **perceptron** ne résout pas un problème **non linéairement séparable** (ex. le **XOR**).
+        - Les **défis** : beaucoup de données, beaucoup de calcul, boîte noire, risque de sur-apprentissage.
+
+        Le **code** (perceptron en Python, Keras) sert à illustrer : il **n'est pas évalué**.
         :::
 
         :::tip Applications avancées
@@ -38,7 +46,7 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
         subgraph Art["🤖 Neurone artificiel"]
             B1["Entrées x₁, x₂, …"]
             B2["Poids w₁, w₂, …"]
-            B3["Somme pondérée<br/>Σ(wᵢ·xᵢ + biais)"]
+            B3["Somme pondérée<br/>Σ(wᵢ·xᵢ) + b"]
             B4["Fonction d'activation<br/>f(Σ)"]
             B5["Sortie y"]
 
@@ -59,7 +67,7 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
         - Certains projets ambitieux, comme le **Blue Brain Project**, tentent de modéliser le cerveau humain.
         Mais en pratique, les neurones artificiels utilisés en apprentissage machine restent des abstractions conçues pour résoudre des tâches spécifiques, sans chercher à reproduire la complexité réelle du cerveau.
         - En réalité, nous comprenons encore mal le fonctionnement détaillé d’un seul neurone biologique.
-        Alors imaginer modéliser le cerveau humain dans son ensemble — qui compte environ **100 milliards de neurones**, interconnectés par **100 trillions de synapses** — dépasse largement nos capacités actuelles de simulation et de compréhension.
+        Alors imaginer modéliser le cerveau humain dans son ensemble — qui compte environ **86 milliards de neurones**, interconnectés par environ **100 000 milliards (10¹⁴) de synapses** — dépasse largement nos capacités actuelles de simulation et de compréhension.
         - Même avec les avancées spectaculaires en intelligence artificielle, la complexité du cerveau humain demeure **infiniment supérieure** à ce que nos modèles peuvent reproduire.
         - Pour aller plus loin, vous pouvez lire *[Le cerveau, l’univers dans votre tête](https://www.davidfortin.ca/styled-2/)* du neurochirurgien David Fortin — un excellent ouvrage de vulgarisation.
         :::
@@ -72,7 +80,7 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
         flowchart LR
             A1["Entrées x₁, x₂, …"]
             A2["Poids w₁, w₂, …"]
-            A3["Somme pondérée<br/>Σ(wᵢ·xᵢ + biais)"]
+            A3["Somme pondérée<br/>Σ(wᵢ·xᵢ) + b"]
             A4["Fonction d'activation<br/>f(Σ)"]
             A5["Sortie y"]
             A1 --> A3
@@ -113,7 +121,7 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
             print((x1, x2), activation(z))
         ```
 
-        Le perceptron peut être entraîné à l'aide d'un algorithme simple qui ajuste les poids en fonction des erreurs de classification sur un ensemble de données d'entraînement. Cependant, le perceptron a des limitations, notamment son incapacité à résoudre des problèmes non linéaires, ce qui a conduit au développement de réseaux de neurones plus complexes et profonds.
+        Le perceptron peut être entraîné à l'aide d'un algorithme simple qui ajuste les poids en fonction des erreurs de classification sur un ensemble de données d'entraînement. Cependant, le perceptron a des limitations, notamment le fait qu'il **ne peut pas résoudre un problème non linéairement séparable**, comme le **OU exclusif (XOR)** : aucune droite ne sépare les cas où la réponse est 1 de ceux où elle est 0. C'est ce qui a conduit au développement de réseaux de neurones plus complexes et profonds.
         :::
 
         :::info 🔗 Réseaux de neurones
@@ -249,18 +257,20 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
 
         :::warning Défis de l'apprentissage profond
         Malgré ses succès, l'apprentissage profond présente plusieurs défis :
-        - **Données massives** : Nécessite de grandes quantités de données étiquetées pour un entraînement efficace.
+        - **Données massives** : Nécessite de grandes quantités de données (étiquetées pour la plupart des tâches, ou **non étiquetées** pour les modèles de langage comme ChatGPT, qui apprennent à partir de texte brut).
         - **Coût computationnel** : Entraînement de modèles profonds demande des ressources matérielles importantes (GPU/TPU).
         - **Interprétabilité** : Les modèles profonds sont souvent considérés comme des "boîtes noires", rendant difficile la compréhension de leurs décisions.
         - **Surapprentissage** : Risque accru de surapprentissage en raison de la complexité des modèles.
         - **Biais** : Les modèles peuvent apprendre et amplifier les biais présents dans les données d'entraînement.
         :::
 
-        ::::info Exemple d'implémentation avec Keras (réseaux de neurones)
+        ::::info Pour les curieux (non évalué) — Exemple d'implémentation avec Keras
+
+        ⚠️ Ce code **n'est pas évalué** à l'examen : il montre seulement à quoi ressemble un entraînement en deep learning. Les termes `relu`, `softmax`, `adam` ou `sparse_categorical_crossentropy` n'ont pas à être connus.
 
         Voici un exemple d'utilisation de la bibliothèque `Keras` (incluse dans `TensorFlow`) pour entraîner un **réseau de neurones simple** sur le jeu de données `MNIST` (images de chiffres manuscrits 28×28).
 
-        Ce jeu de données est constitué d'environ 60 000 images de chiffres (0 à 9) écrits à la main.<br />
+        Ce jeu de données est constitué de 70 000 images (60 000 pour l'entraînement et 10 000 pour le test) de chiffres (0 à 9) écrits à la main.<br />
         Le but est de construire un modèle capable de reconnaître correctement des chiffres écrits à la main.
 
         L'objectif est de montrer les grandes étapes d'un entraînement en deep learning :
@@ -368,5 +378,17 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
         print("Labels prédits   :", pred_labels)
         ::::
 
+        :::tip 🔗 Lien avec la complexité d'un modèle (évaluable)
+        Les **poids et les biais** d'un réseau sont ses **paramètres**. Comparons leur nombre :
 
-        {/* <Feedback feedbackId="Rencontre #12 - 🧠🕸️ Apprentissage profond" /> */}
+        | Modèle | Nombre de paramètres |
+        |--------|----------------------|
+        | Droite de régression (R12) | **2** (pente et ordonnée) |
+        | Petit réseau MNIST ci-dessus (784 → 128 → 64 → 10) | **109 386** (784×128 + 128, + 128×64 + 64, + 64×10 + 10) |
+        | GPT-3 | environ **175 milliards** |
+
+        Plus de paramètres = plus de capacité (voir l'onglet Complexité). C'est pourquoi les réseaux profonds ont besoin d'**énormément de données** (pour ne pas sur-apprendre) et d'**énormément de calcul** (voir l'onglet Empreinte écologique).
+        :::
+
+
+        {/* <Feedback feedbackId="Rencontre #13 - 🧠🕸️ Apprentissage profond" /> */}

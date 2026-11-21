@@ -30,7 +30,7 @@ En R12, on a vu **ce qu'est** l'IA et l'apprentissage machine (onglets « IA —
 2. **Qu'est-ce qu'entraîner** un modèle? → features/labels, train/test, *fit*, prédiction, sur/sous-apprentissage
 3. **Quelle complexité** donner à un modèle? → capacité, et comment la contrôler
 
-Ces trois onglets sont **évaluables à l'examen papier** (QCM, vrai/faux, interprétation de petits scénarios). Les onglets Apprentissage profond, Empreinte écologique et Scikit-learn complètent la matière. L'API Python n'est pas évaluée.
+Ces trois onglets sont **évaluables à l'examen papier** (QCM, vrai/faux, interprétation de petits scénarios). Les onglets Apprentissage profond et Empreinte écologique complètent la matière : seules leurs **notions** sont évaluables (voir la liste dans l'onglet « Théorie — Examen papier »), **pas le code**. L'onglet Scikit-learn est facultatif. L'API Python (scikit-learn, Keras) n'est pas évaluée.
 :::
 
 :::tip Ouvrir le notebook dans Google Colab
@@ -81,10 +81,12 @@ Cliquez sur le badge pour ouvrir le notebook de cette rencontre dans [Google Col
         :::tip Les deux tâches typiques du supervisé
         | Tâche | Ce qu'on prédit | Exemples |
         |-------|-----------------|----------|
-        | **Régression** | une **valeur numérique continue** | prix d'une maison, température de demain, consommation d'essence (L/100 km) |
+        | **Régression** | une **quantité numérique** | prix d'une maison, température de demain, consommation d'essence (L/100 km), nombre de vélos loués demain |
         | **Classification** | une **catégorie** (une classe) | pourriel / normal, chat / chien, réussite / échec, espèce d'arbre |
 
-        **Truc pour les distinguer** : si la réponse est un **nombre sur lequel on peut faire une moyenne** → régression. Si la réponse est **un choix dans une liste** → classification.
+        **Truc pour les distinguer** : si la réponse est une **quantité** (on peut dire « un peu plus » ou « un peu moins » : prix, °C, nombre de vélos) → **régression**. Si la réponse est **un choix dans une liste** (même si on le code 0/1) → **classification**.
+
+        ⚠️ **Piège de nom** : malgré son nom, la **régression logistique** est un modèle de **classification** (elle prédit une catégorie, ex. l'espèce d'iris en R12).
         :::
 
         :::note Exemples de la vie courante
@@ -174,8 +176,8 @@ Cliquez sur le badge pour ouvrir le notebook de cette rencontre dans [Google Col
             Q1 -->|"Seulement une petite partie"| SS["🧩 Semi-supervisé"]
             Q1 -->|"Aucun"| NS["🔍 Non supervisé"]
             S --> Q2{"La réponse est…"}
-            Q2 -->|"un nombre continu"| R["Régression"]
-            Q2 -->|"une catégorie"| C["Classification"]
+            Q2 -->|"une quantité numérique"| R["Régression"]
+            Q2 -->|"un choix dans une liste<br/>(une catégorie)"| C["Classification"]
         ```
         :::
 
@@ -193,6 +195,14 @@ Cliquez sur le badge pour ouvrir le notebook de cette rencontre dans [Google Col
         Ce qui le rend « intelligent », c'est qu'il possède des **paramètres** (des nombres réglables, comme la pente et l'ordonnée à l'origine d'une droite, ou les poids d'un neurone) et que ces paramètres sont **ajustés automatiquement à partir d'exemples**. C'est ce qu'on appelle l'**entraînement**.
 
         Rappel R12 : une régression linéaire `consommation = 0.00408 × poids − 0.903` est un modèle ; ses deux paramètres (0.00408 et −0.903) ont été trouvés par l'entraînement.
+        :::
+
+        :::tip 📏 Lire une droite de régression (sans code, à savoir pour l'examen)
+        Modèle de R12 : `conso = 0,00408 × poids − 0,903` (poids en lb, conso en L/100 km).
+
+        - **Signe de la pente** : 0,00408 est **positif** → plus la voiture est **lourde**, plus elle **consomme**.
+        - **Effet d'une variation** : +1 lb → +0,00408 L/100 km, donc **+1000 lb → +4,08 L/100 km**.
+        - **Prédiction à la main** pour une voiture de 3000 lb : 0,00408 × 3000 − 0,903 = 12,24 − 0,903 ≈ **11,3 L/100 km**.
         :::
 
         ---
@@ -219,17 +229,28 @@ Cliquez sur le badge pour ouvrir le notebook de cette rencontre dans [Google Col
         | **Label** (étiquette, cible) | la **réponse** que le modèle doit trouver | « pomme » ou « orange » |
         | **Modèle** | la « fonction » qui transforme les features en prédiction | la règle apprise |
         | **Paramètres** | les nombres internes réglés pendant l'entraînement | les poids d'un neurone, la pente d'une droite |
-        | **Entraînement** (*fit*) | la phase où le modèle **ajuste ses paramètres** à partir d'exemples étiquetés | le modèle regarde les fruits connus |
+        | **Entraînement** (*fit*) | la phase où le modèle **ajuste ses paramètres** à partir des données (en **supervisé** : features **et** labels ; en **non supervisé** : features seulement) | le modèle regarde les fruits connus |
         | **Inférence** (prédiction, *predict*) | la phase où le modèle **déjà entraîné** donne une réponse pour un **nouvel exemple** | un fruit inconnu arrive : « c'est une orange » |
+        | **Hyperparamètre** | un **réglage choisi par l'humain avant** l'entraînement ; il n'est **pas** appris par *fit* ; on le choisit avec l'ensemble de **validation** | le degré d'une courbe, le nombre de couches ou de neurones, le nombre d'époques, la force de la régularisation |
 
         Par convention, on note **X** les features (un tableau 2D : une ligne par exemple, une colonne par feature) et **y** les labels (une colonne : une réponse par exemple).
+        :::
+
+        :::warning Ne pas confondre paramètre et hyperparamètre
+        | | **Paramètre** | **Hyperparamètre** |
+        |---|---|---|
+        | **Qui le fixe?** | le modèle, **automatiquement** pendant l'entraînement (*fit*) | **l'humain**, **avant** l'entraînement |
+        | **Exemples** | pente et ordonnée d'une droite, poids et biais d'un neurone | degré de la courbe, nombre de couches/neurones, nombre d'époques, force de la régularisation |
+        | **Avec quelles données?** | l'ensemble d'**entraînement** | l'ensemble de **validation** (on compare plusieurs réglages) |
+
+        Les hyperparamètres sont justement les **leviers** qui contrôlent la complexité d'un modèle (voir l'onglet Complexité).
         :::
 
         :::warning Ne pas confondre entraînement et inférence
         | | Entraînement (*fit*) | Inférence (*predict*) |
         |---|---|---|
         | **Quand?** | une fois (ou de temps en temps), **avant** l'utilisation | à chaque utilisation |
-        | **Données utilisées** | features **et** labels | features **seulement** (on ne connaît pas la réponse) |
+        | **Données utilisées** | en **supervisé** : features **et** labels ; en **non supervisé** : features seulement | features **seulement** (on ne connaît pas la réponse) |
         | **Les paramètres changent?** | **oui**, c'est le but | **non**, ils sont figés |
         | **Coût** | long et coûteux (peut prendre des semaines pour un grand modèle) | rapide pour **une** prédiction (mais il y en a des millions, voir l'onglet Empreinte écologique) |
         | **Exemple** | Ton application apprend à partir de 10 000 photos étiquetées | Tu prends une photo, l'application te dit « chat » |
@@ -280,7 +301,7 @@ Cliquez sur le badge pour ouvrir le notebook de cette rencontre dans [Google Col
         :::
 
         :::note Et l'ensemble de validation (vu en R12)?
-        En R12, on a séparé les données en **trois** : entraînement, **validation** et test. La validation sert à **choisir les réglages** du modèle (par exemple sa complexité, voir l'onglet suivant) **sans toucher au test**. Le principe reste le même : évaluer sur des données non utilisées pour ajuster les paramètres.
+        En R12, on a séparé les données en **trois** : entraînement, **validation** et test. La validation sert à **choisir les réglages** du modèle, appelés **hyperparamètres** (par exemple sa complexité, voir l'onglet suivant), **sans toucher au test**. Résumé : **train = ajuster**, **validation = choisir**, **test = confirmer une seule fois** à la fin. Le principe reste le même : évaluer sur des données non utilisées pour ajuster les paramètres.
         :::
 
         ---
@@ -330,6 +351,8 @@ Cliquez sur le badge pour ouvrir le notebook de cette rencontre dans [Google Col
         | 92 % | 89 % | **Bonne généralisation** : les deux sont bons et proches |
         | 100 % | 65 % | **Sur-apprentissage** : grand écart en faveur du train |
 
+        **« Faible » par rapport à quoi?** Pour juger un score, comparez-le à un **modèle de base** : le **hasard**. Avec **2 classes équilibrées** (50 % / 50 %), répondre au hasard donne déjà environ **50 %**. Un modèle à 52 % ne fait donc presque pas mieux que le hasard ; 60 % est faible, 90 % est bon.
+
         ⚠️ Un score de 100 % sur les données d'entraînement **ne prouve rien** : c'est même souvent un **signal d'alarme** de sur-apprentissage. Seul le score sur le **test** indique si le modèle généralise.
         :::
 
@@ -355,7 +378,7 @@ Cliquez sur le badge pour ouvrir le notebook de cette rencontre dans [Google Col
         | **Droite** : note = a × heures + b | 2 | suit la tendance « plus on étudie, plus la note monte » | **bonne complexité** → généralise |
         | **Courbe de degré 9** | 10 | passe **exactement** par les 10 points, avec des zigzags absurdes (ex. prédit 40 % pour 7 h d'étude, mais 98 % pour 6 h) | **trop complexe** → sur-apprentissage |
 
-        Le modèle de degré 9 a une erreur **nulle** sur l'entraînement (il passe par tous les points!), mais il prédit très mal un 11ᵉ étudiant. Il a appris le **bruit** (la fatigue d'un étudiant le jour de l'examen, un autre qui a eu de la chance) au lieu de la **tendance**.
+        Le modèle de degré 9 a une erreur **nulle** sur l'entraînement (il passe par tous les points!), mais il prédit très mal de nouveaux étudiants mis de côté pour la **validation** : c'est donc la droite qu'on **choisit**. On vérifie ensuite, **une seule fois**, sa performance sur le **test**. Il a appris le **bruit** (la fatigue d'un étudiant le jour de l'examen, un autre qui a eu de la chance) au lieu de la **tendance**.
         :::
 
         ---
@@ -370,7 +393,7 @@ Cliquez sur le badge pour ouvrir le notebook de cette rencontre dans [Google Col
         ```
 
         Quand on **augmente** la complexité d'un modèle :
-        - l'erreur sur **l'entraînement** **diminue toujours** (le modèle colle de plus en plus aux exemples) ;
+        - l'erreur sur **l'entraînement** **diminue (en général)** (le modèle colle de plus en plus aux exemples) ;
         - l'erreur sur **le test** diminue d'abord… puis **remonte** quand le modèle commence à apprendre le bruit.
 
         ```
@@ -384,12 +407,12 @@ Cliquez sur le badge pour ouvrir le notebook de cette rencontre dans [Google Col
           │      ╲
           │        ╲___
           │             ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾  ← erreur sur l'ENTRAÎNEMENT
-          │                                         (diminue toujours)
+          │                                         (diminue, en général)
           └───────────────────────────────────────────▶ Complexité
             sous-apprentissage │  zone idéale  │ sur-apprentissage
         ```
 
-        Le **meilleur modèle** est celui où l'erreur sur le **test** (ou la validation) est **la plus basse**, pas celui où l'erreur d'entraînement est la plus basse.
+        Le **meilleur modèle** est celui dont l'erreur de **validation** est **la plus basse**, pas celui dont l'erreur d'entraînement est la plus basse. Le **test** sert ensuite, **une seule fois**, à **confirmer** sa performance (on ne s'en sert pas pour choisir).
         :::
 
         :::tip Pourquoi un modèle trop complexe sur-apprend-il?
@@ -434,7 +457,7 @@ Cliquez sur le badge pour ouvrir le notebook de cette rencontre dans [Google Col
         :::
 
         :::note 🌱 Lien avec l'empreinte écologique
-        Un modèle plus complexe demande **plus de calculs**, donc plus d'énergie, à l'entraînement **et** à chaque prédiction. Le bon réflexe : **commencer par un modèle simple**, et n'augmenter la complexité **que si le score sur le test s'améliore réellement**.
+        Un modèle plus complexe demande **plus de calculs**, donc plus d'énergie, à l'entraînement **et** à chaque prédiction. Le bon réflexe : **commencer par un modèle simple**, et n'augmenter la complexité **que si le score de validation s'améliore réellement**.
         :::
 
     </TabItem>
@@ -603,7 +626,7 @@ Cliquez sur le badge pour ouvrir le notebook de cette rencontre dans [Google Col
         | IA | Nommer des leviers qui contrôlent la complexité (paramètres, neurones/couches, régularisation, arrêt précoce) | ☐ |
 
         :::note
-        Cette auto-évaluation n'est pas soumise — c'est pour vous aider à identifier les points à réviser avant l'examen formatif (R14) et l'examen final (R15).
+        Cette auto-évaluation n'est pas soumise — c'est pour vous aider à identifier les points à réviser avant l'examen formatif (donné en R13, corrigé en R14) et l'examen final (R15).
         ::::
 
         ---
@@ -684,12 +707,15 @@ Cliquez sur le badge pour ouvrir le notebook de cette rencontre dans [Google Col
 
         **Concepts de base**
         - IA > Machine Learning > Deep Learning (hiérarchie, IA = la plus large)
-        - IA faible (spécialisée) vs IA forte (générale) ; Deep Learning = ML avec réseaux de neurones
+        - **IA faible** (spécialisée) = IA conçue pour **une seule tâche** (traduire, jouer aux échecs, reconnaître des visages) ; **toute l'IA actuelle** est de ce type, y compris ChatGPT
+        - **IA forte** (générale) = intelligence **polyvalente comparable à celle d'un humain**, capable d'apprendre n'importe quelle tâche ; elle **n'existe pas encore**
+        - Deep Learning = ML avec des réseaux de neurones à **plusieurs couches**
 
         **Types d'apprentissage** (la question clé : les exemples ont-ils une **étiquette**, c.-à-d. la bonne réponse?)
         - **Supervisé** : **toutes** les données sont étiquetées → on apprend à **prédire** la réponse
-          - **Régression** : prédire une **valeur continue** (ex. prix, température)
-          - **Classification** : prédire une **catégorie** (ex. pourriel/normal, passe/échoue, espèce)
+          - **Régression** : prédire une **quantité** (on peut dire « un peu plus / un peu moins » : prix, température, nombre de vélos)
+          - **Classification** : prédire un **choix dans une liste** (même codé 0/1 : pourriel/normal, passe/échoue, espèce)
+          - Piège : malgré son nom, la **régression logistique** est un modèle de **classification**
           - Ex. : filtre anti-pourriel, prix d'un logement à partir des ventes passées
         - **Semi-supervisé** : **peu** de données étiquetées + **beaucoup** de données non étiquetées → le but reste de **prédire** (surtout classification)
           - Utilisé quand **étiqueter coûte cher** (expert, temps) alors que les données brutes sont faciles à obtenir
@@ -703,16 +729,20 @@ Cliquez sur le badge pour ouvrir le notebook de cette rencontre dans [Google Col
         **Entraînement d'un modèle — vocabulaire**
         - **Feature** (caractéristique) = variable d'**entrée** (notée X) ; **label**/**cible** = la **réponse** à prédire (notée y)
         - **Modèle** = fonction avec des **paramètres** réglables (ex. pente et ordonnée d'une droite, poids d'un neurone)
-        - **Entraînement** (*fit*) = ajuster les paramètres à partir d'exemples **étiquetés** ; boucle **prédire → mesurer l'erreur → ajuster** ; une **époque** = un passage sur toutes les données d'entraînement
+        - **Entraînement** (*fit*) = ajuster les paramètres à partir des données (en **supervisé** : features **et** labels ; en **non supervisé** : features seulement) ; boucle **prédire → mesurer l'erreur → ajuster** ; une **époque** = un passage sur toutes les données d'entraînement
         - **Inférence** (*predict*, prédiction) = utiliser le modèle **déjà entraîné** sur un **nouvel** exemple (features seulement, paramètres figés)
+        - **Paramètre** (appris par *fit* sur l'entraînement : pente, poids, biais) vs **hyperparamètre** (réglage choisi **par l'humain avant** l'entraînement : degré de la courbe, nb de couches/neurones, nb d'époques, régularisation ; choisi avec la **validation**)
+        - **Lire une droite de régression** : `conso = 0,00408 × poids − 0,903` → pente **positive** (plus lourd = plus de consommation) ; +1000 lb → +4,08 L/100 km ; pour 3000 lb : 0,00408 × 3000 − 0,903 ≈ **11,3 L/100 km**
 
         **Séparation train/test**
         - **Train** (≈ 80 %) sert à ajuster les paramètres ; **test** (≈ 20 %) est mis de côté et sert **uniquement** à évaluer à la fin
         - Pourquoi? Pour mesurer la **généralisation** (performance sur des données **jamais vues**) ; évaluer sur les données d'entraînement est « truqué »
-        - Le modèle ne doit **jamais** voir le test pendant l'entraînement ; la **validation** (R12) sert à choisir les réglages sans toucher au test
+        - Le modèle ne doit **jamais** voir le test pendant l'entraînement
+        - Rôles des trois ensembles : **train = ajuster** les paramètres ; **validation = choisir** (hyperparamètres, complexité, arrêt précoce) ; **test = confirmer une seule fois** à la fin (on ne choisit **jamais** avec le test)
 
         **Métrique**
         - **Exactitude (accuracy)** = bonnes prédictions / total (ex. 180 / 200 = 90 %) — pour la **classification**
+        - Pour juger un score, le comparer à un **modèle de base** : avec **2 classes équilibrées**, le **hasard** donne ≈ **50 %**
         - Piège : avec des classes déséquilibrées (ex. 99 % de transactions honnêtes), un modèle qui répond toujours la classe majoritaire a une exactitude élevée mais est inutile
 
         **Sous-apprentissage vs sur-apprentissage**
@@ -724,13 +754,26 @@ Cliquez sur le badge pour ouvrir le notebook de cette rencontre dans [Google Col
         **Complexité (capacité) d'un modèle**
         - **Capacité** = variété des formes/règles qu'un modèle peut apprendre ; augmente avec le **nombre de paramètres**
         - Schéma : **trop simple** (sous-apprentissage) → **bonne complexité** (généralise) → **trop complexe** (sur-apprentissage)
-        - Quand la complexité augmente : l'erreur d'**entraînement diminue toujours** ; l'erreur de **test** diminue puis **remonte** (courbe en U)
+        - Quand la complexité augmente : l'erreur d'**entraînement diminue (en général)** ; l'erreur de **test** diminue puis **remonte** (courbe en U)
         - **Leviers** : nombre de paramètres (ex. degré d'une courbe), nombre de **neurones** et de **couches**, nombre de features, durée d'entraînement / **arrêt précoce**, **régularisation** (pénalise les paramètres extrêmes → réduit la complexité)
         - Remèdes : sous-apprentissage → **augmenter** la complexité ; sur-apprentissage → **diminuer** la complexité, régulariser, arrêt précoce, ou **ajouter des données**
         - Ajouter des données réduit le risque de sur-apprentissage, mais **ne corrige pas** un sous-apprentissage
+        - Le **meilleur modèle** = la plus petite erreur de **validation** (pas d'entraînement) ; le **test** confirme ensuite, une seule fois
+
+        **Apprentissage profond (Deep Learning)** — ce qui est évaluable
+        - **Neurone artificiel** : entrées × **poids**, additionnées, + **biais**, puis **fonction d'activation** → **sortie** (formule : `Σ(wᵢ·xᵢ) + b`, puis activation)
+        - **Réseau** : **couche d'entrée** → une ou plusieurs **couches cachées** → **couche de sortie**
+        - **Profond** = **plusieurs couches cachées**
+        - Les **poids et les biais** sont les **paramètres** appris pendant l'entraînement (droite : 2 paramètres ; petit réseau MNIST : ≈ 109 386 ; GPT-3 : ≈ 175 milliards)
+        - Le **perceptron** (un seul neurone) ne peut pas résoudre un problème **non linéairement séparable**, comme le **OU exclusif (XOR)**
+        - **Défis** : beaucoup de **données**, beaucoup de **calcul** (énergie), **boîte noire** (difficile d'expliquer ses décisions), risque de sur-apprentissage
+        - ⚠️ Le **code Keras/TensorFlow n'est pas évalué**
 
         **Empreinte écologique de l'IA**
         - Coûts : énergie, calcul, données, eau ; questions éthiques et environnementales des grands modèles
+        - **Entraînement** = coût **ponctuel**, mais **très élevé** (semaines de calcul sur des milliers de processeurs)
+        - **Inférence** = **petit** coût, mais **répété** des millions de fois par jour → c'est souvent la **part majoritaire** de l'énergie totale
+        - Réflexe : **commencer par un modèle simple**, et n'augmenter la complexité que si la validation s'améliore réellement
 
         :::note Question type à l'examen papier
         - QCM / vrai-faux sur les notions ci-dessus
@@ -790,7 +833,7 @@ Cliquez sur le badge pour ouvrir le notebook de cette rencontre dans [Google Col
         - Les difficultés rencontrées dans votre TP2
         - Les notions que vous souhaitez réviser
         - Les aspects techniques de votre projet
-        - La préparation à l'examen formatif (R14)
+        - La préparation à l'examen formatif (donné en R13, corrigé en R14)
         :::
 
     </TabItem>
@@ -851,7 +894,7 @@ Cliquez sur le badge pour ouvrir le notebook de cette rencontre dans [Google Col
                    - Ajouter titres, labels, et sauvegarder les graphiques
 
                 7. **Export** :
-                   - Exporter le DataFrame modifié dans un fichier CSV nommé `tips 분석에.csv` (ou `tips_analyse.csv`)
+                   - Exporter le DataFrame modifié dans un fichier CSV nommé `tips_analyse.csv`
 
                 :::note Notions visées
                 Synthèse complète : Pandas (exploration, nettoyage, transformation, agrégation), NumPy (statistiques, masques), Matplotlib (histogramme, scatter), export CSV
@@ -1003,6 +1046,33 @@ Cliquez sur le badge pour ouvrir le notebook de cette rencontre dans [Google Col
 
                 </details>
 
+                #### Partie E — QCM (une seule bonne réponse)
+
+                1. Quel ensemble de données sert à **choisir** entre plusieurs modèles (ou plusieurs réglages)?
+                   a) l'ensemble d'entraînement  b) l'ensemble de validation  c) l'ensemble de test  d) toutes les données réunies
+                2. Lequel des éléments suivants est un **hyperparamètre**?
+                   a) la pente d'une droite de régression  b) le poids d'un neurone  c) le nombre de couches d'un réseau  d) le biais d'un neurone
+                3. Un modèle prédit le **nombre de vélos** loués demain à une station. De quelle tâche s'agit-il?
+                   a) classification  b) régression  c) regroupement  d) détection d'anomalies
+                4. Que calcule un neurone artificiel avant d'appliquer sa fonction d'activation?
+                   a) `Σ(wᵢ·xᵢ) + b`  b) `Σ(wᵢ + xᵢ)`  c) le maximum des entrées  d) la moyenne des poids
+                5. Pour un problème à **2 classes équilibrées**, un modèle obtient **51 %** sur le test. Que peut-on conclure?
+                   a) c'est un excellent modèle  b) il fait à peine mieux que le hasard  c) il est en sur-apprentissage  d) on ne peut rien conclure sans le code
+                6. Laquelle de ces IA est une **IA forte** (générale)?
+                   a) un logiciel d'échecs champion du monde  b) un filtre anti-pourriel  c) ChatGPT  d) aucune : l'IA forte n'existe pas encore
+
+                <details>
+                <summary>Solution — Partie E</summary>
+
+                1. **b)** La validation sert à choisir ; le test confirme une seule fois à la fin.
+                2. **c)** Le nombre de couches est choisi par l'humain avant l'entraînement. Pente, poids et biais sont des **paramètres** appris par *fit*.
+                3. **b)** Le nombre de vélos est une quantité (on peut dire « un peu plus / un peu moins »).
+                4. **a)** Somme des entrées multipliées par leurs poids, plus le biais.
+                5. **b)** Le hasard donne déjà environ 50 % : le modèle est en sous-apprentissage (ou les features ne sont pas utiles).
+                6. **d)** Toutes les IA actuelles, y compris ChatGPT, sont des IA faibles (spécialisées).
+
+                </details>
+
                 :::note Notions visées
                 Types d'apprentissage (supervisé, semi-supervisé, non supervisé), vocabulaire de l'entraînement (feature, label, fit, inférence), train/test, exactitude, sous/sur-apprentissage, complexité d'un modèle et leviers — préparation examen papier (théorie IA)
                 :::
@@ -1086,7 +1156,7 @@ Cliquez sur le badge pour ouvrir le notebook de cette rencontre dans [Google Col
 
                 1. **Quelles notions avez-vous trouvées les plus difficiles** de R9 à R12 ?
                 2. **Quelles techniques prévoyez-vous d'utiliser** dans votre TP2 ?
-                3. **Quelles questions avez-vous** sur l'examen formatif (R14) ?
+                3. **Quelles questions avez-vous** sur l'examen formatif (donné en R13, corrigé en R14) ?
                 4. **Quelles stratégies de révision** prévoyez-vous pour les prochains cours ?
 
                 Préparez un bref résumé de votre discussion à partager avec la classe.
@@ -1112,13 +1182,13 @@ Cliquez sur le badge pour ouvrir le notebook de cette rencontre dans [Google Col
 
                 Pour chaque modèle, répondez : combien de points d'entraînement sont **exactement** sur la courbe? Quel modèle a la plus petite erreur d'**entraînement**?
 
-                **Étape 3 — Les données de test.** L'enseignant·e révèle 3 nouveaux étudiant·es (jamais vus) :
+                **Étape 3 — Les données de validation.** L'enseignant·e révèle 3 nouveaux étudiant·es (jamais vus). Ici, vos 3 nouveaux points jouent le rôle de la **validation** : ils servent à **choisir** le modèle.
 
                 | Heures d'étude | 2,5 | 5,5 | 7,5 |
                 |----------------|-----|-----|-----|
                 | Note (%) | 57 | 74 | 85 |
 
-                Placez-les d'une autre couleur. Pour chaque modèle, estimez à l'œil l'écart entre la prédiction et la vraie note. Quel modèle a la plus petite erreur de **test**?
+                Placez-les d'une autre couleur. Pour chaque modèle, estimez à l'œil l'écart entre la prédiction et la vraie note. Quel modèle a la plus petite erreur de **validation**? C'est celui qu'on choisit (on le confirmerait ensuite, une seule fois, sur un ensemble de **test** encore jamais utilisé).
 
                 **Étape 4 — Discussion.**
                 1. Lequel des modèles est en **sous-apprentissage**? en **sur-apprentissage**? Lequel **généralise**?
@@ -1132,13 +1202,13 @@ Cliquez sur le badge pour ouvrir le notebook de cette rencontre dans [Google Col
                 - Le modèle C a une erreur d'entraînement **nulle** (il passe par les 8 points), mais ses zigzags le rendent peu fiable entre les points : c'est le **sur-apprentissage**.
                 - Le modèle A ignore les heures d'étude : erreur élevée partout (ex. il prédit 69 % pour 57 % et 85 %) → **sous-apprentissage**.
                 - Le modèle B (environ note ≈ 4,75 × heures + 47,75) prédit ≈ 60 %, 74 % et 83 % pour les 3 nouveaux : très proche des vraies notes → il **généralise**.
-                - Plus de paramètres = plus de capacité ; la bonne complexité est celle qui donne la plus petite erreur de **test**, pas d'entraînement.
+                - Plus de paramètres = plus de capacité ; la bonne complexité est celle qui donne la plus petite erreur de **validation**, pas d'entraînement. Le **test** sert ensuite une seule fois à confirmer.
                 - Avec beaucoup plus de données, il devient beaucoup plus difficile d'apprendre « par cœur » : plus de données réduit le risque de sur-apprentissage.
 
                 </details>
 
                 :::note Notions visées
-                Complexité d'un modèle, sous/sur-apprentissage, erreur d'entraînement vs erreur de test, généralisation, types d'apprentissage — théorie IA évaluée à l'examen papier
+                Complexité d'un modèle, sous/sur-apprentissage, erreur d'entraînement vs erreur de validation, choix du modèle (validation) vs confirmation (test), généralisation, types d'apprentissage — théorie IA évaluée à l'examen papier
                 ::::
 
                 ---
@@ -1169,7 +1239,7 @@ Cliquez sur le badge pour ouvrir le notebook de cette rencontre dans [Google Col
                 Prenez le temps de poser des questions sur :
                 - Les difficultés rencontrées dans votre TP2
                 - Les aspects techniques de votre projet
-                - La préparation à l'examen formatif (R14)
+                - La préparation à l'examen formatif (donné en R13, corrigé en R14)
                 - La préparation à l'examen final (R15)
                 :::
 

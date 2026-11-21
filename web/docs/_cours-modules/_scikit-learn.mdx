@@ -357,7 +357,10 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
         Score R² : 0.8176921365228299
         Intercept : -0.5232093212414135
         ```
-        - Le score R² a augmenté à 0.82, indiquant que l’ajout de ces deux variables supplémentaires améliore la capacité du modèle à expliquer la variance de la consommation.
+        - Le score R² a augmenté à 0.82 par rapport au modèle à 1 variable (0.78).
+        - :::warning ⚠️ Attention
+        Ce R² est calculé **sur les données d'entraînement**. **Ajouter des variables fait mécaniquement monter le R²**, même si elles n'apportent rien (ou du bruit). Un 0.82 sur l'entraînement ne prouve donc pas que le modèle s'est vraiment amélioré — pour le savoir, il faudrait comparer **sur des données de test** (voir l'onglet Complexité de R13). Les barèmes figés du type « 0.7 = très bon » restent des **repères indicatifs**, qui dépendent du domaine et de la quantité de données.
+        ::::
         - La relation reste positive pour le poids et le nombre de cylindres, et la puissance a aussi un effet positif sur la consommation.
         - La formule de la régression multiple est donc :
         $$
