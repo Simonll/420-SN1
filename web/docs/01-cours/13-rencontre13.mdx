@@ -1,8 +1,8 @@
 ---
-title: 13 - IA (avancé) + TP2 poursuite
-#description: Deep Learning, Empreinte écologique, Scikit-learn, Exercice de synthèse, Révision ciblée, TP2 poursuite (pas de remise)
+title: 13 - IA (types d'apprentissage, entraînement, complexité) + TP2 poursuite
+#description: Types d'apprentissage (supervisé, semi-supervisé, non supervisé), entraînement d'un modèle (train/test, fit, sur/sous-apprentissage), complexité d'un modèle, Deep Learning, Empreinte écologique, Scikit-learn, Exercice de synthèse, Révision ciblée, TP2 poursuite (pas de remise)
 hide_table_of_contents: true
-draft: true
+draft: false
 ---
 
 import Tabs from '@theme/Tabs';
@@ -21,7 +21,17 @@ import Mod_DeepLearning from '../_cours-modules/_deep-learning.mdx';
 import Mod_EmpreinteEcologique from '../_cours-modules/_empreinte-ecologique.mdx';
 import Mod_ScikitLearn from '../_cours-modules/_scikit-learn.mdx';
 
-# IA (avancé) + Synthèse + TP2 poursuite
+# IA (types d'apprentissage, entraînement, complexité) + Synthèse + TP2 poursuite
+
+:::info Plan de la rencontre
+En R12, on a vu **ce qu'est** l'IA et l'apprentissage machine (onglets « IA — Introduction » et « IA — Apprentissage machine » de la R12). Aujourd'hui, on répond à trois questions, **sans code à écrire** :
+
+1. **Comment** une machine apprend-elle? → les **types d'apprentissage** (supervisé, semi-supervisé, non supervisé)
+2. **Qu'est-ce qu'entraîner** un modèle? → features/labels, train/test, *fit*, prédiction, sur/sous-apprentissage
+3. **Quelle complexité** donner à un modèle? → capacité, et comment la contrôler
+
+Ces trois onglets sont **évaluables à l'examen papier** (QCM, vrai/faux, interprétation de petits scénarios). Les onglets Apprentissage profond, Empreinte écologique et Scikit-learn complètent la matière. L'API Python n'est pas évaluée.
+:::
 
 :::tip Ouvrir le notebook dans Google Colab
 Cliquez sur le badge pour ouvrir le notebook de cette rencontre dans [Google Colab](https://colab.research.google.com/github/Simonll/420-SN1/blob/develop/code/notebooks/13-rencontre13.ipynb) et l'exécuter sans rien installer.
@@ -31,6 +41,404 @@ Cliquez sur le badge pour ouvrir le notebook de cette rencontre dans [Google Col
 
 <Tabs queryString="onglet">
 
+    <TabItem value="types-apprentissage" label="IA — Types d'apprentissage">
+
+        :::info 🎯 L'idée de départ : apprendre à partir d'exemples
+        En apprentissage machine, on ne programme pas les règles à la main (« si le courriel contient *gratuit*, alors c'est un pourriel »). On donne plutôt des **exemples** à un programme, et il **trouve lui-même les règles**.
+
+        La grande question qui détermine le **type d'apprentissage** est :
+
+        > **Est-ce que les exemples viennent avec la bonne réponse (une étiquette)?**
+
+        - **Oui, tous** → apprentissage **supervisé**
+        - **Seulement quelques-uns** → apprentissage **semi-supervisé**
+        - **Aucun** → apprentissage **non supervisé**
+        :::
+
+        :::note 🏷️ C'est quoi, une étiquette (label)?
+        L'**étiquette** (*label*, ou **cible**) est la **réponse** que l'on voudrait que le modèle trouve.
+
+        | Exemple (donnée d'entrée) | Étiquette (réponse) |
+        |---------------------------|---------------------|
+        | Un courriel | « pourriel » ou « normal » |
+        | Une photo d'animal | « chat », « chien », « oiseau » |
+        | Une maison (superficie, quartier, nb de chambres) | son prix de vente : 425 000 $ |
+        | Une radiographie pulmonaire | « pneumonie » ou « saine » |
+
+        ⚠️ Obtenir des étiquettes coûte souvent **cher** : il faut un humain (parfois un expert, comme un radiologue) qui regarde chaque exemple et inscrit la réponse.
+        :::
+
+        ---
+
+        ## 1. Apprentissage supervisé 👩‍🏫
+
+        :::info Définition
+        Le modèle apprend à partir d'exemples **tous étiquetés** : pour chaque exemple, on connaît la bonne réponse. Il apprend à associer les **entrées** à la **réponse**, pour ensuite **prédire** la réponse de nouveaux exemples.
+
+        **Analogie** : un élève qui fait des exercices **avec le corrigé**. Après chaque exercice, il compare sa réponse à celle du corrigé et ajuste sa façon de faire.
+        :::
+
+        :::tip Les deux tâches typiques du supervisé
+        | Tâche | Ce qu'on prédit | Exemples |
+        |-------|-----------------|----------|
+        | **Régression** | une **valeur numérique continue** | prix d'une maison, température de demain, consommation d'essence (L/100 km) |
+        | **Classification** | une **catégorie** (une classe) | pourriel / normal, chat / chien, réussite / échec, espèce d'arbre |
+
+        **Truc pour les distinguer** : si la réponse est un **nombre sur lequel on peut faire une moyenne** → régression. Si la réponse est **un choix dans une liste** → classification.
+        :::
+
+        :::note Exemples de la vie courante
+        - **Filtre anti-pourriel** : des millions de courriels marqués « pourriel » par les utilisateurs servent d'exemples étiquetés.
+        - **Estimation du prix d'un logement** : on part des ventes passées (où le prix est connu).
+        - **Météo** : prédire la température de demain à partir de 30 ans de relevés (dans l'historique, on connaît la « réponse » de chaque lendemain).
+        - **Reconnaissance de chiffres manuscrits** (jeu de données MNIST, voir l'onglet Apprentissage profond).
+        - En R12 : prédire la consommation d'une voiture à partir de son poids (régression).
+        :::
+
+        ---
+
+        ## 2. Apprentissage non supervisé 🔍
+
+        :::info Définition
+        Le modèle reçoit des exemples **sans aucune étiquette**. Personne ne lui dit quelle est la bonne réponse. Il doit **découvrir seul une structure** cachée dans les données : des groupes, des ressemblances, des cas inhabituels.
+
+        **Analogie** : on vous donne une boîte de 500 boutons en vrac et on vous dit « classe-les ». Personne ne vous dit selon quels critères : vous allez naturellement faire des **groupes** (par couleur, taille, nombre de trous…).
+        :::
+
+        :::tip Les tâches typiques du non supervisé
+        | Tâche | Ce que ça fait | Exemples |
+        |-------|----------------|----------|
+        | **Regroupement** (*clustering*) | former des **groupes** d'exemples qui se ressemblent | segmenter les clients d'une épicerie selon leurs achats ; regrouper des articles de nouvelles par sujet |
+        | **Réduction de dimension** | **résumer** beaucoup de variables en quelques-unes, en perdant le moins d'information possible | résumer 300 mesures d'un capteur en 2 axes pour pouvoir les afficher dans un graphique |
+        | **Détection d'anomalies** | repérer les exemples **qui ne ressemblent à aucun autre** | transaction bancaire inhabituelle, capteur défectueux |
+        :::
+
+        :::warning Piège fréquent
+        Un algorithme de regroupement trouve des groupes, mais **il ne sait pas les nommer**. Il dira « groupe 1, groupe 2, groupe 3 ». C'est **un humain** qui interprète ensuite : « le groupe 2, ce sont les familles qui achètent en grande quantité ».
+
+        Et comme il n'y a pas de « bonne réponse », on ne peut pas calculer d'exactitude (*accuracy*) comme en supervisé.
+        :::
+
+        ---
+
+        ## 3. Apprentissage semi-supervisé 🧩
+
+        :::info Définition
+        Le modèle apprend à partir d'un **petit nombre d'exemples étiquetés** et d'un **grand nombre d'exemples non étiquetés**. Le but reste le même qu'en supervisé : **prédire une réponse** (classification ou régression). Les exemples non étiquetés aident le modèle à mieux comprendre la « forme » des données.
+
+        **Quand l'utiliser?** Quand **les données sont faciles à obtenir, mais les étiquettes coûtent cher** (temps, argent, expertise).
+
+        **Analogie** : un élève qui a **10 exercices corrigés** et **500 exercices sans corrigé**. Il apprend la méthode avec les 10 corrigés, puis s'exerce sur les autres. Quand il est très sûr d'une réponse, il la considère comme bonne et continue à apprendre avec elle.
+        :::
+
+        :::tip Un mécanisme simple : le pseudo-étiquetage
+        ```mermaid
+        flowchart LR
+            A["🏷️ Petit lot étiqueté<br/><sub>ex. 200 radiographies<br/>annotées par un radiologue</sub>"] --> B["🧠 Entraîner un<br/>premier modèle"]
+            B --> C["🔮 Prédire sur le grand lot<br/>non étiqueté<br/><sub>ex. 20 000 radiographies</sub>"]
+            C --> D["✅ Garder seulement les prédictions<br/>dont le modèle est très sûr<br/><sub>= pseudo-étiquettes</sub>"]
+            D --> E["➕ Ajouter ces exemples<br/>au lot étiqueté"]
+            E --> B
+        ```
+        On répète la boucle : le lot étiqueté grossit, et le modèle s'améliore sans qu'un humain ait à tout annoter.
+        :::
+
+        :::note Exemples de la vie courante
+        - **Application de photos** : vous identifiez votre chat sur 5 photos, et l'application le retrouve dans vos 3 000 autres photos.
+        - **Imagerie médicale** : quelques centaines d'images annotées par des spécialistes, des dizaines de milliers d'images non annotées.
+        - **Reconnaissance vocale** : quelques heures d'audio transcrites à la main, des milliers d'heures d'audio brut.
+        - **Biologie** : 50 enregistrements de chants d'oiseaux identifiés par un ornithologue, 10 000 enregistrements non identifiés.
+        :::
+
+        ---
+
+        ## 📋 Tableau comparatif (à connaître pour l'examen)
+
+        :::info Supervisé vs semi-supervisé vs non supervisé
+        | | **Supervisé** | **Semi-supervisé** | **Non supervisé** |
+        |---|---|---|---|
+        | **Données d'entrée** | toutes **étiquetées** | **quelques-unes** étiquetées + **beaucoup** non étiquetées | **aucune** étiquette |
+        | **Objectif** | prédire une réponse connue | prédire une réponse connue, avec peu d'étiquettes | découvrir une structure cachée |
+        | **Tâches typiques** | régression, classification | classification (surtout), régression | regroupement (*clustering*), réduction de dimension, détection d'anomalies |
+        | **Peut-on mesurer l'exactitude?** | oui (on connaît les réponses) | oui (sur les exemples étiquetés de test) | pas directement (pas de réponse connue) |
+        | **Quand l'utiliser?** | étiquettes disponibles en quantité | étiqueter coûte cher (expert, temps) | pas d'étiquettes, ou on explore les données |
+        | **Analogie** | exercices **avec corrigé** | **quelques** exercices corrigés + beaucoup sans corrigé | trier une boîte de boutons **sans consigne** |
+        | **Exemple** | filtre anti-pourriel | retrouver son chat dans ses photos | segmenter des clients |
+        :::
+
+        :::tip 🧭 Méthode en 2 questions pour classer une situation
+        ```mermaid
+        flowchart TD
+            Q1{"Les exemples ont-ils<br/>une étiquette (la réponse)?"}
+            Q1 -->|"Oui, tous"| S["👩‍🏫 Supervisé"]
+            Q1 -->|"Seulement une petite partie"| SS["🧩 Semi-supervisé"]
+            Q1 -->|"Aucun"| NS["🔍 Non supervisé"]
+            S --> Q2{"La réponse est…"}
+            Q2 -->|"un nombre continu"| R["Régression"]
+            Q2 -->|"une catégorie"| C["Classification"]
+        ```
+        :::
+
+        :::note Pour la culture (non évalué)
+        Il existe un 4ᵉ grand type : l'**apprentissage par renforcement**. Le modèle (un « agent ») apprend par **essais et erreurs**, en recevant des **récompenses** ou des **pénalités** (ex. une IA qui apprend à jouer aux échecs ou un robot qui apprend à marcher). Il n'est pas au programme de l'examen.
+        :::
+
+    </TabItem>
+
+    <TabItem value="entrainement" label="IA — Entraîner un modèle">
+
+        :::info 🧠 Qu'est-ce qu'un modèle?
+        Un **modèle** est une sorte de **fonction** : on lui donne des **entrées**, il produit une **sortie** (une prédiction).
+
+        Ce qui le rend « intelligent », c'est qu'il possède des **paramètres** (des nombres réglables, comme la pente et l'ordonnée à l'origine d'une droite, ou les poids d'un neurone) et que ces paramètres sont **ajustés automatiquement à partir d'exemples**. C'est ce qu'on appelle l'**entraînement**.
+
+        Rappel R12 : une régression linéaire `consommation = 0.00408 × poids − 0.903` est un modèle ; ses deux paramètres (0.00408 et −0.903) ont été trouvés par l'entraînement.
+        :::
+
+        ---
+
+        ## 1. Le vocabulaire de base
+
+        :::tip Exemple fil rouge : reconnaître des fruits 🍎🍊
+        On veut un modèle qui reconnaît si un fruit est une **pomme** ou une **orange**, à partir de son poids et de sa couleur. Voici nos données :
+
+        | Poids (g) | Couleur (0 = rouge, 1 = orange) | Rugosité de la peau (0 à 10) | **Fruit** |
+        |-----------|-------------------------------|------------------------------|-----------|
+        | 150 | 0 | 1 | **pomme** |
+        | 170 | 0 | 2 | **pomme** |
+        | 140 | 1 | 7 | **orange** |
+        | 130 | 1 | 8 | **orange** |
+        | … | … | … | … |
+
+        Avec ce tableau, on peut nommer chaque morceau :
+
+        | Terme | Définition simple | Dans l'exemple |
+        |-------|-------------------|----------------|
+        | **Exemple** (observation) | une ligne du tableau | un fruit |
+        | **Feature** (caractéristique, variable d'entrée) | une information **donnée au modèle** pour décider | poids, couleur, rugosité |
+        | **Label** (étiquette, cible) | la **réponse** que le modèle doit trouver | « pomme » ou « orange » |
+        | **Modèle** | la « fonction » qui transforme les features en prédiction | la règle apprise |
+        | **Paramètres** | les nombres internes réglés pendant l'entraînement | les poids d'un neurone, la pente d'une droite |
+        | **Entraînement** (*fit*) | la phase où le modèle **ajuste ses paramètres** à partir d'exemples étiquetés | le modèle regarde les fruits connus |
+        | **Inférence** (prédiction, *predict*) | la phase où le modèle **déjà entraîné** donne une réponse pour un **nouvel exemple** | un fruit inconnu arrive : « c'est une orange » |
+
+        Par convention, on note **X** les features (un tableau 2D : une ligne par exemple, une colonne par feature) et **y** les labels (une colonne : une réponse par exemple).
+        :::
+
+        :::warning Ne pas confondre entraînement et inférence
+        | | Entraînement (*fit*) | Inférence (*predict*) |
+        |---|---|---|
+        | **Quand?** | une fois (ou de temps en temps), **avant** l'utilisation | à chaque utilisation |
+        | **Données utilisées** | features **et** labels | features **seulement** (on ne connaît pas la réponse) |
+        | **Les paramètres changent?** | **oui**, c'est le but | **non**, ils sont figés |
+        | **Coût** | long et coûteux (peut prendre des semaines pour un grand modèle) | rapide pour **une** prédiction (mais il y en a des millions, voir l'onglet Empreinte écologique) |
+        | **Exemple** | Ton application apprend à partir de 10 000 photos étiquetées | Tu prends une photo, l'application te dit « chat » |
+        :::
+
+        ---
+
+        ## 2. Comment un modèle apprend-il? (le mécanisme)
+
+        :::info La boucle d'apprentissage : essayer, se tromper, corriger
+        L'entraînement est une **boucle** qui se répète des milliers de fois :
+
+        ```mermaid
+        flowchart LR
+            A["1️⃣ Prédire<br/><sub>avec les paramètres actuels</sub>"] --> B["2️⃣ Comparer<br/><sub>prédiction vs vraie réponse<br/>→ calculer l'erreur</sub>"]
+            B --> C["3️⃣ Ajuster<br/><sub>modifier un peu les paramètres<br/>pour réduire l'erreur</sub>"]
+            C --> A
+        ```
+
+        1. Au départ, les paramètres sont **choisis au hasard** : le modèle répond n'importe quoi.
+        2. Pour chaque exemple, on **compare** sa prédiction à la vraie réponse (le label) : c'est l'**erreur** (aussi appelée **perte**, *loss*).
+        3. On **modifie légèrement** les paramètres dans la direction qui **diminue** l'erreur.
+        4. On recommence. Un passage complet sur toutes les données d'entraînement s'appelle une **époque** (*epoch*).
+
+        **Analogie** : régler l'eau de la douche. Trop froide → on tourne un peu vers le chaud. Trop chaude → un peu vers le froid. On répète jusqu'à ce que ce soit bon. Le modèle fait la même chose avec ses paramètres.
+
+        C'est exactement ce que fait le **perceptron** de l'onglet Apprentissage profond : `err = cible - pred`, puis `w += lr * err * x`.
+        :::
+
+        ---
+
+        ## 3. Séparer les données : entraînement (train) et test
+
+        :::info Pourquoi évaluer sur des données que le modèle n'a jamais vues?
+        Ce qu'on veut d'un modèle, ce n'est pas qu'il réponde bien sur les exemples **qu'il connaît déjà**, mais sur de **nouveaux** exemples. C'est ce qu'on appelle **généraliser**.
+
+        **Analogie de l'examen** : si l'examen final contient **exactement** les mêmes questions que l'examen formatif, un élève qui a appris les réponses par cœur aura 100 %… sans rien avoir compris. Pour savoir si quelqu'un a **vraiment** compris, il faut lui poser des questions **qu'il n'a jamais vues**.
+
+        On sépare donc les données étiquetées **avant** l'entraînement :
+
+        ```mermaid
+        flowchart LR
+            D["📦 Toutes les données étiquetées<br/>(100 %)"] --> T["🏋️ Ensemble d'entraînement (train)<br/>≈ 80 %<br/><sub>sert à ajuster les paramètres (fit)</sub>"]
+            D --> E["📝 Ensemble de test<br/>≈ 20 %<br/><sub>mis de côté, utilisé une seule fois<br/>à la fin pour évaluer</sub>"]
+        ```
+
+        **Règle d'or** : le modèle ne doit **jamais** voir les données de test pendant l'entraînement. Sinon, l'évaluation est « truquée », comme si l'élève avait vu l'examen d'avance.
+        :::
+
+        :::note Et l'ensemble de validation (vu en R12)?
+        En R12, on a séparé les données en **trois** : entraînement, **validation** et test. La validation sert à **choisir les réglages** du modèle (par exemple sa complexité, voir l'onglet suivant) **sans toucher au test**. Le principe reste le même : évaluer sur des données non utilisées pour ajuster les paramètres.
+        :::
+
+        ---
+
+        ## 4. Mesurer la performance : l'exactitude (accuracy)
+
+        :::info Définition
+        Pour une tâche de **classification**, l'**exactitude** (*accuracy*) est :
+
+        $$
+        \text{exactitude} = \frac{\text{nombre de bonnes prédictions}}{\text{nombre total de prédictions}}
+        $$
+
+        **Exemple** : sur 200 fruits de l'ensemble de test, le modèle en reconnaît correctement 180. Exactitude = 180 / 200 = **0,90**, soit **90 %**.
+
+        (Pour une **régression**, on ne parle pas de « bonne » ou « mauvaise » réponse, mais de **distance** à la vraie valeur : on utilise plutôt l'erreur moyenne ou le score R² vu en R12.)
+        :::
+
+        :::warning Piège : une exactitude élevée n'est pas toujours bonne
+        Un détecteur de fraude est testé sur 1 000 transactions, dont **990 honnêtes** et **10 frauduleuses**. Un « modèle » paresseux qui répond **toujours « honnête »** obtient :
+
+        exactitude = 990 / 1 000 = **99 %**… et il n'a **détecté aucune fraude**!
+
+        ➡️ Quand une classe est beaucoup plus fréquente que l'autre, l'exactitude seule peut être trompeuse. Il faut regarder aussi si le modèle trouve les cas rares.
+        :::
+
+        ---
+
+        ## 5. Sous-apprentissage et sur-apprentissage
+
+        :::info Les deux façons de rater un apprentissage
+        | | **Sous-apprentissage** (*underfitting*) | **Bon apprentissage** | **Sur-apprentissage** (*overfitting*) |
+        |---|---|---|---|
+        | **En une phrase** | le modèle est **trop simple**, il n'a pas saisi la tendance | le modèle a saisi la **tendance générale** | le modèle a **appris par cœur** les exemples, y compris le bruit |
+        | **Score sur train** | **faible** | bon | **très élevé** (souvent près de 100 %) |
+        | **Score sur test** | **faible** (proche du score train) | bon (proche du score train) | **nettement plus faible** que sur train |
+        | **Analogie étudiante** | n'a lu que les titres du chapitre : échoue au formatif **et** à l'examen | a compris la méthode : réussit le formatif **et** l'examen | a mémorisé les réponses du formatif : 100 % au formatif, échoue à l'examen |
+        | **Analogie fruits** | « tout ce qui pèse plus de 100 g est une pomme » | utilise couleur + rugosité | « une pomme pèse exactement 150 g ou 170 g » |
+        :::
+
+        :::tip 🩺 Le diagnostic : comparer train et test
+        C'est **l'écart entre le score d'entraînement et le score de test** qui permet de poser le diagnostic :
+
+        | Score train | Score test | Diagnostic |
+        |-------------|------------|------------|
+        | 60 % | 58 % | **Sous-apprentissage** : les deux sont faibles |
+        | 92 % | 89 % | **Bonne généralisation** : les deux sont bons et proches |
+        | 100 % | 65 % | **Sur-apprentissage** : grand écart en faveur du train |
+
+        ⚠️ Un score de 100 % sur les données d'entraînement **ne prouve rien** : c'est même souvent un **signal d'alarme** de sur-apprentissage. Seul le score sur le **test** indique si le modèle généralise.
+        :::
+
+    </TabItem>
+
+    <TabItem value="complexite" label="IA — Complexité d'un modèle">
+
+        :::info 🎚️ Qu'est-ce que la complexité (ou capacité) d'un modèle?
+        La **capacité** d'un modèle, c'est la **variété de formes ou de règles qu'il est capable d'apprendre**. Plus un modèle a de **paramètres réglables**, plus il est **flexible**, donc plus il est **complexe**.
+
+        **Analogie** : dessiner la tendance d'un nuage de points avec…
+        - une **règle droite** 📏 : on ne peut tracer que des droites (faible capacité, 2 paramètres) ;
+        - une **règle flexible** de dessinateur : on peut tracer des courbes douces (capacité moyenne) ;
+        - un **crayon à main levée** ✏️ : on peut passer par **tous** les points, même en zigzag (très grande capacité).
+        :::
+
+        :::note Exemple : prédire une note à partir des heures d'étude
+        Imaginons 10 étudiant·es : on connaît leurs heures d'étude (feature) et leur note (label). On essaie trois modèles de complexités différentes :
+
+        | Modèle | Paramètres | Comportement | Diagnostic |
+        |--------|-----------|--------------|------------|
+        | **Constante** : « tout le monde a 70 % » | 1 | ignore complètement les heures d'étude | **trop simple** → sous-apprentissage |
+        | **Droite** : note = a × heures + b | 2 | suit la tendance « plus on étudie, plus la note monte » | **bonne complexité** → généralise |
+        | **Courbe de degré 9** | 10 | passe **exactement** par les 10 points, avec des zigzags absurdes (ex. prédit 40 % pour 7 h d'étude, mais 98 % pour 6 h) | **trop complexe** → sur-apprentissage |
+
+        Le modèle de degré 9 a une erreur **nulle** sur l'entraînement (il passe par tous les points!), mais il prédit très mal un 11ᵉ étudiant. Il a appris le **bruit** (la fatigue d'un étudiant le jour de l'examen, un autre qui a eu de la chance) au lieu de la **tendance**.
+        :::
+
+        ---
+
+        ## 🧠 Le schéma mental à retenir
+
+        :::info Trop simple → juste bien → trop complexe
+        ```mermaid
+        flowchart LR
+            A["📏 Modèle TROP SIMPLE<br/><sub>peu de paramètres</sub><br/><br/>❌ Sous-apprentissage<br/><sub>train faible · test faible</sub>"] -->|"↑ complexité"| B["🎯 BONNE COMPLEXITÉ<br/><br/>✅ Généralise<br/><sub>train bon · test bon</sub>"]
+            B -->|"↑ complexité"| C["✏️ Modèle TROP COMPLEXE<br/><sub>beaucoup de paramètres</sub><br/><br/>❌ Sur-apprentissage<br/><sub>train excellent · test faible</sub>"]
+        ```
+
+        Quand on **augmente** la complexité d'un modèle :
+        - l'erreur sur **l'entraînement** **diminue toujours** (le modèle colle de plus en plus aux exemples) ;
+        - l'erreur sur **le test** diminue d'abord… puis **remonte** quand le modèle commence à apprendre le bruit.
+
+        ```
+        Erreur
+          ▲
+          │ ╲                                   ╱  ← erreur sur le TEST
+          │  ╲                               ╱       (remonte : sur-apprentissage)
+          │   ╲                          ╱
+          │    ╲                    ╱
+          │     ╲  ‾‾‾‾‾‾‾‾‾‾‾‾‾‾
+          │      ╲
+          │        ╲___
+          │             ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾  ← erreur sur l'ENTRAÎNEMENT
+          │                                         (diminue toujours)
+          └───────────────────────────────────────────▶ Complexité
+            sous-apprentissage │  zone idéale  │ sur-apprentissage
+        ```
+
+        Le **meilleur modèle** est celui où l'erreur sur le **test** (ou la validation) est **la plus basse**, pas celui où l'erreur d'entraînement est la plus basse.
+        :::
+
+        :::tip Pourquoi un modèle trop complexe sur-apprend-il?
+        Les données réelles contiennent toujours du **bruit** : erreurs de mesure, cas particuliers, hasard. Un modèle très flexible a **assez de liberté** pour apprendre ce bruit par cœur, comme s'il s'agissait d'une vraie règle. Or ce bruit ne se répète pas dans les nouvelles données, d'où les mauvaises prédictions.
+
+        **Pourquoi un modèle trop simple sous-apprend-il?** Il n'a **pas assez de liberté** pour représenter la vraie relation. Une droite ne pourra jamais bien représenter des données en forme de U, peu importe le nombre d'exemples ou la durée d'entraînement.
+        :::
+
+        ---
+
+        ## 🔧 Les leviers pour contrôler la complexité
+
+        :::info Les boutons qu'on peut tourner
+        | Levier | Pour **augmenter** la complexité | Pour **diminuer** la complexité |
+        |--------|----------------------------------|----------------------------------|
+        | **Nombre de paramètres** | plus de paramètres (ex. courbe de degré 3 plutôt qu'une droite) | moins de paramètres |
+        | **Réseau de neurones** | plus de **neurones** par couche, plus de **couches** | moins de neurones, moins de couches |
+        | **Nombre de features** | ajouter des variables d'entrée | garder seulement les variables utiles |
+        | **Durée d'entraînement** | plus d'époques | **arrêt précoce** : arrêter quand l'erreur de **validation** commence à remonter |
+        | **Régularisation** | moins de régularisation | **plus** de régularisation |
+        :::
+
+        :::note C'est quoi, la régularisation?
+        La **régularisation** consiste à **pénaliser** le modèle quand ses paramètres deviennent trop extrêmes. Pendant l'entraînement, le modèle ne cherche plus seulement à **réduire son erreur** ; il doit aussi **rester simple**.
+
+        **Analogie** : un professeur qui enlève des points quand une réponse est inutilement compliquée. L'élève est encouragé à trouver l'explication **la plus simple** qui fonctionne.
+
+        Concrètement, la régularisation **réduit la complexité effective** du modèle : elle sert à **combattre le sur-apprentissage**.
+        :::
+
+        :::tip Et les données dans tout ça?
+        Avoir **plus de données d'entraînement** ne change pas la complexité du modèle, mais **réduit le risque de sur-apprentissage** : avec 10 000 points, il est beaucoup plus difficile d'apprendre « par cœur » qu'avec 10 points. C'est pour ça que les grands réseaux de neurones (très complexes) ont besoin d'**énormément** de données (voir l'onglet Apprentissage profond, section « Défis »).
+        :::
+
+        :::warning 🩺 Que faire selon le diagnostic?
+        | Diagnostic | Symptôme | Remèdes |
+        |------------|----------|---------|
+        | **Sous-apprentissage** | train faible, test faible | **augmenter** la complexité : modèle plus flexible, plus de paramètres/neurones/couches, ajouter des features utiles, entraîner plus longtemps, moins de régularisation |
+        | **Sur-apprentissage** | train très bon, test nettement moins bon | **diminuer** la complexité : modèle plus simple, moins de paramètres/neurones/couches, plus de régularisation, arrêt précoce ; **ou** ajouter plus de données d'entraînement |
+
+        ⚠️ **Ajouter des données n'aide pas beaucoup en cas de sous-apprentissage** : une droite restera une droite, même avec un million de points.
+        :::
+
+        :::note 🌱 Lien avec l'empreinte écologique
+        Un modèle plus complexe demande **plus de calculs**, donc plus d'énergie, à l'entraînement **et** à chaque prédiction. Le bon réflexe : **commencer par un modèle simple**, et n'augmenter la complexité **que si le score sur le test s'améliore réellement**.
+        :::
+
+    </TabItem>
+
     <TabItem value="deep-learning" label="IA — Apprentissage profond">
         <Mod_DeepLearning />
     </TabItem>
@@ -39,7 +447,12 @@ Cliquez sur le badge pour ouvrir le notebook de cette rencontre dans [Google Col
         <Mod_EmpreinteEcologique />
     </TabItem>
 
-    <TabItem value="scikit-learn" label="IA — Scikit-learn (pratique)">
+    <TabItem value="scikit-learn" label="IA — Scikit-learn (pratique, facultatif)">
+
+        :::warning Non évalué à l'examen papier
+        Cet onglet montre l'**application pratique** des notions (entraînement avec `fit`, prédiction avec `predict`). L'API de scikit-learn **n'est pas évaluée** à l'examen : retenez plutôt les concepts des onglets précédents.
+        :::
+
         <Mod_ScikitLearn />
     </TabItem>
 
@@ -122,7 +535,7 @@ Cliquez sur le badge pour ouvrir le notebook de cette rencontre dans [Google Col
 
         ---
 
-        :::info 🎯 Ce que le TP2 utilise réellement — concentrez-vous ici
+        ::::info 🎯 Ce que le TP2 utilise réellement — concentrez-vous ici
         La solution de référence du TP2 (arbres de la Ville de Québec) se sert **presque exclusivement de Pandas et Matplotlib** :
 
         **Pandas**
@@ -141,7 +554,7 @@ Cliquez sur le badge pour ouvrir le notebook de cette rencontre dans [Google Col
         :::note Structures R9
         Le TP2 privilégie Pandas, mais les **structures de R9** (set, tuple, dictionnaire, compréhension de liste) restent à savoir : elles servent à lire/comprendre du code et sont évaluables à l'examen. La compréhension de liste, en particulier, fait souvent partie des analyses « à la main ».
         :::
-        :::
+        ::::
 
         :::info Auto-évaluation
         **Check-list de compétences**
@@ -180,6 +593,14 @@ Cliquez sur le badge pour ouvrir le notebook de cette rencontre dans [Google Col
         | Matplotlib | Intégrer NumPy avec Matplotlib | ☐ |
         | IA | Expliquer les concepts de base de l'IA et du ML | ☐ |
         | IA | Utiliser scikit-learn pour une tâche simple (régression ou classification) | ☐ |
+        | IA | Distinguer apprentissage supervisé, semi-supervisé et non supervisé (données requises, tâches, exemples) | ☐ |
+        | IA | Expliquer quand on utilise le semi-supervisé (étiqueter coûte cher) | ☐ |
+        | IA | Nommer feature, label, modèle, entraînement (fit) et inférence (prédiction) dans un exemple | ☐ |
+        | IA | Expliquer pourquoi on sépare les données en train/test | ☐ |
+        | IA | Calculer une exactitude (accuracy) et en voir les limites | ☐ |
+        | IA | Diagnostiquer un sous-apprentissage ou un sur-apprentissage à partir des scores train/test | ☐ |
+        | IA | Expliquer le lien entre complexité d'un modèle et sur/sous-apprentissage | ☐ |
+        | IA | Nommer des leviers qui contrôlent la complexité (paramètres, neurones/couches, régularisation, arrêt précoce) | ☐ |
 
         :::note
         Cette auto-évaluation n'est pas soumise — c'est pour vous aider à identifier les points à réviser avant l'examen formatif (R14) et l'examen final (R15).
@@ -265,18 +686,48 @@ Cliquez sur le badge pour ouvrir le notebook de cette rencontre dans [Google Col
         - IA > Machine Learning > Deep Learning (hiérarchie, IA = la plus large)
         - IA faible (spécialisée) vs IA forte (générale) ; Deep Learning = ML avec réseaux de neurones
 
-        **Apprentissage**
-        - **Supervisé** : données étiquetées (on connaît la réponse) → prédiction
-        - **Non supervisé** : données non étiquetées → regroupement/structuration
-        - **Régression** : prédire une **valeur continue** (ex. prix, température)
-        - **Classification** : prédire une **catégorie** (ex. passe/échoue, espèce)
+        **Types d'apprentissage** (la question clé : les exemples ont-ils une **étiquette**, c.-à-d. la bonne réponse?)
+        - **Supervisé** : **toutes** les données sont étiquetées → on apprend à **prédire** la réponse
+          - **Régression** : prédire une **valeur continue** (ex. prix, température)
+          - **Classification** : prédire une **catégorie** (ex. pourriel/normal, passe/échoue, espèce)
+          - Ex. : filtre anti-pourriel, prix d'un logement à partir des ventes passées
+        - **Semi-supervisé** : **peu** de données étiquetées + **beaucoup** de données non étiquetées → le but reste de **prédire** (surtout classification)
+          - Utilisé quand **étiqueter coûte cher** (expert, temps) alors que les données brutes sont faciles à obtenir
+          - Mécanisme simple : **pseudo-étiquetage** (entraîner sur le petit lot étiqueté, prédire le reste, garder les prédictions sûres, réentraîner)
+          - Ex. : imagerie médicale (quelques images annotées par un radiologue), retrouver son chat dans ses photos
+        - **Non supervisé** : **aucune** étiquette → on **découvre une structure** cachée
+          - **Regroupement** (*clustering*), **réduction de dimension**, détection d'anomalies
+          - Les groupes trouvés n'ont **pas de nom** : un humain doit les interpréter ; pas d'exactitude calculable directement
+          - Ex. : segmenter des clients selon leurs achats, regrouper des articles par sujet
 
-        **Vocabulaire**
-        - `feature` (variable d'entrée), `label`/`cible` (à prédire), `modèle`, `entraînement` (fit), `inférence` (prédiction)
-        - **Sur-apprentissage (overfitting)** : le modèle apprend par cœur l'entraînement, échoue sur du nouveau
-        - **Sous-apprentissage (underfitting)** : le modèle est trop simple pour la tâche
-        - **train/test** : séparer les données pour évaluer honnêtement un modèle
-        - Métrique : **exactitude (accuracy)** = bonnes prédictions / total
+        **Entraînement d'un modèle — vocabulaire**
+        - **Feature** (caractéristique) = variable d'**entrée** (notée X) ; **label**/**cible** = la **réponse** à prédire (notée y)
+        - **Modèle** = fonction avec des **paramètres** réglables (ex. pente et ordonnée d'une droite, poids d'un neurone)
+        - **Entraînement** (*fit*) = ajuster les paramètres à partir d'exemples **étiquetés** ; boucle **prédire → mesurer l'erreur → ajuster** ; une **époque** = un passage sur toutes les données d'entraînement
+        - **Inférence** (*predict*, prédiction) = utiliser le modèle **déjà entraîné** sur un **nouvel** exemple (features seulement, paramètres figés)
+
+        **Séparation train/test**
+        - **Train** (≈ 80 %) sert à ajuster les paramètres ; **test** (≈ 20 %) est mis de côté et sert **uniquement** à évaluer à la fin
+        - Pourquoi? Pour mesurer la **généralisation** (performance sur des données **jamais vues**) ; évaluer sur les données d'entraînement est « truqué »
+        - Le modèle ne doit **jamais** voir le test pendant l'entraînement ; la **validation** (R12) sert à choisir les réglages sans toucher au test
+
+        **Métrique**
+        - **Exactitude (accuracy)** = bonnes prédictions / total (ex. 180 / 200 = 90 %) — pour la **classification**
+        - Piège : avec des classes déséquilibrées (ex. 99 % de transactions honnêtes), un modèle qui répond toujours la classe majoritaire a une exactitude élevée mais est inutile
+
+        **Sous-apprentissage vs sur-apprentissage**
+        - **Sous-apprentissage** (*underfitting*) : modèle **trop simple** → score **faible sur train ET sur test**
+        - **Sur-apprentissage** (*overfitting*) : modèle qui **apprend par cœur** (y compris le bruit) → score **très élevé sur train**, **nettement plus faible sur test**
+        - **Bonne généralisation** : scores train et test **bons et proches**
+        - 100 % sur l'entraînement ne prouve rien ; c'est souvent un signal de sur-apprentissage
+
+        **Complexité (capacité) d'un modèle**
+        - **Capacité** = variété des formes/règles qu'un modèle peut apprendre ; augmente avec le **nombre de paramètres**
+        - Schéma : **trop simple** (sous-apprentissage) → **bonne complexité** (généralise) → **trop complexe** (sur-apprentissage)
+        - Quand la complexité augmente : l'erreur d'**entraînement diminue toujours** ; l'erreur de **test** diminue puis **remonte** (courbe en U)
+        - **Leviers** : nombre de paramètres (ex. degré d'une courbe), nombre de **neurones** et de **couches**, nombre de features, durée d'entraînement / **arrêt précoce**, **régularisation** (pénalise les paramètres extrêmes → réduit la complexité)
+        - Remèdes : sous-apprentissage → **augmenter** la complexité ; sur-apprentissage → **diminuer** la complexité, régulariser, arrêt précoce, ou **ajouter des données**
+        - Ajouter des données réduit le risque de sur-apprentissage, mais **ne corrige pas** un sous-apprentissage
 
         **Empreinte écologique de l'IA**
         - Coûts : énergie, calcul, données, eau ; questions éthiques et environnementales des grands modèles
@@ -285,6 +736,7 @@ Cliquez sur le badge pour ouvrir le notebook de cette rencontre dans [Google Col
         - QCM / vrai-faux sur les notions ci-dessus
         - « Quelle est la sortie de ce code ? » (prédiction Pandas/NumPy)
         - Appariement : méthode ↔ effet, code ↔ type de graphique
+        - IA : classer une situation (supervisé / semi-supervisé / non supervisé, régression / classification), diagnostiquer un sur- ou sous-apprentissage à partir de scores train/test, proposer un levier de complexité
         :::
 
     </TabItem>
@@ -437,6 +889,124 @@ Cliquez sur le badge pour ouvrir le notebook de cette rencontre dans [Google Col
                 Traces d'exécution — révision pour l'examen final (volet papier, 2 points de traces/print)
                 ::::
 
+                ---
+
+                ### Exercice - IA sans ordinateur : types d'apprentissage, entraînement et complexité (préparation examen papier)
+
+                Faites cet exercice **sur papier, sans ordinateur et sans documentation**, comme à l'examen final. Les solutions sont cachées sous chaque partie : ne les ouvrez qu'après avoir répondu.
+
+                #### Partie A — Quel type d'apprentissage?
+
+                Pour chaque situation, indiquez le type d'apprentissage (**supervisé**, **semi-supervisé** ou **non supervisé**) et la tâche (**régression**, **classification**, **regroupement**, **réduction de dimension** ou **détection d'anomalies**). Justifiez en une phrase.
+
+                1. Un service de courriel dispose de 10 000 courriels déjà marqués « pourriel » ou « normal » par ses utilisateurs, et veut trier automatiquement les nouveaux courriels.
+                2. Une épicerie veut former des groupes parmi ses 50 000 clients selon leurs achats, sans avoir de catégories prédéfinies.
+                3. Un hôpital dispose de 200 radiographies annotées par un radiologue (« pneumonie » ou « saine ») et de 20 000 radiographies non annotées. Il veut détecter la pneumonie.
+                4. Prédire la température (en °C) de demain à partir de 30 ans de relevés météo.
+                5. Un capteur produit 300 mesures par seconde ; on veut les résumer en 2 axes pour les afficher dans un graphique.
+                6. Vous identifiez votre chat sur 5 photos, et l'application le retrouve dans vos 3 000 autres photos.
+                7. Estimer le prix de vente d'un appartement (superficie, quartier, étage) à partir des ventes des dernières années.
+                8. Une banque veut repérer des transactions inhabituelles, sans avoir d'exemples de fraudes confirmées.
+                9. Un biologiste possède 50 enregistrements de chants d'oiseaux identifiés par un expert et 10 000 enregistrements non identifiés. Il veut reconnaître l'espèce de chaque enregistrement.
+                10. Un site de nouvelles veut regrouper ses articles par sujet, sans liste de sujets établie à l'avance.
+
+                <details>
+                <summary>Solution — Partie A</summary>
+
+                | # | Type | Tâche | Justification |
+                |---|------|-------|---------------|
+                | 1 | Supervisé | Classification | tous les courriels ont une étiquette ; la réponse est une catégorie |
+                | 2 | Non supervisé | Regroupement | aucune étiquette ; on cherche des groupes |
+                | 3 | Semi-supervisé | Classification | peu d'étiquettes (coûteuses : il faut un radiologue), beaucoup de données non étiquetées |
+                | 4 | Supervisé | Régression | dans l'historique, on connaît la température de chaque lendemain ; c'est un nombre continu |
+                | 5 | Non supervisé | Réduction de dimension | pas d'étiquette ; on résume beaucoup de variables en peu |
+                | 6 | Semi-supervisé | Classification | 5 photos étiquetées, 3 000 non étiquetées |
+                | 7 | Supervisé | Régression | prix connus pour les ventes passées ; le prix est un nombre continu |
+                | 8 | Non supervisé | Détection d'anomalies | aucun exemple étiqueté de fraude ; on repère ce qui ne ressemble pas au reste |
+                | 9 | Semi-supervisé | Classification | 50 étiquettes d'expert, 10 000 enregistrements sans étiquette |
+                | 10 | Non supervisé | Regroupement | aucune liste de sujets (pas d'étiquette) ; on forme des groupes |
+
+                </details>
+
+                #### Partie B — Vocabulaire et exactitude
+
+                Un cégep veut prédire si un·e étudiant·e **réussira** le cours 420-SN1 à partir de son **nombre d'heures d'étude par semaine**, du **nombre d'exercices faits** et de son **taux de présence**. On dispose des résultats des 600 étudiant·es des années passées.
+
+                1. Quelles sont les **features**? Quel est le **label**?
+                2. Quel est le type d'apprentissage et la tâche?
+                3. On garde 480 étudiant·es pour l'entraînement. Combien en reste-t-il pour le test, et quel pourcentage cela représente-t-il?
+                4. Sur l'ensemble de test, le modèle a raison pour 102 étudiant·es. Quelle est son **exactitude**?
+                5. Une collègue propose d'évaluer le modèle sur les 480 étudiant·es d'entraînement « parce qu'il y a plus de données ». Pourquoi est-ce une mauvaise idée?
+                6. L'année suivante, on utilise le modèle pour un nouvel étudiant. S'agit-il d'entraînement ou d'inférence? Les paramètres du modèle changent-ils?
+
+                <details>
+                <summary>Solution — Partie B</summary>
+
+                1. Features : heures d'étude, nombre d'exercices faits, taux de présence. Label : réussite (oui / non).
+                2. Supervisé (on connaît le résultat des années passées), classification (la réponse est une catégorie : réussite ou échec).
+                3. 600 − 480 = **120** étudiant·es, soit 120 / 600 = **20 %** (séparation 80 % / 20 %).
+                4. 102 / 120 = **0,85**, soit **85 %**.
+                5. Le modèle a déjà vu ces étudiant·es pendant l'entraînement : un modèle qui les aurait appris par cœur aurait un excellent score sans savoir généraliser. Il faut évaluer sur des données **jamais vues** (le test).
+                6. Inférence (prédiction). Les paramètres sont **figés** : ils ne changent pas.
+
+                </details>
+
+                #### Partie C — Diagnostic : sous-apprentissage, sur-apprentissage ou bon modèle?
+
+                Pour chaque scénario, posez le diagnostic et proposez **un** levier pour améliorer le modèle (s'il y a lieu).
+
+                1. Un modèle très flexible obtient **100 %** d'exactitude sur l'entraînement et **64 %** sur le test.
+                2. On utilise une **droite** pour représenter des données qui ont clairement une forme de **U**. L'erreur est élevée sur l'entraînement **et** sur le test.
+                3. Un petit réseau de neurones à 2 couches obtient **91 %** sur l'entraînement et **89 %** sur le test.
+                4. Un réseau de **50 couches** de 1 000 neurones chacune est entraîné sur seulement **300 images**. Il obtient 99,8 % sur l'entraînement et 55 % sur le test.
+                5. Pour un problème à 2 classes équilibrées (50 % / 50 %), un modèle obtient **52 %** sur l'entraînement et **50 %** sur le test.
+                6. Pendant l'entraînement, l'erreur sur l'entraînement **diminue à chaque époque**. L'erreur sur la validation diminue jusqu'à l'époque 15, puis **remonte**. Que se passe-t-il après l'époque 15? Que faire?
+
+                <details>
+                <summary>Solution — Partie C</summary>
+
+                1. **Sur-apprentissage** (grand écart train/test). Diminuer la complexité, ajouter de la régularisation ou plus de données.
+                2. **Sous-apprentissage** : la droite est trop simple pour une forme en U. Augmenter la complexité (ex. une courbe de degré 2). Ajouter des données n'aiderait pas.
+                3. **Bon modèle** : les deux scores sont bons et proches. Rien à changer.
+                4. **Sur-apprentissage** : modèle énorme (très grande capacité) pour très peu de données. Réduire le nombre de couches/neurones, régulariser, arrêt précoce ou obtenir beaucoup plus d'images.
+                5. **Sous-apprentissage** : le modèle ne fait pas mieux que le hasard (50 %), même sur l'entraînement. Augmenter la complexité ou ajouter des features utiles.
+                6. Après l'époque 15, le modèle commence à **sur-apprendre** (il apprend le bruit de l'entraînement). On applique l'**arrêt précoce** : on garde le modèle de l'époque 15.
+
+                </details>
+
+                #### Partie D — Vrai ou faux? Justifiez.
+
+                1. En apprentissage non supervisé, on mesure l'exactitude en comparant les prédictions aux étiquettes.
+                2. L'apprentissage semi-supervisé est utile quand obtenir des étiquettes coûte cher.
+                3. Un modèle qui obtient 100 % sur ses données d'entraînement est forcément un bon modèle.
+                4. Quand on augmente la complexité d'un modèle, son erreur d'entraînement a tendance à diminuer.
+                5. Ajouter des données d'entraînement corrige un sous-apprentissage.
+                6. La régularisation sert surtout à combattre le sur-apprentissage.
+                7. Pendant l'inférence, les paramètres du modèle sont modifiés.
+                8. Si on manque de données, on peut utiliser l'ensemble de test pour ajuster les paramètres du modèle.
+                9. Ajouter des couches et des neurones à un réseau augmente sa capacité.
+                10. Un détecteur de fraude qui a 99 % d'exactitude est forcément utile.
+
+                <details>
+                <summary>Solution — Partie D</summary>
+
+                1. **Faux** : en non supervisé, il n'y a pas d'étiquettes, donc pas d'exactitude calculable directement.
+                2. **Vrai** : on profite de beaucoup de données non étiquetées avec seulement quelques étiquettes.
+                3. **Faux** : c'est souvent un signe de sur-apprentissage ; seul le score sur le test compte.
+                4. **Vrai** : un modèle plus flexible colle mieux aux exemples d'entraînement (c'est l'erreur de **test** qui finit par remonter).
+                5. **Faux** : un modèle trop simple reste trop simple ; il faut augmenter sa complexité.
+                6. **Vrai** : elle pénalise les paramètres extrêmes et réduit la complexité effective.
+                7. **Faux** : les paramètres sont figés pendant l'inférence ; ils changent seulement pendant l'entraînement.
+                8. **Faux** : le test doit rester « jamais vu », sinon l'évaluation est truquée.
+                9. **Vrai** : plus de paramètres = plus de capacité (et plus de risque de sur-apprentissage).
+                10. **Faux** : si 99 % des transactions sont honnêtes, un modèle qui répond toujours « honnête » a 99 % d'exactitude sans détecter aucune fraude.
+
+                </details>
+
+                :::note Notions visées
+                Types d'apprentissage (supervisé, semi-supervisé, non supervisé), vocabulaire de l'entraînement (feature, label, fit, inférence), train/test, exactitude, sous/sur-apprentissage, complexité d'un modèle et leviers — préparation examen papier (théorie IA)
+                :::
+
             </TabItem>
 
             <TabItem value="2" label="🏫 Activités à faire en classe">
@@ -521,6 +1091,55 @@ Cliquez sur le badge pour ouvrir le notebook de cette rencontre dans [Google Col
 
                 Préparez un bref résumé de votre discussion à partager avec la classe.
                 :::
+
+                ---
+
+                :::info Atelier IA sur papier — Le juste niveau de complexité (en équipe, sans ordinateur)
+                En équipes de 2-3 personnes, **sur une feuille quadrillée**, sans ordinateur.
+
+                **Étape 1 — Les données d'entraînement.** On connaît les heures d'étude par semaine et la note finale de 8 étudiant·es :
+
+                | Heures d'étude | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 |
+                |----------------|---|---|---|---|---|---|---|---|
+                | Note (%) | 52 | 58 | 61 | 70 | 68 | 79 | 77 | 88 |
+
+                Placez les 8 points sur un graphique (heures en x, note en y).
+
+                **Étape 2 — Trois modèles.** Sur le même graphique, tracez à la main, de trois couleurs différentes :
+                - **Modèle A** : une ligne **horizontale** à la note moyenne (≈ 69 %) ;
+                - **Modèle B** : la **droite** qui suit le mieux la tendance (à l'œil) ;
+                - **Modèle C** : une courbe qui passe **exactement par les 8 points** (elle doit zigzaguer).
+
+                Pour chaque modèle, répondez : combien de points d'entraînement sont **exactement** sur la courbe? Quel modèle a la plus petite erreur d'**entraînement**?
+
+                **Étape 3 — Les données de test.** L'enseignant·e révèle 3 nouveaux étudiant·es (jamais vus) :
+
+                | Heures d'étude | 2,5 | 5,5 | 7,5 |
+                |----------------|-----|-----|-----|
+                | Note (%) | 57 | 74 | 85 |
+
+                Placez-les d'une autre couleur. Pour chaque modèle, estimez à l'œil l'écart entre la prédiction et la vraie note. Quel modèle a la plus petite erreur de **test**?
+
+                **Étape 4 — Discussion.**
+                1. Lequel des modèles est en **sous-apprentissage**? en **sur-apprentissage**? Lequel **généralise**?
+                2. Combien de paramètres a chaque modèle (A : 1, B : 2, C : au moins 8)? Quel est le lien avec la complexité?
+                3. Si on avait 800 étudiant·es au lieu de 8, le modèle C serait-il encore capable de passer par tous les points sans zigzaguer de façon absurde? Qu'est-ce que ça dit sur le rôle de la quantité de données?
+                4. **Défi** : chaque équipe invente **une situation** de la vie courante pour chacun des trois types (supervisé, semi-supervisé, non supervisé), puis l'échange avec une autre équipe, qui doit les classer.
+
+                <details>
+                <summary>Éléments de réponse</summary>
+
+                - Le modèle C a une erreur d'entraînement **nulle** (il passe par les 8 points), mais ses zigzags le rendent peu fiable entre les points : c'est le **sur-apprentissage**.
+                - Le modèle A ignore les heures d'étude : erreur élevée partout (ex. il prédit 69 % pour 57 % et 85 %) → **sous-apprentissage**.
+                - Le modèle B (environ note ≈ 4,75 × heures + 47,75) prédit ≈ 60 %, 74 % et 83 % pour les 3 nouveaux : très proche des vraies notes → il **généralise**.
+                - Plus de paramètres = plus de capacité ; la bonne complexité est celle qui donne la plus petite erreur de **test**, pas d'entraînement.
+                - Avec beaucoup plus de données, il devient beaucoup plus difficile d'apprendre « par cœur » : plus de données réduit le risque de sur-apprentissage.
+
+                </details>
+
+                :::note Notions visées
+                Complexité d'un modèle, sous/sur-apprentissage, erreur d'entraînement vs erreur de test, généralisation, types d'apprentissage — théorie IA évaluée à l'examen papier
+                ::::
 
                 ---
 
