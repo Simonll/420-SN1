@@ -43,7 +43,7 @@ Cliquez sur le badge pour ouvrir le notebook de cette rencontre dans [Google Col
 
     <TabItem value="types-apprentissage" label="IA — Types d'apprentissage">
 
-        :::info 🎯 L'idée de départ : apprendre à partir d'exemples
+        :::info  L'idée de départ : apprendre à partir d'exemples
         En apprentissage machine, on ne programme pas les règles à la main (« si le courriel contient *gratuit*, alors c'est un pourriel »). On donne plutôt des **exemples** à un programme, et il **trouve lui-même les règles**.
 
         La grande question qui détermine le **type d'apprentissage** est :
@@ -55,7 +55,7 @@ Cliquez sur le badge pour ouvrir le notebook de cette rencontre dans [Google Col
         - **Aucun** → apprentissage **non supervisé**
         :::
 
-        :::note 🏷️ C'est quoi, une étiquette (label)?
+        :::note  C'est quoi, une étiquette (label)?
         L'**étiquette** (*label*, ou **cible**) est la **réponse** que l'on voudrait que le modèle trouve.
 
         | Exemple (donnée d'entrée) | Étiquette (réponse) |
@@ -65,12 +65,12 @@ Cliquez sur le badge pour ouvrir le notebook de cette rencontre dans [Google Col
         | Une maison (superficie, quartier, nb de chambres) | son prix de vente : 425 000 $ |
         | Une radiographie pulmonaire | « pneumonie » ou « saine » |
 
-        ⚠️ Obtenir des étiquettes coûte souvent **cher** : il faut un humain (parfois un expert, comme un radiologue) qui regarde chaque exemple et inscrit la réponse.
+         Obtenir des étiquettes coûte souvent **cher** : il faut un humain (parfois un expert, comme un radiologue) qui regarde chaque exemple et inscrit la réponse.
         :::
 
         ---
 
-        ## 1. Apprentissage supervisé 👩‍🏫
+        ## 1. Apprentissage supervisé 
 
         :::info Définition
         Le modèle apprend à partir d'exemples **tous étiquetés** : pour chaque exemple, on connaît la bonne réponse. Il apprend à associer les **entrées** à la **réponse**, pour ensuite **prédire** la réponse de nouveaux exemples.
@@ -86,7 +86,7 @@ Cliquez sur le badge pour ouvrir le notebook de cette rencontre dans [Google Col
 
         **Truc pour les distinguer** : si la réponse est une **quantité** (on peut dire « un peu plus » ou « un peu moins » : prix, °C, nombre de vélos) → **régression**. Si la réponse est **un choix dans une liste** (même si on le code 0/1) → **classification**.
 
-        ⚠️ **Piège de nom** : malgré son nom, la **régression logistique** est un modèle de **classification** (elle prédit une catégorie, ex. l'espèce d'iris en R12).
+         **Piège de nom** : malgré son nom, la **régression logistique** est un modèle de **classification** (elle prédit une catégorie, ex. l'espèce d'iris en R12).
         :::
 
         :::note Exemples de la vie courante
@@ -99,7 +99,7 @@ Cliquez sur le badge pour ouvrir le notebook de cette rencontre dans [Google Col
 
         ---
 
-        ## 2. Apprentissage non supervisé 🔍
+        ## 2. Apprentissage non supervisé 
 
         :::info Définition
         Le modèle reçoit des exemples **sans aucune étiquette**. Personne ne lui dit quelle est la bonne réponse. Il doit **découvrir seul une structure** cachée dans les données : des groupes, des ressemblances, des cas inhabituels.
@@ -123,7 +123,7 @@ Cliquez sur le badge pour ouvrir le notebook de cette rencontre dans [Google Col
 
         ---
 
-        ## 3. Apprentissage semi-supervisé 🧩
+        ## 3. Apprentissage semi-supervisé 
 
         :::info Définition
         Le modèle apprend à partir d'un **petit nombre d'exemples étiquetés** et d'un **grand nombre d'exemples non étiquetés**. Le but reste le même qu'en supervisé : **prédire une réponse** (classification ou régression). Les exemples non étiquetés aident le modèle à mieux comprendre la « forme » des données.
@@ -136,10 +136,10 @@ Cliquez sur le badge pour ouvrir le notebook de cette rencontre dans [Google Col
         :::tip Un mécanisme simple : le pseudo-étiquetage
         ```mermaid
         flowchart LR
-            A["🏷️ Petit lot étiqueté<br/><sub>ex. 200 radiographies<br/>annotées par un radiologue</sub>"] --> B["🧠 Entraîner un<br/>premier modèle"]
-            B --> C["🔮 Prédire sur le grand lot<br/>non étiqueté<br/><sub>ex. 20 000 radiographies</sub>"]
-            C --> D["✅ Garder seulement les prédictions<br/>dont le modèle est très sûr<br/><sub>= pseudo-étiquettes</sub>"]
-            D --> E["➕ Ajouter ces exemples<br/>au lot étiqueté"]
+            A[" Petit lot étiqueté<br/><sub>ex. 200 radiographies<br/>annotées par un radiologue</sub>"] --> B[" Entraîner un<br/>premier modèle"]
+            B --> C[" Prédire sur le grand lot<br/>non étiqueté<br/><sub>ex. 20 000 radiographies</sub>"]
+            C --> D[" Garder seulement les prédictions<br/>dont le modèle est très sûr<br/><sub>= pseudo-étiquettes</sub>"]
+            D --> E[" Ajouter ces exemples<br/>au lot étiqueté"]
             E --> B
         ```
         On répète la boucle : le lot étiqueté grossit, et le modèle s'améliore sans qu'un humain ait à tout annoter.
@@ -154,7 +154,7 @@ Cliquez sur le badge pour ouvrir le notebook de cette rencontre dans [Google Col
 
         ---
 
-        ## 📋 Tableau comparatif (à connaître pour l'examen)
+        ##  Tableau comparatif (à connaître pour l'examen)
 
         :::info Supervisé vs semi-supervisé vs non supervisé
         | | **Supervisé** | **Semi-supervisé** | **Non supervisé** |
@@ -168,13 +168,13 @@ Cliquez sur le badge pour ouvrir le notebook de cette rencontre dans [Google Col
         | **Exemple** | filtre anti-pourriel | retrouver son chat dans ses photos | segmenter des clients |
         :::
 
-        :::tip 🧭 Méthode en 2 questions pour classer une situation
+        :::tip  Méthode en 2 questions pour classer une situation
         ```mermaid
         flowchart TD
             Q1{"Les exemples ont-ils<br/>une étiquette (la réponse)?"}
-            Q1 -->|"Oui, tous"| S["👩‍🏫 Supervisé"]
-            Q1 -->|"Seulement une petite partie"| SS["🧩 Semi-supervisé"]
-            Q1 -->|"Aucun"| NS["🔍 Non supervisé"]
+            Q1 -->|"Oui, tous"| S[" Supervisé"]
+            Q1 -->|"Seulement une petite partie"| SS[" Semi-supervisé"]
+            Q1 -->|"Aucun"| NS[" Non supervisé"]
             S --> Q2{"La réponse est…"}
             Q2 -->|"une quantité numérique"| R["Régression"]
             Q2 -->|"un choix dans une liste<br/>(une catégorie)"| C["Classification"]
@@ -189,7 +189,7 @@ Cliquez sur le badge pour ouvrir le notebook de cette rencontre dans [Google Col
 
     <TabItem value="entrainement" label="IA — Entraîner un modèle">
 
-        :::info 🧠 Qu'est-ce qu'un modèle?
+        :::info  Qu'est-ce qu'un modèle?
         Un **modèle** est une sorte de **fonction** : on lui donne des **entrées**, il produit une **sortie** (une prédiction).
 
         Ce qui le rend « intelligent », c'est qu'il possède des **paramètres** (des nombres réglables, comme la pente et l'ordonnée à l'origine d'une droite, ou les poids d'un neurone) et que ces paramètres sont **ajustés automatiquement à partir d'exemples**. C'est ce qu'on appelle l'**entraînement**.
@@ -197,7 +197,7 @@ Cliquez sur le badge pour ouvrir le notebook de cette rencontre dans [Google Col
         Rappel R12 : une régression linéaire `consommation = 0.00408 × poids − 0.903` est un modèle ; ses deux paramètres (0.00408 et −0.903) ont été trouvés par l'entraînement.
         :::
 
-        :::tip 📏 Lire une droite de régression (sans code, à savoir pour l'examen)
+        :::tip  Lire une droite de régression (sans code, à savoir pour l'examen)
         Modèle de R12 : `conso = 0,00408 × poids − 0,903` (poids en lb, conso en L/100 km).
 
         - **Signe de la pente** : 0,00408 est **positif** → plus la voiture est **lourde**, plus elle **consomme**.
@@ -209,7 +209,7 @@ Cliquez sur le badge pour ouvrir le notebook de cette rencontre dans [Google Col
 
         ## 1. Le vocabulaire de base
 
-        :::tip Exemple fil rouge : reconnaître des fruits 🍎🍊
+        :::tip Exemple fil rouge : reconnaître des fruits 
         On veut un modèle qui reconnaît si un fruit est une **pomme** ou une **orange**, à partir de son poids et de sa couleur. Voici nos données :
 
         | Poids (g) | Couleur (0 = rouge, 1 = orange) | Rugosité de la peau (0 à 10) | **Fruit** |
@@ -265,8 +265,8 @@ Cliquez sur le badge pour ouvrir le notebook de cette rencontre dans [Google Col
 
         ```mermaid
         flowchart LR
-            A["1️⃣ Prédire<br/><sub>avec les paramètres actuels</sub>"] --> B["2️⃣ Comparer<br/><sub>prédiction vs vraie réponse<br/>→ calculer l'erreur</sub>"]
-            B --> C["3️⃣ Ajuster<br/><sub>modifier un peu les paramètres<br/>pour réduire l'erreur</sub>"]
+            A["1 Prédire<br/><sub>avec les paramètres actuels</sub>"] --> B["2 Comparer<br/><sub>prédiction vs vraie réponse<br/>→ calculer l'erreur</sub>"]
+            B --> C["3 Ajuster<br/><sub>modifier un peu les paramètres<br/>pour réduire l'erreur</sub>"]
             C --> A
         ```
 
@@ -293,8 +293,8 @@ Cliquez sur le badge pour ouvrir le notebook de cette rencontre dans [Google Col
 
         ```mermaid
         flowchart LR
-            D["📦 Toutes les données étiquetées<br/>(100 %)"] --> T["🏋️ Ensemble d'entraînement (train)<br/>≈ 80 %<br/><sub>sert à ajuster les paramètres (fit)</sub>"]
-            D --> E["📝 Ensemble de test<br/>≈ 20 %<br/><sub>mis de côté, utilisé une seule fois<br/>à la fin pour évaluer</sub>"]
+            D[" Toutes les données étiquetées<br/>(100 %)"] --> T[" Ensemble d'entraînement (train)<br/>≈ 80 %<br/><sub>sert à ajuster les paramètres (fit)</sub>"]
+            D --> E[" Ensemble de test<br/>≈ 20 %<br/><sub>mis de côté, utilisé une seule fois<br/>à la fin pour évaluer</sub>"]
         ```
 
         **Règle d'or** : le modèle ne doit **jamais** voir les données de test pendant l'entraînement. Sinon, l'évaluation est « truquée », comme si l'élève avait vu l'examen d'avance.
@@ -325,7 +325,7 @@ Cliquez sur le badge pour ouvrir le notebook de cette rencontre dans [Google Col
 
         exactitude = 990 / 1 000 = **99 %**… et il n'a **détecté aucune fraude**!
 
-        ➡️ Quand une classe est beaucoup plus fréquente que l'autre, l'exactitude seule peut être trompeuse. Il faut regarder aussi si le modèle trouve les cas rares.
+         Quand une classe est beaucoup plus fréquente que l'autre, l'exactitude seule peut être trompeuse. Il faut regarder aussi si le modèle trouve les cas rares.
         :::
 
         ---
@@ -342,7 +342,7 @@ Cliquez sur le badge pour ouvrir le notebook de cette rencontre dans [Google Col
         | **Analogie fruits** | « tout ce qui pèse plus de 100 g est une pomme » | utilise couleur + rugosité | « une pomme pèse exactement 150 g ou 170 g » |
         :::
 
-        :::tip 🩺 Le diagnostic : comparer train et test
+        :::tip  Le diagnostic : comparer train et test
         C'est **l'écart entre le score d'entraînement et le score de test** qui permet de poser le diagnostic :
 
         | Score train | Score test | Diagnostic |
@@ -353,20 +353,20 @@ Cliquez sur le badge pour ouvrir le notebook de cette rencontre dans [Google Col
 
         **« Faible » par rapport à quoi?** Pour juger un score, comparez-le à un **modèle de base** : le **hasard**. Avec **2 classes équilibrées** (50 % / 50 %), répondre au hasard donne déjà environ **50 %**. Un modèle à 52 % ne fait donc presque pas mieux que le hasard ; 60 % est faible, 90 % est bon.
 
-        ⚠️ Un score de 100 % sur les données d'entraînement **ne prouve rien** : c'est même souvent un **signal d'alarme** de sur-apprentissage. Seul le score sur le **test** indique si le modèle généralise.
+         Un score de 100 % sur les données d'entraînement **ne prouve rien** : c'est même souvent un **signal d'alarme** de sur-apprentissage. Seul le score sur le **test** indique si le modèle généralise.
         :::
 
     </TabItem>
 
     <TabItem value="complexite" label="IA — Complexité d'un modèle">
 
-        :::info 🎚️ Qu'est-ce que la complexité (ou capacité) d'un modèle?
+        :::info  Qu'est-ce que la complexité (ou capacité) d'un modèle?
         La **capacité** d'un modèle, c'est la **variété de formes ou de règles qu'il est capable d'apprendre**. Plus un modèle a de **paramètres réglables**, plus il est **flexible**, donc plus il est **complexe**.
 
         **Analogie** : dessiner la tendance d'un nuage de points avec…
-        - une **règle droite** 📏 : on ne peut tracer que des droites (faible capacité, 2 paramètres) ;
+        - une **règle droite**  : on ne peut tracer que des droites (faible capacité, 2 paramètres) ;
         - une **règle flexible** de dessinateur : on peut tracer des courbes douces (capacité moyenne) ;
-        - un **crayon à main levée** ✏️ : on peut passer par **tous** les points, même en zigzag (très grande capacité).
+        - un **crayon à main levée**  : on peut passer par **tous** les points, même en zigzag (très grande capacité).
         :::
 
         :::note Exemple : prédire une note à partir des heures d'étude
@@ -383,13 +383,13 @@ Cliquez sur le badge pour ouvrir le notebook de cette rencontre dans [Google Col
 
         ---
 
-        ## 🧠 Le schéma mental à retenir
+        ##  Le schéma mental à retenir
 
         :::info Trop simple → juste bien → trop complexe
         ```mermaid
         flowchart LR
-            A["📏 Modèle TROP SIMPLE<br/><sub>peu de paramètres</sub><br/><br/>❌ Sous-apprentissage<br/><sub>train faible · test faible</sub>"] -->|"↑ complexité"| B["🎯 BONNE COMPLEXITÉ<br/><br/>✅ Généralise<br/><sub>train bon · test bon</sub>"]
-            B -->|"↑ complexité"| C["✏️ Modèle TROP COMPLEXE<br/><sub>beaucoup de paramètres</sub><br/><br/>❌ Sur-apprentissage<br/><sub>train excellent · test faible</sub>"]
+            A[" Modèle TROP SIMPLE<br/><sub>peu de paramètres</sub><br/><br/> Sous-apprentissage<br/><sub>train faible · test faible</sub>"] -->|"↑ complexité"| B[" BONNE COMPLEXITÉ<br/><br/> Généralise<br/><sub>train bon · test bon</sub>"]
+            B -->|"↑ complexité"| C[" Modèle TROP COMPLEXE<br/><sub>beaucoup de paramètres</sub><br/><br/> Sur-apprentissage<br/><sub>train excellent · test faible</sub>"]
         ```
 
         Quand on **augmente** la complexité d'un modèle :
@@ -423,7 +423,7 @@ Cliquez sur le badge pour ouvrir le notebook de cette rencontre dans [Google Col
 
         ---
 
-        ## 🔧 Les leviers pour contrôler la complexité
+        ##  Les leviers pour contrôler la complexité
 
         :::info Les boutons qu'on peut tourner
         | Levier | Pour **augmenter** la complexité | Pour **diminuer** la complexité |
@@ -447,16 +447,16 @@ Cliquez sur le badge pour ouvrir le notebook de cette rencontre dans [Google Col
         Avoir **plus de données d'entraînement** ne change pas la complexité du modèle, mais **réduit le risque de sur-apprentissage** : avec 10 000 points, il est beaucoup plus difficile d'apprendre « par cœur » qu'avec 10 points. C'est pour ça que les grands réseaux de neurones (très complexes) ont besoin d'**énormément** de données (voir l'onglet Apprentissage profond, section « Défis »).
         :::
 
-        :::warning 🩺 Que faire selon le diagnostic?
+        :::warning  Que faire selon le diagnostic?
         | Diagnostic | Symptôme | Remèdes |
         |------------|----------|---------|
         | **Sous-apprentissage** | train faible, test faible | **augmenter** la complexité : modèle plus flexible, plus de paramètres/neurones/couches, ajouter des features utiles, entraîner plus longtemps, moins de régularisation |
         | **Sur-apprentissage** | train très bon, test nettement moins bon | **diminuer** la complexité : modèle plus simple, moins de paramètres/neurones/couches, plus de régularisation, arrêt précoce ; **ou** ajouter plus de données d'entraînement |
 
-        ⚠️ **Ajouter des données n'aide pas beaucoup en cas de sous-apprentissage** : une droite restera une droite, même avec un million de points.
+         **Ajouter des données n'aide pas beaucoup en cas de sous-apprentissage** : une droite restera une droite, même avec un million de points.
         :::
 
-        :::note 🌱 Lien avec l'empreinte écologique
+        :::note  Lien avec l'empreinte écologique
         Un modèle plus complexe demande **plus de calculs**, donc plus d'énergie, à l'entraînement **et** à chaque prédiction. Le bon réflexe : **commencer par un modèle simple**, et n'augmenter la complexité **que si le score de validation s'améliore réellement**.
         :::
 
@@ -558,7 +558,7 @@ Cliquez sur le badge pour ouvrir le notebook de cette rencontre dans [Google Col
 
         ---
 
-        ::::info 🎯 Ce que le TP2 utilise réellement — concentrez-vous ici
+        ::::info  Ce que le TP2 utilise réellement — concentrez-vous ici
         La solution de référence du TP2 (arbres de la Ville de Québec) se sert **presque exclusivement de Pandas et Matplotlib** :
 
         **Pandas**
@@ -584,46 +584,46 @@ Cliquez sur le badge pour ouvrir le notebook de cette rencontre dans [Google Col
 
         Pour chaque notion, cochez si vous pouvez l'utiliser seul·e :
 
-        | Catégorie | Compétence | ✅ / ❌ |
+        | Catégorie | Compétence | Maîtrisé ? |
         |-----------|-----------|--------|
-        | Collections | Créer et manipuler un set | ☐ |
-        | Collections | Créer et manipuler un tuple | ☐ |
-        | Collections | Créer et manipuler un dictionnaire (y compris imbriqué) | ☐ |
-        | Collections | Utiliser la compréhension de liste | ☐ |
-        | Fichiers | Lire un CSV avec Pandas | ☐ |
-        | Fichiers | Écrire un CSV avec Pandas | ☐ |
-        | Fichiers | Lire un JSON avec Pandas | ☐ |
-        | Fichiers | Écrire un JSON avec Pandas | ☐ |
-        | Pandas | Explorer un DataFrame (info, dtypes, describe, head) | ☐ |
-        | Pandas | Sélectionner des colonnes et des lignes (loc, iloc) | ☐ |
-        | Pandas | Filtrer des données (conditions simples et complexes) | ☐ |
-        | Pandas | Trier des données (sort_values) | ☐ |
-        | Pandas | Parcourir un DataFrame (itérations, avec précaution) | ☐ |
-        | Pandas | Nettoyer des données (dropna, fillna, drop_duplicates) | ☐ |
-        | Pandas | Transformer des données (nouvelles colonnes, apply, map) | ☐ |
-        | Pandas | Effectuer des regroupements et agrégations (groupby) | ☐ |
-        | NumPy | Créer et inspecter un tableau NumPy (array, shape, dtype, ndim, size) | ☐ |
-        | NumPy | Effectuer des opérations vectorisées (add, multiply, etc.) | ☐ |
-        | NumPy | Utiliser le broadcasting | ☐ |
-        | NumPy | Créer et appliquer des masques booléens | ☐ |
-        | NumPy | Reshape, transpose, concaténer des tableaux | ☐ |
-        | NumPy | Sauvegarder et charger des tableaux (.npy) | ☐ |
-        | Matplotlib | Créer un graphique de base (plot, scatter, bar, hist) | ☐ |
-        | Matplotlib | Personnaliser un graphique (titre, labels, légende, styles) | ☐ |
-        | Matplotlib | Sauvegarder un graphique (savefig) | ☐ |
-        | Matplotlib | Histogramme : `bins = np.linspace(min, max, nbins+1)` (intervalles réguliers) | ☐ |
-        | Matplotlib | Distinguer un diagramme à barres d'un histogramme | ☐ |
-        | Matplotlib | Intégrer NumPy avec Matplotlib | ☐ |
-        | IA | Expliquer les concepts de base de l'IA et du ML | ☐ |
-        | IA | Utiliser scikit-learn pour une tâche simple (régression ou classification) | ☐ |
-        | IA | Distinguer apprentissage supervisé, semi-supervisé et non supervisé (données requises, tâches, exemples) | ☐ |
-        | IA | Expliquer quand on utilise le semi-supervisé (étiqueter coûte cher) | ☐ |
-        | IA | Nommer feature, label, modèle, entraînement (fit) et inférence (prédiction) dans un exemple | ☐ |
-        | IA | Expliquer pourquoi on sépare les données en train/test | ☐ |
-        | IA | Calculer une exactitude (accuracy) et en voir les limites | ☐ |
-        | IA | Diagnostiquer un sous-apprentissage ou un sur-apprentissage à partir des scores train/test | ☐ |
-        | IA | Expliquer le lien entre complexité d'un modèle et sur/sous-apprentissage | ☐ |
-        | IA | Nommer des leviers qui contrôlent la complexité (paramètres, neurones/couches, régularisation, arrêt précoce) | ☐ |
+        | Collections | Créer et manipuler un set |  |
+        | Collections | Créer et manipuler un tuple |  |
+        | Collections | Créer et manipuler un dictionnaire (y compris imbriqué) |  |
+        | Collections | Utiliser la compréhension de liste |  |
+        | Fichiers | Lire un CSV avec Pandas |  |
+        | Fichiers | Écrire un CSV avec Pandas |  |
+        | Fichiers | Lire un JSON avec Pandas |  |
+        | Fichiers | Écrire un JSON avec Pandas |  |
+        | Pandas | Explorer un DataFrame (info, dtypes, describe, head) |  |
+        | Pandas | Sélectionner des colonnes et des lignes (loc, iloc) |  |
+        | Pandas | Filtrer des données (conditions simples et complexes) |  |
+        | Pandas | Trier des données (sort_values) |  |
+        | Pandas | Parcourir un DataFrame (itérations, avec précaution) |  |
+        | Pandas | Nettoyer des données (dropna, fillna, drop_duplicates) |  |
+        | Pandas | Transformer des données (nouvelles colonnes, apply, map) |  |
+        | Pandas | Effectuer des regroupements et agrégations (groupby) |  |
+        | NumPy | Créer et inspecter un tableau NumPy (array, shape, dtype, ndim, size) |  |
+        | NumPy | Effectuer des opérations vectorisées (add, multiply, etc.) |  |
+        | NumPy | Utiliser le broadcasting |  |
+        | NumPy | Créer et appliquer des masques booléens |  |
+        | NumPy | Reshape, transpose, concaténer des tableaux |  |
+        | NumPy | Sauvegarder et charger des tableaux (.npy) |  |
+        | Matplotlib | Créer un graphique de base (plot, scatter, bar, hist) |  |
+        | Matplotlib | Personnaliser un graphique (titre, labels, légende, styles) |  |
+        | Matplotlib | Sauvegarder un graphique (savefig) |  |
+        | Matplotlib | Histogramme : `bins = np.linspace(min, max, nbins+1)` (intervalles réguliers) |  |
+        | Matplotlib | Distinguer un diagramme à barres d'un histogramme |  |
+        | Matplotlib | Intégrer NumPy avec Matplotlib |  |
+        | IA | Expliquer les concepts de base de l'IA et du ML |  |
+        | IA | Utiliser scikit-learn pour une tâche simple (régression ou classification) |  |
+        | IA | Distinguer apprentissage supervisé, semi-supervisé et non supervisé (données requises, tâches, exemples) |  |
+        | IA | Expliquer quand on utilise le semi-supervisé (étiqueter coûte cher) |  |
+        | IA | Nommer feature, label, modèle, entraînement (fit) et inférence (prédiction) dans un exemple |  |
+        | IA | Expliquer pourquoi on sépare les données en train/test |  |
+        | IA | Calculer une exactitude (accuracy) et en voir les limites |  |
+        | IA | Diagnostiquer un sous-apprentissage ou un sur-apprentissage à partir des scores train/test |  |
+        | IA | Expliquer le lien entre complexité d'un modèle et sur/sous-apprentissage |  |
+        | IA | Nommer des leviers qui contrôlent la complexité (paramètres, neurones/couches, régularisation, arrêt précoce) |  |
 
         :::note
         Cette auto-évaluation n'est pas soumise — c'est pour vous aider à identifier les points à réviser avant l'examen formatif (donné en R13, corrigé en R14) et l'examen final (R15).
@@ -632,12 +632,12 @@ Cliquez sur le badge pour ouvrir le notebook de cette rencontre dans [Google Col
         ---
 
         :::info Examen formatif final — à faire
-        📋 Vous recevez **l'examen formatif final** à faire en autosimulation (mêmes contraintes, même durée que l'examen sommatif de R15).  \\
-        ⏱️ **2 h, sur papier, sans documentation.**  \\
-        👉 On le **corrigera ensemble en R14** — c'est l'occasion parfaite de voir vos erreurs avant le vrai.
+         Vous recevez **l'examen formatif final** à faire en autosimulation (mêmes contraintes, même durée que l'examen sommatif de R15).  \\
+         **2 h, sur papier, sans documentation.**  \\
+         On le **corrigera ensemble en R14** — c'est l'occasion parfaite de voir vos erreurs avant le vrai.
 
         Pour vous préparer :
-        1. **Révisez les notions** où vous avez cochés ❌ dans la check-list
+        1. **Révisez les notions** où vous avez cochés  dans la check-list
         2. **Révisez les traces** et les exercices de code à écrire sans documentation
         3. **Finissez votre TP2** (ou avancez autant que possible) avant la remise de R14
         ::::
@@ -650,7 +650,7 @@ Cliquez sur le badge pour ouvrir le notebook de cette rencontre dans [Google Col
         L'examen final est **100 % papier** : on ne peut pas y exécuter Pandas, NumPy ni Matplotlib. On teste donc leur **compréhension théorique** — concepts, prédiction de sortie, interprétation. Voici les propriétés à maîtriser.
         :::
 
-        ## 📌 Pandas — propriétés à connaître
+        ##  Pandas — propriétés à connaître
 
         **Structure**
         - `DataFrame` (2D, lignes + colonnes) vs `Series` (1D) vs `Index`
@@ -679,7 +679,7 @@ Cliquez sur le badge pour ouvrir le notebook de cette rencontre dans [Google Col
         **Fichiers**
         - `read_csv()`, `to_csv()` ; `read_json()`, `to_json()`
 
-        ## 📌 NumPy — propriétés à connaître
+        ##  NumPy — propriétés à connaître
 
         **Structure**
         - `array` : `shape` (tuple de dimensions), `ndim` (nb de dimensions), `dtype` (type), `size` (nb d'éléments)
@@ -703,7 +703,7 @@ Cliquez sur le badge pour ouvrir le notebook de cette rencontre dans [Google Col
         **Statistiques**
         - `mean()`, `std()`, `min()`, `max()`, `sum()`
 
-        ## 📌 IA — propriétés théoriques à connaître
+        ##  IA — propriétés théoriques à connaître
 
         **Concepts de base**
         - IA > Machine Learning > Deep Learning (hiérarchie, IA = la plus large)
@@ -767,7 +767,7 @@ Cliquez sur le badge pour ouvrir le notebook de cette rencontre dans [Google Col
         - Les **poids et les biais** sont les **paramètres** appris pendant l'entraînement (droite : 2 paramètres ; petit réseau MNIST : ≈ 109 386 ; GPT-3 : ≈ 175 milliards)
         - Le **perceptron** (un seul neurone) ne peut pas résoudre un problème **non linéairement séparable**, comme le **OU exclusif (XOR)**
         - **Défis** : beaucoup de **données**, beaucoup de **calcul** (énergie), **boîte noire** (difficile d'expliquer ses décisions), risque de sur-apprentissage
-        - ⚠️ Le **code Keras/TensorFlow n'est pas évalué**
+        -  Le **code Keras/TensorFlow n'est pas évalué**
 
         **Empreinte écologique de l'IA**
         - Coûts : énergie, calcul, données, eau ; questions éthiques et environnementales des grands modèles
@@ -842,7 +842,7 @@ Cliquez sur le badge pour ouvrir le notebook de cette rencontre dans [Google Col
 
         <RappelFonctionnementClasseInverse/>
         <Tabs>
-            <TabItem value="1" label="🏠 Activités à faire à la maison">
+            <TabItem value="1" label=" Activités à faire à la maison">
 
                 {/* ## Auto-validation des connaissances
 
@@ -1079,9 +1079,9 @@ Cliquez sur le badge pour ouvrir le notebook de cette rencontre dans [Google Col
 
             </TabItem>
 
-            <TabItem value="2" label="🏫 Activités à faire en classe">
+            <TabItem value="2" label=" Activités à faire en classe">
 
-                ## 🔨 Exercices de création
+                ##  Exercices de création
 
                 Pour chacun des exercices de cette section, vous devez créer des fichiers `.py` avec les noms indiqués.
 
