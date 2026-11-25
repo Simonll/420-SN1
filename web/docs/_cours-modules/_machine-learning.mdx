@@ -172,8 +172,9 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
             X, y, test_size=0.15, random_state=42, stratify=y
         )
 
-        # Sur le 85% restant, on garde 70% pour l'entraînement et 15% pour la validation
-        # 15% de 100% = 0.15 → 15% de 85% ≈ 17.6% → on ajuste la proportion
+        # Finalement, on veut 70% entrainement / 15% validation / 15% test (du total)
+        # Apres le split du dessus, ce bloc restant represente 85% du total.
+        # La validation doit valoir 15% du total, soit 15/85 ~ 17.6% du bloc de 85% :
         X_train, X_val, y_train, y_val = train_test_split(
             X_temp, y_temp, test_size=0.176, random_state=42, stratify=y_temp
         )
