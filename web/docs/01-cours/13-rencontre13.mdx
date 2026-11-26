@@ -710,6 +710,19 @@ Cliquez sur le badge pour ouvrir le notebook de cette rencontre dans [Google Col
         - Retour sur la question 4 de la Partie A : les « deux bosses » de `petal length (cm)` venaient du mélange de plusieurs espèces!
         :::
 
+        :::note Exemples : quelles caractéristiques distinguent les espèces d'Iris?
+        En superposant les histogrammes par espèce (comme dans le code ci-dessus), on observe des **degrés de séparation** différents selon la mesure :
+
+        | Mesure | Séparation entre les espèces |
+        |---|---|
+        | `petal length (cm)` | **Très bonne** : `setosa` se distingue nettement (pétales courts) ; `versicolor` et `virginica` ne se chevauchent que peu. |
+        | `petal width (cm)` | **Très bonne** : même constat, `setosa` bien isolée. |
+        | `sepal length (cm)` | Correcte : `setosa` isolée, mais chevauchement entre `versicolor` et `virginica`. |
+        | `sepal width (cm)` | **Faible** : les 3 espèces se chevauchent beaucoup. |
+
+        → Les **pétales** (longueur et largeur) sont les caractéristiques les plus **discriminantes** ; la largeur du sépale l'est beaucoup moins. C'est exactement ce que la régression logistique exploitera en C.3.
+        :::
+
         ### C.2 Séparer les données : entraînement et test
 
         ```python
