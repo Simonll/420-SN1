@@ -24,13 +24,13 @@ import Mod_ScikitLearn from '../_cours-modules/_scikit-learn.mdx';
 # IA (types d'apprentissage, entraînement, complexité) + TP2 poursuite
 
 :::info Plan de la rencontre
-En R12, on a vu **ce qu'est** l'IA et l'apprentissage machine (onglets « IA — Introduction » et « IA — Apprentissage machine » de la R12). Aujourd'hui, on répond à trois questions, **sans code à écrire** :
+En R12, on a vu **ce qu'est** l'IA et l'apprentissage machine (onglets « IA — Introduction » et « IA — Apprentissage machine » de la R12). Aujourd'hui, on répond à trois questions **théoriques**, **sans code à écrire** (le code est réservé à l'onglet Pratique, hors examen) :
 
 1. **Comment** une machine apprend-elle? → les **types d'apprentissage** (supervisé, semi-supervisé, non supervisé)
-2. **Qu'est-ce qu'entraîner** un modèle? → features/labels, train/test, *fit*, prédiction, sur/sous-apprentissage
+2. **Qu'est-ce qu'entraîner** un modèle? → caractéristiques/étiquettes (*features/labels*), ensembles d'entraînement/test, entraînement (*fit*), prédiction, sous/sur-apprentissage
 3. **Quelle complexité** donner à un modèle? → capacité, et comment la contrôler
 
-Ces trois onglets sont **évaluables à l'examen papier** (QCM, vrai/faux, interprétation de petits scénarios). Les onglets Apprentissage profond et Empreinte écologique complètent la matière : seules leurs **notions** sont évaluables (voir la liste dans l'onglet « Théorie — Examen papier » de la R14), **pas le code**. L'onglet Scikit-learn est facultatif. L'API Python (scikit-learn, Keras) n'est pas évaluée.
+Ces trois onglets sont **évaluables à l'examen papier** (QCM, vrai/faux, interprétation de petits scénarios). L'onglet **Pratique : Iris & mpg** est un **travail pratique sur ordinateur, non évalué à l'examen papier** : le code, l'API scikit-learn et l'exécution des programmes ne sont pas évalués, pas plus que le R², la matrice de confusion ou l'asymétrie d'une distribution ; seules les notions d'interprétation des trois onglets théoriques (types de tâches, entraînement/test, exactitude, sous/sur-apprentissage) peuvent l'être. Les onglets Apprentissage profond et Empreinte écologique complètent la matière : seules leurs **notions** sont évaluables (voir la liste dans l'onglet « Théorie — Examen papier » de la R14), **pas le code**. L'onglet Scikit-learn est facultatif. L'API Python (scikit-learn, Keras) n'est pas évaluée.
 :::
 
 :::tip Ouvrir le notebook dans Google Colab
@@ -55,7 +55,7 @@ Cliquez sur le badge pour ouvrir le notebook de cette rencontre dans [Google Col
         - **Aucun** → apprentissage **non supervisé**
         :::
 
-        :::note  C'est quoi, une étiquette (label)?
+        :::note  C'est quoi, une étiquette (*label*)?
         L'**étiquette** (*label*, ou **cible**) est la **réponse** que l'on voudrait que le modèle trouve.
 
         | Exemple (donnée d'entrée) | Étiquette (réponse) |
@@ -86,7 +86,7 @@ Cliquez sur le badge pour ouvrir le notebook de cette rencontre dans [Google Col
 
         **Truc pour les distinguer** : si la réponse est une **quantité** (on peut dire « un peu plus » ou « un peu moins » : prix, °C, nombre de vélos) → **régression**. Si la réponse est **un choix dans une liste** (même si on le code 0/1) → **classification**.
 
-         **Piège de nom** : malgré son nom, la **régression logistique** est un modèle de **classification** (elle prédit une catégorie, ex. l'espèce d'iris en R12).
+         **Piège de nom** : malgré son nom, la **régression logistique** est un modèle de **classification** : elle calcule une **probabilité** pour chaque classe (d'où le mot « régression »), puis choisit la classe la plus probable (ex. l'espèce d'iris, onglet Pratique).
         :::
 
         :::note Exemples de la vie courante
@@ -94,7 +94,7 @@ Cliquez sur le badge pour ouvrir le notebook de cette rencontre dans [Google Col
         - **Estimation du prix d'un logement** : on part des ventes passées (où le prix est connu).
         - **Météo** : prédire la température de demain à partir de 30 ans de relevés (dans l'historique, on connaît la « réponse » de chaque lendemain).
         - **Reconnaissance de chiffres manuscrits** (jeu de données MNIST, voir l'onglet Apprentissage profond).
-        - En R12 : prédire la consommation d'une voiture à partir de son poids (régression).
+        - Onglet Scikit-learn : prédire la consommation (L/100 km) d'une voiture à partir de son poids (régression).
         :::
 
         ---
@@ -194,7 +194,7 @@ Cliquez sur le badge pour ouvrir le notebook de cette rencontre dans [Google Col
 
         Ce qui le rend « intelligent », c'est qu'il possède des **paramètres** (des nombres réglables, comme la pente et l'ordonnée à l'origine d'une droite, ou les poids d'un neurone) et que ces paramètres sont **ajustés automatiquement à partir d'exemples**. C'est ce qu'on appelle l'**entraînement**.
 
-        Rappel R12 : une régression linéaire `consommation = 0.00408 × poids − 0.903` est un modèle ; ses deux paramètres (0.00408 et −0.903) ont été trouvés par l'entraînement.
+        Rappel (onglet Scikit-learn) : une régression linéaire `L/100 km = 0.00408 × poids − 0.903` est un modèle ; ses deux paramètres (0.00408 et −0.903) ont été trouvés par l'entraînement.
         :::
 
         ---
@@ -217,15 +217,15 @@ Cliquez sur le badge pour ouvrir le notebook de cette rencontre dans [Google Col
         | Terme | Définition simple | Dans l'exemple |
         |-------|-------------------|----------------|
         | **Exemple** (observation) | une ligne du tableau | un fruit |
-        | **Feature** (caractéristique, variable d'entrée) | une information **donnée au modèle** pour décider | poids, couleur, rugosité |
-        | **Label** (étiquette, cible) | la **réponse** que le modèle doit trouver | « pomme » ou « orange » |
-        | **Modèle** | la « fonction » qui transforme les features en prédiction | la règle apprise |
+        | **Caractéristique** (*feature*, variable d'entrée) | une information **donnée au modèle** pour décider | poids, couleur, rugosité |
+        | **Étiquette** (*label*, cible) | la **réponse** que le modèle doit trouver | « pomme » ou « orange » |
+        | **Modèle** | la « fonction » qui transforme les caractéristiques en prédiction | la règle apprise |
         | **Paramètres** | les nombres internes réglés pendant l'entraînement | les poids d'un neurone, la pente d'une droite |
-        | **Entraînement** (*fit*) | la phase où le modèle **ajuste ses paramètres** à partir des données (en **supervisé** : features **et** labels ; en **non supervisé** : features seulement) | le modèle regarde les fruits connus |
+        | **Entraînement** (*fit*) | la phase où le modèle **ajuste ses paramètres** à partir des données (en **supervisé** : caractéristiques **et** étiquettes ; en **non supervisé** : caractéristiques seulement) | le modèle regarde les fruits connus |
         | **Inférence** (prédiction, *predict*) | la phase où le modèle **déjà entraîné** donne une réponse pour un **nouvel exemple** | un fruit inconnu arrive : « c'est une orange » |
         | **Hyperparamètre** | un **réglage choisi par l'humain avant** l'entraînement ; il n'est **pas** appris par *fit* ; on le choisit avec l'ensemble de **validation** | le degré d'une courbe, le nombre de couches ou de neurones, le nombre d'époques, la force de la régularisation |
 
-        Par convention, on note **X** les features (un tableau 2D : une ligne par exemple, une colonne par feature) et **y** les labels (une colonne : une réponse par exemple).
+        Par convention, on note **X** les caractéristiques (un tableau 2D : une ligne par exemple, une colonne par caractéristique) et **y** les étiquettes (une colonne : une réponse par exemple).
         :::
 
         :::warning Ne pas confondre paramètre et hyperparamètre
@@ -242,7 +242,7 @@ Cliquez sur le badge pour ouvrir le notebook de cette rencontre dans [Google Col
         | | Entraînement (*fit*) | Inférence (*predict*) |
         |---|---|---|
         | **Quand?** | une fois (ou de temps en temps), **avant** l'utilisation | à chaque utilisation |
-        | **Données utilisées** | en **supervisé** : features **et** labels ; en **non supervisé** : features seulement | features **seulement** (on ne connaît pas la réponse) |
+        | **Données utilisées** | en **supervisé** : caractéristiques **et** étiquettes ; en **non supervisé** : caractéristiques seulement | caractéristiques **seulement** (on ne connaît pas la réponse) |
         | **Les paramètres changent?** | **oui**, c'est le but | **non**, ils sont figés |
         | **Coût** | long et coûteux (peut prendre des semaines pour un grand modèle) | rapide pour **une** prédiction (mais il y en a des millions, voir l'onglet Empreinte écologique) |
         | **Exemple** | Ton application apprend à partir de 10 000 photos étiquetées | Tu prends une photo, l'application te dit « chat » |
@@ -263,7 +263,7 @@ Cliquez sur le badge pour ouvrir le notebook de cette rencontre dans [Google Col
         ```
 
         1. Au départ, les paramètres sont **choisis au hasard** : le modèle répond n'importe quoi.
-        2. Pour chaque exemple, on **compare** sa prédiction à la vraie réponse (le label) : c'est l'**erreur** (aussi appelée **perte**, *loss*).
+        2. Pour chaque exemple, on **compare** sa prédiction à la vraie réponse (l'étiquette) : c'est l'**erreur** (aussi appelée **perte**, *loss*).
         3. On **modifie légèrement** les paramètres dans la direction qui **diminue** l'erreur.
         4. On recommence. Un passage complet sur toutes les données d'entraînement s'appelle une **époque** (*epoch*).
 
@@ -293,12 +293,12 @@ Cliquez sur le badge pour ouvrir le notebook de cette rencontre dans [Google Col
         :::
 
         :::note Et l'ensemble de validation (vu en R12)?
-        En R12, on a séparé les données en **trois** : entraînement, **validation** et test. La validation sert à **choisir les réglages** du modèle, appelés **hyperparamètres** (par exemple sa complexité, voir l'onglet suivant), **sans toucher au test**. Résumé : **train = ajuster**, **validation = choisir**, **test = confirmer une seule fois** à la fin. Le principe reste le même : évaluer sur des données non utilisées pour ajuster les paramètres.
+        En R12, on a séparé les données en **trois** : entraînement, **validation** et test. La validation sert à **choisir les réglages** du modèle, appelés **hyperparamètres** (par exemple sa complexité, voir l'onglet suivant), **sans toucher au test**. Résumé : **entraînement = ajuster**, **validation = choisir**, **test = confirmer une seule fois** à la fin. Le principe reste le même : évaluer sur des données non utilisées pour ajuster les paramètres.
         :::
 
         ---
 
-        ## 4. Mesurer la performance : l'exactitude (accuracy)
+        ## 4. Mesurer la performance : l'exactitude (*accuracy*)
 
         :::info Définition
         Pour une tâche de **classification**, l'**exactitude** (*accuracy*) est :
@@ -328,24 +328,469 @@ Cliquez sur le badge pour ouvrir le notebook de cette rencontre dans [Google Col
         | | **Sous-apprentissage** (*underfitting*) | **Bon apprentissage** | **Sur-apprentissage** (*overfitting*) |
         |---|---|---|---|
         | **En une phrase** | le modèle est **trop simple**, il n'a pas saisi la tendance | le modèle a saisi la **tendance générale** | le modèle a **appris par cœur** les exemples, y compris le bruit |
-        | **Score sur train** | **faible** | bon | **très élevé** (souvent près de 100 %) |
-        | **Score sur test** | **faible** (proche du score train) | bon (proche du score train) | **nettement plus faible** que sur train |
+        | **Score d'entraînement** | **faible** | bon | **très élevé** (souvent près de 100 %) |
+        | **Score de test** | **faible** (proche du score d'entraînement) | bon (proche du score d'entraînement) | **nettement plus faible** que le score d'entraînement |
         | **Analogie étudiante** | n'a lu que les titres du chapitre : échoue au formatif **et** à l'examen | a compris la méthode : réussit le formatif **et** l'examen | a mémorisé les réponses du formatif : 100 % au formatif, échoue à l'examen |
         | **Analogie fruits** | « tout ce qui pèse plus de 100 g est une pomme » | utilise couleur + rugosité | « une pomme pèse exactement 150 g ou 170 g » |
         :::
 
-        :::tip  Le diagnostic : comparer train et test
+        :::tip  Le diagnostic : comparer entraînement et test
         C'est **l'écart entre le score d'entraînement et le score de test** qui permet de poser le diagnostic :
 
-        | Score train | Score test | Diagnostic |
+        | Score (entraînement) | Score (test) | Diagnostic |
         |-------------|------------|------------|
         | 60 % | 58 % | **Sous-apprentissage** : les deux sont faibles |
         | 92 % | 89 % | **Bonne généralisation** : les deux sont bons et proches |
-        | 100 % | 65 % | **Sur-apprentissage** : grand écart en faveur du train |
+        | 100 % | 65 % | **Sur-apprentissage** : grand écart en faveur de l'entraînement |
 
         **« Faible » par rapport à quoi?** Pour juger un score, comparez-le à un **modèle de base** : le **hasard**. Avec **2 classes équilibrées** (50 % / 50 %), répondre au hasard donne déjà environ **50 %**. Un modèle à 52 % ne fait donc presque pas mieux que le hasard ; 60 % est faible, 90 % est bon.
 
          Un score de 100 % sur les données d'entraînement **ne prouve rien** : c'est même souvent un **signal d'alarme** de sur-apprentissage. Seul le score sur le **test** indique si le modèle généralise.
+        :::
+
+    </TabItem>
+
+    <TabItem value="pratique" label="IA — Pratique : Iris & mpg (distribution puis modélisation)">
+
+        :::warning Non évalué à l'examen papier
+        Cet onglet est un **travail pratique sur ordinateur**. Le code, l'API de scikit-learn et l'exécution des programmes **ne sont pas évalués** à l'examen ; le **R²**, la **matrice de confusion** et l'**asymétrie** d'une distribution ne le sont pas non plus. Seules les notions d'interprétation des onglets théoriques (type de tâche, entraînement/test, exactitude, sous/sur-apprentissage) peuvent l'être.
+        :::
+
+        :::info Objectif de l'exercice guidé
+        Avant d'entraîner un modèle, un analyste **regarde toujours ses données**. Cette étape s'appelle l'**analyse exploratoire des données** (en anglais *EDA*, pour *Exploratory Data Analysis*).
+
+        La règle à retenir pour cet exercice :
+
+        > **1. Décrire la distribution des variables → 2. Modéliser → 3. Interpréter.**
+
+        Pourquoi? Parce qu'une variable avec des **valeurs manquantes**, des **valeurs extrêmes** (*outliers*) ou une forme très asymétrique peut fausser un modèle. Si on ne regarde pas les données, on ne le saura jamais.
+        :::
+
+        :::note Les deux jeux de données utilisés
+        | Jeu de données | Contenu | Ce qu'on veut prédire | Type de problème | Modèle |
+        |---|---|---|---|---|
+        | **mpg** | 398 voitures (puissance, poids, cylindres, etc.) | l'**autonomie en carburant** `mpg` (milles par gallon, *miles per gallon*) : un **nombre** (plus il est élevé, moins la voiture consomme) | **régression** | régression **linéaire** |
+        | **Iris** | 150 fleurs (longueur et largeur des sépales et des pétales) | l'**espèce** de la fleur : une **catégorie** parmi 3 | **classification** | régression **logistique** |
+
+        Créez un fichier `pratique_ia.py` (ou un notebook) et exécutez les morceaux de code **un à la fois**, dans l'ordre. Lisez les sorties avant de passer au suivant et répondez aux questions.
+        :::
+
+        :::warning Attention : mpg ≠ L/100 km (sens inverse)
+        `mpg` mesure la **distance** parcourue avec un gallon d'essence : **plus le mpg est élevé, moins la voiture consomme**. C'est le **sens inverse** de la consommation en L/100 km (onglet Scikit-learn), où une valeur élevée veut dire que la voiture consomme **plus**.
+
+        Exemple : 30 mpg ≈ 7,8 L/100 km (voiture économe) ; 15 mpg ≈ 15,7 L/100 km (voiture gourmande).
+        :::
+
+        ---
+
+        ## Partie A — Charger les données et décrire la distribution des variables
+
+        ### A.1 Charger les deux jeux de données
+
+        Téléchargez le fichier <a href={useBaseUrl('/ressources/csv/mpg_dataset.csv')} download="mpg_dataset.csv">mpg_dataset.csv</a> et placez-le dans le même dossier que votre script. Le jeu de données **Iris**, lui, est fourni directement par scikit-learn : aucun fichier à télécharger.
+
+        ```python
+        import pandas as pd
+        import matplotlib.pyplot as plt
+        from sklearn.datasets import load_iris
+
+        # --- Jeu de données mpg (fichier CSV) ---
+        df_mpg = pd.read_csv("mpg_dataset.csv")
+
+        # --- Jeu de données Iris (fourni par scikit-learn) ---
+        iris = load_iris(as_frame=True)   # as_frame=True : on obtient un DataFrame Pandas
+        df_iris = iris.frame              # 4 mesures + une colonne "target" (0, 1 ou 2)
+
+        # On remplace les codes 0, 1, 2 par le nom de l'espèce (plus lisible)
+        df_iris["espece"] = df_iris["target"].map({0: "setosa", 1: "versicolor", 2: "virginica"})
+
+        print(df_mpg.head())
+        print(df_iris.head())
+        ```
+
+        ### A.2 Première vue d'ensemble : `info()`, `describe()`, données manquantes
+
+        ```python
+        # Nombre de lignes, nom et type de chaque colonne, nombre de valeurs non nulles
+        df_mpg.info()
+
+        # Nombre de valeurs manquantes par colonne
+        print(df_mpg.isnull().sum())
+
+        # Statistiques descriptives des colonnes numériques
+        print(df_mpg.describe())
+        ```
+
+        :::tip Valeurs manquantes dans `horsepower`
+        La sortie de `isnull().sum()` montre que la colonne `horsepower` contient **quelques valeurs manquantes** (6 voitures). Un modèle scikit-learn **refuse** les valeurs manquantes : il faut s'en occuper **avant** de modéliser.
+
+        La solution la plus simple ici : **retirer les lignes incomplètes** avec `dropna`.
+
+        ```python
+        print("Avant :", len(df_mpg), "lignes")
+        df_mpg = df_mpg.dropna(subset=["horsepower"])   # retire les lignes où horsepower est vide
+        print("Après :", len(df_mpg), "lignes")
+        ```
+
+        Retirer 6 lignes sur 398 est acceptable. Si la moitié des lignes étaient vides, il faudrait une autre stratégie (par exemple `fillna` avec la médiane).
+        :::
+
+        Faites la même vérification pour Iris :
+
+        ```python
+        df_iris.info()
+        print(df_iris.isnull().sum())
+        print(df_iris.describe())
+        ```
+
+        ### A.3 Variables continues ou catégorielles?
+
+        Avant de tracer quoi que ce soit, il faut savoir **de quel type** est chaque variable, car on ne la décrit pas de la même façon.
+
+        | Type de variable | Définition | Exemples dans mpg | Exemples dans Iris | Comment la décrire |
+        |---|---|---|---|---|
+        | **Continue** (quantitative) | un nombre qui peut prendre beaucoup de valeurs | `mpg`, `horsepower`, `weight`, `acceleration`, `displacement` | les 4 mesures en cm | `describe()`, **histogramme**, **diagramme en boîte** |
+        | **Catégorielle** | un petit nombre de catégories (texte ou codes) | `origin` (usa, europe, japan), `cylinders` (3, 4, 5, 6, 8) | `espece` | `value_counts()`, diagramme à barres |
+
+        ```python
+        # Pour une variable catégorielle : on compte les valeurs
+        print(df_mpg["origin"].value_counts())
+        print(df_mpg["cylinders"].value_counts())
+        print(df_iris["espece"].value_counts())
+        ```
+
+        :::note Attention aux pièges
+        - `cylinders` est stockée comme un **nombre**, mais elle ne prend que 5 valeurs : on la traite plutôt comme une variable **catégorielle**.
+        - `name` (le nom du modèle de voiture) est un **identifiant** : presque chaque ligne a une valeur différente. On ne l'utilise pas pour modéliser.
+        - Dans Iris, les 3 espèces sont **équilibrées** (50 fleurs chacune). Avec 3 classes équilibrées, répondre au hasard donne environ **33 %** d'exactitude : c'est notre point de comparaison pour la partie C.
+        :::
+
+        ### A.4 Décrire la distribution d'une variable continue : l'histogramme
+
+        Un **histogramme** découpe les valeurs en intervalles (les **classes**, ou *bins*) et compte combien de lignes tombent dans chaque intervalle. Il montre la **forme** de la distribution.
+
+        ```python
+        # Histogramme de l'autonomie mpg
+        plt.hist(df_mpg["mpg"], bins=20, edgecolor="black")
+        plt.title("Distribution de mpg")
+        plt.xlabel("mpg (milles par gallon)")
+        plt.ylabel("Nombre de voitures")
+        plt.show()
+        ```
+
+        :::tip Bien choisir le nombre de classes (`bins`)
+        Le paramètre `bins` fixe le **nombre d'intervalles**.
+        - **Trop peu** (ex. `bins=3`) : tout est écrasé, on ne voit plus la forme.
+        - **Trop** (ex. `bins=200`) : l'histogramme devient « en dents de scie », on voit surtout du bruit.
+        - Entre **10 et 30** convient en général pour quelques centaines de lignes.
+
+        Essayez `bins=3`, `bins=20` et `bins=200` sur le même graphique et comparez.
+        :::
+
+        Pour aller plus vite, Pandas peut tracer **tous les histogrammes d'un coup** :
+
+        ```python
+        # Un histogramme par colonne numérique
+        df_mpg.hist(bins=20, figsize=(12, 8), edgecolor="black")
+        plt.tight_layout()
+        plt.show()
+
+        df_iris.drop(columns="target").hist(bins=15, figsize=(10, 6), edgecolor="black")
+        plt.tight_layout()
+        plt.show()
+        ```
+
+        :::info Comment lire la forme d'une distribution
+        | Ce qu'on observe | Vocabulaire | Indice dans `describe()` |
+        |---|---|---|
+        | une seule « bosse » au milieu, à peu près symétrique | distribution **centrée**, **symétrique** | moyenne (`mean`) ≈ médiane (`50%`) |
+        | une longue « queue » vers la **droite** (quelques grandes valeurs) | **asymétrie à droite** | moyenne **plus grande** que la médiane |
+        | une longue « queue » vers la **gauche** | **asymétrie à gauche** | moyenne **plus petite** que la médiane |
+        | les valeurs couvrent un grand intervalle | distribution **étalée** | grand écart-type (`std`), grand écart entre `min` et `max` |
+        | deux « bosses » séparées | distribution **bimodale** (souvent : deux groupes mélangés) | difficile à voir sans graphique |
+        :::
+
+        ### A.5 Repérer les valeurs extrêmes : le diagramme en boîte (*boxplot*)
+
+        Le **diagramme en boîte** (ou boîte à moustaches, *boxplot*) résume une variable autour de ses quartiles : la boîte va du 1er quartile (Q1, `25%`) au 3e quartile (Q3, `75%`), avec un trait à la médiane (`50%`). Les « moustaches » s'étendent jusqu'aux valeurs les plus éloignées situées à moins de 1,5 × (Q3 − Q1) de la boîte (Q3 − Q1 s'appelle l'écart interquartile). Au-delà, les **points isolés** sont des **valeurs extrêmes** potentielles (*outliers*). S'il n'y a aucun point isolé, les moustaches vont jusqu'au minimum et au maximum.
+
+        ```python
+        # Diagrammes en boîte de quelques variables de mpg
+        df_mpg.boxplot(column=["mpg", "acceleration"])
+        plt.title("Diagrammes en boîte : mpg et accélération")
+        plt.show()
+
+        df_mpg.boxplot(column="horsepower")
+        plt.title("Diagramme en boîte : puissance (horsepower)")
+        plt.show()
+        ```
+
+        :::note Une valeur extrême n'est pas une erreur
+        Une voiture de 230 chevaux est **rare**, mais elle **existe**. On ne supprime pas une valeur extrême sans raison : on la **remarque** et on se demande si elle est plausible. On ne retire que les valeurs **impossibles** (ex. un poids négatif).
+        :::
+
+        ### A.6 Questions d'interprétation (Partie A)
+
+        Répondez en commentaire dans votre script (`# Réponse : ...`).
+
+        1. Combien de lignes contient `df_mpg` **avant** et **après** le `dropna`? Combien de valeurs manquantes y avait-il, et dans quelle colonne?
+        2. Parmi `mpg`, `horsepower` et `weight`, quelle variable est la plus **asymétrique**? Vers quel côté? Comparez la moyenne et la médiane dans `describe()` pour confirmer.
+        3. Dans Iris, quelle mesure est la plus **étalée** (le plus grand `std`)? Quelle mesure est la moins étalée?
+        4. L'histogramme de `petal length (cm)` a-t-il **une** ou **deux** bosses? Selon vous, qu'est-ce que cela pourrait signifier? (Indice : il y a plusieurs espèces dans le jeu de données.)
+        5. Y a-t-il des **valeurs extrêmes** dans `horsepower`? Dans `acceleration`? Vous semblent-elles plausibles?
+        6. Classez chaque colonne de `df_mpg` comme **continue**, **catégorielle** ou **identifiant**.
+
+        ---
+
+        ## Partie B — Régression linéaire : prédire `mpg` (jeu de données mpg)
+
+        :::info Le problème
+        On veut **prédire l'autonomie `mpg`** (milles par gallon, un **nombre continu**) d'une voiture à partir de **sa puissance** `horsepower`. C'est un problème de **régression** supervisée :
+        - **caractéristique** (entrée, `X`) : `horsepower`
+        - **étiquette** ou cible (sortie, `y`) : `mpg`
+
+        Le modèle cherche la droite `mpg = a × horsepower + b` qui passe **le plus près possible** des points.
+        :::
+
+        ### B.1 Observer la relation avant de modéliser
+
+        On a déjà décrit `mpg` et `horsepower` **séparément** (Partie A). Regardons maintenant **les deux ensemble** avec un nuage de points.
+
+        ```python
+        plt.scatter(df_mpg["horsepower"], df_mpg["mpg"], alpha=0.5)
+        plt.title("mpg en fonction de la puissance (horsepower)")
+        plt.xlabel("puissance (chevaux)")
+        plt.ylabel("mpg (milles par gallon)")
+        plt.show()
+        ```
+
+        :::tip Questions à se poser devant le nuage
+        - La tendance **monte** ou **descend**? (Plus de puissance → plus ou moins de milles par gallon?)
+        - Les points forment-ils à peu près une **droite**, ou plutôt une **courbe**?
+        - Les points sont-ils **serrés** autour de la tendance, ou très **dispersés**?
+        :::
+
+        ### B.2 Séparer les données : entraînement et test
+
+        Comme vu dans l'onglet « IA — Entraîner un modèle » : on entraîne sur une partie des données (ensemble d'**entraînement**) et on évalue sur une partie **jamais vue** (ensemble de **test**).
+
+        ```python
+        from sklearn.model_selection import train_test_split
+
+        X = df_mpg[["horsepower"]]   # double crochet : X doit être un tableau à 2 dimensions (un DataFrame)
+        y = df_mpg["mpg"]            # simple crochet : y est une seule colonne (une Series)
+
+        # 80 % pour l'entraînement, 20 % pour le test
+        # random_state=42 : le découpage est le même à chaque exécution (résultats reproductibles)
+        X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+        print("Train :", len(X_train), "voitures")
+        print("Test  :", len(X_test), "voitures")
+        ```
+
+        ### B.3 Entraîner le modèle et lire ses paramètres
+
+        ```python
+        from sklearn.linear_model import LinearRegression
+
+        modele_lin = LinearRegression()
+        modele_lin.fit(X_train, y_train)     # entraînement : le modèle trouve a et b
+
+        a = modele_lin.coef_[0]      # la pente
+        b = modele_lin.intercept_    # l'ordonnée à l'origine
+        print("Pente a =", round(a, 4))
+        print("Ordonnée à l'origine b =", round(b, 2))
+        print(f"Modèle : mpg = {a:.4f} × horsepower + {b:.2f}")
+        ```
+
+        ### B.4 Prédire à la main, puis avec le modèle
+
+        Le modèle n'est rien d'autre qu'une **formule**. Vérifions-le en calculant une prédiction **nous-mêmes**.
+
+        ```python
+        puissance = 100   # une voiture de 100 chevaux
+
+        # 1) Prédiction à la main avec la formule mpg = a × X + b
+        mpg_main = a * puissance + b
+        print("Prédiction à la main :", round(mpg_main, 2))
+
+        # 2) Prédiction avec le modèle (même format que X : un DataFrame avec la colonne horsepower)
+        nouvelle_voiture = pd.DataFrame({"horsepower": [puissance]})
+        mpg_modele = modele_lin.predict(nouvelle_voiture)[0]
+        print("Prédiction du modèle :", round(mpg_modele, 2))
+        ```
+
+        Les deux résultats doivent être **identiques** : `predict()` applique simplement la formule.
+
+        ### B.5 Évaluer : le coefficient R² sur l'entraînement et sur le test
+
+        Le **R²** (coefficient de détermination) mesure la part des variations de `mpg` que le modèle explique :
+        - **R² = 1** : prédictions parfaites ;
+        - **R² = 0** : le modèle ne fait pas mieux que de toujours prédire la **moyenne** de `mpg` ;
+        - sur le **test**, le R² peut même être **négatif** : le modèle fait alors **pire** que la moyenne.
+
+        ```python
+        r2_train = modele_lin.score(X_train, y_train)   # pour une régression, score() donne le R²
+        r2_test = modele_lin.score(X_test, y_test)
+        print("R² train :", round(r2_train, 3))
+        print("R² test  :", round(r2_test, 3))
+        ```
+
+        On peut aussi tracer la droite apprise par-dessus les points de test :
+
+        ```python
+        plt.scatter(X_test["horsepower"], y_test, alpha=0.6, label="données de test")
+        plt.plot(X_test["horsepower"], modele_lin.predict(X_test), color="red", label="droite du modèle")
+        plt.xlabel("puissance (chevaux)")
+        plt.ylabel("mpg (milles par gallon)")
+        plt.legend()
+        plt.show()
+        ```
+
+        ### B.6 Questions d'interprétation (Partie B)
+
+        1. La pente `a` est-elle **positive** ou **négative**? Traduisez-la en une phrase : « Chaque cheval de plus fait **…** le mpg de **…** milles par gallon ». Le mpg augmente-t-il ou baisse-t-il? La voiture consomme-t-elle alors **plus** ou **moins** d'essence?
+        2. Votre prédiction **à la main** pour 100 chevaux est-elle identique à celle de `predict()`? Refaites le calcul pour une voiture de **150** chevaux.
+        3. Comparez le R² d'**entraînement** et le R² de **test**. Sont-ils proches? Selon le tableau de l'onglet « IA — Entraîner un modèle », s'agit-il de sous-apprentissage, de sur-apprentissage ou d'une bonne généralisation? (Repère : un R² d'environ 0,6 sur les deux ensembles indique qu'il n'y a pas de sur-apprentissage, mais que la droite n'explique qu'une partie de la variation de `mpg` ; avec une relation courbe (question 4), on parle de léger sous-apprentissage.)
+        4. Dans le nuage de points, la relation ressemble-t-elle à une droite parfaite? Où la droite rouge se trompe-t-elle le plus (puissances faibles, moyennes ou élevées)?
+        5. **Défi** : remplacez `horsepower` par `weight` (partout dans le code). Quel modèle obtient le meilleur R² sur le test?
+
+        ---
+
+        ## Partie C — Régression logistique : classer les espèces d'Iris
+
+        :::info Le problème
+        On veut **prédire l'espèce** d'une fleur (`setosa`, `versicolor` ou `virginica`) à partir de ses **4 mesures**. La sortie est une **catégorie** : c'est un problème de **classification** supervisée.
+        - **caractéristiques** (`X`) : les 4 mesures (longueur et largeur des sépales et des pétales, en cm)
+        - **étiquette** (`y`) : `espece`
+
+        Malgré son nom, la **régression logistique** est un modèle de **classification** : elle calcule, pour chaque espèce, une **probabilité** (d'où le mot « régression »), puis choisit l'espèce la plus probable.
+        :::
+
+        ### C.1 Décrire la distribution des variables, espèce par espèce
+
+        Dans la Partie A, on a regardé chaque mesure pour **toutes** les fleurs mélangées. Pour une classification, la question utile est : **une mesure permet-elle de séparer les espèces?** On trace donc un histogramme **par espèce**, superposés.
+
+        ```python
+        mesure = "petal length (cm)"   # essayez ensuite les 3 autres mesures
+
+        for espece in ["setosa", "versicolor", "virginica"]:
+            valeurs = df_iris[df_iris["espece"] == espece][mesure]
+            plt.hist(valeurs, bins=10, alpha=0.5, edgecolor="black", label=espece)
+
+        plt.title(f"Distribution de {mesure} selon l'espèce")
+        plt.xlabel(mesure)
+        plt.ylabel("Nombre de fleurs")
+        plt.legend()
+        plt.show()
+        ```
+
+        Comparez aussi les **moyennes** et les **diagrammes en boîte** de chaque mesure par espèce :
+
+        ```python
+        # Moyenne de chaque mesure, pour chaque espèce
+        print(df_iris.drop(columns="target").groupby("espece").mean())
+
+        # Un diagramme en boîte par espèce pour une mesure donnée
+        df_iris.boxplot(column="petal length (cm)", by="espece")
+        plt.show()
+        ```
+
+        :::tip Ce qu'on cherche
+        - Si les histogrammes des 3 espèces sont **bien séparés** pour une mesure, cette mesure est une **excellente caractéristique** : le modèle aura la tâche facile.
+        - S'ils se **chevauchent**, le modèle risque de **confondre** ces espèces.
+        - Retour sur la question 4 de la Partie A : les « deux bosses » de `petal length (cm)` venaient du mélange de plusieurs espèces!
+        :::
+
+        ### C.2 Séparer les données : entraînement et test
+
+        ```python
+        from sklearn.model_selection import train_test_split
+
+        colonnes_mesures = ["sepal length (cm)", "sepal width (cm)",
+                            "petal length (cm)", "petal width (cm)"]
+        X = df_iris[colonnes_mesures]
+        y = df_iris["espece"]
+
+        # stratify=y : on garde la même proportion de chaque espèce dans train et dans test
+        X_train, X_test, y_train, y_test = train_test_split(
+            X, y, test_size=0.3, random_state=42, stratify=y
+        )
+
+        print(y_train.value_counts())
+        print(y_test.value_counts())
+        ```
+
+        ### C.3 Entraîner une régression logistique
+
+        ```python
+        from sklearn.linear_model import LogisticRegression
+
+        modele_log = LogisticRegression(max_iter=1000)   # max_iter : plus d'itérations pour bien converger
+        modele_log.fit(X_train, y_train)
+
+        y_pred = modele_log.predict(X_test)
+        print(y_pred[:10])          # les 10 premières prédictions
+        print(y_test.values[:10])   # les 10 premières vraies réponses
+        ```
+
+        <details>
+        <summary>Pour aller plus loin (optionnel) : standardiser les mesures avec une chaîne de traitement (pipeline)</summary>
+
+        La régression logistique fonctionne mieux quand les caractéristiques sont sur une **même échelle**. `StandardScaler` transforme chaque mesure pour qu'elle ait une moyenne de 0 et un écart-type de 1 (on soustrait la moyenne, puis on divise par l'écart-type). Une **chaîne de traitement** (*pipeline*) enchaîne automatiquement la standardisation **puis** le modèle, ce qui évite d'oublier une étape. La moyenne et l'écart-type sont calculés sur l'**entraînement seulement** : le test reste « jamais vu » (règle d'or).
+
+        ```python
+        from sklearn.pipeline import make_pipeline
+        from sklearn.preprocessing import StandardScaler
+
+        modele_pipe = make_pipeline(StandardScaler(), LogisticRegression(max_iter=1000))
+        modele_pipe.fit(X_train, y_train)          # standardise X_train, puis entraîne le modèle
+        y_pred_pipe = modele_pipe.predict(X_test)  # standardise X_test de la même façon, puis prédit
+        ```
+
+        Ici, les 4 mesures sont déjà toutes en cm et du même ordre de grandeur : la différence sera faible. Sur des données comme mpg (`weight` en milliers, `cylinders` entre 3 et 8), elle compte beaucoup plus.
+
+        </details>
+
+        ### C.4 Évaluer : exactitude et matrice de confusion
+
+        ```python
+        from sklearn.metrics import accuracy_score, confusion_matrix
+
+        # Exactitude : proportion de fleurs bien classées
+        print("Exactitude train :", round(modele_log.score(X_train, y_train), 3))
+        print("Exactitude test  :", round(accuracy_score(y_test, y_pred), 3))
+
+        # Matrice de confusion : lignes = vraie espèce, colonnes = espèce prédite
+        especes = ["setosa", "versicolor", "virginica"]
+        matrice = confusion_matrix(y_test, y_pred, labels=especes)
+        print(pd.DataFrame(matrice, index=especes, columns=especes))
+        ```
+
+        :::info Comment lire la matrice de confusion
+        - La **diagonale** (en haut à gauche → en bas à droite) compte les fleurs **bien classées**.
+        - Toute case **hors diagonale** est une **erreur**. Par exemple, la case (ligne `versicolor`, colonne `virginica`) compte les fleurs qui étaient **vraiment** des versicolor, mais que le modèle a prises pour des virginica.
+        :::
+
+        ### C.5 Questions d'interprétation (Partie C)
+
+        1. D'après les histogrammes par espèce, quelle mesure **sépare le mieux** les 3 espèces? Laquelle les sépare le moins bien?
+        2. Quelle espèce est **parfaitement séparée** des deux autres sur les histogrammes? Quelles deux espèces se **chevauchent**?
+        3. Quelle est l'exactitude sur le test? Comparez-la au **hasard** (environ 33 % avec 3 classes équilibrées). Le modèle est-il utile?
+        4. Dans la matrice de confusion, quelle espèce est **la plus souvent confondue**, et avec laquelle? Est-ce cohérent avec ce que vous avez observé à la question 2?
+        5. Comparez l'exactitude d'**entraînement** et de **test**. Y a-t-il des signes de sur-apprentissage?
+        6. (Optionnel, voir « Pour aller plus loin ») La chaîne de traitement avec `StandardScaler` change-t-elle l'exactitude sur le test?
+
+        ---
+
+        ## À retenir
+
+        :::tip Les points clés de cette pratique
+        1. **L'ordre de travail** : **décrire les distributions** (`info`, `describe`, `isnull`, histogrammes, diagrammes en boîte) → **modéliser** (`train_test_split`, `fit`, `predict`) → **interpréter** (paramètres, scores, erreurs).
+        2. **Décrire avant de modéliser** permet de repérer les **valeurs manquantes** (à traiter, sinon le modèle plante), les **valeurs extrêmes** et les variables qui **séparent bien** les classes.
+        3. **Régression linéaire** → prédit une **valeur continue** (ici `mpg`). On l'évalue avec le **R²**. Ses paramètres (pente, ordonnée à l'origine) se lisent et s'interprètent directement.
+        4. **Régression logistique** → malgré son nom, elle calcule une **probabilité** pour chaque classe puis choisit la plus probable : c'est de la **classification** (ici l'espèce d'Iris). On l'évalue avec l'**exactitude** et la **matrice de confusion**.
+        5. **Lien avec les onglets précédents** : on retrouve le vocabulaire de l'**entraînement** (caractéristiques, étiquette, entraînement/test, `fit`, prédiction) et le diagnostic **entraînement vs test** pour détecter le **sous-apprentissage** ou le **sur-apprentissage**. Les deux modèles vus ici sont **simples** (peu de paramètres, faible **complexité**) : ils risquent peu de sur-apprendre, mais une droite ne peut pas suivre une relation courbe (risque de **sous-apprentissage**, comme on le voit sur mpg en fonction de la puissance).
         :::
 
     </TabItem>
@@ -362,7 +807,7 @@ Cliquez sur le badge pour ouvrir le notebook de cette rencontre dans [Google Col
         :::
 
         :::note Exemple : prédire une note à partir des heures d'étude
-        Imaginons 10 étudiant·es : on connaît leurs heures d'étude (feature) et leur note (label). On essaie trois modèles de complexités différentes :
+        Imaginons 10 étudiant·es : on connaît leurs heures d'étude (caractéristique) et leur note (étiquette). On essaie trois modèles de complexités différentes :
 
         | Modèle | Paramètres | Comportement | Diagnostic |
         |--------|-----------|--------------|------------|
@@ -370,7 +815,7 @@ Cliquez sur le badge pour ouvrir le notebook de cette rencontre dans [Google Col
         | **Droite** : note = a × heures + b | 2 | suit la tendance « plus on étudie, plus la note monte » | **bonne complexité** → généralise |
         | **Courbe de degré 9** | 10 | passe **exactement** par les 10 points, avec des zigzags absurdes (ex. prédit 40 % pour 7 h d'étude, mais 98 % pour 6 h) | **trop complexe** → sur-apprentissage |
 
-        Le modèle de degré 9 a une erreur **nulle** sur l'entraînement (il passe par tous les points!), mais il prédit très mal de nouveaux étudiants mis de côté pour la **validation** : c'est donc la droite qu'on **choisit**. On vérifie ensuite, **une seule fois**, sa performance sur le **test**. Il a appris le **bruit** (la fatigue d'un étudiant le jour de l'examen, un autre qui a eu de la chance) au lieu de la **tendance**.
+        La courbe de degré 9 a une erreur **nulle** sur l'entraînement (elle passe par tous les points!), mais elle prédit très mal de nouveaux étudiants mis de côté pour la **validation**. Le modèle de degré 9 a appris le **bruit** (la fatigue d'un étudiant le jour de l'examen, un autre qui a eu de la chance) au lieu de la **tendance**. C'est donc la droite qu'on **choisit** ; on vérifie ensuite, **une seule fois**, sa performance sur le **test**.
         :::
 
         ---
@@ -380,8 +825,8 @@ Cliquez sur le badge pour ouvrir le notebook de cette rencontre dans [Google Col
         :::info Trop simple → juste bien → trop complexe
         ```mermaid
         flowchart LR
-            A[" Modèle TROP SIMPLE<br/><sub>peu de paramètres</sub><br/><br/> Sous-apprentissage<br/><sub>train faible · test faible</sub>"] -->|"↑ complexité"| B[" BONNE COMPLEXITÉ<br/><br/> Généralise<br/><sub>train bon · test bon</sub>"]
-            B -->|"↑ complexité"| C[" Modèle TROP COMPLEXE<br/><sub>beaucoup de paramètres</sub><br/><br/> Sur-apprentissage<br/><sub>train excellent · test faible</sub>"]
+            A[" Modèle TROP SIMPLE<br/><sub>peu de paramètres</sub><br/><br/> Sous-apprentissage<br/><sub>entraînement faible · test faible</sub>"] -->|"↑ complexité"| B[" BONNE COMPLEXITÉ<br/><br/> Généralise<br/><sub>entraînement bon · test bon</sub>"]
+            B -->|"↑ complexité"| C[" Modèle TROP COMPLEXE<br/><sub>beaucoup de paramètres</sub><br/><br/> Sur-apprentissage<br/><sub>entraînement excellent · test faible</sub>"]
         ```
 
         Quand on **augmente** la complexité d'un modèle :
@@ -422,7 +867,7 @@ Cliquez sur le badge pour ouvrir le notebook de cette rencontre dans [Google Col
         |--------|----------------------------------|----------------------------------|
         | **Nombre de paramètres** | plus de paramètres (ex. courbe de degré 3 plutôt qu'une droite) | moins de paramètres |
         | **Réseau de neurones** | plus de **neurones** par couche, plus de **couches** | moins de neurones, moins de couches |
-        | **Nombre de features** | ajouter des variables d'entrée | garder seulement les variables utiles |
+        | **Nombre de caractéristiques** | ajouter des variables d'entrée | garder seulement les variables utiles |
         | **Durée d'entraînement** | plus d'époques | **arrêt précoce** : arrêter quand l'erreur de **validation** commence à remonter |
         | **Régularisation** | moins de régularisation | **plus** de régularisation |
         :::
@@ -442,8 +887,8 @@ Cliquez sur le badge pour ouvrir le notebook de cette rencontre dans [Google Col
         :::warning  Que faire selon le diagnostic?
         | Diagnostic | Symptôme | Remèdes |
         |------------|----------|---------|
-        | **Sous-apprentissage** | train faible, test faible | **augmenter** la complexité : modèle plus flexible, plus de paramètres/neurones/couches, ajouter des features utiles, entraîner plus longtemps, moins de régularisation |
-        | **Sur-apprentissage** | train très bon, test nettement moins bon | **diminuer** la complexité : modèle plus simple, moins de paramètres/neurones/couches, plus de régularisation, arrêt précoce ; **ou** ajouter plus de données d'entraînement |
+        | **Sous-apprentissage** | entraînement faible, test faible | **augmenter** la complexité : modèle plus flexible, plus de paramètres/neurones/couches, ajouter des caractéristiques utiles, entraîner plus longtemps, moins de régularisation |
+        | **Sur-apprentissage** | entraînement très bon, test nettement moins bon | **diminuer** la complexité : modèle plus simple, moins de paramètres/neurones/couches, plus de régularisation, arrêt précoce ; **ou** ajouter plus de données d'entraînement |
 
          **Ajouter des données n'aide pas beaucoup en cas de sous-apprentissage** : une droite restera une droite, même avec un million de points.
         :::
@@ -479,7 +924,7 @@ Cliquez sur le badge pour ouvrir le notebook de cette rencontre dans [Google Col
 
         Pour vous préparer :
         1. **Révisez les notions** où vous hésitez encore (types d'apprentissage, entraînement, complexité, Pandas, NumPy, Matplotlib)
-        2. **Révisez les traces** et les exercices de code à écrire sans documentation
+        2. **Révisez les traces** (onglet Synthèse pratique de la R14) et les exercices de code à écrire sans documentation
         3. **Finissez votre TP2** (ou avancez autant que possible) avant la remise de R14
         :::
 
@@ -487,6 +932,7 @@ Cliquez sur le badge pour ouvrir le notebook de cette rencontre dans [Google Col
 
         :::info Objectif de cette rencontre
         Cette rencontre est la **dernière période de travail sur le TP2 avant la remise**. Vous avez maintenant toutes les notions nécessaires (R9 → R12) pour finaliser votre analyse.
+        :::
 
         ---
 
@@ -502,7 +948,7 @@ Cliquez sur le badge pour ouvrir le notebook de cette rencontre dans [Google Col
 
         ---
 
-        :::info Checklist pour la remise (R14)
+        :::info Liste de vérification pour la remise (R14)
         - [ ] Code du TP2 terminé et fonctionnel
         - [ ] Analyse des données complète (exploration, nettoyage, transformation, agrégation)
         - [ ] Visualisations incluses dans le projet
@@ -589,14 +1035,14 @@ Cliquez sur le badge pour ouvrir le notebook de cette rencontre dans [Google Col
 
                 6. **Visualisation (Matplotlib sans Pandas)** :
                    - Créer un histogramme des `total_bill` (extraire les valeurs depuis Pandas vers NumPy avec `.to_numpy()`)
-                   - Créer un scatter plot de `tip` vs `total_bill`
-                   - Ajouter titres, labels, et sauvegarder les graphiques
+                   - Créer un nuage de points de `tip` en fonction de `total_bill`
+                   - Ajouter titres, étiquettes d'axes (`xlabel`, `ylabel`), et sauvegarder les graphiques
 
                 7. **Export** :
                    - Exporter le DataFrame modifié dans un fichier CSV nommé `tips_analyse.csv`
 
                 :::note Notions visées
-                Synthèse complète : Pandas (exploration, nettoyage, transformation, agrégation), NumPy (statistiques, masques), Matplotlib (histogramme, scatter), export CSV
+                Synthèse complète : Pandas (exploration, nettoyage, transformation, agrégation), NumPy (statistiques, masques), Matplotlib (histogramme, nuage de points), export CSV
                 ::::
 
                 ---
@@ -658,7 +1104,7 @@ Cliquez sur le badge pour ouvrir le notebook de cette rencontre dans [Google Col
 
                 Un cégep veut prédire si un·e étudiant·e **réussira** le cours 420-SN1 à partir de son **nombre d'heures d'étude par semaine**, du **nombre d'exercices faits** et de son **taux de présence**. On dispose des résultats des 600 étudiant·es des années passées.
 
-                1. Quelles sont les **features**? Quel est le **label**?
+                1. Quelles sont les **caractéristiques** (*features*)? Quelle est l'**étiquette** (cible)?
                 2. Quel est le type d'apprentissage et la tâche?
                 3. On garde 480 étudiant·es pour l'entraînement. Combien en reste-t-il pour le test, et quel pourcentage cela représente-t-il?
                 4. Sur l'ensemble de test, le modèle a raison pour 102 étudiant·es. Quelle est son **exactitude**?
@@ -668,7 +1114,7 @@ Cliquez sur le badge pour ouvrir le notebook de cette rencontre dans [Google Col
                 <details>
                 <summary>Solution — Partie B</summary>
 
-                1. Features : heures d'étude, nombre d'exercices faits, taux de présence. Label : réussite (oui / non).
+                1. Caractéristiques : heures d'étude, nombre d'exercices faits, taux de présence. Étiquette : réussite (oui / non).
                 2. Supervisé (on connaît le résultat des années passées), classification (la réponse est une catégorie : réussite ou échec).
                 3. 600 − 480 = **120** étudiant·es, soit 120 / 600 = **20 %** (séparation 80 % / 20 %).
                 4. 102 / 120 = **0,85**, soit **85 %**.
@@ -691,11 +1137,11 @@ Cliquez sur le badge pour ouvrir le notebook de cette rencontre dans [Google Col
                 <details>
                 <summary>Solution — Partie C</summary>
 
-                1. **Sur-apprentissage** (grand écart train/test). Diminuer la complexité, ajouter de la régularisation ou plus de données.
+                1. **Sur-apprentissage** (grand écart entre entraînement et test). Diminuer la complexité, ajouter de la régularisation ou plus de données.
                 2. **Sous-apprentissage** : la droite est trop simple pour une forme en U. Augmenter la complexité (ex. une courbe de degré 2). Ajouter des données n'aiderait pas.
                 3. **Bon modèle** : les deux scores sont bons et proches. Rien à changer.
                 4. **Sur-apprentissage** : modèle énorme (très grande capacité) pour très peu de données. Réduire le nombre de couches/neurones, régulariser, arrêt précoce ou obtenir beaucoup plus d'images.
-                5. **Sous-apprentissage** : le modèle ne fait pas mieux que le hasard (50 %), même sur l'entraînement. Augmenter la complexité ou ajouter des features utiles.
+                5. **Sous-apprentissage** : le modèle ne fait pas mieux que le hasard (50 %), même sur l'entraînement. Augmenter la complexité ou ajouter des caractéristiques utiles.
                 6. Après l'époque 15, le modèle commence à **sur-apprendre** (il apprend le bruit de l'entraînement). On applique l'**arrêt précoce** : on garde le modèle de l'époque 15.
 
                 </details>
@@ -751,13 +1197,13 @@ Cliquez sur le badge pour ouvrir le notebook de cette rencontre dans [Google Col
                 2. **c)** Le nombre de couches est choisi par l'humain avant l'entraînement. Pente, poids et biais sont des **paramètres** appris par *fit*.
                 3. **b)** Le nombre de vélos est une quantité (on peut dire « un peu plus / un peu moins »).
                 4. **a)** Somme des entrées multipliées par leurs poids, plus le biais.
-                5. **b)** Le hasard donne déjà environ 50 % : le modèle est en sous-apprentissage (ou les features ne sont pas utiles).
+                5. **b)** Le hasard donne déjà environ 50 % : le modèle fait à peine mieux que le hasard (sous-apprentissage probable, à confirmer avec le score d'entraînement ; ou les caractéristiques ne sont pas utiles).
                 6. **d)** Toutes les IA actuelles, y compris ChatGPT, sont des IA faibles (spécialisées).
 
                 </details>
 
                 :::note Notions visées
-                Types d'apprentissage (supervisé, semi-supervisé, non supervisé), vocabulaire de l'entraînement (feature, label, fit, inférence), train/test, exactitude, sous/sur-apprentissage, complexité d'un modèle et leviers — préparation examen papier (théorie IA)
+                Types d'apprentissage (supervisé, semi-supervisé, non supervisé), vocabulaire de l'entraînement (caractéristique, étiquette, entraînement/`fit`, inférence), entraînement/test, exactitude, sous/sur-apprentissage, complexité d'un modèle et leviers — préparation examen papier (théorie IA)
                 :::
 
             </TabItem>
@@ -901,7 +1347,7 @@ Cliquez sur le badge pour ouvrir le notebook de cette rencontre dans [Google Col
 
                 C'est la dernière rencontre où vous pouvez travailler sur votre TP2 avant la remise en R14. Utilisez ce temps pour :
 
-                1. **Finaliser votre code** : corrigez les bugs, optimisez les performances, commentez le code
+                1. **Finaliser votre code** : corrigez les bogues, optimisez les performances, commentez le code
                 2. **Finaliser vos visualisations** : assurez-vous qu'elles sont claires, bien étiquetées, sauvegardées
                 3. **Rédiger votre compte-rendu** : expliquez votre démarche, vos résultats, vos interprétations
                 4. **Vérifier l'ensemble** : code fonctionnel, analyses complètes, visualisations incluses

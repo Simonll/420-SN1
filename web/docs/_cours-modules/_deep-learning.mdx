@@ -194,7 +194,7 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
             H22 --> Y
         ```
 
-        Dans un vrai modèle de deep learning, il peut y avoir :
+        Dans un vrai modèle d'apprentissage profond, il peut y avoir :
 
         - beaucoup plus de neurones par couche,
         - de nombreuses couches cachées (réseaux “profonds”),
@@ -266,14 +266,14 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
 
         ::::info Pour les curieux (non évalué) — Exemple d'implémentation avec Keras
 
-        ⚠️ Ce code **n'est pas évalué** à l'examen : il montre seulement à quoi ressemble un entraînement en deep learning. Les termes `relu`, `softmax`, `adam` ou `sparse_categorical_crossentropy` n'ont pas à être connus.
+        ⚠️ Ce code **n'est pas évalué** à l'examen : il montre seulement à quoi ressemble un entraînement en apprentissage profond. Les termes `relu`, `softmax`, `adam` ou `sparse_categorical_crossentropy` n'ont pas à être connus.
 
         Voici un exemple d'utilisation de la bibliothèque `Keras` (incluse dans `TensorFlow`) pour entraîner un **réseau de neurones simple** sur le jeu de données `MNIST` (images de chiffres manuscrits 28×28).
 
         Ce jeu de données est constitué de 70 000 images (60 000 pour l'entraînement et 10 000 pour le test) de chiffres (0 à 9) écrits à la main.<br />
         Le but est de construire un modèle capable de reconnaître correctement des chiffres écrits à la main.
 
-        L'objectif est de montrer les grandes étapes d'un entraînement en deep learning :
+        L'objectif est de montrer les grandes étapes d'un entraînement en apprentissage profond :
 
         1. Charger un jeu de données intégré à Keras
         2. Prétraiter les données (normalisation, mise en forme)
@@ -343,8 +343,8 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
 
         # 5. Compiler le modèle
         #    - Optimiseur : Adam
-        #    - Perte : entropie croisée pour labels entiers (sparse_categorical_crossentropy)
-        #    - Métrique : accuracy
+        #    - Perte (loss) : entropie croisée pour étiquettes entières (sparse_categorical_crossentropy)
+        #    - Métrique : exactitude (accuracy)
         model.compile(
             optimizer="adam",
             loss="sparse_categorical_crossentropy",
@@ -355,15 +355,15 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
         history = model.fit(
             x_train,
             y_train,
-            epochs=5,                # Nombre de passes sur les données d'entraînement
+            epochs=5,                # Nombre d'époques (epochs) : passes complètes sur les données d'entraînement
             batch_size=32,           # Taille des mini-lots
             validation_data=(x_val, y_val),
         )
 
         # 7. Évaluer la performance sur l'ensemble de test
         test_loss, test_acc = model.evaluate(x_test, y_test, verbose=0)
-        print(f"Loss sur le test : {test_loss:.4f}")
-        print(f"Accuracy sur le test : {test_acc:.4f}")
+        print(f"Perte sur le test : {test_loss:.4f}")
+        print(f"Exactitude sur le test : {test_acc:.4f}")
 
         # 8. Faire quelques prédictions (optionnel)
         import numpy as np
@@ -374,8 +374,8 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
         pred_probas = model.predict(samples)
         pred_labels = np.argmax(pred_probas, axis=1)
 
-        print("Labels réels     :", labels)
-        print("Labels prédits   :", pred_labels)
+        print("Étiquettes réelles :", labels)
+        print("Étiquettes prédites :", pred_labels)
         ::::
 
         :::tip 🔗 Lien avec la complexité d'un modèle (évaluable)
