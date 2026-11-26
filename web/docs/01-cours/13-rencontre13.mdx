@@ -1,6 +1,6 @@
 ---
 title: 13 - IA (types d'apprentissage, entraînement, complexité) + TP2 poursuite
-#description: Types d'apprentissage (supervisé, semi-supervisé, non supervisé), entraînement d'un modèle (train/test, fit, sur/sous-apprentissage), complexité d'un modèle, Deep Learning, Empreinte écologique, Scikit-learn, Exercice de synthèse, Révision ciblée, TP2 poursuite (pas de remise)
+#description: Types d'apprentissage (supervisé, semi-supervisé, non supervisé), entraînement d'un modèle (train/test, fit, sur/sous-apprentissage), complexité d'un modèle, Deep Learning, Empreinte écologique, Scikit-learn, Examen formatif à faire, TP2 poursuite (pas de remise)
 hide_table_of_contents: true
 draft: false
 ---
@@ -21,7 +21,7 @@ import Mod_DeepLearning from '../_cours-modules/_deep-learning.mdx';
 import Mod_EmpreinteEcologique from '../_cours-modules/_empreinte-ecologique.mdx';
 import Mod_ScikitLearn from '../_cours-modules/_scikit-learn.mdx';
 
-# IA (types d'apprentissage, entraînement, complexité) + Synthèse + TP2 poursuite
+# IA (types d'apprentissage, entraînement, complexité) + Examen formatif + TP2 poursuite
 
 :::info Plan de la rencontre
 En R12, on a vu **ce qu'est** l'IA et l'apprentissage machine (onglets « IA — Introduction » et « IA — Apprentissage machine » de la R12). Aujourd'hui, on répond à trois questions, **sans code à écrire** :
@@ -30,7 +30,7 @@ En R12, on a vu **ce qu'est** l'IA et l'apprentissage machine (onglets « IA —
 2. **Qu'est-ce qu'entraîner** un modèle? → features/labels, train/test, *fit*, prédiction, sur/sous-apprentissage
 3. **Quelle complexité** donner à un modèle? → capacité, et comment la contrôler
 
-Ces trois onglets sont **évaluables à l'examen papier** (QCM, vrai/faux, interprétation de petits scénarios). Les onglets Apprentissage profond et Empreinte écologique complètent la matière : seules leurs **notions** sont évaluables (voir la liste dans l'onglet « Théorie — Examen papier »), **pas le code**. L'onglet Scikit-learn est facultatif. L'API Python (scikit-learn, Keras) n'est pas évaluée.
+Ces trois onglets sont **évaluables à l'examen papier** (QCM, vrai/faux, interprétation de petits scénarios). Les onglets Apprentissage profond et Empreinte écologique complètent la matière : seules leurs **notions** sont évaluables (voir la liste dans l'onglet « Théorie — Examen papier » de la R14), **pas le code**. L'onglet Scikit-learn est facultatif. L'API Python (scikit-learn, Keras) n'est pas évaluée.
 :::
 
 :::tip Ouvrir le notebook dans Google Colab
@@ -471,311 +471,20 @@ Cliquez sur le badge pour ouvrir le notebook de cette rencontre dans [Google Col
         <Mod_ScikitLearn />
     </TabItem>
 
-    <TabItem value="synthese" label="Synthèse pratique — Révision ciblée">
-
-        :::info Objectif de cette rencontre
-        Cette rencontre est consacrée à la **synthèse des notions vues de R9 à R12**, à la révision ciblée des points difficiles, et à la **poursuite du TP2** (sans remise — la remise finale aura lieu en R14).
-
-        ---
-
-        :::info Exercice de synthèse
-        **Exercice de synthèse — Analyse complète d'un jeu de données**
-
-        À partir d'un fichier CSV, réalisez l'analyse complète suivante :
-
-        1. **Exploration (Pandas)** :
-           - Charger les données avec `pd.read_csv()`
-           - Afficher `info()`, `dtypes`, `describe()`
-           - Identifier les valeurs manquantes, les types de données, les distributions
-
-        2. **Nettoyage (Pandas)** :
-           - Gérer les valeurs manquantes (`dropna()`, `fillna()`)
-           - Supprimer les doublons (`drop_duplicates()`)
-           - Corriger les formats de données si nécessaire
-
-        3. **Transformation (Pandas)** :
-           - Créer de nouvelles colonnes dérivées
-           - Appliquer des transformations (`apply()`, `map()`)
-           - Encoder les variables catégorielles si besoin
-
-        4. **Agrégation et statistiques (Pandas)** :
-           - Effectuer des regroupements (`groupby()`)
-           - Calculer des agrégations (`mean()`, `sum()`, `count()`)
-           - Interpréter les résultats
-
-        5. **Visualisation (Matplotlib — sans Pandas)** :
-           - Créer des graphiques à partir des données (courbes, barres, histogrammes, scatter)
-           - Ajouter titres, labels, légendes, styles
-           - Sauvegarder les graphiques
-
-        6. **Export** :
-           - Exporter les résultats dans un fichier CSV ou JSON
-
-        :::note Notions visées
-        Ensemble des notions de R9 à R12 : Collections, Pandas (bases et avancé), NumPy (bases et avancé), Matplotlib (bases et intégration), fichiers CSV/JSON
-        ::::
-
-        ---
-
-        :::info Révision ciblée — Points difficiles
-        Voici une liste des notions qui posent souvent difficulté. Prenez le temps de les réviser :
-
-        ### Pandas
-        - **groupby() et agrégations** : comprendre comment regrouper des données et calculer des statistiques par groupe
-        - **Filtres booléens complexes** : combiner plusieurs conditions avec `&`, `|`, `~`
-        - **Transformations** : créer de nouvelles colonnes avec `apply()`, `map()`, et les opérations vectorisées
-        - **Gestion des valeurs manquantes** : différence entre `dropna()` et `fillna()`, imputation par moyenne/médiane
-
-        ### NumPy
-        - **Broadcasting** : comprendre comment NumPy étend les opérations entre tableaux de formes différentes
-        - **Masques booléens** : créer et appliquer des masques pour filtrer des données
-        - **Manipulations de dimensions** : `reshape()`, `transpose()`, `concatenate()`
-        - **Opérations vectorisées vs boucles** : pourquoi la vectorisation est plus performante
-
-        ### Matplotlib
-        - **Graphiques sans Pandas** : créer des graphiques à partir de tableaux NumPy ou de listes Python
-        - **Personnalisation** : titres, labels, légendes, styles, sauvegarde
-        - **Différents types de graphiques** : courbes, barres, histogrammes, scatter
-
-        ### Fichiers
-        - **CSV avec Pandas** : `read_csv()`, `to_csv()`, paramètres importants
-        - **JSON avec Pandas** : `read_json()`, `to_json()`, structure JSON
-
-        ### Collections
-        - **Dictionnaires** : structure, méthodes, imbrication
-        - **Ensembles (set)** : opérations, unicité
-        - **Tuples** : immuabilité, utilisations
-        - **Compréhension de liste** : syntaxe, filtrage, transformation
-        :::
-
-        ---
-
-        ::::info  Ce que le TP2 utilise réellement — concentrez-vous ici
-        La solution de référence du TP2 (arbres de la Ville de Québec) se sert **presque exclusivement de Pandas et Matplotlib** :
-
-        **Pandas**
-        - `pd.read_csv()` — charger les données
-        - `dropna()`, `drop_duplicates()`, `fillna()` — nettoyer
-        - `groupby(...).mean()`, `.value_counts()` — agréger / compter
-        - `sort_values()`, `.unique()`, `.tolist()`, `str.contains()`, `idxmax()`, `head()`
-
-        **Matplotlib**
-        - `plt.scatter(...)` (carte / nuage de points), `df.plot(kind="bar")` (barres), `plt.boxplot(...)` (boîtes à moustaches)
-        - `plt.hist(data, bins=np.linspace(min, max, nbins+1))` — **histogramme à intervalles réguliers** (chaque case de largeur égale)
-        - `legend`, `title`, `xlabel`, `ylabel`, `xticks(rotation=45)`, `savefig`
-
-        **NumPy** : **très peu voire pas utilisé** dans le TP2 — ne conserver que les bases (masques, shape) si votre analyse en a besoin. Ne révisez pas NumPy avancé pour le TP.
-
-        :::note Structures R9
-        Le TP2 privilégie Pandas, mais les **structures de R9** (set, tuple, dictionnaire, compréhension de liste) restent à savoir : elles servent à lire/comprendre du code et sont évaluables à l'examen. La compréhension de liste, en particulier, fait souvent partie des analyses « à la main ».
-        :::
-        ::::
-
-        :::info Auto-évaluation
-        **Check-list de compétences**
-
-        Pour chaque notion, cochez si vous pouvez l'utiliser seul·e :
-
-        | Catégorie | Compétence | Maîtrisé ? |
-        |-----------|-----------|--------|
-        | Collections | Créer et manipuler un set |  |
-        | Collections | Créer et manipuler un tuple |  |
-        | Collections | Créer et manipuler un dictionnaire (y compris imbriqué) |  |
-        | Collections | Utiliser la compréhension de liste |  |
-        | Fichiers | Lire un CSV avec Pandas |  |
-        | Fichiers | Écrire un CSV avec Pandas |  |
-        | Fichiers | Lire un JSON avec Pandas |  |
-        | Fichiers | Écrire un JSON avec Pandas |  |
-        | Pandas | Explorer un DataFrame (info, dtypes, describe, head) |  |
-        | Pandas | Sélectionner des colonnes et des lignes (loc, iloc) |  |
-        | Pandas | Filtrer des données (conditions simples et complexes) |  |
-        | Pandas | Trier des données (sort_values) |  |
-        | Pandas | Parcourir un DataFrame (itérations, avec précaution) |  |
-        | Pandas | Nettoyer des données (dropna, fillna, drop_duplicates) |  |
-        | Pandas | Transformer des données (nouvelles colonnes, apply, map) |  |
-        | Pandas | Effectuer des regroupements et agrégations (groupby) |  |
-        | NumPy | Créer et inspecter un tableau NumPy (array, shape, dtype, ndim, size) |  |
-        | NumPy | Effectuer des opérations vectorisées (add, multiply, etc.) |  |
-        | NumPy | Utiliser le broadcasting |  |
-        | NumPy | Créer et appliquer des masques booléens |  |
-        | NumPy | Reshape, transpose, concaténer des tableaux |  |
-        | NumPy | Sauvegarder et charger des tableaux (.npy) |  |
-        | Matplotlib | Créer un graphique de base (plot, scatter, bar, hist) |  |
-        | Matplotlib | Personnaliser un graphique (titre, labels, légende, styles) |  |
-        | Matplotlib | Sauvegarder un graphique (savefig) |  |
-        | Matplotlib | Histogramme : `bins = np.linspace(min, max, nbins+1)` (intervalles réguliers) |  |
-        | Matplotlib | Distinguer un diagramme à barres d'un histogramme |  |
-        | Matplotlib | Intégrer NumPy avec Matplotlib |  |
-        | IA | Expliquer les concepts de base de l'IA et du ML |  |
-        | IA | Utiliser scikit-learn pour une tâche simple (régression ou classification) |  |
-        | IA | Distinguer apprentissage supervisé, semi-supervisé et non supervisé (données requises, tâches, exemples) |  |
-        | IA | Expliquer quand on utilise le semi-supervisé (étiqueter coûte cher) |  |
-        | IA | Nommer feature, label, modèle, entraînement (fit) et inférence (prédiction) dans un exemple |  |
-        | IA | Expliquer pourquoi on sépare les données en train/test |  |
-        | IA | Calculer une exactitude (accuracy) et en voir les limites |  |
-        | IA | Diagnostiquer un sous-apprentissage ou un sur-apprentissage à partir des scores train/test |  |
-        | IA | Expliquer le lien entre complexité d'un modèle et sur/sous-apprentissage |  |
-        | IA | Nommer des leviers qui contrôlent la complexité (paramètres, neurones/couches, régularisation, arrêt précoce) |  |
-
-        :::note
-        Cette auto-évaluation n'est pas soumise — c'est pour vous aider à identifier les points à réviser avant l'examen formatif (donné en R13, corrigé en R14) et l'examen final (R15).
-        ::::
-
-        ---
+    <TabItem value="tp2" label="TP2 — Poursuite (pas de remise)">
 
         :::info Examen formatif final — à faire
-         Vous recevez **l'examen formatif final** à faire en autosimulation (mêmes contraintes, même durée que l'examen sommatif de R15).  \\
-         **2 h, sur papier, sans documentation.**  \\
-         On le **corrigera ensemble en R14** — c'est l'occasion parfaite de voir vos erreurs avant le vrai.
+        Vous recevez **aujourd'hui l'examen formatif final** à faire en autosimulation (mêmes contraintes, même durée que l'examen sommatif de R15).  \\
+        **2 h, sur papier, sans documentation.**  \\
+        On le **corrigera ensemble en R14** — c'est l'occasion parfaite de voir vos erreurs avant le vrai.
 
         Pour vous préparer :
-        1. **Révisez les notions** où vous avez cochés  dans la check-list
+        1. **Révisez les notions** où vous hésitez encore (types d'apprentissage, entraînement, complexité, Pandas, NumPy, Matplotlib)
         2. **Révisez les traces** et les exercices de code à écrire sans documentation
         3. **Finissez votre TP2** (ou avancez autant que possible) avant la remise de R14
-        ::::
-
-    </TabItem>
-
-    <TabItem value="theorie-papier" label="Théorie — Examen papier">
-
-        :::info Objectif
-        L'examen final est **100 % papier** : on ne peut pas y exécuter Pandas, NumPy ni Matplotlib. On teste donc leur **compréhension théorique** — concepts, prédiction de sortie, interprétation. Voici les propriétés à maîtriser.
         :::
 
-        ##  Pandas — propriétés à connaître
-
-        **Structure**
-        - `DataFrame` (2D, lignes + colonnes) vs `Series` (1D) vs `Index`
-        - Accès : `loc` (par **étiquettes**) vs `iloc` (par **positions** entières)
-        - Attributs utiles : `shape`, `dtypes`, `columns`, `index`, `head()`, `info()`, `describe()`
-
-        **Filtrage et booléens**
-        - Comment combiner des conditions : `&`, `|`, `~` (toujours entre parenthèses) et pourquoi une condition seule (`df[df.A > 5 and ...]`) lève une erreur « ambiguous truth value »
-        - `str.contains()` pour filtrer du texte
-
-        **Nettoyage**
-        - `dropna()` : supprime les lignes avec valeurs manquantes
-        - `fillna(valeur/moyenne/médiane)` : **remplace** les manquantes (préserve le nombre de lignes)
-        - `drop_duplicates()` : retire les doublons
-
-        **Transformation**
-        - Nouvelle colonne : `df['col'] = ...` ou `df['col'] = df['a'] / df['b']` (vectorisé)
-        - `apply()` : applique une fonction à chaque ligne/colonne
-        - `map()` : remplace des valeurs selon un dictionnaire (surtout sur une Series)
-
-        **Agrégation**
-        - `groupby('col')` : la colonne de regroupement devient l'**index** de la sortie par défaut
-        - Combinaisons : `.mean()`, `.sum()`, `.count()`
-        - À savoir : prédire la forme d'un `groupby().mean()`
-
-        **Fichiers**
-        - `read_csv()`, `to_csv()` ; `read_json()`, `to_json()`
-
-        ##  NumPy — propriétés à connaître
-
-        **Structure**
-        - `array` : `shape` (tuple de dimensions), `ndim` (nb de dimensions), `dtype` (type), `size` (nb d'éléments)
-        - Liste Python vs array NumPy : l'array est **vectorisé** (opérations élément par élément) et plus rapide
-
-        **Opérations vectorisées**
-        - `arr * 2`, `arr + arr2`, `arr ** 2` : élément par élément (pas comme une liste)
-
-        **Broadcasting**
-        - Étendre automatiquement un tableau de petite taille pour l'aligner sur un plus grand
-        - Savoir prédire la **forme résultante** (ex. `(3,4) + (4,)` → `(3,4)`)
-
-        **Masques booléens**
-        - `arr[arr > 5]` : sélectionner par condition (attention : le résultat est **aplati en 1D**)
-        - `np.where(cond, a, b)` : choisir entre deux valeurs selon une condition
-
-        **Restructuration**
-        - `reshape()`, `transpose()`, `concatenate()`, `vstack()`/`hstack()`
-        - Sauvegarde/chargement `.npy` : `np.save()`/`np.load()`
-
-        **Statistiques**
-        - `mean()`, `std()`, `min()`, `max()`, `sum()`
-
-        ##  IA — propriétés théoriques à connaître
-
-        **Concepts de base**
-        - IA > Machine Learning > Deep Learning (hiérarchie, IA = la plus large)
-        - **IA faible** (spécialisée) = IA conçue pour **une seule tâche** (traduire, jouer aux échecs, reconnaître des visages) ; **toute l'IA actuelle** est de ce type, y compris ChatGPT
-        - **IA forte** (générale) = intelligence **polyvalente comparable à celle d'un humain**, capable d'apprendre n'importe quelle tâche ; elle **n'existe pas encore**
-        - Deep Learning = ML avec des réseaux de neurones à **plusieurs couches**
-
-        **Types d'apprentissage** (la question clé : les exemples ont-ils une **étiquette**, c.-à-d. la bonne réponse?)
-        - **Supervisé** : **toutes** les données sont étiquetées → on apprend à **prédire** la réponse
-          - **Régression** : prédire une **quantité** (on peut dire « un peu plus / un peu moins » : prix, température, nombre de vélos)
-          - **Classification** : prédire un **choix dans une liste** (même codé 0/1 : pourriel/normal, passe/échoue, espèce)
-          - Piège : malgré son nom, la **régression logistique** est un modèle de **classification**
-          - Ex. : filtre anti-pourriel, prix d'un logement à partir des ventes passées
-        - **Semi-supervisé** : **peu** de données étiquetées + **beaucoup** de données non étiquetées → le but reste de **prédire** (surtout classification)
-          - Utilisé quand **étiqueter coûte cher** (expert, temps) alors que les données brutes sont faciles à obtenir
-          - Mécanisme simple : **pseudo-étiquetage** (entraîner sur le petit lot étiqueté, prédire le reste, garder les prédictions sûres, réentraîner)
-          - Ex. : imagerie médicale (quelques images annotées par un radiologue), retrouver son chat dans ses photos
-        - **Non supervisé** : **aucune** étiquette → on **découvre une structure** cachée
-          - **Regroupement** (*clustering*), **réduction de dimension**, détection d'anomalies
-          - Les groupes trouvés n'ont **pas de nom** : un humain doit les interpréter ; pas d'exactitude calculable directement
-          - Ex. : segmenter des clients selon leurs achats, regrouper des articles par sujet
-
-        **Entraînement d'un modèle — vocabulaire**
-        - **Feature** (caractéristique) = variable d'**entrée** (notée X) ; **label**/**cible** = la **réponse** à prédire (notée y)
-        - **Modèle** = fonction avec des **paramètres** réglables (ex. pente et ordonnée d'une droite, poids d'un neurone)
-        - **Entraînement** (*fit*) = ajuster les paramètres à partir des données (en **supervisé** : features **et** labels ; en **non supervisé** : features seulement) ; boucle **prédire → mesurer l'erreur → ajuster** ; une **époque** = un passage sur toutes les données d'entraînement
-        - **Inférence** (*predict*, prédiction) = utiliser le modèle **déjà entraîné** sur un **nouvel** exemple (features seulement, paramètres figés)
-        - **Paramètre** (appris par *fit* sur l'entraînement : pente, poids, biais) vs **hyperparamètre** (réglage choisi **par l'humain avant** l'entraînement : degré de la courbe, nb de couches/neurones, nb d'époques, régularisation ; choisi avec la **validation**)
-
-        **Séparation train/test**
-        - **Train** (≈ 80 %) sert à ajuster les paramètres ; **test** (≈ 20 %) est mis de côté et sert **uniquement** à évaluer à la fin
-        - Pourquoi? Pour mesurer la **généralisation** (performance sur des données **jamais vues**) ; évaluer sur les données d'entraînement est « truqué »
-        - Le modèle ne doit **jamais** voir le test pendant l'entraînement
-        - Rôles des trois ensembles : **train = ajuster** les paramètres ; **validation = choisir** (hyperparamètres, complexité, arrêt précoce) ; **test = confirmer une seule fois** à la fin (on ne choisit **jamais** avec le test)
-
-        **Métrique**
-        - **Exactitude (accuracy)** = bonnes prédictions / total (ex. 180 / 200 = 90 %) — pour la **classification**
-        - Pour juger un score, le comparer à un **modèle de base** : avec **2 classes équilibrées**, le **hasard** donne ≈ **50 %**
-        - Piège : avec des classes déséquilibrées (ex. 99 % de transactions honnêtes), un modèle qui répond toujours la classe majoritaire a une exactitude élevée mais est inutile
-
-        **Sous-apprentissage vs sur-apprentissage**
-        - **Sous-apprentissage** (*underfitting*) : modèle **trop simple** → score **faible sur train ET sur test**
-        - **Sur-apprentissage** (*overfitting*) : modèle qui **apprend par cœur** (y compris le bruit) → score **très élevé sur train**, **nettement plus faible sur test**
-        - **Bonne généralisation** : scores train et test **bons et proches**
-        - 100 % sur l'entraînement ne prouve rien ; c'est souvent un signal de sur-apprentissage
-
-        **Complexité (capacité) d'un modèle**
-        - **Capacité** = variété des formes/règles qu'un modèle peut apprendre ; augmente avec le **nombre de paramètres**
-        - Schéma : **trop simple** (sous-apprentissage) → **bonne complexité** (généralise) → **trop complexe** (sur-apprentissage)
-        - Quand la complexité augmente : l'erreur d'**entraînement diminue (en général)** ; l'erreur de **test** diminue puis **remonte** (courbe en U)
-        - **Leviers** : nombre de paramètres (ex. degré d'une courbe), nombre de **neurones** et de **couches**, nombre de features, durée d'entraînement / **arrêt précoce**, **régularisation** (pénalise les paramètres extrêmes → réduit la complexité)
-        - Remèdes : sous-apprentissage → **augmenter** la complexité ; sur-apprentissage → **diminuer** la complexité, régulariser, arrêt précoce, ou **ajouter des données**
-        - Ajouter des données réduit le risque de sur-apprentissage, mais **ne corrige pas** un sous-apprentissage
-        - Le **meilleur modèle** = la plus petite erreur de **validation** (pas d'entraînement) ; le **test** confirme ensuite, une seule fois
-
-        **Apprentissage profond (Deep Learning)** — ce qui est évaluable
-        - **Neurone artificiel** : entrées × **poids**, additionnées, + **biais**, puis **fonction d'activation** → **sortie** (formule : `Σ(wᵢ·xᵢ) + b`, puis activation)
-        - **Réseau** : **couche d'entrée** → une ou plusieurs **couches cachées** → **couche de sortie**
-        - **Profond** = **plusieurs couches cachées**
-        - Les **poids et les biais** sont les **paramètres** appris pendant l'entraînement (droite : 2 paramètres ; petit réseau MNIST : ≈ 109 386 ; GPT-3 : ≈ 175 milliards)
-        - Le **perceptron** (un seul neurone) ne peut pas résoudre un problème **non linéairement séparable**, comme le **OU exclusif (XOR)**
-        - **Défis** : beaucoup de **données**, beaucoup de **calcul** (énergie), **boîte noire** (difficile d'expliquer ses décisions), risque de sur-apprentissage
-        -  Le **code Keras/TensorFlow n'est pas évalué**
-
-        **Empreinte écologique de l'IA**
-        - Coûts : énergie, calcul, données, eau ; questions éthiques et environnementales des grands modèles
-        - **Entraînement** = coût **ponctuel**, mais **très élevé** (semaines de calcul sur des milliers de processeurs)
-        - **Inférence** = **petit** coût, mais **répété** des millions de fois par jour → c'est souvent la **part majoritaire** de l'énergie totale
-        - Réflexe : **commencer par un modèle simple**, et n'augmenter la complexité que si la validation s'améliore réellement
-
-        :::note Question type à l'examen papier
-        - QCM / vrai-faux sur les notions ci-dessus
-        - « Quelle est la sortie de ce code ? » (prédiction Pandas/NumPy)
-        - Appariement : méthode ↔ effet, code ↔ type de graphique
-        - IA : classer une situation (supervisé / semi-supervisé / non supervisé, régression / classification), diagnostiquer un sur- ou sous-apprentissage à partir de scores train/test, proposer un levier de complexité
-        :::
-
-    </TabItem>
-
-    <TabItem value="tp2" label="TP2 — Poursuite (pas de remise)">
+        ---
 
         :::info Objectif de cette rencontre
         Cette rencontre est la **dernière période de travail sur le TP2 avant la remise**. Vous avez maintenant toutes les notions nécessaires (R9 → R12) pour finaliser votre analyse.
