@@ -300,7 +300,20 @@ Cliquez sur le badge pour ouvrir le notebook de cette rencontre dans [Google Col
 
         **Exemple** : sur 200 fruits de l'ensemble de test, le modèle en reconnaît correctement 180. Exactitude = 180 / 200 = **0,90**, soit **90 %**.
 
-        (Pour une **régression**, on ne parle pas de « bonne » ou « mauvaise » réponse, mais de **distance** à la vraie valeur : on utilise plutôt l'erreur moyenne ou le score R² vu en R12.)
+        Pour une **régression**, on ne parle pas de « bonne » ou « mauvaise » réponse, mais de **distance** entre la valeur prédite et la vraie valeur : on utilise le **coefficient de détermination** R².
+
+        $$
+        R^2 = 1 - \frac{\sum (y_i - \hat{y}_i)^2}{\sum (y_i - \bar{y})^2}
+        $$
+
+        - $y_i$ : la vraie valeur ; $\hat{y}_i$ : la prédiction ; $\bar{y}$ : la moyenne des vraies valeurs ;
+        - **R² = 1** : prédictions parfaites ; **R² = 0** : pas mieux que de prédire la moyenne ; sur le **test**, R² peut être **négatif** (le modèle fait pire que la moyenne).
+        :::
+
+        :::tip Documentation scikit-learn
+        Les fonctions vues ici (exactitude, R²) ont leurs pages de référence officielles :
+        - [`accuracy_score` — exactitude](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.accuracy_score.html)
+        - [`r2_score` — coefficient de détermination R²](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.r2_score.html)
         :::
 
         :::warning Piège : une exactitude élevée n'est pas toujours bonne
@@ -363,7 +376,15 @@ Cliquez sur le badge pour ouvrir le notebook de cette rencontre dans [Google Col
         | **mpg** | 398 voitures (puissance, poids, cylindres, etc.) | l'**autonomie en carburant** `mpg` (milles par gallon, *miles per gallon*) : un **nombre** (plus il est élevé, moins la voiture consomme) | **régression** | régression **linéaire** |
         | **Iris** | 150 fleurs (longueur et largeur des sépales et des pétales) | l'**espèce** de la fleur : une **catégorie** parmi 3 | **classification** | régression **logistique** |
 
-        Créez un fichier `pratique_ia.py` (ou un notebook) et exécutez les morceaux de code **un à la fois**, dans l'ordre. Lisez les sorties avant de passer au suivant et répondez aux questions.
+        Créez un fichier `pratique_ia.py` (ou un notebook) et exécutez les morceaux de code **un à la fois**, dans l'ordre.
+        :::tip Documentation scikit-learn
+        Les fonctions utilisées dans cet exercice ont leur page officielle (utilisable hors examen, pour comprendre la doc) :
+        - [`LinearRegression`](https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LinearRegression.html)
+        - [`LogisticRegression`](https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html)
+        - [`train_test_split`](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.train_test_split.html)
+        - [`accuracy_score`](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.accuracy_score.html) et [`r2_score`](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.r2_score.html)
+        :::
+ Lisez les sorties avant de passer au suivant et répondez aux questions.
         :::
 
         :::warning Attention : mpg ≠ L/100 km (sens inverse)
