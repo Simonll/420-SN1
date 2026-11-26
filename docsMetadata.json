@@ -84,10 +84,10 @@
   },
   {
     "id": "13-rencontre13",
-    "title": "13 - IA (avancé) + TP2 poursuite",
-    "#description": "Deep Learning, Empreinte écologique, Scikit-learn, Exercice de synthèse, Révision ciblée, TP2 poursuite (pas de remise)",
+    "title": "13 - IA (types d'apprentissage, entraînement, complexité) + TP2 poursuite",
+    "#description": "Types d'apprentissage (supervisé, semi-supervisé, non supervisé), entraînement d'un modèle (train/test, fit, sur/sous-apprentissage), complexité d'un modèle, Deep Learning, Empreinte écologique, Scikit-learn, Examen formatif à faire, TP2 poursuite (pas de remise)",
     "hide_table_of_contents": "true",
-    "draft": "true"
+    "draft": "false"
   },
   {
     "id": "14-rencontre14",
