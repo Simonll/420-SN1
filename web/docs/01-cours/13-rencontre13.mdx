@@ -429,7 +429,7 @@ Cliquez sur le badge pour ouvrir le notebook de cette rencontre dans [Google Col
         print(df_mpg.describe())
         ```
 
-        :::tip Valeurs manquantes dans `horsepower`
+        :::tip Valeurs manquantes dans `horsepower` (la puissance)
         La sortie de `isnull().sum()` montre que la colonne `horsepower` contient **quelques valeurs manquantes** (6 voitures). Un modèle scikit-learn **refuse** les valeurs manquantes : il faut s'en occuper **avant** de modéliser.
 
         La solution la plus simple ici : **retirer les lignes incomplètes** avec `dropna`.
@@ -508,6 +508,10 @@ Cliquez sur le badge pour ouvrir le notebook de cette rencontre dans [Google Col
         plt.show()
         ```
 
+        Exemple de rendu (histogrammes de `mpg` et de la puissance) :
+
+        ![Distribution de mpg et de la puissance](/img/cours/mpg_histogrammes.png)
+
         :::info Comment lire la forme d'une distribution
         | Ce qu'on observe | Vocabulaire | Indice dans `describe()` |
         |---|---|---|
@@ -544,7 +548,7 @@ Cliquez sur le badge pour ouvrir le notebook de cette rencontre dans [Google Col
         1. Combien de lignes contient `df_mpg` **avant** et **après** le `dropna`? Combien de valeurs manquantes y avait-il, et dans quelle colonne?
         2. Parmi `mpg`, `horsepower` et `weight`, quelle variable est la plus **asymétrique**? Vers quel côté? Comparez la moyenne et la médiane dans `describe()` pour confirmer.
         3. Dans Iris, quelle mesure est la plus **étalée** (le plus grand `std`)? Quelle mesure est la moins étalée?
-        4. L'histogramme de `petal length (cm)` a-t-il **une** ou **deux** bosses? Selon vous, qu'est-ce que cela pourrait signifier? (Indice : il y a plusieurs espèces dans le jeu de données.)
+        4. L'histogramme de la longueur des pétales (`petal length (cm)`) a-t-il **une** ou **deux** bosses? Selon vous, qu'est-ce que cela pourrait signifier? (Indice : il y a plusieurs espèces dans le jeu de données.)
         5. Y a-t-il des **valeurs extrêmes** dans `horsepower`? Dans `acceleration`? Vous semblent-elles plausibles?
         6. Classez chaque colonne de `df_mpg` comme **continue**, **catégorielle** ou **identifiant**.
 
@@ -553,8 +557,8 @@ Cliquez sur le badge pour ouvrir le notebook de cette rencontre dans [Google Col
         ## Partie B — Régression linéaire : prédire `mpg` (jeu de données mpg)
 
         :::info Le problème
-        On veut **prédire l'autonomie `mpg`** (milles par gallon, un **nombre continu**) d'une voiture à partir de **sa puissance** `horsepower`. C'est un problème de **régression** supervisée :
-        - **caractéristique** (entrée, `X`) : `horsepower`
+        On veut **prédire l'autonomie `mpg`** (un **nombre continu**) d'une voiture à partir de **sa puissance** (*horsepower*, en chevaux). C'est un problème de **régression** supervisée :
+        - **caractéristique** (entrée, `X`) : la puissance (`horsepower`)
         - **étiquette** ou cible (sortie, `y`) : `mpg`
 
         Le modèle cherche la droite `mpg = a × horsepower + b` qui passe **le plus près possible** des points.
@@ -562,7 +566,7 @@ Cliquez sur le badge pour ouvrir le notebook de cette rencontre dans [Google Col
 
         ### B.1 Observer la relation avant de modéliser
 
-        On a déjà décrit `mpg` et `horsepower` **séparément** (Partie A). Regardons maintenant **les deux ensemble** avec un nuage de points.
+        On a déjà décrit l'autonomie `mpg` et la puissance `horsepower` **séparément** (Partie A). Regardons maintenant **les deux ensemble** avec un nuage de points.
 
         ```python
         plt.scatter(df_mpg["horsepower"], df_mpg["mpg"], alpha=0.5)
@@ -577,6 +581,13 @@ Cliquez sur le badge pour ouvrir le notebook de cette rencontre dans [Google Col
         - Les points forment-ils à peu près une **droite**, ou plutôt une **courbe**?
         - Les points sont-ils **serrés** autour de la tendance, ou très **dispersés**?
         :::
+
+
+        Un exemple de rendu : plus la puissance augmente, plus le mpg **baisse** — le poids a lui aussi une relation décroissante avec l'autonomie :
+
+        ![Relation puissance vs autonomie (mpg)](/img/cours/mpg_scatter_mpg_puissance.png)
+
+        ![Relation poids vs autonomie (mpg)](/img/cours/mpg_scatter_mpg_poids.png)
 
         ### B.2 Séparer les données : entraînement et test
 
@@ -661,7 +672,7 @@ Cliquez sur le badge pour ouvrir le notebook de cette rencontre dans [Google Col
         2. Votre prédiction **à la main** pour 100 chevaux est-elle identique à celle de `predict()`? Refaites le calcul pour une voiture de **150** chevaux.
         3. Comparez le R² d'**entraînement** et le R² de **test**. Sont-ils proches? Selon le tableau de l'onglet « IA — Entraîner un modèle », s'agit-il de sous-apprentissage, de sur-apprentissage ou d'une bonne généralisation? (Repère : un R² d'environ 0,6 sur les deux ensembles indique qu'il n'y a pas de sur-apprentissage, mais que la droite n'explique qu'une partie de la variation de `mpg` ; avec une relation courbe (question 4), on parle de léger sous-apprentissage.)
         4. Dans le nuage de points, la relation ressemble-t-elle à une droite parfaite? Où la droite rouge se trompe-t-elle le plus (puissances faibles, moyennes ou élevées)?
-        5. **Défi** : remplacez `horsepower` par `weight` (partout dans le code). Quel modèle obtient le meilleur R² sur le test?
+        5. **Défi** : remplacez la puissance `horsepower` par le poids `weight` (partout dans le code). Quel modèle obtient le meilleur R² sur le test?
 
         ---
 
@@ -707,7 +718,7 @@ Cliquez sur le badge pour ouvrir le notebook de cette rencontre dans [Google Col
         :::tip Ce qu'on cherche
         - Si les histogrammes des 3 espèces sont **bien séparés** pour une mesure, cette mesure est une **excellente caractéristique** : le modèle aura la tâche facile.
         - S'ils se **chevauchent**, le modèle risque de **confondre** ces espèces.
-        - Retour sur la question 4 de la Partie A : les « deux bosses » de `petal length (cm)` venaient du mélange de plusieurs espèces!
+        - Retour sur la question 4 de la Partie A : les « deux bosses » de la longueur des pétales (`petal length (cm)`) venaient du mélange de plusieurs espèces!
         :::
 
         :::note Exemples : quelles caractéristiques distinguent les espèces d'Iris?
@@ -715,14 +726,14 @@ Cliquez sur le badge pour ouvrir le notebook de cette rencontre dans [Google Col
 
         | Mesure | Séparation entre les espèces |
         |---|---|
-        | `petal length (cm)` | **Très bonne** : `setosa` se distingue nettement (pétales courts) ; `versicolor` et `virginica` ne se chevauchent que peu. |
-        | `petal width (cm)` | **Très bonne** : même constat, `setosa` bien isolée. |
-        | `sepal length (cm)` | Correcte : `setosa` isolée, mais chevauchement entre `versicolor` et `virginica`. |
-        | `sepal width (cm)` | **Faible** : les 3 espèces se chevauchent beaucoup. |
+        | **Longueur des pétales** (`petal length (cm)`) | **Très bonne** : `setosa` se distingue nettement (pétales courts) ; `versicolor` et `virginica` ne se chevauchent que peu. |
+        | **Largeur des pétales** (`petal width (cm)`) | **Très bonne** : même constat, `setosa` bien isolée. |
+        | **Longueur des sépales** (`sepal length (cm)`) | Correcte : `setosa` isolée, mais chevauchement entre `versicolor` et `virginica`. |
+        | **Largeur des sépales** (`sepal width (cm)`) | **Faible** : les 3 espèces se chevauchent beaucoup. |
 
-        **En images** — histogramme de `petal length (cm)` par espèce :
+        **En images** — histogramme de la **longueur des pétales** (`petal length (cm)`) par espèce :
 
-        ![Distribution de petal length (cm) selon l'espèce](/img/cours/iris_petal_length_histogramme.png)
+        ![Distribution de la longueur des pétales selon l'espèce](/img/cours/iris_petal_length_histogramme.png)
 
         Et en **nuage de points**, la relation entre deux mesures montre encore mieux la séparation : on voit les 3 espèces former des **groupes distincts** sur les pétales (longueur × largeur), alors que les sépales se chevauchent.
 
