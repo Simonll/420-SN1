@@ -1,19 +1,19 @@
 import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
 
-        :::tip 🌍 Pourquoi parler d’empreinte écologique de l’IA?
+        :::tip  Pourquoi parler d’empreinte écologique de l’IA?
 
         Derrière chaque requête à un modèle d’IA, il y a :
 
-        - des **centres de données** 🏢 remplis de serveurs et de GPU ;
-        - une **consommation d’électricité** ⚡ (souvent produite à partir de combustibles fossiles) ;
-        - du **refroidissement** 💧 (eau, climatisation) ;
+        - des **centres de données**  remplis de serveurs et de GPU ;
+        - une **consommation d’électricité**  (souvent produite à partir de combustibles fossiles) ;
+        - du **refroidissement**  (eau, climatisation) ;
         - et du **matériel** à fabriquer puis à recycler (métaux, terres rares, déchets électroniques).
 
         Selon l’Agence internationale de l’énergie (AIE), les centres de données consommaient déjà autour de **1,5 %** de l’électricité mondiale en 2024, et cette part pourrait **doubler** d’ici 2030, en grande partie à cause de l’IA. ([AIE, 2025](https://www.iea.org/reports/energy-and-ai/executive-summary))
 
         :::
 
-        :::warning 🧩 Où se situe l’impact?
+        :::warning  Où se situe l’impact?
 
         On peut simplifier l’empreinte écologique de l’IA en trois grandes composantes :
 
@@ -35,21 +35,21 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
 
         ```mermaid
         flowchart LR
-            U["👩‍💻 Vous<br/><sub>(code, requêtes)</sub>"] --> R["Requêtes vers un modèle d'IA"]
-            R --> DC["🏢 Centre de données<br/><sub>GPU, serveurs</sub>"]
+            U[" Vous<br/><sub>(code, requêtes)</sub>"] --> R["Requêtes vers un modèle d'IA"]
+            R --> DC[" Centre de données<br/><sub>GPU, serveurs</sub>"]
 
-            DC --> P["⚡ Électricité<br/><sub>mix énergétique local</sub>"]
-            P --> CO2["🌫️ Émissions de CO₂e"]
+            DC --> P[" Électricité<br/><sub>mix énergétique local</sub>"]
+            P --> CO2[" Émissions de CO₂e"]
 
-            DC --> Cool["💧 Refroidissement<br/><sub>eau, climatisation</sub>"]
+            DC --> Cool[" Refroidissement<br/><sub>eau, climatisation</sub>"]
 
-            DC --> HW["🛠️ Matériel informatique"]
-            HW --> Waste["🗑️ Déchets électroniques<br/><sub>extraction, recyclage</sub>"]
+            DC --> HW[" Matériel informatique"]
+            HW --> Waste[" Déchets électroniques<br/><sub>extraction, recyclage</sub>"]
         ```
 
         :::
 
-        :::info 📊 Ordres de grandeur (approximatifs)
+        :::info  Ordres de grandeur (approximatifs)
 
         Ces chiffres évoluent vite, mais donnent une idée des échelles :
 
@@ -60,12 +60,12 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
         | Entraînement d’un très grand modèle | centaines de milliers de kg de CO₂e (≈ centaines de vols long-courrier) | études sur GPT-3 et autres grands modèles ([The Sustainable Agency](https://thesustainableagency.com/blog/environmental-impact-of-generative-ai/)) |
         | Eau utilisée pour l’entraînement d’un grand modèle | ~700 000 L pour un entraînement (ordre de grandeur) | étude sur GPT-3 ([Earth.Org](https://earth.org/environmental-impact-chatgpt/)) |
 
-        > 🧊 À l’échelle d’un **TP en cégep**, votre impact est très faible comparé à celui de grands modèles industriels.
+        >  À l’échelle d’un **TP en cégep**, votre impact est très faible comparé à celui de grands modèles industriels.
         > Mais comprendre ces ordres de grandeur permet de réfléchir à une **pratique plus sobre** dès maintenant.
 
         :::
 
-        :::tip 🌱 Vers une IA plus “verte” (Green AI)
+        :::tip  Vers une IA plus “verte” (Green AI)
 
         Des équipes de recherche et d’ingénierie travaillent à réduire l’empreinte écologique de l’IA, ce qu’on appelle parfois **Green AI**. ([ScienceDirect, 2024](https://www.sciencedirect.com/science/article/pii/S0925231224008671))
         Parmi les stratégies :
@@ -88,7 +88,7 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
 
         :::
 
-        :::tip 🧮 Et vous, en SN1, concrètement?
+        :::tip  Et vous, en SN1, concrètement?
 
         À votre échelle (TP en Python, petits modèles, jeux de données modestes), l’impact direct est très faible, mais vous pouvez déjà adopter de **bons réflexes** :
 
@@ -109,9 +109,9 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
           - C’est déjà une manière de faire évoluer les pratiques.
 
         L’objectif n’est pas de vous culpabiliser dès maintenant, mais de vous donner des **repères** :
-        l’IA n’est pas “magique” ni “immatérielle”, elle repose sur des infrastructures bien réelles, avec un **coût énergétique et matériel**. 🌱
+        l’IA n’est pas “magique” ni “immatérielle”, elle repose sur des infrastructures bien réelles, avec un **coût énergétique et matériel**. 
 
         :::
 
 
-        {/* <Feedback feedbackId="Rencontre #13 - 🌳 Empreinte écologique" /> */}
+        {/* <Feedback feedbackId="Rencontre #13 -  Empreinte écologique" /> */}

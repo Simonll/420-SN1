@@ -1,10 +1,10 @@
 import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
 
-        :::info 🧠🕸️ Qu'est-ce que l'apprentissage profond?
+        :::info  Qu'est-ce que l'apprentissage profond?
         L'**apprentissage profond** (*Deep Learning*, DL), c'est de l'**apprentissage machine** avec des **réseaux** de **beaucoup de couches** de neurones artificiels. Il brille sur les **images**, le **son** et le **texte**.
         :::
 
-        :::note 🎯 Ce qui est évaluable à l'examen papier dans cet onglet
+        :::note  Ce qui est évaluable à l'examen papier dans cet onglet
         - Le **neurone artificiel** : entrées × **poids**, additionnées, + **biais**, puis **fonction d'activation** → **sortie**.
         - Le **réseau** : **couche d'entrée**, **couches cachées**, **couche de sortie**. **Profond** = **plusieurs couches cachées**.
         - Les **poids et les biais** sont les **paramètres** appris pendant l'entraînement.
@@ -24,7 +24,7 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
         | Santé | Diagnostic médical, analyse d'images médicales |
         :::
 
-        :::info Modèle de base : le neurone artificiel 🤖
+        :::info Modèle de base : le neurone artificiel 
 
         Le neurone artificiel est l'unité de base des réseaux de neurones en apprentissage profond.
         Il reçoit plusieurs entrées, applique des poids à chacune d'elles, additionne le tout avec un biais, puis applique une **fonction d'activation** pour produire une sortie.
@@ -34,7 +34,7 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
         ```mermaid
         flowchart LR
 
-        subgraph Bio["🧬 Neurone biologique"]
+        subgraph Bio[" Neurone biologique"]
             A1["Dendrites<br/><sub>Reçoivent des signaux chimiques/électriques</sub>"]
             A2["Soma (corps cellulaire)<br/><sub>Intègre les signaux</sub>"]
             A3["Axone<br/><sub>Transmet un signal électrique</sub>"]
@@ -43,7 +43,7 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
             A1 --> A2 --> A3 --> A4
         end
 
-        subgraph Art["🤖 Neurone artificiel"]
+        subgraph Art[" Neurone artificiel"]
             B1["Entrées x₁, x₂, …"]
             B2["Poids w₁, w₂, …"]
             B3["Somme pondérée<br/>Σ(wᵢ·xᵢ) + b"]
@@ -124,7 +124,7 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
         Le perceptron peut être entraîné à l'aide d'un algorithme simple qui ajuste les poids en fonction des erreurs de classification sur un ensemble de données d'entraînement. Cependant, le perceptron a des limitations, notamment le fait qu'il **ne peut pas résoudre un problème non linéairement séparable**, comme le **OU exclusif (XOR)** : aucune droite ne sépare les cas où la réponse est 1 de ceux où elle est 0. C'est ce qui a conduit au développement de réseaux de neurones plus complexes et profonds.
         :::
 
-        :::info 🔗 Réseaux de neurones
+        :::info  Réseaux de neurones
 
         Un **réseau de neurones artificiels** est une architecture composée de plusieurs couches de neurones interconnectés :
 
@@ -204,7 +204,7 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
         :::
 
 
-        :::tip 🐾 Exemple : classifier des animaux dans des photos
+        :::tip  Exemple : classifier des animaux dans des photos
 
         Dans un réseau profond entraîné à **reconnaître des animaux dans des images**, les couches n’apprennent pas toutes la même chose :
 
@@ -218,7 +218,7 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
         ```mermaid
         flowchart LR
 
-            I["📷 Image d'entrée<br/><sub>chat, chien, oiseau…</sub>"] --> L1
+            I[" Image d'entrée<br/><sub>chat, chien, oiseau…</sub>"] --> L1
             subgraph C1["Couche 1"]
                 L1["Bords & orientations<br/><sub>lignes, contours simples</sub>"]
             end
@@ -238,7 +238,7 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
                 L4["Représentations d'animaux<br/><sub>forme globale : 'chat', 'chien', 'oiseau'</sub>"]
             end
 
-            L4 --> Y["🎯 Sortie<br/><sub>classe prédite</sub>"]
+            L4 --> Y[" Sortie<br/><sub>classe prédite</sub>"]
         ```
 
         Dans un tel modèle de réseau de neurones convolutifs (*Convolutional Neural Network, CNN*), ces “couches” sont des **couches convolutionnelles** apprenant automatiquement ces niveaux de représentation, sans que l’on dise explicitement au modèle “voici un bord” ou “voici une patte” : il les découvre à partir des données et se construit sa propre hiérarchie de caractéristiques.
@@ -266,7 +266,7 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
 
         ::::info Pour les curieux (non évalué) — Exemple d'implémentation avec Keras
 
-        ⚠️ Ce code **n'est pas évalué** à l'examen : il montre seulement à quoi ressemble un entraînement en apprentissage profond. Les termes `relu`, `softmax`, `adam` ou `sparse_categorical_crossentropy` n'ont pas à être connus.
+         Ce code **n'est pas évalué** à l'examen : il montre seulement à quoi ressemble un entraînement en apprentissage profond. Les termes `relu`, `softmax`, `adam` ou `sparse_categorical_crossentropy` n'ont pas à être connus.
 
         Voici un exemple d'utilisation de la bibliothèque `Keras` (incluse dans `TensorFlow`) pour entraîner un **réseau de neurones simple** sur le jeu de données `MNIST` (images de chiffres manuscrits 28×28).
 
@@ -283,7 +283,7 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
         6. Évaluer sur un ensemble de test
 
         :::warning-nt
-        > 💡 Cet exemple est surtout **illustratif** : pour l’exécuter, il faut avoir installé `tensorflow` (qui contient `keras`), ce qui peut prendre environ 3 minutes à installer via le terminal intégré <img src={require('/img/icons/terminal.png').default}/> :
+        >  Cet exemple est surtout **illustratif** : pour l’exécuter, il faut avoir installé `tensorflow` (qui contient `keras`), ce qui peut prendre environ 3 minutes à installer via le terminal intégré <img src={require('/img/icons/terminal.png').default}/> :
 
         ```bash
         pip install tensorflow
@@ -378,7 +378,7 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
         print("Étiquettes prédites :", pred_labels)
         ::::
 
-        :::tip 🔗 Lien avec la complexité d'un modèle (évaluable)
+        :::tip  Lien avec la complexité d'un modèle (évaluable)
         Les **poids et les biais** d'un réseau sont ses **paramètres**. Comparons leur nombre :
 
         | Modèle | Nombre de paramètres |
@@ -391,4 +391,4 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
         :::
 
 
-        {/* <Feedback feedbackId="Rencontre #13 - 🧠🕸️ Apprentissage profond" /> */}
+        {/* <Feedback feedbackId="Rencontre #13 -  Apprentissage profond" /> */}

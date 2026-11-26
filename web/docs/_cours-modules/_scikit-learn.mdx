@@ -2,7 +2,7 @@ import { S, N, K, F, B, C } from '@site/docs/_components/PyCode.mdx';
 import useBaseUrl from '@docusaurus/useBaseUrl';
 
 
-        :::info 🤖 Introduction à Scikit-learn
+        :::info  Introduction à Scikit-learn
 
         Scikit-learn est une bibliothèque Python utilisée pour faire de l’**apprentissage automatique** (*machine learning*).\
         Elle permet de créer des **modèles** capables de détecter des relations dans les données afin de **faire des prédictions**.
@@ -18,7 +18,7 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 
         ---
 
-        ### 🧠 Concepts clés
+        ###  Concepts clés
 
         - **Modèle** : algorithme qui apprend à partir des données
         - **Prétraitement des données** : préparer les données (normaliser, encoder, nettoyer)
@@ -27,11 +27,11 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 
         ---
 
-        👉 Cette semaine, nous allons nous concentrer sur des modèles simples de **régression**, en lien avec la **visualisation des données**.
+         Cette semaine, nous allons nous concentrer sur des modèles simples de **régression**, en lien avec la **visualisation des données**.
 
         :::
 
-        :::note 🚗 Démonstration : Consommation d’essence et caractéristiques des voitures
+        :::note  Démonstration : Consommation d’essence et caractéristiques des voitures
 
         Nous utiliserons le jeu de données classique **Auto MPG** (*Miles per Gallon*) pour explorer la relation entre la **consommation d’essence** (`mpg`) et des variables comme le **poids** (`weight`) ou le **nombre de cylindres** (`cylinders`).
         - Ce jeu de données (*dataset*) est très vintage (années 70-80), mais reste un excellent exemple pédagogique.
@@ -39,7 +39,7 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 
         ---
 
-        ### 🧰 Chargement du jeu de données
+        ###  Chargement du jeu de données
 
         ```python
         import pandas as pd
@@ -92,7 +92,7 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 
         :::
 
-        :::info 🔍 Exploration rapide
+        :::info  Exploration rapide
 
             Regroupons les voitures par nombre de cylindres et calculons la moyenne de consommation pour chaque groupe :
         ```python
@@ -108,11 +108,11 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
         8    14.963107
         Name: mpg, dtype: float64
         ```
-        💡 On observe une relation **inverse** : à l'exception des petits 3-cylindres, on dirait que plus il y a de cylindres, plus la mesure de consommation (mpg) diminue. 🤔<br />
+         On observe une relation **inverse** : à l'exception des petits 3-cylindres, on dirait que plus il y a de cylindres, plus la mesure de consommation (mpg) diminue. <br />
             C'est plutôt logique : plus une voiture a de cylindres, plus elle consomme d’essence (donc moins elle parcourt de miles par gallon).
             Mais c'est un peu mélangeant, car on est plutôt habitué à penser à l'envers, soit en litres consommés aux 100 km (L/100km), où une consommation plus faible est donc meilleure.
 
-        👉 Nous allons donc créer une nouvelle colonne `l_par_100km` pour convertir `mpg` en litres aux 100 km :
+         Nous allons donc créer une nouvelle colonne `l_par_100km` pour convertir `mpg` en litres aux 100 km :
         ```python
         # Conversion mpg -> L/100km
         df["l_par_100km"] = 235.214583 / df["mpg"]
@@ -148,11 +148,11 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 
         <br /><br />
 
-        💬 On observe une tendance claire : plus le poids du véhicule augmente, plus la consommation en litres aux 100 km augmente également. Cela confirme notre intuition que les voitures plus lourdes consomment plus d’essence.
+         On observe une tendance claire : plus le poids du véhicule augmente, plus la consommation en litres aux 100 km augmente également. Cela confirme notre intuition que les voitures plus lourdes consomment plus d’essence.
 
         :::
 
-        :::note 🧮 Régression linéaire simple (Scikit-learn)
+        :::note  Régression linéaire simple (Scikit-learn)
 
         Nous allons modéliser cette relation avec une régression linéaire (`LinearRegression`).
 
@@ -229,10 +229,10 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
         model = LinearRegression()
 
         # Le modèle va essayer de trouver la "meilleure droite" qui représente la relation entre X et y.
-        # 👉 On "entraîne" le modèle :
+        #  On "entraîne" le modèle :
         model = model.fit(X, y)
 
-        # ⚠️ ici, le score est calculé sur les données d'entraînement :
+        #  ici, le score est calculé sur les données d'entraînement :
         print("Score R² :", model.score(X, y))
         print("Coefficient :", model.coef_[0])
         print("Intercept :", model.intercept_)
@@ -267,7 +267,7 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 
         :::
 
-        :::info 📈 Visualisation de la régression
+        :::info  Visualisation de la régression
 
         La méthode `model.predict()` permet d'obtenir les valeurs cibles prédites par le modèle (à l'aide de la formule).
 
@@ -292,7 +292,7 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 
         <br /><br />
 
-        💬 On obtient une droite de tendance montrant clairement la relation linéaire entre le poids et la consommation :
+         On obtient une droite de tendance montrant clairement la relation linéaire entre le poids et la consommation :
         - Les points bleus représentent les données réelles (poids vs consommation).
         - La ligne rouge est la droite de régression linéaire ajustée par le modèle.
 
@@ -321,11 +321,11 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 
         <br /><br />
 
-        💬 On observe que les voitures avec plus de cylindres (ex. 8 cylindres) ont tendance à être plus lourdes et à consommer plus d’essence, ce qui confirme notre analyse précédente.
+         On observe que les voitures avec plus de cylindres (ex. 8 cylindres) ont tendance à être plus lourdes et à consommer plus d’essence, ce qui confirme notre analyse précédente.
 
         :::
 
-        :::info ⚙️ Régression multiple
+        :::info  Régression multiple
 
         On peut facilement ajouter d’autres variables (ex. nombre de cylindres, puissance) :
 
@@ -344,10 +344,10 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
         model = LinearRegression()
 
         # Le modèle va essayer de trouver la "meilleure combinaison" de ces variables pour prédire y.
-        # 👉 On "entraîne" le modèle :
+        #  On "entraîne" le modèle :
         model.fit(X, y)
 
-        # ⚠️ ici, le score est calculé sur les données d'entraînement :
+        #  ici, le score est calculé sur les données d'entraînement :
         print("Score R² :", model.score(X, y))
         print("Coefficients :", model.coef_)
         print("Intercept :", model.intercept_)
@@ -358,7 +358,7 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
         Intercept : -0.5232093212414135
         ```
         - Le score R² a augmenté à 0.82 par rapport au modèle à 1 variable (0.78).
-        - :::warning ⚠️ Attention
+        - :::warning  Attention
         Ce R² est calculé **sur les données d'entraînement**. **Ajouter des variables fait mécaniquement monter le R²**, même si elles n'apportent rien (ou du bruit). Un 0.82 sur l'entraînement ne prouve donc pas que le modèle s'est vraiment amélioré — pour le savoir, il faudrait comparer **sur des données de test** (voir l'onglet Complexité de R13). Les barèmes figés du type « 0.7 = très bon » restent des **repères indicatifs**, qui dépendent du domaine et de la quantité de données.
         ::::
         - La relation reste positive pour le poids et le nombre de cylindres, et la puissance a aussi un effet positif sur la consommation.
@@ -373,10 +373,10 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 
         ---
 
-        :::info 🎁 Exercice facultatif — Régression linéaire simple et visualisation
-        📁 Créez un fichier `regression_lineaire.py` pour votre réponse.
+        :::info  Exercice facultatif — Régression linéaire simple et visualisation
+         Créez un fichier `regression_lineaire.py` pour votre réponse.
 
-        Utilisez 🤖 Scikit-learn pour créer un modèle de régression linéaire simple qui prédit la consommation `l_par_100km` en fonction de la puissance (`horsepower`).
+        Utilisez  Scikit-learn pour créer un modèle de régression linéaire simple qui prédit la consommation `l_par_100km` en fonction de la puissance (`horsepower`).
 
         Affichez le score R², le coefficient et l'intercept du modèle :
         ```
@@ -390,4 +390,4 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
         <img src={require('/img/cours/exercice_4.png').default} width="50%"/>
         :::
 
-        {/* <Feedback feedbackId="Rencontre #12 - 🤖 Scikit-learn" /> */}
+        {/* <Feedback feedbackId="Rencontre #12 -  Scikit-learn" /> */}
