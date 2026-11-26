@@ -720,6 +720,16 @@ Cliquez sur le badge pour ouvrir le notebook de cette rencontre dans [Google Col
         | `sepal length (cm)` | Correcte : `setosa` isolée, mais chevauchement entre `versicolor` et `virginica`. |
         | `sepal width (cm)` | **Faible** : les 3 espèces se chevauchent beaucoup. |
 
+        **En images** — histogramme de `petal length (cm)` par espèce :
+
+        ![Distribution de petal length (cm) selon l'espèce](/img/cours/iris_petal_length_histogramme.png)
+
+        Et en **nuage de points**, la relation entre deux mesures montre encore mieux la séparation : on voit les 3 espèces former des **groupes distincts** sur les pétales (longueur × largeur), alors que les sépales se chevauchent.
+
+        ![Longueur vs largeur des pétales, par espèce](/img/cours/iris_scatter_petales.png)
+
+        ![Longueur vs largeur des sépales, par espèce](/img/cours/iris_scatter_sepales.png)
+
         → Les **pétales** (longueur et largeur) sont les caractéristiques les plus **discriminantes** ; la largeur du sépale l'est beaucoup moins. C'est exactement ce que la régression logistique exploitera en C.3.
         :::
 
