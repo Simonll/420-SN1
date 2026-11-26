@@ -197,14 +197,6 @@ Cliquez sur le badge pour ouvrir le notebook de cette rencontre dans [Google Col
         Rappel R12 : une régression linéaire `consommation = 0.00408 × poids − 0.903` est un modèle ; ses deux paramètres (0.00408 et −0.903) ont été trouvés par l'entraînement.
         :::
 
-        :::tip  Lire une droite de régression (sans code, à savoir pour l'examen)
-        Modèle de R12 : `conso = 0,00408 × poids − 0,903` (poids en lb, conso en L/100 km).
-
-        - **Signe de la pente** : 0,00408 est **positif** → plus la voiture est **lourde**, plus elle **consomme**.
-        - **Effet d'une variation** : +1 lb → +0,00408 L/100 km, donc **+1000 lb → +4,08 L/100 km**.
-        - **Prédiction à la main** pour une voiture de 3000 lb : 0,00408 × 3000 − 0,903 = 12,24 − 0,903 ≈ **11,3 L/100 km**.
-        :::
-
         ---
 
         ## 1. Le vocabulaire de base
@@ -732,7 +724,6 @@ Cliquez sur le badge pour ouvrir le notebook de cette rencontre dans [Google Col
         - **Entraînement** (*fit*) = ajuster les paramètres à partir des données (en **supervisé** : features **et** labels ; en **non supervisé** : features seulement) ; boucle **prédire → mesurer l'erreur → ajuster** ; une **époque** = un passage sur toutes les données d'entraînement
         - **Inférence** (*predict*, prédiction) = utiliser le modèle **déjà entraîné** sur un **nouvel** exemple (features seulement, paramètres figés)
         - **Paramètre** (appris par *fit* sur l'entraînement : pente, poids, biais) vs **hyperparamètre** (réglage choisi **par l'humain avant** l'entraînement : degré de la courbe, nb de couches/neurones, nb d'époques, régularisation ; choisi avec la **validation**)
-        - **Lire une droite de régression** : `conso = 0,00408 × poids − 0,903` → pente **positive** (plus lourd = plus de consommation) ; +1000 lb → +4,08 L/100 km ; pour 3000 lb : 0,00408 × 3000 − 0,903 ≈ **11,3 L/100 km**
 
         **Séparation train/test**
         - **Train** (≈ 80 %) sert à ajuster les paramètres ; **test** (≈ 20 %) est mis de côté et sert **uniquement** à évaluer à la fin
